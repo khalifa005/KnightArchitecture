@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KH.Services", "KH.Services\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KH.PersistenceInfra", "KH.PersistenceInfra\KH.PersistenceInfra.csproj", "{521D5081-7DDC-41EA-859E-7A3D2734DA22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KH.Core", "KH.Core\KH.Core.csproj", "{9AFF252B-21D2-43E3-BE57-E099C4783F15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KH.Helper", "KH.Core\KH.Helper.csproj", "{9AFF252B-21D2-43E3-BE57-E099C4783F15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
