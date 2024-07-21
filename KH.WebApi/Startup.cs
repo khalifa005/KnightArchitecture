@@ -1,10 +1,15 @@
 
+using CA.ViewModels;
 using KH.Helper;
 using KH.Helper.Extentions;
 using KH.Helper.Middlewares;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
+using FluentValidation.AspNetCore;
 
+using FluentValidation;
 namespace KH.WebApi
 {
   public class Startup
@@ -20,38 +25,30 @@ namespace KH.WebApi
 
     public void ConfigureServices(IServiceCollection services)
     {
-
       // Add services to the container.
-      services
-          .AddControllersWithViews()
-          .AddJsonOptions(options =>
-          {
-            options.JsonSerializerOptions.PropertyNamingPolicy = null;
-            options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-
-          }
-
-           );
-      //.AddFluentValidation(fv =>
-      //{
-      //    fv.RegisterValidatorsFromAssemblyContaining<Startup>();
-      //});
-
 
       services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+      services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
+      services.AddEndpointsApiExplorer();
 
-      //services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
-      //services.AddApplicationService(Configuration);
+      services
+              .AddControllers()
+              .AddJsonOptions(options =>
+              {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+              });
+
+      services.AddFluentValidationAutoValidation();
+      services.AddValidatorsFromAssemblyContaining<Startup>();
+
+
       //services.AddInfrastructureService(Configuration);
-      //services.AddViewModelService(Configuration);
       //services.AddBusinessService(Configuration);
 
-      services.AddEndpointsApiExplorer();
-      //services.AddSwaggerDocumentation(Configuration);
+      services.AddDtoService(Configuration);
       //contains the common service registration
-      services.AddApplicationServiceAndSettings(Configuration);
-
-
+      services.AddHelperServicesAndSettings(Configuration);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
@@ -65,7 +62,6 @@ namespace KH.WebApi
       //app.UseApplicationMiddlewares(Configuration);
 
       app.UseMiddleware<ExceptionMiddleware>();
-
       app.UseSwaggerDocumentation(Configuration);
 
       if (env.IsDevelopment())
@@ -91,9 +87,6 @@ namespace KH.WebApi
 
       app.UseRouting();
       app.UseAuthentication();
-
-
-
       // order here matters - after UseAuthentication so we have the Identity populated in the HttpContext
       //app.UseMiddleware<PermissionsMiddleware>();
       app.UseAuthorization();
