@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.WebUtilities;
+using KH.Helper.Responses;
+using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using System.Net.Mime;
 
-namespace CA.Application.Helpers
+namespace KH.Helper.Helpers
 {
     public class HttpRequestHelper
     {

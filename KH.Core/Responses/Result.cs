@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection.PortableExecutable;
 
-namespace CA.Application.Helpers
+namespace KH.Helper.Responses
 {
     public struct Result<T>
     {
@@ -123,7 +124,7 @@ namespace CA.Application.Helpers
     public class HttpModelDTO
     {
 
-        [ModelBinder(BinderType = typeof(FormDataJsonBinder))]
+        //[ModelBinder(BinderType = typeof(FormDataJsonBinder))]
         public dynamic Data { get; set; }
 
         public List<GenericFilesDTO> NewFiles { get; set; }

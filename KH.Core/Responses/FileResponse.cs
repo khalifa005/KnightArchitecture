@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KH.Helper.Errors
+namespace KH.Helper.Responses
 {
     public class FileResponse
     {

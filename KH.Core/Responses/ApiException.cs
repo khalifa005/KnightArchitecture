@@ -1,4 +1,4 @@
-namespace KH.Helper.Errors
+namespace KH.Helper.Responses
 {
     public class ApiException : ApiResponse<object>
     {

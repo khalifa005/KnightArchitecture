@@ -1,4 +1,5 @@
 
+using KH.Helper;
 using KH.Helper.Extentions;
 using KH.Helper.Middlewares;
 using Microsoft.Extensions.Configuration;
@@ -46,8 +47,9 @@ namespace KH.WebApi
       //services.AddBusinessService(Configuration);
 
       services.AddEndpointsApiExplorer();
-      services.AddSwaggerDocumentation(Configuration);
-
+      //services.AddSwaggerDocumentation(Configuration);
+      //contains the common service registration
+      services.AddApplicationServiceAndSettings(Configuration);
 
 
     }
@@ -58,16 +60,17 @@ namespace KH.WebApi
 
       app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
-      //app.UseApplicationMiddlewares(Configuration);
       //app.UseInfrastructureMiddleware(Configuration);
+      //contains multiple middileware
+      //app.UseApplicationMiddlewares(Configuration);
+
+      app.UseMiddleware<ExceptionMiddleware>();
 
       app.UseSwaggerDocumentation(Configuration);
 
       if (env.IsDevelopment())
       {
 
-        app.UseMiddleware<ExceptionMiddleware>();
-        //app.UseExceptionHandler("/Home/Error");
       }
       else
       {

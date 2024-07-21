@@ -1,4 +1,5 @@
 using KH.Domain.Enums;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 
 namespace KH.Helper.Extentions.Methods
