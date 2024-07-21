@@ -66,7 +66,7 @@ namespace KH.WebApi
       if (env.IsDevelopment())
       {
 
-
+        app.UseMiddleware<ExceptionMiddleware>();
         //app.UseExceptionHandler("/Home/Error");
       }
       else
