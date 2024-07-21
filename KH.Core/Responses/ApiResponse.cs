@@ -1,7 +1,7 @@
 
 using System.Diagnostics;
 
-namespace CA.Application.Errors
+namespace KH.Helper.Errors
 {
   public class ApiResponse<T> where T : class
   {

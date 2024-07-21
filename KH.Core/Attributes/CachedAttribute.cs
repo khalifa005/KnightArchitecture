@@ -3,7 +3,7 @@
 //using System.Security.Claims;
 //using System.Text.Json.Serialization;
 
-//namespace CA.Application.Attributes
+//namespace KH.Helper.Attributes
 //{
 //  //move to infra
 //  public interface IResponseCacheService

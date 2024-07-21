@@ -1,5 +1,5 @@
-﻿
-namespace CA.Application.Errors
+
+namespace KH.Helper.Errors
 {
     public class PagedResponse<T> where T : class
     {

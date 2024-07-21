@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CA.Application.Extentions
+namespace KH.Helper.Extentions
 {
     public class ThreadLogger
     {

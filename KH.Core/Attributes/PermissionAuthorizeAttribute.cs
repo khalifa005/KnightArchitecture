@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 
-namespace CA.Application.Attributes
+namespace KH.Helper.Attributes
 {
   //using indexer controllers like:
 

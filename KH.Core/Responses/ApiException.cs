@@ -1,4 +1,4 @@
-﻿namespace CA.Application.Errors
+namespace KH.Helper.Errors
 {
     public class ApiException : ApiResponse<object>
     {
