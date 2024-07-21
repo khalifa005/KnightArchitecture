@@ -1,7 +1,7 @@
 
 //using System.Security.Policy;
 
-//namespace CA.Infrastructure
+//namespace KH.PersistenceInfra
 //{
 //    public static class InfrastructureServiceRegisteration
 //    {

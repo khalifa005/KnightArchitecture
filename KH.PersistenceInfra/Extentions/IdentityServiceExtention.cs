@@ -1,7 +1,7 @@
 
 using Microsoft.AspNetCore.Authorization;
 
-namespace CA.Infrastructure.Extentions
+namespace KH.PersistenceInfra.Extentions
 {
 	public static class IdentityServiceExtention
 	{

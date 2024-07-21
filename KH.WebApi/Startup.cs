@@ -26,26 +26,22 @@ namespace KH.WebApi
     public void ConfigureServices(IServiceCollection services)
     {
       // Add services to the container.
-
       services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
       services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
       services.AddEndpointsApiExplorer();
+      services.AddFluentValidationAutoValidation();
+      services.AddValidatorsFromAssemblyContaining<Startup>();
 
-      services
-              .AddControllers()
+      services.AddControllers()
               .AddJsonOptions(options =>
               {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
               });
 
-      services.AddFluentValidationAutoValidation();
-      services.AddValidatorsFromAssemblyContaining<Startup>();
-
-
+     
       //services.AddInfrastructureService(Configuration);
       //services.AddBusinessService(Configuration);
-
       services.AddDtoService(Configuration);
       //contains the common service registration
       services.AddHelperServicesAndSettings(Configuration);

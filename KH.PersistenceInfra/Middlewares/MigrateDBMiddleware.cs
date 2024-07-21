@@ -1,5 +1,5 @@
-﻿
-namespace CA.Infrastructure.Middlewares
+
+namespace KH.PersistenceInfra.Middlewares
 {
     public static class MigrateDBMiddleware
     {

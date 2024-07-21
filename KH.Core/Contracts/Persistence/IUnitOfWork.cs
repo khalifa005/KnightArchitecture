@@ -12,6 +12,6 @@ namespace KH.Helper.Contracts.Persistence
         Task RollBackTransaction();
         Task CommitTransaction();
 
-        Task<IReadOnlyList<T>> GetFromSql<T>(string storedName, int cmdType = 1, params Dictionary<object, object>[] parameters) where T : class;
+        //Task<IReadOnlyList<T>> GetFromSql<T>(string storedName, int cmdType = 1, params Dictionary<object, object>[] parameters) where T : class;
     }
 }

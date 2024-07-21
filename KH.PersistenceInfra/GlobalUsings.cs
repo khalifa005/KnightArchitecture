@@ -23,3 +23,5 @@ global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using KH.Domain.Entities;
+global using KH.Domain.Entities.lookups;

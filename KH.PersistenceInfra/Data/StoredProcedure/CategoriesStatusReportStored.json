@@ -1,0 +1,34 @@
+/*
+  CREATE PROCEDURE [dbo].[GetEscalationMatrixList]
+                AS
+                BEGIN
+                   DECLARE @V_DepartmentsRoles AS table (DepartmentID int, DepartmentName nvarchar(max), RoleID int, RoleName nvarchar(max))
+                   DELETE @V_DepartmentsRoles
+                
+                  INSERT INTO @V_DepartmentsRoles 
+                  SELECT D.Id  DepartmentID, D.NameEn DepartmentName, R.Id RoleID, R.NameEn RoleName
+                  FROM Departments D
+                  CROSS APPLY Roles R
+                  WHERE R.Id IN (2,3,4,5,6,7)
+                
+                
+                  SELECT DISTINCT D.DepartmentName, d.RoleID, D.RoleName, A.FullName
+                  FROM @V_DepartmentsRoles D
+                  LEFT JOIN (SELECT  UD.DepartmentId, UR.RoleId, U.FirstName +' ' + U.LastName FullName
+                             FROM UserDepartment UD 
+                             JOIN Users          U   ON (UD.UserId = U.Id)
+                             JOIN UserRoles      UR  ON (U.Id = UR.UserId)
+                  		   )A  ON (D.DepartmentID = A.DepartmentId and A.RoleId = D.RoleID)
+                  Order BY D.DepartmentName , D.RoleID desc
+                
+                END
+
+  SELECT 
+COUNT(Id) as TotalCompains,
+SUM(CASE WHEN TicketCategoryId = 1 then 1 else 0 end) as TotalSamaCAreCompalins,
+SUM(CASE WHEN TicketCategoryId = 7 then 1 else 0 end) as TotalCCHICompalins
+FROM [AcigCrmDb].[dbo].[Tickets]
+
+
+*/
+

@@ -27,7 +27,7 @@ namespace KH.Helper.Contracts.Persistence
     void Update(T entity);
     void UpdateRange(ICollection<T> entities);
     void Delete(T entity);
-    Task<IReadOnlyList<T>> GetFromSql(string storedName, int cmdType = 1, params Dictionary<object, object>[] parameters);
-    Task<int> OperateFromSql(string storedName, int cmdType = 2, params Dictionary<object, object>[] parameters);
+    //Task<IReadOnlyList<T>> GetFromSql(string storedName, int cmdType = 1, params Dictionary<object, object>[] parameters);
+    //Task<int> OperateFromSql(string storedName, int cmdType = 2, params Dictionary<object, object>[] parameters);
   }
 }
