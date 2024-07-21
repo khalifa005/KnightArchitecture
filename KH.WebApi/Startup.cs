@@ -10,6 +10,7 @@ using Microsoft.Extensions.FileProviders;
 using FluentValidation.AspNetCore;
 
 using FluentValidation;
+using KH.PersistenceInfra;
 namespace KH.WebApi
 {
   public class Startup
@@ -39,8 +40,8 @@ namespace KH.WebApi
                 options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
               });
 
-     
-      //services.AddInfrastructureService(Configuration);
+
+      services.AddInfrastructureService(Configuration);
       //services.AddBusinessService(Configuration);
       services.AddDtoService(Configuration);
       //contains the common service registration
@@ -53,7 +54,7 @@ namespace KH.WebApi
 
       app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
-      //app.UseInfrastructureMiddleware(Configuration);
+      app.UseInfrastructureMiddleware(Configuration);
       //contains multiple middileware
       //app.UseApplicationMiddlewares(Configuration);
 

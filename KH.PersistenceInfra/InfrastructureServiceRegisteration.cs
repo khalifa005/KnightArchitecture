@@ -1,65 +1,70 @@
 
-//using System.Security.Policy;
+using KH.Helper.Contracts.Persistence;
+using KH.PersistenceInfra.Data;
+using KH.PersistenceInfra.Extentions;
+using KH.PersistenceInfra.Middlewares;
+using KH.PersistenceInfra.Repositories;
+using System.Security.Policy;
 
-//namespace KH.PersistenceInfra
-//{
-//    public static class InfrastructureServiceRegisteration
-//    {
-//        public static IServiceCollection AddInfrastructureService(this IServiceCollection services, IConfiguration configuration)
-//        {
+namespace KH.PersistenceInfra
+{
+  public static class InfrastructureServiceRegisteration
+  {
+    public static IServiceCollection AddInfrastructureService(this IServiceCollection services, IConfiguration configuration)
+    {
 
-//            services.AddDbContext<AppDbContext>(db => db.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-//            services.AddSingleton<DapperContext>();
+      services.AddDbContext<AppDbContext>(db => db.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+      //services.AddSingleton<DapperContext>();
 
-//            services.AddSingleton<IResponseCacheService, ResponseCacheService>();
-//            services.AddScoped<ITokenService, TokenService>();
-//            services.AddScoped<IUnitOfWork, UnitOfWork>();
-//            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+      //services.AddSingleton<IResponseCacheService, ResponseCacheService>();
+      //services.AddScoped<ITokenService, TokenService>();
+      services.AddScoped<IUnitOfWork, UnitOfWork>();
+      services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-//            services.AddIdentityService(configuration);
+      //token setting registration
+      //services.AddIdentityService(configuration);
+      //services.AddDistributedMemoryCache();
+      //services.AddSingleton<IConnectionMultiplexer>(c =>
+      //{
+      //  ConfigurationOptions config = new ConfigurationOptions()
+      //  {
+      //    SyncTimeout = 500000,
+      //    EndPoints = { configuration.GetConnectionString("RedisConnection") },
+      //    AbortOnConnectFail = false // this prevents that error
+      //  };
+      //  return ConnectionMultiplexer.Connect(config);
+      //});
 
-//            services.AddSingleton<IConnectionMultiplexer>(c =>
-//            {
-//				ConfigurationOptions config = new ConfigurationOptions()
-//				{
-//					SyncTimeout = 500000,
-//					EndPoints = { configuration.GetConnectionString("RedisConnection") },
-//					AbortOnConnectFail = false // this prevents that error
-//				};
-//                return ConnectionMultiplexer.Connect(config);
-//            });
+      services.AddCors(opt =>
+      {
+        opt.AddPolicy("CorsPolicy", policy =>
+              {
+                //var issuer = configuration["TokenSettings:Issuer"];
+                //if (issuer != null)
+                //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(issuer);
+                //else
+            policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+          });
+      });
 
-//            services.AddCors(opt =>
-//            {
-//                opt.AddPolicy("CorsPolicy", policy =>
-//                {
-//                    //var issuer = configuration["TokenSettings:Issuer"];
-//                    //if (issuer != null)
-//                    //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(issuer);
-//                    //else
-//                        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-//                });
-//            });
+      //services.AddSession(options =>
+      //{
+      //  options.IdleTimeout = TimeSpan.FromMinutes(30);
+      //});
 
-//            services.AddDistributedMemoryCache();
-//            services.AddSession(options =>
-//            {
-//                options.IdleTimeout = TimeSpan.FromMinutes(30);
-//            });
+      return services;
+    }
 
-//            return services;
-//        }
+    public static IApplicationBuilder UseInfrastructureMiddleware(this IApplicationBuilder app, IConfiguration configuration)
+    {
+      app.MigrateDatabase<AppDbContext>((context, services) =>
+      {
+        var logger = services.GetRequiredService<ILogger<AppDbContext>>();
+        //CleanArchitectDbContext.SeedAsync(context, logger).Wait();
+      });
 
-//        public static IApplicationBuilder UseInfrastructureMiddleware(this IApplicationBuilder app, IConfiguration configuration)
-//        {
-//            app.MigrateDatabase<AppDbContext>((context, services) =>
-//            {
-//                var logger = services.GetRequiredService<ILogger<AppDbContext>>();
-//                //CleanArchitectDbContext.SeedAsync(context, logger).Wait();
-//            });
-           
 
-//            return app;
-//        }
-//    }
-//}
+      return app;
+    }
+  }
+}

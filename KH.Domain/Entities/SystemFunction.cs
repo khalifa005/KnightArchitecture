@@ -9,12 +9,12 @@ namespace KH.Domain.Entities
 		public int SortKey { get; set; }
 
 		#region Parent
-		public int? ParentID { get; set; }
+		public long? ParentID { get; set; }
 
 		public virtual SystemFunction Parent { get; set; }
 		#endregion
 
-		public int? DependOnID { get; set; }
+		public long? DependOnID { get; set; }
 
 	}
 }

@@ -9,7 +9,7 @@ namespace KH.Dto.Models.lookups
 
         #region Props
 
-        public int? ReportToRoleId { get; set; }
+        public long? ReportToRoleId { get; set; }
         public RoleDto? ReportToRole { get; set; }
         #endregion
 
