@@ -1,4 +1,4 @@
-namespace CA.Domain.Enums
+namespace KH.Domain.Enums
 {
   public enum MailTypeEnum
   {

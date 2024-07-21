@@ -1,7 +1,7 @@
-﻿
-namespace CA.Domain.Entities
+
+namespace KH.Domain.Entities
 {
-    public class RoleFunction : BasicTrackerEntity
+    public class RoleFunction : TrackerEntity
     {
         public int SystemFunctionId { get; set; }
         public SystemFunction SystemFunction { get; set; }

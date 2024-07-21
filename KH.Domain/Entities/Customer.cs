@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CA.Domain.Entities
+namespace KH.Domain.Entities
 {
-    public class Customer : BasicTrackerEntity
+    public class Customer : TrackerEntity
     {
         public string? FirstName { get; set; }
         public string? MiddleName { get; set; }

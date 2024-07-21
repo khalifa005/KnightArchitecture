@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CA.Domain.Entities
+namespace KH.Domain.Entities
 {
-    public class SMSFollowUp : BasicTrackerEntity
+    public class SMSFollowUp : TrackerEntity
     {
         public string MobileNumber { get; set; }
         public string Message { get; set; }

@@ -1,9 +1,9 @@
-﻿
+
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CA.Domain.Entities
+namespace KH.Domain.Entities
 {
-    public class UserRole : BasicTrackerEntity
+    public class UserRole : TrackerEntity
     {
         public int UserId { get; set; }
         public User? User { get; set; }

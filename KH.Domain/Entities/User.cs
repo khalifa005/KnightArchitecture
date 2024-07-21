@@ -1,8 +1,8 @@
-﻿
-namespace CA.Domain.Entities
+
+namespace KH.Domain.Entities
 {
-    public class User : BasicTrackerEntity
-    {
+    public class User : TrackerEntity
+  {
 
         public string? FirstName { get; set; }
         public string? MiddleName { get; set; }

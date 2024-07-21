@@ -1,8 +1,8 @@
-﻿
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CA.Domain.Entities
+namespace KH.Domain.Entities
 {
     public class SystemFunction : BasicEntity
     {

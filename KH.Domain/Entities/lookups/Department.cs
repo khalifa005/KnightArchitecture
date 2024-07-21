@@ -1,4 +1,4 @@
-﻿namespace CA.Domain.Entities.lookups
+namespace KH.Domain.Entities.lookups
 {
     public class Department : BasicEntity
     {

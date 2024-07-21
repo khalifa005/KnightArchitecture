@@ -1,7 +1,7 @@
-﻿
-namespace CA.Domain.Entities
+
+namespace KH.Domain.Entities
 {
-    public class UserDepartment : BasicTrackerEntity
+    public class UserDepartment : TrackerEntity
     {
         public int UserId { get; set; }
         public User? User { get; set; }

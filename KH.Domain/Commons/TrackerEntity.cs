@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CA.Domain.Commons
+namespace KH.Domain.Commons
 {
     public abstract partial class TrackerEntity : BaseEntity
     {

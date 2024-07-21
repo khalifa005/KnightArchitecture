@@ -1,5 +1,5 @@
-﻿
-namespace CA.Domain.Entities
+
+namespace KH.Domain.Entities
 {
     public class Role : BasicEntity
     {

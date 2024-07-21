@@ -1,6 +1,6 @@
-﻿namespace CA.Domain.Entities
+namespace KH.Domain.Entities
 {
-    public class Calendar : BasicTrackerEntity
+    public class Calendar : TrackerEntity
     {
         public bool IsHoliday { get; set; }
         public DateTime HolidayDate { get; set; }

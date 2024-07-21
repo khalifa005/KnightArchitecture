@@ -1,6 +1,6 @@
-﻿namespace CA.Domain.Entities
+namespace KH.Domain.Entities
 {
-    public class Media : BasicTrackerEntity
+    public class Media : TrackerEntity
     {
         
         public string FileName { get; set; }
