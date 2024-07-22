@@ -8,10 +8,6 @@ using System.Linq.Expressions;
 
 namespace KH.PersistenceInfra.Repositories
 {
-  /// <summary>
-  /// Generic repository implementation for managing entities.
-  /// </summary>
-  /// <typeparam name="T">The type of the entity.</typeparam>
   public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
   {
     private readonly AppDbContext _dbContext;

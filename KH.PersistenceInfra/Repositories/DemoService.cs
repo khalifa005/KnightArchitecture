@@ -2,16 +2,8 @@ using KH.Domain.Entities;
 using KH.Helper.Contracts.Persistence;
 
 using KH.Domain.Entities;
-using KH.Helper.Contracts.Persistence;
-using Microsoft.EntityFrameworkCore.Query;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using KH.Helper.Responses;
-using static FluentValidation.Validators.PredicateValidator<T, TProperty>;
-
 public class UserService
 {
   private readonly IUnitOfWork _unitOfWork;
