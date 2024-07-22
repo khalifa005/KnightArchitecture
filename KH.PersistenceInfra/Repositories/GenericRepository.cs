@@ -3,10 +3,14 @@ using KH.Helper.Contracts.Persistence;
 using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using System.Security.Policy;
+using System.Linq.Expressions;
 
 namespace KH.PersistenceInfra.Repositories
 {
+  /// <summary>
+  /// Generic repository implementation for managing entities.
+  /// </summary>
+  /// <typeparam name="T">The type of the entity.</typeparam>
   public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
   {
     private readonly AppDbContext _dbContext;
@@ -14,6 +18,11 @@ namespace KH.PersistenceInfra.Repositories
     public GenericRepository(AppDbContext dbContext)
     {
       _dbContext = dbContext;
+    }
+
+    public IQueryable<T> GetQueryable()
+    {
+      return _dbContext.Set<T>();
     }
 
     public void Add(T entity)
@@ -43,63 +52,56 @@ namespace KH.PersistenceInfra.Repositories
 
     public void Delete(T entity)
     {
-      //??
       _dbContext.Entry(entity).State = EntityState.Deleted;
-
       _dbContext.Set<T>().Remove(entity);
     }
 
-    public IReadOnlyList<T> FindBy(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] expressions)
+    public IReadOnlyList<T> FindBy(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {
-      return ApplyIncludes(includes: expressions).Where(expression).ToList();
+      var query = ApplyIncludes(include);
+      return query.Where(expression).ToList();
     }
 
-    public async Task<IReadOnlyList<T>> FindByAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] expressions)
+    public async Task<IReadOnlyList<T>> FindByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {
-      return await ApplyIncludes(includes: expressions).Where(expression).AsNoTracking().ToListAsync();
+      var query = ApplyIncludes(include);
+      return await query.Where(expression).ToListAsync();
     }
 
-    public async Task<int> CountByAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] expressions)
+    public async Task<int> CountByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {
-      return await ApplyIncludes(includes: expressions).Where(expression).CountAsync();
+      var query = ApplyIncludes(include);
+      return await query.Where(expression).CountAsync();
     }
 
-    public async Task<IReadOnlyList<T>> FindByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> customInclude = null)
+    public IReadOnlyList<T> GetAll(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {
-      return await ApplyIncludeAsyncs(includes: customInclude).Where(expression).AsNoTracking().ToListAsync();
-      //return await ApplyIncludes(includes: expressions).Where(expression).AsNoTracking().ToListAsync();
+      var query = ApplyIncludes(include);
+      return query.ToList();
     }
 
-
-
-    public async Task<IReadOnlyList<T>> FindByIncAsync(Expression<Func<T, bool>> expression, string[] includeStrings = null, params Expression<Func<T, object>>[] expressions)
+    public async Task<IReadOnlyList<T>> GetAllAsync(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {
-      return await ApplyIncludes(includeStrings, includes: expressions).Where(expression).ToListAsync();
+      var query = ApplyIncludes(include);
+      return await query.ToListAsync();
     }
 
-
-    public IReadOnlyList<T> GetAll(params Expression<Func<T, object>>[] expressions)
+    public T Get(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {
-      return ApplyIncludes(includes: expressions).ToList();
+      var query = ApplyIncludes(include);
+      return query.FirstOrDefault(t => t.Id == id);
     }
 
-    public async Task<IReadOnlyList<T>> GetAllAsync(params Expression<Func<T, object>>[] expressions)
+    public async Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {
-      return await ApplyIncludes(includes: expressions).ToListAsync();
+      var query = ApplyIncludes(include);
+      return await query.FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    public T Get(int id, params Expression<Func<T, object>>[] expressions)
+    public async Task<T> GetAsyncTracking(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {
-      return ApplyIncludes(includes: expressions).FirstOrDefault(t => t.Id == id);
-    }
-
-    public async Task<T> GetAsync(int id, params Expression<Func<T, object>>[] expressions)
-    {
-      return await ApplyIncludes(includes: expressions).FirstOrDefaultAsync(t => t.Id == id);
-    }
-    public async Task<T> GetAsyncTracking(int id, params Expression<Func<T, object>>[] expressions)
-    {
-      return await ApplyIncludesTracking(includes: expressions).FirstOrDefaultAsync(t => t.Id == id);
+      var query = ApplyIncludes(include, tracking: true);
+      return await query.FirstOrDefaultAsync(t => t.Id == id);
     }
 
     public void Update(T entity)
@@ -111,71 +113,22 @@ namespace KH.PersistenceInfra.Repositories
     public void UpdateRange(ICollection<T> entities)
     {
       _dbContext.Set<T>().AttachRange(entities);
-      _dbContext.Entry(entities).State = EntityState.Modified;
-    }
-
-    private IQueryable<T> ApplyIncludes(string[] includeStrings = null, params Expression<Func<T, object>>[] includes)
-    {
-
-      //query = specification.Includes.Aggregate(query, (current, include) => current.Include(include));
-
-
-      IQueryable<T> query = _dbContext.Set<T>();
-
-      if (includes != null)
+      foreach (var entity in entities)
       {
-        query = includes.Aggregate(query, (current, include) => current.Include(include));
+        _dbContext.Entry(entity).State = EntityState.Modified;
       }
-      //foreach (var include in includes)
-      //{
-      //    query = query.Include(include);
-      //}
-
-      //if (includeStrings != null)
-      //{
-      //    foreach (var include in includeStrings)
-      //    {
-      //        query = query.Include(include);
-      //    }
-      //}
-
-      return query.AsNoTracking();
     }
 
-    private IQueryable<T> ApplyIncludeAsyncs(Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null)
+    private IQueryable<T> ApplyIncludes(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, bool tracking = false)
     {
       IQueryable<T> query = _dbContext.Set<T>();
 
-      if (includes != null)
+      if (include != null)
       {
-        query = includes(query);
+        query = include(query);
       }
 
-      return query.AsNoTracking();
-    }
-    private IQueryable<T> ApplyIncludesTracking(string[] includeStrings = null, params Expression<Func<T, object>>[] includes)
-    {
-      IQueryable<T> query = _dbContext.Set<T>();
-
-      foreach (var include in includes)
-      {
-        query = query.Include(include);
-      }
-
-      if (includeStrings != null)
-      {
-        foreach (var include in includeStrings)
-        {
-          query = query.Include(include);
-        }
-      }
-
-      return query;
-    }
-
-    public IQueryable<T> GetQueryable()
-    {
-      return _dbContext.Set<T>();
+      return tracking ? query : query.AsNoTracking();
     }
   }
 }

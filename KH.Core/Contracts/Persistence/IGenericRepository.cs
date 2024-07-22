@@ -6,28 +6,22 @@ namespace KH.Helper.Contracts.Persistence
 {
   public interface IGenericRepository<T> where T : BaseEntity
   {
-    T Get(int id, params Expression<Func<T, object>>[] includeExpressions);
-    Task<T> GetAsync(int id, params Expression<Func<T, object>>[] includeExpressions);
-    Task<T> GetAsyncTracking(int id, params Expression<Func<T, object>>[] expressions);
-    IReadOnlyList<T> GetAll(params Expression<Func<T, object>>[] includeExpressions);
-    Task<IReadOnlyList<T>> GetAllAsync(params Expression<Func<T, object>>[] includeExpressions);
-    IReadOnlyList<T> FindBy(Expression<Func<T, bool>> whereExpression, params Expression<Func<T, object>>[] includeExpressions);
-
-    Task<IReadOnlyList<T>> FindByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> customInclude = null);
-    Task<IReadOnlyList<T>> FindByAsync(Expression<Func<T, bool>> whereExpression, params Expression<Func<T, object>>[] includeExpressions);
-    Task<IReadOnlyList<T>> FindByIncAsync(Expression<Func<T, bool>> whereExpression, string[] includeStrings = null, params Expression<Func<T, object>>[] includeExpressions);
     IQueryable<T> GetQueryable();
-    int Count();
-    Task<int> CountByAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] expressions);
-    Task<int> CountAsync();
-
     void Add(T entity);
     Task AddAsync(T entity);
     Task AddRangeAsync(ICollection<T> entities);
+    int Count();
+    Task<int> CountAsync();
+    void Delete(T entity);
+    IReadOnlyList<T> FindBy(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+    Task<IReadOnlyList<T>> FindByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+    Task<int> CountByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+    IReadOnlyList<T> GetAll(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+    Task<IReadOnlyList<T>> GetAllAsync(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+    T Get(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+    Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+    Task<T> GetAsyncTracking(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     void Update(T entity);
     void UpdateRange(ICollection<T> entities);
-    void Delete(T entity);
-    //Task<IReadOnlyList<T>> GetFromSql(string storedName, int cmdType = 1, params Dictionary<object, object>[] parameters);
-    //Task<int> OperateFromSql(string storedName, int cmdType = 2, params Dictionary<object, object>[] parameters);
   }
 }

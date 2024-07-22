@@ -4,6 +4,7 @@ using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Extentions;
 using KH.PersistenceInfra.Middlewares;
 using KH.PersistenceInfra.Repositories;
+using KH.PersistenceInfra.Services;
 using System.Security.Policy;
 
 namespace KH.PersistenceInfra
