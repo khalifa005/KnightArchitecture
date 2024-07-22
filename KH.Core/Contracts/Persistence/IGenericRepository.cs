@@ -1,5 +1,6 @@
 
 using KH.Domain.Commons;
+using KH.Helper.Responses;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace KH.Helper.Contracts.Persistence
@@ -17,11 +18,15 @@ namespace KH.Helper.Contracts.Persistence
     Task<IReadOnlyList<T>> FindByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     Task<int> CountByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     IReadOnlyList<T> GetAll(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+    Task<List<T>> GetAllWithTrackingAsync(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     Task<IReadOnlyList<T>> GetAllAsync(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     T Get(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     Task<T> GetAsyncTracking(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     void Update(T entity);
     void UpdateRange(ICollection<T> entities);
+    Task<PagedList<T>> GetPagedAsync(int pageNumber, int pageSize, Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+    Task<PagedList<T>> GetPagedUsingQueryAsync(int pageNumber, int pageSize, IQueryable<T> query);
+
   }
 }

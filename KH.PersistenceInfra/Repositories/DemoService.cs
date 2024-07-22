@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using KH.Helper.Responses;
+using static FluentValidation.Validators.PredicateValidator<T, TProperty>;
 
 public class UserService
 {
@@ -34,6 +36,70 @@ public class UserService
     await repository.AddRangeAsync(users.ToList());
     await _unitOfWork.CommitAsync();
   }
+
+  // Get paginated users with optional filters and includes
+  public async Task<PagedList<User>> GetPagedUsersWithIncludesAsync(
+      int pageNumber,
+      int pageSize,
+      string firstName = null,
+      string lastName = null,
+      string email = null,
+      string mobileNumber = null)
+  {
+    var repository = _unitOfWork.Repository<User>();
+    IQueryable<User> query = repository.GetQueryable();
+
+    if (!string.IsNullOrEmpty(firstName))
+    {
+      query = query.Where(u => u.FirstName.Contains(firstName));
+    }
+
+    if (!string.IsNullOrEmpty(lastName))
+    {
+      query = query.Where(u => u.LastName.Contains(lastName));
+    }
+
+    if (!string.IsNullOrEmpty(email))
+    {
+      query = query.Where(u => u.Email.Contains(email));
+    }
+
+    if (!string.IsNullOrEmpty(mobileNumber))
+    {
+      query = query.Where(u => u.MobileNumber.Contains(mobileNumber));
+    }
+
+    query = query.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+                 .Include(u => u.UserGroups)
+                 .Include(u => u.UserDepartments);
+
+    return await repository.GetPagedUsingQueryAsync(pageNumber, pageSize, query);
+  }
+
+  public async Task<PagedList<User>> GetPagedUsersWithIncludesAsyncVersion2(
+     int pageNumber,
+     int pageSize,
+     string firstName = null,
+     string lastName = null,
+     string email = null,
+     string mobileNumber = null)
+  {
+    var repository = _unitOfWork.Repository<User>();
+    IQueryable<User> query = repository.GetQueryable();
+
+
+    //example with internal predicate
+    var result =  await repository.GetPagedAsync(pageNumber, pageSize, u =>
+    u.FirstName.Contains("search")
+    || u.LastName.Contains("search2"),
+    q => q.Include(u => u.UserRoles)
+    .ThenInclude(ur => ur.Role)
+    .Include(u => u.UserGroups)
+    .Include(u => u.UserDepartments));
+
+    return result;
+  }
+
 
   // Get all users with optional filters and includes
   public async Task<IEnumerable<User>> GetAllUsersWithIncludesAsync(

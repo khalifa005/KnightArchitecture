@@ -1,5 +1,6 @@
 using KH.Domain.Commons;
 using KH.Helper.Contracts.Persistence;
+using KH.Helper.Responses;
 using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -86,6 +87,12 @@ namespace KH.PersistenceInfra.Repositories
       return await query.ToListAsync();
     }
 
+    public async Task<List<T>> GetAllWithTrackingAsync(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+    {
+      var query = ApplyIncludes(include, tracking:true);
+      return await query.ToListAsync();
+    }
+
     public T Get(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {
       var query = ApplyIncludes(include);
@@ -117,6 +124,37 @@ namespace KH.PersistenceInfra.Repositories
       {
         _dbContext.Entry(entity).State = EntityState.Modified;
       }
+    }
+
+
+    public async Task<PagedList<T>> GetPagedAsync(int pageNumber, int pageSize, Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+    {
+      IQueryable<T> query = _dbContext.Set<T>();
+
+      if (include != null)
+      {
+        query = include(query);
+      }
+
+      query = query.Where(expression);
+
+      var count = await query.CountAsync();
+
+      var items = await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+      return new PagedList<T>(items, count, pageNumber, pageSize);
+
+      //return await PagedList<T>.CreateAsync(query, pageNumber, pageSize);
+    }
+
+    public async Task<PagedList<T>> GetPagedUsingQueryAsync(int pageNumber, int pageSize, IQueryable<T> query)
+    {
+
+      var count = await query.CountAsync();
+
+      var items = await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+      return new PagedList<T>(items, count, pageNumber, pageSize);
+
+      //return await PagedList<T>.CreateAsync(query, pageNumber, pageSize);
     }
 
     private IQueryable<T> ApplyIncludes(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, bool tracking = false)
