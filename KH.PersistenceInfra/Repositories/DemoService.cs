@@ -29,6 +29,23 @@ public class UserService
     await _unitOfWork.CommitAsync();
   }
 
+  public async Task AddUsersWithTransactionAsync(IEnumerable<User> users)
+  {
+    await _unitOfWork.BeginTransactionAsync();
+    try
+    {
+      var repository = _unitOfWork.Repository<User>();
+      await repository.AddRangeAsync(users.ToList());
+      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitTransactionAsync();
+    }
+    catch
+    {
+      await _unitOfWork.RollBackTransactionAsync();
+      throw;
+    }
+  }
+
   // Get paginated users with optional filters and includes
   public async Task<PagedList<User>> GetPagedUsersWithIncludesAsync(
       int pageNumber,

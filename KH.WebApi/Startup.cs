@@ -38,7 +38,13 @@ namespace KH.WebApi
               {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-              });
+              })
+              .AddNewtonsoftJson(options =>
+              {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+              }
+        );
 
 
       services.AddInfrastructureService(Configuration);

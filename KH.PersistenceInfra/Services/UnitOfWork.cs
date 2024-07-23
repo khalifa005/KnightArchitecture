@@ -73,7 +73,7 @@ namespace KH.PersistenceInfra.Services
 
       try
       {
-        await _dbContext.SaveChangesAsync();
+        //await _dbContext.SaveChangesAsync();
         await _currentTransaction.CommitAsync();
       }
       catch
