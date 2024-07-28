@@ -2,8 +2,6 @@ namespace KH.Dto.common
 {
     public class BasicTrackerEntityDto : BaseEntityDto
     {
-        //what about the relations for created users !! FK's
-
         public DateTime CreatedDate { get; set; }
         public int? CreatedById { get; set; }
         //public User? CreatedByUser { get; set; }
@@ -15,9 +13,6 @@ namespace KH.Dto.common
         public DateTime? DeletedDate { get; set; }
         public int? DeletedById { get; set; }
         //public User? DeletedByUser { get; set; }
-
-        public bool IsValid { get; set; }
-
     }
 
 }

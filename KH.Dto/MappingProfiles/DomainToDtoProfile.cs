@@ -1,8 +1,10 @@
 using KH.Domain.Commons;
 using KH.Domain.Entities;
 using KH.Dto.lookups;
-using KH.Dto.Models;
+using KH.Dto.Models.Calendar.Response;
 using KH.Dto.Models.lookups;
+using KH.Dto.Models.SMS.Form;
+using KH.Dto.Models.User.Response;
 using KH.Dto.Parameters.Base;
 
 namespace CA.ViewModels.MappingProfiles
@@ -16,13 +18,13 @@ namespace CA.ViewModels.MappingProfiles
       CreateMap<BasicEntity, BasicEntityDto>().ReverseMap();
       CreateMap<HistoryTrackerEntity, HistoryTrackerEntityDto>().ReverseMap();
 
-      CreateMap<City, CityDto>().ReverseMap();
-      CreateMap<Role, RoleDto>().ReverseMap();
-      CreateMap<Department, DepartmentDto>().ReverseMap();
-      CreateMap<Group, GroupDto>().ReverseMap();
-      CreateMap<SMSFollowUp, SMSFollowUpDto>().ReverseMap();
-      CreateMap<User, UserDto>().ReverseMap();
-      CreateMap<Calendar, CalendarDto>().ReverseMap();
+      CreateMap<City, CityResponseDto>().ReverseMap();
+      CreateMap<Role, RoleResponseDto>().ReverseMap();
+      CreateMap<Department, DepartmentResponseDto>().ReverseMap();
+      CreateMap<Group, GroupResponseDto>().ReverseMap();
+      CreateMap<SMSFollowUp, SMSFollowUpFormDto>().ReverseMap();
+      CreateMap<User, UserDetailsResponseDto>().ReverseMap();
+      CreateMap<Calendar, CalendarDetailsResponseDto>().ReverseMap();
 
     }
   }

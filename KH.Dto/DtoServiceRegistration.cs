@@ -13,7 +13,7 @@ namespace CA.ViewModels
         {
             services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
-            services.AddSingleton<IValidator<GroupDto>, GroupValidator>();
+            services.AddSingleton<IValidator<GroupResponseDto>, GroupValidator>();
 
             return services;
         }

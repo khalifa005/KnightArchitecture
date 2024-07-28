@@ -24,4 +24,21 @@
     <ProjectReference Include="..\KH.Domain\KH.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="lookups\Request\" />
+    <Folder Include="lookups\Response\" />
+    <Folder Include="Models\Authentication\Response\" />
+    <Folder Include="Models\Calendar - Copy %282%29\Form\" />
+    <Folder Include="Models\Calendar\Form\" />
+    <Folder Include="Models\Customer\Form\" />
+    <Folder Include="Models\Email\Form\" />
+    <Folder Include="Models\Email\Request\" />
+    <Folder Include="Models\Email\Response\" />
+    <Folder Include="Models\Media\Response\" />
+    <Folder Include="Models\SMS\Response\" />
+    <Folder Include="Models\Calendar - Copy %282%29\Request\" />
+    <Folder Include="Models\Calendar - Copy %282%29\Response\" />
+    <Folder Include="Models\User\Form\" />
+  </ItemGroup>
+
 </Project>

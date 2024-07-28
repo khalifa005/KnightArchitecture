@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace CA.ViewModels.Validations
 {
-    public class GroupValidator : AbstractValidator<GroupDto>
+    public class GroupValidator : AbstractValidator<GroupResponseDto>
     {
         public GroupValidator()
         {
