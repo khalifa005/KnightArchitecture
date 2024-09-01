@@ -8,23 +8,28 @@ using KH.Dto.lookups.Group.Validation;
 using KH.Dto.lookups.GroupDto.Form;
 using KH.Dto.lookups.GroupDto.Request;
 using KH.Dto.lookups.GroupDto.Validation;
-using Microsoft.Extensions.DependencyInjection;
+using KH.Dto.Models.AuthenticationDto.Request;
+using KH.Dto.Models.OtpVerificationDto.Validation;
 
 namespace CA.ViewModels
 {
   public static class DtoServiceRegistration
+  {
+    public static IServiceCollection AddDtoService(this IServiceCollection services, IConfiguration configuration)
     {
-        public static IServiceCollection AddDtoService(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddAutoMapper(typeof(AutoMapperConfiguration));
+      //automapper
+      services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
-            services.AddSingleton<IValidator<CityForm>, DepartmentFormValidator>();
-            services.AddSingleton<IValidator<CityFilterRequest>, CityFilterRequestValidator>();
+      //below validation registration using fluent validation lib
+      services.AddSingleton<IValidator<CityForm>, DepartmentFormValidator>();
+      services.AddSingleton<IValidator<CityFilterRequest>, CityFilterRequestValidator>();
 
-            services.AddSingleton<IValidator<GroupForm>, GroupFormValidator>();
-            services.AddSingleton<IValidator<GroupFilterRequest>, GroupFilterRequestValidator>();
+      services.AddSingleton<IValidator<GroupForm>, GroupFormValidator>();
+      services.AddSingleton<IValidator<GroupFilterRequest>, GroupFilterRequestValidator>();
 
-            return services;
-        }
+      services.AddSingleton<IValidator<OtpVerificationRequest>, OtpVerificationRequestValidator>();
+
+      return services;
     }
+  }
 }

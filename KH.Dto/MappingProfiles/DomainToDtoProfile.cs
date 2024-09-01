@@ -20,9 +20,9 @@ namespace CA.ViewModels.MappingProfiles
       //CreateMap<Role, RoleResponseDto>().ReverseMap();
       //CreateMap<Department, DepartmentResponseDto>().ReverseMap();
       CreateMap<Group, DepartmentResponse>().ReverseMap();
-      CreateMap<SMSFollowUp, SMSFollowUpFormDto>().ReverseMap();
-      CreateMap<User, UserDetailsResponseDto>().ReverseMap();
-      CreateMap<Calendar, CalendarDetailsResponseDto>().ReverseMap();
+      CreateMap<SMSFollowUp, SMSFollowUpForm>().ReverseMap();
+      CreateMap<User, UserDetailsResponse>().ReverseMap();
+      CreateMap<Calendar, CalendarResponse>().ReverseMap();
 
     }
   }

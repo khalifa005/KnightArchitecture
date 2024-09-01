@@ -1,6 +1,4 @@
 using FluentValidation;
-using KH.Dto.lookups.CityDto.Form;
-using KH.Dto.lookups.RoleDto.Form;
 using KH.Dto.Models.AuthenticationDto.Request;
 
 namespace KH.Dto.Models.OtpVerificationDto.Validation
