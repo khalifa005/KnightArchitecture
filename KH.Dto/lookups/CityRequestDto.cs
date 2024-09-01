@@ -1,6 +1,6 @@
 namespace KH.Dto.lookups
 {
-  public class CityRequestDto : LookupSearchRequestDto
+  public class CityRequestDto : CommonLookupFiltersRequest
   {
 
 

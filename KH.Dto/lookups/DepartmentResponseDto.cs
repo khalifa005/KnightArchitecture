@@ -1,6 +1,6 @@
 namespace KH.Dto.Models.lookups
 {
-    public class DepartmentResponseDto : BasicEntityDto
+    public class DepartmentResponseDto : BasicEntityWithTrackingDto
     {
 
         public DepartmentResponseDto()
@@ -50,7 +50,7 @@ namespace KH.Dto.Models.lookups
         #endregion
     }
 
-    public class PolicyInsuranceIssuingSourceDto : BasicEntityDto
+    public class PolicyInsuranceIssuingSourceDto : BasicEntityWithTrackingDto
     {
 
         public PolicyInsuranceIssuingSourceDto()

@@ -3,7 +3,7 @@ using KH.Dto.common;
 
 namespace KH.Dto.lookups
 {
-  public class CityResponseDto : BasicEntityDto
+  public class CityResponseDto : BasicEntityWithTrackingDto
   {
 
     public CityResponseDto()

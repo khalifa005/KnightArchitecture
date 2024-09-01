@@ -1,19 +1,19 @@
 
 using CA.ViewModels.MappingProfiles;
-using CA.ViewModels.Validations;
 using FluentValidation;
-using KH.Dto.Models.lookups;
+using KH.Dto.lookups.Group.Response;
+using KH.Dto.lookups.Group.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CA.ViewModels
 {
-    public static class DtoServiceRegistration
+  public static class DtoServiceRegistration
     {
         public static IServiceCollection AddDtoService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
-            services.AddSingleton<IValidator<GroupResponseDto>, GroupValidator>();
+            services.AddSingleton<IValidator<GroupResponse>, GroupFormValidator>();
 
             return services;
         }

@@ -1,11 +1,11 @@
-using KH.Dto.Models.lookups;
 using FluentValidation;
+using KH.Dto.lookups.Group.Request;
 
 namespace CA.ViewModels.Validations
 {
-    public class GroupValidator : AbstractValidator<GroupResponseDto>
+    public class GroupFilterRequestValidator : AbstractValidator<GroupFilterRequest>
     {
-        public GroupValidator()
+        public GroupFilterRequestValidator()
         {
             RuleFor(x => x.NameAr).NotNull().NotEmpty().Length(1, 250);
             RuleFor(x => x.NameEn).NotNull().NotEmpty().Length(1, 250);

@@ -1,6 +1,6 @@
 namespace KH.Dto.Models.lookups
 {
-    public class RoleResponseDto : BasicEntityDto
+    public class RoleResponseDto : BasicEntityWithTrackingDto
     {
 
         public RoleResponseDto()
