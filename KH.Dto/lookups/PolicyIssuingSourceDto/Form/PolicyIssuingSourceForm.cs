@@ -1,5 +1,5 @@
 
-namespace KH.Dto.lookups.CityDto.Form
+namespace KH.Dto.lookups.PolicyIssuingSourceDto.Form
 {
   public class PolicyIssuingSourceForm : BasicEntityWithTrackingDto
   {

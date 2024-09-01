@@ -3,9 +3,9 @@ using KH.Dto.lookups.CityDto.Form;
 
 namespace KH.Dto.lookups.CityDto.Validation
 {
-  public class CityFormValidator : AbstractValidator<CityForm>
+  public class DepartmentFormValidator : AbstractValidator<CityForm>
   {
-    public CityFormValidator()
+    public DepartmentFormValidator()
     {
       RuleFor(x => x.NameAr)
         .NotNull()
