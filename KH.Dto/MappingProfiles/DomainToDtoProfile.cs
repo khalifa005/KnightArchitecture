@@ -3,6 +3,7 @@ using KH.Domain.Entities;
 using KH.Dto.lookups.CityDto.Response;
 using KH.Dto.Models.CalendarDto.Response;
 using KH.Dto.Models.SMSDto.Form;
+using KH.Dto.Models.UserDto.Form;
 using KH.Dto.Models.UserDto.Response;
 
 namespace CA.ViewModels.MappingProfiles
@@ -16,6 +17,8 @@ namespace CA.ViewModels.MappingProfiles
       CreateMap<BasicEntity, BasicEntityWithTrackingDto>().ReverseMap();
       CreateMap<HistoryTrackerEntity, HistoryTrackerEntityDto>().ReverseMap();
 
+      CreateMap<User, UserForm>().ReverseMap();
+
       CreateMap<City, DepartmentResponse>().ReverseMap();
       //CreateMap<Role, RoleResponseDto>().ReverseMap();
       //CreateMap<Department, DepartmentResponseDto>().ReverseMap();
@@ -23,6 +26,7 @@ namespace CA.ViewModels.MappingProfiles
       CreateMap<SMSFollowUp, SMSFollowUpForm>().ReverseMap();
       CreateMap<User, UserDetailsResponse>().ReverseMap();
       CreateMap<Calendar, CalendarResponse>().ReverseMap();
+
 
     }
   }

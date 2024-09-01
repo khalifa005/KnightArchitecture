@@ -42,7 +42,7 @@ namespace KH.Helper.Extentions.Methods
       return bool.Parse(claim.Value);
     }
 
-    public static int? GetUserId(this IServiceProvider serviceProvider)
+    public static long? GetUserId(this IServiceProvider serviceProvider)
     {
       var context = serviceProvider.GetService<IHttpContextAccessor>();
       Claim claim = context.HttpContext?.User?.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).SingleOrDefault();

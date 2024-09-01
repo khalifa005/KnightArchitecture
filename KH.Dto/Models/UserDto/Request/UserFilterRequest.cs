@@ -1,7 +1,7 @@
 
 namespace KH.Dto.Models.UserDto.Request
 {
-  public class UserSearchRequestDto : PagingRequestHelper
+  public class UserFilterRequest : PagingRequestHelper
   {
     public long? Id { get; set; }
     public string? Email { get; set; }

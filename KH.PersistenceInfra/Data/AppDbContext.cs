@@ -1,5 +1,6 @@
 
 using KH.Domain.Commons;
+using KH.Helper.Extentions.Methods;
 using KH.PersistenceInfra.Data.Seed;
 
 namespace KH.PersistenceInfra.Data
@@ -8,11 +9,16 @@ namespace KH.PersistenceInfra.Data
   {
     private readonly ILoggerFactory _loggerFactory;
     private readonly ILogger<AppDbContext> _logger;
-    public AppDbContext(DbContextOptions<AppDbContext> options,
-        ILogger<AppDbContext> logger,
-  ILoggerFactory loggerFactory) : base(options)
+    private readonly IServiceProvider _serviceProvider;
+
+    public AppDbContext(
+      DbContextOptions<AppDbContext> options,
+      ILogger<AppDbContext> logger,
+      IServiceProvider serviceProvider,
+      ILoggerFactory loggerFactory) : base(options)
     {
       _loggerFactory = loggerFactory;
+      _serviceProvider = serviceProvider;
       _logger = logger;
     }
 
@@ -71,15 +77,18 @@ namespace KH.PersistenceInfra.Data
               break;
 
             entry.State = EntityState.Modified;
-            entry.Entity.DeletedDate = DateTime.Now.AddHours(3);//ksa
+            entry.Entity.DeletedDate = DateTime.UtcNow.AddHours(3);//ksa
+            entry.Entity.DeletedById = _serviceProvider.GetUserId();//test ??
             entry.Entity.IsDeleted = true;
             break;
           case EntityState.Modified:
-            entry.Entity.UpdatedDate = DateTime.Now.AddHours(3);//ksa;
+            entry.Entity.UpdatedDate = DateTime.UtcNow.AddHours(3);//ksa;
+            entry.Entity.UpdatedById = _serviceProvider.GetUserId();//test ??
             entry.Entity.IsDeleted = false;
             break;
           case EntityState.Added:
-            entry.Entity.CreatedDate = DateTime.Now.AddHours(3);//ksa
+            entry.Entity.CreatedDate = DateTime.UtcNow.AddHours(3);//ksa
+            entry.Entity.CreatedById = _serviceProvider.GetUserId();//test ??
             entry.Entity.IsDeleted = false;
             break;
           default:

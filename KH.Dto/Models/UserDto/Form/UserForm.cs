@@ -16,9 +16,9 @@ namespace KH.Dto.Models.UserDto.Form
     public string? Username { get; set; }
     public DateTime? BirthDate { get; set; }
     public string? MobileNumber { get; set; }
-    public int? GroupId { get; set; }
-    public int? DepartmentId { get; set; }
-    public int[]? RoleIds { get; set; }
+    public long? GroupId { get; set; }
+    public long? DepartmentId { get; set; }
+    public long[]? RoleIds { get; set; }
 
     #endregion
 

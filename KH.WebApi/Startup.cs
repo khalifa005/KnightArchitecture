@@ -11,6 +11,7 @@ using FluentValidation.AspNetCore;
 
 using FluentValidation;
 using KH.PersistenceInfra;
+using KH.Services;
 namespace KH.WebApi
 {
   public class Startup
@@ -27,7 +28,8 @@ namespace KH.WebApi
     public void ConfigureServices(IServiceCollection services)
     {
       // Add services to the container.
-      services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+      services.AddHttpContextAccessor();
+
       services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
       services.AddEndpointsApiExplorer();
       services.AddFluentValidationAutoValidation();
@@ -52,6 +54,7 @@ namespace KH.WebApi
       services.AddDtoService(Configuration);
       //contains the common service registration
       services.AddHelperServicesAndSettings(Configuration);
+      services.AddBusinessService(Configuration);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
