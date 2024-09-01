@@ -45,11 +45,15 @@ public class UserService : IUserService
       if (!request.DepartmentId.HasValue)
         throw new Exception("you must select department");
 
+      //-- Check User Duplication
+      //await this.CheckDuplictedUser(userObj);
+
       //custom mapping
       var userEntity = request.ToEntity();
       //auto mapper
       var userEntityByAutoMapper = _mapper.Map<User>(request);
 
+      //check what happen to craetion date for user roles and user groups
       userEntityByAutoMapper.UserRoles = request.RoleIds.Select(roleId => new UserRole
       {
         RoleId = roleId
@@ -63,8 +67,7 @@ public class UserService : IUserService
         new UserGroup { GroupId = request.GroupId!.Value}
       };
 
-      //-- Check User Duplication
-      //await this.CheckDuplictedUser(userObj);
+      
       await _unitOfWork.BeginTransactionAsync();
 
       var repository = _unitOfWork.Repository<User>();
