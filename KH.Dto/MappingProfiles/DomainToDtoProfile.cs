@@ -1,9 +1,9 @@
 using KH.Domain.Commons;
 using KH.Domain.Entities;
 using KH.Dto.lookups.CityDto.Response;
-using KH.Dto.Models.Calendar.Response;
-using KH.Dto.Models.SMS.Form;
-using KH.Dto.Models.User.Response;
+using KH.Dto.Models.CalendarDto.Response;
+using KH.Dto.Models.SMSDto.Form;
+using KH.Dto.Models.UserDto.Response;
 
 namespace CA.ViewModels.MappingProfiles
 {
