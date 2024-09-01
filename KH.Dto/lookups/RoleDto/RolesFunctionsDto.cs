@@ -1,7 +1,4 @@
-using KH.Dto.Models.lookups;
-using Microsoft.AspNetCore.Http;
-
-namespace KH.Dto.lookups
+namespace KH.Dto.lookups.RoleDto
 {
   public class RoleFunctionsDto
   {

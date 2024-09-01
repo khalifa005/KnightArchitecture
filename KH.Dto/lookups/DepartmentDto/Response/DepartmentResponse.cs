@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using KH.Domain.Entities.lookups;
 
-namespace KH.Dto.lookups.CityDto.Response
+namespace KH.Dto.lookups.DepartmentDto.Response
 {
   public class DepartmentResponse : BasicEntityWithTrackingDto
   {
@@ -12,7 +12,7 @@ namespace KH.Dto.lookups.CityDto.Response
     {
     }
 
-    public DepartmentResponse(City e)
+    public DepartmentResponse(Department e)
     {
       NameAr = e.NameAr;
       NameEn = e.NameEn;

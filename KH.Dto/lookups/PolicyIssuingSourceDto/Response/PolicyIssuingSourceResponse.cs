@@ -1,18 +1,18 @@
 using System.Text.RegularExpressions;
 using KH.Domain.Entities.lookups;
 
-namespace KH.Dto.lookups.CityDto.Response
+namespace KH.Dto.lookups.PolicyIssuingSourceDto.Response
 {
-  public class DepartmentResponse : BasicEntityWithTrackingDto
+  public class PolicyIssuingSourceResponse : BasicEntityWithTrackingDto
   {
     //there is no cutom props because it's lookup and common dto has all needed props
     //we can use auto mapper to do mapping or doing our own using ctor
 
-    public DepartmentResponse()
+    public PolicyIssuingSourceResponse()
     {
     }
 
-    public DepartmentResponse(City e)
+    public PolicyIssuingSourceResponse(PolicyIssuingSource e)
     {
       NameAr = e.NameAr;
       NameEn = e.NameEn;

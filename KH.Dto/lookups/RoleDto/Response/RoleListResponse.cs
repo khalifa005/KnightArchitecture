@@ -1,16 +1,18 @@
-namespace KH.Dto.lookups.CityDto.Response
+using KH.Domain.Entities;
+
+namespace KH.Dto.lookups.RoleDto.Response
 {
-  public class DepartmentListResponse : BasicEntityDto
+  public class RoleListResponse : BasicEntityDto
   {
     //we used light BasicEntityDto because in pagination list we may
     //not need the tracking info like created by ..etc
     //we can use auto mapper to do mapping or doing our own using ctor
 
-    public DepartmentListResponse()
+    public RoleListResponse()
     {
     }
 
-    public DepartmentListResponse(KH.Domain.Entities.lookups.City e)
+    public RoleListResponse(Role e)
     {
       NameAr = e.NameAr;
       NameEn = e.NameEn;

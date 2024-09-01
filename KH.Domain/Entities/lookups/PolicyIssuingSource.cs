@@ -1,8 +1,8 @@
-
+﻿
 
 namespace KH.Domain.Entities.lookups
 {
-  public class City : BasicEntity
+  public class PolicyIssuingSource : BasicEntity
   {
     //previous name is Branch 
 

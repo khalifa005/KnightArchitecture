@@ -1,8 +1,13 @@
 
 using CA.ViewModels.MappingProfiles;
 using FluentValidation;
-using KH.Dto.lookups.Group.Response;
+using KH.Dto.lookups.CityDto.Form;
+using KH.Dto.lookups.CityDto.Request;
+using KH.Dto.lookups.CityDto.Validation;
 using KH.Dto.lookups.Group.Validation;
+using KH.Dto.lookups.GroupDto.Form;
+using KH.Dto.lookups.GroupDto.Request;
+using KH.Dto.lookups.GroupDto.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CA.ViewModels
@@ -13,7 +18,11 @@ namespace CA.ViewModels
         {
             services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
-            services.AddSingleton<IValidator<CityResponse>, CityFormValidator>();
+            services.AddSingleton<IValidator<CityForm>, CityFormValidator>();
+            services.AddSingleton<IValidator<CityFilterRequest>, CityFilterRequestValidator>();
+
+            services.AddSingleton<IValidator<GroupForm>, GroupFormValidator>();
+            services.AddSingleton<IValidator<GroupFilterRequest>, GroupFilterRequestValidator>();
 
             return services;
         }

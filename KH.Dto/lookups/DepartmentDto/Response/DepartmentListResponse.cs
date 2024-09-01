@@ -1,4 +1,4 @@
-namespace KH.Dto.lookups.CityDto.Response
+namespace KH.Dto.lookups.DepartmentDto.Response
 {
   public class DepartmentListResponse : BasicEntityDto
   {
@@ -10,7 +10,7 @@ namespace KH.Dto.lookups.CityDto.Response
     {
     }
 
-    public DepartmentListResponse(KH.Domain.Entities.lookups.City e)
+    public DepartmentListResponse(Department e)
     {
       NameAr = e.NameAr;
       NameEn = e.NameEn;

@@ -1,7 +1,6 @@
-using KH.Dto.Models.lookups;
 using Microsoft.AspNetCore.Http;
 
-namespace KH.Dto.lookups
+namespace KH.Dto.lookups.PermissionsDto
 {
   public class TreeItemResponseDto
   {

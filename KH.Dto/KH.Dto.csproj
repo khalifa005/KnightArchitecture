@@ -25,6 +25,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="lookups\PermissionsDto\Form\" />
+    <Folder Include="lookups\PermissionsDto\Request\" />
+    <Folder Include="lookups\PermissionsDto\Response\" />
+    <Folder Include="lookups\PermissionsDto\Validation\" />
+    <Folder Include="lookups\NationalityDto\Request\" />
+    <Folder Include="lookups\NationalityDto\Validation\" />
+    <Folder Include="lookups\RoleDto\Request\" />
+    <Folder Include="lookups\RoleDto\Validation\" />
+    <Folder Include="lookups\PolicyIssuingSourceDto\Request\" />
+    <Folder Include="lookups\PolicyIssuingSourceDto\Validation\" />
+    <Folder Include="lookups\DepartmentDto\Request\" />
+    <Folder Include="lookups\DepartmentDto\Validation\" />
+    <Folder Include="lookups\AEmptyTemplate\Form\" />
+    <Folder Include="lookups\AEmptyTemplate\Request\" />
+    <Folder Include="lookups\AEmptyTemplate\Response\" />
+    <Folder Include="lookups\AEmptyTemplate\Validation\" />
     <Folder Include="Models\AEmptyTemplate\Validation\" />
     <Folder Include="Models\Authentication\Response\" />
     <Folder Include="Models\AEmptyTemplate\Form\" />

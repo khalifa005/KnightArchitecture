@@ -1,4 +1,4 @@
-using KH.Dto.lookups;
+using KH.Dto.lookups.RoleDto;
 
 namespace KH.Dto.Models.Authentication.Request
 {

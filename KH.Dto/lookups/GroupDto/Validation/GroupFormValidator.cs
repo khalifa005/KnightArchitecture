@@ -3,9 +3,9 @@ using KH.Dto.lookups.GroupDto.Form;
 
 namespace KH.Dto.lookups.Group.Validation
 {
-  public class CityFormValidator : AbstractValidator<GroupForm>
+  public class GroupFormValidator : AbstractValidator<GroupForm>
   {
-    public CityFormValidator()
+    public GroupFormValidator()
     {
       RuleFor(x => x.NameAr)
         .NotNull()
