@@ -5,7 +5,6 @@ using KH.Dto.Models.Calendar.Response;
 using KH.Dto.Models.lookups;
 using KH.Dto.Models.SMS.Form;
 using KH.Dto.Models.User.Response;
-using KH.Dto.Parameters.Base;
 
 namespace CA.ViewModels.MappingProfiles
 {

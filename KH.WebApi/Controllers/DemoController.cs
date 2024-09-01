@@ -1,3 +1,4 @@
+using KH.Helper.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.SqlServer.Server;
@@ -123,10 +124,22 @@ namespace KH.WebApi.Controllers
           }
 
           System.Diagnostics.Debug.WriteLine($"File saved: {filePath}");
+          return Ok(new FileResponse { FilePath = $"{filePath}", FileId = $"{filePath}" });
+
         }
       }
 
-      return Ok(new { Message = "Form submitted successfully!" });
+
+      return Ok(new FileResponse { FilePath = $"Form-submitted-successfully!" });
+    }
+
+
+    [HttpGet("DeleteFile")]
+    public async Task<IActionResult> DeleteFile(string ID, string FBFID)
+    {
+
+
+      return Ok(new FileResponse { FilePath = $"Deleted-successfully!" });
     }
 
 
