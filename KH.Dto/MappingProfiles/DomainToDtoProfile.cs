@@ -21,7 +21,7 @@ namespace CA.ViewModels.MappingProfiles
       CreateMap<City, CityResponseDto>().ReverseMap();
       CreateMap<Role, RoleResponseDto>().ReverseMap();
       CreateMap<Department, DepartmentResponseDto>().ReverseMap();
-      CreateMap<Group, GroupResponse>().ReverseMap();
+      CreateMap<Group, CityResponse>().ReverseMap();
       CreateMap<SMSFollowUp, SMSFollowUpFormDto>().ReverseMap();
       CreateMap<User, UserDetailsResponseDto>().ReverseMap();
       CreateMap<Calendar, CalendarDetailsResponseDto>().ReverseMap();

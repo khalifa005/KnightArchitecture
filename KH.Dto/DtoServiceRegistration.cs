@@ -13,7 +13,7 @@ namespace CA.ViewModels
         {
             services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
-            services.AddSingleton<IValidator<GroupResponse>, GroupFormValidator>();
+            services.AddSingleton<IValidator<CityResponse>, CityFormValidator>();
 
             return services;
         }

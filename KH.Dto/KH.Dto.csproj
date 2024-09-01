@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="lookups\Group\Form\" />
     <Folder Include="Models\AEmptyTemplate\Validation\" />
     <Folder Include="Models\Authentication\Response\" />
     <Folder Include="Models\AEmptyTemplate\Form\" />

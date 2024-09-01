@@ -1,11 +1,11 @@
 using FluentValidation;
-using KH.Dto.lookups.Group.Request;
+using KH.Dto.lookups.CityDto.Request;
 
-namespace CA.ViewModels.Validations
+namespace KH.Dto.lookups.CityDto.Validation
 {
-    public class GroupFilterRequestValidator : AbstractValidator<GroupFilterRequest>
+    public class CityFilterRequestValidator : AbstractValidator<CityFilterRequest>
     {
-        public GroupFilterRequestValidator()
+        public CityFilterRequestValidator()
         {
             RuleFor(x => x.NameAr).NotNull().NotEmpty().Length(1, 250);
             RuleFor(x => x.NameEn).NotNull().NotEmpty().Length(1, 250);

@@ -1,11 +1,11 @@
 using FluentValidation;
-using KH.Dto.lookups.Group.Response;
+using KH.Dto.lookups.GroupDto.Form;
 
 namespace KH.Dto.lookups.Group.Validation
 {
-  public class GroupFormValidator : AbstractValidator<GroupForm>
+  public class CityFormValidator : AbstractValidator<GroupForm>
   {
-    public GroupFormValidator()
+    public CityFormValidator()
     {
       RuleFor(x => x.NameAr)
         .NotNull()

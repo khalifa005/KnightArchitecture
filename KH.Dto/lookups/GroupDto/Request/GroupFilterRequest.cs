@@ -1,4 +1,4 @@
-namespace KH.Dto.lookups.Group.Request
+namespace KH.Dto.lookups.GroupDto.Request
 {
   public class GroupFilterRequest : CommonLookupFiltersRequest
   {
