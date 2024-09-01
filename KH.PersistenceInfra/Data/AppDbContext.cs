@@ -71,15 +71,15 @@ namespace KH.PersistenceInfra.Data
               break;
 
             entry.State = EntityState.Modified;
-            entry.Entity.DeletedDate = DateTime.Now;
+            entry.Entity.DeletedDate = DateTime.Now.AddHours(3);//ksa
             entry.Entity.IsDeleted = true;
             break;
           case EntityState.Modified:
-            entry.Entity.UpdatedDate = DateTime.Now;
+            entry.Entity.UpdatedDate = DateTime.Now.AddHours(3);//ksa;
             entry.Entity.IsDeleted = false;
             break;
           case EntityState.Added:
-            entry.Entity.CreatedDate = DateTime.Now;
+            entry.Entity.CreatedDate = DateTime.Now.AddHours(3);//ksa
             entry.Entity.IsDeleted = false;
             break;
           default:

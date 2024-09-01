@@ -18,7 +18,7 @@ namespace CA.ViewModels
         {
             services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
-            services.AddSingleton<IValidator<CityForm>, CityFormValidator>();
+            services.AddSingleton<IValidator<CityForm>, DepartmentFormValidator>();
             services.AddSingleton<IValidator<CityFilterRequest>, CityFilterRequestValidator>();
 
             services.AddSingleton<IValidator<GroupForm>, GroupFormValidator>();

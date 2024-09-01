@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -25,24 +25,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="lookups\PermissionsDto\Form\" />
-    <Folder Include="lookups\PermissionsDto\Request\" />
-    <Folder Include="lookups\PermissionsDto\Response\" />
-    <Folder Include="lookups\PermissionsDto\Validation\" />
-    <Folder Include="lookups\NationalityDto\Request\" />
-    <Folder Include="lookups\NationalityDto\Validation\" />
-    <Folder Include="lookups\RoleDto\Request\" />
-    <Folder Include="lookups\RoleDto\Validation\" />
-    <Folder Include="lookups\PolicyIssuingSourceDto\Request\" />
-    <Folder Include="lookups\PolicyIssuingSourceDto\Validation\" />
-    <Folder Include="lookups\DepartmentDto\Request\" />
-    <Folder Include="lookups\DepartmentDto\Validation\" />
-    <Folder Include="lookups\AEmptyTemplate\Form\" />
-    <Folder Include="lookups\AEmptyTemplate\Request\" />
-    <Folder Include="lookups\AEmptyTemplate\Response\" />
-    <Folder Include="lookups\AEmptyTemplate\Validation\" />
+    <Folder Include="Lookups\NationalityDto\Validation\" />
+    <Folder Include="Lookups\PermissionsDto\Form\" />
+    <Folder Include="Lookups\PermissionsDto\Request\" />
+    <Folder Include="Lookups\PermissionsDto\Response\" />
+    <Folder Include="Lookups\PermissionsDto\Validation\" />
+    <Folder Include="Lookups\NationalityDto\Request\" />
+    <Folder Include="Lookups\RoleDto\Request\" />
+    <Folder Include="Lookups\PolicyIssuingSourceDto\Request\" />
+    <Folder Include="Lookups\DepartmentDto\Request\" />
+    <Folder Include="Lookups\AEmptyTemplate\Form\" />
+    <Folder Include="Lookups\AEmptyTemplate\Request\" />
+    <Folder Include="Lookups\AEmptyTemplate\Response\" />
+    <Folder Include="Lookups\AEmptyTemplate\Validation\" />
+    <Folder Include="Models\AuthenticationDto\Form\" />
     <Folder Include="Models\AEmptyTemplate\Validation\" />
-    <Folder Include="Models\Authentication\Response\" />
     <Folder Include="Models\AEmptyTemplate\Form\" />
     <Folder Include="Models\Calendar\Form\" />
     <Folder Include="Models\Customer\Form\" />
