@@ -9,7 +9,11 @@ using KH.Dto.lookups.GroupDto.Form;
 using KH.Dto.lookups.GroupDto.Request;
 using KH.Dto.lookups.GroupDto.Validation;
 using KH.Dto.Models.AuthenticationDto.Request;
+using KH.Dto.Models.CustomerDto.Form;
+using KH.Dto.Models.CustomerDto.Validation;
 using KH.Dto.Models.OtpVerificationDto.Validation;
+using KH.Dto.Models.UserDto.Form;
+using KH.Dto.Models.UserDto.Validation;
 
 namespace CA.ViewModels
 {
@@ -28,6 +32,10 @@ namespace CA.ViewModels
       services.AddSingleton<IValidator<GroupFilterRequest>, GroupFilterRequestValidator>();
 
       services.AddSingleton<IValidator<OtpVerificationRequest>, OtpVerificationRequestValidator>();
+
+      services.AddSingleton<IValidator<CustomerForm>, CustomerFormValidator>();
+
+      services.AddSingleton<IValidator<UserForm>, UserFormValidator>();
 
       return services;
     }

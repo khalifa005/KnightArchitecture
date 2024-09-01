@@ -42,13 +42,11 @@
     <Folder Include="Models\AEmptyTemplate\Validation\" />
     <Folder Include="Models\AEmptyTemplate\Form\" />
     <Folder Include="Models\CalendarDto\Form\" />
-    <Folder Include="Models\CustomerDto\Validation\" />
     <Folder Include="Models\EmailDto\Form\" />
     <Folder Include="Models\MediaDto\Validation\" />
     <Folder Include="Models\SMSDto\Response\" />
     <Folder Include="Models\AEmptyTemplate\Request\" />
     <Folder Include="Models\AEmptyTemplate\Response\" />
-    <Folder Include="Models\UserDto\Validation\" />
   </ItemGroup>
 
 </Project>
