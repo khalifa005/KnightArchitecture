@@ -1,3 +1,6 @@
+# TODO
+**User API + CRUD operation (pagination) Services Full Implementation Demo**:
+
 # Khalifa Architecture
 
 This repository is structured following the principles of **Clean Architecture** and **Domain-Driven Design (DDD)**. The main idea is to decouple the different concerns of the application into layers, ensuring maintainability, scalability, and testability. Each layer has a clear responsibility, making it easier to navigate and extend the project as it grows.
@@ -293,7 +296,7 @@ We are actively working on new features to improve the architecture and user exp
 14. **User API + CRUD operation (pagination) Services Full Implementation Demo**:
    -
 
-15. ** **:
+15. **Global File management**:
    -
 
 16. ** **:
