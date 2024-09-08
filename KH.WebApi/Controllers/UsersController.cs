@@ -1,5 +1,6 @@
 using CA.Services.Contracts;
 using KH.Dto.Models.UserDto.Form;
+using KH.Helper.Extentions;
 using KH.Helper.Responses;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KH.WebApi.Controllers
 {
-  [Route("api/[controller]")]
-  [ApiController]
-  public class UsersController : ControllerBase
+  //[Route("api/[controller]")]
+  //[ApiController]
+  public class UsersController : BaseApiController
   {
     public readonly IUserService _userService;
     public UsersController(IUserService userService)
@@ -35,7 +36,8 @@ namespace KH.WebApi.Controllers
     public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] UserForm request)
     {
       var res = await _userService.RegisterUserAsync(request);
-      return Ok(res);
+      //return Ok(res);
+      return AsActionResult(res);
       //return AsActionResult(item); use later in cuustom base api
     }
 

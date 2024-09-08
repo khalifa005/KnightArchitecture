@@ -53,12 +53,14 @@ public class UserService : IUserService
       //auto mapper
       var userEntityByAutoMapper = _mapper.Map<User>(request);
 
-      //check what happen to craetion date for user roles and user groups
+      //check what happen to craetion date for user roles and user groups +
+      //move mapping to the automapper or custom entity
       userEntityByAutoMapper.UserRoles = request.RoleIds.Select(roleId => new UserRole
       {
         RoleId = roleId
       }).ToList();
 
+      //this will ensure that wilsave all related user in one query
       userEntityByAutoMapper.UserDepartments = new List<UserDepartment>() {
         new UserDepartment { DepartmentId = request.DepartmentId.Value}
       };
@@ -75,15 +77,10 @@ public class UserService : IUserService
       await repository.AddAsync(userEntityByAutoMapper);
       await _unitOfWork.CommitAsync();
 
-      //ignore this by the above i did define tem to be added auto to db 
-      //--Save User Details with newly created Id
-      //await this.SaveUserRoles(request, entity.Id);
-      //await this.SaveUserDepartment(request, entity.Id);
-      //await this.SaveUserGroup(request, entity.Id);
-      //await _unitOfWork.CommitAsync();
+  
       await _unitOfWork.CommitTransactionAsync();
 
-      res.Data = "item.Data.Id";
+      res.Data = userEntityByAutoMapper.Id.ToString();
       return res;
     }
     catch (Exception ex)
