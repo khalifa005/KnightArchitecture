@@ -287,22 +287,27 @@ We are actively working on new features to improve the architecture and user exp
 11. **IOption Pattern**:
    -        
 
-12. **Hangfire**:
+11. **Bulk add - update**:
+12.  **Lock prop ask yousef**:
+   -        
+    
+   -        
+13. **Hangfire**:
    -   
 
-13. **Fluent Email**:
+14. **Fluent Email**:
    -
 
-14. **User API + CRUD operation (pagination) Services Full Implementation Demo**:
+15. **User API + CRUD operation (pagination) Services Full Implementation Demo**:
    -
 
-15. **Global File management**:
-   -
-
-16. ** **:
+16. **Global File management**:
    -
 
 17. ** **:
+   -
+
+18. ** **:
    -
 
 ---
