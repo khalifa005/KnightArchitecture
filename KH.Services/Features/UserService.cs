@@ -39,9 +39,9 @@ public class UserService : IUserService
       q => q.Include(u => u.UserRoles)
       .ThenInclude(ur => ur.Role)
       .Include(u => u.UserGroups)
-      .ThenInclude(x=> x.Group)
+      .ThenInclude(x => x.Group)
       .Include(u => u.UserDepartments)
-      .ThenInclude(d=> d.Department));
+      .ThenInclude(d => d.Department));
 
     UserDetailsResponse userDetailsResponse = new UserDetailsResponse(detailsUserFromDB);
     //var userResponseByAutoMapper = _mapper.Map<UserDetailsResponse>(detailsUserFromDB);
@@ -57,14 +57,17 @@ public class UserService : IUserService
   {
     throw new NotImplementedException();
   }
-
   public async Task<ApiResponse<string>> AddAsync(UserForm request)
   {
+   
+
     //db context will handel saving it auto
     var actionMadeByUserId = _serviceProvider.GetUserId();
 
     //define our api res 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    await _unitOfWork.BeginTransactionAsync();
 
     //no nned for try catch we have global exception handler test it
     try
@@ -107,13 +110,10 @@ public class UserService : IUserService
       };
 
 
-      await _unitOfWork.BeginTransactionAsync();
-
       var repository = _unitOfWork.Repository<User>();
 
       await repository.AddAsync(userEntityByAutoMapper);
       await _unitOfWork.CommitAsync();
-
 
       await _unitOfWork.CommitTransactionAsync();
 
@@ -122,6 +122,49 @@ public class UserService : IUserService
     }
     catch (Exception ex)
     {
+      await _unitOfWork.RollBackTransactionAsync();
+
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.Data = ex.Message;
+      res.ErrorMessage = ex.Message;
+      return res;
+    }
+  }
+  public async Task<ApiResponse<string>> AddListAsync(List<UserForm> request)
+  {
+    //db context will handel saving it auto
+    var actionMadeByUserId = _serviceProvider.GetUserId();
+
+    //define our api res 
+    ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
+    await _unitOfWork.BeginTransactionAsync();
+
+    try
+    {
+      if (request == null)
+        throw new Exception("Invalid Parameter");
+
+      //-- Check User Duplication for each by national id and email
+      //await this.CheckDuplictedUser(userObj);
+
+      //custom mapping
+      var userEntities = request.Select(x=> x.ToEntity()).ToList();
+
+      var repository = _unitOfWork.Repository<User>();
+
+      await repository.AddRangeAsync(userEntities);
+      await _unitOfWork.CommitAsync();
+
+
+      await _unitOfWork.CommitTransactionAsync();
+
+      res.Data = String.Join(",", userEntities.Select(x=> x.Id));
+      return res;
+    }
+    catch (Exception ex)
+    {
+      await _unitOfWork.RollBackTransactionAsync();
+
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
       res.ErrorMessage = ex.Message;
@@ -134,20 +177,21 @@ public class UserService : IUserService
     //define our api res 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
-    //there will be fluend validation rules
-    if (request == null)
-      throw new Exception("Invalid Parameter");
-
-    //all validation should be in fluent validation side
-    if (!request.Id.HasValue)
-      throw new Exception("id is required");
-
     //auto mapper
     var userEntityByAutoMapper = _mapper.Map<User>(request);
 
+    var repository = _unitOfWork.Repository<User>();
+    await _unitOfWork.BeginTransactionAsync();
+
     try
     {
-      var repository = _unitOfWork.Repository<User>();
+      //there will be fluend validation rules
+      if (request == null)
+        throw new Exception("Invalid Parameter");
+
+      //all validation should be in fluent validation side
+      if (!request.Id.HasValue)
+        throw new Exception("id is required");
 
       var userFromDb = await repository.GetAsync(request.Id.Value);
 
@@ -163,7 +207,6 @@ public class UserService : IUserService
       userFromDb.MiddleName = userEntityByAutoMapper.MiddleName;
       userFromDb.BirthDate = userEntityByAutoMapper.BirthDate;
 
-      await _unitOfWork.BeginTransactionAsync();
 
 
       repository.Update(userFromDb);
@@ -175,6 +218,8 @@ public class UserService : IUserService
     }
     catch (Exception ex)
     {
+      await _unitOfWork.RollBackTransactionAsync();
+
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
       res.ErrorMessage = ex.Message;

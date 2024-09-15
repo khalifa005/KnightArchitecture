@@ -20,6 +20,7 @@ namespace CA.Services.Contracts
     Task<ApiResponse<UserDetailsResponse>> GetAsync(UserFilterRequest request);
     Task<ApiResponse<UserListResponse>> GetListAsync(UserFilterRequest request);
     Task<ApiResponse<string>> AddAsync(UserForm request);
+    Task<ApiResponse<string>> AddListAsync(List<UserForm> request);
     Task<ApiResponse<string>> UpdateAsync(UserForm request);
     Task<ApiResponse<string>> DeleteAsync(UserFilterRequest request);
     Task<ApiResponse<AuthenticationResponse>> Login(AuthenticationLoginRequest request);

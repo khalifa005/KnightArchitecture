@@ -42,6 +42,13 @@ namespace KH.WebApi.Controllers
       return AsActionResult(res);
     }
 
+    [HttpPost("AddRange")]
+    public async Task<ActionResult<ApiResponse<string>>> PostRange([FromBody] List<UserForm> request)
+    {
+      var res = await _userService.AddListAsync(request);
+      return AsActionResult(res);
+    }
+
     [HttpPut]
     public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] UserForm request)
     {
