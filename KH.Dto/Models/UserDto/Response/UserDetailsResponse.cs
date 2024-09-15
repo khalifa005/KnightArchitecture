@@ -1,5 +1,3 @@
-using KH.Dto.lookups.RoleDto;
-
 namespace KH.Dto.Models.UserDto.Response
 {
   public class UserDetailsResponse : BasicTrackerEntityDto
@@ -21,9 +19,9 @@ namespace KH.Dto.Models.UserDto.Response
     public DateTime? LastAssignDateAsCaseOwner { get; set; }
     public DateTime? LastAssignDateAsAssignTo { get; set; }
 
-    public ICollection<UserRoleDto> UserRoles { get; set; } = new HashSet<UserRoleDto>();
-    //public ICollection<UserGroupDto> UserGroups { get; set; } = new HashSet<UserGroup>();
-    //public ICollection<UserDepartmentDto> UserDepartments { get; set; } = new HashSet<UserDepartment>();
+    public ICollection<UserRoleResponse> UserRoles { get; set; } = new HashSet<UserRoleResponse>();
+    public ICollection<UserGroupResponse> UserGroups { get; set; } = new HashSet<UserGroupResponse>();
+    public ICollection<UserDepartmentResponse> UserDepartments { get; set; } = new HashSet<UserDepartmentResponse>();
 
 
     public string FullName

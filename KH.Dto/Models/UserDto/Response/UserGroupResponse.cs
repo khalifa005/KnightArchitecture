@@ -1,0 +1,14 @@
+﻿using KH.Dto.lookups.GroupDto.Response;
+
+namespace KH.Dto.Models.UserDto.Response
+{
+  public class UserGroupResponse
+  {
+    public long UserId { get; set; }
+    //public UserListResponse? User { get; set; }
+
+    public long GroupId { get; set; }
+    public GroupResponse? Group { get; set; }
+
+  }
+}

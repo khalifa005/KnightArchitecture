@@ -1,6 +1,6 @@
-namespace KH.Dto.lookups.RoleDto
+namespace KH.Dto.Lookups.RoleDto.Response
 {
-  public class RoleFunctionsDto
+  public class RoleFunctionsResponse
   {
     public int RoleId { get; set; }
     public List<int> RoleFunctionIds { get; set; } = new List<int>();

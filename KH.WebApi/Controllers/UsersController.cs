@@ -1,5 +1,7 @@
+using Azure.Core;
 using CA.Services.Contracts;
 using KH.Dto.Models.UserDto.Form;
+using KH.Dto.Models.UserDto.Response;
 using KH.Helper.Extentions;
 using KH.Helper.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -26,25 +28,25 @@ namespace KH.WebApi.Controllers
 
     // GET api/<UsersController>/5
     [HttpGet("{id}")]
-    public string Get(int id)
+    public async Task<ActionResult<ApiResponse<UserDetailsResponse>>> Get(int id)
     {
-      return "value";
+      var res = await _userService.GetAsync(id);
+      return AsActionResult(res);
     }
 
     // POST api/<UsersController>
     [HttpPost]
     public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] UserForm request)
     {
-      var res = await _userService.RegisterUserAsync(request);
-      //return Ok(res);
+      var res = await _userService.AddAsync(request);
       return AsActionResult(res);
-      //return AsActionResult(item); use later in cuustom base api
     }
 
-    // PUT api/<UsersController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    [HttpPut]
+    public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] UserForm request)
     {
+      var res = await _userService.UpdateAsync(request);
+      return AsActionResult(res);
     }
 
     // DELETE api/<UsersController>/5
