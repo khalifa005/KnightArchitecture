@@ -1,6 +1,7 @@
 using Azure.Core;
 using CA.Services.Contracts;
 using KH.Dto.Models.UserDto.Form;
+using KH.Dto.Models.UserDto.Request;
 using KH.Dto.Models.UserDto.Response;
 using KH.Helper.Extentions;
 using KH.Helper.Responses;
@@ -20,10 +21,12 @@ namespace KH.WebApi.Controllers
       _userService = userService;
     }
     // GET: api/<UsersController>
-    [HttpGet]
-    public IEnumerable<string> Get()
+    [HttpPost("list")]
+    public async Task<ActionResult<ApiResponse<PagedResponse<UserListResponse>>>> GetList(UserFilterRequest request)
     {
-      return new string[] { "value1", "value2" };
+      //var res = await _userService.GetListUsingIQueryableAsync(request);
+      var res = await _userService.GetListAsync(request);
+      return AsActionResult(res);
     }
 
     // GET api/<UsersController>/5

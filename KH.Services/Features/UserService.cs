@@ -1,8 +1,10 @@
 using AutoMapper;
 using KH.Domain.Entities;
+using KH.Dto.Models.UserDto.Response;
 using KH.Helper.Extentions.Methods;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Linq;
 using System.Net;
 
 public class UserService : IUserService
@@ -53,13 +55,85 @@ public class UserService : IUserService
   {
     throw new NotImplementedException();
   }
-  public Task<ApiResponse<UserListResponse>> GetListAsync(UserFilterRequest request)
+  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListAsync(UserFilterRequest request)
   {
-    throw new NotImplementedException();
+    var repository = _unitOfWork.Repository<User>();
+
+    //example with internal predicate
+    var result = await repository.GetPagedAsync(
+      request.PageIndex,
+      request.PageSize,
+      u =>
+    u.FirstName.Contains(request.Search)
+    || u.LastName.Contains(request.Search),
+
+    q => q.Include(u => u.UserRoles)
+    .ThenInclude(ur => ur.Role)
+    .Include(u => u.UserGroups)
+    .Include(u => u.UserDepartments));
+
+
+    var userListResponses = result.Select(x => new UserListResponse(x)).ToList();
+
+    var pagedResponse = new PagedResponse<UserListResponse>(
+      userListResponses,
+       result.CurrentPage,
+       result.TotalPages,
+       result.PageSize,
+       result.TotalCount);
+
+    ApiResponse<PagedResponse<UserListResponse>> apiResponse = new ApiResponse<PagedResponse<UserListResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = pagedResponse;
+
+    return apiResponse;
   }
+  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingIQueryableAsync(UserFilterRequest request)
+  {
+    var repository = _unitOfWork.Repository<User>();
+    IQueryable<User> query = repository.GetQueryable();
+
+
+    if (!string.IsNullOrEmpty(request.Email))
+    {
+      query = query.Where(u => u.Email.Contains(request.Email));
+    }
+
+    if (!string.IsNullOrEmpty(request.UserName))
+    {
+      query = query.Where(u => u.Username.Contains(request.UserName));
+    }
+
+    if (!string.IsNullOrEmpty(request.Search))
+    {
+      query = query.Where(u =>
+      u.MobileNumber.Contains(request.Search)
+      || u.FirstName.Contains(request.Search));
+    }
+
+    query = query.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+                 .Include(u => u.UserGroups)
+                 .Include(u => u.UserDepartments);
+
+    var usersFromDB = await repository.GetPagedUsingQueryAsync(request.PageIndex, request.PageSize, query);
+
+    var userListResponses = usersFromDB.Select(x => new UserListResponse(x)).ToList();
+
+    var pagedResponse = new PagedResponse<UserListResponse>(
+      userListResponses,
+       usersFromDB.CurrentPage,
+       usersFromDB.TotalPages,
+       usersFromDB.PageSize,
+       usersFromDB.TotalCount);
+
+    ApiResponse<PagedResponse<UserListResponse>> apiResponse = new ApiResponse<PagedResponse<UserListResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = pagedResponse;
+
+    return apiResponse;
+  }
+
   public async Task<ApiResponse<string>> AddAsync(UserForm request)
   {
-   
+
 
     //db context will handel saving it auto
     var actionMadeByUserId = _serviceProvider.GetUserId();
@@ -148,7 +222,7 @@ public class UserService : IUserService
       //await this.CheckDuplictedUser(userObj);
 
       //custom mapping
-      var userEntities = request.Select(x=> x.ToEntity()).ToList();
+      var userEntities = request.Select(x => x.ToEntity()).ToList();
 
       var repository = _unitOfWork.Repository<User>();
 
@@ -158,7 +232,7 @@ public class UserService : IUserService
 
       await _unitOfWork.CommitTransactionAsync();
 
-      res.Data = String.Join(",", userEntities.Select(x=> x.Id));
+      res.Data = String.Join(",", userEntities.Select(x => x.Id));
       return res;
     }
     catch (Exception ex)
@@ -233,6 +307,11 @@ public class UserService : IUserService
   }
   public Task<ApiResponse<AuthenticationResponse>> Login(AuthenticationLoginRequest request)
   {
+    throw new NotImplementedException();
+  }
+  public async Task<ApiResponse<string>> ResetDepartmentsGetTrackedThenSaveAsync(List<long> request)
+  {
+    //get and try to check tracking then save 
     throw new NotImplementedException();
   }
 }
