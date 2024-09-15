@@ -12,6 +12,7 @@ namespace KH.Dto.lookups.DepartmentDto.Response
 
     public DepartmentResponse(Department e)
     {
+      Id = e.Id;
       NameAr = e.NameAr;
       NameEn = e.NameEn;
       Description = e.Description;

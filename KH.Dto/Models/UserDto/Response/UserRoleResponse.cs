@@ -15,6 +15,18 @@ namespace KH.Dto.Models.UserDto.Response
     public RoleResponse? Role { get; set; }
 
     public List<RoleFunctionsResponse> RoleFunctions { get; set; } = new List<RoleFunctionsResponse>();
+    public UserRoleResponse()
+    {
+          
+    }
+
+    // Constructor to map from UserRole entity to UserRoleResponse
+    public UserRoleResponse(UserRole userRole)
+    {
+      RoleId = userRole.RoleId;
+      UserId = userRole.UserId;
+      Role = userRole.Role != null ? new RoleResponse(userRole.Role) : null;
+    }
 
   }
 }

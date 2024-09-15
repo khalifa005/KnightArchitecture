@@ -15,6 +15,7 @@ namespace KH.Dto.lookups.GroupDto.Response
 
     public GroupResponse(KH.Domain.Entities.lookups.Group e)
     {
+      Id = e.Id;
       TicketCategoryId = e.TicketCategoryId;
       NameAr = e.NameAr;
       NameEn = e.NameEn;

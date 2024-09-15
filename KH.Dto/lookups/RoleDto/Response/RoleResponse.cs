@@ -15,6 +15,7 @@ namespace KH.Dto.lookups.RoleDto.Response
 
     public RoleResponse(Role e)
     {
+      Id = e.Id;
       NameAr = e.NameAr;
       NameEn = e.NameEn;
       Description = e.Description;

@@ -9,5 +9,7 @@ namespace KH.Domain.Entities
 
         public long GroupId { get; set; }
         public Group? Group { get; set; }
+
+
     }
 }

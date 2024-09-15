@@ -1,4 +1,6 @@
-﻿using KH.Dto.lookups.DepartmentDto.Response;
+using KH.Domain.Entities;
+using KH.Dto.lookups.DepartmentDto.Response;
+using KH.Dto.lookups.GroupDto.Response;
 
 namespace KH.Dto.Models.UserDto.Response
 {
@@ -10,5 +12,13 @@ namespace KH.Dto.Models.UserDto.Response
     public long DepartmentId { get; set; }
     public DepartmentResponse? Department { get; set; }
 
+    // Constructor to map from UserDepartment entity to UserDepartmentResponse
+    public UserDepartmentResponse(UserDepartment userDepartment)
+    {
+      DepartmentId = userDepartment.DepartmentId;
+      UserId = userDepartment.UserId;
+      Department = userDepartment.Department != null ? new DepartmentResponse(userDepartment.Department) : null;
+
+    }
   }
 }

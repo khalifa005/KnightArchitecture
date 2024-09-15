@@ -39,11 +39,14 @@ public class UserService : IUserService
       q => q.Include(u => u.UserRoles)
       .ThenInclude(ur => ur.Role)
       .Include(u => u.UserGroups)
-      .Include(u => u.UserDepartments));
+      .ThenInclude(x=> x.Group)
+      .Include(u => u.UserDepartments)
+      .ThenInclude(d=> d.Department));
 
-    var userResponseByAutoMapper = _mapper.Map<UserDetailsResponse>(detailsUserFromDB);
+    UserDetailsResponse userDetailsResponse = new UserDetailsResponse(detailsUserFromDB);
+    //var userResponseByAutoMapper = _mapper.Map<UserDetailsResponse>(detailsUserFromDB);
 
-    res.Data = userResponseByAutoMapper;
+    res.Data = userDetailsResponse;
     return res;
   }
   public Task<ApiResponse<UserDetailsResponse>> GetAsync(UserFilterRequest request)
