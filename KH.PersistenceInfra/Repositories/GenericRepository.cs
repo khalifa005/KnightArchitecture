@@ -153,6 +153,54 @@ namespace KH.PersistenceInfra.Repositories
       //return await PagedList<T>.CreateAsync(query, pageNumber, pageSize);
     }
 
+    public async Task<PagedList<TProjection>> GetPagedWithProjectionAsync<TProjection>(
+    int pageNumber,
+    int pageSize,
+    Expression<Func<T, bool>> filterExpression, // Filter expression
+    Expression<Func<T, TProjection>> projectionExpression, // Projection (Select)
+    Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, // Includes
+    Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // Sorting
+    bool tracking = false // Whether to track entities
+)
+    {
+      // Start with the base entity set
+      IQueryable<T> query = _dbContext.Set<T>();
+
+      // Apply includes if specified
+      if (include != null)
+      {
+        query = include(query);
+      }
+
+      // Apply the filter
+      if (filterExpression != null)
+      {
+        query = query.Where(filterExpression);
+      }
+
+      // Apply ordering if specified
+      if (orderBy != null)
+      {
+        query = orderBy(query);
+      }
+
+      // Apply tracking or no-tracking based on the parameter
+      query = tracking ? query : query.AsNoTracking();
+
+      // Get the total count of items that match the filter
+      var count = await query.CountAsync();
+
+      // Apply pagination and projection
+      var items = await query
+          .Skip((pageNumber - 1) * pageSize)
+          .Take(pageSize)
+          .Select(projectionExpression) // Project only the required columns
+          .ToListAsync();
+
+      // Return paged list with projected results
+      return new PagedList<TProjection>(items, count, pageNumber, pageSize);
+    }
+
     private IQueryable<T> ApplyIncludes(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, bool tracking = false)
     {
       IQueryable<T> query = _dbContext.Set<T>();

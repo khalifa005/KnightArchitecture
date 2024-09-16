@@ -27,6 +27,14 @@ namespace KH.Helper.Contracts.Persistence
     void UpdateRange(ICollection<T> entities);
     Task<PagedList<T>> GetPagedAsync(int pageNumber, int pageSize, Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     Task<PagedList<T>> GetPagedUsingQueryAsync(int pageNumber, int pageSize, IQueryable<T> query);
+    Task<PagedList<TProjection>> GetPagedWithProjectionAsync<TProjection>(
+    int pageNumber,
+    int pageSize,
+    Expression<Func<T, bool>> filterExpression, // Filter expression
+    Expression<Func<T, TProjection>> projectionExpression, // Projection (Select)
+    Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, // Includes
+    Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // Sorting
+    bool tracking = false);
 
   }
 }

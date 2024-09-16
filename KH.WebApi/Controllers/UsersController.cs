@@ -17,18 +17,27 @@ namespace KH.WebApi.Controllers
       _userService = userService;
     }
 
-    [HttpPost("list")]
-    public async Task<ActionResult<ApiResponse<PagedResponse<UserListResponse>>>> GetList(UserFilterRequest request)
-    {
-      //var res = await _userService.GetListUsingIQueryableAsync(request);
-      var res = await _userService.GetListAsync(request);
-      return AsActionResult(res);
-    }
-
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<UserDetailsResponse>>> Get(int id)
     {
       var res = await _userService.GetAsync(id);
+      return AsActionResult(res);
+    }
+
+    [HttpPost("Filter")]
+    public async Task<ActionResult<ApiResponse<UserDetailsResponse>>> GetFilteredList(UserFilterRequest request)
+    {
+      var res = await _userService.GetAsync(request);
+      return AsActionResult(res);
+    }
+
+    [HttpPost("list")]
+    public async Task<ActionResult<ApiResponse<PagedResponse<UserListResponse>>>> GetList(UserFilterRequest request)
+    {
+      //each willl have different implementation to atchive the same thing
+      //var res = await _userService.GetListUsingIQueryableAsync(request);
+      //var res = await _userService.GetListAsync(request);
+      var res = await _userService.GetListUsingProjectionAsync(request);
       return AsActionResult(res);
     }
 

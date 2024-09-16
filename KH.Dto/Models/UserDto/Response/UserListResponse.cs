@@ -12,6 +12,9 @@ namespace KH.Dto.Models.UserDto.Response
     public string? Username { get; set; }
     public DateTime? BirthDate { get; set; }
     public string? MobileNumber { get; set; }
+
+    public List<string> DepartmentNames { get; set; }
+    public ICollection<UserRoleResponse> UserRoles { get; set; } = new HashSet<UserRoleResponse>();
     public UserListResponse()
     {
           

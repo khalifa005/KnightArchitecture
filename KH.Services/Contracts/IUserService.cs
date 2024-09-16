@@ -20,6 +20,7 @@ namespace CA.Services.Contracts
     Task<ApiResponse<UserDetailsResponse>> GetAsync(UserFilterRequest request);
     Task<ApiResponse<PagedResponse<UserListResponse>>> GetListAsync(UserFilterRequest request);
     Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingIQueryableAsync(UserFilterRequest request);
+    Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingProjectionAsync(UserFilterRequest request);
     Task<ApiResponse<string>> AddAsync(UserForm request);
     Task<ApiResponse<string>> AddListAsync(List<UserForm> request);
     Task<ApiResponse<string>> UpdateAsync(UserForm request);
