@@ -59,5 +59,12 @@ namespace KH.WebApi.Controllers
       var res = await _userService.DeleteAsync(id);
       return AsActionResult(res);
     }
+
+    [HttpPut("ResetDepartment/{id}")]
+    public async Task<ActionResult<ApiResponse<string>>> ResetDepartment(int id)
+    {
+      var res = await _userService.ResetDepartmentsAsync(id);
+      return AsActionResult(res);
+    }
   }
 }

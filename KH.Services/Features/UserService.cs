@@ -6,6 +6,7 @@ using KH.Helper.Extentions.Methods;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 
 public class UserService : IUserService
@@ -323,14 +324,60 @@ public class UserService : IUserService
       return res;
     }
   }
-  public Task<ApiResponse<AuthenticationResponse>> Login(AuthenticationLoginRequest request)
+  public Task<ApiResponse<AuthenticationResponse>> Login(LoginRequest request)
   {
     throw new NotImplementedException();
   }
-  public async Task<ApiResponse<string>> ResetDepartmentsGetTrackedThenSaveAsync(List<long> request)
+  public async Task<ApiResponse<string>> ResetDepartmentsAsync(long id)
   {
-    //get and try to check tracking then save 
-    throw new NotImplementedException();
+    ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    var repository = _unitOfWork.Repository<User>();
+    var user = await repository.GetAsyncTracking(
+      id,
+      q => q.Include(u => u.UserRoles)
+      .ThenInclude(ur => ur.Role)
+      .Include(u => u.UserGroups)
+      .Include(u => u.UserDepartments));
+
+    if (user == null)
+    {
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.ErrorMessage = "user-not-found";
+      return res;
+    }
+
+    user.UserDepartments = null;
+    await _unitOfWork.CommitAsync();
+
+    return res;
   }
+  // Find users by expression with includes
+  public async Task<IEnumerable<User>> FindUsersWithIncludesAsync(Expression<Func<User, bool>> predicate)
+  {
+    //FindUsersWithIncludesAsync(u => u.FirstName.Contains(search) || u.LastName.Contains(search));
+    var repository = _unitOfWork.Repository<User>();
+
+    //example with internal predicate
+    var result = await repository.FindByAsync(u =>
+    u.FirstName.Contains("search")
+    || u.LastName.Contains("search2"),
+
+    q => q.Include(u => u.UserRoles)
+    .ThenInclude(ur => ur.Role)
+    .Include(u => u.UserGroups)
+    .Include(u => u.UserDepartments));
+
+    return await repository.FindByAsync(predicate, q => q.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+                                                        .Include(u => u.UserGroups)
+                                                        .Include(u => u.UserDepartments));
+  }
+
+  public async Task<int> CountUsersByAsync(Expression<Func<User, bool>> predicate)
+  {
+    var repository = _unitOfWork.Repository<User>();
+    return await repository.CountByAsync(predicate);
+  }
+
 }
 

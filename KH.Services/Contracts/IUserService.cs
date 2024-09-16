@@ -24,8 +24,8 @@ namespace CA.Services.Contracts
     Task<ApiResponse<string>> AddListAsync(List<UserForm> request);
     Task<ApiResponse<string>> UpdateAsync(UserForm request);
     Task<ApiResponse<string>> DeleteAsync(long id);
-    Task<ApiResponse<AuthenticationResponse>> Login(AuthenticationLoginRequest request);
-    Task<ApiResponse<string>> ResetDepartmentsGetTrackedThenSaveAsync(List<long> request);
+    Task<ApiResponse<AuthenticationResponse>> Login(LoginRequest request);
+    Task<ApiResponse<string>> ResetDepartmentsAsync(long id);
 
   }
 }
