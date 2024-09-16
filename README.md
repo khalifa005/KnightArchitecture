@@ -1,6 +1,12 @@
 # TODO
 **User API + CRUD operation (pagination) Services Full Implementation Demo**:
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/2dd2ad50-f923-4c2c-900a-b1ada84b15a9" alt="v2 - Copy" width="300" height="300" />
+</p>
+
+
+
 # Knight Hedge Template
 
 This repository is structured following the principles of **Clean Architecture** and **Domain-Driven Design (DDD)**. The main idea is to decouple the different concerns of the application into layers, ensuring maintainability, scalability, and testability. Each layer has a clear responsibility, making it easier to navigate and extend the project as it grows.
