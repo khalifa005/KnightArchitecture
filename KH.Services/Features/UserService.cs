@@ -285,7 +285,7 @@ public class UserService : IUserService
       Username = u.Username,
       LastName = u.LastName,
       UserRoles = u.UserRoles.Select(ur => new UserRoleResponse(ur)).ToList(),
-      DepartmentNames = u.UserDepartments.Select(ud => ud.Department.NameEn).ToList() // Include departments
+      DepartmentNames = u.UserDepartments.Select(ud => ud.Department.NameEn).ToList() 
     },
     include: query => query
         .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
