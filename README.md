@@ -1,7 +1,7 @@
 # TODO
 **User API + CRUD operation (pagination) Services Full Implementation Demo**:
 
-# Khalifa Architecture
+# Knight Hedge Template
 
 This repository is structured following the principles of **Clean Architecture** and **Domain-Driven Design (DDD)**. The main idea is to decouple the different concerns of the application into layers, ensuring maintainability, scalability, and testability. Each layer has a clear responsibility, making it easier to navigate and extend the project as it grows.
 
