@@ -24,9 +24,10 @@ namespace KH.PersistenceInfra.Data.Configurations
              .WithOne(c => c.User)
              .HasForeignKey(t => t.UserId);
 
-      //builder.HasMany(t => t.UserDepartments)
-      //       .WithOne(c => c.User)
-      //       .HasForeignKey(t => t.UserId);
+      builder.HasMany(t => t.UserDepartments)
+             .WithOne(c => c.User)
+             .HasForeignKey(t => t.UserId)
+              .OnDelete(DeleteBehavior.Cascade);  // Cascade delete;
 
     }
   }

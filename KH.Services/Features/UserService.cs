@@ -346,14 +346,17 @@ public class UserService : IUserService
       res.ErrorMessage = "user-not-found";
       return res;
     }
+    //example on hard delete of user departments
+    //we also can keep it and just mart it as IsDeleted = true
+    user.UserDepartments.Clear();
 
-    user.UserDepartments = null;
     await _unitOfWork.CommitAsync();
 
     return res;
   }
+
   // Find users by expression with includes
-  public async Task<IEnumerable<User>> FindUsersWithIncludesAsync(Expression<Func<User, bool>> predicate)
+  private async Task<IEnumerable<User>> FindUsersWithIncludesAsync(Expression<Func<User, bool>> predicate)
   {
     //FindUsersWithIncludesAsync(u => u.FirstName.Contains(search) || u.LastName.Contains(search));
     var repository = _unitOfWork.Repository<User>();
@@ -373,7 +376,7 @@ public class UserService : IUserService
                                                         .Include(u => u.UserDepartments));
   }
 
-  public async Task<int> CountUsersByAsync(Expression<Func<User, bool>> predicate)
+  private async Task<int> CountUsersByAsync(Expression<Func<User, bool>> predicate)
   {
     var repository = _unitOfWork.Repository<User>();
     return await repository.CountByAsync(predicate);
