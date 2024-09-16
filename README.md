@@ -5,7 +5,16 @@
   <img src="https://github.com/user-attachments/assets/2dd2ad50-f923-4c2c-900a-b1ada84b15a9" alt="v2 - Copy" width="300" height="300" />
 </p>
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/159a3ae0-72be-48d6-99fc-c9d429ed8ee7" alt="v2 - Copy" width="300" height="300" />
+</p>
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/dcc2e920-7596-461f-a5fd-39d3cb18046d" alt="v2 - Copy" width="300" height="300" />
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/131bd858-0496-4017-99a3-7400a6c8117e" alt="v2 - Copy" width="300" height="300" />
+</p>
 
 # Knight Hedge Template
 
