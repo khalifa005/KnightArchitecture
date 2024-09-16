@@ -1,4 +1,5 @@
 using AutoMapper;
+using Azure.Core;
 using KH.Domain.Entities;
 using KH.Dto.Models.UserDto.Response;
 using KH.Helper.Extentions.Methods;
@@ -22,7 +23,6 @@ public class UserService : IUserService
     _serviceProvider = serviceProvider;
     _mapper = mapper;
   }
-
 
   public async Task<ApiResponse<UserDetailsResponse>> GetAsync(long id)
   {
@@ -130,11 +130,8 @@ public class UserService : IUserService
 
     return apiResponse;
   }
-
   public async Task<ApiResponse<string>> AddAsync(UserForm request)
   {
-
-
     //db context will handel saving it auto
     var actionMadeByUserId = _serviceProvider.GetUserId();
 
@@ -245,7 +242,6 @@ public class UserService : IUserService
       return res;
     }
   }
-
   public async Task<ApiResponse<string>> UpdateAsync(UserForm request)
   {
     //define our api res 
@@ -300,10 +296,32 @@ public class UserService : IUserService
       return res;
     }
   }
-
-  public Task<ApiResponse<string>> DeleteAsync(UserFilterRequest request)
+  public async Task<ApiResponse<string>> DeleteAsync(long id)
   {
-    throw new NotImplementedException();
+    ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    try
+    {
+      var repository = _unitOfWork.Repository<User>();
+
+      var userFromDB = await repository.GetAsync(id);
+      if (userFromDB == null)
+        throw new Exception("Invalid user");
+
+      repository.Delete(userFromDB);
+      await _unitOfWork.CommitAsync();
+
+      res.Data = userFromDB.Id.ToString();
+      return res;
+    }
+    catch (Exception ex)
+    {
+
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.Data = ex.Message;
+      res.ErrorMessage = ex.Message;
+      return res;
+    }
   }
   public Task<ApiResponse<AuthenticationResponse>> Login(AuthenticationLoginRequest request)
   {

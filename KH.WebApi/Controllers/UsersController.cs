@@ -7,12 +7,8 @@ using KH.Helper.Extentions;
 using KH.Helper.Responses;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace KH.WebApi.Controllers
 {
-  //[Route("api/[controller]")]
-  //[ApiController]
   public class UsersController : BaseApiController
   {
     public readonly IUserService _userService;
@@ -20,7 +16,7 @@ namespace KH.WebApi.Controllers
     {
       _userService = userService;
     }
-    // GET: api/<UsersController>
+
     [HttpPost("list")]
     public async Task<ActionResult<ApiResponse<PagedResponse<UserListResponse>>>> GetList(UserFilterRequest request)
     {
@@ -29,7 +25,6 @@ namespace KH.WebApi.Controllers
       return AsActionResult(res);
     }
 
-    // GET api/<UsersController>/5
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<UserDetailsResponse>>> Get(int id)
     {
@@ -37,7 +32,6 @@ namespace KH.WebApi.Controllers
       return AsActionResult(res);
     }
 
-    // POST api/<UsersController>
     [HttpPost]
     public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] UserForm request)
     {
@@ -59,10 +53,11 @@ namespace KH.WebApi.Controllers
       return AsActionResult(res);
     }
 
-    // DELETE api/<UsersController>/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public async Task<ActionResult<ApiResponse<string>>> Delete(int id)
     {
+      var res = await _userService.DeleteAsync(id);
+      return AsActionResult(res);
     }
   }
 }
