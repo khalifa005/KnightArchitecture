@@ -9,6 +9,14 @@
   <img src="https://github.com/user-attachments/assets/159a3ae0-72be-48d6-99fc-c9d429ed8ee7" alt="v2 - Copy" width="300" height="300" />
 </p>
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0036aea1-f0ea-4d6f-9e93-2cb41361525d" alt="v2 - Copy" width="300" height="300" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/adadb974-c22f-4bf9-a88f-41d75128b3af" alt="v2 - Copy" width="300" height="300" />
+</p>
+
 # Knight Hedge Template
 
 This repository is structured following the principles of **Clean Architecture** and **Domain-Driven Design (DDD)**. The main idea is to decouple the different concerns of the application into layers, ensuring maintainability, scalability, and testability. Each layer has a clear responsibility, making it easier to navigate and extend the project as it grows.
