@@ -1,10 +1,12 @@
 using KH.Helper.Contracts.Persistence;
 using KH.Helper.Responses;
-public class UserService
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+public class DemoUserService
 {
   private readonly IUnitOfWork _unitOfWork;
 
-  public UserService(IUnitOfWork unitOfWork)
+  public DemoUserService(IUnitOfWork unitOfWork)
   {
     _unitOfWork = unitOfWork;
   }
