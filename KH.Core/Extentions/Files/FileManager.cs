@@ -44,6 +44,7 @@ namespace KH.Helper.Extentions.Files
         }
 
 
+        var originalFileNameX = GenerateUniqueFileName(file.FileName.Trim(' '));
         var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
         var generatedFileName = $"{DateTime.Now:MM-dd-yyyy-h-mm}-{originalFileName}";
 
@@ -243,6 +244,35 @@ namespace KH.Helper.Extentions.Files
       //}
 
       return true;
+    }
+
+    private string SanitizeFileName(string fileName)
+    {
+      // Remove any invalid characters for file paths
+      foreach (char c in Path.GetInvalidFileNameChars())
+      {
+        fileName = fileName.Replace(c, '_');
+      }
+
+      return fileName;
+    }
+
+    private string GenerateUniqueFileName(string originalFileName)
+    {
+      var sanitizedFileName = SanitizeFileName(originalFileName);
+      var timestamp = DateTime.UtcNow.ToString("yyyyMMddHHmmss");
+      var hash = GetFileHash(sanitizedFileName);
+
+      return $"{timestamp}_{hash}_{sanitizedFileName}";
+    }
+
+    private string GetFileHash(string fileName)
+    {
+      using (var sha256 = SHA256.Create())
+      {
+        byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(fileName));
+        return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant().Substring(0, 8);  // First 8 characters
+      }
     }
   }
 }
