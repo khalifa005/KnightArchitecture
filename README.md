@@ -1,6 +1,6 @@
 # TODO
-**Global File management**:
-
+**Fluent Email**:
+10. **JWT**:
 <p align="center">
   <img src="https://github.com/user-attachments/assets/2dd2ad50-f923-4c2c-900a-b1ada84b15a9" alt="v2 - Copy" width="300" height="300" />
 </p>
@@ -300,7 +300,7 @@ We are actively working on new features to improve the architecture and user exp
    -
 10. **JWT**:
    -
-11. **IOption Pattern**:
+11. **IOption Pattern**: done with file seetings
    -        
 
 11. **Bulk add - update**:
@@ -318,7 +318,10 @@ We are actively working on new features to improve the architecture and user exp
 
 18. ** **:
    -
+ 
 
+**Global File management**: done
+Users CRUD done 
 ---
 
 ## How to Run
