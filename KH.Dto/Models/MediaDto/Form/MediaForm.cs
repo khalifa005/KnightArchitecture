@@ -10,6 +10,7 @@ namespace KH.Dto.Models.MediaDto.Form
     public int? ModelId { get; set; }
     public IFormFile? File { get; set; }
     public IFormFileCollection? Files { get; set; }
+    public IFormCollection? FormData { get; set; }
 
 
   }

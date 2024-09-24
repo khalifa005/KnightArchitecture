@@ -98,7 +98,7 @@ namespace KH.Services.Features
         //-- Check Duplication
         //await this.CheckDuplictedUser();
 
-        var fileRes = await _fileManager.Upload(request.File);
+        var fileRes = await _fileManager.Upload(request.File, string.Concat(request.Model,"_", request.ModelId));
 
         if (string.IsNullOrEmpty(fileRes.FilePath) || fileRes is null)
         {

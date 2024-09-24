@@ -1,3 +1,4 @@
+using Azure.Core;
 using CA.Application.Helpers;
 using KH.Helper.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace KH.Helper.Extentions.Files
       //_fileValidator = fileValidator;
     }
 
-    public async Task<FileResponse> Upload(IFormFile file)
+    public async Task<FileResponse> Upload(IFormFile file, string modelWithModelId)
     {
       try
       {
@@ -34,21 +35,26 @@ namespace KH.Helper.Extentions.Files
           return new FileResponse() { IsValid = false, Message = string.Join(",", validationResult.Errors.Select(x => x.ErrorMessage)) };
         }
 
-        var uploadPath = _fileSettings.UploadPath;
+        //var uploadPath = ;
 
-        if (!Directory.Exists(uploadPath))
+        if (!Directory.Exists(_fileSettings.UploadPath))
         {
-          Directory.CreateDirectory(uploadPath);
+          Directory.CreateDirectory(_fileSettings.UploadPath);
         }
 
+        var modelDirectory = Path.Combine(_fileSettings.UploadPath, modelWithModelId);
+        if (!Directory.Exists(modelDirectory))
+        {
+          Directory.CreateDirectory(modelDirectory);
+        }
 
         var originalFileNameX = GenerateUniqueFileName(file.FileName.Trim(' '));
         var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
         var generatedFileName = $"{DateTime.Now:MM-dd-yyyy-h-mm}-{originalFileName}";
 
 
-        var fullPath = Path.Combine(uploadPath, generatedFileName);
-        var dbPath = Path.Combine(_fileSettings.FolderName, generatedFileName);
+        var fullPath = Path.Combine(modelDirectory, generatedFileName);
+        var dbPath = Path.Combine(_fileSettings.FolderName, modelWithModelId, generatedFileName);
 
         using (var stream = new FileStream(fullPath, FileMode.Create))
         {
@@ -74,7 +80,7 @@ namespace KH.Helper.Extentions.Files
       }
     }
 
-    public async Task<IEnumerable<FileResponse>> UploadMultiple(IFormFileCollection files)
+    public async Task<IEnumerable<FileResponse>> UploadMultiple(IFormFileCollection files, string modelWithModelId)
     {
       try
       {
@@ -91,6 +97,13 @@ namespace KH.Helper.Extentions.Files
         {
           Directory.CreateDirectory(pathToSave);
         }
+
+        var modelDirectory = Path.Combine(_fileSettings.UploadPath, modelWithModelId);
+        if (!Directory.Exists(modelDirectory))
+        {
+          Directory.CreateDirectory(modelDirectory);
+        }
+
 
         if (files.Any(f => f.Length == 0))
         {
@@ -119,9 +132,9 @@ namespace KH.Helper.Extentions.Files
 
           var generatedFileName = $"{DateTime.Now:MM-dd-yyyy-h-mm}-{originalFileName}";
 
-          var fullPath = Path.Combine(pathToSave, generatedFileName);
+          var fullPath = Path.Combine(modelDirectory, generatedFileName);
 
-          var dbPath = Path.Combine(_fileSettings.FolderName, generatedFileName);
+          var dbPath = Path.Combine(_fileSettings.FolderName, modelDirectory, generatedFileName);
 
           using (var stream = new FileStream(fullPath, FileMode.Create))
           {
