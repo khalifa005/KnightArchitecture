@@ -52,7 +52,7 @@ namespace KH.WebApi
 
               var customErrorResponse = new ApiResponse<object>(400)
               {
-                ErrorMessage = "Validation failed.",
+                ErrorMessage = "validation-failed.",
                 Errors = errors.SelectMany(x => x.Value).ToList()
               };
 

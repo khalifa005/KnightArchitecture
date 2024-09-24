@@ -43,7 +43,6 @@
     <Folder Include="Models\AEmptyTemplate\Form\" />
     <Folder Include="Models\CalendarDto\Form\" />
     <Folder Include="Models\EmailDto\Form\" />
-    <Folder Include="Models\MediaDto\Validation\" />
     <Folder Include="Models\SMSDto\Response\" />
     <Folder Include="Models\AEmptyTemplate\Request\" />
     <Folder Include="Models\AEmptyTemplate\Response\" />

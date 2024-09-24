@@ -1,7 +1,6 @@
 using FluentValidation;
 using KH.Dto.lookups.CityDto.Form;
 using KH.Dto.Models.MediaDto.Form;
-using KH.Dto.Models.UserDto.Form;
 
 namespace KH.Dto.Models.UserDto.Validation
 {
@@ -12,11 +11,13 @@ namespace KH.Dto.Models.UserDto.Validation
 
       RuleFor(x => x.Model)
         .NotNull()
+        .WithMessage("please-enter-valid-model")
         .NotEmpty()
+        .WithMessage("please-enter-valid-model")
         .Length(1, 250)
-        .WithMessage("please-enter-valid-model-id");
+        .WithMessage("please-enter-valid-model");
 
-      RuleFor(x => x.ModelId).Must(x=> x.HasValue && x.Value < 10)
+      RuleFor(x => x.ModelId).Must(x => x.HasValue && x.Value < 10)
         .WithMessage("please-enter-valid-model-id");
     }
   }
