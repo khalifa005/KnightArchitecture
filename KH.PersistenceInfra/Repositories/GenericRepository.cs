@@ -100,6 +100,11 @@ namespace KH.PersistenceInfra.Repositories
       var query = ApplyIncludes(include);
       return await query.FirstOrDefaultAsync(t => t.Id == id);
     }
+    public async Task<T> GetByExpressionAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+    {
+      var query = ApplyIncludes(include);
+      return await query.Where(expression).FirstOrDefaultAsync();
+    }
 
     public async Task<T> GetAsyncTracking(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {

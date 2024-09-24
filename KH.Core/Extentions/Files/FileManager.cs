@@ -10,13 +10,11 @@ namespace KH.Helper.Extentions.Files
   public class FileManager
   {
     private readonly FileSettings _fileSettings;
-    private readonly FileValidator _fileValidator;
     public FileManager(ILogger<FileManager> logger,
-      IOptions<FileSettings> fileSettings,
-      FileValidator fileValidator)
+      IOptions<FileSettings> fileSettings)
     {
       _fileSettings = fileSettings.Value;
-      _fileValidator = fileValidator;
+      //_fileValidator = fileValidator;
     }
 
     public async Task<FileResponse> Upload(IFormFile file)
@@ -56,7 +54,7 @@ namespace KH.Helper.Extentions.Files
         {
           await file.CopyToAsync(stream);
         }
-
+        
         string fileExtention = Path.GetExtension(fullPath);
 
         return new FileResponse()
@@ -65,6 +63,7 @@ namespace KH.Helper.Extentions.Files
           GeneratedFileName = generatedFileName,
           OrignalFileName = originalFileName,
           FilePath = dbPath,
+          ContentType = file.ContentType,
           FileExtention = fileExtention
         };
 

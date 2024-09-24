@@ -23,6 +23,7 @@ namespace KH.Helper.Contracts.Persistence
     T Get(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     Task<T> GetAsyncTracking(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
+    Task<T> GetByExpressionAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
     void Update(T entity);
     void UpdateRange(ICollection<T> entities);
     Task<PagedList<T>> GetPagedAsync(int pageNumber, int pageSize, Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);

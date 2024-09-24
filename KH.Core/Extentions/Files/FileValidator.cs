@@ -1,13 +1,5 @@
-using CA.Application.Helpers;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
+
 using RestSharp;
-using System;
-using System.IO;
-using Microsoft.AspNetCore.Http;
 using FluentValidation;
 
 

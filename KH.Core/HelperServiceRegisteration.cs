@@ -45,7 +45,7 @@ namespace KH.Helper
       //services.AddScoped(typeof(Lazy<>), typeof(LazilyResolved<>));
 
       services.AddScoped<FileManager>();
-      services.AddSingleton<FileValidator>();
+      //services.AddSingleton<FileValidator>();
 
       services.AddSwaggerDocumentation(configuration);
 
