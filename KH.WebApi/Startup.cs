@@ -12,6 +12,8 @@ using FluentValidation.AspNetCore;
 using FluentValidation;
 using KH.PersistenceInfra;
 using KH.Services;
+using KH.Helper.Responses;
+using Microsoft.AspNetCore.Mvc;
 namespace KH.WebApi
 {
   public class Startup
@@ -32,10 +34,31 @@ namespace KH.WebApi
 
       services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
       services.AddEndpointsApiExplorer();
+
       services.AddFluentValidationAutoValidation();
       services.AddValidatorsFromAssemblyContaining<Startup>();
 
       services.AddControllers()
+          .ConfigureApiBehaviorOptions(options =>
+          {
+            options.InvalidModelStateResponseFactory = context =>
+            {
+              var errors = context.ModelState
+                  .Where(x => x.Value.Errors.Count > 0)
+                  .ToDictionary(
+                      kvp => kvp.Key,
+                      kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                  );
+
+              var customErrorResponse = new ApiResponse<object>(400)
+              {
+                ErrorMessage = "Validation failed.",
+                Errors = errors.SelectMany(x => x.Value).ToList()
+              };
+
+              return new BadRequestObjectResult(customErrorResponse);
+            };
+          })
               .AddJsonOptions(options =>
               {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -60,6 +83,7 @@ namespace KH.WebApi
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
     {
       System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12;
+      //app.UseMiddleware<ValidationErrorMiddleware>();
 
       app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
@@ -68,6 +92,7 @@ namespace KH.WebApi
       //app.UseApplicationMiddlewares(Configuration);
 
       app.UseMiddleware<ExceptionMiddleware>();
+
       app.UseSwaggerDocumentation(Configuration);
 
       if (env.IsDevelopment())

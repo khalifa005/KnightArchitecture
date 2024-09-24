@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 
 
 namespace KH.Helper.Middlewares
 {
-    public class ExceptionMiddleware
+  public class ExceptionMiddleware
     {
         private readonly RequestDelegate _request;
         private readonly ILogger<ExceptionMiddleware> _logger;
@@ -42,7 +43,7 @@ namespace KH.Helper.Middlewares
                 var response = new ApiException((int)HttpStatusCode.InternalServerError, exception.Message, errorDetails);
 
                 var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-                var returnJson = JsonSerializer.Serialize(response, options);
+                var returnJson = System.Text.Json.JsonSerializer.Serialize(response, options);
 
                 await httpContext.Response.WriteAsync(returnJson);
 
@@ -60,6 +61,7 @@ namespace KH.Helper.Middlewares
       StatusCode = statusCode;
     }
   }
+
 
 
 }

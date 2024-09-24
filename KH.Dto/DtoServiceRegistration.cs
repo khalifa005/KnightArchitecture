@@ -11,6 +11,7 @@ using KH.Dto.lookups.GroupDto.Validation;
 using KH.Dto.Models.AuthenticationDto.Request;
 using KH.Dto.Models.CustomerDto.Form;
 using KH.Dto.Models.CustomerDto.Validation;
+using KH.Dto.Models.MediaDto.Form;
 using KH.Dto.Models.OtpVerificationDto.Validation;
 using KH.Dto.Models.UserDto.Form;
 using KH.Dto.Models.UserDto.Validation;
@@ -25,7 +26,10 @@ namespace CA.ViewModels
       services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
       //below validation registration using fluent validation lib
+      services.AddSingleton<IValidator<MediaForm>, MediaFormValidator>();
+
       services.AddSingleton<IValidator<CityForm>, DepartmentFormValidator>();
+
       services.AddSingleton<IValidator<CityFilterRequest>, CityFilterRequestValidator>();
 
       services.AddSingleton<IValidator<GroupForm>, GroupFormValidator>();
