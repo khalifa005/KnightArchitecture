@@ -160,7 +160,7 @@ namespace KH.Services.Features
 
         var repository = _unitOfWork.Repository<Media>();
 
-        var fileRes = await _fileManager.UploadMultiple(request.Files);
+        var fileRes = await _fileManager.UploadMultiple(request.Files, string.Concat(request.Model, "_", request.ModelId));
 
         List<Media> mediaEntities = new List<Media>();
 

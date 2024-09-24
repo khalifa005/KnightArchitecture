@@ -36,13 +36,13 @@ namespace KH.Helper.Extentions.Files
         }
 
         //var uploadPath = ;
-
-        if (!Directory.Exists(_fileSettings.UploadPath))
+        var folder_full_path = string.Concat(_fileSettings.ServerPartition, _fileSettings.FolderName);
+        if (!Directory.Exists(folder_full_path))
         {
-          Directory.CreateDirectory(_fileSettings.UploadPath);
+          Directory.CreateDirectory(folder_full_path);
         }
 
-        var modelDirectory = Path.Combine(_fileSettings.UploadPath, modelWithModelId);
+        var modelDirectory = Path.Combine(folder_full_path, modelWithModelId);
         if (!Directory.Exists(modelDirectory))
         {
           Directory.CreateDirectory(modelDirectory);
@@ -91,14 +91,14 @@ namespace KH.Helper.Extentions.Files
           return filesResponse;
         }
 
-        var pathToSave = _fileSettings.UploadPath;
+        var folder_full_path = string.Concat(_fileSettings.ServerPartition, _fileSettings.FolderName);
 
-        if (!Directory.Exists(pathToSave))
+        if (!Directory.Exists(folder_full_path))
         {
-          Directory.CreateDirectory(pathToSave);
+          Directory.CreateDirectory(folder_full_path);
         }
 
-        var modelDirectory = Path.Combine(_fileSettings.UploadPath, modelWithModelId);
+        var modelDirectory = Path.Combine(folder_full_path, modelWithModelId);
         if (!Directory.Exists(modelDirectory))
         {
           Directory.CreateDirectory(modelDirectory);
@@ -173,12 +173,12 @@ namespace KH.Helper.Extentions.Files
           return new FileResponse() { IsValid = false, Message = "empty-path" };
         }
 
-        var physicalPathToGet = _fileSettings.UploadPath;
+        var filePhysicalPath = string.Concat(_fileSettings.ServerPartition, filePath);
+
         var fileName = Path.GetFileName(filePath);
 
-        var fullPath = Path.Combine(physicalPathToGet, fileName);
 
-        var content = await File.ReadAllBytesAsync(fullPath);
+        var content = await File.ReadAllBytesAsync(filePhysicalPath);
 
         new FileExtensionContentTypeProvider()
             .TryGetContentType(fileName, out string contentType);
@@ -240,10 +240,10 @@ namespace KH.Helper.Extentions.Files
         return false;
       }
 
-      if (string.IsNullOrEmpty(_fileSettings.UploadPath))
-      {
-        return false;
-      }
+      //if (string.IsNullOrEmpty(_fileSettings.UploadPath))
+      //{
+      //  return false;
+      //}
 
       if (string.IsNullOrEmpty(filePath))
       {
