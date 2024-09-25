@@ -2,13 +2,10 @@ using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using KH.Domain.Enums;
 using KH.Dto.Models.EmailDto.Request;
-using KH.Dto.Models.EmailDto.Response;
 using KH.Helper.Settings;
-using KH.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Net.Sockets;
 
 public class EmailService : IEmailService
 {
@@ -34,7 +31,8 @@ public class EmailService : IEmailService
   public async Task<ApiResponse<object>> SendEmailAsync(MailRequest mailRequest)
   {
     var res = new ApiResponse<object>((int)HttpStatusCode.OK);
-    var test = (MailTypeEnum)System.Enum.GetValues(typeof(MailTypeEnum)).GetValue(mailRequest.MailTypeId);
+    var emailType = (MailTypeEnum)System.Enum.GetValues(typeof(MailTypeEnum)).GetValue(mailRequest.MailTypeId);
+    List<MemoryStream> memoryStreams = new List<MemoryStream>();
 
     try
     {
@@ -56,37 +54,23 @@ public class EmailService : IEmailService
         else if (mailRequest.MailType == MailTypeEnum.Default && mailRequest.Body.IsNullOrEmpty())
           throw new Exception("No body defiend for this email type");
 
-        ////--To Email
         var toRecipients = SetEmailRecipients(mailRequest.ToEmail);
-        _loggerFactory.LogInformation($"TO Users : After set List ({string.Join(",", toRecipients.Select(o => o.EmailAddress))})");
-        //-- TO CC
         var ccRecipients = SetEmailRecipients(mailRequest.ToCCEmail);
-        _loggerFactory.LogInformation($"CC Users : After set List ({string.Join(",", ccRecipients.Select(o => o.EmailAddress))})");
-        ////-- Attachments
-        //var attachments = SetEmailAttachments(mailRequest.Attachments);
+        var attachments = SetEmailAttachments(mailRequest.Attachments, memoryStreams);
 
         switch (mailRequest.MailType)
         {
           case MailTypeEnum.WelcomeTemplate:
             {
-              //--Fill Model
               var targetUser = await _userService.GetAsync(mailRequest.UserId);
               if (targetUser.Data is not object)
                 throw new Exception("No user defiend with this id for this email type");
 
               var userInfo = targetUser.Data;
 
-              //_fluentEmail
-              //    .Create().To(toRecipients)
-              //                  .CC(ccRecipients)
-              //                  .Subject(mailRequest.Subject)
-              //                  .Attach(attachments)
-              //                  .UsingTemplateFromFile(filePath, userInfo)
-              //                  .Send();
-
-
               var emailTemplateResult = _fluentEmail.Create().To(toRecipients)
                                 .CC(ccRecipients)
+                                .Attach(attachments)
                                 .Subject(mailRequest.Subject)
                                 .UsingTemplateFromFile(filePath, userInfo);
 
@@ -121,6 +105,14 @@ public class EmailService : IEmailService
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       return res;
     }
+    finally
+    {
+      // Ensure streams are disposed
+      foreach (var stream in memoryStreams)
+      {
+        stream.Dispose();
+      }
+    }
   }
   private static List<Address> SetEmailRecipients(List<string?>? emailRecipients)
   {
@@ -136,49 +128,108 @@ public class EmailService : IEmailService
 
     return toRecipients;
   }
-  private static List<Attachment> SetEmailAttachments(List<IFormFile>? attachments)
+  
+  private static List<Attachment> SetEmailAttachments(List<IFormFile>? attachments, List<MemoryStream> memoryStreams)
   {
     var emailAttachments = new List<Attachment>();
+
     if (attachments != null)
     {
       foreach (var file in attachments)
       {
         if (file.Length > 0)
         {
-          using (var ms = new MemoryStream())
+          var ms = new MemoryStream();
+          file.CopyTo(ms);
+
+          // Ensure the stream is flushed and ready
+          ms.Flush();
+          ms.Position = 0; // Reset the position to ensure it's ready for reading
+
+          // Add to the attachments
+          emailAttachments.Add(new Attachment
           {
-            file.CopyTo(ms);
-            emailAttachments.Add(new Attachment { Filename = file.FileName, Data = ms, ContentType = file.ContentType });
-          }
+            Filename = file.FileName,
+            Data = ms,
+            ContentType = file.ContentType
+          });
+
+          // Track the memory stream for disposal later
+          memoryStreams.Add(ms);
         }
       }
     }
 
     return emailAttachments;
   }
-  //public async Task SendOrderConfirmationAsync(OrderConfirmationModel model)
-  //{
-  //  string templatePath = $"{Directory.GetCurrentDirectory()}\\Templates\\Emails\\OrderConfirmation.cshtml";
 
+  private static List<Attachment> SetEmailAttachmentsXX(List<IFormFile>? attachments, List<string>? filePaths, List<MemoryStream> memoryStreams)
+  {
+    var emailAttachments = new List<Attachment>();
 
-  //  var email = _fluentEmail
-  //      .To("mahmudkhalifa1@gmail.com", model.UserName)
-  //      .Subject("Your Order Confirmation")
-  //      .UsingTemplateFromFile(templatePath, model);
+    // Handle attachments from IFormFile
+    if (attachments != null)
+    {
+      foreach (var file in attachments)
+      {
+        if (file.Length > 0)
+        {
+          var ms = new MemoryStream();
+          file.CopyTo(ms);
 
-  //  // Attach invoice if necessary
-  //  if (!string.IsNullOrEmpty(model.OrderId))
-  //  {
-  //    email.Attach(new FluentEmail.Core.Models.Attachment
-  //    {
-  //      //Data = new MemoryStream(File.ReadAllBytes($"Attachments/Invoice_{model.OrderId}.pdf")),
-  //      Data = new MemoryStream(File.ReadAllBytes($"C:\\Application_Upload\\User_8\\09-25-2024-1-19-keyboard-shortcuts.pdf")),
-  //      ContentType = "application/pdf",
-  //      Filename = $"Invoice_{model.OrderId}.pdf"
-  //    });
-  //  }
+          // Ensure the stream is flushed and ready
+          ms.Flush();
+          ms.Position = 0; // Reset the position to ensure it's ready for reading
 
-  //  await email.SendAsync();
-  //}
+          // Add to the attachments
+          emailAttachments.Add(new Attachment
+          {
+            Filename = file.FileName,
+            Data = ms,
+            ContentType = file.ContentType
+          });
 
+          // Track the memory stream for disposal later
+          memoryStreams.Add(ms);
+        }
+      }
+    }
+
+    // Handle file attachments directly from the disk using file paths
+    if (filePaths != null)
+    {
+      foreach (var filePath in filePaths)
+      {
+        if (File.Exists(filePath))
+        {
+          var ms = new MemoryStream(File.ReadAllBytes(filePath));
+
+          emailAttachments.Add(new Attachment
+          {
+            Filename = Path.GetFileName(filePath),
+            Data = ms,
+            ContentType = GetContentType(filePath) // Auto-detect content type based on file extension
+          });
+
+          // Track the memory stream for disposal later
+          memoryStreams.Add(ms);
+        }
+      }
+    }
+
+    return emailAttachments;
+  }
+  private static string GetContentType(string path)
+  {
+    var ext = Path.GetExtension(path).ToLowerInvariant();
+    return ext switch
+    {
+      ".pdf" => "application/pdf",
+      ".jpg" => "image/jpeg",
+      ".png" => "image/png",
+      ".doc" => "application/msword",
+      ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      _ => "application/octet-stream",
+    };
+  }
 }

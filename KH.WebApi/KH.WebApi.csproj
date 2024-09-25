@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Templates\Models\" />
-    <Folder Include="uploads\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
