@@ -71,6 +71,8 @@ namespace KH.WebApi
               }
         );
 
+      services.AddMemoryCache();
+
 
       services.AddInfrastructureService(Configuration);
       //services.AddBusinessService(Configuration);

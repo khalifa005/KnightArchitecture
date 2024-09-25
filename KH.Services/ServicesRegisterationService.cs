@@ -1,6 +1,8 @@
+using KH.Helper.Settings;
 using KH.Services.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net.Mail;
 
 namespace KH.Services
 {
@@ -11,6 +13,26 @@ namespace KH.Services
 
       services.AddScoped<IUserService, UserService>();
       services.AddScoped<IMediaService, MediaService>();
+
+      //-- SET Fluent Email
+      var mailSettings = configuration.GetSection("MailSettings");
+
+      var mailOptions = mailSettings.Get<MailSettings>();
+      var defaultFromEmail = mailOptions?.Mail ?? "crmesclations@acig.com.sa";
+      var defaultHost = mailOptions?.Host ?? "130.90.4.184";
+      var defaultPort = mailOptions?.Port ?? 25;
+
+      // Add FluentEmail configuration
+      services.AddFluentEmail(defaultFromEmail, mailOptions!.DisplayName)
+          .AddRazorRenderer()
+          .AddSmtpSender(new SmtpClient(mailOptions!.Host)
+          {
+            Port = 587,
+            Credentials = new System.Net.NetworkCredential(mailOptions!.Mail, mailOptions!.Password),
+            EnableSsl = true
+          });
+
+      services.AddScoped<IEmailService, EmailService>();
 
       return services;
     }

@@ -6,6 +6,7 @@ using KH.Helper.Middlewares;
 using KH.Helper.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net.Mail;
 
 namespace KH.Helper
 {
@@ -33,12 +34,17 @@ namespace KH.Helper
       var smsProviderSettings = configuration.GetSection("SMSProviderSettings");
       services.Configure<SMSProviderSettings>(smsProviderSettings);
 
-      var mailSettings = configuration.GetSection("MailSettings");
-      var options = services.Configure<MailSettings>(mailSettings);
 
       var mailTemplateSettings = configuration.GetSection("MailTemplatesSettings");
       services.Configure<MailTemplatesSettings>(mailTemplateSettings);
 
+
+      //-- SET Fluent Email
+      var mailSettings = configuration.GetSection("MailSettings");
+
+      services.AddOptions<MailSettings>()
+       .Bind(mailSettings)
+       .ValidateDataAnnotations();
 
       #endregion
 
@@ -49,15 +55,6 @@ namespace KH.Helper
 
       services.AddSwaggerDocumentation(configuration);
 
-      //-- SET Fluent Email
-      var mailOptions = mailSettings.Get<MailSettings>();
-      var defaultFromEmail = mailOptions?.Mail ?? "crmesclations@acig.com.sa";
-      var defaultHost = mailOptions?.Host ?? "130.90.4.184";
-      var defaultPort = mailOptions?.Port ?? 25;
-
-      // services.AddFluentEmail(defaultFromEmail)
-      //.AddRazorRenderer()
-      //.AddSmtpSender(defaultHost, defaultPort);
 
       return services;
     }

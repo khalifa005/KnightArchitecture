@@ -4,9 +4,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Templates\Models\" />
     <Folder Include="uploads\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
