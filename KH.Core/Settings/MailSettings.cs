@@ -8,6 +8,6 @@ namespace KH.Helper.Settings
     public string Host { get; set; }
     public string? AdminTicketingHostUrl { get; set; }
     public int Port { get; set; }
-    public bool? Disable { get; set; }
+    public bool Disable { get; set; }
   }
 }

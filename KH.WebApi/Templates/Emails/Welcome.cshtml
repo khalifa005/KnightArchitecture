@@ -1,0 +1,128 @@
+@using KH.Dto.Models.UserDto.Response;
+@using System.Collections.Generic;
+@using System;
+@using System.Linq;
+@using System.Text;
+@using RazorLight.Text;
+@model UserDetailsResponse
+
+@{
+    ViewBag.Title = "Welcome Account Confirmation";
+    // Layout = "./Resources/EmailTemplates/_DefaultEmailLayout.cshtml";
+
+}
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: white;">
+    <tr>
+        <td align="center" valign="top">
+            <table width="650" border="0" cellspacing="0" cellpadding="0" class="mobile-shell">
+                <tr>
+                    <td class="container" style="width: 650px; padding: 55px 0px;">
+                        <!-- Header -->
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td class="p30-15" style="padding: 0px 30px 30px 30px;">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <th class="column-top" width="145" style="vertical-align: top;">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td class="img m-center" style="text-align: center;">
+                                                            <img src="https://private-user-images.githubusercontent.com/29863643/367691296-159a3ae0-72be-48d6-99fc-c9d429ed8ee7.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjcyNjcwMzUsIm5iZiI6MTcyNzI2NjczNSwicGF0aCI6Ii8yOTg2MzY0My8zNjc2OTEyOTYtMTU5YTNhZTAtNzJiZS00OGQ2LTk5ZmMtYzlkNDI5ZWQ4ZWU3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA5MjUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwOTI1VDEyMTg1NVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTg3YzY1NThhYTBlNjI3YjE2YTE1M2U3NTYwNjM1N2MwZGQ0Y2ExNTlhODc3YTJkZjUwZWQ5OThkYWE4ZmIzOGMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.32GvU8zQ77n7nPwewbF6SgurqFnxM5y7_32-FVEQ9R4" width="150" height="50" border="0" alt="" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </th>
+                                            <th class="column-empty" width="1"></th>
+                                            <th class="column" style="text-align: right;">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td class="text-header" style="color: #475c77; font-family: 'Muli', Arial, sans-serif; font-size: 12px; text-align: right;">
+                                                            <a href="#" target="_blank" class="link2" style="color: #475c77; text-decoration: none;">Open in your browser</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </th>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- END Header -->
+                        <!-- User Details -->
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td class="tbrr p30-15" style="padding: 60px 30px; border-radius: 26px 26px 0px 0px;" bgcolor="#12325c">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td class="h1 pb25" style="color: #ffffff; font-family: 'Muli', Arial, sans-serif; font-size: 40px; text-align: center;">
+                                                            Welcome, @Model.Username
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center pb25" style="color: #c1cddc; font-family: 'Muli', Arial, sans-serif; font-size: 16px; text-align: center;">
+                                                            Here are your details:
+                                                        </td>
+                                                    </tr>
+
+                                                    <!-- Displaying User Details -->
+                                                    <tr>
+                                                        <td style="padding: 20px; background-color: #fff; color: #333;">
+                                                            <p><strong>Full Name:</strong> @Model.FullName</p>
+                                                            <p><strong>Email:</strong> @Model.Email</p>
+                                                            <p><strong>Birth Date:</strong> @Model.BirthDate?.ToString("yyyy-MM-dd")</p>
+                                                            <p><strong>Mobile Number:</strong> @Model.MobileNumber</p>
+                                                            <p><strong>Roles:</strong></p>
+                                                            <ul>
+                                                                @foreach (var role in Model.UserRoles)
+                                                                {
+                                                                    <li>@role.Role..NameEn</li>
+                                                                }
+                                                            </ul>
+                                                            <p><strong>Groups:</strong></p>
+                                                            <ul>
+                                                                @foreach (var group in Model.UserGroups)
+                                                                {
+                                                                    <li>@group.Group.NameEn</li>
+                                                                }
+                                                            </ul>
+                                                            <p><strong>Departments:</strong></p>
+                                                            <ul>
+                                                                @foreach (var department in Model.UserDepartments)
+                                                                {
+                                                                    <li>@department.Department.NameEn</li>
+                                                                }
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+
+                                                    <!-- Button -->
+                                                    <tr>
+                                                        <td align="center">
+                                                            <table class="center" border="0" cellspacing="0" cellpadding="0" style="text-align: center;">
+                                                                <tr>
+                                                                    <td class="pink-button text-button" style="background: #ff6666; color: #ffffff; font-family: 'Muli', Arial, sans-serif; font-size: 14px; padding: 12px 30px; text-align: center; border-radius: 22px;">
+                                                                        <a href="http://localhost:4200/" target="_blank" class="link-white" style="color: #ffffff; text-decoration: none;">View More Details</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- END Button -->
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- END User Details -->
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

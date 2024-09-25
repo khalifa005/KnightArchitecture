@@ -1,3 +1,4 @@
+using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.EmailDto.Response;
 using KH.Helper.Extentions;
 using KH.Services.Contracts;
@@ -17,7 +18,7 @@ namespace KH.WebApi.Controllers
     }
 
     [HttpPost("Send")]
-    public async Task<IActionResult> SendOrderEmail()
+    public async Task<IActionResult> SendOrderEmail([FromForm] MailRequest request)
     {
       var orderModel = new OrderConfirmationModel
       {
@@ -31,7 +32,8 @@ namespace KH.WebApi.Controllers
             }
       };
 
-      await _emailService.SendOrderConfirmationAsync(orderModel);
+      //await _emailService.SendOrderConfirmationAsync(orderModel);
+      await _emailService.SendEmailAsync(request);
 
       return Ok("Order confirmation email sent!");
     }

@@ -8,6 +8,4 @@ namespace KH.Dto.Models.EmailDto.Response
     public int Quantity { get; set; }
   }
 
-
-
 }
