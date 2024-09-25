@@ -63,7 +63,7 @@ public class EmailService : IEmailService
         var ccRecipients = SetEmailRecipients(mailRequest.ToCCEmail);
         _loggerFactory.LogInformation($"CC Users : After set List ({string.Join(",", ccRecipients.Select(o => o.EmailAddress))})");
         ////-- Attachments
-        var attachments = SetEmailAttachments(mailRequest.Attachments);
+        //var attachments = SetEmailAttachments(mailRequest.Attachments);
 
         switch (mailRequest.MailType)
         {
@@ -76,13 +76,22 @@ public class EmailService : IEmailService
 
               var userInfo = targetUser.Data;
 
-              _fluentEmail
-                  .Create().To(toRecipients)
+              //_fluentEmail
+              //    .Create().To(toRecipients)
+              //                  .CC(ccRecipients)
+              //                  .Subject(mailRequest.Subject)
+              //                  .Attach(attachments)
+              //                  .UsingTemplateFromFile(filePath, userInfo)
+              //                  .Send();
+
+
+              var emailTemplateResult = _fluentEmail.Create().To(toRecipients)
                                 .CC(ccRecipients)
                                 .Subject(mailRequest.Subject)
-                                .Attach(attachments)
-                                .UsingTemplateFromFile(filePath, userInfo)
-                                .Send();
+                                .UsingTemplateFromFile(filePath, userInfo);
+
+              await emailTemplateResult.SendAsync();
+
               break;
             }
           case MailTypeEnum.TicketEscalation:
@@ -95,7 +104,6 @@ public class EmailService : IEmailService
               await _fluentEmail.Create().To(toRecipients)
                                 .CC(ccRecipients)
                                 .Subject(mailRequest.Subject)
-                                .Attach(attachments)
                                 .Body(mailRequest.Body, true)
                                 .SendAsync();
               break;

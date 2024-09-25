@@ -7,8 +7,11 @@
 @model UserDetailsResponse
 
 @{
-    ViewBag.Title = "Welcome Account Confirmation";
-    // Layout = "./Resources/EmailTemplates/_DefaultEmailLayout.cshtml";
+    // ViewBag.Title = "Welcome Account Confirmation";
+    // Layout = "./Templates/Emails/LayoutV2.cshtml";
+    // Layout = "~/Templates/LayoutV2.cshtml"; // Rooted from the project base.
+    Layout = "Templates/LayoutV2.cshtml";
+    // Layout = "../Templates/Emails/LayoutV2.cshtml"; // Relative to the current folder.
 
 }
 
