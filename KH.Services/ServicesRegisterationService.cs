@@ -4,7 +4,6 @@ using KH.Helper.Settings;
 using KH.Services.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Rotativa.AspNetCore;
 using System.Net.Mail;
 
 namespace KH.Services
@@ -20,7 +19,7 @@ namespace KH.Services
       services.AddScoped<IEmailService, EmailService>();
 
       // Register DinkToPdf converter
-      //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+      services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
       //-- SET Fluent Email
       var mailSettings = configuration.GetSection("MailSettings");
@@ -40,7 +39,7 @@ namespace KH.Services
             EnableSsl = true
           });
 
-      services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
 
       return services;
     }

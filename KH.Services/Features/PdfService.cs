@@ -2,18 +2,20 @@ using PuppeteerSharp.Media;
 using PuppeteerSharp;
 using DinkToPdf;
 using DinkToPdf.Contracts;
+using StackExchange.Redis;
 namespace KH.Services.Features
 {
   public class PdfService : IPdfService
   {
     private readonly IUserService _userService;
     private readonly IConverter _converter;
+    //private readonly IRazorViewToStringRenderer _razorRenderer; // Inject Razor renderer
 
     public PdfService(IUserService userService, IConverter converter)
     {
       _userService = userService;
       _converter = converter;
-      //_pdfConverter = pdfConverter;
+      //_razorRenderer = razorRenderer;
     }
 
     public async Task<byte[]> ExportUserDetailsPdfAsync(UserFilterRequest param)
@@ -50,30 +52,7 @@ namespace KH.Services.Features
       // Generate PDF as byte array
       return _converter.Convert(pdfDocument);
     }
-
-    public byte[] GeneratePdf(string htmlContent)
-    {
-      var pdfDocument = new HtmlToPdfDocument
-      {
-        GlobalSettings = {
-                ColorMode = ColorMode.Color,
-                Orientation = Orientation.Portrait,
-                PaperSize = PaperKind.A4,
-                Margins = new MarginSettings { Top = 10 }
-            },
-        Objects = {
-                new ObjectSettings
-                {
-                    PagesCount = true,
-                    HtmlContent = htmlContent,
-                    WebSettings = { DefaultEncoding = "utf-8" },
-                    FooterSettings = { FontSize = 9, Right = "Page [page] of [toPage]" }
-                }
-            }
-      };
-
-      return _converter.Convert(pdfDocument);
-    }
+  
     private string ReplaceUserPlaceholders(UserDetailsResponse user, string filePath)
     {
       string htmlFileContent = File.ReadAllText(filePath);
@@ -89,5 +68,8 @@ namespace KH.Services.Features
       return htmlFileContent;
     }
   }
+
+
+
 }
-  
+
