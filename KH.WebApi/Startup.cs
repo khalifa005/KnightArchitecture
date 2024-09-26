@@ -14,6 +14,8 @@ using KH.PersistenceInfra;
 using KH.Services;
 using KH.Helper.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Rotativa.AspNetCore;
+using Microsoft.Extensions.Hosting.Internal;
 namespace KH.WebApi
 {
   public class Startup
@@ -29,6 +31,11 @@ namespace KH.WebApi
 
     public void ConfigureServices(IServiceCollection services)
     {
+      // Setup Rotativa with the path to the wkhtmltopdf binary
+      //var wkhtmltopdfPath = Path.Combine(Env.WebRootPath, "Rotativa", "wkhtmltopdf.exe");
+      //RotativaConfiguration.Setup(Env.WebRootPath, wkhtmltopdfPath);
+
+
       // Add services to the container.
       services.AddHttpContextAccessor();
 

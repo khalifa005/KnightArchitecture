@@ -1,7 +1,10 @@
+using DinkToPdf.Contracts;
+using DinkToPdf;
 using KH.Helper.Settings;
 using KH.Services.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Rotativa.AspNetCore;
 using System.Net.Mail;
 
 namespace KH.Services
@@ -37,6 +40,7 @@ namespace KH.Services
             EnableSsl = true
           });
 
+      services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
       return services;
     }

@@ -1,13 +1,17 @@
 using PuppeteerSharp.Media;
 using PuppeteerSharp;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 
 public class PdfService : IPdfService
 {
   private readonly IUserService _userService;
+  private readonly IConverter _converter;
 
-  public PdfService(IUserService userService)
+  public PdfService(IUserService userService, IConverter converter)
   {
     _userService = userService;
+    _converter = converter;
     //_pdfConverter = pdfConverter;
   }
 
@@ -25,27 +29,50 @@ public class PdfService : IPdfService
     htmlFileContentForLayout = htmlFileContentForLayout.Replace("{Htmlbody}", htmlContentForBody);
 
 
-    // Set up BrowserFetcher to download Chromium
-    var browserFetcher = new BrowserFetcher();
-    await browserFetcher.DownloadAsync();
-
-    // Launch a headless browser
-    using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
-    using var page = await browser.NewPageAsync();
-
-    // Set the content to be converted to PDF
-    await page.SetContentAsync(htmlFileContentForLayout);
-
-    // Convert to PDF
-    var pdfBytes = await page.PdfDataAsync(new PdfOptions
+    // Convert the HTML content to PDF using DinkToPdf
+    var pdfDocument = new HtmlToPdfDocument()
     {
-      Format = PaperFormat.A4,
-      PrintBackground = true,
-    });
+      GlobalSettings = {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A3Extra,
+                Out = null, // Out set to null because we want the result as a byte array
+            },
+      Objects = {
+                new ObjectSettings() {
+                    HtmlContent = htmlFileContentForLayout,
+                    WebSettings = { DefaultEncoding = "utf-8" },
+                }
+            }
+    };
 
-    return pdfBytes;
+    // Generate PDF as byte array
+    return _converter.Convert(pdfDocument);
   }
 
+  public byte[] GeneratePdf(string htmlContent)
+  {
+    var pdfDocument = new HtmlToPdfDocument
+    {
+      GlobalSettings = {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 }
+            },
+      Objects = {
+                new ObjectSettings
+                {
+                    PagesCount = true,
+                    HtmlContent = htmlContent,
+                    WebSettings = { DefaultEncoding = "utf-8" },
+                    FooterSettings = { FontSize = 9, Right = "Page [page] of [toPage]" }
+                }
+            }
+    };
+
+    return _converter.Convert(pdfDocument);
+  }
   private string ReplaceUserPlaceholders(UserDetailsResponse user, string filePath)
   {
     string htmlFileContent = File.ReadAllText(filePath);
