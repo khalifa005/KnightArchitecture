@@ -1,0 +1,23 @@
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;
+  min-width: 100% !important;
+  width: 100% !important;
+  background: white;
+  -webkit-text-size-adjust: none;
+}
+
+a {
+  color: #66c7ff;
+  text-decoration: none;
+}
+
+p {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+img {
+  -ms-interpolation-mode: bicubic; /* Allow smoother rendering of resized image in Internet Explorer */
+}

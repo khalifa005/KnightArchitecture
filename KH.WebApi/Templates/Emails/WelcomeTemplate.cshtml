@@ -11,90 +11,87 @@
     Layout = "Templates/LayoutV2.cshtml";
 }
 
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: white;">
     <tr>
         <td align="center" valign="top">
-            <table width="650" border="0" cellspacing="0" cellpadding="0" class="mobile-shell">
+            <table width="650" border="0" cellspacing="0" cellpadding="0" class="mobile-shell" style="margin: 0; padding: 0;">
                 <tr>
-                    <td class="container" style="width: 650px; padding: 55px 0px;">
-                        <!-- Header -->
-                        <img src="https://drive.google.com/file/d/1q6tA3qsrM2zigWqMoMHnh0Qu5ekhMwco/view?usp=sharing" width="200" height="100" border="0" alt="" />
-                        <!-- END Header -->
-
-                        <!-- User Details -->
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td style="padding-bottom: 10px;">
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td class="tbrr p30-15" style="padding: 60px 30px; border-radius: 26px 26px 0px 0px;" bgcolor="#12325c">
-                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                    <tr>
-                                                        <td class="h1 pb25" style="color: #ffffff; font-family: 'Muli', Arial, sans-serif; font-size: 40px; text-align: center;">
-                                                            Welcome, @Model.Username
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-center pb25" style="color: #c1cddc; font-family: 'Muli', Arial, sans-serif; font-size: 16px; text-align: center;">
-                                                            Here are your details:
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Displaying User Details -->
-                                                    <tr>
-                                                        <td style="padding: 20px; background-color: #fff; color: #333;">
-                                                            <p><strong>Full Name:</strong> @Model.FullName</p>
-                                                            <p><strong>Email:</strong> @Model.Email</p>
-                                                            <p><strong>Birth Date:</strong> @Model.BirthDate?.ToString("yyyy-MM-dd")</p>
-                                                            <p><strong>Mobile Number:</strong> @Model.MobileNumber</p>
-                                                            <p><strong>Roles:</strong></p>
-                                                            <ul>
-                                                                @foreach (var role in Model.UserRoles)
-                                                                {
-                                                                    <li>@role.Role.NameEn</li>
-                                                                }
-                                                            </ul>
-                                                            <p><strong>Groups:</strong></p>
-                                                            <ul>
-                                                                @foreach (var group in Model.UserGroups)
-                                                                {
-                                                                    <li>@group.Group.NameEn</li>
-                                                                }
-                                                            </ul>
-                                                            <p><strong>Departments:</strong></p>
-                                                            <ul>
-                                                                @foreach (var department in Model.UserDepartments)
-                                                                {
-                                                                    <li>@department.Department.NameEn</li>
-                                                                }
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Button -->
-                                                    <tr>
-                                                        <td align="center">
-                                                            <table class="center" border="0" cellspacing="0" cellpadding="0" style="text-align: center;">
-                                                                <tr>
-                                                                    <td class="pink-button text-button" style="background: #ff6666; color: #ffffff; font-family: 'Muli', Arial, sans-serif; font-size: 14px; padding: 12px 30px; text-align: center; border-radius: 22px;">
-                                                                        <a href="http://localhost:4200/" target="_blank" class="link-white" style="color: #ffffff; text-decoration: none;">View More Details</a>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <!-- END Button -->
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                        <!-- END User Details -->
+                    <td class="container" style="width: 650px; padding: 30px 0px;">
+                        <!-- Unique Intro Section -->
+                <tr>
+                    <td style="font-family: 'Muli', Arial, sans-serif; font-size: 16px; color: #12325c; padding: 20px;">
+                        Welcome to our service, @Model.FullName! We're glad to have you on board.
                     </td>
                 </tr>
-            </table>
+
+                <!-- Header -->
+                <tr>
+                    <td align="center">
+                        <img src="https://argaamplus.s3.amazonaws.com/818cebff-c576-472e-9092-7fb4c52f5e40.png" width="200" height="100" border="0" alt="" style="display: block; margin: 0 auto;" />
+                    </td>
+                </tr>
+                <!-- END Header -->
+                <!-- User Details -->
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td style="padding-bottom: 10px;">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="tbrr p30-15" style="padding: 40px 30px; border-radius: 26px 26px 0px 0px;" bgcolor="#12325c">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td class="h1 pb25" style="color: #ffffff; font-family: 'Muli', Arial, sans-serif; font-size: 32px; text-align: center;">
+                                                    Welcome, @Model.Username
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center pb25" style="color: #c1cddc; font-family: 'Muli', Arial, sans-serif; font-size: 16px; text-align: center;">
+                                                    Here are your details:
+                                                </td>
+                                            </tr>
+
+                                            <!-- Displaying User Details -->
+                                            <tr>
+                                                <td style="padding: 20px; background-color: #fff; color: #333;">
+                                                    <p><strong>Full Name:</strong> @Model.FullName</p>
+                                                    <p><strong>Email:</strong> @Model.Email</p>
+                                                    <p><strong>Birth Date:</strong> @Model.BirthDate?.ToString("yyyy-MM-dd")</p>
+                                                    <p><strong>Mobile Number:</strong> @Model.MobileNumber</p>
+                                                    <p><strong>Roles:</strong></p>
+                                                    <ul>
+                                                                @foreach (var role in Model.UserRoles)
+                                                                {
+                                                            <li>@role.Role.NameEn</li>
+                                                                }
+                                                    </ul>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Button -->
+                                            <tr>
+                                                <td align="center" style="padding-top: 20px;">
+                                                    <table class="center" border="0" cellspacing="0" cellpadding="0" style="text-align: center;">
+                                                        <tr>
+                                                            <td class="pink-button text-button" style="background: #ff6666; color: #ffffff; font-family: 'Muli', Arial, sans-serif; font-size: 14px; padding: 12px 30px; text-align: center; border-radius: 22px; margin-top: 20px;">
+                                                                <a href="http://localhost:4200/" target="_blank" class="link-white" style="color: #ffffff; text-decoration: none;">View More Details</a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <!-- END Button -->
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <!-- END User Details -->
+        </td>
+    </tr>
+</table>
         </td>
     </tr>
 </table>
