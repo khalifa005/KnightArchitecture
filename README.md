@@ -1,6 +1,9 @@
 # TODO
 **Fluent Email**:
+save sent emails to db 
 10. **JWT**:
+
+poly - save sent emails to db 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/2dd2ad50-f923-4c2c-900a-b1ada84b15a9" alt="v2 - Copy" width="300" height="300" />
 </p>
