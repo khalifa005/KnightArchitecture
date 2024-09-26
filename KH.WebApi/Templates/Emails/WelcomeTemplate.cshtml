@@ -7,10 +7,12 @@
 @model UserDetailsResponse
 
 @{
+    // var isRtl = HttpContext.Session.GetString("Language") == "ar";
+    // This condition will check if the language is Arabic to apply RTL class.
+    // var isRtl = Model.Language == "ar"; // Assuming you have a Language property in your model to detect the language.
     // ViewBag.Title = "Welcome Account Confirmation";
     Layout = "Templates/LayoutV2.cshtml";
 }
-
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: white;">
     <tr>
         <td align="center" valign="top">
@@ -57,17 +59,29 @@
                                                     <p><strong>Email:</strong> @Model.Email</p>
                                                     <p><strong>Birth Date:</strong> @Model.BirthDate?.ToString("yyyy-MM-dd")</p>
                                                     <p><strong>Mobile Number:</strong> @Model.MobileNumber</p>
+
+                                                    <!-- Roles Table -->
                                                     <p><strong>Roles:</strong></p>
-                                                    <ul>
-                                                                @foreach (var role in Model.UserRoles)
-                                                                {
-                                                            <li>
-                                                                <strong>Role ID:</strong> @role.Role.Id<br />
-                                                                <strong>Name (English):</strong> @role.Role.NameEn<br />
-                                                                <strong>Name (Arabic):</strong> @role.Role.NameAr<br />
-                                                            </li>
-                                                                }
-                                                    </ul>
+                                                    <table width="100%" border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; font-family: 'Muli', Arial, sans-serif; font-size: 14px; color: #333;">
+                                                        <thead>
+                                                            <tr style="background-color: #12325c; color: #ffffff;">
+                                                                <th align="left">Role ID</th>
+                                                                <th align="left">Name (English)</th>
+                                                                <th align="left">Name (Arabic)</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                    @foreach (var role in Model.UserRoles)
+                                                                    {
+                                                                <tr>
+                                                                    <td>@role.Role.Id</td>
+                                                                    <td>@role.Role.NameEn</td>
+                                                                    <td>@role.Role.NameAr</td>
+                                                                </tr>
+                                                                    }
+                                                        </tbody>
+                                                    </table>
+                                                    <!-- End Roles Table -->
                                                 </td>
                                             </tr>
 
