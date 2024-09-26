@@ -36,6 +36,7 @@ namespace KH.PersistenceInfra.Data
     public DbSet<RoleFunction> RoleFunctions { get; set; }
     public DbSet<SMSFollowUp> SMSFollowUp { get; set; }
     public DbSet<Calendar> Calendar { get; set; }
+    public DbSet<EmailTracker> EmailTracker { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

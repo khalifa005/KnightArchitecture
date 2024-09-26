@@ -7,4 +7,6 @@ namespace KH.Domain.Entities
     public Role? ReportToRole { get; set; }
 
   }
+
+
 }
