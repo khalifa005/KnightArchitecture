@@ -2,7 +2,12 @@ using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using KH.Domain.Enums;
 using KH.Dto.Models.EmailDto.Request;
+using KH.Dto.Models.EmailDto.Response;
+using KH.Dto.Models.MediaDto.Form;
+using KH.Dto.Models.MediaDto.Response;
+using KH.Helper.Extentions.Files;
 using KH.Helper.Settings;
+using KH.PersistenceInfra.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -10,6 +15,7 @@ using Microsoft.Extensions.Options;
 public class EmailService : IEmailService
 {
   private readonly IUserService _userService;
+  private readonly IUnitOfWork _unitOfWork;
   private readonly MailSettings _mailSettings;
   private readonly MailTemplatesSettings _mailTemplatesSettings;
   private IFluentEmailFactory _fluentEmail;
@@ -17,6 +23,7 @@ public class EmailService : IEmailService
   public EmailService(
     IFluentEmailFactory fluentEmail,
     IUserService userService,
+    IUnitOfWork unitOfWork,
     IOptions<MailSettings> mailSettings,
     IOptions<MailTemplatesSettings> mailTemplatesSettings,
     ILogger<EmailService> loggerFactory)
@@ -26,13 +33,15 @@ public class EmailService : IEmailService
     _mailTemplatesSettings = mailTemplatesSettings.Value;
     _loggerFactory = loggerFactory;
     _userService = userService;
+    _unitOfWork = unitOfWork; 
   }
 
   public async Task<ApiResponse<object>> SendEmailAsync(MailRequest mailRequest)
   {
     var res = new ApiResponse<object>((int)HttpStatusCode.OK);
-    var emailType = (MailTypeEnum)System.Enum.GetValues(typeof(MailTypeEnum)).GetValue(mailRequest.MailTypeId);
     List<MemoryStream> memoryStreams = new List<MemoryStream>();
+    bool isSent = false;
+    string failerReasons = "";
 
     try
     {
@@ -62,7 +71,7 @@ public class EmailService : IEmailService
         {
           case MailTypeEnum.WelcomeTemplate:
             {
-              var targetUser = await _userService.GetAsync(mailRequest.UserId);
+              var targetUser = await _userService.GetAsync(mailRequest.ModelId);
               if (targetUser.Data is not object)
                 throw new Exception("No user defiend with this id for this email type");
 
@@ -75,12 +84,13 @@ public class EmailService : IEmailService
                                 .UsingTemplateFromFile(filePath, userInfo);
 
               await emailTemplateResult.SendAsync();
-
+              isSent = true;
               break;
             }
           case MailTypeEnum.TicketEscalation:
             {
               _loggerFactory.LogInformation(" prepare the query of the ticket Email");
+              isSent = true;
               break;
             }
           default:
@@ -90,17 +100,20 @@ public class EmailService : IEmailService
                                 .Subject(mailRequest.Subject)
                                 .Body(mailRequest.Body, true)
                                 .SendAsync();
+              isSent = true;
               break;
             }
         }
 
-        _loggerFactory.LogInformation($"send Email to ({string.Join(",", toRecipients.Select(o => o.EmailAddress))}) for model Id ({mailRequest.UserId}) with Type ({mailRequest.MailType}) Succesded");
+        _loggerFactory.LogInformation($"send Email to ({string.Join(",", toRecipients.Select(o => o.EmailAddress))}) for model Id ({mailRequest.ModelId}) with Type ({mailRequest.MailType}) Succesded");
       }
       return res;
     }
     catch (Exception ex)
     {
-      _loggerFactory.LogError($"send Email to {string.Join(",", mailRequest.ToEmail)} for user Id ({mailRequest.UserId}) with Type {mailRequest.MailType} has error {ex.Message}");
+      isSent = false;
+      failerReasons = ex.Message;
+      _loggerFactory.LogError($"send Email to {string.Join(",", mailRequest.ToEmail)} for user Id ({mailRequest.ModelId}) with Type {mailRequest.MailType} has error {ex.Message}");
       res.ErrorMessage = ex.Message;
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       return res;
@@ -112,8 +125,112 @@ public class EmailService : IEmailService
       {
         stream.Dispose();
       }
+
+      var mailEntity = mailRequest.ToEntity();
+      mailEntity.IsSent = isSent;
+      mailEntity.FailReasons = failerReasons;
+
+      await AddAsync(mailEntity);
     }
   }
+
+  public async Task<ApiResponse<EmailTrackerResponse>> GetAsync(long id)
+  {
+    ApiResponse<EmailTrackerResponse>? res = new ApiResponse<EmailTrackerResponse>((int)HttpStatusCode.OK);
+
+    var repository = _unitOfWork.Repository<EmailTracker>();
+
+    //light user query to make sure the user exist
+    var entityFromDB = await repository.GetAsync(id);
+
+    if (entityFromDB == null)
+    {
+      res.StatusCode = (int)StatusCodes.Status400BadRequest;
+      res.ErrorMessage = "invalid";
+    }
+
+    EmailTrackerResponse entityResponse = new EmailTrackerResponse(entityFromDB);
+
+    res.Data = entityResponse;
+    return res;
+  }
+
+  public async Task<ApiResponse<PagedResponse<EmailTrackerResponse>>> GetListAsync(MailRequest request)
+  {
+    ApiResponse<PagedResponse<EmailTrackerResponse>> apiResponse = new ApiResponse<PagedResponse<EmailTrackerResponse>>((int)HttpStatusCode.OK);
+
+    var repository = _unitOfWork.Repository<EmailTracker>();
+
+    var pagedEntities = await repository.GetPagedWithProjectionAsync<EmailTrackerResponse>(
+    pageNumber: request.PageIndex,
+    pageSize: request.PageSize,
+    filterExpression: u =>
+    u.IsSent == request.IsSent
+    && u.ModelId == request.ModelId
+    && u.Model == request.Model, // Filter by
+
+    projectionExpression: u => new EmailTrackerResponse(u),
+    orderBy: query => query.OrderBy(u => u.Id),  // Sort by Id
+    tracking: false  // Disable tracking for read-only queries
+);
+
+    var entitiesResponses = pagedEntities.Select(x => x).ToList();
+
+    var pagedResponse = new PagedResponse<EmailTrackerResponse>(
+      entitiesResponses,
+       pagedEntities.CurrentPage,
+       pagedEntities.TotalPages,
+       pagedEntities.PageSize,
+       pagedEntities.TotalCount);
+
+    apiResponse.Data = pagedResponse;
+
+    return apiResponse;
+  }
+
+
+  private async Task<ApiResponse<string>> AddAsync(EmailTracker request)
+  {
+    ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    bool isModelExists = Enum.IsDefined(typeof(ModelEnum), request.Model);
+
+    await _unitOfWork.BeginTransactionAsync();
+
+    try
+    {
+      if (request == null)
+        throw new Exception("Invalid Parameter");
+
+      //all validation should be in fluent validation side
+      if (request.ToCCEmail.Length <= 0)
+        throw new Exception("Invalid email");
+
+      if (request.ModelId == null)
+        throw new Exception("Invalid Parameter");
+
+
+      var repository = _unitOfWork.Repository<EmailTracker>();
+
+      await repository.AddAsync(request);
+      await _unitOfWork.CommitAsync();
+
+      await _unitOfWork.CommitTransactionAsync();
+
+      res.Data = request.Id.ToString();
+      return res;
+    }
+    catch (Exception ex)
+    {
+      await _unitOfWork.RollBackTransactionAsync();
+
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.Data = ex.Message;
+      res.ErrorMessage = ex.Message;
+      return res;
+    }
+  }
+
   private static List<Address> SetEmailRecipients(List<string?>? emailRecipients)
   {
     var toRecipients = new List<Address>();
@@ -128,7 +245,6 @@ public class EmailService : IEmailService
 
     return toRecipients;
   }
-  
   private static List<Attachment> SetEmailAttachments(List<IFormFile>? attachments, List<MemoryStream> memoryStreams)
   {
     var emailAttachments = new List<Attachment>();
@@ -162,7 +278,6 @@ public class EmailService : IEmailService
 
     return emailAttachments;
   }
-
   private static List<Attachment> SetEmailAttachmentsXX(List<IFormFile>? attachments, List<string>? filePaths, List<MemoryStream> memoryStreams)
   {
     var emailAttachments = new List<Attachment>();
@@ -231,5 +346,5 @@ public class EmailService : IEmailService
       ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       _ => "application/octet-stream",
     };
-  }
+  }  
 }

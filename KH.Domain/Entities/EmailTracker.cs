@@ -1,9 +1,8 @@
 
 namespace KH.Domain.Entities
 {
-  public class EmailTracker
+  public class EmailTracker : BaseEntity
   {
-    public long Id { get; set; }
     public string Model { get; set; }
     public long ModelId { get; set; }
     public string ToEmail { get; set; }
