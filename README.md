@@ -1,6 +1,6 @@
 # TODO
 **Fluent Email**:
-save sent emails to db 
+save sent emails to db -- pdf
 10. **JWT**:
 
 poly - save sent emails to db 
