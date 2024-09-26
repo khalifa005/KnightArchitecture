@@ -13,6 +13,11 @@ namespace KH.Services
 
       services.AddScoped<IUserService, UserService>();
       services.AddScoped<IMediaService, MediaService>();
+      services.AddScoped<IPdfService, PdfService>();
+      services.AddScoped<IEmailService, EmailService>();
+
+      // Register DinkToPdf converter
+      //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
       //-- SET Fluent Email
       var mailSettings = configuration.GetSection("MailSettings");
@@ -32,7 +37,6 @@ namespace KH.Services
             EnableSsl = true
           });
 
-      services.AddScoped<IEmailService, EmailService>();
 
       return services;
     }

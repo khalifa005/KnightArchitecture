@@ -1,11 +1,8 @@
 using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.EmailDto.Response;
-using KH.Dto.Models.MediaDto.Request;
-using KH.Dto.Models.MediaDto.Response;
 using KH.Helper.Extentions;
 using KH.Helper.Responses;
 using KH.Services.Contracts;
-using KH.Services.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KH.WebApi.Controllers
@@ -37,7 +34,7 @@ namespace KH.WebApi.Controllers
 
 
     [HttpPost("Send")]
-    public async Task<IActionResult> SendOrderEmail([FromForm] MailRequest request)
+    public async Task<IActionResult> SendEmail([FromForm] MailRequest request)
     {
       await _emailService.SendEmailAsync(request);
 

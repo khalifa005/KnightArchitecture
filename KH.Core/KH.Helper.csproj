@@ -36,6 +36,10 @@
 
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 
+    <PackageReference Include="NReco.PdfGenerator" Version="1.2.1" />
+
+    <PackageReference Include="PuppeteerSharp" Version="20.0.2" />
+
     <PackageReference Include="RestSharp" Version="112.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.6.2" />
