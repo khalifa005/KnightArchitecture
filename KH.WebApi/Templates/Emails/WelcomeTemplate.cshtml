@@ -11,7 +11,6 @@
     Layout = "Templates/LayoutV2.cshtml";
 }
 
-
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: white;">
     <tr>
         <td align="center" valign="top">
@@ -25,10 +24,10 @@
                     </td>
                 </tr>
 
-                <!-- Header -->
+                <!-- Header with Image -->
                 <tr>
                     <td align="center">
-                        <img src="https://argaamplus.s3.amazonaws.com/818cebff-c576-472e-9092-7fb4c52f5e40.png" width="200" height="100" border="0" alt="" style="display: block; margin: 0 auto;" />
+                        <img src="https://argaamplus.s3.amazonaws.com/818cebff-c576-472e-9092-7fb4c52f5e40.png" width="100%" height="auto" border="0" alt="" style="display: block; width: 100%; max-width: 650px; height: auto; margin-bottom: 20px;" />
                     </td>
                 </tr>
                 <!-- END Header -->
@@ -62,7 +61,11 @@
                                                     <ul>
                                                                 @foreach (var role in Model.UserRoles)
                                                                 {
-                                                            <li>@role.Role.NameEn</li>
+                                                            <li>
+                                                                <strong>Role ID:</strong> @role.Role.Id<br />
+                                                                <strong>Name (English):</strong> @role.Role.NameEn<br />
+                                                                <strong>Name (Arabic):</strong> @role.Role.NameAr<br />
+                                                            </li>
                                                                 }
                                                     </ul>
                                                 </td>
