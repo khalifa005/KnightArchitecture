@@ -7,7 +7,7 @@ namespace KH.Dto.Models.EmailDto.Request
   public class MailRequest : PagingRequestHelper
   {
     public List<string?>? ToEmail { get; set; } = new();
-    public List<string?>? ToCCEmail { get; set; } = new ();
+    public List<string?>? ToCCEmail { get; set; } = new();
     public string? Subject { get; set; }
     public string? Body { get; set; }
     public List<IFormFile>? Attachments { get; set; } = new();

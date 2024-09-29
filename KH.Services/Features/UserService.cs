@@ -1,6 +1,3 @@
-using KH.Dto.Models.MediaDto.Response;
-using Microsoft.AspNetCore.Http;
-
 public class UserService : IUserService
 {
   private readonly IUnitOfWork _unitOfWork;
