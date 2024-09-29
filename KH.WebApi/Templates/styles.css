@@ -27,9 +27,20 @@ img {
 }
 
   .pink-button:hover {
-    background-color: #ff4444;
+    background-color: #F68B2C;
     transform: scale(1.05);
   }
+
+/* Badge Style */
+.badge {
+  display: inline-block;
+  background-color: #4CAF50;
+  padding: 20px;
+  border-radius: 30px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
 
 /* Image fade-in animation */
 img {
@@ -45,4 +56,61 @@ img {
   100% {
     opacity: 1;
   }
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: 'Muli', Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 14px;
+  color: #333333;
+}
+
+th {
+  background-color: #F68B2C; /* Orange header */
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+tr {
+  background-color: #f4f4f9; /* Light background for rows */
+}
+
+  tr:nth-child(even) {
+    background-color: #fdfdfd;
+  }
+
+  tr:hover {
+    background-color: #4CAF50; /* Green hover */
+    color: white;
+  }
+
+/* Responsive Design for Table */
+@media (max-width: 600px) {
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 8px 10px;
+  }
+}
+
+/* Animation for Table Rows */
+tr {
+  transition: all 0.3s ease-in-out;
+}
+
+th {
+  transition: background-color 0.3s ease-in-out;
 }
