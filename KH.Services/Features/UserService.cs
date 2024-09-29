@@ -1,3 +1,6 @@
+using KH.Dto.Models.MediaDto.Response;
+using Microsoft.AspNetCore.Http;
+
 public class UserService : IUserService
 {
   private readonly IUnitOfWork _unitOfWork;
@@ -41,108 +44,13 @@ public class UserService : IUserService
     res.Data = userDetailsResponse;
     return res;
   }
-  /// <summary>
-  /// translated query will be
-  /// // Define the SQL query string
-  //string sqlQuery = @"
-  //  SELECT 
-  //      [u].[Id], 
-  //      [u].[BirthDate], 
-  //      [u].[CreatedById], 
-  //      [u].[CreatedDate], 
-  //      [u].[DeletedById], 
-  //      [u].[DeletedDate], 
-  //      [u].[Email], 
-  //      [u].[FirstName], 
-  //      [u].[IsDeleted], 
-  //      [u].[LastAssignDateAsAssignTo], 
-  //      [u].[LastAssignDateAsCaseOwner], 
-  //      [u].[LastAssignDateAsSupervisor], 
-  //      [u].[LastName], 
-  //      [u].[MiddleName], 
-  //      [u].[MobileNumber], 
-  //      [u].[UpdatedById], 
-  //      [u].[UpdatedDate], 
-  //      [u].[Username], 
-  //      [t].[Id], 
-  //      [t].[CreatedById], 
-  //      [t].[CreatedDate], 
-  //      [t].[DeletedById], 
-  //      [t].[DeletedDate], 
-  //      [t].[IsDeleted], 
-  //      [t].[RoleId], 
-  //      [t].[UpdatedById], 
-  //      [t].[UpdatedDate], 
-  //      [t].[UserId], 
-  //      [t].[Id0], 
-  //      [t].[CreatedById0], 
-  //      [t].[CreatedDate0], 
-  //      [t].[DeletedById0], 
-  //      [t].[DeletedDate0], 
-  //      [t].[Description], 
-  //      [t].[IsDeleted0], 
-  //      [t].[NameAr], 
-  //      [t].[NameEn], 
-  //      [t].[ReportToRoleId], 
-  //      [t].[UpdatedById0], 
-  //      [t].[UpdatedDate0], 
-  //      [u1].[Id], 
-  //      [u1].[CreatedById], 
-  //      [u1].[CreatedDate], 
-  //      [u1].[DeletedById], 
-  //      [u1].[DeletedDate], 
-  //      [u1].[GroupId], 
-  //      [u1].[IsDeleted], 
-  //      [u1].[UpdatedById], 
-  //      [u1].[UpdatedDate], 
-  //      [u1].[UserId], 
-  //      [u2].[Id], 
-  //      [u2].[CreatedById], 
-  //      [u2].[CreatedDate], 
-  //      [u2].[DeletedById], 
-  //      [u2].[DeletedDate], 
-  //      [u2].[DepartmentId], 
-  //      [u2].[IsDeleted], 
-  //      [u2].[UpdatedById], 
-  //      [u2].[UpdatedDate], 
-  //      [u2].[UserId]
-  //  FROM 
-  //      [Users] AS [u]
-  //  LEFT JOIN (
-  //      SELECT 
-  //          [u0].[Id], 
-  //          [u0].[CreatedById], 
-  //          [u0].[CreatedDate], 
-  //          [u0].[DeletedById], 
-  //          [u0].[DeletedDate], 
-  //          [u0].[IsDeleted], 
-  //          [u0].[RoleId], 
-  //          [u0].[UpdatedById], 
-  //          [u0].[UpdatedDate], 
-  //          [u0].[UserId], 
-  //          [r].[Id] AS [Id0], 
-  //          [r].[CreatedById] AS [CreatedById0], 
-  //          [r].[CreatedDate] AS [CreatedDate0], 
-  //          [r].[DeletedById] AS [DeletedById0], 
-  //          [r].[DeletedDate] AS [DeletedDate0], 
-  //          [r].[Description], 
-  //          [r].[IsDeleted] AS [IsDeleted0], 
-  //          [r].[NameAr], 
-  //          [r].[NameEn], 
-  //          [r].[ReportToRoleId], 
-  //          [r].[UpdatedById] AS [UpdatedById0], 
-  //          [r].[UpdatedDate] AS [UpdatedDate0]
-  //      FROM 
-
-
-  ///// </summary>
-  ///// <param name="request"></param>
-  /// <returns></returns>
-  /// <exception cref="NotImplementedException"></exception>
   public async Task<ApiResponse<UserDetailsResponse>> GetAsync(UserFilterRequest request)
   {
+    ApiResponse<UserDetailsResponse>? res = new ApiResponse<UserDetailsResponse>((int)HttpStatusCode.OK);
+
     var repository = _unitOfWork.Repository<User>();
 
+    //use this if u need to get all users related to this filter
     var result = await repository.FindByAsync(u =>
     u.FirstName.Contains(request.Search)
     || u.LastName.Contains(request.Search),
@@ -152,7 +60,26 @@ public class UserService : IUserService
     .Include(u => u.UserGroups)
     .Include(u => u.UserDepartments));
 
-    throw new NotImplementedException();
+    //use this if u need to get one user related to this filter
+    var entityFromDB = await repository.GetByExpressionAsync(u =>
+    u.FirstName.Contains(request.Search)
+    || u.LastName.Contains(request.Search),
+
+    q => q.Include(u => u.UserRoles)
+    .ThenInclude(ur => ur.Role)
+    .Include(u => u.UserGroups)
+    .Include(u => u.UserDepartments));
+
+    if (entityFromDB == null)
+    {
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.ErrorMessage = "invalid user";
+    }
+
+    UserDetailsResponse entityResponse = new UserDetailsResponse(entityFromDB);
+
+    res.Data = entityResponse;
+    return res;
   }
   public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListAsync(UserFilterRequest request)
   {
@@ -229,36 +156,6 @@ public class UserService : IUserService
 
     return apiResponse;
   }
-  /// <summary>
-  /// converted sql 
-  //  string sqlQuery = @"
-  //    SELECT 
-  //        [u].[Id], 
-  //        [u].[Username]
-  //    FROM 
-  //        [Users] AS [u]
-  //    WHERE 
-  //        [u].[IsDeleted] = CAST(0 AS bit) -- Filter to include only non-deleted users
-  //    ORDER BY 
-  //        (SELECT 1) -- A dummy ORDER BY clause; can be replaced with actual column(s) for ordering
-  //    OFFSET @__p_0 ROWS -- Skip the number of rows specified by @__p_0
-  //    FETCH NEXT @__p_1 ROWS ONLY -- Fetch the number of rows specified by @__p_1
-  //";
-
-  //  // Define the parameters for the query
-  //  int offset = 0; // Number of rows to skip
-  //  int fetchNext = 10; // Number of rows to fetch
-
-  //  // Create the command object with the query and parameters
-  //  SqlCommand command = new SqlCommand(sqlQuery);
-  //  command.Parameters.AddWithValue("@__p_0", offset);
-  //command.Parameters.AddWithValue("@__p_1", fetchNext);
-
-  // Execute the query (this step is context-dependent, e.g., using a connection object)
-
-  /// </summary>
-  /// <param name="request"></param>
-  /// <returns></returns>
   public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingProjectionAsync(UserFilterRequest request)
   {
     var repository = _unitOfWork.Repository<User>();
@@ -558,7 +455,6 @@ public class UserService : IUserService
                                                         .Include(u => u.UserGroups)
                                                         .Include(u => u.UserDepartments));
   }
-
   private async Task<int> CountUsersByAsync(Expression<Func<User, bool>> predicate)
   {
     var repository = _unitOfWork.Repository<User>();

@@ -23,8 +23,8 @@ namespace KH.WebApi.Controllers
       return AsActionResult(res);
     }
 
-    [HttpPost("Filter")]
-    public async Task<ActionResult<ApiResponse<UserDetailsResponse>>> GetFilteredList(UserFilterRequest request)
+    [HttpPost("GetUserByFilter")]
+    public async Task<ActionResult<ApiResponse<UserDetailsResponse>>> GetUserByFilter(UserFilterRequest request)
     {
       var res = await _userService.GetAsync(request);
       return AsActionResult(res);
