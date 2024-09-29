@@ -17,6 +17,7 @@ public static class ServicesRegisterationService
     services.AddScoped<IMediaService, MediaService>();
     services.AddScoped<IPdfService, PdfService>();
     services.AddScoped<IEmailService, EmailService>();
+    services.AddScoped<IRoleService, RoleService>();
 
     // Register DinkToPdf converter
     services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));

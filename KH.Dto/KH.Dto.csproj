@@ -28,7 +28,6 @@
     <Folder Include="Lookups\PermissionsDto\Response\" />
     <Folder Include="Lookups\PermissionsDto\Validation\" />
     <Folder Include="Lookups\NationalityDto\Request\" />
-    <Folder Include="Lookups\RoleDto\Request\" />
     <Folder Include="Lookups\PolicyIssuingSourceDto\Request\" />
     <Folder Include="Lookups\DepartmentDto\Request\" />
     <Folder Include="Lookups\AEmptyTemplate\Form\" />
