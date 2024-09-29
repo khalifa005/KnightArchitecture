@@ -1,7 +1,7 @@
 using FluentValidation;
 using KH.Dto.lookups.GroupDto.Form;
 
-namespace KH.Dto.lookups.Group.Validation
+namespace KH.Dto.Lookups.GroupDto.Validation
 {
   public class GroupFormValidator : AbstractValidator<GroupForm>
   {

@@ -1,7 +1,7 @@
 using FluentValidation;
 using KH.Dto.Models.AuthenticationDto.Request;
 
-namespace KH.Dto.Models.OtpVerificationDto.Validation
+namespace KH.Dto.Models.AuthenticationDto.Validation
 {
   public class OtpVerificationRequestValidator : AbstractValidator<OtpVerificationRequest>
   {

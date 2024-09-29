@@ -9,7 +9,7 @@ using KH.Dto.Models.SMSDto.Form;
 using KH.Dto.Models.UserDto.Form;
 using KH.Dto.Models.UserDto.Response;
 
-namespace CA.ViewModels.MappingProfiles
+namespace KH.Dto.MappingProfiles
 {
   public class DomainToDtoProfile : Profile
   {

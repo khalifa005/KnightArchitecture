@@ -1,5 +1,3 @@
-
-using CA.ViewModels;
 using KH.Helper;
 using KH.Helper.Extentions;
 using KH.Helper.Middlewares;
@@ -16,6 +14,7 @@ using KH.Helper.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Rotativa.AspNetCore;
 using Microsoft.Extensions.Hosting.Internal;
+using KH.Dto;
 namespace KH.WebApi
 {
   public class Startup

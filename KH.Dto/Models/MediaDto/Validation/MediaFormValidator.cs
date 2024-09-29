@@ -2,7 +2,7 @@ using FluentValidation;
 using KH.Dto.lookups.CityDto.Form;
 using KH.Dto.Models.MediaDto.Form;
 
-namespace KH.Dto.Models.UserDto.Validation
+namespace KH.Dto.Models.MediaDto.Validation
 {
   public class MediaFormValidator : AbstractValidator<MediaForm>
   {

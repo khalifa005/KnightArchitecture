@@ -1,8 +1,7 @@
-
 using Microsoft.Extensions.Options;
 using System.ComponentModel.DataAnnotations;
 
-namespace CA.Application.Helpers
+namespace KH.Helper.Settings
 {
   public class FileSettings
   {
@@ -14,6 +13,6 @@ namespace CA.Application.Helpers
     [StringLength(100, MinimumLength = 5)]  // This restricts the length of the DirectoryPath
     public string FolderName { get; set; }
     public string VirusTotalApiKey { get; set; }
-    
+
   }
 }

@@ -1,15 +1,15 @@
 ﻿using FluentValidation;
 
-namespace CA.ViewModels.Validations.CustomValidation
+namespace KH.Dto.Validations.CustomValidation
 {
-    public static class FluentValidationExtensions
+  public static class FluentValidationExtensions
+  {
+    public static IRuleBuilderOptions<T, string> FullName<T>(this IRuleBuilder<T, string> ruleBuilder)
     {
-        public static IRuleBuilderOptions<T, string> FullName<T>(this IRuleBuilder<T, string> ruleBuilder)
-        {
-            return ruleBuilder
-                       .MinimumLength(10)
-                       .Must(val => val.Split(" ").Length >= 2);
-        }
+      return ruleBuilder
+                 .MinimumLength(10)
+                 .Must(val => val.Split(" ").Length >= 2);
     }
+  }
 
 }
