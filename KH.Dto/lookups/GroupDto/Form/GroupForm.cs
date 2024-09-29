@@ -2,8 +2,6 @@ namespace KH.Dto.lookups.GroupDto.Form;
 
 public class GroupForm : LookupEntityWithTrackingDto
 {
-  //there is no cutom props because it's lookup and common dto has all needed props
-  //we can use auto mapper to do mapping or doing our own using ctor
   public long? TicketCategoryId { get; set; }
   public bool IsUpdateMode { get; set; }
 
@@ -22,9 +20,9 @@ public class GroupForm : LookupEntityWithTrackingDto
     CreatedById = e.CreatedById;
   }
 
-  public City ToEntity()
+  public Group ToEntity()
   {
-    var e = new City()
+    var e = new Group()
     {
       NameAr = NameAr,
       NameEn = NameEn,

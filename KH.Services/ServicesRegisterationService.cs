@@ -18,6 +18,8 @@ public static class ServicesRegisterationService
     services.AddScoped<IPdfService, PdfService>();
     services.AddScoped<IEmailService, EmailService>();
     services.AddScoped<IRoleService, RoleService>();
+    services.AddScoped<IDepartmentService, DepartmentService>();
+    services.AddScoped<IGroupService, GroupService>();
 
     // Register DinkToPdf converter
     services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));

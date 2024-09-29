@@ -1,7 +1,5 @@
 namespace KH.Dto.Lookups.RoleDto.Request;
-public class RoleFilterRequest : PagingRequestHelper
+public class RoleFilterRequest : CommonLookupFiltersRequest
 {
-  public long? Id { get; set; }
-  public bool? IsDeleted { get; set; } = false;
-
+  public long? ReportToRoleId { get; set; }
 }
