@@ -1,5 +1,4 @@
-
-namespace KH.Helper.Middlewares
+namespace KH.BuildingBlocks.Middlewares
 {
   public static class SwaggerMiddleware
   {

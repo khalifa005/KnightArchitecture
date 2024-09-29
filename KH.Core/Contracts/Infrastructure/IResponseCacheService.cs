@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace KH.Helper.Contracts.Infrastructure
+namespace KH.BuildingBlocks.Contracts.Infrastructure
 {
   public interface IResponseCacheService
   {

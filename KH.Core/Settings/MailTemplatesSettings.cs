@@ -1,6 +1,6 @@
 using KH.Domain.Enums;
 
-namespace KH.Helper.Settings
+namespace KH.BuildingBlocks.Settings
 {
   public class MailTemplatesSettings
   {

@@ -3,9 +3,9 @@ using KH.Services.Contracts;
 using KH.Dto.Models.UserDto.Form;
 using KH.Dto.Models.UserDto.Request;
 using KH.Dto.Models.UserDto.Response;
-using KH.Helper.Extentions;
-using KH.Helper.Responses;
 using Microsoft.AspNetCore.Mvc;
+using KH.BuildingBlocks.Extentions;
+using KH.BuildingBlocks.Responses;
 
 namespace KH.WebApi.Controllers
 {

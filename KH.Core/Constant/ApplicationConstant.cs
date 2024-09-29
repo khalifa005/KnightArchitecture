@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KH.Helper.Constant
+namespace KH.BuildingBlocks.Constant
 {
   public static class ApplicationConstant
   {

@@ -1,4 +1,4 @@
-namespace KH.Helper.Extentions.Methods
+namespace KH.BuildingBlocks.Extentions.Methods
 {
   public static class Common
   {

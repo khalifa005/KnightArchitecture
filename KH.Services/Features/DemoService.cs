@@ -1,5 +1,5 @@
-using KH.Helper.Contracts.Persistence;
-using KH.Helper.Responses;
+using KH.BuildingBlocks.Contracts.Persistence;
+using KH.BuildingBlocks.Responses;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 public class DemoUserService

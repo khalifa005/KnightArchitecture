@@ -4,7 +4,7 @@ using FluentValidation;
 
 
 
-namespace KH.Helper.Extentions.Files
+namespace KH.BuildingBlocks.Extentions.Files
 {
   public class FileValidator : AbstractValidator<IFormFile>
   {

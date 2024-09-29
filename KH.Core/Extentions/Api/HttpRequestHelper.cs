@@ -1,9 +1,9 @@
-using KH.Helper.Responses;
+using KH.BuildingBlocks.Responses;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using System.Net.Mime;
 
-namespace KH.Helper.Extentions.Api
+namespace KH.BuildingBlocks.Extentions.Api
 {
   public class HttpRequestHelper
   {

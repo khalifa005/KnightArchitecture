@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KH.Services", "KH.Services\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KH.PersistenceInfra", "KH.PersistenceInfra\KH.PersistenceInfra.csproj", "{521D5081-7DDC-41EA-859E-7A3D2734DA22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KH.Helper", "KH.Core\KH.Helper.csproj", "{9AFF252B-21D2-43E3-BE57-E099C4783F15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KH.BuildingBlocks", "KH.Core\KH.BuildingBlocks.csproj", "{9AFF252B-21D2-43E3-BE57-E099C4783F15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

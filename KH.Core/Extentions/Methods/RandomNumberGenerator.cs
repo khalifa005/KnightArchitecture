@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KH.Helper.Extentions.Methods
+namespace KH.BuildingBlocks.Extentions.Methods
 {
   public class SecureRandom
   {

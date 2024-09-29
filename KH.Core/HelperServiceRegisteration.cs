@@ -1,12 +1,12 @@
-using KH.Helper.Extentions;
-using KH.Helper.Extentions.Files;
-using KH.Helper.Middlewares;
-using KH.Helper.Settings;
+using KH.BuildingBlocks.Extentions;
+using KH.BuildingBlocks.Extentions.Files;
+using KH.BuildingBlocks.Settings;
+using KH.BuildingBlocks.Middlewares;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Mail;
 
-namespace KH.Helper
+namespace KH.BuildingBlocks
 {
   public static class HelperServiceRegisteration
   {

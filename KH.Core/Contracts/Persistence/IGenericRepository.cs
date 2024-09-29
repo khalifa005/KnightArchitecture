@@ -1,9 +1,8 @@
-
+using KH.BuildingBlocks.Responses;
 using KH.Domain.Commons;
-using KH.Helper.Responses;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace KH.Helper.Contracts.Persistence
+namespace KH.BuildingBlocks.Contracts.Persistence
 {
   public interface IGenericRepository<T> where T : BaseEntity
   {

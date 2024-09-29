@@ -1,7 +1,6 @@
-
 using System.Diagnostics;
 
-namespace KH.Helper.Responses
+namespace KH.BuildingBlocks.Responses
 {
   public class ApiResponse<T> where T : class
   {

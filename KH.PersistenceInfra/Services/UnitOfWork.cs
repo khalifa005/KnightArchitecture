@@ -1,5 +1,5 @@
+using KH.BuildingBlocks.Contracts.Persistence;
 using KH.Domain.Commons;
-using KH.Helper.Contracts.Persistence;
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Repositories;
 using Microsoft.EntityFrameworkCore;

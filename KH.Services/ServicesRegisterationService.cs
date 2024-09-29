@@ -1,10 +1,10 @@
 using DinkToPdf.Contracts;
 using DinkToPdf;
-using KH.Helper.Settings;
 using KH.Services.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Mail;
+using KH.BuildingBlocks.Settings;
 
 namespace KH.Services
 {

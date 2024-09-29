@@ -1,4 +1,4 @@
-using KH.Helper.Responses;
+using KH.BuildingBlocks.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.SqlServer.Server;

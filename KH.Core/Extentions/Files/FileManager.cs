@@ -1,12 +1,13 @@
 using Azure.Core;
-using KH.Helper.Responses;
-using KH.Helper.Settings;
+using KH.BuildingBlocks.Responses;
+using KH.BuildingBlocks.Settings;
+using KH.BuildingBlocks.Extentions.Files;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 
-namespace KH.Helper.Extentions.Files
+namespace KH.BuildingBlocks.Extentions.Files
 {
   public class FileManager
   {
@@ -60,7 +61,7 @@ namespace KH.Helper.Extentions.Files
         {
           await file.CopyToAsync(stream);
         }
-        
+
         string fileExtention = Path.GetExtension(fullPath);
 
         return new FileResponse()

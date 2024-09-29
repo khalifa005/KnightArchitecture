@@ -1,4 +1,4 @@
-namespace KH.Helper.Settings
+namespace KH.BuildingBlocks.Settings
 {
   public class MailSettings
   {

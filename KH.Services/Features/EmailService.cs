@@ -1,12 +1,14 @@
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
+using KH.BuildingBlocks.Contracts.Persistence;
+using KH.BuildingBlocks.Responses;
+using KH.BuildingBlocks.Settings;
 using KH.Domain.Enums;
 using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.EmailDto.Response;
 using KH.Dto.Models.MediaDto.Form;
 using KH.Dto.Models.MediaDto.Response;
-using KH.Helper.Extentions.Files;
-using KH.Helper.Settings;
+using KH.BuildingBlocks.Extentions.Files;
 using KH.PersistenceInfra.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;

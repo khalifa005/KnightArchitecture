@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 using System.ComponentModel.DataAnnotations;
 
-namespace KH.Helper.Settings
+namespace KH.BuildingBlocks.Settings
 {
   public class FileSettings
   {

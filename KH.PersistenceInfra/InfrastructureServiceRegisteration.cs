@@ -1,5 +1,5 @@
 
-using KH.Helper.Contracts.Persistence;
+using KH.BuildingBlocks.Contracts.Persistence;
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Extentions;
 using KH.PersistenceInfra.Middlewares;

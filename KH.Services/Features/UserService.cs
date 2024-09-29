@@ -1,5 +1,9 @@
 
 
+using KH.BuildingBlocks.Contracts.Persistence;
+using KH.BuildingBlocks.Extentions.Methods;
+using KH.BuildingBlocks.Responses;
+
 public class UserService : IUserService
 {
   private readonly IUnitOfWork _unitOfWork;

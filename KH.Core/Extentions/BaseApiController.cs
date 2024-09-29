@@ -1,11 +1,10 @@
-
-using KH.Helper.Responses;
-using KH.Helper.Settings;
+using KH.BuildingBlocks.Responses;
+using KH.BuildingBlocks.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
-namespace KH.Helper.Extentions
+namespace KH.BuildingBlocks.Extentions
 {
   //[ApiVersion("1.0")]
   //[Route("api/v{v:apiversion}/[controller]")]
@@ -89,7 +88,7 @@ namespace KH.Helper.Extentions
         //response.CorrelationId = ;
       }
 
-      ObjectResult? result = new ObjectResult(response) { StatusCode = (int)(response?.StatusCode ?? (int)HttpStatusCode.BadRequest) };
+      ObjectResult? result = new ObjectResult(response) { StatusCode = response?.StatusCode ?? (int)HttpStatusCode.BadRequest };
       return result;
 
     }

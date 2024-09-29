@@ -1,6 +1,4 @@
-using KH.Helper;
-using KH.Helper.Extentions;
-using KH.Helper.Middlewares;
+using KH.BuildingBlocks.Extentions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -10,11 +8,13 @@ using FluentValidation.AspNetCore;
 using FluentValidation;
 using KH.PersistenceInfra;
 using KH.Services;
-using KH.Helper.Responses;
+using KH.BuildingBlocks.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Rotativa.AspNetCore;
 using Microsoft.Extensions.Hosting.Internal;
 using KH.Dto;
+using KH.BuildingBlocks;
+using KH.BuildingBlocks.Middlewares;
 namespace KH.WebApi
 {
   public class Startup
