@@ -1,10 +1,3 @@
-using KH.BuildingBlocks.Extentions;
-using KH.BuildingBlocks.Responses;
-using KH.Dto.Models.MediaDto.Form;
-using KH.Dto.Models.MediaDto.Request;
-using KH.Dto.Models.MediaDto.Response;
-using KH.Services.Contracts;
-using Microsoft.AspNetCore.Mvc;
 
 
 namespace KH.WebApi.Controllers

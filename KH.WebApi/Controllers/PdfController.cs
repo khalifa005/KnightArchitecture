@@ -1,8 +1,3 @@
-using KH.BuildingBlocks.Extentions;
-using KH.Dto.Models.UserDto.Request;
-using KH.Services.Contracts;
-using Microsoft.AspNetCore.Mvc;
-
 namespace KH.WebApi.Controllers
 {
   public class PdfController : BaseApiController

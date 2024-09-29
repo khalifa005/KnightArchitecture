@@ -1,9 +1,4 @@
-using KH.BuildingBlocks.Extentions;
-using KH.BuildingBlocks.Responses;
-using KH.Dto.Models.EmailDto.Request;
-using KH.Dto.Models.EmailDto.Response;
-using KH.Services.Contracts;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace KH.WebApi.Controllers
 {
