@@ -1,7 +1,7 @@
 
 namespace KH.Dto.lookups.PolicyIssuingSourceDto.Form
 {
-  public class PolicyIssuingSourceForm : BasicEntityWithTrackingDto
+  public class PolicyIssuingSourceForm : LookupEntityWithTrackingDto
   {
     //there is no cutom props because it's lookup and common dto has all needed props
     //we can use auto mapper to do mapping or doing our own using ctor

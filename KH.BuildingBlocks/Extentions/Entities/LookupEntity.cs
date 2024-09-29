@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KH.BuildingBlocks.Extentions.Entities
 {
-  public abstract partial class BasicEntity : TrackerEntity
+  public abstract partial class LookupEntity : TrackerEntity
   {
     [Column(Order = 2)]
     public string NameAr { get; set; }

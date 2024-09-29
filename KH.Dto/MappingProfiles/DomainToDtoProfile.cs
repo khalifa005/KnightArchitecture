@@ -17,7 +17,7 @@ namespace KH.Dto.MappingProfiles
     {
       CreateMap<BaseEntity, BaseEntityDto>().ReverseMap();
       CreateMap<TrackerEntity, BasicTrackerEntityDto>().ReverseMap();
-      CreateMap<BasicEntity, BasicEntityWithTrackingDto>().ReverseMap();
+      CreateMap<LookupEntity, LookupEntityWithTrackingDto>().ReverseMap();
       CreateMap<HistoryTrackerEntity, HistoryTrackerEntityDto>().ReverseMap();
 
       CreateMap<User, UserForm>().ReverseMap();

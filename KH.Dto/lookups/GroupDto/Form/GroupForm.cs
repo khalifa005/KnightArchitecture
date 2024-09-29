@@ -1,6 +1,6 @@
 namespace KH.Dto.lookups.GroupDto.Form
 {
-  public class GroupForm : BasicEntityWithTrackingDto
+  public class GroupForm : LookupEntityWithTrackingDto
   {
     //there is no cutom props because it's lookup and common dto has all needed props
     //we can use auto mapper to do mapping or doing our own using ctor

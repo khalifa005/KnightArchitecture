@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KH.Domain.Entities
 {
-  public class SystemFunction : BasicEntity
+  public class SystemFunction : LookupEntity
     {
 		public int SortKey { get; set; }
 

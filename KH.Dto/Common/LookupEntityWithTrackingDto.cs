@@ -1,7 +1,7 @@
 
 namespace KH.Dto.common
 {
-  public class BasicEntityWithTrackingDto : BasicTrackerEntityDto
+  public class LookupEntityWithTrackingDto : BasicTrackerEntityDto
   {
     public string NameAr { get; set; }
     public string NameEn { get; set; }
