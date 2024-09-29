@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KH.Services", "KH.Services\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KH.PersistenceInfra", "KH.PersistenceInfra\KH.PersistenceInfra.csproj", "{521D5081-7DDC-41EA-859E-7A3D2734DA22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KH.BuildingBlocks", "KH.Core\KH.BuildingBlocks.csproj", "{9AFF252B-21D2-43E3-BE57-E099C4783F15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KH.BuildingBlocks", "KH.BuildingBlocks\KH.BuildingBlocks.csproj", "{F18336EF-F9FC-4FB1-A481-BF20CC117DE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{521D5081-7DDC-41EA-859E-7A3D2734DA22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{521D5081-7DDC-41EA-859E-7A3D2734DA22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{521D5081-7DDC-41EA-859E-7A3D2734DA22}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9AFF252B-21D2-43E3-BE57-E099C4783F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9AFF252B-21D2-43E3-BE57-E099C4783F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9AFF252B-21D2-43E3-BE57-E099C4783F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9AFF252B-21D2-43E3-BE57-E099C4783F15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F18336EF-F9FC-4FB1-A481-BF20CC117DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F18336EF-F9FC-4FB1-A481-BF20CC117DE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F18336EF-F9FC-4FB1-A481-BF20CC117DE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F18336EF-F9FC-4FB1-A481-BF20CC117DE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

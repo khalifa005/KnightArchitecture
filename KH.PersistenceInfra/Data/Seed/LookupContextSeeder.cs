@@ -1,4 +1,4 @@
-using KH.Domain.Enums;
+using KH.BuildingBlocks.Enums;
 using Role = KH.Domain.Entities.Role;
 
 namespace KH.PersistenceInfra.Data.Seed

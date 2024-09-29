@@ -1,4 +1,4 @@
-using KH.Domain.Commons;
+using KH.BuildingBlocks.Extentions.Entities;
 using KH.Domain.Entities;
 using KH.Dto.lookups.DepartmentDto.Response;
 using KH.Dto.lookups.GroupDto.Response;

@@ -1,8 +1,9 @@
+using KH.BuildingBlocks.Extentions.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KH.Domain.Entities
 {
-    public class SMSFollowUp : TrackerEntity
+  public class SMSFollowUp : TrackerEntity
     {
         public string MobileNumber { get; set; }
         public string Message { get; set; }

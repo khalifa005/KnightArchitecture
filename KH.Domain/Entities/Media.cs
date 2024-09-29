@@ -1,3 +1,5 @@
+using KH.BuildingBlocks.Extentions.Entities;
+
 namespace KH.Domain.Entities
 {
   public class Media : TrackerEntity

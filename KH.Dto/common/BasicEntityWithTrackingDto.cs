@@ -1,4 +1,3 @@
-using KH.Domain.Commons;
 
 namespace KH.Dto.common
 {

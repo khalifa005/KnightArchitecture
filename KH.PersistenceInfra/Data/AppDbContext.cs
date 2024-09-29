@@ -1,6 +1,6 @@
 
+using KH.BuildingBlocks.Extentions.Entities;
 using KH.BuildingBlocks.Extentions.Methods;
-using KH.Domain.Commons;
 using KH.PersistenceInfra.Data.Seed;
 
 namespace KH.PersistenceInfra.Data

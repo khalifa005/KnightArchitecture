@@ -1,4 +1,5 @@
-using KH.Domain.Enums;
+
+using KH.BuildingBlocks.Enums;
 
 namespace KH.BuildingBlocks.Settings
 {

@@ -25,6 +25,9 @@ global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.Extensions.Logging;
 global using System.Text.Json;
+global using KH.BuildingBlocks.Enums;
+global using KH.BuildingBlocks.Extentions;
+
 global using Microsoft.AspNetCore.Mvc.Filters;
 global using Asp.Versioning;
 //global using Asp.Versioning.Mvc;

@@ -1,6 +1,6 @@
 using KH.BuildingBlocks.Contracts.Persistence;
+using KH.BuildingBlocks.Extentions.Entities;
 using KH.BuildingBlocks.Responses;
-using KH.Domain.Commons;
 using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;

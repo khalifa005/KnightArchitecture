@@ -70,7 +70,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Calendar");
+                    b.ToTable("Calendar", (string)null);
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.Customer", b =>
@@ -186,7 +186,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
 
                     b.HasData(
                         new
@@ -50060,7 +50060,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EmailTracker");
+                    b.ToTable("EmailTracker", (string)null);
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.Media", b =>
@@ -50128,7 +50128,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Media");
+                    b.ToTable("Media", (string)null);
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.Role", b =>
@@ -50189,7 +50189,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasIndex("ReportToRoleId");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
@@ -50332,7 +50332,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasIndex("SystemFunctionId");
 
-                    b.ToTable("RoleFunctions");
+                    b.ToTable("RoleFunctions", (string)null);
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.SMSFollowUp", b =>
@@ -50399,7 +50399,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SMSFollowUp");
+                    b.ToTable("SMSFollowUp", (string)null);
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.SystemFunction", b =>
@@ -50466,7 +50466,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasIndex("ParentID");
 
-                    b.ToTable("SystemFunctions");
+                    b.ToTable("SystemFunctions", (string)null);
 
                     b.HasData(
                         new
@@ -50969,7 +50969,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
@@ -51194,7 +51194,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserDepartment");
+                    b.ToTable("UserDepartment", (string)null);
 
                     b.HasData(
                         new
@@ -51346,7 +51346,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserGroups");
+                    b.ToTable("UserGroups", (string)null);
 
                     b.HasData(
                         new
@@ -51408,7 +51408,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
 
                     b.HasData(
                         new
@@ -51570,7 +51570,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
 
                     b.HasData(
                         new
@@ -51652,7 +51652,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
 
                     b.HasData(
                         new
@@ -51764,7 +51764,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Groups");
+                    b.ToTable("Groups", (string)null);
 
                     b.HasData(
                         new

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace KH.Domain.Commons
+namespace KH.BuildingBlocks.Extentions.Entities
 {
   public abstract partial class BaseEntity
   {

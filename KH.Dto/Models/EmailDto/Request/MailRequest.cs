@@ -1,5 +1,5 @@
+using KH.BuildingBlocks.Enums;
 using KH.Domain.Entities;
-using KH.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 
 namespace KH.Dto.Models.EmailDto.Request

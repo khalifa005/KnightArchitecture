@@ -1,5 +1,4 @@
-using KH.Domain.Commons;
-using System.Data;
+using KH.BuildingBlocks.Extentions.Entities;
 
 namespace KH.BuildingBlocks.Contracts.Persistence
 {

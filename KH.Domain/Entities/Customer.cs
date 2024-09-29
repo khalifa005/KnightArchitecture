@@ -1,8 +1,9 @@
+using KH.BuildingBlocks.Extentions.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KH.Domain.Entities
 {
-    public class Customer : TrackerEntity
+  public class Customer : TrackerEntity
     {
         public string? FirstName { get; set; }
         public string? MiddleName { get; set; }

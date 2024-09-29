@@ -1,5 +1,5 @@
+using KH.BuildingBlocks.Extentions.Entities;
 using KH.BuildingBlocks.Responses;
-using KH.Domain.Commons;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace KH.BuildingBlocks.Contracts.Persistence

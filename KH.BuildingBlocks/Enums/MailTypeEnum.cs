@@ -1,4 +1,4 @@
-namespace KH.Domain.Enums
+namespace KH.BuildingBlocks.Enums
 {
   public enum MailTypeEnum
   {

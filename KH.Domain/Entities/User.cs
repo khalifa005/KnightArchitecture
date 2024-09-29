@@ -1,7 +1,9 @@
 
+using KH.BuildingBlocks.Extentions.Entities;
+
 namespace KH.Domain.Entities
 {
-    public class User : TrackerEntity
+  public class User : TrackerEntity
   {
 
         public string? FirstName { get; set; }

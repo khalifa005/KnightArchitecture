@@ -1,7 +1,7 @@
 using KH.BuildingBlocks.Contracts.Persistence;
+using KH.BuildingBlocks.Enums;
 using KH.BuildingBlocks.Extentions.Files;
 using KH.BuildingBlocks.Responses;
-using KH.Domain.Enums;
 using KH.Dto.Models.MediaDto.Form;
 using KH.Dto.Models.MediaDto.Request;
 using KH.Dto.Models.MediaDto.Response;

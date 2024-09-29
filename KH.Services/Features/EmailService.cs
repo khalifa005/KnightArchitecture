@@ -3,7 +3,6 @@ using FluentEmail.Core.Models;
 using KH.BuildingBlocks.Contracts.Persistence;
 using KH.BuildingBlocks.Responses;
 using KH.BuildingBlocks.Settings;
-using KH.Domain.Enums;
 using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.EmailDto.Response;
 using KH.Dto.Models.MediaDto.Form;
@@ -13,6 +12,7 @@ using KH.PersistenceInfra.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using KH.BuildingBlocks.Enums;
 
 public class EmailService : IEmailService
 {
