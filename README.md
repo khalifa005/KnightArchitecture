@@ -340,7 +340,7 @@ Users CRUD done
    ```bash
    dotnet ef database update
 
-
+#### VS 2022 - Convert to file-scoped namespace in all files
 
    After you have configured the .editorconfig, you can configure a 'Code Cleanup' setting to automatically convert all files to use file-scoped namespace. Go to Tools -> Options -> Text Editor -> Code Cleanup -> Configure Code Cleanup. Then add the 'Apply namespace preferences'. Then go to Analyze -> Code Cleanup (or just search for 'Code cleanup') and run the Code Cleanup to automatically change the namespaces to file-scoped.
 
