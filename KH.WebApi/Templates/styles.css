@@ -21,3 +21,28 @@ p {
 img {
   -ms-interpolation-mode: bicubic; /* Allow smoother rendering of resized image in Internet Explorer */
 }
+
+.pink-button {
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+}
+
+  .pink-button:hover {
+    background-color: #ff4444;
+    transform: scale(1.05);
+  }
+
+/* Image fade-in animation */
+img {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
