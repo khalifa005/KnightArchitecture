@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace KH.Dto.Models.CustomerDto.Response
 {
   public class CustomerDetailsResponse : BasicTrackerEntityDto

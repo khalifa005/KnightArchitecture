@@ -6,7 +6,7 @@ namespace KH.PersistenceInfra.Data.Seed
   public class LookupContextSeeder
   {
 
-   
+
     public static void SeedRoles(ModelBuilder builder, ILoggerFactory loggerFactory)
     {
       try
@@ -76,7 +76,7 @@ namespace KH.PersistenceInfra.Data.Seed
       }
     }
 
-  
+
 
     public static void SeedCities(ModelBuilder builder, ILoggerFactory loggerFactory)
     {
@@ -102,7 +102,7 @@ namespace KH.PersistenceInfra.Data.Seed
       }
     }
 
-   
+
     public static void SeedCustomer(ModelBuilder builder, ILoggerFactory loggerFactory)
     {
       try
@@ -130,7 +130,7 @@ namespace KH.PersistenceInfra.Data.Seed
         });
 
 
-        int counter = 10; 
+        int counter = 10;
         while (counter < 2500)
         {
           entities.Add(new Customer
@@ -138,14 +138,14 @@ namespace KH.PersistenceInfra.Data.Seed
             Id = counter,
             FirstName = "customer",
             MiddleName = "number",
-            LastName = "-"+ counter,
-            MobileNumber = "05246554"+counter,
+            LastName = "-" + counter,
+            MobileNumber = "05246554" + counter,
             IDNumber = "",
             BirthDate = DateTime.Parse("2023-06-18 12:37:20.9340518"),
             IsOTPVerified = true,
             OTPCode = "",
             IsSelfRegistered = true,
-            Username = "customer"+ counter,
+            Username = "customer" + counter,
             IsDeleted = false,
             Email = "admin123@gmail.com",
             Password = "AQAAAAIAAYagAAAAEDfjVdHaKiIjPGgo40R5sw5yz0euQkT0rPW0ClWdYJLxgXMou/Zw07GWc65b68IJOA=="
@@ -1034,6 +1034,6 @@ namespace KH.PersistenceInfra.Data.Seed
       }
     }
 
-  
+
   }
 }

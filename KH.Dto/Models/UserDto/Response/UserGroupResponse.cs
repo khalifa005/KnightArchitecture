@@ -1,6 +1,5 @@
 using KH.Domain.Entities;
 using KH.Dto.lookups.GroupDto.Response;
-using KH.Dto.lookups.RoleDto.Response;
 
 namespace KH.Dto.Models.UserDto.Response
 {
@@ -14,7 +13,7 @@ namespace KH.Dto.Models.UserDto.Response
 
     public UserGroupResponse()
     {
-          
+
     }
     public UserGroupResponse(UserGroup userGroup)
     {

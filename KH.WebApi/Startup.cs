@@ -1,20 +1,14 @@
-using KH.BuildingBlocks.Extentions;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.FileProviders;
-using FluentValidation.AspNetCore;
-
 using FluentValidation;
-using KH.PersistenceInfra;
-using KH.Services;
-using KH.BuildingBlocks.Responses;
-using Microsoft.AspNetCore.Mvc;
-using Rotativa.AspNetCore;
-using Microsoft.Extensions.Hosting.Internal;
-using KH.Dto;
+using FluentValidation.AspNetCore;
 using KH.BuildingBlocks;
 using KH.BuildingBlocks.Middlewares;
+using KH.BuildingBlocks.Responses;
+using KH.Dto;
+using KH.PersistenceInfra;
+using KH.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace KH.WebApi
 {
   public class Startup

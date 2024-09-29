@@ -20,7 +20,7 @@ namespace KH.Dto.Models.MediaDto.Response
 
     public MediaResponse()
     {
-          
+
     }
 
     public MediaResponse(Media entity)
@@ -35,7 +35,7 @@ namespace KH.Dto.Models.MediaDto.Response
       CreatedDate = entity.CreatedDate;
       UpdatedById = entity.UpdatedById;
       UpdatedDate = entity.UpdatedDate;
-      
+
     }
 
   }

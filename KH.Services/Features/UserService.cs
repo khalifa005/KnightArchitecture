@@ -1,9 +1,3 @@
-
-
-using KH.BuildingBlocks.Contracts.Persistence;
-using KH.BuildingBlocks.Extentions.Methods;
-using KH.BuildingBlocks.Responses;
-
 public class UserService : IUserService
 {
   private readonly IUnitOfWork _unitOfWork;
@@ -279,7 +273,7 @@ public class UserService : IUserService
       Username = u.Username,
       LastName = u.LastName,
       UserRoles = u.UserRoles.Select(ur => new UserRoleResponse(ur)).ToList(),
-      DepartmentNames = u.UserDepartments.Select(ud => ud.Department.NameEn).ToList() 
+      DepartmentNames = u.UserDepartments.Select(ud => ud.Department.NameEn).ToList()
     },
     include: query => query
         .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)

@@ -1,6 +1,3 @@
-using System.Text.RegularExpressions;
-using KH.Domain.Entities.lookups;
-
 namespace KH.Dto.lookups.GroupDto.Response
 {
   public class GroupResponse : LookupEntityWithTrackingDto

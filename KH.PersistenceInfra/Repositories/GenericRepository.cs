@@ -2,9 +2,7 @@ using KH.BuildingBlocks.Contracts.Persistence;
 using KH.BuildingBlocks.Extentions.Entities;
 using KH.BuildingBlocks.Responses;
 using KH.PersistenceInfra.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using System.Linq.Expressions;
 
 namespace KH.PersistenceInfra.Repositories
 {
@@ -85,7 +83,7 @@ namespace KH.PersistenceInfra.Repositories
 
     public async Task<List<T>> GetAllWithTrackingAsync(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
     {
-      var query = ApplyIncludes(include, tracking:true);
+      var query = ApplyIncludes(include, tracking: true);
       return await query.ToListAsync();
     }
 

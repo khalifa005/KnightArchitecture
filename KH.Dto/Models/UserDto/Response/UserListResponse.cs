@@ -1,6 +1,4 @@
-using KH.Domain.Entities.lookups;
 using KH.Domain.Entities;
-using KH.Dto.Models;
 
 namespace KH.Dto.Models.UserDto.Response
 {
@@ -17,7 +15,7 @@ namespace KH.Dto.Models.UserDto.Response
     public ICollection<UserRoleResponse> UserRoles { get; set; } = new HashSet<UserRoleResponse>();
     public UserListResponse()
     {
-          
+
     }
     public UserListResponse(User e)
     {

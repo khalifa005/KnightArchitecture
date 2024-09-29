@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace KH.BuildingBlocks.Responses
 {
   public class PagedList<T> : List<T>

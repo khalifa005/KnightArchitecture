@@ -1,8 +1,5 @@
-using PuppeteerSharp.Media;
-using PuppeteerSharp;
 using DinkToPdf;
 using DinkToPdf.Contracts;
-using StackExchange.Redis;
 namespace KH.Services.Features
 {
   public class PdfService : IPdfService
@@ -52,7 +49,7 @@ namespace KH.Services.Features
       // Generate PDF as byte array
       return _converter.Convert(pdfDocument);
     }
-  
+
     private string ReplaceUserPlaceholders(UserDetailsResponse user, string filePath)
     {
       string htmlFileContent = File.ReadAllText(filePath);

@@ -1,7 +1,5 @@
-using Azure.Core;
 using KH.BuildingBlocks.Responses;
 using KH.BuildingBlocks.Settings;
-using KH.BuildingBlocks.Extentions.Files;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;

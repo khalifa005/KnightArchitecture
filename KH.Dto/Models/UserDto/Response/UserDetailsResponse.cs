@@ -50,7 +50,7 @@ namespace KH.Dto.Models.UserDto.Response
       UserGroups = user.UserGroups.Select(ug => new UserGroupResponse(ug)).ToList();
       UserDepartments = user.UserDepartments.Select(ud => new UserDepartmentResponse(ud)).ToList();
     }
-    
+
   }
 
 }

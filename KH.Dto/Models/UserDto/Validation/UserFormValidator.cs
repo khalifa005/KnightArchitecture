@@ -1,5 +1,4 @@
 using FluentValidation;
-using KH.Dto.lookups.CityDto.Form;
 using KH.Dto.Models.UserDto.Form;
 
 namespace KH.Dto.Models.UserDto.Validation

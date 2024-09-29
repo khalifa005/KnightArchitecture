@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace KH.BuildingBlocks.Responses
 {
   public class ApiResponse<T> where T : class

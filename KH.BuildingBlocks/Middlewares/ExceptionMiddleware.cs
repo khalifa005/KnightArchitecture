@@ -1,10 +1,4 @@
 using KH.BuildingBlocks.Responses;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using System;
 
 
 namespace KH.BuildingBlocks.Middlewares

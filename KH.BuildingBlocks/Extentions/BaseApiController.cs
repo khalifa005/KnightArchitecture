@@ -2,7 +2,6 @@ using KH.BuildingBlocks.Responses;
 using KH.BuildingBlocks.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System.Diagnostics;
 
 namespace KH.BuildingBlocks.Extentions
 {

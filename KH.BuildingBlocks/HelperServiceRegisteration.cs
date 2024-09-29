@@ -1,10 +1,5 @@
-using KH.BuildingBlocks.Extentions;
 using KH.BuildingBlocks.Extentions.Files;
 using KH.BuildingBlocks.Settings;
-using KH.BuildingBlocks.Middlewares;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using System.Net.Mail;
 
 namespace KH.BuildingBlocks
 {

@@ -1,7 +1,3 @@
-using KH.BuildingBlocks.Contracts.Persistence;
-using KH.BuildingBlocks.Responses;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 public class DemoUserService
 {
   private readonly IUnitOfWork _unitOfWork;
@@ -96,7 +92,7 @@ public class DemoUserService
 
 
     //example with internal predicate
-    var result =  await repository.GetPagedAsync(pageNumber, pageSize, u =>
+    var result = await repository.GetPagedAsync(pageNumber, pageSize, u =>
     u.FirstName.Contains("search")
     || u.LastName.Contains("search2"),
     q => q.Include(u => u.UserRoles)

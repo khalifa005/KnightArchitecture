@@ -1,17 +1,9 @@
-using KH.BuildingBlocks.Contracts.Persistence;
 using KH.BuildingBlocks.Enums;
 using KH.BuildingBlocks.Extentions.Files;
-using KH.BuildingBlocks.Responses;
 using KH.Dto.Models.MediaDto.Form;
 using KH.Dto.Models.MediaDto.Request;
 using KH.Dto.Models.MediaDto.Response;
-using KH.Services.Contracts;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KH.Services.Features
 {
@@ -100,7 +92,7 @@ namespace KH.Services.Features
         //-- Check Duplication
         //await this.CheckDuplictedUser();
 
-        var fileRes = await _fileManager.Upload(request.File, string.Concat(request.Model,"_", request.ModelId));
+        var fileRes = await _fileManager.Upload(request.File, string.Concat(request.Model, "_", request.ModelId));
 
         if (string.IsNullOrEmpty(fileRes.FilePath) || fileRes is null)
         {
@@ -240,14 +232,14 @@ namespace KH.Services.Features
     {
       ApiResponse<MediaResponse>? res = new ApiResponse<MediaResponse>((int)HttpStatusCode.OK);
 
-      
+
       if (id == null)
         throw new Exception("Invalid Parameter");
 
       var repository = _unitOfWork.Repository<Media>();
 
       //light user query to make sure the user exist
-      var entityFromDBX = await repository.GetByExpressionAsync(x=> x.Id == id);
+      var entityFromDBX = await repository.GetByExpressionAsync(x => x.Id == id);
       var entityFromDB = await repository.GetAsync(id);
 
       if (entityFromDB == null)

@@ -16,7 +16,7 @@ namespace KH.Dto.Models.EmailDto.Response
 
     public EmailTrackerResponse()
     {
-          
+
     }
 
     public EmailTrackerResponse(EmailTracker e)
@@ -31,7 +31,7 @@ namespace KH.Dto.Models.EmailDto.Response
       MailType = e.MailType;
       IsSent = e.IsSent;
       FailReasons = e.FailReasons;
-      
+
     }
   }
 }

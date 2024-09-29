@@ -21,7 +21,7 @@ namespace KH.Dto.Models.UserDto.Form
     public long[]? RoleIds { get; set; }
     public UserForm()
     {
-          
+
     }
     #endregion
 

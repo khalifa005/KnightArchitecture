@@ -1,6 +1,3 @@
-
-using KH.BuildingBlocks.Responses;
-
 namespace KH.Services.Contracts
 {
   public interface IUserService

@@ -1,22 +1,21 @@
 using KH.BuildingBlocks.Extentions.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KH.Domain.Entities
 {
   public class SMSFollowUp : TrackerEntity
-    {
-        public string MobileNumber { get; set; }
-        public string Message { get; set; }
-        public bool? IsSent { get; set; }
-		public string? FailReason { get; set; }
+  {
+    public string MobileNumber { get; set; }
+    public string Message { get; set; }
+    public bool? IsSent { get; set; }
+    public string? FailReason { get; set; }
 
-		//related to SmsStatusEnum
-		public string Status { get; set; }
+    //related to SmsStatusEnum
+    public string Status { get; set; }
 
-        //related to ModelEnum
-        public string Model { get; set; }
-        //as fake FK of the related item
-        public int ModelId { get; set; }
-    }
+    //related to ModelEnum
+    public string Model { get; set; }
+    //as fake FK of the related item
+    public int ModelId { get; set; }
+  }
 
 }

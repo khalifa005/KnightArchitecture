@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace KH.Dto.Models.EmailDto.Request
 {
-  public class MailRequest: PagingRequestHelper
+  public class MailRequest : PagingRequestHelper
   {
     public List<string?>? ToEmail { get; set; }
     public List<string?>? ToCCEmail { get; set; }

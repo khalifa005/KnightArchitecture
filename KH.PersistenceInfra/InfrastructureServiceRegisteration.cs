@@ -1,11 +1,9 @@
 
 using KH.BuildingBlocks.Contracts.Persistence;
 using KH.PersistenceInfra.Data;
-using KH.PersistenceInfra.Extentions;
 using KH.PersistenceInfra.Middlewares;
 using KH.PersistenceInfra.Repositories;
 using KH.PersistenceInfra.Services;
-using System.Security.Policy;
 
 namespace KH.PersistenceInfra
 {
@@ -44,8 +42,8 @@ namespace KH.PersistenceInfra
                 //if (issuer != null)
                 //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(issuer);
                 //else
-            policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-          });
+                policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+              });
       });
 
       //services.AddSession(options =>

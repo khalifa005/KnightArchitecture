@@ -1,8 +1,6 @@
 using KH.Domain.Entities;
 using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.RoleDto.Response;
-using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KH.Dto.Models.UserDto.Response
 {
@@ -17,7 +15,7 @@ namespace KH.Dto.Models.UserDto.Response
     public List<RoleFunctionsResponse> RoleFunctions { get; set; } = new List<RoleFunctionsResponse>();
     public UserRoleResponse()
     {
-          
+
     }
 
     // Constructor to map from UserRole entity to UserRoleResponse

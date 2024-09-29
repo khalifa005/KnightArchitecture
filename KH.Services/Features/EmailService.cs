@@ -1,18 +1,12 @@
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
-using KH.BuildingBlocks.Contracts.Persistence;
-using KH.BuildingBlocks.Responses;
+using KH.BuildingBlocks.Enums;
 using KH.BuildingBlocks.Settings;
 using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.EmailDto.Response;
-using KH.Dto.Models.MediaDto.Form;
-using KH.Dto.Models.MediaDto.Response;
-using KH.BuildingBlocks.Extentions.Files;
-using KH.PersistenceInfra.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using KH.BuildingBlocks.Enums;
 
 public class EmailService : IEmailService
 {
@@ -35,7 +29,7 @@ public class EmailService : IEmailService
     _mailTemplatesSettings = mailTemplatesSettings.Value;
     _loggerFactory = loggerFactory;
     _userService = userService;
-    _unitOfWork = unitOfWork; 
+    _unitOfWork = unitOfWork;
   }
 
   public async Task<ApiResponse<object>> SendEmailAsync(MailRequest mailRequest)
@@ -348,5 +342,5 @@ public class EmailService : IEmailService
       ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       _ => "application/octet-stream",
     };
-  }  
+  }
 }

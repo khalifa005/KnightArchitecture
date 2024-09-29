@@ -1,6 +1,5 @@
 using KH.Domain.Entities;
 using KH.Dto.lookups.DepartmentDto.Response;
-using KH.Dto.lookups.GroupDto.Response;
 
 namespace KH.Dto.Models.UserDto.Response
 {
