@@ -1,8 +1,7 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum GroupEnum
 {
-  public enum GroupEnum
-  {
-    ExternalRequest = 1,
-    SellingTeam = 2,
-  }
+  ExternalRequest = 1,
+  SellingTeam = 2,
 }

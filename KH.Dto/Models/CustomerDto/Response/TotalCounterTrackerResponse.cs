@@ -1,8 +1,7 @@
-namespace KH.Dto.Models.CustomerDto.Response
+namespace KH.Dto.Models.CustomerDto.Response;
+
+public class TotalCounterTrackerResponse
 {
-  public class TotalCounterTrackerResponse
-  {
-    public int TotalCustomers { get; set; }
-    public int TotalProducts { get; set; }
-  }
+  public int TotalCustomers { get; set; }
+  public int TotalProducts { get; set; }
 }

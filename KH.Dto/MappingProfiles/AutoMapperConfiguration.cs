@@ -1,13 +1,12 @@
-namespace KH.Dto.MappingProfiles
+namespace KH.Dto.MappingProfiles;
+
+public class AutoMapperConfiguration
 {
-  public class AutoMapperConfiguration
+  public AutoMapperConfiguration()
   {
-    public AutoMapperConfiguration()
+    var mapConfig = new MapperConfiguration(m =>
     {
-      var mapConfig = new MapperConfiguration(m =>
-      {
-        m.AddProfile<DomainToDtoProfile>();
-      });
-    }
+      m.AddProfile<DomainToDtoProfile>();
+    });
   }
 }

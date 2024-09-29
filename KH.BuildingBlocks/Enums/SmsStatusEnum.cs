@@ -1,9 +1,8 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum SmsStatusEnum
 {
-  public enum SmsStatusEnum
-  {
-    Pending = 1,
-    Success = 2,
-    Fail = 3
-  }
+  Pending = 1,
+  Success = 2,
+  Fail = 3
 }

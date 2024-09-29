@@ -1,14 +1,11 @@
 
 using KH.BuildingBlocks.Extentions.Entities;
 
-namespace KH.Domain.Entities
+namespace KH.Domain.Entities;
+
+public class Role : LookupEntity
 {
-  public class Role : LookupEntity
-  {
-    public long? ReportToRoleId { get; set; }
-    public Role? ReportToRole { get; set; }
-
-  }
-
+  public long? ReportToRoleId { get; set; }
+  public Role? ReportToRole { get; set; }
 
 }

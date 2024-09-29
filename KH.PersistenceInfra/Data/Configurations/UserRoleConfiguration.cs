@@ -1,13 +1,11 @@
 
-namespace KH.PersistenceInfra.Data.Configurations
+namespace KH.PersistenceInfra.Data.Configurations;
+
+public class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
 {
-  public class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
+  public void Configure(EntityTypeBuilder<UserRole> builder)
   {
-    public void Configure(EntityTypeBuilder<UserRole> builder)
-    {
 
 
-    }
   }
-
 }

@@ -1,10 +1,9 @@
-﻿namespace KH.Dto
+﻿namespace KH.Dto;
+
+public static class AppConstant
 {
-  public static class AppConstant
-  {
-    public const int DropDownAllOption = -1;
+  public const int DropDownAllOption = -1;
 
 
-  }
 }
 

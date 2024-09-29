@@ -1,10 +1,7 @@
-namespace KH.Dto.lookups.CityDto.Request
+namespace KH.Dto.lookups.CityDto.Request;
+
+public class CityFilterRequest : CommonLookupFiltersRequest
 {
-  public class CityFilterRequest : CommonLookupFiltersRequest
-  {
-    //custom props used in filteration + common props
-
-  }
-
+  //custom props used in filteration + common props
 
 }

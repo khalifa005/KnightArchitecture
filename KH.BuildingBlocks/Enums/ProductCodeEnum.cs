@@ -1,10 +1,9 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum ProductCodeEnum
 {
-  public enum ProductCodeEnum
-  {
-    TPL = 5515,
-    Comprehansive = 5520,
-    Medmal = 5014,
-    Travel = 6003,
-  }
+  TPL = 5515,
+  Comprehansive = 5520,
+  Medmal = 5014,
+  Travel = 6003,
 }

@@ -1,8 +1,7 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum IDTypeEnum
 {
-  public enum IDTypeEnum
-  {
-    NationalID = 1,
-    Passport = 2,
-  }
+  NationalID = 1,
+  Passport = 2,
 }

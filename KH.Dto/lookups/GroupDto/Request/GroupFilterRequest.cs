@@ -1,11 +1,8 @@
-namespace KH.Dto.lookups.GroupDto.Request
+namespace KH.Dto.lookups.GroupDto.Request;
+
+public class GroupFilterRequest : CommonLookupFiltersRequest
 {
-  public class GroupFilterRequest : CommonLookupFiltersRequest
-  {
-    //custom props used in filteration + common props
-    public int? TicketCategoryId { get; set; }
-
-  }
-
+  //custom props used in filteration + common props
+  public int? TicketCategoryId { get; set; }
 
 }

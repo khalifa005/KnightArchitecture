@@ -1,10 +1,9 @@
-﻿namespace KH.BuildingBlocks.Settings
+﻿namespace KH.BuildingBlocks.Settings;
+
+public class SMSProviderSettings
 {
-  public class SMSProviderSettings
-  {
-    public string? SMSAPIURL { get; set; }
-    public string? UserName { get; set; }
-    public string? Password { get; set; }
-    public bool? IsActive { get; set; }
-  }
+  public string? SMSAPIURL { get; set; }
+  public string? UserName { get; set; }
+  public string? Password { get; set; }
+  public bool? IsActive { get; set; }
 }

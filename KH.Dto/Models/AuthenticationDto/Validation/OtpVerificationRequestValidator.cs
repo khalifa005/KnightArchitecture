@@ -1,19 +1,17 @@
 using FluentValidation;
 using KH.Dto.Models.AuthenticationDto.Request;
 
-namespace KH.Dto.Models.AuthenticationDto.Validation
+namespace KH.Dto.Models.AuthenticationDto.Validation;
+
+public class OtpVerificationRequestValidator : AbstractValidator<OtpVerificationRequest>
 {
-  public class OtpVerificationRequestValidator : AbstractValidator<OtpVerificationRequest>
+  public OtpVerificationRequestValidator()
   {
-    public OtpVerificationRequestValidator()
-    {
 
-      RuleFor(x => x.OtpCode)
-        .NotNull()
-        .NotEmpty()
-        .Length(1, 250)
-        .WithMessage("please-enter-otp-code");
-    }
+    RuleFor(x => x.OtpCode)
+      .NotNull()
+      .NotEmpty()
+      .Length(1, 250)
+      .WithMessage("please-enter-otp-code");
   }
-
 }

@@ -1,67 +1,66 @@
 using KH.BuildingBlocks.Extentions.Files;
 using KH.BuildingBlocks.Settings;
 
-namespace KH.BuildingBlocks
+namespace KH.BuildingBlocks;
+
+public static class HelperServiceRegisteration
 {
-  public static class HelperServiceRegisteration
+  public static IServiceCollection AddHelperServicesAndSettings(this IServiceCollection services, IConfiguration configuration)
   {
-    public static IServiceCollection AddHelperServicesAndSettings(this IServiceCollection services, IConfiguration configuration)
-    {
-      #region Settings
+    #region Settings
 
-      //use options patterns if u want to add validation while startup pn the json files
-      //or reload the values when file changes
-      var globalSettingSection = configuration.GetSection("GlobalSettings");
-      services.Configure<GlobalSettings>(globalSettingSection);
+    //use options patterns if u want to add validation while startup pn the json files
+    //or reload the values when file changes
+    var globalSettingSection = configuration.GetSection("GlobalSettings");
+    services.Configure<GlobalSettings>(globalSettingSection);
 
-      //var fileSettingsSection = configuration.GetSection("FileSettings");
-      //services.Configure<FileSettings>(fileSettingsSection);
-      services.AddOptions<FileSettings>()
-        .Bind(configuration.GetSection("FileSettings"))
-        .ValidateDataAnnotations(); // Optional validation if using annotations
+    //var fileSettingsSection = configuration.GetSection("FileSettings");
+    //services.Configure<FileSettings>(fileSettingsSection);
+    services.AddOptions<FileSettings>()
+      .Bind(configuration.GetSection("FileSettings"))
+      .ValidateDataAnnotations(); // Optional validation if using annotations
 
 
-      var tokenSettingsSection = configuration.GetSection("TokenSettings");
-      services.Configure<TokenSettings>(tokenSettingsSection);
+    var tokenSettingsSection = configuration.GetSection("TokenSettings");
+    services.Configure<TokenSettings>(tokenSettingsSection);
 
-      var smsProviderSettings = configuration.GetSection("SMSProviderSettings");
-      services.Configure<SMSProviderSettings>(smsProviderSettings);
-
-
-      var mailTemplateSettings = configuration.GetSection("MailTemplatesSettings");
-      services.Configure<MailTemplatesSettings>(mailTemplateSettings);
+    var smsProviderSettings = configuration.GetSection("SMSProviderSettings");
+    services.Configure<SMSProviderSettings>(smsProviderSettings);
 
 
-      //-- SET Fluent Email
-      var mailSettings = configuration.GetSection("MailSettings");
-
-      services.AddOptions<MailSettings>()
-       .Bind(mailSettings)
-       .ValidateDataAnnotations();
-
-      #endregion
-
-      //services.AddScoped(typeof(Lazy<>), typeof(LazilyResolved<>));
-
-      services.AddScoped<FileManager>();
-      //services.AddSingleton<FileValidator>();
-
-      services.AddSwaggerDocumentation(configuration);
+    var mailTemplateSettings = configuration.GetSection("MailTemplatesSettings");
+    services.Configure<MailTemplatesSettings>(mailTemplateSettings);
 
 
-      return services;
-    }
+    //-- SET Fluent Email
+    var mailSettings = configuration.GetSection("MailSettings");
 
-    public static IApplicationBuilder UseApplicationMiddlewares(this IApplicationBuilder app, IConfiguration configuration)
-    {
-      // keep it empty because this part we want to keep it on the startup for better viewing no encasulation
-      //because also middleware order matters
+    services.AddOptions<MailSettings>()
+     .Bind(mailSettings)
+     .ValidateDataAnnotations();
 
-      //app.UseMiddleware<ExceptionMiddleware>();
-      //app.UseSwaggerDocumentation(configuration);
+    #endregion
+
+    //services.AddScoped(typeof(Lazy<>), typeof(LazilyResolved<>));
+
+    services.AddScoped<FileManager>();
+    //services.AddSingleton<FileValidator>();
+
+    services.AddSwaggerDocumentation(configuration);
 
 
-      return app;
-    }
+    return services;
+  }
+
+  public static IApplicationBuilder UseApplicationMiddlewares(this IApplicationBuilder app, IConfiguration configuration)
+  {
+    // keep it empty because this part we want to keep it on the startup for better viewing no encasulation
+    //because also middleware order matters
+
+    //app.UseMiddleware<ExceptionMiddleware>();
+    //app.UseSwaggerDocumentation(configuration);
+
+
+    return app;
   }
 }

@@ -1,9 +1,8 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum DepartmentEnum
 {
-  public enum DepartmentEnum
-  {
-    Finance = 6,
-    Medical = 4,
-    MotorClaim = 1,
-  }
+  Finance = 6,
+  Medical = 4,
+  MotorClaim = 1,
 }

@@ -16,32 +16,31 @@ using KH.Dto.Models.MediaDto.Validation;
 using KH.Dto.Models.UserDto.Form;
 using KH.Dto.Models.UserDto.Validation;
 
-namespace KH.Dto
+namespace KH.Dto;
+
+public static class DtoServiceRegistration
 {
-  public static class DtoServiceRegistration
+  public static IServiceCollection AddDtoService(this IServiceCollection services, IConfiguration configuration)
   {
-    public static IServiceCollection AddDtoService(this IServiceCollection services, IConfiguration configuration)
-    {
-      //automapper
-      services.AddAutoMapper(typeof(AutoMapperConfiguration));
+    //automapper
+    services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
-      //below validation registration using fluent validation lib
-      services.AddSingleton<IValidator<MediaForm>, MediaFormValidator>();
+    //below validation registration using fluent validation lib
+    services.AddSingleton<IValidator<MediaForm>, MediaFormValidator>();
 
-      services.AddSingleton<IValidator<CityForm>, DepartmentFormValidator>();
+    services.AddSingleton<IValidator<CityForm>, DepartmentFormValidator>();
 
-      services.AddSingleton<IValidator<CityFilterRequest>, CityFilterRequestValidator>();
+    services.AddSingleton<IValidator<CityFilterRequest>, CityFilterRequestValidator>();
 
-      services.AddSingleton<IValidator<GroupForm>, GroupFormValidator>();
-      services.AddSingleton<IValidator<GroupFilterRequest>, GroupFilterRequestValidator>();
+    services.AddSingleton<IValidator<GroupForm>, GroupFormValidator>();
+    services.AddSingleton<IValidator<GroupFilterRequest>, GroupFilterRequestValidator>();
 
-      services.AddSingleton<IValidator<OtpVerificationRequest>, OtpVerificationRequestValidator>();
+    services.AddSingleton<IValidator<OtpVerificationRequest>, OtpVerificationRequestValidator>();
 
-      services.AddSingleton<IValidator<CustomerForm>, CustomerFormValidator>();
+    services.AddSingleton<IValidator<CustomerForm>, CustomerFormValidator>();
 
-      services.AddSingleton<IValidator<UserForm>, UserFormValidator>();
+    services.AddSingleton<IValidator<UserForm>, UserFormValidator>();
 
-      return services;
-    }
+    return services;
   }
 }

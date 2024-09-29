@@ -1,29 +1,28 @@
-namespace KH.WebApi.Controllers
+namespace KH.WebApi.Controllers;
+
+public class PdfController : BaseApiController
 {
-  public class PdfController : BaseApiController
+  public readonly IUserService _userService;
+  private readonly IPdfService _pdfService;
+
+  public PdfController(IUserService userService, IPdfService pdfService)
   {
-    public readonly IUserService _userService;
-    private readonly IPdfService _pdfService;
+    _userService = userService;
+    _pdfService = pdfService;
+  }
 
-    public PdfController(IUserService userService, IPdfService pdfService)
+  [HttpPost("Download")]
+
+  public async Task<IActionResult> Download([FromBody] UserFilterRequest request)
+  {
+    try
     {
-      _userService = userService;
-      _pdfService = pdfService;
+      var pdfBytes = await _pdfService.ExportUserDetailsPdfAsync(request);
+      return File(pdfBytes, "application/pdf", $"UserDetails_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.pdf");
     }
-
-    [HttpPost("Download")]
-
-    public async Task<IActionResult> Download([FromBody] UserFilterRequest request)
+    catch (Exception ex)
     {
-      try
-      {
-        var pdfBytes = await _pdfService.ExportUserDetailsPdfAsync(request);
-        return File(pdfBytes, "application/pdf", $"UserDetails_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.pdf");
-      }
-      catch (Exception ex)
-      {
-        return BadRequest(ex.Message);
-      }
+      return BadRequest(ex.Message);
     }
   }
 }

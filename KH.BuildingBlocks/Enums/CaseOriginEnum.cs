@@ -1,7 +1,6 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum CaseOriginEnum
 {
-  public enum CaseOriginEnum
-  {
-    CustomerPortal = 1,
-  }
+  CustomerPortal = 1,
 }

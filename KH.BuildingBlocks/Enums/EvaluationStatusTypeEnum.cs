@@ -1,9 +1,8 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum EvaluationStatusTypeEnum
 {
-  public enum EvaluationStatusTypeEnum
-  {
-    Sales = 1,
-    Claim = 2,
-    Complain = 3,
-  }
+  Sales = 1,
+  Claim = 2,
+  Complain = 3,
 }

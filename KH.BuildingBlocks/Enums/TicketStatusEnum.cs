@@ -1,10 +1,9 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum TicketStatusEnum
 {
-  public enum TicketStatusEnum
-  {
-    Hold = 1,
-    InProgress = 2,
-    Suspended = 3,
-    Closed = 4,
-  }
+  Hold = 1,
+  InProgress = 2,
+  Suspended = 3,
+  Closed = 4,
 }

@@ -1,10 +1,9 @@
-namespace KH.BuildingBlocks.Contracts.Infrastructure
+namespace KH.BuildingBlocks.Contracts.Infrastructure;
+
+public interface ITokenService
 {
-  public interface ITokenService
-  {
-    //string CreateToken(IdentityUser user);
-    string CreateToken(object user);
-    //string CreateToken(object customer);
-    //string CreateToken(CustomerDto customer);
-  }
+  //string CreateToken(IdentityUser user);
+  string CreateToken(object user);
+  //string CreateToken(object customer);
+  //string CreateToken(CustomerDto customer);
 }

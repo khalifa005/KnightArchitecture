@@ -1,9 +1,8 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum MailTypeEnum
 {
-  public enum MailTypeEnum
-  {
-    Default = 1,
-    WelcomeTemplate = 2,
-    TicketEscalation = 3,
-  }
+  Default = 1,
+  WelcomeTemplate = 2,
+  TicketEscalation = 3,
 }

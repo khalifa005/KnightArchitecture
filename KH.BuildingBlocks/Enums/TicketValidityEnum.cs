@@ -1,8 +1,7 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum TicketValidityEnum
 {
-  public enum TicketValidityEnum
-  {
-    Valid = 1,
-    Invalid = 2,
-  }
+  Valid = 1,
+  Invalid = 2,
 }

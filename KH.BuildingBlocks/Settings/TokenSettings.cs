@@ -1,8 +1,7 @@
-﻿namespace KH.BuildingBlocks.Settings
+﻿namespace KH.BuildingBlocks.Settings;
+
+public class TokenSettings
 {
-  public class TokenSettings
-  {
-    public string Key { get; set; }
-    public string Issuer { get; set; }
-  }
+  public string Key { get; set; }
+  public string Issuer { get; set; }
 }

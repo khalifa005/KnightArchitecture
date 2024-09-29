@@ -1,8 +1,7 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum SystemTypeEnum
 {
-  public enum SystemTypeEnum
-  {
-    CRMAdmin = 1,
-    CRMClientPortal = 2,
-  }
+  CRMAdmin = 1,
+  CRMClientPortal = 2,
 }

@@ -1,9 +1,8 @@
-namespace KH.BuildingBlocks.Enums
+namespace KH.BuildingBlocks.Enums;
+
+public enum ModelEnum
 {
-  public enum ModelEnum
-  {
-    Ticket = 1,
-    Customer = 2,
-    ExternalEvaluation = 3,
-  }
+  Ticket = 1,
+  Customer = 2,
+  ExternalEvaluation = 3,
 }
