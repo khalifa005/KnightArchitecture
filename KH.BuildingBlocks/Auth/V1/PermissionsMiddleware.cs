@@ -1,6 +1,8 @@
 using KH.BuildingBlocks.Constant;
 using KH.BuildingBlocks.Contracts.Infrastructure;
 using KH.BuildingBlocks.Extentions.Methods;
+using KH.BuildingBlocks.Responses;
+using Newtonsoft.Json;
 using System.Security.Claims;
 
 namespace KH.BuildingBlocks.Auth.V1;
@@ -28,9 +30,21 @@ public class PermissionsMiddleware
   {
     if (context.User.Identity == null || !context.User.Identity.IsAuthenticated)
     {
-      await _request(context);
+      context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+      context.Response.ContentType = "application/json";
+
+      var apiResponse = new ApiResponse<object>(StatusCodes.Status401Unauthorized)
+      {
+        ErrorMessage = "Unauthorized access",
+        ErrorMessageAr = "وصول غير مصرح به", // Example Arabic error message, customize as needed
+        Errors = new List<string> { "User is not authenticated" }
+      };
+
+      var jsonResponse = JsonConvert.SerializeObject(apiResponse); // Assuming you're using Newtonsoft.Json or System.Text.Json
+      await context.Response.WriteAsync(jsonResponse);//, cancellationToken
       return;
     }
+
 
     var cancellationToken = context.RequestAborted;
     var permissionsIdentity = new ClaimsIdentity(nameof(PermissionsMiddleware), "name", "role");
