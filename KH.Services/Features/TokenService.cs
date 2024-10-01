@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text;
+using System.Text.Json.Serialization;
 namespace KH.Services.Features;
 
 public class TokenService : ITokenService
@@ -85,13 +86,19 @@ public class TokenService : ITokenService
   }
   private string FormatUserRole(User user)
   {
-    var userRoles = user.UserRoles.Where(o => o.RoleId == UserExtensions.SUPER_ADMIN_ROLE_ID || o.RoleFunctions.Count > 0);
+    var userRoles = user.UserRoles?
+        .Where(o => o.RoleId == UserExtensions.SUPER_ADMIN_ROLE_ID || (o.RoleFunctions != null && o.RoleFunctions.Count > 0))
+        ?? Enumerable.Empty<UserRole>();
+
     var options = new JsonSerializerOptions
     {
       Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-      WriteIndented = true
+      WriteIndented = true,
+      ReferenceHandler = ReferenceHandler.Preserve // This handles circular references
     };
 
     return JsonSerializer.Serialize(userRoles, options);
   }
+
+
 }
