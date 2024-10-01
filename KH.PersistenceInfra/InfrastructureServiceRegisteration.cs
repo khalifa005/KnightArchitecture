@@ -5,6 +5,7 @@ using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Middlewares;
 using KH.PersistenceInfra.Repositories;
 using KH.PersistenceInfra.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KH.PersistenceInfra;
 
@@ -22,7 +23,22 @@ public static class InfrastructureServiceRegisteration
     services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
     services.AddScoped<IUserPermissionService, UserPermissionService>();
+    services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
 
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+      .AddJwtBearer(options =>
+      {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+          ValidateIssuerSigningKey = true,
+          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenSettings:Key"])),
+          ValidIssuer = configuration["TokenSettings:Issuer"],
+          ValidateIssuer = true,
+          ValidateAudience = false,
+        };
+      });
+
+    // Overrides the DefaultAuthorizationPolicyProvider with our own
     //token setting registration
     //services.AddIdentityService(configuration);
     //services.AddDistributedMemoryCache();

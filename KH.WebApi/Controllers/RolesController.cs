@@ -3,6 +3,7 @@ using KH.BuildingBlocks.Constant;
 using KH.Dto.lookups.RoleDto.Form;
 using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.RoleDto.Request;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KH.WebApi.Controllers;
 
@@ -20,6 +21,7 @@ public class RolesController : BaseApiController
     var res = await _lookupService.GetAsync(id);
     return AsActionResult(res);
   }
+  [Authorize]
   [HttpPost("list")]
   public async Task<ActionResult<ApiResponse<PagedResponse<RoleListResponse>>>> GetList(RoleFilterRequest request)
   {
