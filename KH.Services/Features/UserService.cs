@@ -32,7 +32,7 @@ public class UserService : IUserService
       var repository = _unitOfWork.Repository<User>();
 
       var entityFromDB = await repository.GetByExpressionAsync(u =>
-   u.Username == request.Username,
+   u.Username == request.Username && u.IsDeleted == false,
 
    q => q.Include(u => u.UserRoles)
    .ThenInclude(ur => ur.Role)
@@ -277,29 +277,29 @@ public class UserService : IUserService
 
       //check what happen to craetion date for user roles and user groups +
       //move mapping to the automapper or custom entity
-      userEntityByAutoMapper.UserRoles = request.RoleIds.Select(roleId => new UserRole
+      userEntity.UserRoles = request.RoleIds.Select(roleId => new UserRole
       {
         RoleId = roleId
       }).ToList();
 
       //this will ensure that wilsave all related user in one query
-      userEntityByAutoMapper.UserDepartments = new List<UserDepartment>() {
+      userEntity.UserDepartments = new List<UserDepartment>() {
         new UserDepartment { DepartmentId = request.DepartmentId.Value}
       };
 
-      userEntityByAutoMapper.UserGroups = new List<UserGroup>() {
+      userEntity.UserGroups = new List<UserGroup>() {
         new UserGroup { GroupId = request.GroupId!.Value}
       };
 
 
       var repository = _unitOfWork.Repository<User>();
 
-      await repository.AddAsync(userEntityByAutoMapper);
+      await repository.AddAsync(userEntity);
       await _unitOfWork.CommitAsync();
 
       await _unitOfWork.CommitTransactionAsync();
 
-      res.Data = userEntityByAutoMapper.Id.ToString();
+      res.Data = userEntity.Id.ToString();
       return res;
     }
     catch (Exception ex)

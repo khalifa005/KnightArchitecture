@@ -116,8 +116,8 @@ public class Startup
 
     app.UseRouting();
     // order here matters - after UseAuthentication so we have the Identity populated in the HttpContext
+    //app.UseMiddleware<PermissionsMiddleware>();
     app.UseAuthorization();
-    app.UseMiddleware<PermissionsMiddleware>();
 
 
     app.UseEndpoints(endpoints =>
