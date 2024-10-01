@@ -1,8 +1,10 @@
 # TODO
-**pdf**:
- **JWT**:
 
-poly - save sent emails to db 
+ **JWT-permissions**:
+
+poly 
+
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/2dd2ad50-f923-4c2c-900a-b1ada84b15a9" alt="v2 - Copy" width="300" height="300" />
 </p>
@@ -351,3 +353,5 @@ It says that you can change the code-style preference (and enable the display of
 
 ![image](https://github.com/user-attachments/assets/fd3e99bd-facc-4e49-87d5-cd83f3ce5a0c)
 
+
+https://blog.joaograssi.com/series/authorization-in-asp.net-core/ 
