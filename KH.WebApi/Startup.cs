@@ -1,6 +1,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using KH.BuildingBlocks;
+using KH.BuildingBlocks.Auth.V1;
 using KH.BuildingBlocks.Middlewares;
 using KH.Dto;
 using KH.PersistenceInfra;
@@ -115,7 +116,8 @@ public class Startup
     app.UseRouting();
     app.UseAuthentication();
     // order here matters - after UseAuthentication so we have the Identity populated in the HttpContext
-    //app.UseMiddleware<PermissionsMiddleware>();
+    app.UseMiddleware<PermissionsMiddleware>();
+
     app.UseAuthorization();
 
     app.UseEndpoints(endpoints =>

@@ -1,6 +1,6 @@
 using System.Security.Claims;
 
-namespace KH.BuildingBlocks.Contracts.Infrastructure;
+namespace KH.BuildingBlocks.Auth.V1;
 
 public interface IUserPermissionService
 {

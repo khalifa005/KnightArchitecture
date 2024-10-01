@@ -1,4 +1,5 @@
 
+using KH.BuildingBlocks.Auth.V1;
 using KH.BuildingBlocks.Contracts.Persistence;
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Middlewares;
@@ -19,6 +20,8 @@ public static class InfrastructureServiceRegisteration
     //services.AddScoped<ITokenService, TokenService>();
     services.AddScoped<IUnitOfWork, UnitOfWork>();
     services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+    services.AddScoped<IUserPermissionService, UserPermissionService>();
 
     //token setting registration
     //services.AddIdentityService(configuration);

@@ -1,18 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 
-namespace KH.BuildingBlocks.Attributes;
+namespace KH.BuildingBlocks.Auth.V1;
 
-//using indexer controllers like:
-
-//[HttpPut]
-//[PermissionAuthorize(ApplicationConstant.EDIT_CALENDAR_PERMISSION)]
-
-
-public enum PermissionOperator
-{
-  And = 1,
-  Or = 2
-}
 public class PermissionAuthorizeAttribute : AuthorizeAttribute
 {
   public const string PolicyPrefix = "PERMISSION_";
@@ -58,7 +47,7 @@ public class PermissionAuthorizeAttribute : AuthorizeAttribute
   public static string[] GetPermissionsFromPolicy(string policyName)
   {
     return policyName.Substring(PolicyPrefix.Length + 2)
-        .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
+      .Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
   }
 
 }

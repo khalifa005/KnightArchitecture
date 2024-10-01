@@ -51,6 +51,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Auth\V1\Midilleware\" />
+    <Folder Include="Auth\V2\Midilleware\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

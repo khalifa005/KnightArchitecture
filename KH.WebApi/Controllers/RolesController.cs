@@ -1,3 +1,5 @@
+using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Constant;
 using KH.Dto.lookups.RoleDto.Form;
 using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.RoleDto.Request;
@@ -31,6 +33,7 @@ public class RolesController : BaseApiController
     return AsActionResult(res);
   }
   [HttpPut]
+  [PermissionAuthorize(ApplicationConstant.EDIT_ROLES_PERMISSION)]
   public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] RoleForm request)
   {
     var res = await _lookupService.UpdateAsync(request);
