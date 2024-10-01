@@ -15,6 +15,10 @@ public class User : TrackerEntity
   public string? Username { get; set; }
   public DateTime? BirthDate { get; set; }
 
+  public string? OtpCode { get; set; }
+  public bool IsOtpVerified { get; set; }
+  public string? Password { get; set; }
+
   public DateTime? LastAssignDateAsSupervisor { get; set; }
   public DateTime? LastAssignDateAsCaseOwner { get; set; }
   public DateTime? LastAssignDateAsAssignTo { get; set; }

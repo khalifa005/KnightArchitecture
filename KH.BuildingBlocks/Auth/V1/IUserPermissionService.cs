@@ -11,3 +11,4 @@ public interface IUserPermissionService
   /// <param name="cancellationToken"></param>
   ValueTask<ClaimsIdentity?> GetUserPermissionsIdentity(int userId, string? systemType, CancellationToken cancellationToken);
 }
+

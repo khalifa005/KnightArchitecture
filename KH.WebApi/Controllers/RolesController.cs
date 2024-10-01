@@ -14,14 +14,15 @@ public class RolesController : BaseApiController
   {
     _lookupService = lookupService;
   }
-
+  [Authorize]
   [HttpGet("{id}")]
   public async Task<ActionResult<ApiResponse<RoleResponse>>> Get(int id)
   {
     var res = await _lookupService.GetAsync(id);
     return AsActionResult(res);
   }
-  [Authorize]
+  //[Authorize]
+  [AllowAnonymous]
   [HttpPost("list")]
   public async Task<ActionResult<ApiResponse<PagedResponse<RoleListResponse>>>> GetList(RoleFilterRequest request)
   {

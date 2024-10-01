@@ -2,6 +2,6 @@ namespace KH.BuildingBlocks.Enums;
 
 public enum SystemTypeEnum
 {
-  CRMAdmin = 1,
-  CRMClientPortal = 2,
+  InternalAdmin = 1,
+  ExternalCustomer = 2,
 }

@@ -11,7 +11,7 @@ public interface IUserService
   Task<ApiResponse<string>> AddListAsync(List<UserForm> request);
   Task<ApiResponse<string>> UpdateAsync(UserForm request);
   Task<ApiResponse<string>> DeleteAsync(long id);
-  Task<ApiResponse<AuthenticationResponse>> Login(LoginRequest request);
+  Task<ApiResponse<AuthenticationResponse>> LoginAsync(LoginRequest request);
   Task<ApiResponse<string>> ResetDepartmentsAsync(long id);
 
 }

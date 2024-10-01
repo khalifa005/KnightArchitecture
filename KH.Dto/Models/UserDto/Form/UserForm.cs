@@ -1,4 +1,6 @@
+using KH.BuildingBlocks.Extentions.Methods;
 using KH.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace KH.Dto.Models.UserDto.Form;
 
@@ -16,6 +18,9 @@ public class UserForm
   public string? Username { get; set; }
   public DateTime? BirthDate { get; set; }
   public string? MobileNumber { get; set; }
+  public string? OtpCode { get; set; }
+  public bool IsOtpVerified { get; set; }
+  public string? Password { get; set; }
   public long? GroupId { get; set; }
   public long? DepartmentId { get; set; }
   public long[]? RoleIds { get; set; }
@@ -63,24 +68,29 @@ public class UserForm
       user.Id = Id.Value;
       IsUpdateMode = true;
     }
-
-    // Map GroupId, DepartmentId, and RoleIds
-    if (GroupId.HasValue)
+    else
     {
-      user.UserGroups = new List<UserGroup> { new UserGroup { GroupId = GroupId.Value } };
+      user.Password = new PasswordHasher<object?>().HashPassword(null, Password);
+      user.OtpCode = SecureRandom.GenerateOTP();
+      user.IsOtpVerified = false;
     }
+      // Map GroupId, DepartmentId, and RoleIds
+      if (GroupId.HasValue)
+      {
+        user.UserGroups = new List<UserGroup> { new UserGroup { GroupId = GroupId.Value } };
+      }
 
-    if (DepartmentId.HasValue)
-    {
-      user.UserDepartments = new List<UserDepartment> { new UserDepartment { DepartmentId = DepartmentId.Value } };
+      if (DepartmentId.HasValue)
+      {
+        user.UserDepartments = new List<UserDepartment> { new UserDepartment { DepartmentId = DepartmentId.Value } };
+      }
+
+      if (RoleIds != null && RoleIds.Length > 0)
+      {
+        user.UserRoles = RoleIds.Select(roleId => new UserRole { RoleId = roleId }).ToList();
+      }
+
+      return user;
     }
-
-    if (RoleIds != null && RoleIds.Length > 0)
-    {
-      user.UserRoles = RoleIds.Select(roleId => new UserRole { RoleId = roleId }).ToList();
-    }
-
-    return user;
+    #endregion
   }
-  #endregion
-}

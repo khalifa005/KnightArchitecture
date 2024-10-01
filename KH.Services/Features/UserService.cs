@@ -1,19 +1,69 @@
+using KH.BuildingBlocks.Contracts.Infrastructure;
+using Microsoft.AspNetCore.Identity;
+
 public class UserService : IUserService
 {
   private readonly IUnitOfWork _unitOfWork;
+  private readonly ITokenService _tokenService;
   private readonly IServiceProvider _serviceProvider;
   private readonly IMapper _mapper;
 
   public UserService(
     IUnitOfWork unitOfWork,
+    ITokenService tokenService,
     IServiceProvider serviceProvider,
     IMapper mapper)
   {
     _unitOfWork = unitOfWork;
+    _tokenService = tokenService;
     _serviceProvider = serviceProvider;
     _mapper = mapper;
   }
 
+  public async Task<ApiResponse<AuthenticationResponse>> LoginAsync(LoginRequest request)
+  {
+    var res = new ApiResponse<AuthenticationResponse>((int)HttpStatusCode.OK);
+
+    try
+    {
+      if (request == null)
+        throw new Exception("Invalid Parameter");
+
+      var repository = _unitOfWork.Repository<User>();
+
+      var entityFromDB = await repository.GetByExpressionAsync(u =>
+   u.Username == request.Username,
+
+   q => q.Include(u => u.UserRoles)
+   .ThenInclude(ur => ur.Role)
+   .Include(u => u.UserGroups)
+   .Include(u => u.UserDepartments));
+
+      if (entityFromDB == null || request.Password.IsNullOrEmpty())
+        throw new Exception("Invalid User");
+
+      //Check Is OTP Verified at First Login
+
+      //Hashed Password Check
+      var passwordVerificationResult = new PasswordHasher<object?>()
+        .VerifyHashedPassword(null, entityFromDB.Password, request.Password);
+      if (passwordVerificationResult != PasswordVerificationResult.Success)
+        throw new Exception("Invalid User!");
+
+      var jwtToken = _tokenService.CreateToken(entityFromDB);
+
+      res.Data = new AuthenticationResponse { AccessToken = jwtToken };
+
+      return res;
+    }
+    catch (Exception ex)
+    {
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.Data = new AuthenticationResponse();
+      res.ErrorMessage = ex.Message;
+      return res;
+    }
+  }
   public async Task<ApiResponse<UserDetailsResponse>> GetAsync(long id)
   {
     //define our api res 

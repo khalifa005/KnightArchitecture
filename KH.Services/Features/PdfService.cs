@@ -65,4 +65,3 @@ public class PdfService : IPdfService
     return htmlFileContent;
   }
 }
-

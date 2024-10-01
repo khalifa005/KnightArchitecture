@@ -21,7 +21,7 @@ public class UserPermissionService : IUserPermissionService
     int userId, string? systemType, CancellationToken cancellationToken)
   {
     var userPermissions = new List<Claim>();
-    if (systemType == SystemTypeEnum.CRMClientPortal.ToString())
+    if (systemType == SystemTypeEnum.ExternalCustomer.ToString())
     {
       //--Add Default Permissions In case System Is CRMClient
       userPermissions = new List<Claim> { new Claim(PermissionRequirement.ClaimType, ApplicationConstant.CRM_CLIENT_SYSTEM_PERMISSION) };

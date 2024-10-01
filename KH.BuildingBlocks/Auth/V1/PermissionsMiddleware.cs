@@ -2,6 +2,7 @@ using KH.BuildingBlocks.Constant;
 using KH.BuildingBlocks.Contracts.Infrastructure;
 using KH.BuildingBlocks.Extentions.Methods;
 using KH.BuildingBlocks.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
@@ -28,6 +29,15 @@ public class PermissionsMiddleware
 
   public async Task InvokeAsync(HttpContext context, IUserPermissionService permissionService)
   {
+    // Check if the endpoint has AllowAnonymous applied
+    var endpoint = context.GetEndpoint();
+    if (endpoint != null && endpoint.Metadata.GetMetadata<AllowAnonymousAttribute>() != null)
+    {
+      // If AllowAnonymous is found, bypass the authentication and permission checks
+      await _request(context);
+      return;
+    }
+
     if (context.User.Identity == null || !context.User.Identity.IsAuthenticated)
     {
       context.Response.StatusCode = StatusCodes.Status401Unauthorized;

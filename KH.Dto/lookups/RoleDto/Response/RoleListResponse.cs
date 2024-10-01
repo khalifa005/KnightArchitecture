@@ -13,6 +13,7 @@ public class RoleListResponse : BasicEntityDto
 
   public RoleListResponse(Role e)
   {
+    Id = e.Id;
     NameAr = e.NameAr;
     NameEn = e.NameEn;
     Description = e.Description;

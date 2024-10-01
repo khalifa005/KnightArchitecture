@@ -1,3 +1,6 @@
+using KH.Dto.Models.AuthenticationDto.Request;
+using KH.Dto.Models.AuthenticationDto.Response;
+
 namespace KH.WebApi.Controllers;
 public class UsersController : BaseApiController
 {
@@ -5,6 +8,13 @@ public class UsersController : BaseApiController
   public UsersController(IUserService userService)
   {
     _userService = userService;
+  }
+
+  [HttpPost("Login")]
+  public async Task<ActionResult<ApiResponse<AuthenticationResponse>>> Login(LoginRequest request)
+  {
+    var res = await _userService.LoginAsync(request);
+    return AsActionResult(res);
   }
 
   [HttpGet("{id}")]
