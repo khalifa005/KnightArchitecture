@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using KH.BuildingBlocks;
 using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Extentions.Methods;
 using KH.BuildingBlocks.Middlewares;
 using KH.Dto;
 using KH.PersistenceInfra;
@@ -25,11 +26,8 @@ public class Startup
   {
 
     // Add services to the container.
-    services.AddHttpContextAccessor();
 
-    services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
     services.AddEndpointsApiExplorer();
-
     services.AddFluentValidationAutoValidation();
     services.AddValidatorsFromAssemblyContaining<Startup>();
 
