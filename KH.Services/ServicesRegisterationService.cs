@@ -29,9 +29,9 @@ public static class ServicesRegisterationService
     var mailSettings = configuration.GetSection("MailSettings");
 
     var mailOptions = mailSettings.Get<MailSettings>();
-    var defaultFromEmail = mailOptions?.Mail ?? "crmesclations@acig.com.sa";
-    var defaultHost = mailOptions?.Host ?? "130.90.4.184";
-    var defaultPort = mailOptions?.Port ?? 25;
+    var defaultFromEmail = mailOptions?.Mail ;
+    var defaultHost = mailOptions?.Host;
+    var defaultPort = mailOptions?.Port;
 
     // Add FluentEmail configuration
     services.AddFluentEmail(defaultFromEmail, mailOptions!.DisplayName)

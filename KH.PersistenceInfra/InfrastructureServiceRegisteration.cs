@@ -26,32 +26,19 @@ public static class InfrastructureServiceRegisteration
     services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
 
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-      .AddJwtBearer(options =>
-      {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-          ValidateIssuerSigningKey = true,
-          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenSettings:Key"])),
-          ValidIssuer = configuration["TokenSettings:Issuer"],
-          ValidateIssuer = true,
-          ValidateAudience = false,
-        };
-      });
-
-    // Overrides the DefaultAuthorizationPolicyProvider with our own
-    //token setting registration
-    //services.AddIdentityService(configuration);
-    //services.AddDistributedMemoryCache();
-    //services.AddSingleton<IConnectionMultiplexer>(c =>
-    //{
-    //  ConfigurationOptions config = new ConfigurationOptions()
-    //  {
-    //    SyncTimeout = 500000,
-    //    EndPoints = { configuration.GetConnectionString("RedisConnection") },
-    //    AbortOnConnectFail = false // this prevents that error
-    //  };
-    //  return ConnectionMultiplexer.Connect(config);
-    //});
+   .AddJwtBearer(options =>
+   {
+     options.TokenValidationParameters = new TokenValidationParameters
+     {
+       ValidateIssuerSigningKey = true,
+       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenSettings:Key"])),
+       ValidIssuer = configuration["TokenSettings:Issuer"],
+       ValidateIssuer = true,
+       ValidateAudience = false,  // Adjust this based on your needs
+       ValidateLifetime = true,   // Ensure token hasn't expired
+       ClockSkew = TimeSpan.Zero  // Optional: Remove default clock skew
+     };
+   });
 
     services.AddCors(opt =>
     {
