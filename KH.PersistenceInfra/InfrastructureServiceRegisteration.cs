@@ -6,6 +6,9 @@ using KH.PersistenceInfra.Middlewares;
 using KH.PersistenceInfra.Repositories;
 using KH.PersistenceInfra.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace KH.PersistenceInfra;
 
@@ -25,21 +28,9 @@ public static class InfrastructureServiceRegisteration
     services.AddScoped<IUserPermissionService, UserPermissionService>();
     services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
 
-    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-   .AddJwtBearer(options =>
-   {
-     options.TokenValidationParameters = new TokenValidationParameters
-     {
-       ValidateIssuerSigningKey = true,
-       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenSettings:Key"])),
-       ValidIssuer = configuration["TokenSettings:Issuer"],
-       ValidateIssuer = true,
-       ValidateAudience = false,  // Adjust this based on your needs
-       ValidateLifetime = true,   // Ensure token hasn't expired
-       ClockSkew = TimeSpan.Zero  // Optional: Remove default clock skew
-     };
-   });
+    services.AddIdentityService(configuration);
 
+   
     services.AddCors(opt =>
     {
       opt.AddPolicy("CorsPolicy", policy =>
@@ -71,4 +62,7 @@ public static class InfrastructureServiceRegisteration
 
     return app;
   }
+
+
+  
 }

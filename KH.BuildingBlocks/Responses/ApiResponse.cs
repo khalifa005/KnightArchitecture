@@ -40,7 +40,7 @@ public class ApiResponse<T> where T : class
         break;
       case (int)HttpStatusCode.InternalServerError:
         ErrorMessage = ErrorMessage ?? "Errors found in application, please contact with the acig support team";
-        ErrorMessageAr = ErrorMessageAr ?? "يوجد خطا في النظام من فضلك تواصل مع فريق دعم اسيج";
+        ErrorMessageAr = ErrorMessageAr ?? "يوجد خطا في النظام من فضلك تواصل مع فريق دعم ";
         ErrorCode = "ERO_005";
         break;
       case (int)HttpStatusCode.Forbidden:

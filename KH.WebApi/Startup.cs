@@ -78,7 +78,6 @@ public class Startup
   public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
   {
     System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12;
-    //app.UseMiddleware<ValidationErrorMiddleware>();
 
     app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
@@ -103,6 +102,11 @@ public class Startup
 
     app.UseCors("CorsPolicy");
     app.UseHttpsRedirection();
+    app.UseRouting();
+    app.UseAuthentication();
+    // order here matters - after UseAuthentication so we have the Identity populated in the HttpContext
+    app.UseMiddleware<PermissionsMiddleware>();
+    app.UseAuthorization();
 
     app.UseStaticFiles();
     //app.UseStaticFiles(new StaticFileOptions()
@@ -111,11 +115,7 @@ public class Startup
     //  RequestPath = new PathString("/Resources")
     //});
 
-    app.UseRouting();
-    app.UseAuthentication();
-    // order here matters - after UseAuthentication so we have the Identity populated in the HttpContext
-    app.UseMiddleware<PermissionsMiddleware>();
-    app.UseAuthorization();
+
 
 
     app.UseEndpoints(endpoints =>

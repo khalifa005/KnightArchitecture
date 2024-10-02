@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KH.BuildingBlocks.Auth.V1;
 
@@ -51,3 +51,4 @@ public class PermissionAuthorizeAttribute : AuthorizeAttribute
   }
 
 }
+

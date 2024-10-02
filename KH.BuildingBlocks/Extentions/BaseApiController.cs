@@ -1,5 +1,6 @@
 using KH.BuildingBlocks.Responses;
 using KH.BuildingBlocks.Settings;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -9,7 +10,7 @@ namespace KH.BuildingBlocks.Extentions;
 //[Route("api/v{v:apiversion}/[controller]")]
 [Route("api/[controller]")]
 [ApiController]
-//[Authorize]
+[Authorize]
 public class BaseApiController : ControllerBase
 {
   //private readonly IUserService _userService;

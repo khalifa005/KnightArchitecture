@@ -7,14 +7,17 @@ public class UserService : IUserService
   private readonly ITokenService _tokenService;
   private readonly IServiceProvider _serviceProvider;
   private readonly IMapper _mapper;
+  private readonly ICurrentUserService _currentUserService;
 
   public UserService(
     IUnitOfWork unitOfWork,
+    ICurrentUserService currentUserService,
     ITokenService tokenService,
     IServiceProvider serviceProvider,
     IMapper mapper)
   {
     _unitOfWork = unitOfWork;
+    _currentUserService = currentUserService;
     _tokenService = tokenService;
     _serviceProvider = serviceProvider;
     _mapper = mapper;
@@ -247,6 +250,7 @@ public class UserService : IUserService
   {
     //db context will handel saving it auto
     var actionMadeByUserId = _serviceProvider.GetUserId();
+    var useid = _currentUserService.UserId;
 
     //define our api res 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);

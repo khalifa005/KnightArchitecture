@@ -38,8 +38,16 @@ public class PermissionsMiddleware
       return;
     }
 
+ 
     if (context.User.Identity == null || !context.User.Identity.IsAuthenticated)
     {
+      if (context.Response.HasStarted)
+      {
+        // Log and exit early if the response has already started
+        _logger.LogWarning("The response has already started.");
+        return;
+      }
+
       context.Response.StatusCode = StatusCodes.Status401Unauthorized;
       context.Response.ContentType = "application/json";
 
