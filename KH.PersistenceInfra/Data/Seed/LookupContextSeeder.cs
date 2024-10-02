@@ -600,11 +600,11 @@ public class LookupContextSeeder
   {
     try
     {
-      List<SystemActions> entities = new List<SystemActions>();
+      List<Permission> entities = new List<Permission>();
 
       #region lookups
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 1,
         NameEn = "lookups",
@@ -614,215 +614,215 @@ public class LookupContextSeeder
 
 
       #region categories
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 2,
         NameEn = "categories",
         NameAr = "فئات الطلبات",
         SortKey = 1,
-        ParentID = 1
+        ParentId = 1
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 3,
         NameEn = "add-category",
         NameAr = "إضافة فئة طلب",
         SortKey = 1,
-        ParentID = 2
+        ParentId = 2
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 4,
         NameEn = "edit-category",
         NameAr = "تعديل فئة طلب",
         SortKey = 2,
-        ParentID = 2
+        ParentId = 2
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 5,
         NameEn = "delete-category",
         NameAr = "حذف فئة طلب",
         SortKey = 3,
-        ParentID = 2
+        ParentId = 2
       });
       #endregion
 
       #region status
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 6,
         NameEn = "status",
         NameAr = "حالات الطلبات",
         SortKey = 2,
-        ParentID = 1
+        ParentId = 1
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 8,
         NameEn = "edit-status",
         NameAr = "تعديل حالة طلب",
         SortKey = 2,
-        ParentID = 6
+        ParentId = 6
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 9,
         NameEn = "delete-status",
         NameAr = "حذف حالة طلب",
         SortKey = 3,
-        ParentID = 6
+        ParentId = 6
       });
 
       #endregion
 
       #region cities
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 18,
         NameEn = "cities",
         NameAr = "المدن",
         SortKey = 5,
-        ParentID = 1
+        ParentId = 1
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 19,
         NameEn = "add-city",
         NameAr = "إضافة مدينه",
         SortKey = 1,
-        ParentID = 18
+        ParentId = 18
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 20,
         NameEn = "edit-city",
         NameAr = "تعديل مدينه",
         SortKey = 2,
-        ParentID = 18
+        ParentId = 18
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 21,
         NameEn = "delete-city",
         NameAr = "حذف مدينه",
         SortKey = 3,
-        ParentID = 18
+        ParentId = 18
       });
 
       #endregion
 
       #region groups
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 22,
         NameEn = "groups",
         NameAr = "المجموعات",
         SortKey = 6,
-        ParentID = 1
+        ParentId = 1
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 23,
         NameEn = "add-group",
         NameAr = "إضافة مجموعه",
         SortKey = 1,
-        ParentID = 22
+        ParentId = 22
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 24,
         NameEn = "edit-group",
         NameAr = "تعديل مجموعه",
         SortKey = 2,
-        ParentID = 22
+        ParentId = 22
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 25,
         NameEn = "delete-group",
         NameAr = "حذف مجموعه",
         SortKey = 3,
-        ParentID = 22
+        ParentId = 22
       });
       #endregion
 
       #region roles
-      entities.Add(item: new SystemActions
+      entities.Add(item: new Permission
       {
         Id = 30,
         NameEn = "roles",
         NameAr = "الأدوار",
         SortKey = 8,
-        ParentID = 1
+        ParentId = 1
       });
 
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 31,
         NameEn = "edit-role",
         NameAr = "تعديل دور مستخدم",
         SortKey = 1,
-        ParentID = 30
+        ParentId = 30
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 32,
         NameEn = "delete-role",
         NameAr = "حذف دور مستخدم",
         SortKey = 2,
-        ParentID = 30
+        ParentId = 30
       });
       #endregion
 
       #region departments
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 33,
         NameEn = "departments",
         NameAr = "الإدارات والأقسام",
         SortKey = 9,
-        ParentID = 1
+        ParentId = 1
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 34,
         NameEn = "add-department",
         NameAr = "إضافة قسم",
         SortKey = 1,
-        ParentID = 33
+        ParentId = 33
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 35,
         NameEn = "edit-department",
         NameAr = "تعديل قسم",
         SortKey = 2,
-        ParentID = 33
+        ParentId = 33
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 36,
         NameEn = "delete-department",
         NameAr = "حذف قسم",
         SortKey = 3,
-        ParentID = 33
+        ParentId = 33
       });
 
       #endregion
@@ -831,7 +831,7 @@ public class LookupContextSeeder
 
       #region user-management
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 69,
         NameEn = "user-management",
@@ -840,82 +840,82 @@ public class LookupContextSeeder
       });
 
       #region Role management
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 70,
         NameEn = "roles-management",
         NameAr = "إدارة أدوار المستخدمين",
         SortKey = 1,
-        ParentID = 69
+        ParentId = 69
       });
       #endregion
 
       #region Users
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 71,
         NameEn = "users",
         NameAr = "المستخدمين",
         SortKey = 2,
-        ParentID = 69
+        ParentId = 69
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 72,
         NameEn = "add-user",
         NameAr = " إضافة مستخدم",
         SortKey = 1,
-        ParentID = 71
+        ParentId = 71
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 73,
         NameEn = "edit-user",
         NameAr = "تعديل مستخدم ",
         SortKey = 2,
-        ParentID = 71
+        ParentId = 71
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 74,
         NameEn = "delete-user",
         NameAr = "حذف مستخدم ",
         SortKey = 3,
-        ParentID = 71
+        ParentId = 71
       });
 
       #endregion
 
       #region calender
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 75,
         NameEn = "calender",
         NameAr = "التورايخ",
         SortKey = 3,
-        ParentID = 69
+        ParentId = 69
       });
 
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 76,
         NameEn = "add-calender-holiday",
         NameAr = " إضافة تاريخ اجازة",
         SortKey = 1,
-        ParentID = 75
+        ParentId = 75
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 77,
         NameEn = "edit-calender-holiday",
         NameAr = "تعديل تاريخ اجازة ",
         SortKey = 2,
-        ParentID = 75
+        ParentId = 75
       });
 
       #endregion
@@ -923,7 +923,7 @@ public class LookupContextSeeder
       #endregion
 
       #region ServiceOne
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 78,
         NameEn = "servic-one",
@@ -933,61 +933,61 @@ public class LookupContextSeeder
 
 
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 80,
         NameEn = "add-service-one",
         NameAr = "إضافة شكوى او طلب",
         SortKey = 2,
-        ParentID = 78
+        ParentId = 78
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 81,
         NameEn = "edit-service-one",
         NameAr = "تعديل شكوى او طلب",
         SortKey = 3,
-        ParentID = 78
+        ParentId = 78
       });
 
 
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 82,
         NameEn = "close-service-one",
         NameAr = "تعديل شكوى او طلب",
         SortKey = 4,
-        ParentID = 78
+        ParentId = 78
       });
 
 
 
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 84,
         NameEn = "change-category-service-one",
         NameAr = "تغيير فئة شكوى او طلب",
         SortKey = 6,
-        ParentID = 78
+        ParentId = 78
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 85,
         NameEn = "add-comment-service-one",
         NameAr = "إضافة تعليق على شكوى او طلب",
         SortKey = 7,
-        ParentID = 78
+        ParentId = 78
       });
 
 
       #endregion
 
       #region Customers
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 86,
         NameEn = "Customers",
@@ -996,35 +996,35 @@ public class LookupContextSeeder
       });
 
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 87,
         NameEn = "add-Customer",
         NameAr = "إضافة عميل",
         SortKey = 1,
-        ParentID = 86
+        ParentId = 86
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 88,
         NameEn = "edit-Customer",
         NameAr = "تعديل عميل",
         SortKey = 2,
-        ParentID = 86
+        ParentId = 86
       });
 
-      entities.Add(new SystemActions
+      entities.Add(new Permission
       {
         Id = 89,
         NameEn = "delete-Customer",
         NameAr = "حذف عميل",
         SortKey = 3,
-        ParentID = 86
+        ParentId = 86
       });
       #endregion
 
-      builder.Entity<SystemActions>().HasData(entities);
+      builder.Entity<Permission>().HasData(entities);
 
     }
     catch (Exception ex)

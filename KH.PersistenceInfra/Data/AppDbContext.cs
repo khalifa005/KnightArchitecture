@@ -32,7 +32,7 @@ public class AppDbContext : DbContext
   public DbSet<KH.Domain.Entities.Role> Roles { get; set; }
   public DbSet<UserRole> UserRoles { get; set; }
   public DbSet<UserGroup> UserGroups { get; set; }
-  public DbSet<SystemActions> SystemActions { get; set; }
+  public DbSet<Permission> Permissions { get; set; }
   public DbSet<RolePermissions> RolePermissions { get; set; }
   public DbSet<SMSFollowUp> SMSFollowUp { get; set; }
   public DbSet<Calendar> Calendar { get; set; }

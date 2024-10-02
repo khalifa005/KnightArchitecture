@@ -34,11 +34,11 @@ public class UserPermissionService : IUserPermissionService
       var dbRolesFunctions = await _unitOfWork
         .Repository<RolePermissions>()
         .FindByAsync(x => userRoles.Select(o => o.RoleId).Contains(x.RoleId),
-        q => q.Include(u => u.SystemActions));
+        q => q.Include(u => u.Permission));
 
       userPermissions =
          (from perm in dbRolesFunctions
-          select new Claim(PermissionRequirement.ClaimType, perm.SystemActions?.NameEn ?? "")).ToList();
+          select new Claim(PermissionRequirement.ClaimType, perm.Permission?.NameEn ?? "")).ToList();
     }
     return CreatePermissionsIdentity(userPermissions);
   }

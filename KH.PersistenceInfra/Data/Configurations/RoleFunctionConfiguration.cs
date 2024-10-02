@@ -5,17 +5,20 @@ public class RoleFunctionConfiguration : IEntityTypeConfiguration<RolePermission
   public void Configure(EntityTypeBuilder<RolePermissions> builder)
   {
     builder.Property(p => p.Id).UseIdentityColumn();
-    builder.Property(p => p.SystemActionsId).HasColumnOrder(2);
+    builder.Property(p => p.PermissionId).HasColumnOrder(2);
     builder.Property(p => p.RoleId).HasColumnOrder(3);
 
-    builder.HasOne(t => t.SystemActions)
-              .WithMany()
-                .HasForeignKey(t => t.SystemActionsId);
 
-    builder.HasOne(t => t.Role)
-        .WithMany()
-          .HasForeignKey(t => t.RoleId);
+    // Define relationship with Permission
+    builder.HasOne(rp => rp.Permission)
+           .WithMany(p => p.RolePermissions) // Explicitly define inverse relationship
+           .HasForeignKey(rp => rp.PermissionId)
+           .OnDelete(DeleteBehavior.Restrict);
 
-
+    // Define relationship with Role
+    builder.HasOne(rp => rp.Role)
+           .WithMany(r => r.RolePermissions) // Explicitly define inverse relationship
+           .HasForeignKey(rp => rp.RoleId)
+           .OnDelete(DeleteBehavior.Restrict);
   }
 }

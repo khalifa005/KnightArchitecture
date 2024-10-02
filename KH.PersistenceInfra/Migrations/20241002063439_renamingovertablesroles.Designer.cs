@@ -4,6 +4,7 @@ using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KH.PersistenceInfra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241002063439_renamingovertablesroles")]
+    partial class renamingovertablesroles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50153,7 +50156,7 @@ namespace KH.PersistenceInfra.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(106);
 
-                    b.Property<long?>("DependOnId")
+                    b.Property<long?>("DependOnID")
                         .HasColumnType("bigint")
                         .HasColumnOrder(7);
 
@@ -50175,7 +50178,7 @@ namespace KH.PersistenceInfra.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnOrder(3);
 
-                    b.Property<long?>("ParentId")
+                    b.Property<long?>("ParentID")
                         .HasColumnType("bigint")
                         .HasColumnOrder(5);
 
@@ -50193,7 +50196,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("ParentID");
 
                     b.ToTable("Permissions");
 
@@ -50214,7 +50217,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "فئات الطلبات",
                             NameEn = "categories",
-                            ParentId = 1L,
+                            ParentID = 1L,
                             SortKey = 1
                         },
                         new
@@ -50224,7 +50227,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "إضافة فئة طلب",
                             NameEn = "add-category",
-                            ParentId = 2L,
+                            ParentID = 2L,
                             SortKey = 1
                         },
                         new
@@ -50234,7 +50237,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل فئة طلب",
                             NameEn = "edit-category",
-                            ParentId = 2L,
+                            ParentID = 2L,
                             SortKey = 2
                         },
                         new
@@ -50244,7 +50247,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "حذف فئة طلب",
                             NameEn = "delete-category",
-                            ParentId = 2L,
+                            ParentID = 2L,
                             SortKey = 3
                         },
                         new
@@ -50254,7 +50257,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "حالات الطلبات",
                             NameEn = "status",
-                            ParentId = 1L,
+                            ParentID = 1L,
                             SortKey = 2
                         },
                         new
@@ -50264,7 +50267,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل حالة طلب",
                             NameEn = "edit-status",
-                            ParentId = 6L,
+                            ParentID = 6L,
                             SortKey = 2
                         },
                         new
@@ -50274,7 +50277,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "حذف حالة طلب",
                             NameEn = "delete-status",
-                            ParentId = 6L,
+                            ParentID = 6L,
                             SortKey = 3
                         },
                         new
@@ -50284,7 +50287,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "المدن",
                             NameEn = "cities",
-                            ParentId = 1L,
+                            ParentID = 1L,
                             SortKey = 5
                         },
                         new
@@ -50294,7 +50297,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "إضافة مدينه",
                             NameEn = "add-city",
-                            ParentId = 18L,
+                            ParentID = 18L,
                             SortKey = 1
                         },
                         new
@@ -50304,7 +50307,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل مدينه",
                             NameEn = "edit-city",
-                            ParentId = 18L,
+                            ParentID = 18L,
                             SortKey = 2
                         },
                         new
@@ -50314,7 +50317,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "حذف مدينه",
                             NameEn = "delete-city",
-                            ParentId = 18L,
+                            ParentID = 18L,
                             SortKey = 3
                         },
                         new
@@ -50324,7 +50327,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "المجموعات",
                             NameEn = "groups",
-                            ParentId = 1L,
+                            ParentID = 1L,
                             SortKey = 6
                         },
                         new
@@ -50334,7 +50337,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "إضافة مجموعه",
                             NameEn = "add-group",
-                            ParentId = 22L,
+                            ParentID = 22L,
                             SortKey = 1
                         },
                         new
@@ -50344,7 +50347,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل مجموعه",
                             NameEn = "edit-group",
-                            ParentId = 22L,
+                            ParentID = 22L,
                             SortKey = 2
                         },
                         new
@@ -50354,7 +50357,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "حذف مجموعه",
                             NameEn = "delete-group",
-                            ParentId = 22L,
+                            ParentID = 22L,
                             SortKey = 3
                         },
                         new
@@ -50364,7 +50367,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "الأدوار",
                             NameEn = "roles",
-                            ParentId = 1L,
+                            ParentID = 1L,
                             SortKey = 8
                         },
                         new
@@ -50374,7 +50377,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل دور مستخدم",
                             NameEn = "edit-role",
-                            ParentId = 30L,
+                            ParentID = 30L,
                             SortKey = 1
                         },
                         new
@@ -50384,7 +50387,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "حذف دور مستخدم",
                             NameEn = "delete-role",
-                            ParentId = 30L,
+                            ParentID = 30L,
                             SortKey = 2
                         },
                         new
@@ -50394,7 +50397,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "الإدارات والأقسام",
                             NameEn = "departments",
-                            ParentId = 1L,
+                            ParentID = 1L,
                             SortKey = 9
                         },
                         new
@@ -50404,7 +50407,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "إضافة قسم",
                             NameEn = "add-department",
-                            ParentId = 33L,
+                            ParentID = 33L,
                             SortKey = 1
                         },
                         new
@@ -50414,7 +50417,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل قسم",
                             NameEn = "edit-department",
-                            ParentId = 33L,
+                            ParentID = 33L,
                             SortKey = 2
                         },
                         new
@@ -50424,7 +50427,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "حذف قسم",
                             NameEn = "delete-department",
-                            ParentId = 33L,
+                            ParentID = 33L,
                             SortKey = 3
                         },
                         new
@@ -50443,7 +50446,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "إدارة أدوار المستخدمين",
                             NameEn = "roles-management",
-                            ParentId = 69L,
+                            ParentID = 69L,
                             SortKey = 1
                         },
                         new
@@ -50453,7 +50456,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "المستخدمين",
                             NameEn = "users",
-                            ParentId = 69L,
+                            ParentID = 69L,
                             SortKey = 2
                         },
                         new
@@ -50463,7 +50466,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = " إضافة مستخدم",
                             NameEn = "add-user",
-                            ParentId = 71L,
+                            ParentID = 71L,
                             SortKey = 1
                         },
                         new
@@ -50473,7 +50476,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل مستخدم ",
                             NameEn = "edit-user",
-                            ParentId = 71L,
+                            ParentID = 71L,
                             SortKey = 2
                         },
                         new
@@ -50483,7 +50486,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "حذف مستخدم ",
                             NameEn = "delete-user",
-                            ParentId = 71L,
+                            ParentID = 71L,
                             SortKey = 3
                         },
                         new
@@ -50493,7 +50496,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "التورايخ",
                             NameEn = "calender",
-                            ParentId = 69L,
+                            ParentID = 69L,
                             SortKey = 3
                         },
                         new
@@ -50503,7 +50506,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = " إضافة تاريخ اجازة",
                             NameEn = "add-calender-holiday",
-                            ParentId = 75L,
+                            ParentID = 75L,
                             SortKey = 1
                         },
                         new
@@ -50513,7 +50516,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل تاريخ اجازة ",
                             NameEn = "edit-calender-holiday",
-                            ParentId = 75L,
+                            ParentID = 75L,
                             SortKey = 2
                         },
                         new
@@ -50532,7 +50535,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "إضافة شكوى او طلب",
                             NameEn = "add-service-one",
-                            ParentId = 78L,
+                            ParentID = 78L,
                             SortKey = 2
                         },
                         new
@@ -50542,7 +50545,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل شكوى او طلب",
                             NameEn = "edit-service-one",
-                            ParentId = 78L,
+                            ParentID = 78L,
                             SortKey = 3
                         },
                         new
@@ -50552,7 +50555,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل شكوى او طلب",
                             NameEn = "close-service-one",
-                            ParentId = 78L,
+                            ParentID = 78L,
                             SortKey = 4
                         },
                         new
@@ -50562,7 +50565,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تغيير فئة شكوى او طلب",
                             NameEn = "change-category-service-one",
-                            ParentId = 78L,
+                            ParentID = 78L,
                             SortKey = 6
                         },
                         new
@@ -50572,7 +50575,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "إضافة تعليق على شكوى او طلب",
                             NameEn = "add-comment-service-one",
-                            ParentId = 78L,
+                            ParentID = 78L,
                             SortKey = 7
                         },
                         new
@@ -50591,7 +50594,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "إضافة عميل",
                             NameEn = "add-Customer",
-                            ParentId = 86L,
+                            ParentID = 86L,
                             SortKey = 1
                         },
                         new
@@ -50601,7 +50604,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "تعديل عميل",
                             NameEn = "edit-Customer",
-                            ParentId = 86L,
+                            ParentID = 86L,
                             SortKey = 2
                         },
                         new
@@ -50611,7 +50614,7 @@ namespace KH.PersistenceInfra.Migrations
                             IsDeleted = false,
                             NameAr = "حذف عميل",
                             NameEn = "delete-Customer",
-                            ParentId = 86L,
+                            ParentID = 86L,
                             SortKey = 3
                         });
                 });
@@ -51812,8 +51815,8 @@ namespace KH.PersistenceInfra.Migrations
             modelBuilder.Entity("KH.Domain.Entities.Permission", b =>
                 {
                     b.HasOne("KH.Domain.Entities.Permission", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId")
+                        .WithMany()
+                        .HasForeignKey("ParentID")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Parent");
@@ -51822,7 +51825,7 @@ namespace KH.PersistenceInfra.Migrations
             modelBuilder.Entity("KH.Domain.Entities.Role", b =>
                 {
                     b.HasOne("KH.Domain.Entities.Role", "ReportToRole")
-                        .WithMany("SubRoles")
+                        .WithMany()
                         .HasForeignKey("ReportToRoleId")
                         .OnDelete(DeleteBehavior.Restrict);
 
@@ -51832,13 +51835,13 @@ namespace KH.PersistenceInfra.Migrations
             modelBuilder.Entity("KH.Domain.Entities.RolePermissions", b =>
                 {
                     b.HasOne("KH.Domain.Entities.Permission", "Permission")
-                        .WithMany("RolePermissions")
+                        .WithMany()
                         .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("KH.Domain.Entities.Role", "Role")
-                        .WithMany("RolePermissions")
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -51903,20 +51906,6 @@ namespace KH.PersistenceInfra.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("KH.Domain.Entities.Permission", b =>
-                {
-                    b.Navigation("Children");
-
-                    b.Navigation("RolePermissions");
-                });
-
-            modelBuilder.Entity("KH.Domain.Entities.Role", b =>
-                {
-                    b.Navigation("RolePermissions");
-
-                    b.Navigation("SubRoles");
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.User", b =>

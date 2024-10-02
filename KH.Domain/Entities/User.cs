@@ -23,7 +23,7 @@ public class User : TrackerEntity
   public DateTime? LastAssignDateAsCaseOwner { get; set; }
   public DateTime? LastAssignDateAsAssignTo { get; set; }
 
-  public ICollection<UserRole> UserRoles { get; set; }
+  public ICollection<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
   public ICollection<UserGroup> UserGroups { get; set; } = new HashSet<UserGroup>();
   public ICollection<UserDepartment> UserDepartments { get; set; } = new HashSet<UserDepartment>();
 }

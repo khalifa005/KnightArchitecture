@@ -14,5 +14,7 @@ public class UserRole : TrackerEntity
 
   [NotMapped]
   public List<RolePermissions> RolePermissions { get; set; } = new List<RolePermissions>();
+  //in RolePermissions we can list all user permissions instead of geeting it from multiple joins
+  //and we will cache all roles permissions and user just the user roles to gets it;s related items
 
 }

@@ -36,8 +36,10 @@ public class UserService : IUserService
 
    q => q.Include(u => u.UserRoles)
    .ThenInclude(ur => ur.Role)
+   .ThenInclude(r => r.RolePermissions)
    .Include(u => u.UserGroups)
    .Include(u => u.UserDepartments));
+
 
       if (entityFromDB == null || request.Password.IsNullOrEmpty())
         throw new Exception("Invalid User");
