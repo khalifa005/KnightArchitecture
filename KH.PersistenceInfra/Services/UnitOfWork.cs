@@ -30,6 +30,10 @@ public partial class UnitOfWork : IUnitOfWork
   {
     return await _dbContext.SaveChangesAsync();
   }
+  public async Task<int> CommitWithAuditingAsync(string userId)
+  {
+    return await _dbContext.SaveChangesAsync(userId);
+  }
 
   /// <summary>
   /// Begins a new transaction with the specified isolation level.

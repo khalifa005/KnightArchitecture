@@ -1,5 +1,4 @@
 namespace KH.BuildingBlocks.Responses;
-
 public class ApiException : ApiResponse<object>
 {
   public ApiException(int statusCode, string errorMessage = null, string errorMessageAr = null,

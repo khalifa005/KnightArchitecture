@@ -4,3 +4,4 @@ public enum CaseOriginEnum
 {
   CustomerPortal = 1,
 }
+

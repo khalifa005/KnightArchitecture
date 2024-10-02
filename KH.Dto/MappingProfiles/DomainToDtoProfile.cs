@@ -1,4 +1,5 @@
 using KH.BuildingBlocks.Extentions.Entities;
+using KH.BuildingBlocks.Responses;
 using KH.Domain.Entities;
 using KH.Dto.lookups.DepartmentDto.Response;
 using KH.Dto.lookups.RoleDto.Response;
@@ -17,6 +18,7 @@ public class DomainToDtoProfile : Profile
     CreateMap<TrackerEntity, BasicTrackerEntityDto>().ReverseMap();
     CreateMap<LookupEntity, LookupEntityWithTrackingDto>().ReverseMap();
     CreateMap<HistoryTrackerEntity, HistoryTrackerEntityDto>().ReverseMap();
+    CreateMap<AuditResponse, Audit>().ReverseMap();
 
     CreateMap<User, UserForm>().ReverseMap();
 

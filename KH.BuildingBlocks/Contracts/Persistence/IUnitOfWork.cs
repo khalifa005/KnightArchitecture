@@ -6,6 +6,7 @@ public interface IUnitOfWork : IDisposable
 {
   IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
   Task<int> CommitAsync();
+  Task<int> CommitWithAuditingAsync(string userId);
   Task BeginTransactionAsync();
   Task RollBackTransactionAsync();
   Task CommitTransactionAsync();

@@ -1,27 +1,30 @@
-
 using KH.BuildingBlocks.Extentions.Entities;
 using KH.BuildingBlocks.Extentions.Methods;
 using KH.PersistenceInfra.Data.Seed;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace KH.PersistenceInfra.Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext : AuditableContext
 {
   private readonly ILoggerFactory _loggerFactory;
   private readonly ILogger<AppDbContext> _logger;
   private readonly IServiceProvider _serviceProvider;
-
+  private readonly ICurrentUserService _currentUserService;
   public AppDbContext(
     DbContextOptions<AppDbContext> options,
+    ICurrentUserService currentUserService,
     ILogger<AppDbContext> logger,
     IServiceProvider serviceProvider,
     ILoggerFactory loggerFactory) : base(options)
   {
     _loggerFactory = loggerFactory;
+    _currentUserService = currentUserService;
+    
     _serviceProvider = serviceProvider;
     _logger = logger;
   }
-
 
   public DbSet<Media> Media { get; set; }
   public DbSet<Customer> Customers { get; set; }
@@ -37,7 +40,6 @@ public class AppDbContext : DbContext
   public DbSet<SMSFollowUp> SMSFollowUp { get; set; }
   public DbSet<Calendar> Calendar { get; set; }
   public DbSet<EmailTracker> EmailTracker { get; set; }
-
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
@@ -62,7 +64,7 @@ public class AppDbContext : DbContext
     //modelBuilder.Entity<EscalationMatrixDto>().HasNoKey().ToTable((string?)null);
   }
 
-  public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+  public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
   {
     foreach (var entry in ChangeTracker.Entries<TrackerEntity>())
     {
@@ -97,6 +99,14 @@ public class AppDbContext : DbContext
       }
     }
 
-    return base.SaveChangesAsync(cancellationToken);
+    if (_currentUserService.UserId == null)
+    {
+      return await base.SaveChangesAsync(cancellationToken);
+    }
+    else
+    {
+      return await base.SaveChangesAsync(_currentUserService.UserId, cancellationToken);
+    }
+
   }
 }

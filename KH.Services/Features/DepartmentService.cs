@@ -84,7 +84,7 @@ public class DepartmentService : IDepartmentService
       var repository = _unitOfWork.Repository<Department>();
 
       await repository.AddAsync(entity);
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitWithAuditingAsync("26");
 
       await _unitOfWork.CommitTransactionAsync();
 
@@ -131,7 +131,9 @@ public class DepartmentService : IDepartmentService
       entityFromDb.Description = entityAfterMapping.Description;
 
       repository.Update(entityFromDb);
-      await _unitOfWork.CommitAsync();
+      //await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitWithAuditingAsync("26");
+
       await _unitOfWork.CommitTransactionAsync();
 
       res.Data = entityAfterMapping.Id.ToString();
