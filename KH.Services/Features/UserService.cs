@@ -250,7 +250,8 @@ public class UserService : IUserService
   {
     //db context will handel saving it auto
     var actionMadeByUserId = _serviceProvider.GetUserId();
-    var useid = _currentUserService.UserId;
+    var currentUserId = _currentUserService.UserId;
+    var currentUserRoles = _currentUserService.RolesIds;
 
     //define our api res 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
