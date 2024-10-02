@@ -32,13 +32,13 @@ public class UserPermissionService : IUserPermissionService
       var userRoles = await _unitOfWork.Repository<UserRole>().FindByAsync(x => x.UserId == userId);
 
       var dbRolesFunctions = await _unitOfWork
-        .Repository<RoleFunction>()
+        .Repository<RolePermissions>()
         .FindByAsync(x => userRoles.Select(o => o.RoleId).Contains(x.RoleId),
-        q => q.Include(u => u.SystemFunction));
+        q => q.Include(u => u.SystemActions));
 
       userPermissions =
          (from perm in dbRolesFunctions
-          select new Claim(PermissionRequirement.ClaimType, perm.SystemFunction?.NameEn ?? "")).ToList();
+          select new Claim(PermissionRequirement.ClaimType, perm.SystemActions?.NameEn ?? "")).ToList();
     }
     return CreatePermissionsIdentity(userPermissions);
   }

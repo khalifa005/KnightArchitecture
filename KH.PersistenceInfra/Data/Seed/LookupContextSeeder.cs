@@ -600,11 +600,11 @@ public class LookupContextSeeder
   {
     try
     {
-      List<SystemFunction> entities = new List<SystemFunction>();
+      List<SystemActions> entities = new List<SystemActions>();
 
       #region lookups
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 1,
         NameEn = "lookups",
@@ -614,7 +614,7 @@ public class LookupContextSeeder
 
 
       #region categories
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 2,
         NameEn = "categories",
@@ -623,7 +623,7 @@ public class LookupContextSeeder
         ParentID = 1
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 3,
         NameEn = "add-category",
@@ -632,7 +632,7 @@ public class LookupContextSeeder
         ParentID = 2
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 4,
         NameEn = "edit-category",
@@ -641,7 +641,7 @@ public class LookupContextSeeder
         ParentID = 2
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 5,
         NameEn = "delete-category",
@@ -652,7 +652,7 @@ public class LookupContextSeeder
       #endregion
 
       #region status
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 6,
         NameEn = "status",
@@ -661,7 +661,7 @@ public class LookupContextSeeder
         ParentID = 1
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 8,
         NameEn = "edit-status",
@@ -670,7 +670,7 @@ public class LookupContextSeeder
         ParentID = 6
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 9,
         NameEn = "delete-status",
@@ -682,7 +682,7 @@ public class LookupContextSeeder
       #endregion
 
       #region cities
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 18,
         NameEn = "cities",
@@ -691,7 +691,7 @@ public class LookupContextSeeder
         ParentID = 1
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 19,
         NameEn = "add-city",
@@ -700,7 +700,7 @@ public class LookupContextSeeder
         ParentID = 18
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 20,
         NameEn = "edit-city",
@@ -709,7 +709,7 @@ public class LookupContextSeeder
         ParentID = 18
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 21,
         NameEn = "delete-city",
@@ -721,7 +721,7 @@ public class LookupContextSeeder
       #endregion
 
       #region groups
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 22,
         NameEn = "groups",
@@ -730,7 +730,7 @@ public class LookupContextSeeder
         ParentID = 1
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 23,
         NameEn = "add-group",
@@ -739,7 +739,7 @@ public class LookupContextSeeder
         ParentID = 22
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 24,
         NameEn = "edit-group",
@@ -748,7 +748,7 @@ public class LookupContextSeeder
         ParentID = 22
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 25,
         NameEn = "delete-group",
@@ -759,7 +759,7 @@ public class LookupContextSeeder
       #endregion
 
       #region roles
-      entities.Add(item: new SystemFunction
+      entities.Add(item: new SystemActions
       {
         Id = 30,
         NameEn = "roles",
@@ -769,7 +769,7 @@ public class LookupContextSeeder
       });
 
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 31,
         NameEn = "edit-role",
@@ -778,7 +778,7 @@ public class LookupContextSeeder
         ParentID = 30
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 32,
         NameEn = "delete-role",
@@ -789,7 +789,7 @@ public class LookupContextSeeder
       #endregion
 
       #region departments
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 33,
         NameEn = "departments",
@@ -798,7 +798,7 @@ public class LookupContextSeeder
         ParentID = 1
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 34,
         NameEn = "add-department",
@@ -807,7 +807,7 @@ public class LookupContextSeeder
         ParentID = 33
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 35,
         NameEn = "edit-department",
@@ -816,7 +816,7 @@ public class LookupContextSeeder
         ParentID = 33
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 36,
         NameEn = "delete-department",
@@ -831,7 +831,7 @@ public class LookupContextSeeder
 
       #region user-management
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 69,
         NameEn = "user-management",
@@ -840,7 +840,7 @@ public class LookupContextSeeder
       });
 
       #region Role management
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 70,
         NameEn = "roles-management",
@@ -851,7 +851,7 @@ public class LookupContextSeeder
       #endregion
 
       #region Users
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 71,
         NameEn = "users",
@@ -860,7 +860,7 @@ public class LookupContextSeeder
         ParentID = 69
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 72,
         NameEn = "add-user",
@@ -869,7 +869,7 @@ public class LookupContextSeeder
         ParentID = 71
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 73,
         NameEn = "edit-user",
@@ -878,7 +878,7 @@ public class LookupContextSeeder
         ParentID = 71
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 74,
         NameEn = "delete-user",
@@ -890,7 +890,7 @@ public class LookupContextSeeder
       #endregion
 
       #region calender
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 75,
         NameEn = "calender",
@@ -900,7 +900,7 @@ public class LookupContextSeeder
       });
 
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 76,
         NameEn = "add-calender-holiday",
@@ -909,7 +909,7 @@ public class LookupContextSeeder
         ParentID = 75
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 77,
         NameEn = "edit-calender-holiday",
@@ -923,7 +923,7 @@ public class LookupContextSeeder
       #endregion
 
       #region ServiceOne
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 78,
         NameEn = "servic-one",
@@ -933,7 +933,7 @@ public class LookupContextSeeder
 
 
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 80,
         NameEn = "add-service-one",
@@ -942,7 +942,7 @@ public class LookupContextSeeder
         ParentID = 78
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 81,
         NameEn = "edit-service-one",
@@ -953,7 +953,7 @@ public class LookupContextSeeder
 
 
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 82,
         NameEn = "close-service-one",
@@ -965,7 +965,7 @@ public class LookupContextSeeder
 
 
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 84,
         NameEn = "change-category-service-one",
@@ -974,7 +974,7 @@ public class LookupContextSeeder
         ParentID = 78
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 85,
         NameEn = "add-comment-service-one",
@@ -987,7 +987,7 @@ public class LookupContextSeeder
       #endregion
 
       #region Customers
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 86,
         NameEn = "Customers",
@@ -996,7 +996,7 @@ public class LookupContextSeeder
       });
 
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 87,
         NameEn = "add-Customer",
@@ -1005,7 +1005,7 @@ public class LookupContextSeeder
         ParentID = 86
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 88,
         NameEn = "edit-Customer",
@@ -1014,7 +1014,7 @@ public class LookupContextSeeder
         ParentID = 86
       });
 
-      entities.Add(new SystemFunction
+      entities.Add(new SystemActions
       {
         Id = 89,
         NameEn = "delete-Customer",
@@ -1024,7 +1024,7 @@ public class LookupContextSeeder
       });
       #endregion
 
-      builder.Entity<SystemFunction>().HasData(entities);
+      builder.Entity<SystemActions>().HasData(entities);
 
     }
     catch (Exception ex)

@@ -3,10 +3,10 @@ using KH.BuildingBlocks.Extentions.Entities;
 
 namespace KH.Domain.Entities;
 
-public class RoleFunction : TrackerEntity
+public class RolePermissions : TrackerEntity
 {
-  public long SystemFunctionId { get; set; }
-  public SystemFunction SystemFunction { get; set; }
+  public long SystemActionsId { get; set; }
+  public SystemActions SystemActions { get; set; }
 
   public long RoleId { get; set; }
   public Role Role { get; set; }

@@ -1,9 +1,9 @@
 
 namespace KH.PersistenceInfra.Data.Configurations;
 
-public class SystemFunctionConfiguration : IEntityTypeConfiguration<SystemFunction>
+public class SystemFunctionConfiguration : IEntityTypeConfiguration<SystemActions>
 {
-  public void Configure(EntityTypeBuilder<SystemFunction> builder)
+  public void Configure(EntityTypeBuilder<SystemActions> builder)
   {
     builder.Property(p => p.Id).ValueGeneratedNever();
     builder.Property(p => p.NameAr).IsRequired();

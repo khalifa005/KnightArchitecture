@@ -87,7 +87,7 @@ public class TokenService : ITokenService
   private string FormatUserRole(User user)
   {
     var userRoles = user.UserRoles?
-        .Where(o => o.RoleId == UserExtensions.SUPER_ADMIN_ROLE_ID || (o.RoleFunctions != null && o.RoleFunctions.Count > 0))
+        .Where(o => o.RoleId == UserExtensions.SUPER_ADMIN_ROLE_ID || (o.RolePermissions != null && o.RolePermissions.Count > 0))
         ?? Enumerable.Empty<UserRole>();
 
     var options = new JsonSerializerOptions

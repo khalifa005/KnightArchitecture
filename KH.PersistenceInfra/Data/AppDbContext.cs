@@ -32,8 +32,8 @@ public class AppDbContext : DbContext
   public DbSet<KH.Domain.Entities.Role> Roles { get; set; }
   public DbSet<UserRole> UserRoles { get; set; }
   public DbSet<UserGroup> UserGroups { get; set; }
-  public DbSet<SystemFunction> SystemFunctions { get; set; }
-  public DbSet<RoleFunction> RoleFunctions { get; set; }
+  public DbSet<SystemActions> SystemActions { get; set; }
+  public DbSet<RolePermissions> RolePermissions { get; set; }
   public DbSet<SMSFollowUp> SMSFollowUp { get; set; }
   public DbSet<Calendar> Calendar { get; set; }
   public DbSet<EmailTracker> EmailTracker { get; set; }
@@ -74,7 +74,7 @@ public class AppDbContext : DbContext
           break;
         case EntityState.Deleted:
 
-          if (entry.Entity.GetType() == typeof(RoleFunction) || entry.Entity.GetType() == typeof(UserRole) || entry.Entity.GetType() == typeof(UserGroup) || entry.Entity.GetType() == typeof(UserDepartment))
+          if (entry.Entity.GetType() == typeof(RolePermissions) || entry.Entity.GetType() == typeof(UserRole) || entry.Entity.GetType() == typeof(UserGroup) || entry.Entity.GetType() == typeof(UserDepartment))
             break;
 
           entry.State = EntityState.Modified;

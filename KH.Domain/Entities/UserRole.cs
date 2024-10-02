@@ -13,6 +13,6 @@ public class UserRole : TrackerEntity
   public Role? Role { get; set; }
 
   [NotMapped]
-  public List<RoleFunction> RoleFunctions { get; set; } = new List<RoleFunction>();
+  public List<RolePermissions> RolePermissions { get; set; } = new List<RolePermissions>();
 
 }
