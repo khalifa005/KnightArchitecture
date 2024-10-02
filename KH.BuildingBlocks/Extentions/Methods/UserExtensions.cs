@@ -179,22 +179,20 @@ public static class UserExtensions
   /// <returns></returns>
   public static bool HasSuperAdminRole(this ClaimsPrincipal identity)
   {
-    Claim claim = identity?.Claims.Where(c => c.Type == ClaimTypes.Role).SingleOrDefault();
-
-    if (claim == null || claim.Value.IsNullOrEmpty())
+    // Check if the identity has any role claims
+    if (identity?.Claims == null || !identity.Claims.Any(c => c.Type == ClaimTypes.Role))
       return false;
 
-    var rolesSplit = claim.Value.Split("|");
-    for (var index = 0; index < rolesSplit.Length; index++)
+    // Iterate over all role claims and check if any match the SUPER_ADMIN_ROLE_ID
+    foreach (var claim in identity.Claims.Where(c => c.Type == ClaimTypes.Role))
     {
-      var roleElement = rolesSplit[index].Split("=");
-      if (roleElement.Length >= 2)
+      if (int.TryParse(claim.Value, out int roleId) && roleId == SUPER_ADMIN_ROLE_ID)
       {
-        int.TryParse(roleElement[1], out int roleId);
-        if (roleId == SUPER_ADMIN_ROLE_ID)
-          return true;
+        return true; // Found the super admin role
       }
     }
-    return false;
+
+    return false; // No matching role found
   }
+
 }

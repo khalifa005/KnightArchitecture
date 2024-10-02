@@ -1,5 +1,6 @@
 using KH.Dto.Models.AuthenticationDto.Request;
 using KH.Dto.Models.AuthenticationDto.Response;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KH.WebApi.Controllers;
 public class UsersController : BaseApiController
@@ -9,7 +10,7 @@ public class UsersController : BaseApiController
   {
     _userService = userService;
   }
-
+  [AllowAnonymous]
   [HttpPost("Login")]
   public async Task<ActionResult<ApiResponse<AuthenticationResponse>>> Login(LoginRequest request)
   {

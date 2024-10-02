@@ -7,6 +7,8 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text;
 using System.Text.Json.Serialization;
+using System.Linq;
+using Newtonsoft.Json;
 namespace KH.Services.Features;
 
 public class TokenService : ITokenService
@@ -24,11 +26,15 @@ public class TokenService : ITokenService
   public string CreateToken(User user)
   {
 
-    string userRoles = FormatUserRole(user);
+    var userRoles = user.UserRoles?
+        .Where(o =>
+            o.RoleId == UserExtensions.SUPER_ADMIN_ROLE_ID ||
+            (o.RolePermissions != null && o.RolePermissions.Count > 0))
+        .Select(o => o.RoleId.ToString()) // Directly select RoleId as string
+        .ToList();
 
     var claims = new List<Claim>
             {
-               new Claim(ClaimTypes.Role , userRoles),
                new Claim(ClaimTypes.System , SystemTypeEnum.InternalAdmin.ToString()),
                new Claim(ClaimTypes.NameIdentifier ,$"{user.Id}"),
                new Claim(ClaimTypes.Name,$"{user.FirstName}"),
@@ -36,6 +42,8 @@ public class TokenService : ITokenService
                new Claim(ClaimTypes.Email,$"{user.Email}"),
                new Claim(ClaimTypes.GivenName,$"{user.MobileNumber}")
             };
+
+    claims.AddRange(userRoles.Select(roleId => new Claim(ClaimTypes.Role, roleId)));
 
     var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
@@ -84,21 +92,7 @@ public class TokenService : ITokenService
 
     return tokenHandler.WriteToken(token);
   }
-  private string FormatUserRole(User user)
-  {
-    var userRoles = user.UserRoles?
-        .Where(o => o.RoleId == UserExtensions.SUPER_ADMIN_ROLE_ID || (o.RolePermissions != null && o.RolePermissions.Count > 0))
-        ?? Enumerable.Empty<UserRole>();
 
-    var options = new JsonSerializerOptions
-    {
-      Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-      WriteIndented = true,
-      ReferenceHandler = ReferenceHandler.Preserve // This handles circular references
-    };
-
-    return JsonSerializer.Serialize(userRoles, options);
-  }
 
 
 }
