@@ -212,6 +212,7 @@ public class UserService : IUserService
   {
     var repository = _unitOfWork.Repository<User>();
 
+    //QuerySplittingBehavior Warning
     var pagedUsers = await repository.GetPagedWithProjectionAsync<UserListResponse>(
     pageNumber: 1,
     pageSize: 10,

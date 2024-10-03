@@ -30,9 +30,9 @@ public class AuditEntry
       TableName = TableName,
       DateTime = DateTime.UtcNow,
       PrimaryKey = JsonConvert.SerializeObject(KeyValues),
-      OldValues = OldValues.Count == 0 ? null : JsonConvert.SerializeObject(OldValues),
-      NewValues = NewValues.Count == 0 ? null : JsonConvert.SerializeObject(NewValues),
-      AffectedColumns = ChangedColumns.Count == 0 ? null : JsonConvert.SerializeObject(ChangedColumns)
+      OldValues = OldValues.Count == 0 ? "\"No changes\"" : JsonConvert.SerializeObject(OldValues),
+      NewValues = NewValues.Count == 0 ? "\"No changes\"" : JsonConvert.SerializeObject(NewValues),
+      AffectedColumns = ChangedColumns.Count == 0 ? "\"No changes\"" : JsonConvert.SerializeObject(ChangedColumns) // Assign default value
     };
     return audit;
   }

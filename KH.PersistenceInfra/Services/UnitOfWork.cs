@@ -30,10 +30,7 @@ public partial class UnitOfWork : IUnitOfWork
   {
     return await _dbContext.SaveChangesAsync();
   }
-  public async Task<int> CommitWithAuditingAsync(string userId)
-  {
-    return await _dbContext.SaveChangesAsync();
-  }
+
 
   /// <summary>
   /// Begins a new transaction with the specified isolation level.
@@ -99,24 +96,6 @@ public partial class UnitOfWork : IUnitOfWork
     _currentTransaction?.Dispose();
     _dbContext.Dispose();
   }
-
-  /// <summary>
-  /// Gets a repository for the specified entity type.
-  /// </summary>
-  /// <typeparam name="TEntity">The type of the entity.</typeparam>
-  /// <returns>A repository instance for the specified entity type.</returns>
-  //public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
-  //{
-  //  var typeName = typeof(TEntity).Name;
-
-  //  if (!_repositories.ContainsKey(typeName))
-  //  {
-  //    var repositoryInstance = Activator.CreateInstance(typeof(GenericRepository<>).MakeGenericType(typeof(TEntity)), _dbContext);
-  //    _repositories[typeName] = repositoryInstance;
-  //  }
-
-  //  return (IGenericRepository<TEntity>)_repositories[typeName];
-  //}
 
   public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
   {

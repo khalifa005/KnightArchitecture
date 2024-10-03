@@ -1,3 +1,4 @@
+using KH.BuildingBlocks.Enums;
 using KH.BuildingBlocks.Extentions.Entities;
 using KH.BuildingBlocks.Extentions.Methods;
 using KH.PersistenceInfra.Data.Seed;
@@ -6,33 +7,34 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace KH.PersistenceInfra.Data;
 
-public class AppDbContext : AuditableContext
+public class AppDbContext : DbContext
 {
   private readonly ILoggerFactory _loggerFactory;
   private readonly ILogger<AppDbContext> _logger;
   private readonly IServiceProvider _serviceProvider;
   private readonly ICurrentUserService _currentUserService;
+
   public AppDbContext(
-    DbContextOptions<AppDbContext> options,
-    ICurrentUserService currentUserService,
-    ILogger<AppDbContext> logger,
-    IServiceProvider serviceProvider,
-    ILoggerFactory loggerFactory) : base(options)
+      DbContextOptions<AppDbContext> options,
+      ICurrentUserService currentUserService,
+      ILogger<AppDbContext> logger,
+      IServiceProvider serviceProvider,
+      ILoggerFactory loggerFactory) : base(options)
   {
     _loggerFactory = loggerFactory;
     _currentUserService = currentUserService;
-    
     _serviceProvider = serviceProvider;
     _logger = logger;
   }
 
+  public DbSet<Audit> AuditTrails { get; set; }
   public DbSet<Media> Media { get; set; }
   public DbSet<Customer> Customers { get; set; }
   public DbSet<City> Cities { get; set; }
   public DbSet<Department> Departments { get; set; }
   public DbSet<Group> Groups { get; set; }
   public DbSet<User> Users { get; set; }
-  public DbSet<KH.Domain.Entities.Role> Roles { get; set; }
+  public DbSet<Role> Roles { get; set; }
   public DbSet<UserRole> UserRoles { get; set; }
   public DbSet<UserGroup> UserGroups { get; set; }
   public DbSet<Permission> Permissions { get; set; }
@@ -40,6 +42,7 @@ public class AppDbContext : AuditableContext
   public DbSet<SMSFollowUp> SMSFollowUp { get; set; }
   public DbSet<Calendar> Calendar { get; set; }
   public DbSet<EmailTracker> EmailTracker { get; set; }
+
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
@@ -51,7 +54,6 @@ public class AppDbContext : AuditableContext
 
     modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-    //LookupContextSeeder.SeedRoles(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedCities(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedDepartment(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedGroups(modelBuilder, _loggerFactory);
@@ -59,13 +61,13 @@ public class AppDbContext : AuditableContext
     LookupContextSeeder.SeedRoles(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedUser(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedSystemFunction(modelBuilder, _loggerFactory);
-
-    //-- Add Type To Context Model but exclude from migration
-    //modelBuilder.Entity<EscalationMatrixDto>().HasNoKey().ToTable((string?)null);
   }
 
   public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
   {
+    var userId = _currentUserService.UserId;
+
+    // Handle the state of TrackerEntity types
     foreach (var entry in ChangeTracker.Entries<TrackerEntity>())
     {
       switch (entry.State)
@@ -75,38 +77,146 @@ public class AppDbContext : AuditableContext
         case EntityState.Unchanged:
           break;
         case EntityState.Deleted:
-
-          if (entry.Entity.GetType() == typeof(RolePermissions) || entry.Entity.GetType() == typeof(UserRole) || entry.Entity.GetType() == typeof(UserGroup) || entry.Entity.GetType() == typeof(UserDepartment))
+          if (entry.Entity.GetType() == typeof(RolePermissions) || entry.Entity.GetType() == typeof(UserRole) ||
+              entry.Entity.GetType() == typeof(UserGroup) || entry.Entity.GetType() == typeof(UserDepartment))
             break;
 
           entry.State = EntityState.Modified;
-          entry.Entity.DeletedDate = DateTime.UtcNow.AddHours(3);//ksa
-          entry.Entity.DeletedById = _serviceProvider.GetUserId();//test ??
+          entry.Entity.DeletedDate = DateTime.UtcNow.AddHours(3); // KSA Time
+          entry.Entity.DeletedById = _serviceProvider.GetUserId(); // Custom service to get user ID
           entry.Entity.IsDeleted = true;
           break;
+
         case EntityState.Modified:
-          entry.Entity.UpdatedDate = DateTime.UtcNow.AddHours(3);//ksa;
-          entry.Entity.UpdatedById = _serviceProvider.GetUserId();//test ??
+          entry.Entity.UpdatedDate = DateTime.UtcNow.AddHours(3); // KSA Time
+          entry.Entity.UpdatedById = _serviceProvider.GetUserId(); // Custom service to get user ID
           entry.Entity.IsDeleted = false;
           break;
+
         case EntityState.Added:
-          entry.Entity.CreatedDate = DateTime.UtcNow.AddHours(3);//ksa
-          entry.Entity.CreatedById = _serviceProvider.GetUserId();//test ??
+          entry.Entity.CreatedDate = DateTime.UtcNow.AddHours(3); // KSA Time
+          entry.Entity.CreatedById = _serviceProvider.GetUserId(); // Custom service to get user ID
           entry.Entity.IsDeleted = false;
           break;
+
         default:
           break;
       }
     }
 
-    if (_currentUserService.UserId == null)
+    // Step 1: Call OnBeforeSaveChanges to gather audit entries
+    var auditEntries = OnBeforeSaveChanges(userId);
+
+    // Step 2: Save changes to the database
+    var result = await base.SaveChangesAsync(cancellationToken);
+
+    // Step 3: Process the audit entries with temporary properties after save
+    await OnAfterSaveChanges(auditEntries, cancellationToken);
+
+    return result;
+  }
+
+  // Step 1: OnBeforeSaveChanges method
+  private List<AuditEntry> OnBeforeSaveChanges(string userId)
+  {
+    ChangeTracker.DetectChanges();
+    var auditEntries = new List<AuditEntry>();
+
+    foreach (var entry in ChangeTracker.Entries())
     {
-      return await base.SaveChangesAsync(cancellationToken);
-    }
-    else
-    {
-      return await base.SaveChangesAsync(_currentUserService.UserId, cancellationToken);
+      if (entry.Entity is Audit || entry.State == EntityState.Detached || entry.State == EntityState.Unchanged)
+        continue;
+
+      var auditEntry = new AuditEntry(entry)
+      {
+        TableName = entry.Entity.GetType().Name,
+        UserId = userId
+      };
+
+      auditEntries.Add(auditEntry);
+
+      foreach (var property in entry.Properties)
+      {
+        if (property.IsTemporary)
+        {
+          auditEntry.TemporaryProperties.Add(property);
+          continue;
+        }
+
+        string propertyName = property.Metadata.Name;
+
+        if (property.Metadata.IsPrimaryKey())
+        {
+          auditEntry.KeyValues[propertyName] = property.CurrentValue;
+          continue;
+        }
+
+        switch (entry.State)
+        {
+          case EntityState.Added:
+            auditEntry.AuditType = AuditType.Create;
+            auditEntry.NewValues[propertyName] = property.CurrentValue;
+            break;
+
+          case EntityState.Deleted:
+            auditEntry.AuditType = AuditType.Delete;
+            auditEntry.OldValues[propertyName] = property.OriginalValue;
+            break;
+
+          case EntityState.Modified:
+            if (property.IsModified && !Equals(property.OriginalValue, property.CurrentValue))
+            {
+              auditEntry.ChangedColumns.Add(propertyName);
+              auditEntry.AuditType = AuditType.Update;
+              auditEntry.OldValues[propertyName] = property.OriginalValue;
+              auditEntry.NewValues[propertyName] = property.CurrentValue;
+            }
+            break;
+        }
+      }
+
+      // Ensure that AffectedColumns are populated or handle if there are no changes
+      if (auditEntry.AuditType == AuditType.Update && !auditEntry.ChangedColumns.Any())
+      {
+        // Optionally skip or populate with "No changes" if needed
+        auditEntry.ChangedColumns.Add("No changes");
+      }
     }
 
+    foreach (var auditEntry in auditEntries.Where(ae => !ae.HasTemporaryProperties))
+    {
+      AuditTrails.Add(auditEntry.ToAudit());
+    }
+
+    return auditEntries.Where(ae => ae.HasTemporaryProperties).ToList();
+  }
+
+
+  // Step 3: OnAfterSaveChanges method to finalize audit entries with temporary properties
+  private Task OnAfterSaveChanges(List<AuditEntry> auditEntries, CancellationToken cancellationToken)
+  {
+    if (auditEntries == null || !auditEntries.Any())
+      return Task.CompletedTask;
+
+    foreach (var auditEntry in auditEntries)
+    {
+      foreach (var prop in auditEntry.TemporaryProperties)
+      {
+        if (prop.Metadata.IsPrimaryKey())
+        {
+          auditEntry.KeyValues[prop.Metadata.Name] = prop.CurrentValue;
+        }
+        else
+        {
+          auditEntry.NewValues[prop.Metadata.Name] = prop.CurrentValue;
+        }
+      }
+
+      // Add finalized audit entry to AuditTrails
+      AuditTrails.Add(auditEntry.ToAudit());
+    }
+
+    // Save audit entries to the database
+    return base.SaveChangesAsync(cancellationToken);
   }
 }

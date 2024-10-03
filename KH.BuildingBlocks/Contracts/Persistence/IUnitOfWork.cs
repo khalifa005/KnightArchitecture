@@ -6,10 +6,7 @@ public interface IUnitOfWork : IDisposable
 {
   IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
   Task<int> CommitAsync();
-  Task<int> CommitWithAuditingAsync(string userId);
   Task BeginTransactionAsync();
   Task RollBackTransactionAsync();
   Task CommitTransactionAsync();
-
-  //Task<IReadOnlyList<T>> GetFromSql<T>(string storedName, int cmdType = 1, params Dictionary<object, object>[] parameters) where T : class;
 }
