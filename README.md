@@ -427,6 +427,9 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseMiddleware<PermissionsMiddleware>();  // Custom permissions handling
     app.UseAuthorization();  // Role-based authorization
 }
+```
+
+
 
 # Auditing Process in KnightHedgeArchitecture Repository
 
@@ -476,4 +479,3 @@ The `audittable.cs` migration file creates a database table named `AuditTrails`,
 
 ## Conclusion
 The auditing process in this repository is designed to provide detailed tracking of all significant changes to the system. It stores information about what changes were made, who made them, and when they occurred, allowing for transparency and traceability in the system.
-
