@@ -1,5 +1,6 @@
 using DinkToPdf;
 using DinkToPdf.Contracts;
+using KH.BuildingBlocks.Services;
 using KH.BuildingBlocks.Settings;
 using KH.Services.Features;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,7 @@ public static class ServicesRegisterationService
     services.AddScoped<IGroupService, GroupService>();
     services.AddScoped<ITokenService, TokenService>();
     services.AddScoped<IAuditService, AuditService>();
+    services.AddSingleton<IExcelService, ExcelService>();
 
     // Register DinkToPdf converter
     services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));

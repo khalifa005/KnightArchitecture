@@ -19,7 +19,6 @@ public static class HelperServiceRegisteration
     services.AddHttpContextAccessor();
     services.AddScoped<ICurrentUserService, CurrentUserService>();
     services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
-    //services.AddScoped<IExcelService, ExcelService>();
     services.AddScoped<FileManager>();
     //services.AddScoped(typeof(Lazy<>), typeof(LazilyResolved<>));
     services.AddSwaggerDocumentation(configuration);
