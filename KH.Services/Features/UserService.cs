@@ -382,7 +382,7 @@ public class UserService : IUserService
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var userFromDb = await repository.GetAsync(request.Id.Value);
+      var userFromDb = await repository.GetAsync(request.Id.Value, tracking: true);
 
       if (userFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -398,7 +398,7 @@ public class UserService : IUserService
 
 
 
-      repository.Update(userFromDb);
+      //repository.UpdateDetachedEntity(userFromDb);
       await _unitOfWork.CommitAsync();
       await _unitOfWork.CommitTransactionAsync();
 

@@ -218,7 +218,7 @@ public class DemoUserService
   public async Task UpdateUserAsync(User user)
   {
     var repository = _unitOfWork.Repository<User>();
-    repository.Update(user);
+    repository.UpdateDetachedEntity(user);//, tracking: true
     await _unitOfWork.CommitAsync();
   }
 

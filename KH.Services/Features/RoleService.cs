@@ -119,7 +119,7 @@ public class RoleService : IRoleService
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var entityFromDb = await repository.GetAsync(request.Id.Value);
+      var entityFromDb = await repository.GetAsync(request.Id.Value, tracking: true);
 
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -129,7 +129,6 @@ public class RoleService : IRoleService
       entityFromDb.NameEn = entityAfterMapping.NameEn;
       entityFromDb.Description = entityAfterMapping.Description;
 
-      repository.Update(entityFromDb);
       await _unitOfWork.CommitAsync();
       await _unitOfWork.CommitTransactionAsync();
 
