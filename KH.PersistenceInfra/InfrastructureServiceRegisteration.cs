@@ -19,34 +19,9 @@ public static class InfrastructureServiceRegisteration
 
     services.AddDbContext<AppDbContext>(db => db.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
     //services.AddSingleton<DapperContext>();
-
-    //services.AddSingleton<IResponseCacheService, ResponseCacheService>();
-    //services.AddScoped<ITokenService, TokenService>();
     services.AddScoped<IUnitOfWork, UnitOfWork>();
     services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-    services.AddScoped<IUserPermissionService, UserPermissionService>();
-    services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
-
-    services.AddIdentityService(configuration);
-
-   
-    services.AddCors(opt =>
-    {
-      opt.AddPolicy("CorsPolicy", policy =>
-            {
-              //var issuer = configuration["TokenSettings:Issuer"];
-              //if (issuer != null)
-              //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(issuer);
-              //else
-              policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-            });
-    });
-
-    //services.AddSession(options =>
-    //{
-    //  options.IdleTimeout = TimeSpan.FromMinutes(30);
-    //});
 
     return services;
   }

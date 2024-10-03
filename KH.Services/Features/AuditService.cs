@@ -1,23 +1,9 @@
-using AutoMapper;
-using KH.BuildingBlocks.Contracts.Persistence;
 using KH.BuildingBlocks.Extentions.Entities;
-using KH.BuildingBlocks.Responses;
 using KH.BuildingBlocks.Services;
-using KH.Dto.lookups.DepartmentDto.Response;
 using Microsoft.Extensions.Localization;
 using System.Globalization;
-using System.Net;
 
-namespace KH.PersistenceInfra.Services;
-
-public interface IAuditService
-{
-  Task<ApiResponse<List<AuditResponse>>> GetCurrentUserTrailsAsync(string userId);
-
-  Task<ApiResponse<string>> ExportToExcelAsync(string userId, string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false);
-
-}
-
+namespace KH.Services.Features;
 public class AuditService : IAuditService
 {
 
@@ -28,12 +14,11 @@ public class AuditService : IAuditService
 
   public AuditService(
       IMapper mapper,
-      IUnitOfWork unitOfWork,
-      IExcelService excelService)
+      IUnitOfWork unitOfWork)
   {
     _mapper = mapper;
     _unitOfWork = unitOfWork;
-    _excelService = excelService;
+    //_excelService = excelService;
   }
 
   public async Task<ApiResponse<List<AuditResponse>>> GetCurrentUserTrailsAsync(string userId)
@@ -76,3 +61,4 @@ public class AuditService : IAuditService
     return res;
   }
 }
+

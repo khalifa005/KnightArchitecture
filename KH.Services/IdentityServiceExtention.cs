@@ -1,14 +1,24 @@
+using KH.BuildingBlocks.Auth.V1;
 using KH.BuildingBlocks.Responses;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System.Net;
+using System.Text;
 
-namespace KH.PersistenceInfra;
+namespace KH.Services;
 
 public static class IdentityServiceExtention
 {
   public static IServiceCollection AddIdentityService(this IServiceCollection services, IConfiguration configuration)
   {
+    services.AddScoped<IUserPermissionService, UserPermissionService>();
+    services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
+
+
     var key = Encoding.UTF8.GetBytes(configuration["TokenSettings:Key"]);
 
     services.AddAuthentication(options =>

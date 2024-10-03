@@ -12,6 +12,7 @@ public static class ServicesRegisterationService
 {
   public static IServiceCollection AddBusinessService(this IServiceCollection services, IConfiguration configuration)
   {
+    services.AddIdentityService(configuration);
 
     services.AddScoped<IUserService, UserService>();
     services.AddScoped<IMediaService, MediaService>();
@@ -21,6 +22,7 @@ public static class ServicesRegisterationService
     services.AddScoped<IDepartmentService, DepartmentService>();
     services.AddScoped<IGroupService, GroupService>();
     services.AddScoped<ITokenService, TokenService>();
+    services.AddScoped<IAuditService, AuditService>();
 
     // Register DinkToPdf converter
     services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));

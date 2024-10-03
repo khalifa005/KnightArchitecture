@@ -65,7 +65,24 @@ public class Startup
       );
 
     services.AddMemoryCache();
+    //services.AddSession(options =>
+    //{
+    //  options.IdleTimeout = TimeSpan.FromMinutes(30);
+    //});
 
+    //services.AddSingleton<IResponseCacheService, ResponseCacheService>();
+
+    services.AddCors(opt =>
+    {
+      opt.AddPolicy("CorsPolicy", policy =>
+      {
+        //var issuer = configuration["TokenSettings:Issuer"];
+        //if (issuer != null)
+        //    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(issuer);
+        //else
+        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+      });
+    });
 
     services.AddInfrastructureService(Configuration);
     //services.AddBusinessService(Configuration);

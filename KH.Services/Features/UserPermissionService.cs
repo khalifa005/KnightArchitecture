@@ -1,10 +1,7 @@
 using KH.BuildingBlocks.Auth.V1;
 using KH.BuildingBlocks.Constant;
-using KH.BuildingBlocks.Contracts.Persistence;
 using KH.BuildingBlocks.Enums;
 using System.Security.Claims;
-
-namespace KH.PersistenceInfra.Services;
 
 public class UserPermissionService : IUserPermissionService
 {
@@ -24,7 +21,7 @@ public class UserPermissionService : IUserPermissionService
     if (systemType == SystemTypeEnum.ExternalCustomer.ToString())
     {
       //--Add Default Permissions In case System Is CRMClient
-      userPermissions = new List<Claim> { new Claim(PermissionRequirement.ClaimType, ApplicationConstant.CRM_CLIENT_SYSTEM_PERMISSION) };
+      userPermissions = new List<Claim> { new Claim(PermissionRequirement.ClaimType, ApplicationConstant.CUSTOMER_SYSTEM_PERMISSION) };
     }
     else
     {
@@ -54,3 +51,4 @@ public class UserPermissionService : IUserPermissionService
     return permissionsIdentity;
   }
 }
+
