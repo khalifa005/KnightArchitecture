@@ -1,5 +1,3 @@
-
-
 namespace KH.PersistenceInfra.Data.Configurations;
 
 public class CalenderConfiguration : IEntityTypeConfiguration<Calendar>
