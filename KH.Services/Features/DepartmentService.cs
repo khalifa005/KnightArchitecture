@@ -84,7 +84,8 @@ public class DepartmentService : IDepartmentService
       var repository = _unitOfWork.Repository<Department>();
 
       await repository.AddAsync(entity);
-      await _unitOfWork.CommitWithAuditingAsync("26");
+      //await _unitOfWork.CommitWithAuditingAsync("26");
+      await _unitOfWork.CommitAsync();
 
       await _unitOfWork.CommitTransactionAsync();
 
@@ -125,14 +126,18 @@ public class DepartmentService : IDepartmentService
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
 
+      //cleaner way
+      //var oldProduct = await _context.Product.FindAsync(id);
+      //_context.Entry(oldProduct).CurrentValues.SetValues(product);
+
       //Add the new props here ..etc
       entityFromDb.NameAr = entityAfterMapping.NameAr;
       entityFromDb.NameEn = entityAfterMapping.NameEn;
       entityFromDb.Description = entityAfterMapping.Description;
 
       repository.Update(entityFromDb);
-      //await _unitOfWork.CommitAsync();
-      await _unitOfWork.CommitWithAuditingAsync("26");
+      await _unitOfWork.CommitAsync();
+      //await _unitOfWork.CommitWithAuditingAsync("26");
 
       await _unitOfWork.CommitTransactionAsync();
 

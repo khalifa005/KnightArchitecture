@@ -32,7 +32,7 @@ public partial class UnitOfWork : IUnitOfWork
   }
   public async Task<int> CommitWithAuditingAsync(string userId)
   {
-    return await _dbContext.SaveChangesAsync(userId);
+    return await _dbContext.SaveChangesAsync();
   }
 
   /// <summary>
