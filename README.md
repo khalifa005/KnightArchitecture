@@ -428,4 +428,52 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseAuthorization();  // Role-based authorization
 }
 
+# Auditing Process in KnightHedgeArchitecture Repository
+
+The auditing process in the **KnightHedgeArchitecture** repository is designed to track changes to various entities, focusing on capturing the essential details of data modifications. Here's a breakdown of the key components involved in the auditing system:
+
+## 1. Audit Types
+Audit events are categorized into three types, as defined in the `AuditType.cs` file:
+
+- **Create**: When a new entity is added to the system.
+- **Update**: When an existing entity is modified.
+- **Delete**: When an entity is removed from the system.
+
+## 2. Audit Entry
+The `AuditEntry` class in the `Audit.cs` file is responsible for holding details about changes made to entities. It captures:
+
+- `UserId`: The identifier of the user who performed the action.
+- `TableName`: The name of the table being modified.
+- `KeyValues`: The primary key of the affected entity.
+- `OldValues`: The previous state of the entity before modification.
+- `NewValues`: The new state of the entity after modification.
+- `ChangedColumns`: Columns that were changed during the action.
+
+The `AuditEntry` also converts its state to a more general `Audit` entity for storage, including serializing changes and timestamps.
+
+## 3. Audit Response
+The `AuditResponse.cs` file defines the structure of an audit record that will be returned in responses. It includes:
+
+- `UserId`: The user responsible for the action.
+- `Type`: The type of audit event (Create, Update, Delete).
+- `TableName`: The affected table.
+- `OldValues` and `NewValues`: The values before and after the change.
+- `AffectedColumns`: The columns that were modified.
+- `PrimaryKey`: The primary key of the entity involved.
+
+## 4. Audit Service
+The `IAuditService.cs` file provides services for retrieving and exporting audit trails:
+
+- `GetCurrentUserTrailsAsync`: Retrieves audit logs related to a specific user.
+- `ExportToExcelAsync`: Exports audit logs to an Excel file, with options to filter by search terms, including old or new values.
+
+## 5. Audit Table Migration
+The `audittable.cs` migration file creates a database table named `AuditTrails`, which stores the audit records. The table contains fields for storing:
+
+- `UserId`: The user who performed the action.
+- `Type`: The type of the audit (Create, Update, Delete).
+- `TableName`, `OldValues`, `NewValues`, `AffectedColumns`, and `PrimaryKey`: Storing detailed information about the audit event.
+
+## Conclusion
+The auditing process in this repository is designed to provide detailed tracking of all significant changes to the system. It stores information about what changes were made, who made them, and when they occurred, allowing for transparency and traceability in the system.
 
