@@ -451,12 +451,12 @@ public class UserService : IUserService
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
     var repository = _unitOfWork.Repository<User>();
-    var user = await repository.GetAsyncTracking(
+    var user = await repository.GetAsync(
       id,
       q => q.Include(u => u.UserRoles)
       .ThenInclude(ur => ur.Role)
       .Include(u => u.UserGroups)
-      .Include(u => u.UserDepartments));
+      .Include(u => u.UserDepartments), tracking: true);
 
     if (user == null)
     {

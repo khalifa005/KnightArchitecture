@@ -1,8 +1,12 @@
 using KH.BuildingBlocks.Contracts.Persistence;
 using KH.BuildingBlocks.Extentions.Entities;
 using KH.BuildingBlocks.Responses;
+using KH.BuildingBlocks.Services;
+using KH.Domain.Entities.lookups;
 using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore.Query;
+using System;
+using System.Net.NetworkInformation;
 
 namespace KH.PersistenceInfra.Repositories;
 
@@ -109,13 +113,33 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     var query = ApplyIncludes(include, tracking: true);
     return await query.FirstOrDefaultAsync(t => t.Id == id);
   }
+  public async Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, bool tracking = false)
+  {
+    var query = ApplyIncludes(include, tracking: tracking);
+    return await query.FirstOrDefaultAsync(t => t.Id == id);
+  }
+
+
 
   public void Update(T entity)
   {
-    _dbContext.Set<T>().Attach(entity);
-    _dbContext.Entry(entity).State = EntityState.Modified;
-  }
 
+    //CurrentValues.SetValues, EF Core will update only the properties that differ from the tracked entity in the context.
+    //_dbContext.Entry(entity).CurrentValues.SetValues(entity);
+    // Reload and track changes
+    //_dbContext.Set<T>().Attach(entity);
+    //_dbContext.Entry(entity).CurrentValues.SetValues(entity); // Update the tracked entity
+
+    //Marks the entire entity as modified and will result in all columns being updated.
+    //_dbContext.Set<T>().Attach(entity);
+    //_dbContext.Entry(entity).State = EntityState.Modified;
+
+    _dbContext.Entry(entity).CurrentValues.SetValues(entity);
+  }
+  public void UpdateX(T entity, T newEntity)
+  {
+    _dbContext.Entry(entity).CurrentValues.SetValues(newEntity);
+  }
   public void UpdateRange(ICollection<T> entities)
   {
     _dbContext.Set<T>().AttachRange(entities);

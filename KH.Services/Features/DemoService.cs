@@ -161,9 +161,9 @@ public class DemoUserService
   public async Task<User> GetUserByIdWithTrackingAsync(long id)
   {
     var repository = _unitOfWork.Repository<User>();
-    return await repository.GetAsyncTracking(id, q => q.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
+    return await repository.GetAsync(id, q => q.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
                                                       .Include(u => u.UserGroups)
-                                                      .Include(u => u.UserDepartments));
+                                                      .Include(u => u.UserDepartments), tracking:true);
   }
 
   // Find users by expression

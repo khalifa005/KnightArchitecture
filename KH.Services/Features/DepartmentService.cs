@@ -121,7 +121,7 @@ public class DepartmentService : IDepartmentService
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var entityFromDb = await repository.GetAsync(request.Id.Value);
+      var entityFromDb = await repository.GetAsync(request.Id.Value, tracking: true);
 
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -135,7 +135,8 @@ public class DepartmentService : IDepartmentService
       entityFromDb.NameEn = entityAfterMapping.NameEn;
       entityFromDb.Description = entityAfterMapping.Description;
 
-      repository.Update(entityFromDb);
+      //repository.Update(entityFromDb);
+      //repository.UpdateX(entityFromDb, entityAfterMapping);
       await _unitOfWork.CommitAsync();
       //await _unitOfWork.CommitWithAuditingAsync("26");
 
