@@ -4,73 +4,11 @@ namespace KH.BuildingBlocks.Extentions;
 
 public static class SwaggerExtention
 {
-  public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services, IConfiguration configuration)
-  {
-
-    services.AddSwaggerGen();
-
-    //services.AddSwaggerGen(options =>
-    //{
-    //  options.SwaggerDoc("v1", new OpenApiInfo { Title = "Clean Architecture Web API V1", Version = "version 1" });
-
-    //  // bearer -> basic , Bearer -> Basic
-
-    //  //var securitySchema = new OpenApiSecurityScheme
-    //  //{
-    //  //    Description = "Jwt Auth Basic Scheme",
-    //  //    Name = "Authorization",
-    //  //    In = ParameterLocation.Header,
-    //  //    Type = SecuritySchemeType.Http,
-    //  //    Scheme = "basic",
-    //  //    Reference = new OpenApiReference
-    //  //    {
-    //  //        Id = "Basic",
-    //  //        Type = ReferenceType.SecurityScheme
-    //  //    }
-    //  //};
-
-    //  //var securitySchema = new OpenApiSecurityScheme
-    //  //{
-    //  //  Description = "identity",
-    //  //  Name = "Authorization",
-    //  //  In = ParameterLocation.Header,
-    //  //  Type = SecuritySchemeType.ApiKey,
-    //  //  Scheme = "oauth2",
-    //  //  Reference = new OpenApiReference
-    //  //  {
-    //  //    Id = "Bearer",
-    //  //    Type = ReferenceType.SecurityScheme
-    //  //  }
-    //  //};
-
-    //  //options.AddSecurityDefinition("Bearer", securitySchema);
-    //  //var securityRequirement = new OpenApiSecurityRequirement
-    //  //  {
-    //  //            { securitySchema , new[] { "Bearer" } }
-    //  //  };
-
-    //  //options.AddSecurityDefinition("Basic", securitySchema);
-    //  //var securityRequirement = new OpenApiSecurityRequirement
-    //  //{
-    //  //    { securitySchema , new[] { "Basic" } }
-    //  //};
-    //  //options.AddSecurityRequirement(securityRequirement);
-
-    //});
-
-
-    return services;
-  }
-
   internal static void RegisterSwagger(this IServiceCollection services)
   {
-    services.AddSwaggerGen(async c =>
+    services.AddSwaggerGen(c =>
     {
-      //TODO - Lowercase Swagger Documents
-      //c.DocumentFilter<LowercaseDocumentFilter>();
-      //Refer - https://gist.github.com/rafalkasa/01d5e3b265e5aa075678e0adfd54e23f
-
-      // include all project's xml comments
+      // Include all project's XML comments
       var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
       foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
       {
@@ -96,36 +34,62 @@ public static class SwaggerExtention
         }
       });
 
-      //var localizer = await GetRegisteredServerLocalizerAsync<ServerCommonResources>(services);
-
+      // JWT Bearer Authentication
       c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
       {
         Name = "Authorization",
         In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
+        Type = SecuritySchemeType.Http,
         Scheme = "Bearer",
         BearerFormat = "JWT",
         Description = "Input your Bearer token in this format - Bearer {your token here} to access this API",
-        //Description = localizer["Input your Bearer token in this format - Bearer {your token here} to access this API"],
       });
+
+      // Basic Authentication
+      c.AddSecurityDefinition("Basic", new OpenApiSecurityScheme
+      {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "basic",
+        In = ParameterLocation.Header,
+        Description = "Input your username and password to access this API"
+      });
+
+      // Add Security Requirements for both JWT and Basic Auth
       c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
                 {
+                    Reference = new OpenApiReference
                     {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer",
-                            },
-                            Scheme = "Bearer",
-                            Name = "Bearer",
-                            In = ParameterLocation.Header,
-                        }, new List<string>()
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
                     },
-                });
+                    Scheme = "Bearer",
+                    Name = "Bearer",
+                    In = ParameterLocation.Header,
+                },
+                new List<string>()
+            },
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Basic"
+                    },
+                    Scheme = "basic",
+                    Name = "Basic",
+                    In = ParameterLocation.Header,
+                },
+                new List<string>()
+            }
+        });
     });
   }
+
 
   public static IApplicationBuilder UseSwaggerDocumentationMiddleware(this IApplicationBuilder app, IConfiguration configuration)
   {
@@ -146,9 +110,6 @@ public static class SwaggerExtention
       options.DisplayRequestDuration();
       options.DefaultModelsExpandDepth(-1);  // Collapse models by default
     });
-
-
-   
 
     return app;
   }

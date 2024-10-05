@@ -1,4 +1,5 @@
 using KH.BuildingBlocks.Constant;
+using KH.BuildingBlocks.Extentions;
 using KH.BuildingBlocks.Extentions.Files;
 using KH.BuildingBlocks.Extentions.Methods;
 using KH.BuildingBlocks.Services;
@@ -19,7 +20,7 @@ public static class HelperServiceRegisteration
     services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
     services.AddScoped<FileManager>();
     //services.AddScoped(typeof(Lazy<>), typeof(LazilyResolved<>));
-    services.AddSwaggerDocumentation(configuration);
+    services.RegisterSwagger();
     services.AddServerLocalization();
 
     #region Settings

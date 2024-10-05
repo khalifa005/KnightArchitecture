@@ -1,11 +1,20 @@
+using AngleSharp.Css.Values;
 using KH.BuildingBlocks.Auth.V1;
+using KH.Domain.Entities;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using PuppeteerSharp;
+using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
+using System.Text.Encodings.Web;
 
 namespace KH.Services;
 
@@ -21,9 +30,24 @@ public static class IdentityServiceExtention
 
     services.AddAuthentication(options =>
     {
-      options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-      options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+      //options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+      //options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+      options.DefaultScheme = "BasicOrJwt";  // Set a policy scheme to handle both
+
+      options.DefaultChallengeScheme = "BasicOrJwt";
     })
+      .AddPolicyScheme("BasicOrJwt", "JWT or Basic", options =>
+       {
+         options.ForwardDefaultSelector = context =>
+         {
+           var authHeader = context.Request.Headers["Authorization"].ToString();
+           if (authHeader.StartsWith("Basic ", StringComparison.OrdinalIgnoreCase))
+           {
+             return "BasicAuthentication";
+           }
+           return JwtBearerDefaults.AuthenticationScheme;
+         };
+       })
     .AddJwtBearer(bearer =>
     {
       bearer.RequireHttpsMetadata = false;
@@ -97,10 +121,12 @@ public static class IdentityServiceExtention
         // Handle missing or invalid token
         OnChallenge = context =>
         {
+          //DefaultChallengeScheme is used for prompting the user for credentials when authentication is required but not present.
+
           if (string.IsNullOrEmpty(context.Request.Headers["Authorization"]))
-          {
-            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-            context.Response.ContentType = "application/json";
+              {
+                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                context.Response.ContentType = "application/json";
             var result = JsonConvert.SerializeObject(new ApiResponse<object>(StatusCodes.Status401Unauthorized)
             {
               ErrorMessage = "No token provided.",
@@ -112,9 +138,71 @@ public static class IdentityServiceExtention
           return Task.CompletedTask;
         }
       };
-    });
+    }).AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null); // Adding Basic Authentication
 
     return services;
   }
 
 }
+
+public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+{
+  public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
+                                    ILoggerFactory logger,
+                                    UrlEncoder encoder,
+                                    ISystemClock clock)
+      : base(options, logger, encoder, clock)
+  {
+  }
+
+  protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
+  {
+    // Check for Authorization header
+    if (!Request.Headers.ContainsKey("Authorization"))
+    {
+      return AuthenticateResult.Fail("Missing Authorization Header");
+    }
+
+    try
+    {
+      var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
+      var credentials = Encoding.UTF8
+          .GetString(Convert.FromBase64String(authHeader.Parameter))
+          .Split(':', 2);
+
+      var username = credentials[0];
+      var password = credentials[1];
+
+      // Validate credentials (e.g., against a user store)
+      if (IsValidUser(username, password))
+      {
+        var claims = new[] {
+          new Claim(ClaimTypes.Name, username),
+          new Claim(ClaimTypes.NameIdentifier, "26")
+        };
+
+        var identity = new ClaimsIdentity(claims, Scheme.Name);
+        var principal = new ClaimsPrincipal(identity);
+        var ticket = new AuthenticationTicket(principal, Scheme.Name);
+
+        return AuthenticateResult.Success(ticket);
+      }
+      else
+      {
+        return AuthenticateResult.Fail("Invalid Username or Password");
+      }
+    }
+    catch
+    {
+      return AuthenticateResult.Fail("Invalid Authorization Header");
+    }
+  }
+
+  private bool IsValidUser(string username, string password)
+  {
+    // Implement your own user validation logic
+    // This could be querying a database, checking a hardcoded list, etc.
+    return username == "admin" && password == "password"; // Example hardcoded user
+  }
+}
+
