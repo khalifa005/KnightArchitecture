@@ -101,7 +101,7 @@ public class Startup
 
     app.UseMiddleware<ExceptionMiddleware>();
 
-    app.UseSwaggerDocumentation(Configuration);
+    app.UseSwaggerDocumentationMiddleware(Configuration);
 
     if (env.IsDevelopment())
     {

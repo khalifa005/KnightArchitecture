@@ -126,5 +126,31 @@ public static class SwaggerExtention
                 });
     });
   }
+
+  public static IApplicationBuilder UseSwaggerDocumentationMiddleware(this IApplicationBuilder app, IConfiguration configuration)
+  {
+
+    app.UseSwagger();
+
+    app.UseSwaggerUI(options =>
+    {
+      var isLocal = bool.TryParse(configuration["GlobalSettings:IsLocal"], out bool local) && local;
+      var iisApiName = configuration["GlobalSettings:IISApiName"];
+      var swagV1 = isLocal ? "/swagger/v1/swagger.json" : $"/{iisApiName}/swagger/v1/swagger.json";
+
+      // Set Swagger endpoint based on environment
+      options.SwaggerEndpoint(swagV1, isLocal ? "My API" : "Clean Architecture Web API V1");
+
+      // Set route and additional UI options
+      options.RoutePrefix = "swagger";
+      options.DisplayRequestDuration();
+      options.DefaultModelsExpandDepth(-1);  // Collapse models by default
+    });
+
+
+   
+
+    return app;
+  }
 }
 
