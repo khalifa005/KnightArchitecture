@@ -1,4 +1,6 @@
 
+using System.Net;
+
 namespace KH.WebApi.Controllers;
 
 public class AuditsController : BaseApiController
@@ -28,5 +30,17 @@ public class AuditsController : BaseApiController
     return File(fileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
   }
 
-}
+  [HttpPost("ImportExternalAudit")]
+  public async Task<ActionResult<ApiResponse<string>>> ImportExternalAudit([FromForm] MediaForm request)
+  {
+    if (request.File == null || request.File.Length == 0)
+    {
+      return new ApiResponse<string>((int)HttpStatusCode.BadRequest, "No file uploaded");
+    }
+
+    var res = await _auditService.ImportExternalAudit(request.File);
+    return AsActionResult(res);
+  }
+
+  }
 

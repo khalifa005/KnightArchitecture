@@ -90,10 +90,10 @@ public class ExcelService : IExcelService
     using var p = new ExcelPackage();
     stream.Position = 0;
     await p.LoadAsync(stream);
+
     var ws = p.Workbook.Worksheets[sheetName];
     if (ws == null)
     {
-      //return await Result<IEnumerable<TEntity>>.FailAsync(string.Format(_localizer["Sheet with name {0} does not exist!"], sheetName));
       return await Result<IEnumerable<TEntity>>.FailAsync(string.Format("Sheet with name {0} does not exist!", sheetName));
     }
 
@@ -103,14 +103,16 @@ public class ExcelService : IExcelService
     {
       dt.Columns.Add(titlesInFirstRow ? firstRowCell.Text : $"Column {firstRowCell.Start.Column}");
     }
+
     var startRow = titlesInFirstRow ? 2 : 1;
-    var headers = mappers.Keys.Select(x => x).ToList();
+    var headers = mappers.Keys.ToList();
     var errors = new List<string>();
+
+    // Validate headers
     foreach (var header in headers)
     {
       if (!dt.Columns.Contains(header))
       {
-        //errors.Add(string.Format(_localizer["Header '{0}' does not exist in table!"], header));
         errors.Add(string.Format("Header '{0}' does not exist in table!", header));
       }
     }
@@ -120,6 +122,7 @@ public class ExcelService : IExcelService
       return await Result<IEnumerable<TEntity>>.FailAsync(errors);
     }
 
+    // Process rows
     for (var rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)
     {
       try
@@ -127,21 +130,25 @@ public class ExcelService : IExcelService
         var wsRow = ws.Cells[rowNum, 1, rowNum, ws.Dimension.End.Column];
         DataRow row = dt.Rows.Add();
         var item = (TEntity)Activator.CreateInstance(typeof(TEntity));
+
+        // Add cell values to DataRow
         foreach (var cell in wsRow)
         {
           row[cell.Start.Column - 1] = cell.Text;
         }
+
+        // Apply mappers to map the DataRow to TEntity
         headers.ForEach(x => mappers[x](row, item));
+
         result.Add(item);
       }
       catch (Exception e)
       {
         return await Result<IEnumerable<TEntity>>.FailAsync(e.Message);
-        //return await Result<IEnumerable<TEntity>>.FailAsync(_localizer[e.Message]);
       }
     }
 
     return await Result<IEnumerable<TEntity>>.SuccessAsync(result, "Import Success");
-    //return await Result<IEnumerable<TEntity>>.SuccessAsync(result, _localizer["Import Success"]);
   }
+
 }

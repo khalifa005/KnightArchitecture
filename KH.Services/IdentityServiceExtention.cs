@@ -64,7 +64,8 @@ public static class IdentityServiceExtention
             var result = JsonConvert.SerializeObject(new ApiResponse<object>(StatusCodes.Status401Unauthorized)
             {
 
-              ErrorMessage = "Token expired."
+              ErrorMessage = "Token expired.",
+              ErrorMessageAr = "Token expired."
             });
             context.NoResult(); // Stop further processing
             return context.Response.WriteAsync(result);
@@ -74,7 +75,8 @@ public static class IdentityServiceExtention
           context.Response.ContentType = "application/json";
           var errorResult = JsonConvert.SerializeObject(new ApiResponse<object>(StatusCodes.Status401Unauthorized)
           {
-            ErrorMessage = "Authentication faild xx."
+            ErrorMessage = "Authentication faild",
+            ErrorMessageAr = "Authentication faild"
           });
           context.NoResult(); // Stop further processing
           return context.Response.WriteAsync(errorResult);
@@ -87,7 +89,8 @@ public static class IdentityServiceExtention
           context.Response.ContentType = "application/json";
           var result = JsonConvert.SerializeObject(new ApiResponse<object>(StatusCodes.Status403Forbidden)
           {
-            ErrorMessage = "You are not authorized to access this resource."
+            ErrorMessage = "You are not authorized to access this resource.",
+            ErrorMessageAr = "You are not authorized to access this resource."
           });
           context.NoResult(); // Stop further processing
           return context.Response.WriteAsync(result);
@@ -102,7 +105,8 @@ public static class IdentityServiceExtention
             context.Response.ContentType = "application/json";
             var result = JsonConvert.SerializeObject(new ApiResponse<object>(StatusCodes.Status401Unauthorized)
             {
-              ErrorMessage = "No token provided."
+              ErrorMessage = "No token provided.",
+              ErrorMessageAr = "No token provided."
             });
             return context.Response.WriteAsync(result);
           }
