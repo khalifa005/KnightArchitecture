@@ -11,7 +11,7 @@ public class SystemFunctionConfiguration : IEntityTypeConfiguration<Permission>
     builder.Property(p => p.SortKey).HasColumnOrder(6);
     builder.Property(p => p.DependOnId).IsRequired(false).HasColumnOrder(7);
 
-    
+
     // Self-referencing relationship for Parent Permission
     builder.HasOne(p => p.Parent)
            .WithMany(p => p.Children) // Define inverse relationship

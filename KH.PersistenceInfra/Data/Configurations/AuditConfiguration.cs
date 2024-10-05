@@ -14,7 +14,7 @@ public class AuditConfiguration : IEntityTypeConfiguration<Audit>
     builder
       .HasIndex(e => e.UserId); // Defining the index using Fluent API
 
-       //.HasDatabaseName("IX_MyEntity_MyStringField"); // Optional: specify a custom index name
+    //.HasDatabaseName("IX_MyEntity_MyStringField"); // Optional: specify a custom index name
 
   }
 }

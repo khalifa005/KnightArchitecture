@@ -3,12 +3,7 @@ using KH.BuildingBlocks.Settings;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text.Encodings.Web;
-using System.Text.Json;
 using System.Text;
-using System.Text.Json.Serialization;
-using System.Linq;
-using Newtonsoft.Json;
 namespace KH.Services.Features;
 
 public class TokenService : ITokenService

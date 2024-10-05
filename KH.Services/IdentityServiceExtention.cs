@@ -1,12 +1,10 @@
 using KH.BuildingBlocks.Auth.V1;
-using KH.BuildingBlocks.Responses;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using System.Net;
 using System.Text;
 
 namespace KH.Services;

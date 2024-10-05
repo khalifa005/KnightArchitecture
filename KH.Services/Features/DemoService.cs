@@ -163,7 +163,7 @@ public class DemoUserService
     var repository = _unitOfWork.Repository<User>();
     return await repository.GetAsync(id, q => q.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
                                                       .Include(u => u.UserGroups)
-                                                      .Include(u => u.UserDepartments), tracking:true);
+                                                      .Include(u => u.UserDepartments), tracking: true);
   }
 
   // Find users by expression

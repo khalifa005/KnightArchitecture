@@ -1,14 +1,8 @@
-
-using KH.BuildingBlocks.Auth.V1;
 using KH.BuildingBlocks.Contracts.Persistence;
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Middlewares;
 using KH.PersistenceInfra.Repositories;
 using KH.PersistenceInfra.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System.Net;
 
 namespace KH.PersistenceInfra;
 
@@ -39,5 +33,5 @@ public static class InfrastructureServiceRegisteration
   }
 
 
-  
+
 }

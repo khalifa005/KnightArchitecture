@@ -1,5 +1,4 @@
 using KH.BuildingBlocks.Constant;
-using KH.BuildingBlocks.Contracts.Infrastructure;
 using KH.BuildingBlocks.Extentions.Methods;
 using KH.BuildingBlocks.Responses;
 using Microsoft.AspNetCore.Authorization;
@@ -38,7 +37,7 @@ public class PermissionsMiddleware
       return;
     }
 
- 
+
     if (context.User.Identity == null || !context.User.Identity.IsAuthenticated)
     {
       if (context.Response.HasStarted)

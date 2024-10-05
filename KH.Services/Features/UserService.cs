@@ -1,4 +1,3 @@
-using KH.BuildingBlocks.Contracts.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 
 public class UserService : IUserService

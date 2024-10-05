@@ -1,5 +1,4 @@
 using System.Security.Claims;
-using System.Security.Principal;
 
 namespace KH.BuildingBlocks.Extentions.Methods;
 
@@ -10,7 +9,7 @@ public interface ICurrentUserService
 }
 public class CurrentUserService : ICurrentUserService
 {
-  
+
   public CurrentUserService(IHttpContextAccessor httpContextAccessor)
   {
     UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);

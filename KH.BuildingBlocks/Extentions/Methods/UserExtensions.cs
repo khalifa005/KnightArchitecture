@@ -1,4 +1,3 @@
-using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 
 namespace KH.BuildingBlocks.Extentions.Methods;

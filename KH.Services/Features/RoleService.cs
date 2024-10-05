@@ -45,7 +45,7 @@ public class RoleService : IRoleService
     projectionExpression: u => new RoleListResponse(u),
     include: null,
     orderBy: query => query.OrderBy(u => u.Id),
-    tracking: false 
+    tracking: false
 );
 
 

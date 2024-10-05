@@ -2,12 +2,9 @@ using KH.BuildingBlocks.Extentions.Files;
 using KH.BuildingBlocks.Extentions.Methods;
 using KH.BuildingBlocks.Services;
 using KH.BuildingBlocks.Settings;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Localization;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 
 namespace KH.BuildingBlocks;
 
@@ -106,5 +103,5 @@ public static class HelperServiceRegisteration
     return services;
   }
 
- 
+
 }

@@ -2,13 +2,10 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using KH.BuildingBlocks;
 using KH.BuildingBlocks.Auth.V1;
-using KH.BuildingBlocks.Extentions.Methods;
 using KH.BuildingBlocks.Middlewares;
 using KH.Dto;
 using KH.PersistenceInfra;
 using KH.Services;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace KH.WebApi;
 
 public class Startup

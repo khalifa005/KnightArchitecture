@@ -74,23 +74,23 @@ public class UserForm
       user.OtpCode = SecureRandom.GenerateOTP();
       user.IsOtpVerified = false;
     }
-      // Map GroupId, DepartmentId, and RoleIds
-      if (GroupId.HasValue)
-      {
-        user.UserGroups = new List<UserGroup> { new UserGroup { GroupId = GroupId.Value } };
-      }
-
-      if (DepartmentId.HasValue)
-      {
-        user.UserDepartments = new List<UserDepartment> { new UserDepartment { DepartmentId = DepartmentId.Value } };
-      }
-
-      if (RoleIds != null && RoleIds.Length > 0)
-      {
-        user.UserRoles = RoleIds.Select(roleId => new UserRole { RoleId = roleId }).ToList();
-      }
-
-      return user;
+    // Map GroupId, DepartmentId, and RoleIds
+    if (GroupId.HasValue)
+    {
+      user.UserGroups = new List<UserGroup> { new UserGroup { GroupId = GroupId.Value } };
     }
-    #endregion
+
+    if (DepartmentId.HasValue)
+    {
+      user.UserDepartments = new List<UserDepartment> { new UserDepartment { DepartmentId = DepartmentId.Value } };
+    }
+
+    if (RoleIds != null && RoleIds.Length > 0)
+    {
+      user.UserRoles = RoleIds.Select(roleId => new UserRole { RoleId = roleId }).ToList();
+    }
+
+    return user;
   }
+  #endregion
+}

@@ -6,7 +6,7 @@ namespace KH.WebApi.Controllers;
 public class AuditsController : BaseApiController
 {
   public readonly IAuditService _auditService;
-  public AuditsController(IAuditService  auditService)
+  public AuditsController(IAuditService auditService)
   {
     _auditService = auditService;
   }
@@ -42,5 +42,5 @@ public class AuditsController : BaseApiController
     return AsActionResult(res);
   }
 
-  }
+}
 

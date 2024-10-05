@@ -1,12 +1,8 @@
 using KH.BuildingBlocks.Contracts.Persistence;
 using KH.BuildingBlocks.Extentions.Entities;
 using KH.BuildingBlocks.Responses;
-using KH.BuildingBlocks.Services;
-using KH.Domain.Entities.lookups;
 using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore.Query;
-using System;
-using System.Net.NetworkInformation;
 
 namespace KH.PersistenceInfra.Repositories;
 

@@ -33,7 +33,7 @@ public static class ServicesRegisterationService
     var mailSettings = configuration.GetSection("MailSettings");
 
     var mailOptions = mailSettings.Get<MailSettings>();
-    var defaultFromEmail = mailOptions?.Mail ;
+    var defaultFromEmail = mailOptions?.Mail;
     var defaultHost = mailOptions?.Host;
     var defaultPort = mailOptions?.Port;
 

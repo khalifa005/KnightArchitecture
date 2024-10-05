@@ -2,7 +2,6 @@ using KH.BuildingBlocks.Enums;
 using KH.BuildingBlocks.Extentions.Entities;
 using KH.BuildingBlocks.Extentions.Methods;
 using KH.PersistenceInfra.Data.Seed;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace KH.PersistenceInfra.Data;
