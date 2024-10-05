@@ -38,7 +38,7 @@ public class PermissionsMiddleware
     }
 
 
-    if (context.User.Identity == null || !context.User.Identity.IsAuthenticated)
+    if (context.User.Identity == null || !context.User.Identity.IsAuthenticated || context.Response.StatusCode == StatusCodes.Status403Forbidden)
     {
       if (context.Response.HasStarted)
       {

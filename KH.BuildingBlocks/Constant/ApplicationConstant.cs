@@ -8,6 +8,9 @@ public static class ApplicationConstant
 
   #region [PERMISSIONS] According To System Functions Name
 
+  //-- audits
+  public const string VIEW_AUDITS_PERMISSION = "view-audit";
+
   //-- roles
   public const string ROLES_PERMISSION = "roles";
   public const string EDIT_ROLES_PERMISSION = "edit-role";

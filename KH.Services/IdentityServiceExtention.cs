@@ -41,10 +41,24 @@ public static class IdentityServiceExtention
          options.ForwardDefaultSelector = context =>
          {
            var authHeader = context.Request.Headers["Authorization"].ToString();
+
+           var endpoint = context.GetEndpoint();
+           var allowAnonymous = endpoint?.Metadata?.GetMetadata<IAllowAnonymous>() != null;
+
+           // Use a key to track if the authentication scheme has already been selected for this request
+           const string schemeSelectedKey = "SchemeSelected";
+
+           
+           // Otherwise, select the appropriate scheme based on the Authorization header
            if (authHeader.StartsWith("Basic ", StringComparison.OrdinalIgnoreCase))
            {
+             // Mark the scheme as selected
+             context.Items[schemeSelectedKey] = true;
              return "BasicAuthentication";
            }
+
+           // Default to JWT Bearer
+           context.Items[schemeSelectedKey] = true;
            return JwtBearerDefaults.AuthenticationScheme;
          };
        })

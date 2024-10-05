@@ -1,4 +1,6 @@
 
+using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Constant;
 using System.Net;
 
 namespace KH.WebApi.Controllers;
@@ -11,6 +13,7 @@ public class AuditsController : BaseApiController
     _auditService = auditService;
   }
 
+  [PermissionAuthorize(ApplicationConstant.VIEW_AUDITS_PERMISSION)]
   [HttpGet("GetUserAudits/{userId}")]
   public async Task<ActionResult<ApiResponse<List<AuditResponse>>>> Get(string userId)
   {

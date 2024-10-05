@@ -117,6 +117,7 @@ public class Startup
     app.UseCors("CorsPolicy");
     app.UseHttpsRedirection();
     app.UseRouting();
+
     app.UseAuthentication();
     // order here matters - after UseAuthentication so we have the Identity populated in the HttpContext
     app.UseMiddleware<PermissionsMiddleware>();

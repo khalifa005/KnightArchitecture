@@ -44,7 +44,9 @@ public class PermissionRequirement : AuthorizationHandler<PermissionRequirement>
       {
         if (!context.User.HasClaim(PermissionRequirement.ClaimType, permission))
         {
-          context.Fail();
+
+          context.Fail(new AuthorizationFailureReason(this, "Unauthorized access"));
+
           return Task.CompletedTask;
         }
       }
@@ -59,12 +61,13 @@ public class PermissionRequirement : AuthorizationHandler<PermissionRequirement>
       if (context.User.HasClaim(PermissionRequirement.ClaimType, permission))
       {
         context.Succeed(requirement);
+
         return Task.CompletedTask;
       }
     }
 
     // identity does not have any of the required permissions
-    context.Fail();
+    context.Fail(new AuthorizationFailureReason(this, "Unauthorized access"));
     return Task.CompletedTask;
   }
 }
