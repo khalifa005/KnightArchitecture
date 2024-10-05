@@ -1,4 +1,6 @@
-﻿namespace KH.BuildingBlocks.Services;
+using KH.BuildingBlocks.Services;
+
+namespace KH.BuildingBlocks.Contracts;
 
 public interface IServerStorageService
 {

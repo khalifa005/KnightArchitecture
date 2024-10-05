@@ -1,4 +1,7 @@
-﻿namespace KH.BuildingBlocks.Services;
+﻿using KH.BuildingBlocks.Constant;
+using KH.BuildingBlocks.Contracts;
+
+namespace KH.BuildingBlocks.Services;
 
 public record ServerPreference : IPreference
 {

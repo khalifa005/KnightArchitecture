@@ -1,4 +1,4 @@
-﻿namespace KH.BuildingBlocks.Services;
+namespace KH.BuildingBlocks.Extentions.Entities;
 
 public class LanguageCode
 {

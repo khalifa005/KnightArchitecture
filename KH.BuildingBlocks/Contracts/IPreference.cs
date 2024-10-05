@@ -1,4 +1,4 @@
-﻿namespace KH.BuildingBlocks.Services;
+namespace KH.BuildingBlocks.Contracts;
 
 public interface IPreference
 {

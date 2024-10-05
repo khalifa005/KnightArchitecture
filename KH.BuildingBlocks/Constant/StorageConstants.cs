@@ -1,4 +1,4 @@
-namespace KH.BuildingBlocks.Services;
+namespace KH.BuildingBlocks.Constant;
 
 public static class StorageConstants
 {

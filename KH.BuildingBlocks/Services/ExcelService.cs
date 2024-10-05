@@ -1,3 +1,4 @@
+using KH.BuildingBlocks.Contracts;
 using Microsoft.Extensions.Localization;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;

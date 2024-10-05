@@ -1,5 +1,5 @@
+using KH.BuildingBlocks.Contracts;
 using KH.BuildingBlocks.Extentions.Entities;
-using KH.BuildingBlocks.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
 using System.Data;

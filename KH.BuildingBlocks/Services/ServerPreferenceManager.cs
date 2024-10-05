@@ -1,3 +1,5 @@
+using KH.BuildingBlocks.Constant;
+using KH.BuildingBlocks.Contracts;
 using Microsoft.Extensions.Localization;
 
 namespace KH.BuildingBlocks.Services;
@@ -14,7 +16,7 @@ public class ServerPreferenceManager : IServerPreferenceManager
     _localizer = localizer;
   }
 
-  public async Task<IResult> ChangeLanguageAsync(string languageCode)
+  public async Task<Contracts.IResult> ChangeLanguageAsync(string languageCode)
   {
     var preference = await GetPreference() as ServerPreference;
     if (preference != null)

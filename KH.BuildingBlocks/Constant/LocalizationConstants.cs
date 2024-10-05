@@ -1,4 +1,6 @@
-﻿namespace KH.BuildingBlocks.Services;
+using KH.BuildingBlocks.Extentions.Entities;
+
+namespace KH.BuildingBlocks.Constant;
 
 public static class LocalizationConstants
 {

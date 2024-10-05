@@ -1,5 +1,6 @@
 using DinkToPdf;
 using DinkToPdf.Contracts;
+using KH.BuildingBlocks.Contracts;
 using KH.BuildingBlocks.Services;
 using KH.BuildingBlocks.Settings;
 using KH.Services.Features;
