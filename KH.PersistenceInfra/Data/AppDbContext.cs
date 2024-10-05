@@ -103,7 +103,7 @@ public class AppDbContext : DbContext
     }
 
     // Step 1: Call OnBeforeSaveChanges to gather audit entries
-    var auditEntries = OnBeforeSaveChanges(userId);
+    var auditEntries = OnBeforeSaveChanges(_serviceProvider.GetUserId().ToString());
 
     // Step 2: Save changes to the database
     var result = await base.SaveChangesAsync(cancellationToken);

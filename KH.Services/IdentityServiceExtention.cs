@@ -1,6 +1,7 @@
 using AngleSharp.Css.Values;
 using KH.BuildingBlocks.Auth.V1;
 using KH.Domain.Entities;
+using KH.Services.Features;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -157,66 +158,5 @@ public static class IdentityServiceExtention
     return services;
   }
 
-}
-
-public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
-{
-  public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
-                                    ILoggerFactory logger,
-                                    UrlEncoder encoder,
-                                    ISystemClock clock)
-      : base(options, logger, encoder, clock)
-  {
-  }
-
-  protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
-  {
-    // Check for Authorization header
-    if (!Request.Headers.ContainsKey("Authorization"))
-    {
-      return AuthenticateResult.Fail("Missing Authorization Header");
-    }
-
-    try
-    {
-      var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
-      var credentials = Encoding.UTF8
-          .GetString(Convert.FromBase64String(authHeader.Parameter))
-          .Split(':', 2);
-
-      var username = credentials[0];
-      var password = credentials[1];
-
-      // Validate credentials (e.g., against a user store)
-      if (IsValidUser(username, password))
-      {
-        var claims = new[] {
-          new Claim(ClaimTypes.Name, username),
-          new Claim(ClaimTypes.NameIdentifier, "26")
-        };
-
-        var identity = new ClaimsIdentity(claims, Scheme.Name);
-        var principal = new ClaimsPrincipal(identity);
-        var ticket = new AuthenticationTicket(principal, Scheme.Name);
-
-        return AuthenticateResult.Success(ticket);
-      }
-      else
-      {
-        return AuthenticateResult.Fail("Invalid Username or Password");
-      }
-    }
-    catch
-    {
-      return AuthenticateResult.Fail("Invalid Authorization Header");
-    }
-  }
-
-  private bool IsValidUser(string username, string password)
-  {
-    // Implement your own user validation logic
-    // This could be querying a database, checking a hardcoded list, etc.
-    return username == "admin" && password == "password"; // Example hardcoded user
-  }
 }
 

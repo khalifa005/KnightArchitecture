@@ -18,7 +18,7 @@ public class TokenService : ITokenService
     _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenSettings.Key));
   }
 
-  public string CreateToken(User user)
+  public List<Claim> GetClaims(User user)
   {
 
     var userRoles = user.UserRoles?
@@ -39,6 +39,14 @@ public class TokenService : ITokenService
             };
 
     claims.AddRange(userRoles.Select(roleId => new Claim(ClaimTypes.Role, roleId)));
+
+    return claims;
+  }
+
+  public string CreateToken(User user)
+  {
+
+    var claims = GetClaims(user);
 
     var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 

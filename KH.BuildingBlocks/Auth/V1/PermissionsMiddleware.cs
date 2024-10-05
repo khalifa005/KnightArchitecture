@@ -126,3 +126,4 @@ public class PermissionsMiddleware
     await _request(context);
   }
 }
+

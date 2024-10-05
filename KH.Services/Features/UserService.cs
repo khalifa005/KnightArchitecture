@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 public class UserService : IUserService
 {
@@ -66,6 +67,46 @@ public class UserService : IUserService
       res.Data = new AuthenticationResponse();
       res.ErrorMessage = ex.Message;
       return res;
+    }
+  }
+
+  public async Task<List<Claim>> GetUserClaims(LoginRequest request)
+  {
+    try
+    {
+      if (request == null)
+        throw new Exception("Invalid Parameter");
+
+      var repository = _unitOfWork.Repository<User>();
+
+      var entityFromDB = await repository.GetByExpressionAsync(u =>
+   u.Username == request.Username && u.IsDeleted == false,
+
+   q => q.Include(u => u.UserRoles)
+   .ThenInclude(ur => ur.Role)
+   .ThenInclude(r => r.RolePermissions)
+   .Include(u => u.UserGroups)
+   .Include(u => u.UserDepartments));
+
+
+      if (entityFromDB == null || request.Password.IsNullOrEmpty())
+        throw new Exception("Invalid User");
+
+      //Check Is OTP Verified at First Login
+
+      //Hashed Password Check
+      var passwordVerificationResult = new PasswordHasher<object?>()
+        .VerifyHashedPassword(null, entityFromDB.Password, request.Password);
+      if (passwordVerificationResult != PasswordVerificationResult.Success)
+        throw new Exception("Invalid User!");
+
+      var userClaims = _tokenService.GetClaims(entityFromDB);
+
+      return userClaims;
+    }
+    catch (Exception ex)
+    {
+      return new List<Claim>();
     }
   }
   public async Task<ApiResponse<UserDetailsResponse>> GetAsync(long id)
@@ -441,10 +482,7 @@ public class UserService : IUserService
       return res;
     }
   }
-  public Task<ApiResponse<AuthenticationResponse>> Login(LoginRequest request)
-  {
-    throw new NotImplementedException();
-  }
+
   public async Task<ApiResponse<string>> ResetDepartmentsAsync(long id)
   {
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);

@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 namespace KH.Services.Contracts;
 
 public interface IUserService
@@ -13,5 +15,6 @@ public interface IUserService
   Task<ApiResponse<string>> DeleteAsync(long id);
   Task<ApiResponse<AuthenticationResponse>> LoginAsync(LoginRequest request);
   Task<ApiResponse<string>> ResetDepartmentsAsync(long id);
+  Task<List<Claim>> GetUserClaims(LoginRequest request);
 
 }
