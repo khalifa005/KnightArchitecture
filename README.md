@@ -503,32 +503,6 @@ Here’s how the authentication, authorization, and permissions management syste
 
 ---
 
-## Authentication and Authorization Code Overview
-
-### PermissionAuthorizationPolicyProvider
-
-```csharp
-public override async Task<AuthorizationPolicy?> GetPolicyAsync(string policyName)
-{
-    if (!policyName.StartsWith(PolicyPrefix, StringComparison.OrdinalIgnoreCase))
-    {
-        return await base.GetPolicyAsync(policyName);
-    }
-
-    var policy = _policies.GetOrAdd(policyName, static name =>
-    {
-        PermissionOperator @operator = PermissionAuthorizeAttribute.GetOperatorFromPolicy(name);
-        string[] permissions = PermissionAuthorizeAttribute.GetPermissionsFromPolicy(name);
-
-        var requirement = new PermissionRequirement(@operator, permissions);
-        return new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .AddRequirements(requirement)
-            .Build();
-    });
-
-    return policy;
-}
 
 
 # Auditing Process in KnightHedgeArchitecture Repository
