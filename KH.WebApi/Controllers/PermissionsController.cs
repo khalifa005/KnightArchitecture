@@ -13,7 +13,8 @@ public class PermissionsController : BaseApiController
   {
     _lookupService = lookupService;
   }
-  [Authorize]
+  [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.VIEW_PERMISSION)]
+
   [HttpGet("{id}")]
   public async Task<ActionResult<ApiResponse<PermissionResponse>>> Get(int id)
   {
@@ -22,12 +23,13 @@ public class PermissionsController : BaseApiController
   }
 
   [HttpGet("List")]
-  [PermissionAuthorize(ApplicationConstant.SUPER_ADMIN_PERMISSION)]
+  [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.LIST_PERMISSIONS)]
   public async Task<ActionResult<ApiResponse<PagedResponse<PermissionResponse>>>> GetPermissions()
   {
     var res = await _lookupService.GetListAsync();
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.ADD_PERMISSION)]
 
   [HttpPost]
   public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] PermissionForm request)
@@ -35,6 +37,7 @@ public class PermissionsController : BaseApiController
     var res = await _lookupService.AddAsync(request);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.EDIT_PERMISSION)]
 
   [HttpPut]
   public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] PermissionForm request)
@@ -42,6 +45,7 @@ public class PermissionsController : BaseApiController
     var res = await _lookupService.UpdateAsync(request);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.DELETE_PERMISSION)]
 
   [HttpDelete("{id}")]
   public async Task<ActionResult<ApiResponse<string>>> Delete(int id)

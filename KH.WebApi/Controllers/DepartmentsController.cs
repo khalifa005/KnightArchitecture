@@ -1,3 +1,5 @@
+using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Constant;
 using KH.Dto.lookups.DepartmentDto.Form;
 using KH.Dto.lookups.DepartmentDto.Response;
 using KH.Dto.Lookups.DepartmentDto.Request;
@@ -11,6 +13,7 @@ public class DepartmentsController : BaseApiController
   {
     _lookupService = lookupService;
   }
+  [PermissionAuthorize(PermissionKeysConstant.Departments.VIEW_DEPARTMENT)]
 
   [HttpGet("{id}")]
   public async Task<ActionResult<ApiResponse<DepartmentResponse>>> Get(int id)
@@ -18,24 +21,33 @@ public class DepartmentsController : BaseApiController
     var res = await _lookupService.GetAsync(id);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.Departments.LIST_DEPARTMENTS)]
+
   [HttpPost("list")]
   public async Task<ActionResult<ApiResponse<PagedResponse<DepartmentListResponse>>>> GetList(DepartmentFilterRequest request)
   {
     var res = await _lookupService.GetListAsync(request);
     return AsActionResult(res);
   }
+
+  [PermissionAuthorize(PermissionKeysConstant.Departments.ADD_DEPARTMENT)]
+
   [HttpPost]
   public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] DepartmentForm request)
   {
     var res = await _lookupService.AddAsync(request);
     return AsActionResult(res);
   }
+
+  [PermissionAuthorize(PermissionKeysConstant.Departments.EDIT_DEPARTMENT)]
   [HttpPut]
   public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] DepartmentForm request)
   {
     var res = await _lookupService.UpdateAsync(request);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.Departments.DELETE_DEPARTMENT)]
+
   [HttpDelete("{id}")]
   public async Task<ActionResult<ApiResponse<string>>> Delete(int id)
   {

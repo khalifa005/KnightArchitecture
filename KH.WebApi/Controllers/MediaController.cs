@@ -1,5 +1,9 @@
 
 
+using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Constant;
+using Microsoft.AspNetCore.Authorization;
+
 namespace KH.WebApi.Controllers;
 
 public class MediaController : BaseApiController
@@ -9,6 +13,7 @@ public class MediaController : BaseApiController
   {
     _mediaService = mediaService;
   }
+  [PermissionAuthorize(PermissionKeysConstant.Media.VIEW_MEDIA)]
 
   [HttpGet("{id}")]
   public async Task<ActionResult<ApiResponse<MediaResponse>>> Get(int id)
@@ -16,6 +21,7 @@ public class MediaController : BaseApiController
     var res = await _mediaService.GetAsync(id);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.Media.LIST_MEDIA)]
 
   [HttpPost("list")]
   public async Task<ActionResult<ApiResponse<PagedResponse<MediaResponse>>>> GetList(MediaRequest request)
@@ -23,6 +29,7 @@ public class MediaController : BaseApiController
     var res = await _mediaService.GetListAsync(request);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.Media.ADD_MEDIA)]
 
   [HttpPost]
   public async Task<ActionResult<ApiResponse<string>>> Post([FromForm] MediaForm request)
@@ -30,6 +37,7 @@ public class MediaController : BaseApiController
     var res = await _mediaService.AddAsync(request);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.Media.ADD_MEDIA_RANGE)]
 
   [HttpPost("AddRange")]
   public async Task<ActionResult<ApiResponse<string>>> PostRange([FromForm] MediaForm request)
@@ -37,6 +45,7 @@ public class MediaController : BaseApiController
     var res = await _mediaService.AddListAsync(request);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.Media.DELETE_MEDIA)]
 
   [HttpDelete("{id}")]
   public async Task<ActionResult<ApiResponse<string>>> Delete(int id)
@@ -44,6 +53,7 @@ public class MediaController : BaseApiController
     var res = await _mediaService.DeleteAsync(id);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.Media.DOWNLOAD_MEDIA)]
 
   [HttpGet("Download/{id}")]
   public async Task<IActionResult> Download(int id)
@@ -60,6 +70,7 @@ public class MediaController : BaseApiController
     }
 
   }
+  [AllowAnonymous]
 
   [HttpPost("SubmitFormlyFormFileStream")]
   public async Task<IActionResult> SubmitFormUsingFileStream([FromForm] IFormCollection form)

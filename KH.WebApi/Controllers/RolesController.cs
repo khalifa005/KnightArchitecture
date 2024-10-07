@@ -15,21 +15,23 @@ public class RolesController : BaseApiController
   {
     _lookupService = lookupService;
   }
-  [Authorize]
+  [PermissionAuthorize(PermissionKeysConstant.Roles.VIEW_ROLE)]
   [HttpGet("{id}")]
   public async Task<ActionResult<ApiResponse<RoleResponse>>> Get(int id)
   {
     var res = await _lookupService.GetAsync(id);
     return AsActionResult(res);
   }
-  //[Authorize]
-  [AllowAnonymous]
+  [PermissionAuthorize(PermissionKeysConstant.Roles.LIST_ROLE)]
+
   [HttpPost("list")]
   public async Task<ActionResult<ApiResponse<PagedResponse<RoleListResponse>>>> GetList(RoleFilterRequest request)
   {
     var res = await _lookupService.GetListAsync(request);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.Roles.ADD_ROLE)]
+
   [HttpPost]
   public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] RoleForm request)
   {

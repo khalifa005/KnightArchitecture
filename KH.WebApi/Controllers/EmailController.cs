@@ -1,5 +1,8 @@
 
 
+using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Constant;
+
 namespace KH.WebApi.Controllers;
 public class EmailController : BaseApiController
 {
@@ -11,6 +14,7 @@ public class EmailController : BaseApiController
     _userService = userService;
     _emailService = emailService;
   }
+  [PermissionAuthorize(PermissionKeysConstant.Emails.VIEW_EMAIL)]
 
   [HttpGet("{id}")]
   public async Task<ActionResult<ApiResponse<EmailTrackerResponse>>> Get(int id)
@@ -18,6 +22,7 @@ public class EmailController : BaseApiController
     var res = await _emailService.GetAsync(id);
     return AsActionResult(res);
   }
+  [PermissionAuthorize(PermissionKeysConstant.Emails.LIST_EMAILS)]
 
   [HttpPost("list")]
   public async Task<ActionResult<ApiResponse<PagedResponse<EmailTrackerResponse>>>> GetList([FromBody] MailRequest request)
@@ -26,7 +31,7 @@ public class EmailController : BaseApiController
     return AsActionResult(res);
   }
 
-
+  [PermissionAuthorize(PermissionKeysConstant.Emails.SEND_EMAIL)]
   [HttpPost("Send")]
   public async Task<IActionResult> SendEmail([FromForm] MailRequest request)
   {

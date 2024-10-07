@@ -21,6 +21,7 @@ public class AuditsController : BaseApiController
     return AsActionResult(res);
   }
 
+  [PermissionAuthorize(PermissionKeysConstant.Audits.EXPORT_AUDITS)]
   [HttpGet("ExportUserAudits/{userId}")]
   public async Task<IActionResult> ExportExcel(string userId, string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false)
   {
@@ -33,6 +34,7 @@ public class AuditsController : BaseApiController
     return File(fileContent, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
   }
 
+  [PermissionAuthorize(PermissionKeysConstant.Audits.IMPORT_AUDITS)]
   [HttpPost("ImportExternalAudit")]
   public async Task<ActionResult<ApiResponse<string>>> ImportExternalAudit([FromForm] MediaForm request)
   {

@@ -1,3 +1,6 @@
+using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Constant;
+
 namespace KH.WebApi.Controllers;
 
 public class PdfController : BaseApiController
@@ -10,6 +13,7 @@ public class PdfController : BaseApiController
     _userService = userService;
     _pdfService = pdfService;
   }
+  [PermissionAuthorize(PermissionKeysConstant.Pdf.EXPORT_PDF)]
 
   [HttpPost("Download")]
 

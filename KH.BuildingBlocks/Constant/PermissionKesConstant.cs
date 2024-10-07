@@ -25,6 +25,9 @@ public static class PermissionKeysConstant
   public static class Roles
   {
     public const string ROLES = "roles";
+    public const string VIEW_ROLE = "view-role";
+    public const string LIST_ROLE = "list-role";
+    public const string ADD_ROLE = "add-role";
     public const string EDIT_ROLE = "edit-role";
     public const string DELETE_ROLE = "delete-role";
   }
