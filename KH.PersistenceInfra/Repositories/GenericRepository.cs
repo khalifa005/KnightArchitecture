@@ -50,6 +50,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     _dbContext.Entry(entity).State = EntityState.Deleted;
     _dbContext.Set<T>().Remove(entity);
   }
+  public void DeleteTracked(T entity)
+  {
+    _dbContext.Set<T>().Remove(entity);
+  }
 
   public IReadOnlyList<T> FindBy(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
   {

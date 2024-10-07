@@ -26,9 +26,9 @@ public class RoleService : IRoleService
     var repository = _unitOfWork.Repository<Role>();
 
     var entityFromDB = await repository.GetAsync(id,
-      x=>
-      x.Include(i=> i.RolePermissions)
-      .ThenInclude(i=> i.Permission));
+      x =>
+      x.Include(i => i.RolePermissions)
+      .ThenInclude(i => i.Permission));
 
     if (entityFromDB == null)
       throw new Exception("Invalid Parameter");
@@ -123,7 +123,53 @@ public class RoleService : IRoleService
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var entityFromDb = await repository.GetAsync(request.Id.Value,include:x=> x.Include(x=> x.RolePermissions), tracking: true);
+      var entityFromDb = await repository.GetAsync(request.Id.Value, include: x => x.Include(x => x.RolePermissions), tracking: true);
+
+      if (entityFromDb == null)
+        throw new Exception("Invalid Parameter");
+
+      //Add the new props here ..etc
+      entityFromDb.NameAr = entityAfterMapping.NameAr;
+      entityFromDb.NameEn = entityAfterMapping.NameEn;
+      entityFromDb.Description = entityAfterMapping.Description;
+
+      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitTransactionAsync();
+
+      res.Data = entityAfterMapping.Id.ToString();
+      return res;
+    }
+    catch (Exception ex)
+    {
+      await _unitOfWork.RollBackTransactionAsync();
+
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.Data = ex.Message;
+      res.ErrorMessage = ex.Message;
+      return res;
+    }
+  }
+  public async Task<ApiResponse<string>> UpdateBothRoleWithRelatedPermissionsAsync(RoleForm request)
+  {
+    //define our api res 
+    ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    //auto mapper
+    var entityAfterMapping = request.ToEntity();
+
+    var repositoryRolePermissions = _unitOfWork.Repository<RolePermissions>();
+    var repository = _unitOfWork.Repository<Role>();
+    await _unitOfWork.BeginTransactionAsync();
+
+    try
+    {
+      if (request == null)
+        throw new Exception("Invalid Parameter");
+
+      if (!request.Id.HasValue)
+        throw new Exception("id is required");
+
+      var entityFromDb = await repository.GetAsync(request.Id.Value, include: x => x.Include(x => x.RolePermissions), tracking: true);
 
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -144,10 +190,9 @@ public class RoleService : IRoleService
         // Remove them from the Role's RolePermissions collection
         foreach (var permission in permissionsToRemove)
         {
-          permission.IsDeleted = true;
-          entityFromDb.RolePermissions.Add(permission);
-          //entityFromDb.RolePermissions.Remove(permission);
-          //_context.RolePermissions.Remove(permission); // Mark them for deletion
+          repositoryRolePermissions.DeleteTracked(permission);
+          //entityFromDb.RolePermissions.Add(permission);
+
         }
 
       }
@@ -168,6 +213,127 @@ public class RoleService : IRoleService
       return res;
     }
   }
+  public async Task<ApiResponse<string>> UpdateRolePermissionsAsync(RoleForm request)
+  {
+    //define our api res 
+    ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    //mapper
+    var entityAfterMapping = request.ToEntity();
+
+    var repositoryRolePermissions = _unitOfWork.Repository<RolePermissions>();
+    var repository = _unitOfWork.Repository<Role>();
+    await _unitOfWork.BeginTransactionAsync();
+
+    try
+    {
+      if (request == null)
+        throw new Exception("Invalid Parameter");
+
+      if (!request.Id.HasValue)
+        throw new Exception("id is required");
+
+      var entityFromDb = await repository.GetAsync(request.Id.Value, include: x => x.Include(x => x.RolePermissions), tracking: true);
+
+      if (entityFromDb == null)
+        throw new Exception("Invalid Parameter");
+
+      // Find permissions that should be removed
+      var permissionsToRemove = entityFromDb.RolePermissions
+          .Where(rp => !request.RolePermissionsIds.Contains(rp.PermissionId))
+          .ToList();
+
+      entityFromDb.RolePermissions = entityAfterMapping.RolePermissions;
+
+      // Remove them from the Role's RolePermissions collection
+      foreach (var permission in permissionsToRemove)
+      {
+        repositoryRolePermissions.DeleteTracked(permission);
+        //entityFromDb.RolePermissions.Add(permission);
+
+      }
+      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitTransactionAsync();
+
+      res.Data = entityAfterMapping.Id.ToString();
+      return res;
+    }
+    catch (Exception ex)
+    {
+      await _unitOfWork.RollBackTransactionAsync();
+
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.Data = ex.Message;
+      res.ErrorMessage = ex.Message;
+      return res;
+    }
+  }
+
+  public async Task<ApiResponse<string>> UpdateRoleAndPermissionsAsync(RoleForm request)
+  {
+    //define our api res 
+    ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    //auto mapper
+    var entityAfterMapping = request.ToEntity();
+
+    var repositoryRolePermissions = _unitOfWork.Repository<RolePermissions>();
+    var repository = _unitOfWork.Repository<Role>();
+    await _unitOfWork.BeginTransactionAsync();
+
+    try
+    {
+      if (request == null)
+        throw new Exception("Invalid Parameter");
+
+      if (!request.Id.HasValue)
+        throw new Exception("id is required");
+
+      var entityFromDb = await repository.GetAsync(request.Id.Value, include: x => x.Include(x => x.RolePermissions), tracking: true);
+
+      if (entityFromDb == null)
+        throw new Exception("Invalid Parameter");
+
+      //Add the new props here ..etc
+      entityFromDb.NameAr = entityAfterMapping.NameAr;
+      entityFromDb.NameEn = entityAfterMapping.NameEn;
+      entityFromDb.Description = entityAfterMapping.Description;
+      if (request.HasPermissionsUpdates)
+      {
+        // Find permissions that should be removed
+        var permissionsToRemove = entityFromDb.RolePermissions
+            .Where(rp => !request.RolePermissionsIds.Contains(rp.PermissionId))
+            .ToList();
+
+        entityFromDb.RolePermissions = entityAfterMapping.RolePermissions;
+
+        // Remove them from the Role's RolePermissions collection
+        foreach (var permission in permissionsToRemove)
+        {
+          repositoryRolePermissions.Delete(permission);
+          entityFromDb.RolePermissions.Add(permission);
+
+        }
+
+      }
+
+      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitTransactionAsync();
+
+      res.Data = entityAfterMapping.Id.ToString();
+      return res;
+    }
+    catch (Exception ex)
+    {
+      await _unitOfWork.RollBackTransactionAsync();
+
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.Data = ex.Message;
+      res.ErrorMessage = ex.Message;
+      return res;
+    }
+  }
+
   public async Task<ApiResponse<string>> DeleteAsync(long id)
   {
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);

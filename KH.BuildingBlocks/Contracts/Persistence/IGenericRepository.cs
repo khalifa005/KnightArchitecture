@@ -14,6 +14,7 @@ public interface IGenericRepository<T> where T : BaseEntity
   int Count();
   Task<int> CountAsync();
   void Delete(T entity);
+  void DeleteTracked(T entity);
   IReadOnlyList<T> FindBy(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
   Task<IReadOnlyList<T>> FindByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
   Task<int> CountByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
