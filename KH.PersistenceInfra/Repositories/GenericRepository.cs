@@ -226,4 +226,23 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 
     return tracking ? query : query.AsNoTracking();
   }
+
+
+  public async Task<int> BatchUpdateAsync(Expression<Func<T, bool>> filterExpression, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> updateExpression)
+  {
+    var query = _dbContext.Set<T>().Where(filterExpression);
+
+    // Use ExecuteUpdateAsync to update entities in bulk
+    return await query.ExecuteUpdateAsync(updateExpression);
+  }
+
+  public async Task<int> BatchDeleteAsync(Expression<Func<T, bool>> filterExpression)
+  {
+    var query = _dbContext.Set<T>().Where(filterExpression);
+
+    // Use ExecuteDeleteAsync to delete entities in bulk
+    return await query.ExecuteDeleteAsync();
+  }
+
+
 }

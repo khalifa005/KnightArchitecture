@@ -37,5 +37,7 @@ public interface IGenericRepository<T> where T : BaseEntity
   Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, // Includes
   Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, // Sorting
   bool tracking = false);
+  Task<int> BatchUpdateAsync(Expression<Func<T, bool>> filterExpression, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> updateExpression);
+  Task<int> BatchDeleteAsync(Expression<Func<T, bool>> filterExpression);
 
 }

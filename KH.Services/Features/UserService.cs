@@ -141,7 +141,7 @@ public class UserService : IUserService
     var detailsUserFromDB = await repository.GetAsync(id,
       q => q.Include(u => u.UserRoles)
       .ThenInclude(ur => ur.Role)
-      .ThenInclude(r=> r.RolePermissions).ThenInclude(rp=> rp.Permission)
+      .ThenInclude(r => r.RolePermissions).ThenInclude(rp => rp.Permission)
       .Include(u => u.UserGroups)
       .ThenInclude(x => x.Group)
       .Include(u => u.UserDepartments)
@@ -477,6 +477,22 @@ public class UserService : IUserService
       res.ErrorMessage = ex.Message;
       return res;
     }
+  }
+
+  public async Task<ApiResponse<string>> UpdateRangeUsingBatchAsync(UserForm request)
+  {
+    ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
+    var repository = _unitOfWork.Repository<User>();
+
+    await repository.BatchUpdateAsync(
+        x => x.IsDeleted == true,
+        x => x.SetProperty(y => y.IsOtpVerified, false)
+    );
+
+    await repository.BatchDeleteAsync(x => x.DeletedDate < DateTime.UtcNow.AddMonths(-6));
+
+    return res;
+
   }
   public async Task<ApiResponse<string>> DeleteAsync(long id)
   {
