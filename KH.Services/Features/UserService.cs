@@ -111,6 +111,8 @@ public class UserService : IUserService
   }
   public async Task<ApiResponse<UserDetailsResponse>> GetAsync(long id)
   {
+    //below there will be multiple query technique so u can open sql profile and see translated query for each
+
     //define our api res 
     ApiResponse<UserDetailsResponse>? res = new ApiResponse<UserDetailsResponse>((int)HttpStatusCode.OK);
 
@@ -121,6 +123,19 @@ public class UserService : IUserService
 
     if (userFromDB == null)
       throw new Exception("Invalid Parameter");
+
+    //complex user query using spliting
+    var detailsUserFromDBX = await repository.GetAsync(id,
+    q => q.Include(u => u.UserRoles)
+           .ThenInclude(ur => ur.Role)
+           .ThenInclude(r => r.RolePermissions)
+           .ThenInclude(rp => rp.Permission)
+           .Include(u => u.UserGroups)
+           .ThenInclude(x => x.Group)
+           .Include(u => u.UserDepartments)
+           .ThenInclude(d => d.Department),
+    splitQuery: true);
+
 
     //crazy query example that needs spliting or it will cause performance issues
     var detailsUserFromDB = await repository.GetAsync(id,

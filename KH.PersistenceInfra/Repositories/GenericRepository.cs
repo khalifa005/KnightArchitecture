@@ -97,28 +97,24 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     return query.FirstOrDefault(t => t.Id == id);
   }
 
-  public async Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
-  {
-    var query = ApplyIncludes(include);
-    return await query.FirstOrDefaultAsync(t => t.Id == id);
-  }
   public async Task<T> GetByExpressionAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
   {
     var query = ApplyIncludes(include);
     return await query.Where(expression).FirstOrDefaultAsync();
   }
 
-  public async Task<T> GetAsyncTracking(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
-  {
-    var query = ApplyIncludes(include, tracking: true);
-    return await query.FirstOrDefaultAsync(t => t.Id == id);
-  }
-  public async Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, bool tracking = false)
+  public async Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, bool tracking = false, bool splitQuery = false)
   {
     var query = ApplyIncludes(include, tracking: tracking);
+
+    // Enable query splitting if specified
+    if (splitQuery)
+    {
+      query = query.AsSplitQuery();
+    }
+
     return await query.FirstOrDefaultAsync(t => t.Id == id);
   }
-
   public void UpdateDetachedEntity(T entity)
   {
     //Marks the entire entity as modified and will result in all columns being updated.
