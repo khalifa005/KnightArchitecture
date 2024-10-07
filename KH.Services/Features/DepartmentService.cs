@@ -84,7 +84,6 @@ public class DepartmentService : IDepartmentService
       var repository = _unitOfWork.Repository<Department>();
 
       await repository.AddAsync(entity);
-      //await _unitOfWork.CommitWithAuditingAsync("26");
       await _unitOfWork.CommitAsync();
 
       await _unitOfWork.CommitTransactionAsync();

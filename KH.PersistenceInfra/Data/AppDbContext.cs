@@ -59,7 +59,7 @@ public class AppDbContext : DbContext
     LookupContextSeeder.SeedCustomer(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedRoles(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedUser(modelBuilder, _loggerFactory);
-    LookupContextSeeder.SeedSystemFunction(modelBuilder, _loggerFactory);
+    PermissionsContextSeeder.SeedSystemPermissions(modelBuilder, _loggerFactory);
   }
 
   public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

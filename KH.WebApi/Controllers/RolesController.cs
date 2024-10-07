@@ -37,7 +37,7 @@ public class RolesController : BaseApiController
     return AsActionResult(res);
   }
   [HttpPut]
-  [PermissionAuthorize(ApplicationConstant.EDIT_ROLES_PERMISSION)]
+  [PermissionAuthorize(PermissionKeysConstant.Roles.EDIT_ROLE)]
   public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] RoleForm request)
   {
     var res = await _lookupService.UpdateAsync(request);
@@ -45,7 +45,7 @@ public class RolesController : BaseApiController
   }
 
   [HttpPut("UpdateBothRoleWithRelatedPermissions")]
-  [PermissionAuthorize(ApplicationConstant.EDIT_ROLES_PERMISSION)]
+  [PermissionAuthorize(PermissionKeysConstant.Roles.EDIT_ROLE)]
   public async Task<ActionResult<ApiResponse<string>>> UpdateBothRoleWithRelatedPermissions([FromBody] RoleForm request)
   {
     var res = await _lookupService.UpdateBothRoleWithRelatedPermissionsAsync(request);

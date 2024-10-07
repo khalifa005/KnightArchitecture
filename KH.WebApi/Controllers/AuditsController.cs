@@ -13,7 +13,7 @@ public class AuditsController : BaseApiController
     _auditService = auditService;
   }
 
-  [PermissionAuthorize(ApplicationConstant.VIEW_AUDITS_PERMISSION)]
+  [PermissionAuthorize(PermissionKeysConstant.Audits.VIEW_AUDITS)]
   [HttpGet("GetUserAudits/{userId}")]
   public async Task<ActionResult<ApiResponse<List<AuditResponse>>>> Get(string userId)
   {

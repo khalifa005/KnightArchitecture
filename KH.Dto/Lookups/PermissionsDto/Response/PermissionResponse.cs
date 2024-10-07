@@ -5,6 +5,7 @@ namespace KH.Dto.Lookups.PermissionsDto.Response;
 public class PermissionResponse
 {
   public long Id { get; set; }
+  public string Key { get; set; }
   public string NameEn { get; set; }
   public string NameAr { get; set; }
   public bool Disabled { get; set; }
