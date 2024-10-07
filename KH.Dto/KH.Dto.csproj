@@ -23,9 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Lookups\NationalityDto\Validation\" />
-    <Folder Include="Lookups\PermissionsDto\Form\" />
     <Folder Include="Lookups\PermissionsDto\Request\" />
-    <Folder Include="Lookups\PermissionsDto\Response\" />
     <Folder Include="Lookups\PermissionsDto\Validation\" />
     <Folder Include="Lookups\NationalityDto\Request\" />
     <Folder Include="Lookups\PolicyIssuingSourceDto\Request\" />

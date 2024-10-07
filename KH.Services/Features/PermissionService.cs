@@ -1,15 +1,13 @@
-using KH.Dto.lookups.RoleDto.Form;
-using KH.Dto.lookups.RoleDto.Response;
+using KH.Dto.lookups.PermissionDto.Form;
 using KH.Dto.Lookups.PermissionsDto.Response;
-using KH.Dto.Lookups.RoleDto.Request;
 
-public class RoleService : IRoleService
+public class PermissionService : IPermissionService
 {
   private readonly IUnitOfWork _unitOfWork;
   private readonly IServiceProvider _serviceProvider;
   private readonly IMapper _mapper;
 
-  public RoleService(
+  public PermissionService(
     IUnitOfWork unitOfWork,
     IServiceProvider serviceProvider,
     IMapper mapper)
@@ -19,55 +17,23 @@ public class RoleService : IRoleService
     _mapper = mapper;
   }
 
-  public async Task<ApiResponse<RoleResponse>> GetAsync(long id)
+  public async Task<ApiResponse<PermissionResponse>> GetAsync(long id)
   {
-    var res = new ApiResponse<RoleResponse>((int)HttpStatusCode.OK);
+    var res = new ApiResponse<PermissionResponse>((int)HttpStatusCode.OK);
 
-    var repository = _unitOfWork.Repository<Role>();
+    var repository = _unitOfWork.Repository<Permission>();
 
-    var entityFromDB = await repository.GetAsync(id,
-      x=>
-      x.Include(i=> i.RolePermissions)
-      .ThenInclude(i=> i.Permission));
+    var entityFromDB = await repository.GetAsync(id);
 
     if (entityFromDB == null)
       throw new Exception("Invalid Parameter");
 
-    var entityDetailsResponse = new RoleResponse(entityFromDB);
+    var entityDetailsResponse = new PermissionResponse(entityFromDB);
 
     res.Data = entityDetailsResponse;
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<RoleListResponse>>> GetListAsync(RoleFilterRequest request)
-  {
-    var repository = _unitOfWork.Repository<Role>();
-
-    var pagedEntities = await repository.GetPagedWithProjectionAsync<RoleListResponse>(
-    pageNumber: 1,
-    pageSize: 10,
-    filterExpression: u => u.IsDeleted == request.IsDeleted,
-    projectionExpression: u => new RoleListResponse(u),
-    include: null,
-    orderBy: query => query.OrderBy(u => u.Id),
-    tracking: false
-);
-
-
-    var entityListResponses = pagedEntities.Select(x => x).ToList();
-
-    var pagedResponse = new PagedResponse<RoleListResponse>(
-      entityListResponses,
-       pagedEntities.CurrentPage,
-       pagedEntities.TotalPages,
-       pagedEntities.PageSize,
-       pagedEntities.TotalCount);
-
-    var apiResponse = new ApiResponse<PagedResponse<RoleListResponse>>((int)HttpStatusCode.OK);
-    apiResponse.Data = pagedResponse;
-
-    return apiResponse;
-  }
-  public async Task<ApiResponse<string>> AddAsync(RoleForm request)
+  public async Task<ApiResponse<string>> AddAsync(PermissionForm request)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -84,7 +50,7 @@ public class RoleService : IRoleService
 
       var entity = request.ToEntity();
 
-      var repository = _unitOfWork.Repository<Role>();
+      var repository = _unitOfWork.Repository<Permission>();
 
       await repository.AddAsync(entity);
       await _unitOfWork.CommitAsync();
@@ -104,7 +70,7 @@ public class RoleService : IRoleService
       return res;
     }
   }
-  public async Task<ApiResponse<string>> UpdateAsync(RoleForm request)
+  public async Task<ApiResponse<string>> UpdateAsync(PermissionForm request)
   {
     //define our api res 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
@@ -112,7 +78,7 @@ public class RoleService : IRoleService
     //auto mapper
     var entityAfterMapping = request.ToEntity();
 
-    var repository = _unitOfWork.Repository<Role>();
+    var repository = _unitOfWork.Repository<Permission>();
     await _unitOfWork.BeginTransactionAsync();
 
     try
@@ -123,7 +89,7 @@ public class RoleService : IRoleService
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var entityFromDb = await repository.GetAsync(request.Id.Value,include:x=> x.Include(x=> x.RolePermissions), tracking: true);
+      var entityFromDb = await repository.GetAsync(request.Id.Value, tracking: true);
 
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -132,25 +98,6 @@ public class RoleService : IRoleService
       entityFromDb.NameAr = entityAfterMapping.NameAr;
       entityFromDb.NameEn = entityAfterMapping.NameEn;
       entityFromDb.Description = entityAfterMapping.Description;
-      if (request.HasPermissionsUpdates)
-      {
-        // Find permissions that should be removed
-        var permissionsToRemove = entityFromDb.RolePermissions
-            .Where(rp => !request.RolePermissionsIds.Contains(rp.PermissionId))
-            .ToList();
-
-        entityFromDb.RolePermissions = entityAfterMapping.RolePermissions;
-
-        // Remove them from the Role's RolePermissions collection
-        foreach (var permission in permissionsToRemove)
-        {
-          permission.IsDeleted = true;
-          entityFromDb.RolePermissions.Add(permission);
-          //entityFromDb.RolePermissions.Remove(permission);
-          //_context.RolePermissions.Remove(permission); // Mark them for deletion
-        }
-
-      }
 
       await _unitOfWork.CommitAsync();
       await _unitOfWork.CommitTransactionAsync();
@@ -174,11 +121,11 @@ public class RoleService : IRoleService
 
     try
     {
-      var repository = _unitOfWork.Repository<Role>();
+      var repository = _unitOfWork.Repository<Permission>();
 
       var entityFromDB = await repository.GetAsync(id);
       if (entityFromDB == null)
-        throw new Exception("Invalid user");
+        throw new Exception("Invalid");
 
       repository.Delete(entityFromDB);
       await _unitOfWork.CommitAsync();
@@ -195,8 +142,7 @@ public class RoleService : IRoleService
       return res;
     }
   }
-
-  public async Task<ApiResponse<PagedResponse<PermissionResponse>>> GetPermissionsListAsync()
+  public async Task<ApiResponse<PagedResponse<PermissionResponse>>> GetListAsync()
   {
     var repository = _unitOfWork.Repository<Permission>();
 

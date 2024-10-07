@@ -12,7 +12,7 @@ public class UserRoleResponse
   public long RoleId { get; set; }
   public RoleResponse? Role { get; set; }
 
-  public List<RoleFunctionsResponse> RoleFunctions { get; set; } = new List<RoleFunctionsResponse>();
+  public List<RolesPermissionResponse> RoleFunctions { get; set; } = new List<RolesPermissionResponse>();
   public UserRoleResponse()
   {
 

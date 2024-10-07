@@ -1,34 +1,37 @@
 
 using KH.Domain.Entities;
 
-namespace KH.Dto.lookups.RoleDto.Form;
+namespace KH.Dto.lookups.PermissionDto.Form;
 
-public class RoleForm : LookupEntityWithTrackingDto
+public class PermissionForm : LookupEntityWithTrackingDto
 {
   public bool IsUpdateMode { get; set; }
-  public bool HasPermissionsUpdates { get; set; }
-  public List<long> RolePermissionsIds { get; set; } = new();
-  public RoleForm()
+  public int SortKey { get; set; }
+  public long? ParentId { get; set; }
+
+  public PermissionForm()
   {
   }
-  public RoleForm(Role e)
+  public PermissionForm(Permission e)
   {
     NameAr = e.NameAr;
     NameEn = e.NameEn;
+    SortKey = e.SortKey;
+    ParentId = e.ParentId;
     Description = e.Description;
     CreatedDate = e.CreatedDate;
     UpdatedDate = e.UpdatedDate;
     CreatedById = e.CreatedById;
-    RolePermissionsIds = e.RolePermissions.Select(x=> x.PermissionId).ToList();
   }
-  public Role ToEntity()
+  public Permission ToEntity()
   {
-    var e = new Role()
+    var e = new Permission()
     {
       NameAr = NameAr,
       NameEn = NameEn,
+      SortKey = SortKey,
+      ParentId = ParentId,
       Description = Description,
-      RolePermissions = RolePermissionsIds.Select(x => new RolePermissions() { PermissionId = x }).ToList()
     };
 
     if (Id.HasValue)
@@ -39,7 +42,7 @@ public class RoleForm : LookupEntityWithTrackingDto
     }
     else
     {
-      e.Id = Id.Value;
+      //e.Id = Id.Value;
     }
 
     return e;
