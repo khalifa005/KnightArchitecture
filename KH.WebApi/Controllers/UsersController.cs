@@ -42,6 +42,7 @@ public class UsersController : BaseApiController
     return AsActionResult(res);
   }
 
+  [AllowAnonymous]
   [HttpPost]
   public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] UserForm request)
   {

@@ -122,9 +122,11 @@ public class UserService : IUserService
     if (userFromDB == null)
       throw new Exception("Invalid Parameter");
 
+    //crazy query example that needs spliting or it will cause performance issues
     var detailsUserFromDB = await repository.GetAsync(id,
       q => q.Include(u => u.UserRoles)
       .ThenInclude(ur => ur.Role)
+      .ThenInclude(r=> r.RolePermissions).ThenInclude(rp=> rp.Permission)
       .Include(u => u.UserGroups)
       .ThenInclude(x => x.Group)
       .Include(u => u.UserDepartments)
@@ -316,7 +318,13 @@ public class UserService : IUserService
         throw new Exception("you must select department");
 
       //-- Check User Duplication
-      //await this.CheckDuplictedUser(userObj);
+      var isThereDuplicatedUser = await IsThereMatchedUser(request.Email, request.Username);
+      if (isThereDuplicatedUser)
+        throw new Exception("duplicated username or email");
+
+      var isThereDuplicatedUserWithTheSamePhone = await IsThereMatchedUserWithTheSamePhoneNumber(request.MobileNumber);
+      if (isThereDuplicatedUserWithTheSamePhone)
+        throw new Exception("duplicated phone number");
 
       //custom mapping
       var userEntity = request.ToEntity();
@@ -525,6 +533,33 @@ public class UserService : IUserService
     }
 
     return res;
+  }
+
+  private async Task<bool> IsThereMatchedUser(string email, string username)
+  {
+    var repository = _unitOfWork.Repository<User>();
+
+    var result = await repository.FindByAsync(u =>
+    u.Username == username ||
+    u.Email == email);
+
+    if (result.Any())
+      return true;
+
+    return false;
+  }
+
+  private async Task<bool> IsThereMatchedUserWithTheSamePhoneNumber(string phoneNumber)
+  {
+    var repository = _unitOfWork.Repository<User>();
+
+    var result = await repository.FindByAsync(u =>
+    u.MobileNumber == phoneNumber);
+
+    if (result.Any())
+      return true;
+
+    return false;
   }
 
   // Find users by expression with includes
