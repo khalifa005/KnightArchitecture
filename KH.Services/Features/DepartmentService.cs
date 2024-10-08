@@ -72,13 +72,6 @@ public class DepartmentService : IDepartmentService
 
     try
     {
-      if (request == null)
-        throw new Exception("Invalid Parameter");
-
-      //all validation should be in fluent validation side
-      if (request.NameEn.IsNullOrEmpty())
-        throw new Exception("NameEn is required");
-
       var entity = request.ToEntity();
 
       var repository = _unitOfWork.Repository<Department>();
@@ -103,10 +96,8 @@ public class DepartmentService : IDepartmentService
   }
   public async Task<ApiResponse<string>> UpdateAsync(DepartmentForm request)
   {
-    //define our api res 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
-    //auto mapper
     var entityAfterMapping = request.ToEntity();
 
     var repository = _unitOfWork.Repository<Department>();
@@ -114,9 +105,6 @@ public class DepartmentService : IDepartmentService
 
     try
     {
-      if (request == null)
-        throw new Exception("Invalid Parameter");
-
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
@@ -125,7 +113,6 @@ public class DepartmentService : IDepartmentService
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
 
-      //Add the new props here ..etc
       entityFromDb.NameAr = entityAfterMapping.NameAr;
       entityFromDb.NameEn = entityAfterMapping.NameEn;
       entityFromDb.Description = entityAfterMapping.Description;

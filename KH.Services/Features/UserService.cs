@@ -29,9 +29,6 @@ public class UserService : IUserService
 
     try
     {
-      if (request == null)
-        throw new Exception("Invalid Parameter");
-
       var repository = _unitOfWork.Repository<User>();
 
       var entityFromDB = await repository.GetByExpressionAsync(u =>
@@ -74,9 +71,6 @@ public class UserService : IUserService
   {
     try
     {
-      if (request == null)
-        throw new Exception("Invalid Parameter");
-
       var repository = _unitOfWork.Repository<User>();
 
       var entityFromDB = await repository.GetByExpressionAsync(u =>
@@ -113,7 +107,6 @@ public class UserService : IUserService
   {
     //below there will be multiple query technique so u can open sql profile and see translated query for each
 
-    //define our api res 
     ApiResponse<UserDetailsResponse>? res = new ApiResponse<UserDetailsResponse>((int)HttpStatusCode.OK);
 
     var repository = _unitOfWork.Repository<User>();
@@ -309,9 +302,7 @@ public class UserService : IUserService
     //db context will handel saving it auto
     var actionMadeByUserId = _serviceProvider.GetUserId();
     var currentUserId = _currentUserService.UserId;
-    var currentUserRoles = _currentUserService.RolesIds;
 
-    //define our api res 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
     await _unitOfWork.BeginTransactionAsync();
@@ -319,19 +310,6 @@ public class UserService : IUserService
     //no nned for try catch we have global exception handler test it
     try
     {
-      if (request == null)
-        throw new Exception("Invalid Parameter");
-
-      //all validation should be in fluent validation side
-      if (request.Email.IsNullOrEmpty())
-        throw new Exception("email is required");
-
-      if (request.RoleIds == null || request.RoleIds.Length <= 0)
-        throw new Exception("you must select at least one role");
-
-      if (!request.DepartmentId.HasValue)
-        throw new Exception("you must select department");
-
       //-- Check User Duplication
       var isThereDuplicatedUser = await IsThereMatchedUser(request.Email, request.Username);
       if (isThereDuplicatedUser)
@@ -385,21 +363,11 @@ public class UserService : IUserService
   }
   public async Task<ApiResponse<string>> AddListAsync(List<UserForm> request)
   {
-    //db context will handel saving it auto
-    var actionMadeByUserId = _serviceProvider.GetUserId();
-
-    //define our api res 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
     await _unitOfWork.BeginTransactionAsync();
 
     try
     {
-      if (request == null)
-        throw new Exception("Invalid Parameter");
-
-      //-- Check User Duplication for each by national id and email
-      //await this.CheckDuplictedUser(userObj);
-
       //custom mapping
       var userEntities = request.Select(x => x.ToEntity()).ToList();
 
@@ -426,7 +394,6 @@ public class UserService : IUserService
   }
   public async Task<ApiResponse<string>> UpdateAsync(UserForm request)
   {
-    //define our api res 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
     //auto mapper
@@ -437,11 +404,6 @@ public class UserService : IUserService
 
     try
     {
-      //there will be fluend validation rules
-      if (request == null)
-        throw new Exception("Invalid Parameter");
-
-      //all validation should be in fluent validation side
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
@@ -458,8 +420,6 @@ public class UserService : IUserService
       userFromDb.FirstName = userEntityByAutoMapper.FirstName;
       userFromDb.MiddleName = userEntityByAutoMapper.MiddleName;
       userFromDb.BirthDate = userEntityByAutoMapper.BirthDate;
-
-
 
       //repository.UpdateDetachedEntity(userFromDb);
       await _unitOfWork.CommitAsync();
@@ -478,7 +438,6 @@ public class UserService : IUserService
       return res;
     }
   }
-
   public async Task<ApiResponse<string>> UpdateRangeUsingBatchAsync(UserForm request)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
@@ -521,7 +480,6 @@ public class UserService : IUserService
       return res;
     }
   }
-
   public async Task<ApiResponse<string>> ResetDepartmentsAsync(long id)
   {
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
@@ -565,7 +523,6 @@ public class UserService : IUserService
 
     return res;
   }
-
   private async Task<bool> IsThereMatchedUser(string email, string username)
   {
     var repository = _unitOfWork.Repository<User>();
@@ -579,7 +536,6 @@ public class UserService : IUserService
 
     return false;
   }
-
   private async Task<bool> IsThereMatchedUserWithTheSamePhoneNumber(string phoneNumber)
   {
     var repository = _unitOfWork.Repository<User>();
@@ -592,8 +548,6 @@ public class UserService : IUserService
 
     return false;
   }
-
-  // Find users by expression with includes
   private async Task<IEnumerable<User>> FindUsersWithIncludesAsync(Expression<Func<User, bool>> predicate)
   {
     //FindUsersWithIncludesAsync(u => u.FirstName.Contains(search) || u.LastName.Contains(search));

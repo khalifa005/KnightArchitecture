@@ -11,7 +11,6 @@ public interface IRoleService
   Task<ApiResponse<string>> AddAsync(RoleForm request);
   Task<ApiResponse<string>> UpdateAsync(RoleForm request);
   Task<ApiResponse<string>> DeleteAsync(long id);
-
   Task<ApiResponse<string>> UpdateBothRoleWithRelatedPermissionsAsync(RoleForm request);
   Task<ApiResponse<string>> UpdateRolePermissionsAsync(RoleForm request);
 }

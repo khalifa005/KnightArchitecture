@@ -71,13 +71,6 @@ public class GroupService : IGroupService
 
     try
     {
-      if (request == null)
-        throw new Exception("Invalid Parameter");
-
-      //all validation should be in fluent validation side
-      if (request.NameEn.IsNullOrEmpty())
-        throw new Exception("NameEn is required");
-
       var entity = request.ToEntity();
 
       var repository = _unitOfWork.Repository<KH.Domain.Entities.lookups.Group>();
@@ -102,10 +95,8 @@ public class GroupService : IGroupService
   }
   public async Task<ApiResponse<string>> UpdateAsync(GroupForm request)
   {
-    //define our api res 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
-    //auto mapper
     var entityAfterMapping = request.ToEntity();
 
     var repository = _unitOfWork.Repository<KH.Domain.Entities.lookups.Group>();
@@ -113,9 +104,6 @@ public class GroupService : IGroupService
 
     try
     {
-      if (request == null)
-        throw new Exception("Invalid Parameter");
-
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 

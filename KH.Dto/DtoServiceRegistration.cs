@@ -27,6 +27,7 @@ public static class DtoServiceRegistration
 
     //below validation registration using fluent validation lib
     services.AddSingleton<IValidator<MediaForm>, MediaFormValidator>();
+    services.AddSingleton<IValidator<LoginRequest>, LoginRequestValidator>();
 
     services.AddSingleton<IValidator<CityForm>, DepartmentFormValidator>();
 

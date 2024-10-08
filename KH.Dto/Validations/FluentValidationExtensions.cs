@@ -1,6 +1,6 @@
-﻿using FluentValidation;
+using FluentValidation;
 
-namespace KH.Dto.Validations.CustomValidation;
+namespace KH.Dto.Validations;
 
 public static class FluentValidationExtensions
 {
