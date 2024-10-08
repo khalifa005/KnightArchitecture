@@ -267,7 +267,6 @@ public class SmsService : ISmsService
       return res;
     }
   }
-
   public async Task<ApiResponse<string>> ResendAsync(SmsTracker request)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);

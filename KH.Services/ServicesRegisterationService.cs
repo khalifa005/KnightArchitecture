@@ -3,9 +3,15 @@ using DinkToPdf.Contracts;
 using KH.BuildingBlocks.Contracts;
 using KH.BuildingBlocks.Services;
 using KH.BuildingBlocks.Settings;
+using KH.Services.BackgroundServices;
 using KH.Services.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Quartz;
+using Quartz.Simpl;
+using Quartz.Spi;
+
 using System.Net.Mail;
 
 namespace KH.Services;
@@ -52,7 +58,19 @@ public static class ServicesRegisterationService
         });
 
 
+    services.AddQuartz(q =>
+    {
+      // Use a Scoped container to create jobs. I'll touch on this later
+      // Use a Scoped container to create jobs.
+      q.UseJobFactory<MicrosoftDependencyInjectionJobFactory>();
+      var serviceProvider = services.BuildServiceProvider();
+      var logger = serviceProvider.GetService<ILogger<EmailSenderJob>>();
 
+      q.AddJobAndTrigger<EmailSenderJob>(configuration, logger);
+    });
+
+    services.AddQuartzHostedService(
+        q => q.WaitForJobsToComplete = true);
     return services;
   }
 }

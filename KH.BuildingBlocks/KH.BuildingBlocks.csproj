@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -41,6 +41,12 @@
     <PackageReference Include="NReco.PdfGenerator" Version="1.2.1" />
 
     <PackageReference Include="PuppeteerSharp" Version="20.0.2" />
+
+    <PackageReference Include="Quartz" Version="3.13.0" />
+
+    <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.13.0" />
+
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.13.0" />
 
     <PackageReference Include="RestSharp" Version="112.0.0" />
 
