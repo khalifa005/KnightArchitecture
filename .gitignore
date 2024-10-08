@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /KH.WebApi/uploads
 /images
 /KH.WebApi/appsettings.Development.json
+/KH.WebApi/Fake SMS
