@@ -7,11 +7,12 @@ namespace KH.BuildingBlocks.Extentions.Api;
 
 public class HttpRequestHelper
 {
-  private readonly HttpClient _http;
+  private readonly IHttpClientFactory _httpClientFactory;
   private readonly ILogger<HttpRequestHelper> _logger;
-  public HttpRequestHelper(HttpClient http, ILogger<HttpRequestHelper> logger)
+
+  public HttpRequestHelper(IHttpClientFactory httpClientFactory, ILogger<HttpRequestHelper> logger)
   {
-    _http = http;
+    _httpClientFactory = httpClientFactory;
     _logger = logger;
   }
 
@@ -31,7 +32,8 @@ public class HttpRequestHelper
          = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
     }
 
-    var result = await _http.SendAsync(httpRequestMessage);
+    var client = _httpClientFactory.CreateClient();
+    var result = await client.SendAsync(httpRequestMessage);
 
     dynamic content = null;
 
@@ -116,7 +118,8 @@ public class HttpRequestHelper
      = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
     }
 
-    var result = await _http.SendAsync(httpRequestMessage);
+    var client = _httpClientFactory.CreateClient();
+    var result = await client.SendAsync(httpRequestMessage);
 
 
     var responde = await result.Content.ReadAsStringAsync();
@@ -185,7 +188,8 @@ public class HttpRequestHelper
      = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
     }
 
-    var result = await _http.SendAsync(httpRequestMessage);
+    var client = _httpClientFactory.CreateClient();
+    var result = await client.SendAsync(httpRequestMessage);
 
     var responde = await result.Content.ReadAsStringAsync();
 

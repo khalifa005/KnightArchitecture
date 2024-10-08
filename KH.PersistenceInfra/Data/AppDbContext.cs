@@ -27,6 +27,8 @@ public class AppDbContext : DbContext
   }
 
   public DbSet<Audit> AuditTrails { get; set; }
+  public DbSet<SmsTemplate> SmsTemplates { get; set; }
+  public DbSet<SmsTracker> SmsTracker { get; set; }
   public DbSet<Media> Media { get; set; }
   public DbSet<Customer> Customers { get; set; }
   public DbSet<City> Cities { get; set; }
@@ -38,7 +40,6 @@ public class AppDbContext : DbContext
   public DbSet<UserGroup> UserGroups { get; set; }
   public DbSet<Permission> Permissions { get; set; }
   public DbSet<RolePermissions> RolePermissions { get; set; }
-  public DbSet<SMSFollowUp> SMSFollowUp { get; set; }
   public DbSet<Calendar> Calendar { get; set; }
   public DbSet<EmailTracker> EmailTracker { get; set; }
 
@@ -60,6 +61,7 @@ public class AppDbContext : DbContext
     LookupContextSeeder.SeedRoles(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedUser(modelBuilder, _loggerFactory);
     PermissionsContextSeeder.SeedSystemPermissions(modelBuilder, _loggerFactory);
+    SmsTemplateContextSeeder.SeedTemplates(modelBuilder, _loggerFactory);
   }
 
   public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

@@ -116,9 +116,6 @@ public struct Result<T>
   }
 }
 
-
-
-
 public class HttpModelDTO
 {
 

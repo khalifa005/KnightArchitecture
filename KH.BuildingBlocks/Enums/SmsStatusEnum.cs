@@ -2,7 +2,8 @@ namespace KH.BuildingBlocks.Enums;
 
 public enum SmsStatusEnum
 {
-  Pending = 1,
-  Success = 2,
-  Fail = 3
+  Scheduled = 1,
+  SendOnTheFly = 2,
+  Success = 3,
+  Fail = 4
 }

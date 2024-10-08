@@ -26,7 +26,7 @@ public class DomainToDtoProfile : Profile
     //CreateMap<Role, RoleResponseDto>().ReverseMap();
     //CreateMap<Department, DepartmentResponseDto>().ReverseMap();
     CreateMap<Group, DepartmentResponse>().ReverseMap();
-    CreateMap<SMSFollowUp, SMSFollowUpForm>().ReverseMap();
+    CreateMap<SmsTracker, SmsTrackerForm>().ReverseMap();
     CreateMap<Calendar, CalendarResponse>().ReverseMap();
 
     //CreateMap<User, UserDetailsResponse>().ReverseMap();

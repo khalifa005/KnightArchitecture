@@ -41,7 +41,7 @@ public static class HelperServiceRegisteration
     services.Configure<TokenSettings>(tokenSettingsSection);
 
     var smsProviderSettings = configuration.GetSection("SMSProviderSettings");
-    services.Configure<SMSProviderSettings>(smsProviderSettings);
+    services.Configure<SmsSettings>(smsProviderSettings);
 
 
     var mailTemplateSettings = configuration.GetSection("MailTemplatesSettings");
@@ -53,6 +53,11 @@ public static class HelperServiceRegisteration
 
     services.AddOptions<MailSettings>()
      .Bind(mailSettings)
+     .ValidateDataAnnotations();
+
+    var SmsSettings = configuration.GetSection("SmsSettings");
+    services.AddOptions<SmsSettings>()
+     .Bind(SmsSettings)
      .ValidateDataAnnotations();
 
     #endregion

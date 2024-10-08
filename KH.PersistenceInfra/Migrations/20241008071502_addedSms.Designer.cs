@@ -4,6 +4,7 @@ using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KH.PersistenceInfra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241008071502_addedSms")]
+    partial class addedSms
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51158,10 +51161,6 @@ namespace KH.PersistenceInfra.Migrations
                         .HasColumnType("bit")
                         .HasColumnOrder(105);
 
-                    b.Property<string>("SmsType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("TextAr")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -51169,6 +51168,9 @@ namespace KH.PersistenceInfra.Migrations
                     b.Property<string>("TextEn")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
 
                     b.Property<long?>("UpdatedById")
                         .HasColumnType("bigint")
@@ -51181,26 +51183,6 @@ namespace KH.PersistenceInfra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SmsTemplates");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            SmsType = "WelcomeUser",
-                            TextAr = "مرحبًا {FirstName}، رمز التحقق الخاص بك هو {OtpCode}.",
-                            TextEn = "Welcome {FirstName}, your OTP code is {OtpCode}."
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            IsDeleted = false,
-                            SmsType = "OTP",
-                            TextAr = "مرحبًا {Username}، استخدم هذا الرمز {OtpCode} لإعادة تعيين كلمة المرور.",
-                            TextEn = "Hello {Username}, use this OTP {OtpCode} to reset your password."
-                        });
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.SmsTracker", b =>
@@ -51250,8 +51232,8 @@ namespace KH.PersistenceInfra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ModelId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()

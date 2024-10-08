@@ -1,3 +1,6 @@
+using KH.BuildingBlocks.Enums;
+using KH.Dto.Models.SMSDto.Form;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
@@ -8,18 +11,24 @@ public class UserService : IUserService
   private readonly IServiceProvider _serviceProvider;
   private readonly IMapper _mapper;
   private readonly ICurrentUserService _currentUserService;
+  private readonly ISmsService _smsService;
+  private readonly ISmsTemplateService _smsTemplateService;
 
   public UserService(
     IUnitOfWork unitOfWork,
     ICurrentUserService currentUserService,
     ITokenService tokenService,
     IServiceProvider serviceProvider,
+    ISmsService smsService,
+    ISmsTemplateService smsTemplateService,
     IMapper mapper)
   {
     _unitOfWork = unitOfWork;
     _currentUserService = currentUserService;
     _tokenService = tokenService;
     _serviceProvider = serviceProvider;
+    _smsService = smsService;
+    _smsTemplateService = smsTemplateService;
     _mapper = mapper;
   }
 
@@ -344,7 +353,26 @@ public class UserService : IUserService
       var repository = _unitOfWork.Repository<User>();
 
       await repository.AddAsync(userEntity);
+      
       await _unitOfWork.CommitAsync();
+
+      var smsWelcomeTemplateResult = await _smsTemplateService.GetSmsTemplateAsync(SmsTypeEnum.WelcomeUser.ToString());
+      if (smsWelcomeTemplateResult.StatusCode == StatusCodes.Status200OK && smsWelcomeTemplateResult.Data is object)
+      {
+        var template = smsWelcomeTemplateResult.Data;
+        var templateContetBasedOnLanguage = _smsTemplateService.GetTemplateForLanguage(template, LanguageEnum.English);
+        var welcomeSmsMessageFormatted = _smsTemplateService.ReplaceWelcomeSmsPlaceholders(templateContetBasedOnLanguage, userEntity);
+
+        var smsTrackerForm = new SmsTrackerForm()
+        {
+          MobileNumber = userEntity.MobileNumber,
+          Message = welcomeSmsMessageFormatted,
+          Model = ModelEnum.User.ToString(),
+          ModelId = userEntity.Id
+        };
+
+        var smsResult = await _smsService.SendSmsAsync(smsTrackerForm);
+      }
 
       await _unitOfWork.CommitTransactionAsync();
 

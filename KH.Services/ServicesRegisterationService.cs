@@ -27,6 +27,8 @@ public static class ServicesRegisterationService
     services.AddScoped<IAuditService, AuditService>();
     services.AddSingleton<IExcelService, ExcelService>();
     services.AddScoped<IPermissionService, PermissionService>();
+    services.AddScoped<ISmsTemplateService, SmsTemplateService>();
+    services.AddScoped<ISmsService, SmsService>();
 
     // Register DinkToPdf converter
     services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
