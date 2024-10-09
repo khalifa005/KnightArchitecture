@@ -1,5 +1,8 @@
 using KH.BuildingBlocks.Enums;
+using KH.BuildingBlocks.Extentions;
+using KH.Domain.Entities;
 using KH.Dto.Models.SMSDto.Form;
+using KH.PersistenceInfra.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
@@ -13,6 +16,8 @@ public class UserService : IUserService
   private readonly ICurrentUserService _currentUserService;
   private readonly ISmsService _smsService;
   private readonly ISmsTemplateService _smsTemplateService;
+  private readonly IHttpContextAccessor _httpContextAccessor;
+
 
   public UserService(
     IUnitOfWork unitOfWork,
@@ -21,7 +26,8 @@ public class UserService : IUserService
     IServiceProvider serviceProvider,
     ISmsService smsService,
     ISmsTemplateService smsTemplateService,
-    IMapper mapper)
+    IMapper mapper,
+    IHttpContextAccessor httpContextAccessor)
   {
     _unitOfWork = unitOfWork;
     _currentUserService = currentUserService;
@@ -30,6 +36,7 @@ public class UserService : IUserService
     _smsService = smsService;
     _smsTemplateService = smsTemplateService;
     _mapper = mapper;
+    _httpContextAccessor = httpContextAccessor;
   }
 
   public async Task<ApiResponse<AuthenticationResponse>> LoginAsync(LoginRequest request)
@@ -45,12 +52,10 @@ public class UserService : IUserService
 
    q => q.Include(u => u.UserRoles)
    .ThenInclude(ur => ur.Role)
-   .ThenInclude(r => r.RolePermissions)
-   .Include(u => u.UserGroups)
-   .Include(u => u.UserDepartments));
+   .ThenInclude(r => r.RolePermissions), tracking: true);
 
 
-      if (entityFromDB == null || request.Password.IsNullOrEmpty())
+      if (entityFromDB == null || request.Password.IsNullOrEmpty() || entityFromDB.IsDeleted)
         throw new Exception("Invalid User");
 
       //Check Is OTP Verified at First Login
@@ -62,8 +67,31 @@ public class UserService : IUserService
         throw new Exception("Invalid User!");
 
       var jwtToken = _tokenService.CreateToken(entityFromDB);
+      var authenticationResponse = new AuthenticationResponse { AccessToken = jwtToken };
 
-      res.Data = new AuthenticationResponse { AccessToken = jwtToken };
+      if (entityFromDB.RefreshTokenExpiryTime > DateTime.UtcNow)
+      {
+        authenticationResponse.RefreshToken = entityFromDB.RefreshToken;
+      }
+      else
+      {
+        var refreshToken = _tokenService.GenerateRefreshToken();
+
+        //below to activate the RefreshToken 
+        entityFromDB.RefreshToken = refreshToken.Token;
+        entityFromDB.RefreshTokenExpiryTime = refreshToken.Expires;
+        entityFromDB.RefreshTokenCreatedDate = refreshToken.Created;
+        await _unitOfWork.CommitAsync();
+
+        authenticationResponse.RefreshToken = refreshToken.Token;
+      }
+
+      //in case we need to set at cookies
+      var response = _httpContextAccessor.HttpContext.Response;
+      CookieHelper.SetCookie(response, "accessToken", authenticationResponse.AccessToken);
+      CookieHelper.SetCookie(response, "refreshToken", authenticationResponse.RefreshToken);
+
+      res.Data = authenticationResponse;
 
       return res;
     }
@@ -353,7 +381,7 @@ public class UserService : IUserService
       var repository = _unitOfWork.Repository<User>();
 
       await repository.AddAsync(userEntity);
-      
+
       await _unitOfWork.CommitAsync();
 
       var smsWelcomeTemplateResult = await _smsTemplateService.GetSmsTemplateAsync(SmsTypeEnum.WelcomeUser.ToString());

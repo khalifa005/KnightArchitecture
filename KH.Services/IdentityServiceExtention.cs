@@ -27,7 +27,7 @@ public static class IdentityServiceExtention
     services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
 
 
-    var key = Encoding.UTF8.GetBytes(configuration["TokenSettings:Key"]);
+    //var key = Encoding.UTF8.GetBytes(configuration["TokenSettings:Key"]);
 
     services.AddAuthentication(options =>
     {
@@ -70,7 +70,8 @@ public static class IdentityServiceExtention
       bearer.TokenValidationParameters = new TokenValidationParameters
       {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenSettings:Key"])),
+
         ValidateIssuer = true,
         ValidIssuer = configuration["TokenSettings:Issuer"],
         ValidateAudience = false,

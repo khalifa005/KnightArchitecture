@@ -18,7 +18,11 @@ public class User : TrackerEntity
   public string? OtpCode { get; set; }
   public bool IsOtpVerified { get; set; }
   public string? Password { get; set; }
-
+  public string? RefreshToken { get; set; }
+  public DateTime? RefreshTokenExpiryTime { get; set; }
+  public DateTime RefreshTokenCreatedDate { get; set; }
+  public DateTime? RefreshTokenRevokedDate { get; set; }
+  
   public DateTime? LastAssignDateAsSupervisor { get; set; }
   public DateTime? LastAssignDateAsCaseOwner { get; set; }
   public DateTime? LastAssignDateAsAssignTo { get; set; }
@@ -27,3 +31,4 @@ public class User : TrackerEntity
   public ICollection<UserGroup> UserGroups { get; set; } = new HashSet<UserGroup>();
   public ICollection<UserDepartment> UserDepartments { get; set; } = new HashSet<UserDepartment>();
 }
+

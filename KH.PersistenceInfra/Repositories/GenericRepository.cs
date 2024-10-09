@@ -97,9 +97,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     return query.FirstOrDefault(t => t.Id == id);
   }
 
-  public async Task<T> GetByExpressionAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
+  public async Task<T> GetByExpressionAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, bool tracking = false)
   {
-    var query = ApplyIncludes(include);
+    var query = ApplyIncludes(include, tracking: tracking);
     return await query.Where(expression).FirstOrDefaultAsync();
   }
 
