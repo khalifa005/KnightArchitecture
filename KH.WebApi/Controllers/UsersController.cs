@@ -18,6 +18,13 @@ public class UsersController : BaseApiController
     return AsActionResult(res);
   }
 
+  [HttpGet("RefreshUserToken/{refreshToken}")]
+  public async Task<ActionResult<ApiResponse<AuthenticationResponse>>> RefreshUserToken(string refreshToken)
+  {
+    var res = await _userService.RefreshUserTokenAsync(refreshToken);
+    return AsActionResult(res);
+  }
+
   [HttpGet("{id}")]
   public async Task<ActionResult<ApiResponse<UserDetailsResponse>>> Get(int id)
   {

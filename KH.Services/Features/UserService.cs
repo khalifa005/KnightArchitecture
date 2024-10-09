@@ -1,10 +1,12 @@
 using KH.BuildingBlocks.Enums;
 using KH.BuildingBlocks.Extentions;
 using KH.Domain.Entities;
+using KH.Dto.Models.AuthenticationDto.Response;
 using KH.Dto.Models.SMSDto.Form;
 using KH.PersistenceInfra.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json.Linq;
 using System.Security.Claims;
 
 public class UserService : IUserService
@@ -37,6 +39,63 @@ public class UserService : IUserService
     _smsTemplateService = smsTemplateService;
     _mapper = mapper;
     _httpContextAccessor = httpContextAccessor;
+  }
+
+  public async Task<ApiResponse<AuthenticationResponse>> RefreshUserTokenAsync(string refreshTokenValue)
+  {
+    var res = new ApiResponse<AuthenticationResponse>((int)HttpStatusCode.OK);
+
+    var repository = _unitOfWork.Repository<User>();
+    if (string.IsNullOrEmpty(refreshTokenValue))
+    {
+      res.StatusCode = StatusCodes.Status400BadRequest;
+      res.ErrorMessage = "empty token";
+      return res;
+    }
+
+    var entityFromDB = await repository.GetByExpressionAsync(u =>
+ u.RefreshToken == refreshTokenValue && u.IsDeleted == false,
+
+ q => q.Include(u => u.UserRoles)
+ .ThenInclude(ur => ur.Role)
+ .ThenInclude(r => r.RolePermissions), tracking: true);
+
+
+    if (entityFromDB == null)
+    {
+      res.StatusCode = StatusCodes.Status400BadRequest;
+      res.ErrorMessage = "invalid-refresh-token";
+      return res;
+    }
+
+    if (entityFromDB.RefreshTokenExpiryTime < DateTime.UtcNow)
+    {
+      res.StatusCode = StatusCodes.Status400BadRequest;
+      res.ErrorMessage = $"token-not-active.";
+      return res;
+    }
+
+    //Revoke Current Refresh Token
+    entityFromDB.RefreshTokenRevokedDate = DateTime.UtcNow;
+
+    //Generate new Refresh Token and save to Database
+    var refreshToken = _tokenService.GenerateRefreshToken();
+
+    //below to activate the RefreshToken 
+    entityFromDB.RefreshToken = refreshToken.Token;
+    entityFromDB.RefreshTokenExpiryTime = refreshToken.Expires;
+    entityFromDB.RefreshTokenCreatedDate = refreshToken.Created;
+    await _unitOfWork.CommitAsync();
+
+    var authenticationResponse = new AuthenticationResponse();
+    authenticationResponse.RefreshToken = refreshToken.Token;
+
+    //Generates new jwt
+    var jwtToken = _tokenService.CreateToken(entityFromDB);
+    authenticationResponse.AccessToken = jwtToken;  
+
+    res.Data = authenticationResponse;
+    return res;
   }
 
   public async Task<ApiResponse<AuthenticationResponse>> LoginAsync(LoginRequest request)
@@ -103,7 +162,6 @@ public class UserService : IUserService
       return res;
     }
   }
-
   public async Task<List<Claim>> GetUserClaims(LoginRequest request)
   {
     try
