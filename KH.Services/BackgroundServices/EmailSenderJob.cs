@@ -36,15 +36,24 @@ public class EmailSenderJob : IJob
 
     try
     {
-      var currentDate = DateTime.Now;
-      _logger.LogError("{currentDate} has exception ", currentDate);
+      var startTime = DateTime.Now;
+      _logger.LogInformation("{Task} Execution started at: {StartTime}", TaskName, startTime);
 
+      // Delay the execution for 5 minutes (300,000 milliseconds)
+      await Task.Delay(TimeSpan.FromMinutes(5));
+
+      var endTime = DateTime.Now;
+      _logger.LogInformation("{Task} Execution resumed after delay at: {EndTime}", TaskName, endTime);
+
+      var currentDate = DateTime.Now;
+
+      // Your logic here after the delay
 
     }
     catch (Exception ex)
     {
-
       _logger.LogError("{Task} has exception {Exception}", TaskName, ex.Message);
     }
   }
+
 }
