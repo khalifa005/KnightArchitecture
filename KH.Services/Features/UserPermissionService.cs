@@ -34,7 +34,7 @@ public class UserPermissionService : IUserPermissionService
 
       userPermissions =
          (from perm in dbRolesFunctions
-          select new Claim(PermissionRequirement.ClaimType, perm.Permission?.NameEn ?? "")).ToList();
+          select new Claim(PermissionRequirement.ClaimType, perm.Permission?.Key ?? "")).ToList();
     }
     return CreatePermissionsIdentity(userPermissions);
   }

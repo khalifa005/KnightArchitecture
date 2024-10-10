@@ -106,12 +106,14 @@ public class UserService : IUserService
     {
       var repository = _unitOfWork.Repository<User>();
 
+      
       var entityFromDB = await repository.GetByExpressionAsync(u =>
    u.Username == request.Username && u.IsDeleted == false,
 
    q => q.Include(u => u.UserRoles)
    .ThenInclude(ur => ur.Role)
    .ThenInclude(r => r.RolePermissions), tracking: true);
+
 
 
       if (entityFromDB == null || request.Password.IsNullOrEmpty() || entityFromDB.IsDeleted)
@@ -124,6 +126,15 @@ public class UserService : IUserService
         .VerifyHashedPassword(null, entityFromDB.Password, request.Password);
       if (passwordVerificationResult != PasswordVerificationResult.Success)
         throw new Exception("Invalid User!");
+
+      var rolesPermissions = entityFromDB
+        .UserRoles
+        .SelectMany(x=> x.Role.RolePermissions)
+        .ToList();
+
+      var rolesPermissionsXX = entityFromDB.UserRoles
+          .SelectMany(x => x.AggregateRolePermissions(x.Role))
+          .ToList();
 
       var jwtToken = _tokenService.CreateToken(entityFromDB);
       var authenticationResponse = new AuthenticationResponse { AccessToken = jwtToken };

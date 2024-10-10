@@ -25,11 +25,16 @@ public class TokenService : ITokenService
   {
 
     var userRoles = user.UserRoles?
-        .Where(o =>
-            o.RoleId == UserExtensions.SUPER_ADMIN_ROLE_ID ||
-            (o.RolePermissions != null && o.RolePermissions.Count > 0))
         .Select(o => o.RoleId.ToString()) // Directly select RoleId as string
         .ToList();
+
+    //to include only the role with permissions
+    //var userRoles = user.UserRoles?
+    //.Where(o =>
+    //    o.RoleId == UserExtensions.SUPER_ADMIN_ROLE_ID ||
+    //    (o.RolePermissions != null && o.RolePermissions.Count > 0))
+    //.Select(o => o.RoleId.ToString()) // Directly select RoleId as string
+    //.ToList();
 
     var claims = new List<Claim>
             {
