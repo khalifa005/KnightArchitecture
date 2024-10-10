@@ -361,7 +361,7 @@ public class UserService : IUserService
     var pagedUsers = await repository.GetPagedWithProjectionAsync<UserListResponse>(
     pageNumber: 1,
     pageSize: 10,
-    filterExpression: u => u.IsDeleted, // Filter by 
+    filterExpression: u => u.IsDeleted == request.IsDeleted, // Filter by 
     projectionExpression: u => new UserListResponse
     {
       Id = u.Id,
@@ -405,6 +405,9 @@ public class UserService : IUserService
     //no nned for try catch we have global exception handler test it
     try
     {
+      if (request.Id.HasValue)
+        throw new Exception("invalid-user-id-in-add-mode");
+
       //-- Check User Duplication
       var isThereDuplicatedUser = await IsThereMatchedUser(request.Email, request.Username);
       if (isThereDuplicatedUser)
@@ -510,10 +513,13 @@ public class UserService : IUserService
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
-    //auto mapper
-    var userEntityByAutoMapper = _mapper.Map<User>(request);
+    //mapper
+    //var userEntityByAutoMapper = _mapper.Map<User>(request);
+    var userEntityByAutoMapper = request.ToEntity();
 
+    var userRoleRepository = _unitOfWork.Repository<UserRole>();
     var repository = _unitOfWork.Repository<User>();
+
     await _unitOfWork.BeginTransactionAsync();
 
     try
@@ -521,22 +527,35 @@ public class UserService : IUserService
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var userFromDb = await repository.GetAsync(request.Id.Value, tracking: true);
+      var userFromDb = await repository.GetAsync(request.Id.Value, include: x => x.Include(x => x.UserRoles), tracking: true);
 
       if (userFromDb == null)
         throw new Exception("Invalid Parameter");
 
       //Add the new props here ..etc
       userFromDb.MobileNumber = userEntityByAutoMapper.MobileNumber;
-      userFromDb.Email = userEntityByAutoMapper.Email;
-      userFromDb.Username = userEntityByAutoMapper.Username;
       userFromDb.LastName = userEntityByAutoMapper.LastName;
       userFromDb.FirstName = userEntityByAutoMapper.FirstName;
       userFromDb.MiddleName = userEntityByAutoMapper.MiddleName;
       userFromDb.BirthDate = userEntityByAutoMapper.BirthDate;
 
-      //repository.UpdateDetachedEntity(userFromDb);
+      if (userEntityByAutoMapper.UserRoles.Count > 0)
+      {
+        // Find permissions that should be removed
+        var userRolesToRemove = userFromDb.UserRoles
+            .Where(rp => !request.RoleIds.Contains(rp.RoleId))
+            .ToList();
+
+        userFromDb.UserRoles = userEntityByAutoMapper.UserRoles;
+
+        foreach (var userRole in userRolesToRemove)
+        {
+          userRoleRepository.DeleteTracked(userRole);
+        }
+
+      }
       await _unitOfWork.CommitAsync();
+
       await _unitOfWork.CommitTransactionAsync();
 
       res.Data = userEntityByAutoMapper.Id.ToString();

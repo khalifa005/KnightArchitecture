@@ -20,13 +20,12 @@ public class UserPermissionService : IUserPermissionService
     var userPermissions = new List<Claim>();
     if (systemType == SystemTypeEnum.ExternalCustomer.ToString())
     {
-      //--Add Default Permissions In case System Is CRMClient
       userPermissions = new List<Claim> { new Claim(PermissionRequirement.ClaimType, ApplicationConstant.CUSTOMER_SYSTEM_PERMISSION) };
     }
     else
     {
       //we can get user roles from token + we can get the system function from cache
-      var userRoles = await _unitOfWork.Repository<UserRole>().FindByAsync(x => x.UserId == userId);
+      var userRoles = await _unitOfWork.Repository<UserRole>().FindByAsync(x => x.UserId == userId && x.IsDeleted == false);
 
       var dbRolesFunctions = await _unitOfWork
         .Repository<RolePermissions>()

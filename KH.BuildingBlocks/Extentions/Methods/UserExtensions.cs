@@ -155,6 +155,19 @@ public static class UserExtensions
     return claim.Value;
   }
 
+  public static IEnumerable<string> GetUserRoles(this ClaimsPrincipal identity)
+  {
+    if (identity == null)
+      return null;
+
+    var roles = identity.Claims
+                        .Where(c => c.Type == ClaimTypes.Role)
+                        .Select(c => c.Value);
+
+    return roles;
+  }
+
+
   /// <summary>
   /// GET System Type
   /// </summary>

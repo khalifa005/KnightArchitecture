@@ -10,4 +10,8 @@
     <ProjectReference Include="..\KH.PersistenceInfra\KH.PersistenceInfra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Users\Implementatoin\" />
+  </ItemGroup>
+
 </Project>

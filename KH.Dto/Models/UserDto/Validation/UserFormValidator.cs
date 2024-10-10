@@ -35,11 +35,12 @@ public class UserFormValidator : AbstractValidator<UserForm>
 
 
     RuleFor(x => x.Password)
-      .NotNull()
+      .NotNull().When(x=> !x.Id.HasValue)
       .WithMessage("please-enter-password")
-      .NotEmpty()
+      .NotEmpty().When(x => !x.Id.HasValue)
       .WithMessage("please-enter-password")
       .Length(1, 250)
+      .When(x => !x.Id.HasValue)
       .WithMessage("please-enter-password");
 
     RuleFor(x => x.Username)

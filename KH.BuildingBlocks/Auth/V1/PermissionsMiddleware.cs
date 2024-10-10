@@ -76,52 +76,44 @@ public class PermissionsMiddleware
       var userId = context.User.GetId();
       if (string.IsNullOrEmpty(userId))
       {
-        await context.Response.WriteAsync("User 'Identifier' claim is required",
-        cancellationToken);
+        var apiResponse = new ApiResponse<object>(StatusCodes.Status401Unauthorized)
+        {
+          ErrorMessage = "access-denied",
+          ErrorMessageAr = "وصول غير مصرح به", // Example Arabic error message, customize as needed
+          Errors = new List<string> { "invalid-user-id" }
+        };
+
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        context.Response.ContentType = "application/json";
+
+        var jsonResponse = JsonConvert.SerializeObject(apiResponse); // Assuming you're using Newtonsoft.Json or System.Text.Json
+        await context.Response.WriteAsync(jsonResponse, cancellationToken);
         return;
       }
 
       var systemType = context.User.GetSystemType();
-      var userRoles = context.User.GetUserRole();
+      var userRole = context.User.GetUserRole();
+      var userRoles = context.User.GetUserRoles();
 
       permissionsIdentity = await permissionService.GetUserPermissionsIdentity(int.Parse(userId), systemType, cancellationToken);
       if (permissionsIdentity == null)
       {
-        _logger.LogWarning("User {Identifier} does not have permissions", userId);
-        await context.Response.WriteAsync("Access denied",
-        cancellationToken);
+        var apiResponse = new ApiResponse<object>(StatusCodes.Status401Unauthorized)
+        {
+          ErrorMessage = "access-denied",
+          ErrorMessageAr = "وصول غير مصرح به", // Example Arabic error message, customize as needed
+          Errors = new List<string> { "User is not authenticated" }
+        };
+
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        context.Response.ContentType = "application/json";
+        var jsonResponse = JsonConvert.SerializeObject(apiResponse); // Assuming you're using Newtonsoft.Json or System.Text.Json
+        await context.Response.WriteAsync(jsonResponse, cancellationToken);
         return;
       }
     }
     // User has permissions, so we add the extra identity containing the "permissions" claims
     context.User.AddIdentity(permissionsIdentity);
-
-    //-- TODO: Remove Comment To Allow Redis Caching
-    /*
-    var responseCached = await _cache.GetCachedResponseAsync($"Permissions_{userId}");
-    var permissionsIdentity = new ClaimsIdentity();
-    if (responseCached == null)
-    {
-      permissionsIdentity = await permissionService.GetUserPermissionsIdentity(int.Parse(userId), systemType, cancellationToken);
-      if (permissionsIdentity == null)
-      {
-        _logger.LogWarning("User {Identifier} does not have permissions", userId);
-        await context.Response.WriteAsync("Access denied",
-        cancellationToken);
-        return;
-      }
-      await _cache.CacheResponseAsync($"Permissions_{userId}", permissionsIdentity, TimeSpan.FromSeconds(500000));
-    }
-    else
-    {
-      permissionsIdentity = JsonConvert.DeserializeObject<ClaimsIdentity>(responseCached, new ClaimConverter());
-    }
-    if (permissionsIdentity != null)
-    {
-      // User has permissions, so we add the extra identity containing the "permissions" claims
-      context.User.AddIdentity(permissionsIdentity);
-    }
-    */
 
     await _request(context);
   }
