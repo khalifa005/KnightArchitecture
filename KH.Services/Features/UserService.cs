@@ -539,21 +539,31 @@ public class UserService : IUserService
       userFromDb.MiddleName = userEntityByAutoMapper.MiddleName;
       userFromDb.BirthDate = userEntityByAutoMapper.BirthDate;
 
-      if (userEntityByAutoMapper.UserRoles.Count > 0)
+      if (userEntityByAutoMapper?.UserRoles?.Count > 0)
       {
-        // Find permissions that should be removed
-        var userRolesToRemove = userFromDb.UserRoles
-            .Where(rp => !request.RoleIds.Contains(rp.RoleId))
-            .ToList();
-
-        userFromDb.UserRoles = userEntityByAutoMapper.UserRoles;
-
-        foreach (var userRole in userRolesToRemove)
+        // Ensure userFromDb and request are not null
+        if (userFromDb?.UserRoles != null && request?.RoleIds != null)
         {
-          userRoleRepository.DeleteTracked(userRole);
-        }
+          // Get existing roles from the database that match the RoleIds in the request
+          var existingUserRoles = userFromDb.UserRoles
+              .Where(userRole => request.RoleIds.Contains(userRole.RoleId))
+              .ToList();
 
+          // Identify new roles from AutoMapper that are not already in the database or in the matched roles
+          var newUserRoles = userEntityByAutoMapper.UserRoles
+              .Where(mappedRole => !userFromDb.UserRoles.Any(dbRole => dbRole.RoleId == mappedRole.RoleId)
+                                 && !existingUserRoles.Any(matchedRole => matchedRole.RoleId == mappedRole.RoleId))
+              .ToList();
+
+          // Combine the existing and new roles
+          var updatedUserRoles = existingUserRoles.Concat(newUserRoles).ToList();
+
+          // Update the UserRoles collection with the combined list of roles; EF Core will track and apply changes
+          userFromDb.UserRoles = updatedUserRoles;
+        }
       }
+
+
       await _unitOfWork.CommitAsync();
 
       await _unitOfWork.CommitTransactionAsync();

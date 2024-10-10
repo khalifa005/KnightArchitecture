@@ -47,21 +47,22 @@ public class AppDbContext : DbContext
   {
     base.OnModelCreating(modelBuilder);
 
-    foreach (var fk in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-    {
-      fk.DeleteBehavior = DeleteBehavior.Restrict;
-    }
+    //foreach (var fk in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+    //{
+    //  fk.DeleteBehavior = DeleteBehavior.Restrict;
+    //}
 
     modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
     LookupContextSeeder.SeedCities(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedDepartment(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedGroups(modelBuilder, _loggerFactory);
-    LookupContextSeeder.SeedCustomer(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedRoles(modelBuilder, _loggerFactory);
-    LookupContextSeeder.SeedUser(modelBuilder, _loggerFactory);
     PermissionsContextSeeder.SeedSystemPermissions(modelBuilder, _loggerFactory);
     SmsTemplateContextSeeder.SeedTemplates(modelBuilder, _loggerFactory);
+    UsersContextSeeder.SeedCustomer(modelBuilder, _loggerFactory);
+    UsersContextSeeder.SeedUser(modelBuilder, _loggerFactory);
+
   }
 
   public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

@@ -13,12 +13,12 @@ public class RoleFunctionConfiguration : IEntityTypeConfiguration<RolePermission
     builder.HasOne(rp => rp.Permission)
            .WithMany(p => p.RolePermissions) // Explicitly define inverse relationship
            .HasForeignKey(rp => rp.PermissionId)
-           .OnDelete(DeleteBehavior.Restrict);
+           .OnDelete(DeleteBehavior.Cascade);
 
     // Define relationship with Role
     builder.HasOne(rp => rp.Role)
            .WithMany(r => r.RolePermissions) // Explicitly define inverse relationship
            .HasForeignKey(rp => rp.RoleId)
-           .OnDelete(DeleteBehavior.Restrict);
+           .OnDelete(DeleteBehavior.Cascade);
   }
 }

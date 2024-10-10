@@ -9,13 +9,13 @@ public class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
     builder.HasOne(rp => rp.User)
            .WithMany(p => p.UserRoles) // Explicitly define inverse relationship
            .HasForeignKey(rp => rp.UserId)
-           .OnDelete(DeleteBehavior.Restrict);
+           .OnDelete(DeleteBehavior.Cascade);
 
     // Define relationship with Role
     builder.HasOne(rp => rp.Role)
            .WithMany() // Explicitly define inverse relationship
            .HasForeignKey(rp => rp.RoleId)
-           .OnDelete(DeleteBehavior.Restrict);
+           .OnDelete(DeleteBehavior.Cascade);
 
   }
 }

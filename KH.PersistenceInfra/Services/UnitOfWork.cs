@@ -2,6 +2,7 @@ using KH.BuildingBlocks.Contracts.Persistence;
 using KH.BuildingBlocks.Extentions.Entities;
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Concurrent;
 
@@ -45,6 +46,19 @@ public partial class UnitOfWork : IUnitOfWork
 
     _currentTransaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
   }
+
+
+  public async Task BeginTransactionAsync(System.Data.IsolationLevel isolationLevel = System.Data.IsolationLevel.ReadUncommitted)
+  {
+    if (_currentTransaction != null)
+    {
+      throw new InvalidOperationException("There is already an active transaction.");
+    }
+
+    _currentTransaction = await _dbContext.Database.BeginTransactionAsync(isolationLevel);
+
+  }
+
 
   /// <summary>
   /// Rolls back the current transaction.
@@ -105,5 +119,6 @@ public partial class UnitOfWork : IUnitOfWork
     return (IGenericRepository<TEntity>)_repositories.GetOrAdd(typeName,
         (key) => Activator.CreateInstance(typeof(GenericRepository<>).MakeGenericType(typeof(TEntity)), _dbContext));
   }
+
 
 }

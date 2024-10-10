@@ -160,23 +160,26 @@ public class RoleService : IRoleService
       entityFromDb.NameAr = entityAfterMapping.NameAr;
       entityFromDb.NameEn = entityAfterMapping.NameEn;
       entityFromDb.Description = entityAfterMapping.Description;
+
+   
       if (request.HasPermissionsUpdates)
       {
-        // Find permissions that should be removed
-        var permissionsToRemove = entityFromDb.RolePermissions
-            .Where(rp => !request.RolePermissionsIds.Contains(rp.PermissionId))
+        // Get matched role permissions from the database based on request's RolePermissionsIds
+        var matchedRolePermissions = entityFromDb.RolePermissions
+            .Where(rp => request.RolePermissionsIds.Contains(rp.PermissionId))
             .ToList();
 
-        entityFromDb.RolePermissions = entityAfterMapping.RolePermissions;
+        // Get new role permissions that don't exist in both entityFromDb and matchedRolePermissions
+        var newRolePermissions = entityAfterMapping.RolePermissions
+            .Where(np => !entityFromDb.RolePermissions.Any(rp => rp.PermissionId == np.PermissionId)
+                      && !matchedRolePermissions.Any(mp => mp.PermissionId == np.PermissionId))
+            .ToList();
 
-        // Remove them from the Role's RolePermissions collection
-        foreach (var permission in permissionsToRemove)
-        {
-          repositoryRolePermissions.DeleteTracked(permission);
-          //entityFromDb.RolePermissions.Add(permission);
+        // Combine the matched and new role permissions
+        var updatedRolePermissions = matchedRolePermissions.Concat(newRolePermissions).ToList();
 
-        }
-
+        // Replace the RolePermissions collection, EF Core will track the changes automatically
+        entityFromDb.RolePermissions = updatedRolePermissions;
       }
 
       await _unitOfWork.CommitAsync();
@@ -226,8 +229,8 @@ public class RoleService : IRoleService
       // Remove them from the Role's RolePermissions collection
       foreach (var permission in permissionsToRemove)
       {
-        repositoryRolePermissions.DeleteTracked(permission);
-        //entityFromDb.RolePermissions.Add(permission);
+        //repositoryRolePermissions.DeleteTracked(permission);
+        
 
       }
       await _unitOfWork.CommitAsync();
