@@ -32,6 +32,96 @@ public class PermissionsContextSeeder
       logger.LogError($"Error occurred while seeding permissions: {ex.Message}", ex);
     }
   }
+  public static void SeedCEORolePermissions(ModelBuilder builder, ILoggerFactory loggerFactory)
+  {
+    try
+    {
+      List<RolePermissions> rolePermissions = new List<RolePermissions>();
+
+      // Assign lookup permissions to CEO (RoleId = 2)
+      rolePermissions.AddRange(new[]
+      {
+            new RolePermissions { Id = 1, RoleId = 2, PermissionId = 1 }, // Basic Data
+            new RolePermissions { Id = 2, RoleId = 2, PermissionId = 2 }, // Request Categories
+            new RolePermissions { Id = 3, RoleId = 2, PermissionId = 3 }, // Add Request Category
+            new RolePermissions { Id = 4, RoleId = 2, PermissionId = 4 }, // Edit Request Category
+            new RolePermissions { Id = 5, RoleId = 2, PermissionId = 5 }, // Delete Request Category
+            new RolePermissions { Id = 6, RoleId = 2, PermissionId = 6 }, // Request Status
+            new RolePermissions { Id = 7, RoleId = 2, PermissionId = 8 }, // Edit Request Status
+            new RolePermissions { Id = 8, RoleId = 2, PermissionId = 9 }, // Delete Request Status
+        });
+
+      // Assign user management permissions to CEO (RoleId = 2)
+      rolePermissions.AddRange(new[]
+      {
+            new RolePermissions { Id = 9, RoleId = 2, PermissionId = 69 }, // User Management
+            new RolePermissions { Id = 10, RoleId = 2, PermissionId = 70 }, // Roles Management
+            new RolePermissions { Id = 11, RoleId = 2, PermissionId = 71 }, // Users
+            new RolePermissions { Id = 12, RoleId = 2, PermissionId = 72 }, // Add User
+            new RolePermissions { Id = 13, RoleId = 2, PermissionId = 73 }, // Edit User
+            new RolePermissions { Id = 14, RoleId = 2, PermissionId = 74 }, // Delete User
+            new RolePermissions { Id = 15, RoleId = 2, PermissionId = 75 }, // Calendar
+            new RolePermissions { Id = 16, RoleId = 2, PermissionId = 76 }, // Add Calendar Holiday
+            new RolePermissions { Id = 17, RoleId = 2, PermissionId = 77 }, // Edit Calendar Holiday
+        });
+
+      // Assign more permissions for other services to CEO (RoleId = 2)
+      // If the CEO role needs other permissions like Audit, Departments, etc., include them here.
+      rolePermissions.AddRange(new[]
+      {
+            // Audit permissions
+            new RolePermissions { Id = 18, RoleId = 2, PermissionId = 100 }, // Audit Trails
+            new RolePermissions { Id = 19, RoleId = 2, PermissionId = 101 }, // View Audit Trails
+            new RolePermissions { Id = 20, RoleId = 2, PermissionId = 102 }, // Export Audit Trails
+            new RolePermissions { Id = 21, RoleId = 2, PermissionId = 103 }, // Import Audit Trails
+
+            // Department permissions
+            new RolePermissions { Id = 22, RoleId = 2, PermissionId = 110 }, // Departments
+            new RolePermissions { Id = 23, RoleId = 2, PermissionId = 111 }, // View Department
+            new RolePermissions { Id = 24, RoleId = 2, PermissionId = 112 }, // List Departments
+            new RolePermissions { Id = 25, RoleId = 2, PermissionId = 113 }, // Add Department
+            new RolePermissions { Id = 26, RoleId = 2, PermissionId = 114 }, // Edit Department
+            new RolePermissions { Id = 27, RoleId = 2, PermissionId = 115 }, // Delete Department
+
+            // Email permissions
+            new RolePermissions { Id = 28, RoleId = 2, PermissionId = 120 }, // Emails
+            new RolePermissions { Id = 29, RoleId = 2, PermissionId = 121 }, // View Email
+            new RolePermissions { Id = 30, RoleId = 2, PermissionId = 122 }, // List Emails
+            new RolePermissions { Id = 31, RoleId = 2, PermissionId = 123 }, // Send Email
+
+            // Media permissions
+            new RolePermissions { Id = 32, RoleId = 2, PermissionId = 130 }, // Media
+            new RolePermissions { Id = 33, RoleId = 2, PermissionId = 131 }, // View Media
+            new RolePermissions { Id = 34, RoleId = 2, PermissionId = 132 }, // List Media
+            new RolePermissions { Id = 35, RoleId = 2, PermissionId = 133 }, // Add Media
+            new RolePermissions { Id = 36, RoleId = 2, PermissionId = 134 }, // Add Media Range
+            new RolePermissions { Id = 37, RoleId = 2, PermissionId = 135 }, // Delete Media
+            new RolePermissions { Id = 38, RoleId = 2, PermissionId = 136 }, // Download Media
+            new RolePermissions { Id = 39, RoleId = 2, PermissionId = 137 }, // Submit Form with Media
+
+            // PDF permissions
+            new RolePermissions { Id = 40, RoleId = 2, PermissionId = 140 }, // PDF Files
+            new RolePermissions { Id = 41, RoleId = 2, PermissionId = 141 }, // Export User Details to PDF
+
+            // Permission Management
+            new RolePermissions { Id = 42, RoleId = 2, PermissionId = 150 }, // Permission Management
+            new RolePermissions { Id = 43, RoleId = 2, PermissionId = 151 }, // View Permission
+            new RolePermissions { Id = 44, RoleId = 2, PermissionId = 152 }, // List Permissions
+            new RolePermissions { Id = 45, RoleId = 2, PermissionId = 153 }, // Add Permission
+            new RolePermissions { Id = 46, RoleId = 2, PermissionId = 154 }, // Edit Permission
+            new RolePermissions { Id = 47, RoleId = 2, PermissionId = 155 }, // Delete Permission
+        });
+
+      // Seed the role permissions
+      builder.Entity<RolePermissions>().HasData(rolePermissions);
+    }
+    catch (Exception ex)
+    {
+      var logger = loggerFactory.CreateLogger<LookupContextSeeder>();
+      logger.LogError($"Error occurred while seeding CEO role permissions: {ex.Message}", ex);
+    }
+  }
+
 
   // Define a fixed date for the seed data to avoid changes in migration
   private static readonly DateTime SeedDate = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);

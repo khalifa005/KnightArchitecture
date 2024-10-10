@@ -58,8 +58,12 @@ public class AppDbContext : DbContext
     LookupContextSeeder.SeedDepartment(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedGroups(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedRoles(modelBuilder, _loggerFactory);
+
     PermissionsContextSeeder.SeedSystemPermissions(modelBuilder, _loggerFactory);
+    PermissionsContextSeeder.SeedCEORolePermissions(modelBuilder, _loggerFactory);
+
     SmsTemplateContextSeeder.SeedTemplates(modelBuilder, _loggerFactory);
+
     UsersContextSeeder.SeedCustomer(modelBuilder, _loggerFactory);
     UsersContextSeeder.SeedUser(modelBuilder, _loggerFactory);
 
@@ -85,18 +89,18 @@ public class AppDbContext : DbContext
 
           entry.State = EntityState.Modified;
           entry.Entity.DeletedDate = DateTime.UtcNow.AddHours(3); // KSA Time
-          entry.Entity.DeletedById = _serviceProvider.GetUserId(); // Custom service to get user ID
+          entry.Entity.DeletedById = _serviceProvider.GetUserId(); 
           entry.Entity.IsDeleted = true;
           break;
 
         case EntityState.Modified:
           entry.Entity.UpdatedDate = DateTime.UtcNow.AddHours(3); // KSA Time
-          entry.Entity.UpdatedById = _serviceProvider.GetUserId(); // Custom service to get user ID
+          entry.Entity.UpdatedById = _serviceProvider.GetUserId(); 
           break;
 
         case EntityState.Added:
           entry.Entity.CreatedDate = DateTime.UtcNow.AddHours(3); // KSA Time
-          entry.Entity.CreatedById = _serviceProvider.GetUserId(); // Custom service to get user ID
+          entry.Entity.CreatedById = _serviceProvider.GetUserId(); 
           entry.Entity.IsDeleted = false;
           break;
 
