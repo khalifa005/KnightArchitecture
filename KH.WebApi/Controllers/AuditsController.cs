@@ -1,5 +1,6 @@
 
 using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Auth.V1.Enum;
 using KH.BuildingBlocks.Constant;
 using System.Net;
 
@@ -22,7 +23,7 @@ public class AuditsController : BaseApiController
   }
 
   [PermissionAuthorize(
-    PermissionOperator.Or,
+    PermissionOperatorEnum.Or,
     PermissionKeysConstant.SUPER_ADMIN_PERMISSION,
     PermissionKeysConstant.Audits.EXPORT_AUDITS)]
 

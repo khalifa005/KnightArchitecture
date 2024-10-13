@@ -1,3 +1,4 @@
+using KH.BuildingBlocks.Auth.V1.Enum;
 using KH.BuildingBlocks.Extentions.Methods;
 using Microsoft.AspNetCore.Authorization;
 
@@ -7,13 +8,13 @@ namespace KH.BuildingBlocks.Auth.V1;
 public class PermissionRequirement : AuthorizationHandler<PermissionRequirement>, IAuthorizationRequirement
 {
   // 1 - The operator
-  public PermissionOperator PermissionOperator { get; }
+  public PermissionOperatorEnum PermissionOperator { get; }
   // 2 - The list of permissions passed
   public string[] Permissions { get; }
 
   public static string ClaimType => "permissions";
 
-  public PermissionRequirement(PermissionOperator permissionOperator, string[] permissions)
+  public PermissionRequirement(PermissionOperatorEnum permissionOperator, string[] permissions)
   {
     if (permissions.Length == 0)
       throw new ArgumentException("At least one permission is required.", nameof(permissions));
@@ -40,7 +41,7 @@ public class PermissionRequirement : AuthorizationHandler<PermissionRequirement>
       return Task.CompletedTask;
     }
 
-    if (requirement.PermissionOperator == PermissionOperator.And)
+    if (requirement.PermissionOperator == PermissionOperatorEnum.And)
     {
       foreach (var permission in requirement.Permissions)
       {
@@ -76,44 +77,4 @@ public class PermissionRequirement : AuthorizationHandler<PermissionRequirement>
 
 
 
-//extra handeler
-public class PermissionHandler : AuthorizationHandler<PermissionRequirement>
-{
-  protected override Task HandleRequirementAsync(
-      AuthorizationHandlerContext context, PermissionRequirement requirement)
-  {
-    if (requirement.PermissionOperator == PermissionOperator.And)
-    {
-      foreach (var permission in requirement.Permissions)
-      {
-        if (!context.User.
-            HasClaim(PermissionRequirement.ClaimType, permission))
-        {
-          // If the user lacks ANY of the required permissions
-          // we mark it as failed.
-          context.Fail();
-          return Task.CompletedTask;
-        }
-      }
 
-      // identity has all required permissions
-      context.Succeed(requirement);
-      return Task.CompletedTask;
-    }
-
-    foreach (var permission in requirement.Permissions)
-    {
-      if (context.User.HasClaim(PermissionRequirement.ClaimType, permission))
-      {
-        // In the OR case, as soon as we found a matching permission
-        // we can already mark it as Succeed
-        context.Succeed(requirement);
-        return Task.CompletedTask;
-      }
-    }
-
-    // identity does not have any of the required permissions
-    context.Fail();
-    return Task.CompletedTask;
-  }
-}

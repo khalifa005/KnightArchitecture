@@ -1,3 +1,4 @@
+using KH.BuildingBlocks.Auth.V1.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
@@ -26,7 +27,7 @@ public class PermissionAuthorizationPolicyProvider : DefaultAuthorizationPolicyP
     // create and return the policy for our requirement
     var policy = _policies.GetOrAdd(policyName, static name =>
     {
-      PermissionOperator @operator = PermissionAuthorizeAttribute.GetOperatorFromPolicy(name);
+      PermissionOperatorEnum @operator = PermissionAuthorizeAttribute.GetOperatorFromPolicy(name);
       string[] permissions = PermissionAuthorizeAttribute.GetPermissionsFromPolicy(name);
 
       // extract the info from the policy name and create our requirement
