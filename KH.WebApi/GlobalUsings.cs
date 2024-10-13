@@ -1,5 +1,5 @@
 global using KH.BuildingBlocks.Auth.Attributes;
-global using KH.BuildingBlocks.Files;
+global using KH.BuildingBlocks.Files.Responses;
 global using KH.BuildingBlocks.Apis;
 global using KH.BuildingBlocks.Apis.Responses;
 global using KH.Dto.Models.EmailDto.Request;

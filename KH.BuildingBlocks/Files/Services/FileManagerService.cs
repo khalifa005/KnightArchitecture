@@ -1,15 +1,17 @@
+using KH.BuildingBlocks.Files.Responses;
+using KH.BuildingBlocks.Files.Validation;
 using KH.BuildingBlocks.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
 
-namespace KH.BuildingBlocks.Files;
+namespace KH.BuildingBlocks.Files.Services;
 
-public class FileManager
+public class FileManagerService
 {
   private readonly FileSettings _fileSettings;
-  public FileManager(ILogger<FileManager> logger,
+  public FileManagerService(ILogger<FileManagerService> logger,
     IOptions<FileSettings> fileSettings)
   {
     _fileSettings = fileSettings.Value;

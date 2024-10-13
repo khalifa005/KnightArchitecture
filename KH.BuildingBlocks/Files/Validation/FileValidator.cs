@@ -4,7 +4,7 @@ using RestSharp;
 
 
 
-namespace KH.BuildingBlocks.Files;
+namespace KH.BuildingBlocks.Files.Validation;
 
 public class FileValidator : AbstractValidator<IFormFile>
 {

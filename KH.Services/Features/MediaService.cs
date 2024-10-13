@@ -1,6 +1,6 @@
 using KH.BuildingBlocks.Apis.Enums;
 using KH.BuildingBlocks.Apis.Responses;
-using KH.BuildingBlocks.Files;
+using KH.BuildingBlocks.Files.Services;
 using KH.Dto.Models.MediaDto.Form;
 using KH.Dto.Models.MediaDto.Request;
 using KH.Dto.Models.MediaDto.Response;
@@ -10,9 +10,9 @@ namespace KH.Services.Features;
 
 public class MediaService : IMediaService
 {
-  private readonly FileManager _fileManager;
+  private readonly FileManagerService _fileManager;
   private readonly IUnitOfWork _unitOfWork;
-  public MediaService(FileManager fileManager, IUnitOfWork unitOfWork)
+  public MediaService(FileManagerService fileManager, IUnitOfWork unitOfWork)
   {
     _fileManager = fileManager;
     _unitOfWork = unitOfWork;

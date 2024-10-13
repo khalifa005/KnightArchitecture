@@ -1,6 +1,6 @@
 using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.User;
-using KH.BuildingBlocks.Files;
+using KH.BuildingBlocks.Files.Services;
 using KH.BuildingBlocks.Localizatoin.Constants;
 using KH.BuildingBlocks.Localizatoin.Services;
 using KH.BuildingBlocks.Settings;
@@ -18,7 +18,7 @@ public static class BuildingBlocksServiceRegisteration
     services.AddHttpContextAccessor();
     services.AddScoped<ICurrentUserService, CurrentUserService>();
     services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
-    services.AddScoped<FileManager>();
+    services.AddScoped<FileManagerService>();
     //services.AddScoped(typeof(Lazy<>), typeof(LazilyResolved<>));
     services.RegisterSwagger();
     services.AddServerLocalization();

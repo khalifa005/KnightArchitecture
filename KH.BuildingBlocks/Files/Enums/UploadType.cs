@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace KH.BuildingBlocks.Files;
+namespace KH.BuildingBlocks.Files.Enums;
 
 public enum UploadType : byte
 {

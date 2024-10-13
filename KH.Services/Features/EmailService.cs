@@ -1,7 +1,6 @@
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using KH.BuildingBlocks.Apis.Enums;
-using KH.BuildingBlocks.Apis.Responses;
 using KH.BuildingBlocks.Settings;
 using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.EmailDto.Response;
