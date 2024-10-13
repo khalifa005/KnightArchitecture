@@ -1,3 +1,4 @@
+using KH.BuildingBlocks.Auth.V1.Contracts;
 using KH.BuildingBlocks.Constant;
 using KH.BuildingBlocks.Extentions.Methods;
 using KH.BuildingBlocks.Responses;
@@ -5,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
-namespace KH.BuildingBlocks.Auth.V1;
+namespace KH.BuildingBlocks.Auth.V1.Midilleware;
 
 /// <summary>
 /// The goal of our middleware is to create a ClaimsIdentity containing all the user permissions as Claim
@@ -25,6 +26,8 @@ public class PermissionsMiddleware
 
   public async Task InvokeAsync(HttpContext context, IUserPermissionService permissionService)
   {
+    var cancellationToken = context.RequestAborted;
+
     // Check if the endpoint has AllowAnonymous applied
     var endpoint = context.GetEndpoint();
     if (endpoint != null && endpoint.Metadata.GetMetadata<AllowAnonymousAttribute>() != null)
@@ -48,22 +51,21 @@ public class PermissionsMiddleware
       var apiResponse = new ApiResponse<object>(StatusCodes.Status401Unauthorized)
       {
         ErrorMessage = "Unauthorized access",
-        ErrorMessageAr = "وصول غير مصرح به", 
+        ErrorMessageAr = "وصول غير مصرح به",
         Errors = new List<string> { "User is not authenticated" }
       };
 
       var jsonResponse = JsonConvert.SerializeObject(apiResponse);
-      await context.Response.WriteAsync(jsonResponse);//, cancellationToken
+      await context.Response.WriteAsync(jsonResponse, cancellationToken: cancellationToken);
       return;
     }
 
-    var cancellationToken = context.RequestAborted;
     var permissionsIdentity = new ClaimsIdentity(nameof(PermissionsMiddleware), "name", "role");
 
     if (context.User.HasSuperAdminRole())
     {
       //--Add Default Permissions In case User System admin
-      permissionsIdentity.AddClaim(new Claim(PermissionRequirement.ClaimType, ApplicationConstant.SUPER_ADMIN_PERMISSION));
+      permissionsIdentity.AddClaim(new Claim(PermissionRequirement.ClaimType, PermissionKeysConstant.SUPER_ADMIN_PERMISSION));
     }
     else
     {
@@ -73,7 +75,7 @@ public class PermissionsMiddleware
         var apiResponse = new ApiResponse<object>(StatusCodes.Status401Unauthorized)
         {
           ErrorMessage = "access-denied",
-          ErrorMessageAr = "وصول غير مصرح به", 
+          ErrorMessageAr = "وصول غير مصرح به",
           Errors = new List<string> { "invalid-user-id" }
         };
 

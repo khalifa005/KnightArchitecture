@@ -2,6 +2,8 @@ namespace KH.BuildingBlocks.Constant;
 
 public static class PermissionKeysConstant
 {
+  public const string SUPER_ADMIN_PERMISSION = "super-admin";
+  public const string CUSTOMER_SYSTEM_PERMISSION = "customer";
   public static class Lookups
   {
     public const string LOOKUPS = "lookups";

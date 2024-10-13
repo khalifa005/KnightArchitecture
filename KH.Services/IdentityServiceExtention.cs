@@ -1,5 +1,6 @@
 using AngleSharp.Css.Values;
 using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Auth.V1.Contracts;
 using KH.Domain.Entities;
 using KH.Services.Features;
 using Microsoft.AspNetCore.Authentication;

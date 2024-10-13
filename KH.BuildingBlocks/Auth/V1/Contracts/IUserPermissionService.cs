@@ -1,6 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
-namespace KH.BuildingBlocks.Auth.V1;
+namespace KH.BuildingBlocks.Auth.V1.Contracts;
 
 public interface IUserPermissionService
 {
@@ -11,4 +12,3 @@ public interface IUserPermissionService
   /// <param name="cancellationToken"></param>
   ValueTask<ClaimsIdentity?> GetUserPermissionsIdentity(int userId, string? systemType, CancellationToken cancellationToken);
 }
-

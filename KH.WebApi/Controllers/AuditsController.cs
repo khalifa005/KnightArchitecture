@@ -21,7 +21,11 @@ public class AuditsController : BaseApiController
     return AsActionResult(res);
   }
 
-  [PermissionAuthorize(PermissionKeysConstant.Audits.EXPORT_AUDITS)]
+  [PermissionAuthorize(
+    PermissionOperator.Or,
+    PermissionKeysConstant.SUPER_ADMIN_PERMISSION,
+    PermissionKeysConstant.Audits.EXPORT_AUDITS)]
+
   [HttpGet("ExportUserAudits/{userId}")]
   public async Task<IActionResult> ExportExcel(string userId, string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false)
   {

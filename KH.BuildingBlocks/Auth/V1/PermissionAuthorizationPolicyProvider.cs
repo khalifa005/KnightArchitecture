@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
 namespace KH.BuildingBlocks.Auth.V1;
+//2
 public class PermissionAuthorizationPolicyProvider : DefaultAuthorizationPolicyProvider
 {
   private readonly LockingConcurrentDictionary<string, AuthorizationPolicy> _policies =

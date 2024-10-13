@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace KH.BuildingBlocks.Auth.V1;
 
+//3
 public class PermissionAuthorizeAttribute : AuthorizeAttribute
 {
   public const string PolicyPrefix = "PERMISSION_";

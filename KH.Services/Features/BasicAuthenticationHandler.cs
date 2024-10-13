@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Sockets;
 using System.Security.Claims;
@@ -69,6 +70,17 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
     }
   }
 
+  protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
+  {
+    Response.StatusCode = StatusCodes.Status401Unauthorized;
+    Response.ContentType = "application/json";
+    var result = JsonConvert.SerializeObject(new ApiResponse<object>(StatusCodes.Status401Unauthorized)
+    {
+      ErrorMessage = "Invalid Basic authentication credentials.",
+      ErrorMessageAr = "بيانات اعتماد غير صالحة للمصادقة الأساسية."
+    });
+    await Response.WriteAsync(result);
+  }
   private bool IsValidUser(string username, string password)
   {
     // Implement your own user validation logic

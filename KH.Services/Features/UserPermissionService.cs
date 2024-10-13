@@ -1,4 +1,6 @@
 using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Auth.V1.Contracts;
+using KH.BuildingBlocks.Auth.V1.Midilleware;
 using KH.BuildingBlocks.Constant;
 using KH.BuildingBlocks.Enums;
 using System.Security.Claims;
@@ -20,7 +22,7 @@ public class UserPermissionService : IUserPermissionService
     var userPermissions = new List<Claim>();
     if (systemType == SystemTypeEnum.ExternalCustomer.ToString())
     {
-      userPermissions = new List<Claim> { new Claim(PermissionRequirement.ClaimType, ApplicationConstant.CUSTOMER_SYSTEM_PERMISSION) };
+      userPermissions = new List<Claim> { new Claim(PermissionRequirement.ClaimType, PermissionKeysConstant.CUSTOMER_SYSTEM_PERMISSION) };
     }
     else
     {
