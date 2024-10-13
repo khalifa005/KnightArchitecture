@@ -53,24 +53,3 @@ public class PermissionAuthorizeAttribute : AuthorizeAttribute
   }
 
 }
-
-//At startup
-//services.AddAuthorization(options =>
-//{
-//    // One static policy - All users must be authenticated
-//    options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
-//        .RequireAuthenticatedUser()
-//        .Build();
-
-//// A static policy from our previous post. This still works!
-//options.AddPolicy("Over18YearsOld", policy => policy.RequireAssertion(context =>
-//        context.User.HasClaim(c =>
-//            (c.Type == "DateOfBirth" && DateTime.Now.Year - DateTime.Parse(c.Value).Year >= 18)
-//        )));
-//});
-
-//// Register our custom Authorization handler
-//services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
-
-//// Overrides the DefaultAuthorizationPolicyProvider with our own
-//services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();

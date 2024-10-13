@@ -27,13 +27,16 @@ public static class IdentityServiceExtention
     services.AddScoped<IUserPermissionService, UserPermissionService>();
     services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
 
-
-    //var key = Encoding.UTF8.GetBytes(configuration["TokenSettings:Key"]);
+    //services.AddAuthorization(options =>
+    //{
+    //  // One static policy - All users must be authenticated
+    //  options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+    //      .RequireAuthenticatedUser()
+    //      .Build();
+    //});
 
     services.AddAuthentication(options =>
     {
-      //options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-      //options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
       options.DefaultScheme = "BasicOrJwt";  // Set a policy scheme to handle both
 
       options.DefaultChallengeScheme = "BasicOrJwt";
