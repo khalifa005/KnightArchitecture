@@ -1,5 +1,3 @@
-using KH.BuildingBlocks.Apis.Entities;
-
 namespace KH.BuildingBlocks.Localizatoin.Constants;
 
 public static class LocalizationConstants

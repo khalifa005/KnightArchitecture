@@ -1,8 +1,9 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using KH.BuildingBlocks;
-using KH.BuildingBlocks.Apis;
+using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Apis.Middlewares;
+using KH.BuildingBlocks.Apis.Services;
 using KH.BuildingBlocks.Auth.Midilleware;
 using KH.Dto;
 using KH.PersistenceInfra;
@@ -26,7 +27,7 @@ public class Startup
     // Add services to the container.
 
     services.AddHttpClient();
-    services.AddTransient<HttpRequestHelper>(); // Register HttpRequestHelper as a service
+    services.AddTransient<CustomHttpRequestService>(); // Register HttpRequestHelper as a service
 
     services.AddEndpointsApiExplorer();
     services.AddFluentValidationAutoValidation();

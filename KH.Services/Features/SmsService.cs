@@ -1,7 +1,7 @@
-using KH.BuildingBlocks.Apis;
 using KH.BuildingBlocks.Apis.Constant;
 using KH.BuildingBlocks.Apis.Enums;
 using KH.BuildingBlocks.Apis.Responses;
+using KH.BuildingBlocks.Apis.Services;
 using KH.BuildingBlocks.Settings;
 using KH.Dto.Models.SMSDto.Form;
 using KH.Dto.Models.SMSDto.Request;
@@ -15,13 +15,13 @@ public class SmsService : ISmsService
 {
   private readonly IUnitOfWork _unitOfWork;
   private readonly SmsSettings _smsProviderSettings;
-  private readonly HttpRequestHelper _httpRequestHelper;
+  private readonly CustomHttpRequestService _httpRequestHelper;
 
   private readonly ILogger<SmsService> _loggerFactory;
   public SmsService(
     IUnitOfWork unitOfWork,
     IOptions<SmsSettings> smsProviderSettings,
-    HttpRequestHelper httpRequestHelper,
+    CustomHttpRequestService httpRequestHelper,
     ILogger<SmsService> loggerFactory)
   {
     _smsProviderSettings = smsProviderSettings.Value;

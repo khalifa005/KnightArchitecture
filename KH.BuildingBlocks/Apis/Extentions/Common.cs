@@ -1,4 +1,4 @@
-namespace KH.BuildingBlocks.Apis;
+namespace KH.BuildingBlocks.Apis.Extentions;
 
 public static class Common
 {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace KH.BuildingBlocks.Apis;
+namespace KH.BuildingBlocks.Apis.Extentions;
 
 
 //[ApiVersion("1.0")]

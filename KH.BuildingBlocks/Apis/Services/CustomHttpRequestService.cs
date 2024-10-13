@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using System.Net.Mime;
 
-namespace KH.BuildingBlocks.Apis;
+namespace KH.BuildingBlocks.Apis.Services;
 
-public class HttpRequestHelper
+public class CustomHttpRequestService
 {
   private readonly IHttpClientFactory _httpClientFactory;
-  private readonly ILogger<HttpRequestHelper> _logger;
+  private readonly ILogger<CustomHttpRequestService> _logger;
 
-  public HttpRequestHelper(IHttpClientFactory httpClientFactory, ILogger<HttpRequestHelper> logger)
+  public CustomHttpRequestService(IHttpClientFactory httpClientFactory, ILogger<CustomHttpRequestService> logger)
   {
     _httpClientFactory = httpClientFactory;
     _logger = logger;

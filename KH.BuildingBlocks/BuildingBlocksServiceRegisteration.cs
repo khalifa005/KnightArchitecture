@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Apis;
+using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.User;
 using KH.BuildingBlocks.Files;
 using KH.BuildingBlocks.Localizatoin.Constants;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Localization;
 
 namespace KH.BuildingBlocks;
 
-public static class HelperServiceRegisteration
+public static class BuildingBlocksServiceRegisteration
 {
   public static IServiceCollection AddHelperServicesAndSettings(this IServiceCollection services, IConfiguration configuration)
   {

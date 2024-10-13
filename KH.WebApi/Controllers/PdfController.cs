@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Apis;
+using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
 
 namespace KH.WebApi.Controllers;

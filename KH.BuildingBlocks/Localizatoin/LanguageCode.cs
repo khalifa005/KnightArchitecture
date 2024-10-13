@@ -1,4 +1,4 @@
-namespace KH.BuildingBlocks.Apis.Entities;
+namespace KH.BuildingBlocks.Localizatoin;
 
 public class LanguageCode
 {

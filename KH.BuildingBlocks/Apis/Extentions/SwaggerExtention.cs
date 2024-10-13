@@ -1,6 +1,6 @@
 using Microsoft.OpenApi.Models;
 
-namespace KH.BuildingBlocks.Apis;
+namespace KH.BuildingBlocks.Apis.Extentions;
 
 public static class SwaggerExtention
 {
