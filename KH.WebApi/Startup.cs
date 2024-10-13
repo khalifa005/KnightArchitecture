@@ -90,7 +90,7 @@ public class Startup
     //services.AddBusinessService(Configuration);
     services.AddDtoService(Configuration);
     //contains the common service registration
-    services.AddHelperServicesAndSettings(Configuration);
+    services.AddBuildingBlocksServices(Configuration);
     services.AddBusinessService(Configuration);
   }
 

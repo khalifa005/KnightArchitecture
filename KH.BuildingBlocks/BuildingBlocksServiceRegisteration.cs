@@ -12,16 +12,17 @@ namespace KH.BuildingBlocks;
 
 public static class BuildingBlocksServiceRegisteration
 {
-  public static IServiceCollection AddHelperServicesAndSettings(this IServiceCollection services, IConfiguration configuration)
+  public static IServiceCollection AddBuildingBlocksServices(this IServiceCollection services, IConfiguration configuration)
   {
 
     services.AddHttpContextAccessor();
     services.AddScoped<ICurrentUserService, CurrentUserService>();
     services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
     services.AddScoped<FileManagerService>();
-    //services.AddScoped(typeof(Lazy<>), typeof(LazilyResolved<>));
     services.RegisterSwagger();
     services.AddServerLocalization();
+    //services.AddScoped(typeof(Lazy<>), typeof(LazilyResolved<>));
+
 
     #region Settings
 
@@ -65,14 +66,8 @@ public static class BuildingBlocksServiceRegisteration
     return services;
   }
 
-  public static IApplicationBuilder UseApplicationMiddlewares(this IApplicationBuilder app, IConfiguration configuration)
+  public static IApplicationBuilder UseBuildingBlocksMiddlewares(this IApplicationBuilder app, IConfiguration configuration)
   {
-    // keep it empty because this part we want to keep it on the startup for better viewing no encasulation
-    //because also middleware order matters
-
-    //app.UseMiddleware<ExceptionMiddleware>();
-    //app.UseSwaggerDocumentation(configuration);
-
 
     return app;
   }

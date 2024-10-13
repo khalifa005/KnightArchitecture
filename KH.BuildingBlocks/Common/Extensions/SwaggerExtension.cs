@@ -2,7 +2,7 @@ using Microsoft.OpenApi.Models;
 
 namespace KH.BuildingBlocks.Apis.Extentions;
 
-public static class SwaggerExtention
+public static class SwaggerExtension
 {
   internal static void RegisterSwagger(this IServiceCollection services)
   {

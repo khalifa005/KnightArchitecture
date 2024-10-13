@@ -1,6 +1,3 @@
-﻿using KH.Services.BackgroundServices;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Quartz;
 
 namespace KH.Services;
@@ -10,7 +7,7 @@ public static class ServiceCollectionQuartzConfiguratorExtensions
   public static void AddJobAndTrigger<T>(
       this IServiceCollectionQuartzConfigurator quartz,
       IConfiguration config,
-      ILogger<EmailSenderJob> logger,
+      ILogger<T> logger,
       bool immidateExecution = false)
       where T : IJob
   {
