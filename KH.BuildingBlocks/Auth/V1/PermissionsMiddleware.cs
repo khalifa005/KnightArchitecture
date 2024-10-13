@@ -8,21 +8,18 @@ using System.Security.Claims;
 namespace KH.BuildingBlocks.Auth.V1;
 
 /// <summary>
-/// In CASE USER IsAuthenticated 
-/// Collect his Permissions from (DB/Caching) and add to Identity Claims With Type [permissions]
+/// The goal of our middleware is to create a ClaimsIdentity containing all the user permissions as Claim
 /// </summary>
 public class PermissionsMiddleware
 {
   private readonly RequestDelegate _request;
   private readonly ILogger<PermissionsMiddleware> _logger;
-  //private IResponseCacheService _cache;
   public PermissionsMiddleware(
     RequestDelegate request,
     ILogger<PermissionsMiddleware> logger)
   {
     _request = request;
     _logger = logger;
-    //_cache = cache;
   }
 
 
@@ -32,11 +29,9 @@ public class PermissionsMiddleware
     var endpoint = context.GetEndpoint();
     if (endpoint != null && endpoint.Metadata.GetMetadata<AllowAnonymousAttribute>() != null)
     {
-      // If AllowAnonymous is found, bypass the authentication and permission checks
       await _request(context);
       return;
     }
-
 
     if (context.User.Identity == null || !context.User.Identity.IsAuthenticated || context.Response.StatusCode == StatusCodes.Status403Forbidden)
     {
@@ -53,15 +48,14 @@ public class PermissionsMiddleware
       var apiResponse = new ApiResponse<object>(StatusCodes.Status401Unauthorized)
       {
         ErrorMessage = "Unauthorized access",
-        ErrorMessageAr = "وصول غير مصرح به", // Example Arabic error message, customize as needed
+        ErrorMessageAr = "وصول غير مصرح به", 
         Errors = new List<string> { "User is not authenticated" }
       };
 
-      var jsonResponse = JsonConvert.SerializeObject(apiResponse); // Assuming you're using Newtonsoft.Json or System.Text.Json
+      var jsonResponse = JsonConvert.SerializeObject(apiResponse);
       await context.Response.WriteAsync(jsonResponse);//, cancellationToken
       return;
     }
-
 
     var cancellationToken = context.RequestAborted;
     var permissionsIdentity = new ClaimsIdentity(nameof(PermissionsMiddleware), "name", "role");
@@ -79,14 +73,14 @@ public class PermissionsMiddleware
         var apiResponse = new ApiResponse<object>(StatusCodes.Status401Unauthorized)
         {
           ErrorMessage = "access-denied",
-          ErrorMessageAr = "وصول غير مصرح به", // Example Arabic error message, customize as needed
+          ErrorMessageAr = "وصول غير مصرح به", 
           Errors = new List<string> { "invalid-user-id" }
         };
 
         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
         context.Response.ContentType = "application/json";
 
-        var jsonResponse = JsonConvert.SerializeObject(apiResponse); // Assuming you're using Newtonsoft.Json or System.Text.Json
+        var jsonResponse = JsonConvert.SerializeObject(apiResponse);
         await context.Response.WriteAsync(jsonResponse, cancellationToken);
         return;
       }
@@ -101,7 +95,7 @@ public class PermissionsMiddleware
         var apiResponse = new ApiResponse<object>(StatusCodes.Status401Unauthorized)
         {
           ErrorMessage = "access-denied",
-          ErrorMessageAr = "وصول غير مصرح به", // Example Arabic error message, customize as needed
+          ErrorMessageAr = "وصول غير مصرح به",
           Errors = new List<string> { "User is not authenticated" }
         };
 
@@ -112,6 +106,7 @@ public class PermissionsMiddleware
         return;
       }
     }
+
     // User has permissions, so we add the extra identity containing the "permissions" claims
     context.User.AddIdentity(permissionsIdentity);
 
