@@ -362,7 +362,7 @@ https://blog.joaograssi.com/series/authorization-in-asp.net-core/
 
 
 # Authentication, Authorization, and Permissions Process in This Repository
-
+Protecting your API endpoints with dynamic policies in ASP.NET Core 
 This project utilizes JWT-based authentication and role-based authorization to protect its API endpoints. Additionally, custom permissions are implemented using middleware to ensure that users have the necessary access rights to specific resources based on their roles.
 
 ## Overall Process Flow
