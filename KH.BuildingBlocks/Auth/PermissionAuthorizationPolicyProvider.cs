@@ -1,8 +1,9 @@
-using KH.BuildingBlocks.Auth.V1.Enum;
+using KH.BuildingBlocks.Auth.Attributes;
+using KH.BuildingBlocks.Auth.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
-namespace KH.BuildingBlocks.Auth.V1;
+namespace KH.BuildingBlocks.Auth;
 //2
 public class PermissionAuthorizationPolicyProvider : DefaultAuthorizationPolicyProvider
 {

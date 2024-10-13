@@ -1,13 +1,7 @@
-using FluentEmail.Core;
-using FluentEmail.Core.Models;
 using KH.BuildingBlocks.Constant;
 using KH.BuildingBlocks.Enums;
 using KH.BuildingBlocks.Extentions.Api;
 using KH.BuildingBlocks.Settings;
-using KH.Dto;
-using KH.Dto.common;
-using KH.Dto.Models.EmailDto.Request;
-using KH.Dto.Models.EmailDto.Response;
 using KH.Dto.Models.SMSDto.Form;
 using KH.Dto.Models.SMSDto.Request;
 using KH.Dto.Models.SMSDto.Response;

@@ -11,7 +11,7 @@ public class SmsTemplateForm
 
   public SmsTemplateForm()
   {
-        
+
   }
   // Constructor for mapping from SmsTemplate
   public SmsTemplateForm(SmsTemplate smsTemplate)

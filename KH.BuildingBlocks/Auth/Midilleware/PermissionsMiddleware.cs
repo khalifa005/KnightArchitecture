@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Auth.V1.Contracts;
+using KH.BuildingBlocks.Auth.Contracts;
 using KH.BuildingBlocks.Constant;
 using KH.BuildingBlocks.Extentions.Methods;
 using KH.BuildingBlocks.Responses;
@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
-namespace KH.BuildingBlocks.Auth.V1.Midilleware;
+namespace KH.BuildingBlocks.Auth.Midilleware;
 
 /// <summary>
 /// The goal of our middleware is to create a ClaimsIdentity containing all the user permissions as Claim

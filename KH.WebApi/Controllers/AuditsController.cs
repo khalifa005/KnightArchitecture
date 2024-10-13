@@ -1,6 +1,6 @@
 
-using KH.BuildingBlocks.Auth.V1;
-using KH.BuildingBlocks.Auth.V1.Enum;
+using KH.BuildingBlocks.Auth.Attributes;
+using KH.BuildingBlocks.Auth.Enum;
 using KH.BuildingBlocks.Constant;
 using System.Net;
 

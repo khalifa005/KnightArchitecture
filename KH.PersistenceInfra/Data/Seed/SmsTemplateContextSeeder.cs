@@ -1,5 +1,4 @@
 using KH.BuildingBlocks.Enums;
-using Role = KH.Domain.Entities.Role;
 
 namespace KH.PersistenceInfra.Data.Seed;
 
@@ -40,5 +39,5 @@ public class SmsTemplateContextSeeder
       logger.LogError(ex.Message);
     }
   }
-  
+
 }

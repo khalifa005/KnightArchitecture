@@ -19,7 +19,7 @@ public class RoleForm : LookupEntityWithTrackingDto
     CreatedDate = e.CreatedDate;
     UpdatedDate = e.UpdatedDate;
     CreatedById = e.CreatedById;
-    RolePermissionsIds = e.RolePermissions.Select(x=> x.PermissionId).ToList();
+    RolePermissionsIds = e.RolePermissions.Select(x => x.PermissionId).ToList();
   }
   public Role ToEntity()
   {

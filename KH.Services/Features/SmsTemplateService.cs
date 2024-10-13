@@ -1,16 +1,12 @@
-using KH.BuildingBlocks.Constant;
 using KH.BuildingBlocks.Enums;
 using KH.BuildingBlocks.Extentions.Api;
 using KH.BuildingBlocks.Settings;
-using KH.Domain.Entities.lookups;
-using KH.Dto.lookups.DepartmentDto.Form;
 using KH.Dto.Models.SMSDto.Form;
 using KH.Dto.Models.SMSDto.Request;
 using KH.Dto.Models.SMSDto.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Web;
 
 public class SmsTemplateService : ISmsTemplateService
 {

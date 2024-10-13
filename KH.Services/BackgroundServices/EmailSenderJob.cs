@@ -1,14 +1,5 @@
-using KH.BuildingBlocks.Enums;
-using KH.Dto.Models.EmailDto.Request;
-using KH.Services.Contracts;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Quartz;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KH.Services.BackgroundServices;
 [DisallowConcurrentExecution]

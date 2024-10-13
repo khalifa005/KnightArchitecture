@@ -1,6 +1,4 @@
-
-
-using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Auth.Attributes;
 using KH.BuildingBlocks.Constant;
 using Microsoft.AspNetCore.Authorization;
 

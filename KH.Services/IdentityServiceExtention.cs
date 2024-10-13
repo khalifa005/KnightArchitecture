@@ -1,7 +1,5 @@
-using AngleSharp.Css.Values;
-using KH.BuildingBlocks.Auth.V1;
-using KH.BuildingBlocks.Auth.V1.Contracts;
-using KH.Domain.Entities;
+using KH.BuildingBlocks.Auth;
+using KH.BuildingBlocks.Auth.Contracts;
 using KH.Services.Features;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -9,14 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using PuppeteerSharp;
-using System.Net.Http.Headers;
-using System.Security.Claims;
 using System.Text;
-using System.Text.Encodings.Web;
 
 namespace KH.Services;
 
@@ -53,7 +45,7 @@ public static class IdentityServiceExtention
            // Use a key to track if the authentication scheme has already been selected for this request
            const string schemeSelectedKey = "SchemeSelected";
 
-           
+
            // Otherwise, select the appropriate scheme based on the Authorization header
            if (authHeader.StartsWith("Basic ", StringComparison.OrdinalIgnoreCase))
            {
@@ -144,9 +136,9 @@ public static class IdentityServiceExtention
           //DefaultChallengeScheme is used for prompting the user for credentials when authentication is required but not present.
 
           if (string.IsNullOrEmpty(context.Request.Headers["Authorization"]))
-              {
-                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                context.Response.ContentType = "application/json";
+          {
+            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            context.Response.ContentType = "application/json";
             var result = JsonConvert.SerializeObject(new ApiResponse<object>(StatusCodes.Status401Unauthorized)
             {
               ErrorMessage = "No token provided.",

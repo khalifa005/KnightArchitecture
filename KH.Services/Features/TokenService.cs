@@ -1,7 +1,6 @@
 using KH.BuildingBlocks.Enums;
 using KH.BuildingBlocks.Settings;
 using KH.Dto.Models.AuthenticationDto;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

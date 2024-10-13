@@ -1,4 +1,4 @@
-namespace KH.BuildingBlocks.Auth.V1.Enum;
+namespace KH.BuildingBlocks.Auth.Enum;
 
 public enum PermissionOperatorEnum
 {

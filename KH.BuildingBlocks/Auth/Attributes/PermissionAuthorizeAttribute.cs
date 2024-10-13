@@ -1,7 +1,7 @@
-using KH.BuildingBlocks.Auth.V1.Enum;
+using KH.BuildingBlocks.Auth.Enum;
 using Microsoft.AspNetCore.Authorization;
 
-namespace KH.BuildingBlocks.Auth.V1;
+namespace KH.BuildingBlocks.Auth.Attributes;
 
 //3
 public class PermissionAuthorizeAttribute : AuthorizeAttribute

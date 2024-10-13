@@ -1,4 +1,3 @@
-using KH.BuildingBlocks.Auth.V1;
 using KH.BuildingBlocks.Constant;
 
 namespace KH.WebApi.Controllers;

@@ -22,7 +22,7 @@ public class User : TrackerEntity
   public DateTime? RefreshTokenExpiryTime { get; set; }
   public DateTime RefreshTokenCreatedDate { get; set; }
   public DateTime? RefreshTokenRevokedDate { get; set; }
-  
+
   public DateTime? LastAssignDateAsSupervisor { get; set; }
   public DateTime? LastAssignDateAsCaseOwner { get; set; }
   public DateTime? LastAssignDateAsAssignTo { get; set; }

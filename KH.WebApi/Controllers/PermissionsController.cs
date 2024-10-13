@@ -1,8 +1,6 @@
-using KH.BuildingBlocks.Auth.V1;
 using KH.BuildingBlocks.Constant;
 using KH.Dto.lookups.PermissionDto.Form;
 using KH.Dto.Lookups.PermissionsDto.Response;
-using Microsoft.AspNetCore.Authorization;
 
 namespace KH.WebApi.Controllers;
 

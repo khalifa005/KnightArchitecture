@@ -1,6 +1,5 @@
 using KH.Dto.lookups.RoleDto.Form;
 using KH.Dto.lookups.RoleDto.Response;
-using KH.Dto.Lookups.PermissionsDto.Response;
 using KH.Dto.Lookups.RoleDto.Request;
 
 public class RoleService : IRoleService
@@ -161,7 +160,7 @@ public class RoleService : IRoleService
       entityFromDb.NameEn = entityAfterMapping.NameEn;
       entityFromDb.Description = entityAfterMapping.Description;
 
-   
+
       if (request.HasPermissionsUpdates)
       {
         // Get matched role permissions from the database based on request's RolePermissionsIds
@@ -210,7 +209,7 @@ public class RoleService : IRoleService
 
     try
     {
-     
+
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
@@ -230,7 +229,7 @@ public class RoleService : IRoleService
       foreach (var permission in permissionsToRemove)
       {
         //repositoryRolePermissions.DeleteTracked(permission);
-        
+
 
       }
       await _unitOfWork.CommitAsync();

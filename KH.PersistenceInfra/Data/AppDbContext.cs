@@ -89,18 +89,18 @@ public class AppDbContext : DbContext
 
           entry.State = EntityState.Modified;
           entry.Entity.DeletedDate = DateTime.UtcNow.AddHours(3); // KSA Time
-          entry.Entity.DeletedById = _serviceProvider.GetUserId(); 
+          entry.Entity.DeletedById = _serviceProvider.GetUserId();
           entry.Entity.IsDeleted = true;
           break;
 
         case EntityState.Modified:
           entry.Entity.UpdatedDate = DateTime.UtcNow.AddHours(3); // KSA Time
-          entry.Entity.UpdatedById = _serviceProvider.GetUserId(); 
+          entry.Entity.UpdatedById = _serviceProvider.GetUserId();
           break;
 
         case EntityState.Added:
           entry.Entity.CreatedDate = DateTime.UtcNow.AddHours(3); // KSA Time
-          entry.Entity.CreatedById = _serviceProvider.GetUserId(); 
+          entry.Entity.CreatedById = _serviceProvider.GetUserId();
           entry.Entity.IsDeleted = false;
           break;
 

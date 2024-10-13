@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Auth.V1;
+using KH.BuildingBlocks.Auth.Attributes;
 using KH.BuildingBlocks.Constant;
 using KH.Dto.lookups.DepartmentDto.Form;
 using KH.Dto.lookups.DepartmentDto.Response;

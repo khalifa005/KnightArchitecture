@@ -1,6 +1,6 @@
-using KH.BuildingBlocks.Auth.V1;
-using KH.BuildingBlocks.Auth.V1.Contracts;
-using KH.BuildingBlocks.Auth.V1.Midilleware;
+using KH.BuildingBlocks.Auth;
+using KH.BuildingBlocks.Auth.Contracts;
+using KH.BuildingBlocks.Auth.Midilleware;
 using KH.BuildingBlocks.Constant;
 using KH.BuildingBlocks.Enums;
 using System.Security.Claims;

@@ -1,8 +1,3 @@
-using KH.BuildingBlocks.Auth.V1;
-using KH.BuildingBlocks.Constant;
-using KH.Dto.lookups.DepartmentDto.Form;
-using KH.Dto.lookups.DepartmentDto.Response;
-using KH.Dto.Lookups.DepartmentDto.Request;
 using KH.Dto.Models.SMSDto.Form;
 using KH.Dto.Models.SMSDto.Request;
 using KH.Dto.Models.SMSDto.Response;

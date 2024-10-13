@@ -1,12 +1,8 @@
 using KH.BuildingBlocks.Enums;
 using KH.BuildingBlocks.Extentions;
-using KH.Domain.Entities;
-using KH.Dto.Models.AuthenticationDto.Response;
 using KH.Dto.Models.SMSDto.Form;
-using KH.PersistenceInfra.Migrations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Newtonsoft.Json.Linq;
 using System.Security.Claims;
 
 public class UserService : IUserService
@@ -92,7 +88,7 @@ public class UserService : IUserService
 
     //Generates new jwt
     var jwtToken = _tokenService.CreateToken(entityFromDB);
-    authenticationResponse.AccessToken = jwtToken;  
+    authenticationResponse.AccessToken = jwtToken;
 
     res.Data = authenticationResponse;
     return res;
@@ -106,7 +102,7 @@ public class UserService : IUserService
     {
       var repository = _unitOfWork.Repository<User>();
 
-      
+
       var entityFromDB = await repository.GetByExpressionAsync(u =>
    u.Username == request.Username && u.IsDeleted == false,
 
@@ -129,7 +125,7 @@ public class UserService : IUserService
 
       var rolesPermissions = entityFromDB
         .UserRoles
-        .SelectMany(x=> x.Role.RolePermissions)
+        .SelectMany(x => x.Role.RolePermissions)
         .ToList();
 
       var rolesPermissionsXX = entityFromDB.UserRoles

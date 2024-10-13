@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 
-namespace KH.BuildingBlocks.Auth.V1;
+namespace KH.BuildingBlocks.Auth;
 
 /// <summary>
 /// 'GetOrAdd' call on the ConcurrentDictionary is not thread safe and we might end up creating the GetterInfo more than

@@ -10,3 +10,6 @@ global using KH.Dto.Models.UserDto.Request;
 global using KH.Dto.Models.UserDto.Response;
 global using KH.Services.Contracts;
 global using Microsoft.AspNetCore.Mvc;
+global using KH.BuildingBlocks.Auth.Attributes;
+global using KH.BuildingBlocks.Constant;
+global using Microsoft.AspNetCore.Authorization;

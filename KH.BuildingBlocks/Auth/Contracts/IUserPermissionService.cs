@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
-namespace KH.BuildingBlocks.Auth.V1.Contracts;
+namespace KH.BuildingBlocks.Auth.Contracts;
 
 public interface IUserPermissionService
 {

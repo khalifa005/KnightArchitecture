@@ -1,7 +1,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using KH.BuildingBlocks;
-using KH.BuildingBlocks.Auth.V1.Midilleware;
+using KH.BuildingBlocks.Auth.Midilleware;
 using KH.BuildingBlocks.Extentions.Api;
 using KH.BuildingBlocks.Middlewares;
 using KH.Dto;

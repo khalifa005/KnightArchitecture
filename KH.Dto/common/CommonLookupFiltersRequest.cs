@@ -10,7 +10,7 @@ public class CommonLookupFiltersRequest : PagingRequestHelper
   public string? Model { get; set; }
   public long? ModelId { get; set; }
   public bool? IsDeleted { get; set; } = false;
-  public bool IsSent{ get; set; } = false;
+  public bool IsSent { get; set; } = false;
   public bool? RequestFromCustomerPortal { get; set; } = false;
 
 

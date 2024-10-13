@@ -1,8 +1,8 @@
-using KH.BuildingBlocks.Auth.V1.Enum;
+using KH.BuildingBlocks.Auth.Enum;
 using KH.BuildingBlocks.Extentions.Methods;
 using Microsoft.AspNetCore.Authorization;
 
-namespace KH.BuildingBlocks.Auth.V1;
+namespace KH.BuildingBlocks.Auth;
 
 //1- Requirements must implement the IAuthorizationRequirement marker interface. You can pass data to it, just like I did above. In this case, we need 1 - the operator and 2 - the list of permissions. We also have the ClaimType which is always permissions.
 public class PermissionRequirement : AuthorizationHandler<PermissionRequirement>, IAuthorizationRequirement
@@ -45,7 +45,7 @@ public class PermissionRequirement : AuthorizationHandler<PermissionRequirement>
     {
       foreach (var permission in requirement.Permissions)
       {
-        if (!context.User.HasClaim(PermissionRequirement.ClaimType, permission))
+        if (!context.User.HasClaim(ClaimType, permission))
         {
 
           context.Fail(new AuthorizationFailureReason(this, "Unauthorized access"));
@@ -61,7 +61,7 @@ public class PermissionRequirement : AuthorizationHandler<PermissionRequirement>
 
     foreach (var permission in requirement.Permissions)
     {
-      if (context.User.HasClaim(PermissionRequirement.ClaimType, permission))
+      if (context.User.HasClaim(ClaimType, permission))
       {
         context.Succeed(requirement);
 

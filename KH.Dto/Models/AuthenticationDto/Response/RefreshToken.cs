@@ -1,8 +1,6 @@
-using KH.BuildingBlocks.Extentions.Entities;
-
 namespace KH.Dto.Models.AuthenticationDto;
 
-public class RefreshTokenResponse 
+public class RefreshTokenResponse
 {
   public string Token { get; set; }
   public DateTime Expires { get; set; }

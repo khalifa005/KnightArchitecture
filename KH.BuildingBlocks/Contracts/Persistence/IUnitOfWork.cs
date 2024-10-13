@@ -1,5 +1,4 @@
 using KH.BuildingBlocks.Extentions.Entities;
-using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 namespace KH.BuildingBlocks.Contracts.Persistence;
