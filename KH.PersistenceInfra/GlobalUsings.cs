@@ -1,5 +1,6 @@
 global using KH.Domain.Entities;
 global using KH.Domain.Entities.lookups;
+global using KH.BuildingBlocks.Infrastructure.Contracts;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.Data.SqlClient;
 global using Microsoft.EntityFrameworkCore;

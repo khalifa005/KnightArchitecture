@@ -1,5 +1,5 @@
 global using AutoMapper;
-global using KH.BuildingBlocks.Contracts.Persistence;
+global using KH.BuildingBlocks.Infrastructure.Contracts;
 global using KH.BuildingBlocks.Extentions.Methods;
 global using KH.BuildingBlocks.Responses;
 global using KH.Domain.Entities;

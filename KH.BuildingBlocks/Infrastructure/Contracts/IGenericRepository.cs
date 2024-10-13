@@ -3,7 +3,7 @@ using KH.BuildingBlocks.Responses;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
-namespace KH.BuildingBlocks.Contracts.Persistence;
+namespace KH.BuildingBlocks.Infrastructure.Contracts;
 
 public interface IGenericRepository<T> where T : BaseEntity
 {

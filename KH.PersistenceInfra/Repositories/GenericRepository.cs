@@ -1,4 +1,3 @@
-using KH.BuildingBlocks.Contracts.Persistence;
 using KH.BuildingBlocks.Extentions.Entities;
 using KH.BuildingBlocks.Responses;
 using KH.PersistenceInfra.Data;

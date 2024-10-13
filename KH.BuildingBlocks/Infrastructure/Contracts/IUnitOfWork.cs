@@ -1,7 +1,7 @@
 using KH.BuildingBlocks.Extentions.Entities;
 using System.Data;
 
-namespace KH.BuildingBlocks.Contracts.Persistence;
+namespace KH.BuildingBlocks.Infrastructure.Contracts;
 
 public interface IUnitOfWork : IDisposable
 {
