@@ -1,7 +1,8 @@
-using KH.BuildingBlocks.Constant;
-using KH.BuildingBlocks.Extentions.Files;
-using KH.BuildingBlocks.Extentions.Methods;
-using KH.BuildingBlocks.Services;
+using KH.BuildingBlocks.Apis;
+using KH.BuildingBlocks.Auth.User;
+using KH.BuildingBlocks.Files;
+using KH.BuildingBlocks.Localizatoin.Constants;
+using KH.BuildingBlocks.Localizatoin.Services;
 using KH.BuildingBlocks.Settings;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection.Extensions;

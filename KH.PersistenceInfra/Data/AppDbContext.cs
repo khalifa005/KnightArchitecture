@@ -1,6 +1,6 @@
-using KH.BuildingBlocks.Enums;
-using KH.BuildingBlocks.Extentions.Entities;
-using KH.BuildingBlocks.Extentions.Methods;
+using KH.BuildingBlocks.Apis.Entities;
+using KH.BuildingBlocks.Apis.Enums;
+using KH.BuildingBlocks.Auth.User;
 using KH.PersistenceInfra.Data.Seed;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 

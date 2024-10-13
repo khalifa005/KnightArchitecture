@@ -1,4 +1,3 @@
-using KH.BuildingBlocks.Infrastructure.Contracts;
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Middlewares;
 using KH.PersistenceInfra.Repositories;

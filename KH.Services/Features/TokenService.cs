@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Enums;
+using KH.BuildingBlocks.Apis.Enums;
 using KH.BuildingBlocks.Settings;
 using KH.Dto.Models.AuthenticationDto;
 using Microsoft.Extensions.Options;

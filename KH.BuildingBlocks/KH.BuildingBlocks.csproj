@@ -60,7 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Attributes\" />
+    <Folder Include="Apis\Exception\" />
   </ItemGroup>
 
 </Project>

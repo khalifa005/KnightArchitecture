@@ -1,6 +1,7 @@
-using KH.BuildingBlocks.Constant;
-using KH.BuildingBlocks.Enums;
-using KH.BuildingBlocks.Extentions.Api;
+using KH.BuildingBlocks.Apis;
+using KH.BuildingBlocks.Apis.Constant;
+using KH.BuildingBlocks.Apis.Enums;
+using KH.BuildingBlocks.Apis.Responses;
 using KH.BuildingBlocks.Settings;
 using KH.Dto.Models.SMSDto.Form;
 using KH.Dto.Models.SMSDto.Request;

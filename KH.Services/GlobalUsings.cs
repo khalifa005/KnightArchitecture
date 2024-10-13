@@ -1,7 +1,5 @@
 global using AutoMapper;
 global using KH.BuildingBlocks.Infrastructure.Contracts;
-global using KH.BuildingBlocks.Extentions.Methods;
-global using KH.BuildingBlocks.Responses;
 global using KH.Domain.Entities;
 global using KH.Dto.Models.AuthenticationDto.Request;
 global using KH.Dto.Models.AuthenticationDto.Response;
@@ -12,6 +10,7 @@ global using KH.Services.Contracts;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.IdentityModel.Tokens;
 global using System;
+global using KH.BuildingBlocks.Apis.Responses;
 global using System.Collections.Generic;
 global using System.Linq;
 global using System.Linq.Expressions;

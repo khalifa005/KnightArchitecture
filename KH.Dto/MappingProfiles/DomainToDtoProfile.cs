@@ -1,5 +1,5 @@
-using KH.BuildingBlocks.Extentions.Entities;
-using KH.BuildingBlocks.Responses;
+using KH.BuildingBlocks.Apis.Entities;
+using KH.BuildingBlocks.Apis.Responses;
 using KH.Domain.Entities;
 using KH.Dto.lookups.DepartmentDto.Response;
 using KH.Dto.lookups.RoleDto.Response;

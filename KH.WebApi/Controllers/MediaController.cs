@@ -1,6 +1,6 @@
-using KH.BuildingBlocks.Auth.Attributes;
-using KH.BuildingBlocks.Constant;
-using Microsoft.AspNetCore.Authorization;
+using KH.BuildingBlocks.Apis;
+using KH.BuildingBlocks.Apis.Responses;
+using KH.BuildingBlocks.Auth.Constant;
 
 namespace KH.WebApi.Controllers;
 

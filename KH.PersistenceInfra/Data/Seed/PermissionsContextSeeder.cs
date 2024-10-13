@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Constant;
+using KH.BuildingBlocks.Auth.Constant;
 
 namespace KH.PersistenceInfra.Data.Seed;
 

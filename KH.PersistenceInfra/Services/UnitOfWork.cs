@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Extentions.Entities;
+using KH.BuildingBlocks.Apis.Entities;
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Repositories;
 using Microsoft.EntityFrameworkCore.Storage;

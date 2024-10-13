@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Enums;
+using KH.BuildingBlocks.Apis.Enums;
 using KH.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 

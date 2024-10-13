@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Enums;
+using KH.BuildingBlocks.Apis.Enums;
 
 namespace KH.PersistenceInfra.Data.Seed;
 

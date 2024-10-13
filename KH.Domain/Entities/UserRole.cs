@@ -1,5 +1,5 @@
 
-using KH.BuildingBlocks.Extentions.Entities;
+using KH.BuildingBlocks.Apis.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KH.Domain.Entities;

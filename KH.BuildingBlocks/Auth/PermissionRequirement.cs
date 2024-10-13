@@ -1,5 +1,5 @@
 using KH.BuildingBlocks.Auth.Enum;
-using KH.BuildingBlocks.Extentions.Methods;
+using KH.BuildingBlocks.Auth.User;
 using Microsoft.AspNetCore.Authorization;
 
 namespace KH.BuildingBlocks.Auth;

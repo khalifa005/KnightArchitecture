@@ -1,6 +1,6 @@
 ﻿
 
-using KH.BuildingBlocks.Extentions.Entities;
+using KH.BuildingBlocks.Apis.Entities;
 
 namespace KH.Domain.Entities.lookups;
 

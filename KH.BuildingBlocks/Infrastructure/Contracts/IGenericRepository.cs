@@ -1,5 +1,5 @@
-using KH.BuildingBlocks.Extentions.Entities;
-using KH.BuildingBlocks.Responses;
+using KH.BuildingBlocks.Apis.Entities;
+using KH.BuildingBlocks.Apis.Responses;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 

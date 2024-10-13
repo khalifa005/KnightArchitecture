@@ -1,2 +1,0 @@
-namespace KH.BuildingBlocks.Auth;
-

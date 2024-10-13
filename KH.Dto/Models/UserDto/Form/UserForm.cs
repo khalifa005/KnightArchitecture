@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Extentions.Methods;
+using KH.BuildingBlocks.Apis;
 using KH.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 

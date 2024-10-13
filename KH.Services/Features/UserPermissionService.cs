@@ -1,8 +1,8 @@
+using KH.BuildingBlocks.Apis.Enums;
 using KH.BuildingBlocks.Auth;
+using KH.BuildingBlocks.Auth.Constant;
 using KH.BuildingBlocks.Auth.Contracts;
 using KH.BuildingBlocks.Auth.Midilleware;
-using KH.BuildingBlocks.Constant;
-using KH.BuildingBlocks.Enums;
 using System.Security.Claims;
 
 public class UserPermissionService : IUserPermissionService

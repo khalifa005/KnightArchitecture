@@ -1,5 +1,6 @@
-using KH.BuildingBlocks.Enums;
-using KH.BuildingBlocks.Extentions.Files;
+using KH.BuildingBlocks.Apis.Enums;
+using KH.BuildingBlocks.Apis.Responses;
+using KH.BuildingBlocks.Files;
 using KH.Dto.Models.MediaDto.Form;
 using KH.Dto.Models.MediaDto.Request;
 using KH.Dto.Models.MediaDto.Response;

@@ -1,3 +1,5 @@
+using KH.BuildingBlocks.Apis.Enums;
+
 namespace KH.BuildingBlocks.Settings;
 
 public class MailTemplatesSettings

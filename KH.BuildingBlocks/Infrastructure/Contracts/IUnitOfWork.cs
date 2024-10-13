@@ -1,4 +1,4 @@
-using KH.BuildingBlocks.Extentions.Entities;
+using KH.BuildingBlocks.Apis.Entities;
 using System.Data;
 
 namespace KH.BuildingBlocks.Infrastructure.Contracts;

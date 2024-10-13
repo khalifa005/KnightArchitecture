@@ -1,4 +1,5 @@
-﻿using KH.Dto.lookups.DepartmentDto.Form;
+﻿using KH.BuildingBlocks.Apis.Responses;
+using KH.Dto.lookups.DepartmentDto.Form;
 using KH.Dto.lookups.DepartmentDto.Response;
 using KH.Dto.Lookups.DepartmentDto.Request;
 
