@@ -1,4 +1,5 @@
 using KH.BuildingBlocks.Apis.Enums;
+using KH.BuildingBlocks.Common.Attributes;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json;
 
@@ -41,6 +42,8 @@ public class AuditEntry
     return audit;
   }
 }
+
+[NoAudit]
 public class Audit : BaseEntity
 {
   public string UserId { get; set; }

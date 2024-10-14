@@ -1,11 +1,12 @@
 
 using KH.BuildingBlocks.Apis.Entities;
+using KH.BuildingBlocks.Common.Attributes;
 
 namespace KH.Domain.Entities;
-
+[NoAudit]
 public class User : TrackerEntity
 {
-
+  //public byte[] RowVersion { get; set; } // Concurrency token
   public string? FirstName { get; set; }
   public string? MiddleName { get; set; }
   public string? LastName { get; set; }

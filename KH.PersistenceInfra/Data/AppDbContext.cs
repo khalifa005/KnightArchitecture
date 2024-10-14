@@ -2,6 +2,7 @@ using KH.BuildingBlocks.Apis.Constant;
 using KH.BuildingBlocks.Apis.Entities;
 using KH.BuildingBlocks.Apis.Enums;
 using KH.BuildingBlocks.Auth.User;
+using KH.BuildingBlocks.Common.Attributes;
 using KH.PersistenceInfra.Data.Seed;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -142,8 +143,12 @@ public class AppDbContext : DbContext
 
     foreach (var entry in ChangeTracker.Entries())
     {
-      // Skip audit for certain entities or unchanged/detached entities
-      if (entry.Entity is Audit || entry.State == EntityState.Detached || entry.State == EntityState.Unchanged)
+      // Skip audit for certain entities or unchanged/detached entities Skip entities with [NoAudit] attribute
+      var entityType = entry.Entity.GetType();
+      if (entityType.GetCustomAttribute<NoAuditAttribute>() != null
+        || entry.Entity is Audit
+        || entry.State == EntityState.Detached
+        || entry.State == EntityState.Unchanged)
         continue;
 
       var auditEntry = new AuditEntry(entry)

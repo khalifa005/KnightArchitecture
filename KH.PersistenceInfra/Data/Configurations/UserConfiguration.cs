@@ -16,9 +16,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     builder.Property(p => p.Username).HasColumnOrder(7);
     builder.Property(p => p.BirthDate).HasColumnOrder(8);
 
-    //builder.HasMany(t => t.UserGroups)
-    //       .WithOne(c => c.User)
-    //       .HasForeignKey(t => t.UserId);
+    //builder.Property(p => p.RowVersion)
+    //  .IsRowVersion(); // EF will use this column for concurrency checks;
+
+
 
     builder.HasMany(t => t.UserRoles)
            .WithOne(c => c.User)
