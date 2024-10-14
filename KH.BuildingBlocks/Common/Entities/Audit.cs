@@ -14,6 +14,8 @@ public class AuditEntry
   public EntityEntry Entry { get; }
   public string UserId { get; set; }
   public string TableName { get; set; }
+  public string CorrelationId { get; set; }
+
   public Dictionary<string, object> KeyValues { get; } = new();
   public Dictionary<string, object> OldValues { get; } = new();
   public Dictionary<string, object> NewValues { get; } = new();
@@ -27,6 +29,7 @@ public class AuditEntry
     var audit = new Audit
     {
       UserId = UserId,
+      CorrelationId = CorrelationId,
       Type = AuditType.ToString(),
       TableName = TableName,
       DateTime = DateTime.UtcNow,
@@ -48,4 +51,6 @@ public class Audit : BaseEntity
   public string NewValues { get; set; }
   public string AffectedColumns { get; set; }
   public string PrimaryKey { get; set; }
+  public string CorrelationId { get; set; }
+
 }

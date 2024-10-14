@@ -1,7 +1,9 @@
+using KH.BuildingBlocks.Apis.Constant;
 using KH.BuildingBlocks.Apis.Entities;
 using KH.BuildingBlocks.Apis.Enums;
 using KH.BuildingBlocks.Auth.User;
 using KH.PersistenceInfra.Data.Seed;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace KH.PersistenceInfra.Data;
@@ -12,18 +14,22 @@ public class AppDbContext : DbContext
   private readonly ILogger<AppDbContext> _logger;
   private readonly IServiceProvider _serviceProvider;
   private readonly ICurrentUserService _currentUserService;
+  private readonly IHttpContextAccessor _httpContextAccessor; 
 
   public AppDbContext(
       DbContextOptions<AppDbContext> options,
       ICurrentUserService currentUserService,
       ILogger<AppDbContext> logger,
       IServiceProvider serviceProvider,
-      ILoggerFactory loggerFactory) : base(options)
+      ILoggerFactory loggerFactory,
+      IHttpContextAccessor httpContextAccessor) : base(options)
   {
     _loggerFactory = loggerFactory;
     _currentUserService = currentUserService;
     _serviceProvider = serviceProvider;
     _logger = logger;
+    _httpContextAccessor = httpContextAccessor; // Store IHttpContextAccessor
+
   }
 
   public DbSet<Audit> AuditTrails { get; set; }
@@ -127,6 +133,13 @@ public class AppDbContext : DbContext
     ChangeTracker.DetectChanges();
     var auditEntries = new List<AuditEntry>();
 
+    // Retrieve the CorrelationId from HTTP headers, or generate a new one if it doesn't exist
+    var correlationId = _httpContextAccessor
+      .HttpContext?
+      .Request
+      .Headers[ApplicationConstant.X_Correlation_ID]
+      .FirstOrDefault();
+
     foreach (var entry in ChangeTracker.Entries())
     {
       // Skip audit for certain entities or unchanged/detached entities
@@ -136,7 +149,8 @@ public class AppDbContext : DbContext
       var auditEntry = new AuditEntry(entry)
       {
         TableName = entry.Entity.GetType().Name,
-        UserId = userId
+        UserId = userId,
+        CorrelationId = correlationId
       };
 
       auditEntries.Add(auditEntry);
@@ -190,6 +204,9 @@ public class AppDbContext : DbContext
 
     foreach (var auditEntry in auditEntries.Where(ae => !ae.HasTemporaryProperties))
     {
+      //var mappedAuditEntry = auditEntry.ToAudit();
+      //mappedAuditEntry.CorrelationId = correlationId;
+
       AuditTrails.Add(auditEntry.ToAudit());
     }
 

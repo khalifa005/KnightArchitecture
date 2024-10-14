@@ -98,6 +98,9 @@ public class Startup
   {
     System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12;
 
+    // Add Correlation ID Middleware early in the pipeline
+    app.UseMiddleware<CorrelationIdMiddleware>();
+
     app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
     app.UseInfrastructureMiddleware(Configuration);
