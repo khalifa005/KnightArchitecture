@@ -29,11 +29,33 @@ public class ExceptionMiddleware
       httpContext.Response.ContentType = "application/json";
       httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-      var errorDetails = exception.StackTrace.ToString();
+      // Prepare error details
+      string errorDetails = null;
+      if (_host.IsDevelopment())
+      {
+        errorDetails = exception.StackTrace;
+
+        if (exception.InnerException != null)
+        {
+          errorDetails += $"\nInner Exception: {exception.InnerException.Message}";
+        }
+      }
+      else
+      {
+        var logedErrorDetails = exception.StackTrace;
+
+        if (exception.InnerException != null)
+        {
+          logedErrorDetails += $"\nInner Exception: {exception.InnerException.Message}";
+        }
+        _logger.LogError(exception, logedErrorDetails);
+      }
 
       _logger.LogError(exception, errorDetails);
 
       var response = new ApiException((int)HttpStatusCode.InternalServerError, exception.Message, errorDetails);
+      // Automatically assign error details like ErrorMessage and ErrorCode
+      response.assignErrorDetails();
 
       var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
       var returnJson = JsonSerializer.Serialize(response, options);
@@ -41,17 +63,6 @@ public class ExceptionMiddleware
       await httpContext.Response.WriteAsync(returnJson);
 
     }
-  }
-}
-
-
-public class BaseException : Exception
-{
-  public HttpStatusCode StatusCode { get; }
-  public BaseException(string message, HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
-      : base(message)
-  {
-    StatusCode = statusCode;
   }
 }
 

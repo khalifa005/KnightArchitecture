@@ -19,7 +19,7 @@ public class ApiResponse<T> where T : class
   public string ErrorCode { get; set; }
   public string ErrorMessageAr { get; set; }
 
-  void assignErrorDetails()
+  public void assignErrorDetails()
   {
     switch (StatusCode)
     {

@@ -1,22 +1,34 @@
+using KH.BuildingBlocks.Apis.Extentions;
+using KH.BuildingBlocks.Apis.Middlewares;
 using KH.BuildingBlocks.Apis.Responses;
 using KH.Dto.lookups.RoleDto.Form;
 using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.RoleDto.Request;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 public class RoleService : IRoleService
 {
   private readonly IUnitOfWork _unitOfWork;
   private readonly IServiceProvider _serviceProvider;
   private readonly IMapper _mapper;
+  private readonly IHostEnvironment _env;
+  private readonly ILogger<RoleService> _logger;
+
+
 
   public RoleService(
     IUnitOfWork unitOfWork,
     IServiceProvider serviceProvider,
-    IMapper mapper)
+    IMapper mapper,
+    IHostEnvironment env,
+    ILogger<RoleService> logger)
   {
     _unitOfWork = unitOfWork;
     _serviceProvider = serviceProvider;
     _mapper = mapper;
+    _env = env;
+    _logger = logger;
   }
 
   public async Task<ApiResponse<RoleResponse>> GetAsync(long id)
@@ -90,11 +102,7 @@ public class RoleService : IRoleService
     catch (Exception ex)
     {
       await _unitOfWork.RollBackTransactionAsync();
-
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
   public async Task<ApiResponse<string>> UpdateAsync(RoleForm request)
