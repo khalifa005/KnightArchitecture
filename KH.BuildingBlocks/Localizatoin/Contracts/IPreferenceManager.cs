@@ -1,4 +1,3 @@
-using KH.BuildingBlocks.Apis.Contracts;
 using IResult = KH.BuildingBlocks.Apis.Contracts.IResult;
 
 namespace KH.BuildingBlocks.Localizatoin.Contracts;

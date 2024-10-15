@@ -1,11 +1,3 @@
-using KH.BuildingBlocks.Apis.Enums;
-using KH.BuildingBlocks.Apis.Helpers;
-using KH.BuildingBlocks.Apis.Responses;
-using KH.BuildingBlocks.Auth.User;
-using KH.BuildingBlocks.Localizatoin.Enum;
-using KH.Dto.Models.SMSDto.Form;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
 public class UserService : IUserService
@@ -18,7 +10,8 @@ public class UserService : IUserService
   private readonly ISmsService _smsService;
   private readonly ISmsTemplateService _smsTemplateService;
   private readonly IHttpContextAccessor _httpContextAccessor;
-
+  private readonly IHostEnvironment _env;
+  private readonly ILogger<RoleService> _logger;
 
   public UserService(
     IUnitOfWork unitOfWork,
@@ -28,7 +21,9 @@ public class UserService : IUserService
     ISmsService smsService,
     ISmsTemplateService smsTemplateService,
     IMapper mapper,
-    IHttpContextAccessor httpContextAccessor)
+    IHttpContextAccessor httpContextAccessor,
+    IHostEnvironment env,
+    ILogger<RoleService> logger)
   {
     _unitOfWork = unitOfWork;
     _currentUserService = currentUserService;
@@ -38,6 +33,8 @@ public class UserService : IUserService
     _smsTemplateService = smsTemplateService;
     _mapper = mapper;
     _httpContextAccessor = httpContextAccessor;
+    _env = env;
+    _logger = logger;
   }
 
   public async Task<ApiResponse<AuthenticationResponse>> RefreshUserTokenAsync(string refreshTokenValue)
@@ -172,6 +169,9 @@ public class UserService : IUserService
       return res;
     }
   }
+
+
+
   public async Task<List<Claim>> GetUserClaims(LoginRequest request)
   {
     try
@@ -208,6 +208,9 @@ public class UserService : IUserService
       return new List<Claim>();
     }
   }
+
+
+
   public async Task<ApiResponse<UserDetailsResponse>> GetAsync(long id)
   {
     //below there will be multiple query technique so u can open sql profile and see translated query for each

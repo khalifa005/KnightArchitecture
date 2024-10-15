@@ -41,7 +41,7 @@ public static class ExceptionExtensions
       // Call assignErrorDetails to automatically set the appropriate error messages and codes
       res.assignErrorDetails();
     }
-    
+
     return res;
   }
 }

@@ -1,6 +1,3 @@
-
-using KH.BuildingBlocks.Apis.Responses;
-
 public class DemoUserService
 {
   private readonly IUnitOfWork _unitOfWork;

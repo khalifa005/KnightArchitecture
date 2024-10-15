@@ -1,6 +1,3 @@
-using Microsoft.Extensions.Logging;
-using Quartz;
-
 namespace KH.Services.BackgroundServices;
 [DisallowConcurrentExecution]
 public class EmailSenderJob : IJob

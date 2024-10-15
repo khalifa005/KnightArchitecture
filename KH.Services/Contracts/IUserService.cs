@@ -1,4 +1,3 @@
-using KH.BuildingBlocks.Apis.Responses;
 using System.Security.Claims;
 
 namespace KH.Services.Contracts;
@@ -10,6 +9,7 @@ public interface IUserService
   Task<ApiResponse<PagedResponse<UserListResponse>>> GetListAsync(UserFilterRequest request);
   Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingIQueryableAsync(UserFilterRequest request);
   Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingProjectionAsync(UserFilterRequest request);
+
   Task<ApiResponse<string>> AddAsync(UserForm request);
   Task<ApiResponse<string>> AddListAsync(List<UserForm> request);
   Task<ApiResponse<string>> UpdateAsync(UserForm request);

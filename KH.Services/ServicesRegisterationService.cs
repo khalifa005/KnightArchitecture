@@ -1,18 +1,3 @@
-using DinkToPdf;
-using DinkToPdf.Contracts;
-using KH.BuildingBlocks.Excel.Contracts;
-using KH.BuildingBlocks.Excel.Services;
-using KH.BuildingBlocks.Settings;
-using KH.Services.BackgroundServices;
-using KH.Services.Features;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Quartz;
-using Quartz.Simpl;
-
-using System.Net.Mail;
-
 namespace KH.Services;
 
 public static class ServicesRegisterationService
@@ -34,6 +19,10 @@ public static class ServicesRegisterationService
     services.AddScoped<IPermissionService, PermissionService>();
     services.AddScoped<ISmsTemplateService, SmsTemplateService>();
     services.AddScoped<ISmsService, SmsService>();
+    services.AddScoped<IAuthenticationService, AuthenticationService>();
+    services.AddScoped<IUserManagementService, UserManagementService>();
+    services.AddScoped<IUserQueryService, UserQueryService>();
+    services.AddScoped<IUserValidationService, UserValidationService>();
 
     // Register DinkToPdf converter
     services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));

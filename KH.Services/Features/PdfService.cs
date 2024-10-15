@@ -1,5 +1,3 @@
-using DinkToPdf;
-using DinkToPdf.Contracts;
 namespace KH.Services.Features;
 
 public class PdfService : IPdfService

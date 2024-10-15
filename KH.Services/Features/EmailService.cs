@@ -1,12 +1,9 @@
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
-using KH.BuildingBlocks.Apis.Enums;
-using KH.BuildingBlocks.Settings;
 using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.EmailDto.Response;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using FluentEmail.Core.Models;
 
 public class EmailService : IEmailService
 {
@@ -241,9 +238,9 @@ public class EmailService : IEmailService
 
     return toRecipients;
   }
-  private static List<Attachment> SetEmailAttachments(List<IFormFile>? attachments, List<MemoryStream> memoryStreams)
+  private static List<FluentEmail.Core.Models.Attachment> SetEmailAttachments(List<IFormFile>? attachments, List<MemoryStream> memoryStreams)
   {
-    var emailAttachments = new List<Attachment>();
+    var emailAttachments = new List<FluentEmail.Core.Models.Attachment>();
 
     if (attachments != null)
     {
@@ -259,7 +256,7 @@ public class EmailService : IEmailService
           ms.Position = 0; // Reset the position to ensure it's ready for reading
 
           // Add to the attachments
-          emailAttachments.Add(new Attachment
+          emailAttachments.Add(new FluentEmail.Core.Models.Attachment
           {
             Filename = file.FileName,
             Data = ms,
@@ -274,9 +271,9 @@ public class EmailService : IEmailService
 
     return emailAttachments;
   }
-  private static List<Attachment> SetEmailAttachmentsXX(List<IFormFile>? attachments, List<string>? filePaths, List<MemoryStream> memoryStreams)
+  private static List<FluentEmail.Core.Models.Attachment> SetEmailAttachmentsXX(List<IFormFile>? attachments, List<string>? filePaths, List<MemoryStream> memoryStreams)
   {
-    var emailAttachments = new List<Attachment>();
+    var emailAttachments = new List<FluentEmail.Core.Models.Attachment>();
 
     // Handle attachments from IFormFile
     if (attachments != null)
@@ -293,7 +290,7 @@ public class EmailService : IEmailService
           ms.Position = 0; // Reset the position to ensure it's ready for reading
 
           // Add to the attachments
-          emailAttachments.Add(new Attachment
+          emailAttachments.Add(new FluentEmail.Core.Models.Attachment
           {
             Filename = file.FileName,
             Data = ms,
@@ -315,7 +312,7 @@ public class EmailService : IEmailService
         {
           var ms = new MemoryStream(File.ReadAllBytes(filePath));
 
-          emailAttachments.Add(new Attachment
+          emailAttachments.Add(new FluentEmail.Core.Models.Attachment
           {
             Filename = Path.GetFileName(filePath),
             Data = ms,

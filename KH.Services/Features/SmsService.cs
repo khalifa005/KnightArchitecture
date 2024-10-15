@@ -1,13 +1,7 @@
 using KH.BuildingBlocks.Apis.Constant;
-using KH.BuildingBlocks.Apis.Enums;
-using KH.BuildingBlocks.Apis.Responses;
 using KH.BuildingBlocks.Apis.Services;
-using KH.BuildingBlocks.Settings;
-using KH.Dto.Models.SMSDto.Form;
 using KH.Dto.Models.SMSDto.Request;
 using KH.Dto.Models.SMSDto.Response;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Web;
 

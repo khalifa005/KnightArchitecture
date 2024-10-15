@@ -15,7 +15,7 @@ public class AppDbContext : DbContext
   private readonly ILogger<AppDbContext> _logger;
   private readonly IServiceProvider _serviceProvider;
   private readonly ICurrentUserService _currentUserService;
-  private readonly IHttpContextAccessor _httpContextAccessor; 
+  private readonly IHttpContextAccessor _httpContextAccessor;
 
   public AppDbContext(
       DbContextOptions<AppDbContext> options,

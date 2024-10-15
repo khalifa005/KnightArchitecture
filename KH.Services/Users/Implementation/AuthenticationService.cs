@@ -38,6 +38,7 @@ public class AuthenticationService : IAuthenticationService
       return res;
     }
 
+
     var entityFromDB = await repository.GetByExpressionAsync(u =>
  u.RefreshToken == refreshTokenValue && u.IsDeleted == false,
 

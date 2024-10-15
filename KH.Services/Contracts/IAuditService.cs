@@ -1,6 +1,3 @@
-using KH.BuildingBlocks.Apis.Responses;
-using Microsoft.AspNetCore.Http;
-
 namespace KH.Services.Contracts;
 
 public interface IAuditService

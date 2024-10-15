@@ -102,7 +102,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     return await query.Where(expression).FirstOrDefaultAsync();
   }
 
-  public async Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, bool tracking = false, bool splitQuery = false)
+  public async Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object?>?>? include = null, bool tracking = false, bool splitQuery = false)
   {
     var query = ApplyIncludes(include, tracking: tracking);
 
