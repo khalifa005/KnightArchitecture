@@ -1,3 +1,14 @@
+using KH.Services.Audits.Contracts;
+using KH.Services.Audits.Implementation;
+using KH.Services.Emails.Contracts;
+using KH.Services.Lookups.Departments.Contracts;
+using KH.Services.Lookups.Groups.Contracts;
+using KH.Services.Lookups.Permissions.Contracts;
+using KH.Services.Lookups.Roles.Contracts;
+using KH.Services.Media_s.Contracts;
+using KH.Services.Media_s.Implementation;
+using KH.Services.Sms.Contracts;
+
 namespace KH.Services;
 
 public static class ServicesRegisterationService

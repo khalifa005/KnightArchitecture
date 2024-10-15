@@ -1,4 +1,3 @@
-using System.Security.Claims;
 
 namespace KH.BuildingBlocks.Auth.Contracts;
 

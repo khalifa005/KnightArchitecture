@@ -1,7 +1,8 @@
 using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
-using KH.Dto.lookups.PermissionDto.Form;
+using KH.Dto.Lookups.PermissionsDto.Request;
 using KH.Dto.Lookups.PermissionsDto.Response;
+using KH.Services.Lookups.Permissions.Contracts;
 
 namespace KH.WebApi.Controllers;
 
@@ -31,7 +32,7 @@ public class PermissionsController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.ADD_PERMISSION)]
 
   [HttpPost]
-  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] PermissionForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreatePermissionRequest request)
   {
     var res = await _lookupService.AddAsync(request);
     return AsActionResult(res);
@@ -39,7 +40,7 @@ public class PermissionsController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.EDIT_PERMISSION)]
 
   [HttpPut]
-  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] PermissionForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreatePermissionRequest request)
   {
     var res = await _lookupService.UpdateAsync(request);
     return AsActionResult(res);

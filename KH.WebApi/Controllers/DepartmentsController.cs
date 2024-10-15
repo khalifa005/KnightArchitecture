@@ -1,8 +1,8 @@
 using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
-using KH.Dto.lookups.DepartmentDto.Form;
 using KH.Dto.lookups.DepartmentDto.Response;
 using KH.Dto.Lookups.DepartmentDto.Request;
+using KH.Services.Lookups.Departments.Contracts;
 
 namespace KH.WebApi.Controllers;
 
@@ -33,7 +33,7 @@ public class DepartmentsController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.Departments.ADD_DEPARTMENT)]
 
   [HttpPost]
-  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] DepartmentForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreateDepartmentRequest request)
   {
     var res = await _lookupService.AddAsync(request);
     return AsActionResult(res);
@@ -41,7 +41,7 @@ public class DepartmentsController : BaseApiController
 
   [PermissionAuthorize(PermissionKeysConstant.Departments.EDIT_DEPARTMENT)]
   [HttpPut]
-  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] DepartmentForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreateDepartmentRequest request)
   {
     var res = await _lookupService.UpdateAsync(request);
     return AsActionResult(res);

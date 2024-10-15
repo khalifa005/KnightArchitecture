@@ -1,5 +1,6 @@
 using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
+using KH.Services.Emails.Contracts;
 
 namespace KH.WebApi.Controllers;
 public class EmailController : BaseApiController

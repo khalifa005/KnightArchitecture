@@ -4,8 +4,8 @@ using KH.Domain.Entities;
 using KH.Dto.lookups.DepartmentDto.Response;
 using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Models.CalendarDto.Response;
-using KH.Dto.Models.SMSDto.Form;
-using KH.Dto.Models.UserDto.Form;
+using KH.Dto.Models.SMSDto.Request;
+using KH.Dto.Models.UserDto.Request;
 using KH.Dto.Models.UserDto.Response;
 
 namespace KH.Dto.MappingProfiles;
@@ -20,13 +20,13 @@ public class DomainToDtoProfile : Profile
     CreateMap<HistoryTrackerEntity, HistoryTrackerEntityDto>().ReverseMap();
     CreateMap<AuditResponse, Audit>().ReverseMap();
 
-    CreateMap<User, UserForm>().ReverseMap();
+    CreateMap<User, CreateUserRequest>().ReverseMap();
 
     CreateMap<City, DepartmentResponse>().ReverseMap();
     //CreateMap<Role, RoleResponseDto>().ReverseMap();
     //CreateMap<Department, DepartmentResponseDto>().ReverseMap();
     CreateMap<Group, DepartmentResponse>().ReverseMap();
-    CreateMap<SmsTracker, SmsTrackerForm>().ReverseMap();
+    CreateMap<SmsTracker, CreateSmsTrackerRequest>().ReverseMap();
     CreateMap<Calendar, CalendarResponse>().ReverseMap();
 
     //CreateMap<User, UserDetailsResponse>().ReverseMap();

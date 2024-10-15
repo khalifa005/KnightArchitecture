@@ -1,6 +1,7 @@
 using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
 using KH.BuildingBlocks.Auth.Enum;
+using KH.Services.Audits.Contracts;
 using System.Net;
 
 namespace KH.WebApi.Controllers;
@@ -40,7 +41,7 @@ public class AuditsController : BaseApiController
 
   [PermissionAuthorize(PermissionKeysConstant.Audits.IMPORT_AUDITS)]
   [HttpPost("ImportExternalAudit")]
-  public async Task<ActionResult<ApiResponse<string>>> ImportExternalAudit([FromForm] MediaForm request)
+  public async Task<ActionResult<ApiResponse<string>>> ImportExternalAudit([FromForm] CreateMediaRequest request)
   {
     if (request.File == null || request.File.Length == 0)
     {

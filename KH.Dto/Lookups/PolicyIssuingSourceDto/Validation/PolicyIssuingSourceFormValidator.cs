@@ -1,9 +1,9 @@
 using FluentValidation;
-using KH.Dto.lookups.PolicyIssuingSourceDto.Form;
+using KH.Dto.Lookups.PolicyIssuingSourceDto.Request;
 
 namespace KH.Dto.lookups.PolicyIssuingSourceDto.Validation;
 
-public class PolicyIssuingSourceFormValidator : AbstractValidator<PolicyIssuingSourceForm>
+public class PolicyIssuingSourceFormValidator : AbstractValidator<CreatePolicyIssuingSourceRequest>
 {
   public PolicyIssuingSourceFormValidator()
   {

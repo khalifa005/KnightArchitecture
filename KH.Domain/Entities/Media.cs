@@ -1,4 +1,5 @@
 using KH.BuildingBlocks.Apis.Entities;
+using KH.Domain.Entities;
 
 namespace KH.Domain.Entities;
 

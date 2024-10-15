@@ -1,6 +1,7 @@
 
 using KH.BuildingBlocks.Apis.Entities;
 
+
 namespace KH.Domain.Entities;
 
 public class Permission : LookupEntity

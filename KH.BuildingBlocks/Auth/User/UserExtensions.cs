@@ -1,5 +1,3 @@
-using KH.BuildingBlocks.Apis.Enums;
-using System.Security.Claims;
 
 namespace KH.BuildingBlocks.Auth.User;
 

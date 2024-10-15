@@ -1,10 +1,4 @@
-using KH.BuildingBlocks.Apis.Responses;
-using KH.BuildingBlocks.Auth.Constant;
-using KH.BuildingBlocks.Auth.Contracts;
-using KH.BuildingBlocks.Auth.User;
-using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json;
-using System.Security.Claims;
+
 
 namespace KH.BuildingBlocks.Auth.Midilleware;
 

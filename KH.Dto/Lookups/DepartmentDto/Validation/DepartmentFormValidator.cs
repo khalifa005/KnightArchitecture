@@ -1,9 +1,9 @@
 using FluentValidation;
-using KH.Dto.lookups.DepartmentDto.Form;
+using KH.Dto.Lookups.DepartmentDto.Request;
 
 namespace KH.Dto.lookups.DepartmentDto.Validation;
 
-public class DepartmentFormValidator : AbstractValidator<DepartmentForm>
+public class DepartmentFormValidator : AbstractValidator<CreateDepartmentRequest>
 {
   public DepartmentFormValidator()
   {

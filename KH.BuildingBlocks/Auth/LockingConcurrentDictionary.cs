@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 
 namespace KH.BuildingBlocks.Auth;
 

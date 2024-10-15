@@ -1,4 +1,3 @@
-using KH.BuildingBlocks.Apis.Responses;
 
 namespace KH.BuildingBlocks.Apis.Middlewares;
 
@@ -58,7 +57,7 @@ public class ExceptionMiddleware
       response.assignErrorDetails();
 
       var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-      var returnJson = JsonSerializer.Serialize(response, options);
+      var returnJson = System.Text.Json.JsonSerializer.Serialize(response, options);
 
       await httpContext.Response.WriteAsync(returnJson);
 

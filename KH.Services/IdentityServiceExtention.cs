@@ -1,5 +1,6 @@
 using KH.BuildingBlocks.Auth;
 using KH.BuildingBlocks.Auth.Contracts;
+using KH.Services.Users.Handlers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;

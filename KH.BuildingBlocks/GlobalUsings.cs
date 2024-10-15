@@ -15,5 +15,23 @@ global using System.Text;
 global using System.Text.Json;
 global using System.Text.RegularExpressions;
 global using System.Threading.Tasks;
-
-
+global using KH.BuildingBlocks.Auth.Enum;
+global using Microsoft.AspNetCore.Authorization;
+global using System.Security.Claims;
+global using KH.BuildingBlocks.Apis.Responses;
+global using KH.BuildingBlocks.Auth.Constant;
+global using KH.BuildingBlocks.Auth.Contracts;
+global using KH.BuildingBlocks.Auth.User;
+global using Newtonsoft.Json;
+global using KH.BuildingBlocks.Apis.Enums;
+global using System.Collections.Concurrent;
+global using KH.BuildingBlocks.Auth.Attributes;
+global using Microsoft.Extensions.Options;
+global using KH.BuildingBlocks.Apis.Extentions;
+global using KH.BuildingBlocks.Files.Services;
+global using KH.BuildingBlocks.Localizatoin.Constants;
+global using KH.BuildingBlocks.Localizatoin.Services;
+global using KH.BuildingBlocks.Settings;
+global using Microsoft.AspNetCore.Mvc.Infrastructure;
+global using Microsoft.Extensions.DependencyInjection.Extensions;
+global using Microsoft.Extensions.Localization;

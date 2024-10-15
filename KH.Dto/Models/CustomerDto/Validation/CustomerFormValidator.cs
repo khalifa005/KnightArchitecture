@@ -1,9 +1,9 @@
 using FluentValidation;
-using KH.Dto.Models.CustomerDto.Form;
+using KH.Dto.Models.CustomerDto.Request;
 
 namespace KH.Dto.Models.CustomerDto.Validation;
 
-public class CustomerFormValidator : AbstractValidator<CustomerForm>
+public class CustomerFormValidator : AbstractValidator<CreateCustomerRequest>
 {
   public CustomerFormValidator()
   {

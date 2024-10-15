@@ -1,7 +1,8 @@
 using KH.BuildingBlocks.Apis.Extentions;
-using KH.Dto.lookups.GroupDto.Form;
 using KH.Dto.lookups.GroupDto.Request;
 using KH.Dto.lookups.GroupDto.Response;
+using KH.Dto.Lookups.GroupDto.Request;
+using KH.Services.Lookups.Groups.Contracts;
 
 namespace KH.WebApi.Controllers;
 
@@ -26,13 +27,13 @@ public class GroupsController : BaseApiController
     return AsActionResult(res);
   }
   [HttpPost]
-  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] GroupForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreateGroupRequest request)
   {
     var res = await _lookupService.AddAsync(request);
     return AsActionResult(res);
   }
   [HttpPut]
-  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] GroupForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreateGroupRequest request)
   {
     var res = await _lookupService.UpdateAsync(request);
     return AsActionResult(res);

@@ -1,9 +1,9 @@
 using FluentValidation;
-using KH.Dto.Models.UserDto.Form;
+using KH.Dto.Models.UserDto.Request;
 
 namespace KH.Dto.Models.UserDto.Validation;
 
-public class UserFormValidator : AbstractValidator<UserForm>
+public class UserFormValidator : AbstractValidator<CreateUserRequest>
 {
   public UserFormValidator()
   {

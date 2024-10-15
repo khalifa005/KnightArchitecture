@@ -1,4 +1,7 @@
-namespace KH.Services.Users.Implementatoin;
+using KH.Dto.Models.SMSDto.Request;
+using KH.Services.Sms.Contracts;
+
+namespace KH.Services.Users.Implementation;
 
 public class UserManagementService : IUserManagementService
 {
@@ -39,7 +42,7 @@ public class UserManagementService : IUserManagementService
     _logger = logger;
   }
 
-  public async Task<ApiResponse<string>> AddAsync(UserForm request)
+  public async Task<ApiResponse<string>> AddAsync(CreateUserRequest request)
   {
     var actionMadeByUserId = _serviceProvider.GetUserId();
     var currentUserId = _currentUserService.UserId;
@@ -93,7 +96,7 @@ public class UserManagementService : IUserManagementService
         var templateContetBasedOnLanguage = _smsTemplateService.GetTemplateForLanguage(template, LanguageEnum.English);
         var welcomeSmsMessageFormatted = _smsTemplateService.ReplaceWelcomeSmsPlaceholders(templateContetBasedOnLanguage, userEntity);
 
-        var smsTrackerForm = new SmsTrackerForm()
+        var smsTrackerForm = new CreateSmsTrackerRequest()
         {
           MobileNumber = userEntity.MobileNumber,
           Message = welcomeSmsMessageFormatted,
@@ -116,7 +119,7 @@ public class UserManagementService : IUserManagementService
       return ex.HandleException(res, _env, _logger);
     }
   }
-  public async Task<ApiResponse<string>> AddListAsync(List<UserForm> request)
+  public async Task<ApiResponse<string>> AddListAsync(List<CreateUserRequest> request)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
     await _unitOfWork.BeginTransactionAsync();
@@ -143,7 +146,7 @@ public class UserManagementService : IUserManagementService
       return ex.HandleException(res, _env, _logger);
     }
   }
-  public async Task<ApiResponse<string>> UpdateAsync(UserForm request)
+  public async Task<ApiResponse<string>> UpdateAsync(CreateUserRequest request)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -211,7 +214,7 @@ public class UserManagementService : IUserManagementService
       return ex.HandleException(res, _env, _logger);
     }
   }
-  public async Task<ApiResponse<string>> UpdateRangeUsingBatchAsync(UserForm request)
+  public async Task<ApiResponse<string>> UpdateRangeUsingBatchAsync(CreateUserRequest request)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
     var repository = _unitOfWork.Repository<User>();

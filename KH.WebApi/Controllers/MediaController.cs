@@ -1,5 +1,6 @@
 using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
+using KH.Services.Media_s.Contracts;
 
 namespace KH.WebApi.Controllers;
 
@@ -29,7 +30,7 @@ public class MediaController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.Media.ADD_MEDIA)]
 
   [HttpPost]
-  public async Task<ActionResult<ApiResponse<string>>> Post([FromForm] MediaForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Post([FromForm] CreateMediaRequest request)
   {
     var res = await _mediaService.AddAsync(request);
     return AsActionResult(res);
@@ -37,7 +38,7 @@ public class MediaController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.Media.ADD_MEDIA_RANGE)]
 
   [HttpPost("AddRange")]
-  public async Task<ActionResult<ApiResponse<string>>> PostRange([FromForm] MediaForm request)
+  public async Task<ActionResult<ApiResponse<string>>> PostRange([FromForm] CreateMediaRequest request)
   {
     var res = await _mediaService.AddListAsync(request);
     return AsActionResult(res);

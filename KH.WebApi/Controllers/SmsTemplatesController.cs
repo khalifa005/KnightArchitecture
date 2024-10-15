@@ -1,7 +1,7 @@
 using KH.BuildingBlocks.Apis.Extentions;
-using KH.Dto.Models.SMSDto.Form;
 using KH.Dto.Models.SMSDto.Request;
 using KH.Dto.Models.SMSDto.Response;
+using KH.Services.Sms.Contracts;
 
 namespace KH.WebApi.Controllers;
 
@@ -29,14 +29,14 @@ public class SmsTemplatesController : BaseApiController
 
 
   [HttpPost]
-  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] SmsTemplateForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreateSmsTemplateRequest request)
   {
     var res = await _service.AddSmsTemplateAsync(request);
     return AsActionResult(res);
   }
 
   [HttpPut]
-  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] SmsTemplateForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreateSmsTemplateRequest request)
   {
     var res = await _service.UpdateAsync(request);
     return AsActionResult(res);

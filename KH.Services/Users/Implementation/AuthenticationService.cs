@@ -1,7 +1,7 @@
 
 using System.Security.Claims;
 
-namespace KH.Services.Users.Implementatoin;
+namespace KH.Services.Users.Implementation;
 
 public class AuthenticationService : IAuthenticationService
 {

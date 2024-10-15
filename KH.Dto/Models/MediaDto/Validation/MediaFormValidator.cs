@@ -1,9 +1,9 @@
 using FluentValidation;
-using KH.Dto.Models.MediaDto.Form;
+using KH.Dto.Models.MediaDto.Request;
 
 namespace KH.Dto.Models.MediaDto.Validation;
 
-public class MediaFormValidator : AbstractValidator<MediaForm>
+public class MediaFormValidator : AbstractValidator<CreateMediaRequest>
 {
   public MediaFormValidator()
   {

@@ -23,19 +23,11 @@
 
   <ItemGroup>
     <Folder Include="Lookups\NationalityDto\Validation\" />
-    <Folder Include="Lookups\PermissionsDto\Request\" />
     <Folder Include="Lookups\PermissionsDto\Validation\" />
-    <Folder Include="Lookups\NationalityDto\Request\" />
-    <Folder Include="Lookups\PolicyIssuingSourceDto\Request\" />
-    <Folder Include="Lookups\AEmptyTemplate\Form\" />
     <Folder Include="Lookups\AEmptyTemplate\Request\" />
     <Folder Include="Lookups\AEmptyTemplate\Response\" />
     <Folder Include="Lookups\AEmptyTemplate\Validation\" />
-    <Folder Include="Models\AuthenticationDto\Form\" />
     <Folder Include="Models\AEmptyTemplate\Validation\" />
-    <Folder Include="Models\AEmptyTemplate\Form\" />
-    <Folder Include="Models\CalendarDto\Form\" />
-    <Folder Include="Models\EmailDto\Form\" />
     <Folder Include="Models\AEmptyTemplate\Request\" />
     <Folder Include="Models\AEmptyTemplate\Response\" />
   </ItemGroup>

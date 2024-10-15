@@ -52,7 +52,7 @@ public class UsersController : BaseApiController
   }
 
   [HttpPost]
-  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] UserForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreateUserRequest request)
   {
     //var res = await _userService.AddAsync(request);
     var res = await _userManagementService.AddAsync(request);
@@ -60,7 +60,7 @@ public class UsersController : BaseApiController
   }
 
   [HttpPost("AddRange")]
-  public async Task<ActionResult<ApiResponse<string>>> PostRange([FromBody] List<UserForm> request)
+  public async Task<ActionResult<ApiResponse<string>>> PostRange([FromBody] List<CreateUserRequest> request)
   {
     //var res = await _userService.AddListAsync(request);
     var res = await _userManagementService.AddListAsync(request);
@@ -68,7 +68,7 @@ public class UsersController : BaseApiController
   }
 
   [HttpPut]
-  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] UserForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreateUserRequest request)
   {
     //var res = await _userService.UpdateAsync(request);
     var res = await _userManagementService.UpdateAsync(request);

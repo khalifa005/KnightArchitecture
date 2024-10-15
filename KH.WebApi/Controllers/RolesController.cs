@@ -1,8 +1,8 @@
 using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
-using KH.Dto.lookups.RoleDto.Form;
 using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.RoleDto.Request;
+using KH.Services.Lookups.Roles.Contracts;
 
 namespace KH.WebApi.Controllers;
 
@@ -31,14 +31,14 @@ public class RolesController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.Roles.ADD_ROLE)]
 
   [HttpPost]
-  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] RoleForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreateRoleRequest request)
   {
     var res = await _lookupService.AddAsync(request);
     return AsActionResult(res);
   }
   [HttpPut]
   [PermissionAuthorize(PermissionKeysConstant.Roles.EDIT_ROLE)]
-  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] RoleForm request)
+  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreateRoleRequest request)
   {
     var res = await _lookupService.UpdateAsync(request);
     return AsActionResult(res);
@@ -46,7 +46,7 @@ public class RolesController : BaseApiController
 
   [HttpPut("UpdateBothRoleWithRelatedPermissions")]
   [PermissionAuthorize(PermissionKeysConstant.Roles.EDIT_ROLE)]
-  public async Task<ActionResult<ApiResponse<string>>> UpdateBothRoleWithRelatedPermissions([FromBody] RoleForm request)
+  public async Task<ActionResult<ApiResponse<string>>> UpdateBothRoleWithRelatedPermissions([FromBody] CreateRoleRequest request)
   {
     var res = await _lookupService.UpdateBothRoleWithRelatedPermissionsAsync(request);
     return AsActionResult(res);

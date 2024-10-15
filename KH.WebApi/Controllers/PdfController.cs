@@ -1,5 +1,6 @@
 using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
+using KH.Services.Media_s.Contracts;
 
 namespace KH.WebApi.Controllers;
 

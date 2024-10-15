@@ -1,9 +1,9 @@
 using FluentValidation;
-using KH.Dto.lookups.RoleDto.Form;
+using KH.Dto.Lookups.RoleDto.Request;
 
 namespace KH.Dto.lookups.RoleDto.Validation;
 
-public class OtpVerificationValidator : AbstractValidator<RoleForm>
+public class OtpVerificationValidator : AbstractValidator<CreateRoleRequest>
 {
   public OtpVerificationValidator()
   {
