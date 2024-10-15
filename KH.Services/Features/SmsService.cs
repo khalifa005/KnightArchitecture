@@ -80,7 +80,7 @@ public class SmsService : ISmsService
     }
 
     string formattedMessage = HttpUtility.UrlEncode(message).Trim();
-    string url = $"{smsApiUrl}UserName={userName}&Password={password}&MessageType=text&Recipients={phoneNumber}&SenderName=ACIG&MessageText={formattedMessage}";
+    string url = $"{smsApiUrl}UserName={userName}&Password={password}&MessageType=text&Recipients={phoneNumber}&SenderName=khalifaaPro&MessageText={formattedMessage}";
 
     //example output
     //https://ht.deewan.sa:8443/Send.aspx?UserName=external&Password=pass&MessageType=text&Recipients=966566285570&SenderName=Khalifa&MessageText=external

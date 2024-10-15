@@ -1,3 +1,5 @@
+using FluentEmail.Core;
+using KH.BuildingBlocks.Apis.Constant;
 using KH.BuildingBlocks.Apis.Entities;
 using Microsoft.Extensions.Localization;
 using System.Data;
@@ -13,15 +15,17 @@ public class AuditService : IAuditService
   private readonly IMapper _mapper;
   private readonly IExcelService _excelService;
   private readonly IStringLocalizer<AuditService> _localizer;
-
+  private readonly IHttpContextAccessor _httpContextAccessor;
   public AuditService(
       IMapper mapper,
       IExcelService excelService,
-      IUnitOfWork unitOfWork)
+      IUnitOfWork unitOfWork,
+      IHttpContextAccessor httpContextAccessor)
   {
     _mapper = mapper;
     _unitOfWork = unitOfWork;
     _excelService = excelService;
+    _httpContextAccessor = httpContextAccessor;
   }
 
   public async Task<ApiResponse<List<AuditResponse>>> GetCurrentUserTrailsAsync(string userId)
@@ -133,6 +137,13 @@ public class AuditService : IAuditService
     // Process the result
     if (result.Succeeded)
     {
+      var correlationId = _httpContextAccessor
+  .HttpContext?
+  .Request
+  .Headers[ApplicationConstant.X_Correlation_ID]
+  .FirstOrDefault();
+
+      result.Data.ForEach(x => x.CorrelationId = correlationId);
       var importedData = result.Data;
 
       await _unitOfWork.Repository<Audit>().AddRangeAsync(importedData.ToList());

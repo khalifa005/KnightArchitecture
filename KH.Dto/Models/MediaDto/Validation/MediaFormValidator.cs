@@ -12,11 +12,9 @@ public class MediaFormValidator : AbstractValidator<MediaForm>
       .NotNull()
       .WithMessage("please-enter-valid-model")
       .NotEmpty()
-      .WithMessage("please-enter-valid-model")
-      .Length(1, 250)
       .WithMessage("please-enter-valid-model");
 
-    RuleFor(x => x.ModelId).Must(x => x.HasValue && x.Value < 10)
+    RuleFor(x => x.ModelId).NotNull()
       .WithMessage("please-enter-valid-model-id");
   }
 }

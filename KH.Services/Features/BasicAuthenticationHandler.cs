@@ -80,11 +80,5 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
     });
     await Response.WriteAsync(result);
   }
-  private bool IsValidUser(string username, string password)
-  {
-    // Implement your own user validation logic
-    // This could be querying a database, checking a hardcoded list, etc.
-    return username == "admin" && password == "password"; // Example hardcoded user
-  }
 }
 
