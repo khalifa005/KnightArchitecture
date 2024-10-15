@@ -1,9 +1,9 @@
 using FluentValidation;
-using KH.Dto.lookups.CityDto.Form;
+using KH.Dto.Lookups.CityDto.Request;
 
 namespace KH.Dto.lookups.CityDto.Validation;
 
-public class DepartmentFormValidator : AbstractValidator<CityForm>
+public class DepartmentFormValidator : AbstractValidator<CreateCityRequest>
 {
   public DepartmentFormValidator()
   {

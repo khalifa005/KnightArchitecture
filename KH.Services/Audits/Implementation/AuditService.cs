@@ -29,7 +29,7 @@ public class AuditService : IAuditService
     _httpContextAccessor = httpContextAccessor;
   }
 
-  public async Task<ApiResponse<List<AuditResponse>>> GetCurrentUserTrailsAsync(string userId)
+  public async Task<ApiResponse<List<AuditResponse>>> GetCurrentUserTrailsAsync(string userId, CancellationToken cancellationToken)
   {
     var res = new ApiResponse<List<AuditResponse>>((int)HttpStatusCode.OK);
 
@@ -59,7 +59,7 @@ public class AuditService : IAuditService
     return res;
   }
 
-  public async Task<ApiResponse<string>> ExportToExcelAsync(string userId, string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false)
+  public async Task<ApiResponse<string>> ExportToExcelAsync(string userId, CancellationToken cancellationToken, string searchString = "", bool searchInOldValues = false, bool searchInNewValues = false)
   {
     var repository = _unitOfWork.Repository<Audit>();
 
@@ -109,7 +109,7 @@ public class AuditService : IAuditService
   /// </summary>
   /// <param name="file"></param>
   /// <returns></returns>
-  public async Task<ApiResponse<string>> ImportExternalAudit(IFormFile file)
+  public async Task<ApiResponse<string>> ImportExternalAudit(IFormFile file, CancellationToken cancellationToken)
   {
     if (file == null || file.Length == 0)
     {

@@ -31,4 +31,3 @@ public class CorrelationIdMiddleware
     await _next(context);
   }
 }
-
