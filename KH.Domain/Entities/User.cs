@@ -3,7 +3,7 @@ using KH.BuildingBlocks.Apis.Entities;
 using KH.BuildingBlocks.Common.Attributes;
 
 namespace KH.Domain.Entities;
-[NoAudit]
+//[NoAudit]
 public class User : TrackerEntity
 {
   //public byte[] RowVersion { get; set; } // Concurrency token

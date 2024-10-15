@@ -25,23 +25,6 @@ public class UsersController : BaseApiController
     _userValidationService = userValidationService;
   }
 
-  [AllowAnonymous]
-  [HttpPost("Login")]
-  public async Task<ActionResult<ApiResponse<AuthenticationResponse>>> Login(LoginRequest request)
-  {
-    //var res = await _userService.LoginAsync(request);
-    var res = await _authenticationService.LoginAsync(request);
-    return AsActionResult(res);
-  }
-
-  [HttpGet("RefreshUserToken")]
-  public async Task<ActionResult<ApiResponse<AuthenticationResponse>>> RefreshUserToken([FromQuery] string refreshToken)
-  {
-    //var res = await _userService.RefreshUserTokenAsync(refreshToken);
-    var res = await _authenticationService.RefreshUserTokenAsync(refreshToken);
-    return AsActionResult(res);
-  }
-
   [HttpGet("{id}")]
   public async Task<ActionResult<ApiResponse<UserDetailsResponse>>> Get(int id)
   {

@@ -26,21 +26,20 @@ public class AuthenticationService : IAuthenticationService
     _env = env;
     _logger = logger;
   }
-  public async Task<ApiResponse<AuthenticationResponse>> RefreshUserTokenAsync(string refreshTokenValue)
+  public async Task<ApiResponse<AuthenticationResponse>> RefreshUserTokenAsync(RefreshTokenRequest refreshTokenRequest)
   {
     var res = new ApiResponse<AuthenticationResponse>((int)HttpStatusCode.OK);
 
     var repository = _unitOfWork.Repository<User>();
-    if (string.IsNullOrEmpty(refreshTokenValue))
+    if (refreshTokenRequest == null)
     {
       res.StatusCode = StatusCodes.Status400BadRequest;
       res.ErrorMessage = "empty token";
       return res;
     }
 
-
     var entityFromDB = await repository.GetByExpressionAsync(u =>
- u.RefreshToken == refreshTokenValue && u.IsDeleted == false,
+ u.RefreshToken == refreshTokenRequest.RefreshToken.Trim().ToString() && u.IsDeleted == false,
 
  q => q.Include(u => u.UserRoles)
  .ThenInclude(ur => ur.Role)

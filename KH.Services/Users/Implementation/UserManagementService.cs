@@ -191,6 +191,7 @@ public class UserManagementService : IUserManagementService
           var updatedUserRoles = existingUserRoles.Concat(newUserRoles).ToList();
 
           // Update the UserRoles collection with the combined list of roles; EF Core will track and apply changes
+          //ef will delete the missing roles that was being tracked then won't exist anymore
           userFromDb.UserRoles = updatedUserRoles;
         }
       }

@@ -6,6 +6,8 @@ using KH.BuildingBlocks.Apis.Middlewares;
 using KH.BuildingBlocks.Apis.Services;
 using KH.BuildingBlocks.Auth.Midilleware;
 using KH.Dto;
+using KH.Dto.Models.UserDto.Validation;
+using KH.Dto.Validations;
 using KH.PersistenceInfra;
 using KH.Services;
 namespace KH.WebApi;
@@ -31,10 +33,12 @@ public class Startup
 
     services.AddEndpointsApiExplorer();
     services.AddFluentValidationAutoValidation();
-    services.AddValidatorsFromAssemblyContaining<Startup>();
+    services.AddValidatorsFromAssemblyContaining<UserFormValidator>();
 
-    services.AddControllers()
-        .ConfigureApiBehaviorOptions(options =>
+    services.AddControllers(options =>
+    {
+
+    }).ConfigureApiBehaviorOptions(options =>
         {
           options.InvalidModelStateResponseFactory = context =>
           {
@@ -44,6 +48,11 @@ public class Startup
                     kvp => kvp.Key,
                     kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
                 );
+            // Log the raw model state errors for further inspection
+            var detailedErrors = context.ModelState.SelectMany(x => x.Value.Errors.Select(e => e.Exception?.Message ?? e.ErrorMessage)).ToList();
+
+            // Log these errors to check if something else is affecting validation
+            Console.WriteLine("ModelState Errors: " + string.Join(", ", detailedErrors));
 
             var customErrorResponse = new ApiResponse<object>(400)
             {
