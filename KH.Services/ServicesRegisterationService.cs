@@ -6,7 +6,6 @@ public static class ServicesRegisterationService
   {
     services.AddIdentityService(configuration);
 
-    services.AddScoped<IUserService, UserService>();
     services.AddScoped<IMediaService, MediaService>();
     services.AddScoped<IPdfService, PdfService>();
     services.AddScoped<IEmailService, EmailService>();

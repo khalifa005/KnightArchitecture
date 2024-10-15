@@ -4,12 +4,10 @@ using KH.BuildingBlocks.Auth.Constant;
 namespace KH.WebApi.Controllers;
 public class EmailController : BaseApiController
 {
-  public readonly IUserService _userService;
   private readonly IEmailService _emailService;
 
-  public EmailController(IUserService userService, IEmailService emailService)
+  public EmailController( IEmailService emailService)
   {
-    _userService = userService;
     _emailService = emailService;
   }
   [PermissionAuthorize(PermissionKeysConstant.Emails.VIEW_EMAIL)]

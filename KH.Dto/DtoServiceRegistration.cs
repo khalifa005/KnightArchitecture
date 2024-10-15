@@ -41,6 +41,7 @@ public static class DtoServiceRegistration
     services.AddSingleton<IValidator<CustomerForm>, CustomerFormValidator>();
 
     services.AddSingleton<IValidator<UserForm>, UserFormValidator>();
+    services.AddSingleton<IValidator<List<UserForm>>, UserFormListValidator>();
 
     return services;
   }

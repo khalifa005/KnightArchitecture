@@ -5,10 +5,10 @@ namespace KH.WebApi.Controllers;
 
 public class PdfController : BaseApiController
 {
-  public readonly IUserService _userService;
+  public readonly IUserQueryService _userService;
   private readonly IPdfService _pdfService;
 
-  public PdfController(IUserService userService, IPdfService pdfService)
+  public PdfController(IUserQueryService userService, IPdfService pdfService)
   {
     _userService = userService;
     _pdfService = pdfService;

@@ -44,6 +44,15 @@ public class UserFormValidator : AbstractValidator<UserForm>
       .When(x => !x.Id.HasValue)
       .WithMessage("please-enter-password");
 
+    RuleFor(x => x.Password)
+  .NotNull()
+  .WithMessage("please-enter-password")
+  .NotEmpty()
+  .WithMessage("please-enter-password")
+  .Length(1, 250)
+  
+  .WithMessage("please-enter-password");
+
 
     RuleFor(x => x.MobileNumber)
       .NotNull()

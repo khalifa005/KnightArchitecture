@@ -2,11 +2,11 @@ namespace KH.Services.Features;
 
 public class PdfService : IPdfService
 {
-  private readonly IUserService _userService;
+  private readonly IUserQueryService _userService;
   private readonly IConverter _converter;
   //private readonly IRazorViewToStringRenderer _razorRenderer; // Inject Razor renderer
 
-  public PdfService(IUserService userService, IConverter converter)
+  public PdfService(IUserQueryService userService, IConverter converter)
   {
     _userService = userService;
     _converter = converter;

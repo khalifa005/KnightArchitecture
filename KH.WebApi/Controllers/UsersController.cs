@@ -6,19 +6,17 @@ using KH.Services.Users.Contracts;
 namespace KH.WebApi.Controllers;
 public class UsersController : BaseApiController
 {
-  public readonly IUserService _userService;
   public readonly IAuthenticationService _authenticationService;
   public readonly IUserManagementService _userManagementService;
   public readonly IUserQueryService _userQueryService;
   public readonly IUserValidationService _userValidationService;
 
-  public UsersController(IUserService userService,
+  public UsersController(
   IAuthenticationService authenticationService,
   IUserManagementService userManagementService,
   IUserQueryService userQueryService,
   IUserValidationService userValidationService)
   {
-    _userService = userService;
     _authenticationService = authenticationService;
     _userManagementService = userManagementService;
     _userQueryService = userQueryService;

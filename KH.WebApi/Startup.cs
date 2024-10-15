@@ -33,11 +33,12 @@ public class Startup
 
     services.AddEndpointsApiExplorer();
     services.AddFluentValidationAutoValidation();
-    services.AddValidatorsFromAssemblyContaining<UserFormValidator>();
+    services.AddValidatorsFromAssemblyContaining<Startup>();
 
     services.AddControllers(options =>
     {
-
+        // Disable ASP.NET Core's default model validation
+        //options.ModelValidatorProviders.Clear();
     }).ConfigureApiBehaviorOptions(options =>
         {
           options.InvalidModelStateResponseFactory = context =>

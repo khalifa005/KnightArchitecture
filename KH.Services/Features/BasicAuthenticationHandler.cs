@@ -5,14 +5,16 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
+using KH.Services.Users.Contracts;
+
 
 namespace KH.Services.Features;
 
 public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
-  private readonly IUserService _user;
+  private readonly KH.Services.Users.Contracts.IAuthenticationService _user;
   public BasicAuthenticationHandler(
-    IUserService user,
+    KH.Services.Users.Contracts.IAuthenticationService user,
     IOptionsMonitor<AuthenticationSchemeOptions> options,
                                     ILoggerFactory logger,
                                     UrlEncoder encoder,

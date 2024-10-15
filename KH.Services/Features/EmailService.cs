@@ -7,7 +7,7 @@ using FluentEmail.Core.Models;
 
 public class EmailService : IEmailService
 {
-  private readonly IUserService _userService;
+  private readonly IUserQueryService _userQueryService;
   private readonly IUnitOfWork _unitOfWork;
   private readonly MailSettings _mailSettings;
   private readonly MailTemplatesSettings _mailTemplatesSettings;
@@ -15,7 +15,7 @@ public class EmailService : IEmailService
   private readonly ILogger<EmailService> _loggerFactory;
   public EmailService(
     IFluentEmailFactory fluentEmail,
-    IUserService userService,
+    IUserQueryService userQueryService,
     IUnitOfWork unitOfWork,
     IOptions<MailSettings> mailSettings,
     IOptions<MailTemplatesSettings> mailTemplatesSettings,
@@ -25,7 +25,7 @@ public class EmailService : IEmailService
     _mailSettings = mailSettings.Value;
     _mailTemplatesSettings = mailTemplatesSettings.Value;
     _loggerFactory = loggerFactory;
-    _userService = userService;
+    _userQueryService = userQueryService;
     _unitOfWork = unitOfWork;
   }
 
@@ -64,7 +64,7 @@ public class EmailService : IEmailService
         {
           case MailTypeEnum.WelcomeTemplate:
             {
-              var targetUser = await _userService.GetAsync(mailRequest.ModelId);
+              var targetUser = await _userQueryService.GetAsync(mailRequest.ModelId);
               if (targetUser.Data is not object)
                 throw new Exception("No user defiend with this id for this email type");
 
