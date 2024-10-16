@@ -81,6 +81,8 @@ public class EmailService : IEmailService
                 throw new Exception("No user defiend with this id for this email type");
 
               var userInfo = targetUser.Data;
+              userInfo.PrefaredLanguageKey = mailRequest.PrefaredLanguageKey;
+
 
               var emailTemplateResult = _fluentEmail.Create().To(toRecipients)
                                 .CC(ccRecipients)

@@ -8,9 +8,13 @@
 
 @{
     Layout = "Templates/LayoutV2.cshtml";
+    string langKey = Model.PrefaredLanguageKey; 
+    string direction = langKey == "Ar" ? "rtl" : "ltr";
+    string textAlign = langKey == "Ar" ? "right" : "left";
+    string fontFamily = langKey == "Ar" ? "'Cairo', Arial, sans-serif" : "'Muli', Arial, sans-serif";
 }
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: white; border-radius: 16px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: white; border-radius: 16px; direction: @direction; text-align: @textAlign;">
     <tr>
         <td align="center" valign="top">
             <table width="650" border="0" cellspacing="0" cellpadding="0" class="mobile-shell" style="margin: 0; padding: 0; border-radius: 16px;">
@@ -18,11 +22,20 @@
                     <td class="container" style="width: 650px; padding: 30px 0px; border-radius: 16px;">
                         <!-- Unique Intro Section -->
                 <tr>
-                    <td align="center" style="font-family: 'Muli', Arial, sans-serif; font-size: 16px; color: #12325c; padding: 20px;">
+                    <td align="center" style="font-family: @fontFamily; font-size: 16px; color: #12325c; padding: 20px;">
                         <!-- Welcome Badge -->
                         <div style="display: inline-block; background-color: #4CAF50; padding: 20px; border-radius: 30px; color: white; font-size: 18px; font-weight: bold;">
                             <img src="https://img.icons8.com/color/48/000000/verified-badge.png" alt="badge" style="vertical-align: middle;" />
-                            @Model.FullName! We're glad to have you on board.
+                                    @{
+                                        if (langKey == "Ar")
+                                        {
+                                            <text>@Model.FullName! نحن سعداء بانضمامك إلينا.</text>
+                                        }
+                                        else
+                                        {
+                                            <text>@Model.FullName! We're glad to have you on board.</text>
+                                        }
+                                    }
                         </div>
                     </td>
                 </tr>
@@ -43,39 +56,55 @@
                                     <td class="tbrr p30-15" style="padding: 40px 30px; border-radius: 16px 16px 0px 0px; background: linear-gradient(135deg, #12325c 0%, #F68B2C 100%);">
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <td class="h1 pb25" style="color: #ffffff; font-family: 'Muli', Arial, sans-serif; font-size: 32px; text-align: center;">
-                                                    Welcome, @Model.Username
+                                                <td class="h1 pb25" style="color: #ffffff; font-family: @fontFamily; font-size: 32px; text-align: center;">
+                                                            @{
+                                                                if (langKey == "Ar")
+                                                                {
+                                                                    <text>مرحباً، @Model.Username</text>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <text>Welcome, @Model.Username</text>
+                                                                }
+                                                            }
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="text-center pb25" style="color: #c1cddc; font-family: 'Muli', Arial, sans-serif; font-size: 16px; text-align: center;">
-                                                    Here are your details:
+                                                <td class="text-center pb25" style="color: #c1cddc; font-family: @fontFamily; font-size: 16px; text-align: center;">
+                                                            @{
+                                                                if (langKey == "Ar")
+                                                                {
+                                                                    <text>هنا تفاصيل حسابك:</text>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <text>Here are your details:</text>
+                                                                }
+                                                            }
                                                 </td>
                                             </tr>
 
                                             <!-- Displaying User Details -->
                                             <tr>
                                                 <td style="padding: 20px; background-color: #f4f4f9; color: #333;">
-                                                    <p><strong>Full Name:</strong> <span style="color: black;">@Model.FullName</span></p>
-                                                    <p><strong>Email:</strong> <span style="color: black;">@Model.Email</span></p>
-                                                    <p><strong>Birth Date:</strong> <span style="color: black;">@Model.BirthDate?.ToString("yyyy-MM-dd")</span></p>
-                                                    <p><strong>Mobile Number:</strong> <span style="color: black;">@Model.MobileNumber</span></p>
+                                                    <p><strong>@(langKey == "Ar" ? "الاسم الكامل:" : "Full Name:")</strong> <span style="color: black;">@Model.FullName</span></p>
+                                                    <p><strong>@(langKey == "Ar" ? "البريد الإلكتروني:" : "Email:")</strong> <span style="color: black;">@Model.Email</span></p>
+                                                    <p><strong>@(langKey == "Ar" ? "تاريخ الميلاد:" : "Birth Date:")</strong> <span style="color: black;">@Model.BirthDate?.ToString("yyyy-MM-dd")</span></p>
+                                                    <p><strong>@(langKey == "Ar" ? "رقم الهاتف:" : "Mobile Number:")</strong> <span style="color: black;">@Model.MobileNumber</span></p>
 
                                                     <!-- Roles Table -->
-                                                    <p><strong>Roles:</strong></p>
-                                                    <table width="100%" border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; font-family: 'Muli', Arial, sans-serif; font-size: 14px; color: #333;">
+                                                    <p><strong>@(langKey == "Ar" ? "الأدوار:" : "Roles:")</strong></p>
+                                                    <table width="100%" border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; font-family: @fontFamily; font-size: 14px; color: #333;">
                                                         <thead>
                                                             <tr style="background-color: #F68B2C; color: #ffffff;">
-                                                                        @* <th align="left">Role ID</th> *@
-                                                                <th align="left">Name (English)</th>
-                                                                <th align="left">Name (Arabic)</th>
+                                                                <th align="@textAlign">@(langKey == "Ar" ? "الاسم (إنجليزي)" : "Name (English)")</th>
+                                                                <th align="@textAlign">@(langKey == "Ar" ? "الاسم (عربي)" : "Name (Arabic)")</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                                     @foreach (var role in Model.UserRoles)
                                                                     {
                                                                 <tr>
-                                                                            @* <td>@role.Role.Id</td> *@
                                                                     <td>@role.Role.NameEn</td>
                                                                     <td>@role.Role.NameAr</td>
                                                                 </tr>
@@ -89,8 +118,8 @@
                                             <!-- Fully Clickable Button -->
                                             <tr>
                                                 <td align="center" style="padding-top: 20px;">
-                                                    <a href="http://localhost:4200/" target="_blank" style="display: inline-block; text-decoration: none; background: #F68B2C; color: #ffffff; font-family: 'Muli', Arial, sans-serif; font-size: 14px; padding: 12px 30px; text-align: center; border-radius: 22px; margin-top: 20px;">
-                                                        View More Details
+                                                    <a href="http://localhost:4200/" target="_blank" style="display: inline-block; text-decoration: none; background: #F68B2C; color: #ffffff; font-family: @fontFamily; font-size: 14px; padding: 12px 30px; text-align: center; border-radius: 22px; margin-top: 20px;">
+                                                                @(langKey == "Ar" ? "عرض المزيد من التفاصيل" : "View More Details")
                                                     </a>
                                                 </td>
                                             </tr>

@@ -14,6 +14,7 @@ public class MailRequest : PagingRequestHelper
   public MailTypeEnum MailType { get; set; } = MailTypeEnum.Default;
   public long ModelId { get; set; }
   public string Model { get; set; }
+  public string PrefaredLanguageKey { get; set; }
   public bool IsSent { get; set; }
 
   public MailRequest()

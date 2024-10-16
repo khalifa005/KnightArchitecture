@@ -16,6 +16,7 @@ public class UserDetailsResponse : BasicTrackerEntityDto
   public long? GroupId { get; set; }
   public long? DepartmentId { get; set; }
   public long[]? RoleIds { get; set; }
+  public string PrefaredLanguageKey { get; set; }
 
   public DateTime? LastAssignDateAsSupervisor { get; set; }
   public DateTime? LastAssignDateAsCaseOwner { get; set; }
