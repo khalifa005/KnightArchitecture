@@ -10,41 +10,37 @@
     Layout = "Templates/LayoutV2.cshtml";
 }
 
-
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: white;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: white; border-radius: 16px;">
     <tr>
         <td align="center" valign="top">
-            <table width="650" border="0" cellspacing="0" cellpadding="0" class="mobile-shell" style="margin: 0; padding: 0;">
+            <table width="650" border="0" cellspacing="0" cellpadding="0" class="mobile-shell" style="margin: 0; padding: 0; border-radius: 16px;">
                 <tr>
-                    <td class="container" style="width: 650px; padding: 30px 0px;">
+                    <td class="container" style="width: 650px; padding: 30px 0px; border-radius: 16px;">
                         <!-- Unique Intro Section -->
                 <tr>
                     <td align="center" style="font-family: 'Muli', Arial, sans-serif; font-size: 16px; color: #12325c; padding: 20px;">
                         <!-- Welcome Badge -->
                         <div style="display: inline-block; background-color: #4CAF50; padding: 20px; border-radius: 30px; color: white; font-size: 18px; font-weight: bold;">
                             <img src="https://img.icons8.com/color/48/000000/verified-badge.png" alt="badge" style="vertical-align: middle;" />
-                            Welcome to our service, @Model.FullName! We're glad to have you on board.
+                            @Model.FullName! We're glad to have you on board.
                         </div>
                     </td>
                 </tr>
 
                 <!-- Header with Image -->
                 <tr>
-                    <td align="center">
-                        <!-- Using a base64 encoded image instead of local file -->
-                        @* <img src="data:image/png;base64, [your base64 string here]" width="100%" height="auto" border="0" /> *@
-                        <img style="height:250px; width:100%;" src="https://t4.ftcdn.net/jpg/05/24/07/77/360_F_524077766_kJgKvQrx83Wkw8RbK3VFts0HmyZepF3b.jpg" width="100%" height="auto" border="0" alt="" />
+                    <td align="center" style="border-radius: 16px;">
+                        <img style="height:250px; width:100%; border-radius: 16px;" src="https://t4.ftcdn.net/jpg/05/24/07/77/360_F_524077766_kJgKvQrx83Wkw8RbK3VFts0HmyZepF3b.jpg" width="100%" height="auto" border="0" alt="" />
                     </td>
                 </tr>
                 <!-- END Header -->
                 <!-- User Details -->
-                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-radius: 16px; overflow: hidden;">
                     <tr>
-                        <td style="padding-bottom: 10px;">
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <td style="padding-bottom: 10px; border-radius: 16px;">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-radius: 16px;">
                                 <tr>
-                                    <td class="tbrr p30-15" style="padding: 40px 30px; border-radius: 26px 26px 0px 0px; background: linear-gradient(135deg, #12325c 0%, #F68B2C 100%);">
+                                    <td class="tbrr p30-15" style="padding: 40px 30px; border-radius: 16px 16px 0px 0px; background: linear-gradient(135deg, #12325c 0%, #F68B2C 100%);">
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td class="h1 pb25" style="color: #ffffff; font-family: 'Muli', Arial, sans-serif; font-size: 32px; text-align: center;">
@@ -60,17 +56,17 @@
                                             <!-- Displaying User Details -->
                                             <tr>
                                                 <td style="padding: 20px; background-color: #f4f4f9; color: #333;">
-                                                    <p><strong>Full Name:</strong> @Model.FullName</p>
-                                                    <p><strong>Email:</strong> @Model.Email</p>
-                                                    <p><strong>Birth Date:</strong> @Model.BirthDate?.ToString("yyyy-MM-dd")</p>
-                                                    <p><strong>Mobile Number:</strong> @Model.MobileNumber</p>
+                                                    <p><strong>Full Name:</strong> <span style="color: black;">@Model.FullName</span></p>
+                                                    <p><strong>Email:</strong> <span style="color: black;">@Model.Email</span></p>
+                                                    <p><strong>Birth Date:</strong> <span style="color: black;">@Model.BirthDate?.ToString("yyyy-MM-dd")</span></p>
+                                                    <p><strong>Mobile Number:</strong> <span style="color: black;">@Model.MobileNumber</span></p>
 
                                                     <!-- Roles Table -->
                                                     <p><strong>Roles:</strong></p>
                                                     <table width="100%" border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; font-family: 'Muli', Arial, sans-serif; font-size: 14px; color: #333;">
                                                         <thead>
                                                             <tr style="background-color: #F68B2C; color: #ffffff;">
-                                                                @* <th align="left">Role ID</th> *@
+                                                                        @* <th align="left">Role ID</th> *@
                                                                 <th align="left">Name (English)</th>
                                                                 <th align="left">Name (Arabic)</th>
                                                             </tr>
@@ -79,7 +75,7 @@
                                                                     @foreach (var role in Model.UserRoles)
                                                                     {
                                                                 <tr>
-                                                                    @* <td>@role.Role.Id</td> *@
+                                                                            @* <td>@role.Role.Id</td> *@
                                                                     <td>@role.Role.NameEn</td>
                                                                     <td>@role.Role.NameAr</td>
                                                                 </tr>
