@@ -9,16 +9,18 @@ public class SmsTemplateService : ISmsTemplateService
   private readonly IUnitOfWork _unitOfWork;
   private readonly SmsSettings _smsProviderSettings;
   private readonly CustomHttpRequestService _httpRequestHelper;
-
-  private readonly ILogger<SmsTemplateService> _loggerFactory;
+  private readonly IHostEnvironment _env;
+  private readonly ILogger<SmsTemplateService> _logger;
   public SmsTemplateService(
     IUnitOfWork unitOfWork,
     IOptions<SmsSettings> smsProviderSettings,
     CustomHttpRequestService httpRequestHelper,
+    IHostEnvironment env,
     ILogger<SmsTemplateService> loggerFactory)
   {
     _smsProviderSettings = smsProviderSettings.Value;
-    _loggerFactory = loggerFactory;
+    _logger = loggerFactory;
+    _env = env;
     _httpRequestHelper = httpRequestHelper;
     _unitOfWork = unitOfWork;
   }
@@ -107,10 +109,7 @@ public class SmsTemplateService : ISmsTemplateService
     {
       await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
 
@@ -162,10 +161,7 @@ public class SmsTemplateService : ISmsTemplateService
     catch (Exception ex)
     {
 
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
 

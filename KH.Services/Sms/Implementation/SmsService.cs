@@ -11,16 +11,19 @@ public class SmsService : ISmsService
   private readonly IUnitOfWork _unitOfWork;
   private readonly SmsSettings _smsProviderSettings;
   private readonly CustomHttpRequestService _httpRequestHelper;
-
-  private readonly ILogger<SmsService> _loggerFactory;
+  private readonly IHostEnvironment _env;
+  private readonly ILogger<SmsService> _logger;
   public SmsService(
     IUnitOfWork unitOfWork,
     IOptions<SmsSettings> smsProviderSettings,
     CustomHttpRequestService httpRequestHelper,
+    IHostEnvironment env,
     ILogger<SmsService> loggerFactory)
   {
+    _env  = env;
+    _logger = loggerFactory;
     _smsProviderSettings = smsProviderSettings.Value;
-    _loggerFactory = loggerFactory;
+    _logger = loggerFactory;
     _httpRequestHelper = httpRequestHelper;
     _unitOfWork = unitOfWork;
   }
@@ -251,10 +254,7 @@ public class SmsService : ISmsService
     }
     catch (Exception ex)
     {
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
   public async Task<ApiResponse<string>> ResendAsync(SmsTracker request, CancellationToken cancellationToken)
@@ -304,10 +304,7 @@ public class SmsService : ISmsService
     }
     catch (Exception ex)
     {
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
 }

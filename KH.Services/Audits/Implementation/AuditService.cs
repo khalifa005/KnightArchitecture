@@ -17,12 +17,18 @@ public class AuditService : IAuditService
   private readonly IMapper _mapper;
   private readonly IExcelService _excelService;
   private readonly IHttpContextAccessor _httpContextAccessor;
+  private readonly IHostEnvironment _env;
+  private readonly ILogger<AuditService> _logger;
   public AuditService(
       IMapper mapper,
+      ILogger<AuditService> logger,
+      IHostEnvironment env,
       IExcelService excelService,
       IUnitOfWork unitOfWork,
       IHttpContextAccessor httpContextAccessor)
   {
+    _env = env;
+    _logger = logger;
     _mapper = mapper;
     _unitOfWork = unitOfWork;
     _excelService = excelService;

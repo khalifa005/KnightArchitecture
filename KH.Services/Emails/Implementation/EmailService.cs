@@ -13,21 +13,24 @@ public class EmailService : IEmailService
   private readonly MailSettings _mailSettings;
   private readonly MailTemplatesSettings _mailTemplatesSettings;
   private IFluentEmailFactory _fluentEmail;
-  private readonly ILogger<EmailService> _loggerFactory;
+  private readonly ILogger<EmailService> _logger;
+    private readonly IHostEnvironment _env;
   public EmailService(
     IFluentEmailFactory fluentEmail,
     IUserQueryService userQueryService,
     IUnitOfWork unitOfWork,
     IOptions<MailSettings> mailSettings,
     IOptions<MailTemplatesSettings> mailTemplatesSettings,
+    IHostEnvironment env,
     ILogger<EmailService> loggerFactory)
   {
     _fluentEmail = fluentEmail;
     _mailSettings = mailSettings.Value;
     _mailTemplatesSettings = mailTemplatesSettings.Value;
-    _loggerFactory = loggerFactory;
+    _logger = loggerFactory;
     _userQueryService = userQueryService;
     _unitOfWork = unitOfWork;
+    _env = env;
   }
 
   public async Task<ApiResponse<object>> SendEmailAsync(MailRequest mailRequest, CancellationToken cancellationToken)
@@ -39,7 +42,15 @@ public class EmailService : IEmailService
 
     try
     {
-      _loggerFactory.LogInformation("SendEmailAsync started type {etype}", mailRequest.MailType.ToString());
+      _logger.LogInformation("SendEmailAsync started type {etype}", mailRequest.MailType.ToString());
+
+      if (mailRequest == null)
+        throw new Exception("Invalid Parameter");
+
+
+      if (mailRequest.Model is null || mailRequest.ModelId == 0)
+        throw new Exception("Invalid Parameter");
+
 
       if (!_mailSettings.Disable)
       {
@@ -83,7 +94,7 @@ public class EmailService : IEmailService
             }
           case MailTypeEnum.TicketEscalation:
             {
-              _loggerFactory.LogInformation(" prepare the query of the ticket Email");
+              _logger.LogInformation(" prepare the query of the ticket Email");
               isSent = true;
               break;
             }
@@ -99,7 +110,7 @@ public class EmailService : IEmailService
             }
         }
 
-        _loggerFactory.LogInformation($"send Email to ({string.Join(",", toRecipients.Select(o => o.EmailAddress))}) for model Id ({mailRequest.ModelId}) with Type ({mailRequest.MailType}) Succesded");
+        _logger.LogInformation($"send Email to ({string.Join(",", toRecipients.Select(o => o.EmailAddress))}) for model Id ({mailRequest.ModelId}) with Type ({mailRequest.MailType}) Succesded");
       }
       return res;
     }
@@ -107,7 +118,7 @@ public class EmailService : IEmailService
     {
       isSent = false;
       failerReasons = ex.Message;
-      _loggerFactory.LogError($"send Email to {string.Join(",", mailRequest.ToEmail)} for user Id ({mailRequest.ModelId}) with Type {mailRequest.MailType} has error {ex.Message}");
+      _logger.LogError($"send Email to {string.Join(",", mailRequest.ToEmail)} for user Id ({mailRequest.ModelId}) with Type {mailRequest.MailType} has error {ex.Message}");
       res.ErrorMessage = ex.Message;
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       return res;
@@ -194,15 +205,6 @@ public class EmailService : IEmailService
 
     try
     {
-      if (request == null)
-        throw new Exception("Invalid Parameter");
-
-      //all validation should be in fluent validation side
-      if (request.ToCCEmail.Length <= 0)
-        throw new Exception("Invalid email");
-
-      if (request.ModelId == null)
-        throw new Exception("Invalid Parameter");
 
 
       var repository = _unitOfWork.Repository<EmailTracker>();
@@ -218,11 +220,7 @@ public class EmailService : IEmailService
     catch (Exception ex)
     {
       await _unitOfWork.RollBackTransactionAsync(cancellationToken);
-
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
 

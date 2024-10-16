@@ -7,13 +7,19 @@ public class PermissionService : IPermissionService
   private readonly IUnitOfWork _unitOfWork;
   private readonly IServiceProvider _serviceProvider;
   private readonly IMapper _mapper;
+  private readonly IHostEnvironment _env;
+  private readonly ILogger<PermissionService> _logger;
 
   public PermissionService(
     IUnitOfWork unitOfWork,
+    ILogger<PermissionService> logger,
+    IHostEnvironment env,
     IServiceProvider serviceProvider,
     IMapper mapper)
   {
     _unitOfWork = unitOfWork;
+    _logger = logger;
+    _env = env;
     _serviceProvider = serviceProvider;
     _mapper = mapper;
   }
@@ -59,10 +65,7 @@ public class PermissionService : IPermissionService
     {
       await _unitOfWork.RollBackTransactionAsync(cancellationToken);
 
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
   public async Task<ApiResponse<string>> UpdateAsync(CreatePermissionRequest request, CancellationToken cancellationToken)
@@ -99,10 +102,7 @@ public class PermissionService : IPermissionService
     {
       await _unitOfWork.RollBackTransactionAsync(cancellationToken);
 
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
   public async Task<ApiResponse<string>> DeleteAsync(long id, CancellationToken cancellationToken)
@@ -125,11 +125,7 @@ public class PermissionService : IPermissionService
     }
     catch (Exception ex)
     {
-
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
   public async Task<ApiResponse<PagedResponse<PermissionResponse>>> GetListAsync(CancellationToken cancellationToken)

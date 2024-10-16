@@ -8,12 +8,17 @@ public class GroupService : IGroupService
   private readonly IUnitOfWork _unitOfWork;
   private readonly IServiceProvider _serviceProvider;
   private readonly IMapper _mapper;
-
+  private readonly IHostEnvironment _env;
+  private readonly ILogger<GroupService> _logger;
   public GroupService(
     IUnitOfWork unitOfWork,
+    IHostEnvironment env,
+    ILogger<GroupService> logger,
     IServiceProvider serviceProvider,
     IMapper mapper)
   {
+    _env = env;
+    _logger = logger;
     _unitOfWork = unitOfWork;
     _serviceProvider = serviceProvider;
     _mapper = mapper;
@@ -47,7 +52,7 @@ public class GroupService : IGroupService
     include: null,
     orderBy: query => query.OrderBy(u => u.Id),
     tracking: false
-);
+  );
 
 
     var entityListResponses = pagedEntities.Select(x => x).ToList();
@@ -88,10 +93,7 @@ public class GroupService : IGroupService
     {
       await _unitOfWork.RollBackTransactionAsync(cancellationToken);
 
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
   public async Task<ApiResponse<string>> UpdateAsync(CreateGroupRequest request, CancellationToken cancellationToken)
@@ -128,10 +130,7 @@ public class GroupService : IGroupService
     {
       await _unitOfWork.RollBackTransactionAsync(cancellationToken);
 
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
   public async Task<ApiResponse<string>> DeleteAsync(long id, CancellationToken cancellationToken)
@@ -154,11 +153,7 @@ public class GroupService : IGroupService
     }
     catch (Exception ex)
     {
-
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
 

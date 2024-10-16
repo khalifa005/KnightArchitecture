@@ -10,8 +10,15 @@ public class MediaService : IMediaService
 {
   private readonly FileManagerService _fileManager;
   private readonly IUnitOfWork _unitOfWork;
-  public MediaService(FileManagerService fileManager, IUnitOfWork unitOfWork)
+  private readonly IHostEnvironment _env;
+  private readonly ILogger<MediaService> _logger;
+  public MediaService(FileManagerService fileManager,
+    IHostEnvironment env,
+    ILogger<MediaService> logger,
+    IUnitOfWork unitOfWork)
   {
+    _logger = logger;
+    _env = env;
     _fileManager = fileManager;
     _unitOfWork = unitOfWork;
   }
@@ -127,10 +134,7 @@ public class MediaService : IMediaService
     {
       await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
     }
   }
 
@@ -193,10 +197,8 @@ public class MediaService : IMediaService
     {
       await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
+
     }
   }
 
@@ -221,10 +223,8 @@ public class MediaService : IMediaService
     catch (Exception ex)
     {
 
-      res.StatusCode = (int)HttpStatusCode.BadRequest;
-      res.Data = ex.Message;
-      res.ErrorMessage = ex.Message;
-      return res;
+      return ex.HandleException(res, _env, _logger);
+
     }
   }
 
