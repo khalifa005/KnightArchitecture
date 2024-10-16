@@ -16,14 +16,14 @@ public class MediaService : IMediaService
     _unitOfWork = unitOfWork;
   }
 
-  public async Task<ApiResponse<MediaResponse>> GetAsync(long id)
+  public async Task<ApiResponse<MediaResponse>> GetAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<MediaResponse>? res = new ApiResponse<MediaResponse>((int)HttpStatusCode.OK);
 
     var repository = _unitOfWork.Repository<Media>();
 
     //light user query to make sure the user exist
-    var entityFromDB = await repository.GetAsync(id);
+    var entityFromDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
 
     if (entityFromDB == null)
     {
@@ -36,7 +36,7 @@ public class MediaService : IMediaService
     return res;
   }
 
-  public async Task<ApiResponse<PagedResponse<MediaResponse>>> GetListAsync(MediaRequest request)
+  public async Task<ApiResponse<PagedResponse<MediaResponse>>> GetListAsync(MediaRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<PagedResponse<MediaResponse>> apiResponse = new ApiResponse<PagedResponse<MediaResponse>>((int)HttpStatusCode.OK);
 
@@ -52,7 +52,8 @@ public class MediaService : IMediaService
 
     projectionExpression: u => new MediaResponse(u),
     orderBy: query => query.OrderBy(u => u.Id),  // Sort by Id
-    tracking: false  // Disable tracking for read-only queries
+    tracking: false,  // Disable tracking for read-only queries
+    cancellationToken: cancellationToken
 );
 
     var entitiesResponses = pagedEntities.Select(x => x).ToList();
@@ -69,13 +70,13 @@ public class MediaService : IMediaService
     return apiResponse;
   }
 
-  public async Task<ApiResponse<string>> AddAsync(CreateMediaRequest request)
+  public async Task<ApiResponse<string>> AddAsync(CreateMediaRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
     bool isModelExists = Enum.IsDefined(typeof(ModelEnum), request.Model);
 
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken: cancellationToken);
 
     try
     {
@@ -114,17 +115,17 @@ public class MediaService : IMediaService
 
       var repository = _unitOfWork.Repository<Media>();
 
-      await repository.AddAsync(mediaEntity);
-      await _unitOfWork.CommitAsync();
+      await repository.AddAsync(mediaEntity, cancellationToken: cancellationToken);
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
       res.Data = mediaEntity.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -133,12 +134,12 @@ public class MediaService : IMediaService
     }
   }
 
-  public async Task<ApiResponse<string>> AddListAsync(CreateMediaRequest request)
+  public async Task<ApiResponse<string>> AddListAsync(CreateMediaRequest request, CancellationToken cancellationToken)
   {
     bool isModelExists = Enum.IsDefined(typeof(ModelEnum), request.Model);
 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken: cancellationToken);
 
     try
     {
@@ -179,18 +180,18 @@ public class MediaService : IMediaService
         mediaEntities.Add(mediaEntity);
       }
 
-      await repository.AddRangeAsync(mediaEntities);
-      await _unitOfWork.CommitAsync();
+      await repository.AddRangeAsync(mediaEntities, cancellationToken: cancellationToken);
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
       res.Data = string.Join(",", mediaEntities.Select(x => x.Id));
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -199,7 +200,7 @@ public class MediaService : IMediaService
     }
   }
 
-  public async Task<ApiResponse<string>> DeleteAsync(long id)
+  public async Task<ApiResponse<string>> DeleteAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -207,12 +208,12 @@ public class MediaService : IMediaService
     {
       var repository = _unitOfWork.Repository<Media>();
 
-      var entityDB = await repository.GetAsync(id);
+      var entityDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
       if (entityDB == null)
         throw new Exception("Invalid file");
 
       repository.Delete(entityDB);
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
       res.Data = entityDB.Id.ToString();
       return res;
@@ -227,7 +228,7 @@ public class MediaService : IMediaService
     }
   }
 
-  public async Task<ApiResponse<MediaResponse>> DownloadAsync(long id)
+  public async Task<ApiResponse<MediaResponse>> DownloadAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<MediaResponse>? res = new ApiResponse<MediaResponse>((int)HttpStatusCode.OK);
 
@@ -238,8 +239,8 @@ public class MediaService : IMediaService
     var repository = _unitOfWork.Repository<Media>();
 
     //light user query to make sure the user exist
-    var entityFromDBX = await repository.GetByExpressionAsync(x => x.Id == id);
-    var entityFromDB = await repository.GetAsync(id);
+    var entityFromDBX = await repository.GetByExpressionAsync(x => x.Id == id, cancellationToken: cancellationToken);
+    var entityFromDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
 
     if (entityFromDB == null)
     {

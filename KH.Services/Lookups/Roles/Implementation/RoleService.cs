@@ -26,7 +26,7 @@ public class RoleService : IRoleService
     _logger = logger;
   }
 
-  public async Task<ApiResponse<RoleResponse>> GetAsync(long id)
+  public async Task<ApiResponse<RoleResponse>> GetAsync(long id, CancellationToken cancellationToken)
   {
     var res = new ApiResponse<RoleResponse>((int)HttpStatusCode.OK);
 
@@ -35,7 +35,8 @@ public class RoleService : IRoleService
     var entityFromDB = await repository.GetAsync(id,
       x =>
       x.Include(i => i.RolePermissions)
-      .ThenInclude(i => i.Permission));
+      .ThenInclude(i => i.Permission),
+      cancellationToken: cancellationToken);
 
     if (entityFromDB == null)
       throw new Exception("Invalid Parameter");
@@ -45,7 +46,7 @@ public class RoleService : IRoleService
     res.Data = entityDetailsResponse;
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<RoleListResponse>>> GetListAsync(RoleFilterRequest request)
+  public async Task<ApiResponse<PagedResponse<RoleListResponse>>> GetListAsync(RoleFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<Role>();
 
@@ -56,7 +57,8 @@ public class RoleService : IRoleService
     projectionExpression: u => new RoleListResponse(u),
     include: null,
     orderBy: query => query.OrderBy(u => u.Id),
-    tracking: false
+    tracking: false,
+    cancellationToken: cancellationToken
 );
 
 
@@ -74,11 +76,11 @@ public class RoleService : IRoleService
 
     return apiResponse;
   }
-  public async Task<ApiResponse<string>> AddAsync(CreateRoleRequest request)
+  public async Task<ApiResponse<string>> AddAsync(CreateRoleRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
     try
     {
@@ -86,35 +88,38 @@ public class RoleService : IRoleService
 
       var repository = _unitOfWork.Repository<Role>();
 
-      await repository.AddAsync(entity);
-      await _unitOfWork.CommitAsync();
+      await repository.AddAsync(entity,cancellationToken: cancellationToken);
+      await _unitOfWork.CommitAsync(cancellationToken);
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
       res.Data = entity.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken);
       return ex.HandleException(res, _env, _logger);
     }
   }
-  public async Task<ApiResponse<string>> UpdateAsync(CreateRoleRequest request)
+  public async Task<ApiResponse<string>> UpdateAsync(CreateRoleRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
     var entityAfterMapping = request.ToEntity();
 
     var repository = _unitOfWork.Repository<Role>();
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
     try
     {
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var entityFromDb = await repository.GetAsync(request.Id.Value, include: x => x.Include(x => x.RolePermissions), tracking: true);
+      var entityFromDb = await repository.GetAsync(request.Id.Value,
+        include: x => x.Include(x => x.RolePermissions),
+        tracking: true,
+        cancellationToken: cancellationToken);
 
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -123,15 +128,15 @@ public class RoleService : IRoleService
       entityFromDb.NameEn = entityAfterMapping.NameEn;
       entityFromDb.Description = entityAfterMapping.Description;
 
-      await _unitOfWork.CommitAsync();
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitAsync(cancellationToken);
+      await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
       res.Data = entityAfterMapping.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -139,7 +144,7 @@ public class RoleService : IRoleService
       return res;
     }
   }
-  public async Task<ApiResponse<string>> UpdateBothRoleWithRelatedPermissionsAsync(CreateRoleRequest request)
+  public async Task<ApiResponse<string>> UpdateBothRoleWithRelatedPermissionsAsync(CreateRoleRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -147,14 +152,18 @@ public class RoleService : IRoleService
 
     var repositoryRolePermissions = _unitOfWork.Repository<RolePermissions>();
     var repository = _unitOfWork.Repository<Role>();
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken: cancellationToken);
 
     try
     {
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var entityFromDb = await repository.GetAsync(request.Id.Value, include: x => x.Include(x => x.RolePermissions), tracking: true);
+      var entityFromDb = await repository
+        .GetAsync(request.Id.Value,
+        include: x => x.Include(x => x.RolePermissions),
+        tracking: true,
+        cancellationToken: cancellationToken);
 
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -185,15 +194,15 @@ public class RoleService : IRoleService
         entityFromDb.RolePermissions = updatedRolePermissions;
       }
 
-      await _unitOfWork.CommitAsync();
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
+      await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
       res.Data = entityAfterMapping.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -201,7 +210,7 @@ public class RoleService : IRoleService
       return res;
     }
   }
-  public async Task<ApiResponse<string>> UpdateRolePermissionsAsync(CreateRoleRequest request)
+  public async Task<ApiResponse<string>> UpdateRolePermissionsAsync(CreateRoleRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -209,7 +218,7 @@ public class RoleService : IRoleService
 
     var repositoryRolePermissions = _unitOfWork.Repository<RolePermissions>();
     var repository = _unitOfWork.Repository<Role>();
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken: cancellationToken);
 
     try
     {
@@ -217,7 +226,10 @@ public class RoleService : IRoleService
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var entityFromDb = await repository.GetAsync(request.Id.Value, include: x => x.Include(x => x.RolePermissions), tracking: true);
+      var entityFromDb = await repository.GetAsync(request.Id.Value,
+        include: x => x.Include(x => x.RolePermissions),
+        tracking: true,
+        cancellationToken: cancellationToken);
 
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -236,15 +248,15 @@ public class RoleService : IRoleService
 
 
       }
-      await _unitOfWork.CommitAsync();
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
+      await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
       res.Data = entityAfterMapping.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -252,7 +264,7 @@ public class RoleService : IRoleService
       return res;
     }
   }
-  public async Task<ApiResponse<string>> DeleteAsync(long id)
+  public async Task<ApiResponse<string>> DeleteAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -260,12 +272,12 @@ public class RoleService : IRoleService
     {
       var repository = _unitOfWork.Repository<Role>();
 
-      var entityFromDB = await repository.GetAsync(id);
+      var entityFromDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
       if (entityFromDB == null)
         throw new Exception("Invalid user");
 
       repository.Delete(entityFromDB);
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
       res.Data = entityFromDB.Id.ToString();
       return res;

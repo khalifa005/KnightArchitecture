@@ -25,9 +25,9 @@ public partial class UnitOfWork : IUnitOfWork
   /// Commits the current changes to the database.
   /// </summary>
   /// <returns>The number of state entries written to the database.</returns>
-  public async Task<int> CommitAsync()
+  public async Task<int> CommitAsync(CancellationToken cancellationToken = default)
   {
-    return await _dbContext.SaveChangesAsync();
+    return await _dbContext.SaveChangesAsync(cancellationToken);
   }
 
 
@@ -35,25 +35,25 @@ public partial class UnitOfWork : IUnitOfWork
   /// Begins a new transaction with the specified isolation level.
   /// </summary>
   /// <returns>A task representing the asynchronous operation.</returns>
-  public async Task BeginTransactionAsync()
+  public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
   {
     if (_currentTransaction != null)
     {
       throw new InvalidOperationException("There is already an active transaction.");
     }
 
-    _currentTransaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
+    _currentTransaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted, cancellationToken);
   }
 
 
-  public async Task BeginTransactionAsync(System.Data.IsolationLevel isolationLevel = System.Data.IsolationLevel.ReadUncommitted)
+  public async Task BeginTransactionAsync(System.Data.IsolationLevel isolationLevel = System.Data.IsolationLevel.ReadUncommitted, CancellationToken cancellationToken = default)
   {
     if (_currentTransaction != null)
     {
       throw new InvalidOperationException("There is already an active transaction.");
     }
 
-    _currentTransaction = await _dbContext.Database.BeginTransactionAsync(isolationLevel);
+    _currentTransaction = await _dbContext.Database.BeginTransactionAsync(isolationLevel, cancellationToken);
 
   }
 
@@ -62,11 +62,11 @@ public partial class UnitOfWork : IUnitOfWork
   /// Rolls back the current transaction.
   /// </summary>
   /// <returns>A task representing the asynchronous operation.</returns>
-  public async Task RollBackTransactionAsync()
+  public async Task RollBackTransactionAsync(CancellationToken cancellationToken = default)
   {
     if (_currentTransaction != null)
     {
-      await _currentTransaction.RollbackAsync();
+      await _currentTransaction.RollbackAsync(cancellationToken);
       await _currentTransaction.DisposeAsync();
       _currentTransaction = null;
     }
@@ -76,7 +76,7 @@ public partial class UnitOfWork : IUnitOfWork
   /// Commits the current transaction.
   /// </summary>
   /// <returns>A task representing the asynchronous operation.</returns>
-  public async Task CommitTransactionAsync()
+  public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
   {
     if (_currentTransaction == null)
     {
@@ -86,11 +86,11 @@ public partial class UnitOfWork : IUnitOfWork
     try
     {
       //await _dbContext.SaveChangesAsync();
-      await _currentTransaction.CommitAsync();
+      await _currentTransaction.CommitAsync(cancellationToken);
     }
     catch
     {
-      await RollBackTransactionAsync();
+      await RollBackTransactionAsync(cancellationToken);
       throw;
     }
     finally

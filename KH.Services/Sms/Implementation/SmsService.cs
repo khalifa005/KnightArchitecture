@@ -88,7 +88,7 @@ public class SmsService : ISmsService
 
     return url;
   }
-  private async Task<ApiResponse<SmsTracker>> ApplySendSmsAsync(string url, SmsTracker smsTrackerRequest)
+  private async Task<ApiResponse<SmsTracker>> ApplySendSmsAsync(string url, SmsTracker smsTrackerRequest, CancellationToken cancellationToken)
   {
     var response = new ApiResponse<SmsTracker>((int)HttpStatusCode.OK);
 
@@ -135,7 +135,7 @@ public class SmsService : ISmsService
     response.Data = smsTrackerRequest;
     return response;
   }
-  public async Task<ApiResponse<SmsTrackerResponse>> GetSmsTrackerAsync(long id)
+  public async Task<ApiResponse<SmsTrackerResponse>> GetSmsTrackerAsync(long id, CancellationToken cancellationToken)
   {
     var res = new ApiResponse<SmsTrackerResponse>((int)HttpStatusCode.OK);
 
@@ -153,7 +153,7 @@ public class SmsService : ISmsService
     res.Data = new SmsTrackerResponse(entityFromDB);
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<SmsTrackerResponse>>> GetSmsTrackerListAsync(SmsTrackerFilterRequest request)
+  public async Task<ApiResponse<PagedResponse<SmsTrackerResponse>>> GetSmsTrackerListAsync(SmsTrackerFilterRequest request, CancellationToken cancellationToken)
   {
     var apiResponse = new ApiResponse<PagedResponse<SmsTrackerResponse>>((int)HttpStatusCode.OK);
 
@@ -196,7 +196,7 @@ public class SmsService : ISmsService
 
     return apiResponse;
   }
-  public async Task<ApiResponse<string>> SendSmsAsync(CreateSmsTrackerRequest request)
+  public async Task<ApiResponse<string>> SendSmsAsync(CreateSmsTrackerRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -235,7 +235,7 @@ public class SmsService : ISmsService
        request.MobileNumber,
        request.Message);
 
-        var result = await ApplySendSmsAsync(url, smsEntity);
+        var result = await ApplySendSmsAsync(url, smsEntity, cancellationToken);
         smsEntity = result.Data;
       }
 
@@ -257,7 +257,7 @@ public class SmsService : ISmsService
       return res;
     }
   }
-  public async Task<ApiResponse<string>> ResendAsync(SmsTracker request)
+  public async Task<ApiResponse<string>> ResendAsync(SmsTracker request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -289,7 +289,7 @@ public class SmsService : ISmsService
             smsEntity.MobileNumber,
             smsEntity.Message);
 
-      var result = await ApplySendSmsAsync(url, smsEntity);
+      var result = await ApplySendSmsAsync(url, smsEntity, cancellationToken);
       smsEntity = result.Data;
 
       var repository = _unitOfWork.Repository<SmsTracker>();

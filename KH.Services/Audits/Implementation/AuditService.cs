@@ -36,7 +36,7 @@ public class AuditService : IAuditService
     var repository = _unitOfWork.Repository<Audit>();
 
     var context = repository.GetQueryable();
-    var trails = await context.Where(a => a.UserId == userId).OrderByDescending(a => a.Id).Take(250).ToListAsync();
+    var trails = await context.Where(a => a.UserId == userId).OrderByDescending(a => a.Id).Take(250).ToListAsync(cancellationToken);
     var mappedLogs = _mapper.Map<List<AuditResponse>>(trails);
 
     // Reformat the serialized values in each log
@@ -64,7 +64,7 @@ public class AuditService : IAuditService
     var repository = _unitOfWork.Repository<Audit>();
 
     var context = repository.GetQueryable();
-    var trails = await context.Where(a => a.UserId == userId).OrderByDescending(a => a.Id).Take(250).ToListAsync();
+    var trails = await context.Where(a => a.UserId == userId).OrderByDescending(a => a.Id).Take(250).ToListAsync(cancellationToken);
 
     var res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -118,7 +118,7 @@ public class AuditService : IAuditService
 
     // Read the uploaded file into a MemoryStream
     using var stream = new MemoryStream();
-    await file.CopyToAsync(stream);
+    await file.CopyToAsync(stream, cancellationToken);
     stream.Position = 0; // Reset the stream position to the beginning
 
     // Import the file using the Excel service
@@ -147,9 +147,9 @@ public class AuditService : IAuditService
       result.Data.ForEach(x => x.CorrelationId = correlationId);
       var importedData = result.Data;
 
-      await _unitOfWork.Repository<Audit>().AddRangeAsync(importedData.ToList());
+      await _unitOfWork.Repository<Audit>().AddRangeAsync(importedData.ToList(), cancellationToken);
 
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken);
 
       var res = new ApiResponse<string>((int)HttpStatusCode.OK);
       res.Data = "imported";

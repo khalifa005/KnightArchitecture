@@ -24,7 +24,7 @@ public class UserValidationService : IUserValidationService
     _logger = logger;
   }
 
-  public async Task<bool> IsThereMatchedUserAsync(string email, string username)
+  public async Task<bool> IsThereMatchedUserAsync(string email, string username, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<User>();
 
@@ -37,7 +37,7 @@ public class UserValidationService : IUserValidationService
 
     return false;
   }
-  public async Task<bool> IsThereMatchedUserWithTheSamePhoneNumberAsync(string phoneNumber)
+  public async Task<bool> IsThereMatchedUserWithTheSamePhoneNumberAsync(string phoneNumber, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<User>();
 

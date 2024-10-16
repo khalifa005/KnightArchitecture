@@ -2,6 +2,6 @@ namespace KH.Services.Users.Contracts;
 
 public interface IUserValidationService
 {
-  Task<bool> IsThereMatchedUserAsync(string email, string username);
-  Task<bool> IsThereMatchedUserWithTheSamePhoneNumberAsync(string phoneNumber);
+  Task<bool> IsThereMatchedUserAsync(string email, string username, CancellationToken cancellationToken);
+  Task<bool> IsThereMatchedUserWithTheSamePhoneNumberAsync(string phoneNumber, CancellationToken cancellationToken);
 }

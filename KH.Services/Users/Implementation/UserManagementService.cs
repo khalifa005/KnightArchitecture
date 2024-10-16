@@ -42,14 +42,14 @@ public class UserManagementService : IUserManagementService
     _logger = logger;
   }
 
-  public async Task<ApiResponse<string>> AddAsync(CreateUserRequest request)
+  public async Task<ApiResponse<string>> AddAsync(CreateUserRequest request, CancellationToken cancellationToken)
   {
     var actionMadeByUserId = _serviceProvider.GetUserId();
     var currentUserId = _currentUserService.UserId;
 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken: cancellationToken);
 
     try
     {
@@ -57,11 +57,11 @@ public class UserManagementService : IUserManagementService
         throw new Exception("invalid-user-id-in-add-mode");
 
       //-- Check User Duplication
-      var isThereDuplicatedUser = await _userValidationService.IsThereMatchedUserAsync(request.Email, request.Username);
+      var isThereDuplicatedUser = await _userValidationService.IsThereMatchedUserAsync(request.Email, request.Username, cancellationToken: cancellationToken);
       if (isThereDuplicatedUser)
         throw new Exception("duplicated username or email");
 
-      var isThereDuplicatedUserWithTheSamePhone = await _userValidationService.IsThereMatchedUserWithTheSamePhoneNumberAsync(request.MobileNumber);
+      var isThereDuplicatedUserWithTheSamePhone = await _userValidationService.IsThereMatchedUserWithTheSamePhoneNumberAsync(request.MobileNumber, cancellationToken: cancellationToken);
       if (isThereDuplicatedUserWithTheSamePhone)
         throw new Exception("duplicated phone number");
 
@@ -89,7 +89,7 @@ public class UserManagementService : IUserManagementService
 
       await _unitOfWork.CommitAsync();
 
-      var smsWelcomeTemplateResult = await _smsTemplateService.GetSmsTemplateAsync(SmsTypeEnum.WelcomeUser.ToString());
+      var smsWelcomeTemplateResult = await _smsTemplateService.GetSmsTemplateAsync(SmsTypeEnum.WelcomeUser.ToString(), cancellationToken: cancellationToken);
       if (smsWelcomeTemplateResult.StatusCode == StatusCodes.Status200OK && smsWelcomeTemplateResult.Data is object)
       {
         var template = smsWelcomeTemplateResult.Data;
@@ -104,25 +104,25 @@ public class UserManagementService : IUserManagementService
           ModelId = userEntity.Id
         };
 
-        var smsResult = await _smsService.SendSmsAsync(smsTrackerForm);
+        var smsResult = await _smsService.SendSmsAsync(smsTrackerForm, cancellationToken: cancellationToken);
       }
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
       res.Data = userEntity.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
       return ex.HandleException(res, _env, _logger);
     }
   }
-  public async Task<ApiResponse<string>> AddListAsync(List<CreateUserRequest> request)
+  public async Task<ApiResponse<string>> AddListAsync(List<CreateUserRequest> request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken: cancellationToken);
 
     try
     {
@@ -130,23 +130,23 @@ public class UserManagementService : IUserManagementService
 
       var repository = _unitOfWork.Repository<User>();
 
-      await repository.AddRangeAsync(userEntities);
-      await _unitOfWork.CommitAsync();
+      await repository.AddRangeAsync(userEntities, cancellationToken: cancellationToken);
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
       res.Data = String.Join(",", userEntities.Select(x => x.Id));
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
       return ex.HandleException(res, _env, _logger);
     }
   }
-  public async Task<ApiResponse<string>> UpdateAsync(CreateUserRequest request)
+  public async Task<ApiResponse<string>> UpdateAsync(CreateUserRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -155,14 +155,18 @@ public class UserManagementService : IUserManagementService
     var userRoleRepository = _unitOfWork.Repository<UserRole>();
     var repository = _unitOfWork.Repository<User>();
 
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken: cancellationToken);
 
     try
     {
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var userFromDb = await repository.GetAsync(request.Id.Value, include: x => x.Include(x => x.UserRoles), tracking: true);
+      var userFromDb = await repository
+        .GetAsync(request.Id.Value,
+        include: x => x.Include(x => x.UserRoles),
+        tracking: true,
+        cancellationToken: cancellationToken);
 
       if (userFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -200,21 +204,21 @@ public class UserManagementService : IUserManagementService
       }
 
 
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
       res.Data = userEntityByAutoMapper.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
       return ex.HandleException(res, _env, _logger);
     }
   }
-  public async Task<ApiResponse<string>> UpdateRangeUsingBatchAsync(CreateUserRequest request)
+  public async Task<ApiResponse<string>> UpdateRangeUsingBatchAsync(CreateUserRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
     var repository = _unitOfWork.Repository<User>();
@@ -224,12 +228,12 @@ public class UserManagementService : IUserManagementService
         x => x.SetProperty(y => y.IsOtpVerified, false)
     );
 
-    await repository.BatchDeleteAsync(x => x.DeletedDate < DateTime.UtcNow.AddMonths(-6));
+    await repository.BatchDeleteAsync(x => x.DeletedDate < DateTime.UtcNow.AddMonths(-6), cancellationToken: cancellationToken);
 
     return res;
 
   }
-  public async Task<ApiResponse<string>> DeleteAsync(long id)
+  public async Task<ApiResponse<string>> DeleteAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -237,12 +241,12 @@ public class UserManagementService : IUserManagementService
     {
       var repository = _unitOfWork.Repository<User>();
 
-      var userFromDB = await repository.GetAsync(id);
+      var userFromDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
       if (userFromDB == null)
         throw new Exception("Invalid user");
 
       repository.Delete(userFromDB);
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
       res.Data = userFromDB.Id.ToString();
       return res;
@@ -252,7 +256,7 @@ public class UserManagementService : IUserManagementService
       return ex.HandleException(res, _env, _logger);
     }
   }
-  public async Task<ApiResponse<string>> ResetDepartmentsAsync(long id)
+  public async Task<ApiResponse<string>> ResetDepartmentsAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -262,7 +266,9 @@ public class UserManagementService : IUserManagementService
       q => q.Include(u => u.UserRoles)
       .ThenInclude(ur => ur.Role)
       .Include(u => u.UserGroups)
-      .Include(u => u.UserDepartments), tracking: true);
+      .Include(u => u.UserDepartments),
+      tracking: true,
+      cancellationToken: cancellationToken);
 
     if (user == null)
     {
@@ -274,7 +280,7 @@ public class UserManagementService : IUserManagementService
     //we also can keep it and just mart it as IsDeleted = true
     user.UserDepartments.Clear();
 
-    await _unitOfWork.CommitAsync();
+    await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
     //another approach is using soft delete
 
@@ -290,7 +296,7 @@ public class UserManagementService : IUserManagementService
       }
 
       // Save changes
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
     }
 
     return res;

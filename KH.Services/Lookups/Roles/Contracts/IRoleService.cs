@@ -5,11 +5,11 @@ namespace KH.Services.Lookups.Roles.Contracts;
 
 public interface IRoleService
 {
-  Task<ApiResponse<RoleResponse>> GetAsync(long id);
-  Task<ApiResponse<PagedResponse<RoleListResponse>>> GetListAsync(RoleFilterRequest request);
-  Task<ApiResponse<string>> AddAsync(CreateRoleRequest request);
-  Task<ApiResponse<string>> UpdateAsync(CreateRoleRequest request);
-  Task<ApiResponse<string>> DeleteAsync(long id);
-  Task<ApiResponse<string>> UpdateBothRoleWithRelatedPermissionsAsync(CreateRoleRequest request);
-  Task<ApiResponse<string>> UpdateRolePermissionsAsync(CreateRoleRequest request);
+  Task<ApiResponse<RoleResponse>> GetAsync(long id, CancellationToken cancellationToken);
+  Task<ApiResponse<PagedResponse<RoleListResponse>>> GetListAsync(RoleFilterRequest request, CancellationToken cancellationToken);
+  Task<ApiResponse<string>> AddAsync(CreateRoleRequest request, CancellationToken cancellationToken);
+  Task<ApiResponse<string>> UpdateAsync(CreateRoleRequest request, CancellationToken cancellationToken);
+  Task<ApiResponse<string>> DeleteAsync(long id, CancellationToken cancellationToken);
+  Task<ApiResponse<string>> UpdateBothRoleWithRelatedPermissionsAsync(CreateRoleRequest request, CancellationToken cancellationToken);
+  Task<ApiResponse<string>> UpdateRolePermissionsAsync(CreateRoleRequest request, CancellationToken cancellationToken);
 }

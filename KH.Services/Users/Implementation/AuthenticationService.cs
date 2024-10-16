@@ -26,7 +26,7 @@ public class AuthenticationService : IAuthenticationService
     _env = env;
     _logger = logger;
   }
-  public async Task<ApiResponse<AuthenticationResponse>> RefreshUserTokenAsync(RefreshTokenRequest refreshTokenRequest)
+  public async Task<ApiResponse<AuthenticationResponse>> RefreshUserTokenAsync(RefreshTokenRequest refreshTokenRequest, CancellationToken cancellationToken)
   {
     var res = new ApiResponse<AuthenticationResponse>((int)HttpStatusCode.OK);
 
@@ -38,12 +38,17 @@ public class AuthenticationService : IAuthenticationService
       return res;
     }
 
-    var entityFromDB = await repository.GetByExpressionAsync(u =>
- u.RefreshToken == refreshTokenRequest.RefreshToken.Trim().ToString() && u.IsDeleted == false,
+    var entityFromDB = await repository
+      .GetByExpressionAsync(u =>
+ u.RefreshToken == refreshTokenRequest.RefreshToken.Trim().ToString()
+ && u.IsDeleted == false,
 
  q => q.Include(u => u.UserRoles)
  .ThenInclude(ur => ur.Role)
- .ThenInclude(r => r.RolePermissions), tracking: true);
+ .ThenInclude(r => r.RolePermissions),
+ tracking: true,
+ cancellationToken: cancellationToken);
+
 
 
     if (entityFromDB == null)
@@ -70,7 +75,7 @@ public class AuthenticationService : IAuthenticationService
     entityFromDB.RefreshToken = refreshToken.Token;
     entityFromDB.RefreshTokenExpiryTime = refreshToken.Expires;
     entityFromDB.RefreshTokenCreatedDate = refreshToken.Created;
-    await _unitOfWork.CommitAsync();
+    await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
     var authenticationResponse = new AuthenticationResponse();
     authenticationResponse.RefreshToken = refreshToken.Token;
@@ -82,7 +87,7 @@ public class AuthenticationService : IAuthenticationService
     res.Data = authenticationResponse;
     return res;
   }
-  public async Task<ApiResponse<AuthenticationResponse>> LoginAsync(LoginRequest request)
+  public async Task<ApiResponse<AuthenticationResponse>> LoginAsync(LoginRequest request, CancellationToken cancellationToken)
   {
     var res = new ApiResponse<AuthenticationResponse>((int)HttpStatusCode.OK);
 
@@ -91,12 +96,16 @@ public class AuthenticationService : IAuthenticationService
       var repository = _unitOfWork.Repository<User>();
 
 
-      var entityFromDB = await repository.GetByExpressionAsync(u =>
-   u.Username == request.Username && u.IsDeleted == false,
+      var entityFromDB = await repository
+        .GetByExpressionAsync(u =>
+   u.Username == request.Username
+   && u.IsDeleted == false,
 
    q => q.Include(u => u.UserRoles)
    .ThenInclude(ur => ur.Role)
-   .ThenInclude(r => r.RolePermissions), tracking: true);
+   .ThenInclude(r => r.RolePermissions),
+   tracking: true,
+   cancellationToken: cancellationToken);
 
 
 
@@ -135,7 +144,7 @@ public class AuthenticationService : IAuthenticationService
         entityFromDB.RefreshToken = refreshToken.Token;
         entityFromDB.RefreshTokenExpiryTime = refreshToken.Expires;
         entityFromDB.RefreshTokenCreatedDate = refreshToken.Created;
-        await _unitOfWork.CommitAsync();
+        await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
         authenticationResponse.RefreshToken = refreshToken.Token;
       }
@@ -154,14 +163,16 @@ public class AuthenticationService : IAuthenticationService
       return ex.HandleException(res, _env, _logger);
     }
   }
-  public async Task<List<Claim>> GetUserClaims(LoginRequest request)
+  public async Task<List<Claim>> GetUserClaimsAsync(LoginRequest request)
   {
     try
     {
       var repository = _unitOfWork.Repository<User>();
 
-      var entityFromDB = await repository.GetByExpressionAsync(u =>
-   u.Username == request.Username && u.IsDeleted == false,
+      var entityFromDB = await repository
+        .GetByExpressionAsync(u =>
+   u.Username == request.Username
+   && u.IsDeleted == false,
 
    q => q.Include(u => u.UserRoles)
    .ThenInclude(ur => ur.Role)

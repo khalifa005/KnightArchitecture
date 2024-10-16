@@ -18,7 +18,7 @@ public class PermissionService : IPermissionService
     _mapper = mapper;
   }
 
-  public async Task<ApiResponse<PermissionResponse>> GetAsync(long id)
+  public async Task<ApiResponse<PermissionResponse>> GetAsync(long id, CancellationToken cancellationToken)
   {
     var res = new ApiResponse<PermissionResponse>((int)HttpStatusCode.OK);
 
@@ -34,11 +34,11 @@ public class PermissionService : IPermissionService
     res.Data = entityDetailsResponse;
     return res;
   }
-  public async Task<ApiResponse<string>> AddAsync(CreatePermissionRequest request)
+  public async Task<ApiResponse<string>> AddAsync(CreatePermissionRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
     try
     {
@@ -47,17 +47,17 @@ public class PermissionService : IPermissionService
 
       var repository = _unitOfWork.Repository<Permission>();
 
-      await repository.AddAsync(entity);
-      await _unitOfWork.CommitAsync();
+      await repository.AddAsync(entity, cancellationToken: cancellationToken);
+      await _unitOfWork.CommitAsync(cancellationToken);
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
       res.Data = entity.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -65,21 +65,21 @@ public class PermissionService : IPermissionService
       return res;
     }
   }
-  public async Task<ApiResponse<string>> UpdateAsync(CreatePermissionRequest request)
+  public async Task<ApiResponse<string>> UpdateAsync(CreatePermissionRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
     var entityAfterMapping = request.ToEntity();
 
     var repository = _unitOfWork.Repository<Permission>();
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
     try
     {
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var entityFromDb = await repository.GetAsync(request.Id.Value, tracking: true);
+      var entityFromDb = await repository.GetAsync(request.Id.Value, tracking: true, cancellationToken: cancellationToken);
 
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -89,15 +89,15 @@ public class PermissionService : IPermissionService
       entityFromDb.NameEn = entityAfterMapping.NameEn;
       entityFromDb.Description = entityAfterMapping.Description;
 
-      await _unitOfWork.CommitAsync();
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitAsync(cancellationToken);
+      await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
       res.Data = entityAfterMapping.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -105,7 +105,7 @@ public class PermissionService : IPermissionService
       return res;
     }
   }
-  public async Task<ApiResponse<string>> DeleteAsync(long id)
+  public async Task<ApiResponse<string>> DeleteAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -113,12 +113,12 @@ public class PermissionService : IPermissionService
     {
       var repository = _unitOfWork.Repository<Permission>();
 
-      var entityFromDB = await repository.GetAsync(id);
+      var entityFromDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
       if (entityFromDB == null)
         throw new Exception("Invalid");
 
       repository.Delete(entityFromDB);
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken);
 
       res.Data = entityFromDB.Id.ToString();
       return res;
@@ -132,7 +132,7 @@ public class PermissionService : IPermissionService
       return res;
     }
   }
-  public async Task<ApiResponse<PagedResponse<PermissionResponse>>> GetListAsync()
+  public async Task<ApiResponse<PagedResponse<PermissionResponse>>> GetListAsync(CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<Permission>();
 
@@ -143,7 +143,8 @@ public class PermissionService : IPermissionService
     projectionExpression: u => new PermissionResponse(u),
     include: null,
     orderBy: query => query.OrderBy(u => u.Id),
-    tracking: false
+    tracking: false,
+    cancellationToken: cancellationToken
 );
 
     var entityListResponses = pagedEntities.Select(x => x).ToList();

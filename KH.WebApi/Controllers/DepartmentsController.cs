@@ -16,42 +16,42 @@ public class DepartmentsController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.Departments.VIEW_DEPARTMENT)]
 
   [HttpGet("{id}")]
-  public async Task<ActionResult<ApiResponse<DepartmentResponse>>> Get(int id)
+  public async Task<ActionResult<ApiResponse<DepartmentResponse>>> Get(int id, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.GetAsync(id);
+    var res = await _lookupService.GetAsync(id, cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.Departments.LIST_DEPARTMENTS)]
 
   [HttpPost("list")]
-  public async Task<ActionResult<ApiResponse<PagedResponse<DepartmentListResponse>>>> GetList(DepartmentFilterRequest request)
+  public async Task<ActionResult<ApiResponse<PagedResponse<DepartmentListResponse>>>> GetList(DepartmentFilterRequest request, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.GetListAsync(request);
+    var res = await _lookupService.GetListAsync(request, cancellationToken);
     return AsActionResult(res);
   }
 
   [PermissionAuthorize(PermissionKeysConstant.Departments.ADD_DEPARTMENT)]
 
   [HttpPost]
-  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreateDepartmentRequest request)
+  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreateDepartmentRequest request, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.AddAsync(request);
+    var res = await _lookupService.AddAsync(request, cancellationToken);
     return AsActionResult(res);
   }
 
   [PermissionAuthorize(PermissionKeysConstant.Departments.EDIT_DEPARTMENT)]
   [HttpPut]
-  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreateDepartmentRequest request)
+  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreateDepartmentRequest request, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.UpdateAsync(request);
+    var res = await _lookupService.UpdateAsync(request, cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.Departments.DELETE_DEPARTMENT)]
 
   [HttpDelete("{id}")]
-  public async Task<ActionResult<ApiResponse<string>>> Delete(int id)
+  public async Task<ActionResult<ApiResponse<string>>> Delete(int id, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.DeleteAsync(id);
+    var res = await _lookupService.DeleteAsync(id, cancellationToken);
     return AsActionResult(res);
   }
 }

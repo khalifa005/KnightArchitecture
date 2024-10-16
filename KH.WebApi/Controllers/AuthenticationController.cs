@@ -11,19 +11,19 @@ public class AuthenticationController : BaseApiController
 
   [AllowAnonymous]
   [HttpPost("Login")]
-  public async Task<ActionResult<ApiResponse<AuthenticationResponse>>> Login(LoginRequest request)
+  public async Task<ActionResult<ApiResponse<AuthenticationResponse>>> Login(LoginRequest request, CancellationToken cancellationToken)
   {
     //var res = await _userService.LoginAsync(request);
-    var res = await _authenticationService.LoginAsync(request);
+    var res = await _authenticationService.LoginAsync(request, cancellationToken);
     return AsActionResult(res);
   }
 
   [AllowAnonymous]
   [HttpPost("RefreshUserToken")]
-  public async Task<ActionResult<ApiResponse<AuthenticationResponse>>> RefreshUserToken(RefreshTokenRequest refreshTokenRequest)
+  public async Task<ActionResult<ApiResponse<AuthenticationResponse>>> RefreshUserToken(RefreshTokenRequest refreshTokenRequest, CancellationToken cancellationToken)
   {
     //var res = await _userService.RefreshUserTokenAsync(refreshToken);
-    var res = await _authenticationService.RefreshUserTokenAsync(refreshTokenRequest);
+    var res = await _authenticationService.RefreshUserTokenAsync(refreshTokenRequest,cancellationToken);
     return AsActionResult(res);
   }
 

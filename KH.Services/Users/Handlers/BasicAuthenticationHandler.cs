@@ -42,7 +42,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
       var username = credentials[0];
       var password = credentials[1];
 
-      var userClaims = await _user.GetUserClaims(new LoginRequest
+      var userClaims = await _user.GetUserClaimsAsync(new LoginRequest
       {
         Username = username,
         Password = password

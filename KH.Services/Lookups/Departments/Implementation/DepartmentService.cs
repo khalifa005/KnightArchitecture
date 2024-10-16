@@ -19,7 +19,7 @@ public class DepartmentService : IDepartmentService
     _mapper = mapper;
   }
 
-  public async Task<ApiResponse<DepartmentResponse>> GetAsync(long id)
+  public async Task<ApiResponse<DepartmentResponse>> GetAsync(long id, CancellationToken cancellationToken)
   {
     var res = new ApiResponse<DepartmentResponse>((int)HttpStatusCode.OK);
 
@@ -35,7 +35,7 @@ public class DepartmentService : IDepartmentService
     res.Data = entityDetailsResponse;
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<DepartmentListResponse>>> GetListAsync(DepartmentFilterRequest request)
+  public async Task<ApiResponse<PagedResponse<DepartmentListResponse>>> GetListAsync(DepartmentFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<Department>();
 
@@ -64,11 +64,11 @@ public class DepartmentService : IDepartmentService
 
     return apiResponse;
   }
-  public async Task<ApiResponse<string>> AddAsync(CreateDepartmentRequest request)
+  public async Task<ApiResponse<string>> AddAsync(CreateDepartmentRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
     try
     {
@@ -76,17 +76,17 @@ public class DepartmentService : IDepartmentService
 
       var repository = _unitOfWork.Repository<Department>();
 
-      await repository.AddAsync(entity);
-      await _unitOfWork.CommitAsync();
+      await repository.AddAsync(entity, cancellationToken: cancellationToken);
+      await _unitOfWork.CommitAsync(cancellationToken);
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
       res.Data = entity.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -94,21 +94,21 @@ public class DepartmentService : IDepartmentService
       return res;
     }
   }
-  public async Task<ApiResponse<string>> UpdateAsync(CreateDepartmentRequest request)
+  public async Task<ApiResponse<string>> UpdateAsync(CreateDepartmentRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
     var entityAfterMapping = request.ToEntity();
 
     var repository = _unitOfWork.Repository<Department>();
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
     try
     {
       if (!request.Id.HasValue)
         throw new Exception("id is required");
 
-      var entityFromDb = await repository.GetAsync(request.Id.Value, tracking: true);
+      var entityFromDb = await repository.GetAsync(request.Id.Value, tracking: true, cancellationToken: cancellationToken);
 
       if (entityFromDb == null)
         throw new Exception("Invalid Parameter");
@@ -117,16 +117,16 @@ public class DepartmentService : IDepartmentService
       entityFromDb.NameEn = entityAfterMapping.NameEn;
       entityFromDb.Description = entityAfterMapping.Description;
 
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken);
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
       res.Data = entityAfterMapping.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -134,7 +134,7 @@ public class DepartmentService : IDepartmentService
       return res;
     }
   }
-  public async Task<ApiResponse<string>> DeleteAsync(long id)
+  public async Task<ApiResponse<string>> DeleteAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -142,12 +142,12 @@ public class DepartmentService : IDepartmentService
     {
       var repository = _unitOfWork.Repository<Department>();
 
-      var entityFromDB = await repository.GetAsync(id);
+      var entityFromDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
       if (entityFromDB == null)
         throw new Exception("Invalid user");
 
       repository.Delete(entityFromDB);
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken);
 
       res.Data = entityFromDB.Id.ToString();
       return res;

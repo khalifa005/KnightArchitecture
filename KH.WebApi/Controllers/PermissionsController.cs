@@ -16,41 +16,41 @@ public class PermissionsController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.VIEW_PERMISSION)]
 
   [HttpGet("{id}")]
-  public async Task<ActionResult<ApiResponse<PermissionResponse>>> Get(int id)
+  public async Task<ActionResult<ApiResponse<PermissionResponse>>> Get(int id, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.GetAsync(id);
+    var res = await _lookupService.GetAsync(id, cancellationToken);
     return AsActionResult(res);
   }
 
   [HttpGet("List")]
   [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.LIST_PERMISSIONS)]
-  public async Task<ActionResult<ApiResponse<PagedResponse<PermissionResponse>>>> GetPermissions()
+  public async Task<ActionResult<ApiResponse<PagedResponse<PermissionResponse>>>> GetPermissions(CancellationToken cancellationToken)
   {
-    var res = await _lookupService.GetListAsync();
+    var res = await _lookupService.GetListAsync(cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.ADD_PERMISSION)]
 
   [HttpPost]
-  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreatePermissionRequest request)
+  public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreatePermissionRequest request, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.AddAsync(request);
+    var res = await _lookupService.AddAsync(request, cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.EDIT_PERMISSION)]
 
   [HttpPut]
-  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreatePermissionRequest request)
+  public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreatePermissionRequest request, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.UpdateAsync(request);
+    var res = await _lookupService.UpdateAsync(request, cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.DELETE_PERMISSION)]
 
   [HttpDelete("{id}")]
-  public async Task<ActionResult<ApiResponse<string>>> Delete(int id)
+  public async Task<ActionResult<ApiResponse<string>>> Delete(int id, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.DeleteAsync(id);
+    var res = await _lookupService.DeleteAsync(id, cancellationToken);
     return AsActionResult(res);
   }
 

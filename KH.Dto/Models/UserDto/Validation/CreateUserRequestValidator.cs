@@ -3,9 +3,9 @@ using KH.Dto.Models.UserDto.Request;
 
 namespace KH.Dto.Models.UserDto.Validation;
 
-public class UserFormValidator : AbstractValidator<CreateUserRequest>
+public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
 {
-  public UserFormValidator()
+  public CreateUserRequestValidator()
   {
 
     RuleFor(x => x.FirstName)
@@ -43,16 +43,6 @@ public class UserFormValidator : AbstractValidator<CreateUserRequest>
       .Length(1, 250)
       .When(x => !x.Id.HasValue)
       .WithMessage("please-enter-password");
-
-    RuleFor(x => x.Password)
-  .NotNull()
-  .WithMessage("please-enter-password")
-  .NotEmpty()
-  .WithMessage("please-enter-password")
-  .Length(1, 250)
-  
-  .WithMessage("please-enter-password");
-
 
     RuleFor(x => x.MobileNumber)
       .NotNull()

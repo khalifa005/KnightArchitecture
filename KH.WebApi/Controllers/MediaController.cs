@@ -14,49 +14,49 @@ public class MediaController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.Media.VIEW_MEDIA)]
 
   [HttpGet("{id}")]
-  public async Task<ActionResult<ApiResponse<MediaResponse>>> Get(int id)
+  public async Task<ActionResult<ApiResponse<MediaResponse>>> Get(int id, CancellationToken cancellationToken)
   {
-    var res = await _mediaService.GetAsync(id);
+    var res = await _mediaService.GetAsync(id, cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.Media.LIST_MEDIA)]
 
   [HttpPost("list")]
-  public async Task<ActionResult<ApiResponse<PagedResponse<MediaResponse>>>> GetList(MediaRequest request)
+  public async Task<ActionResult<ApiResponse<PagedResponse<MediaResponse>>>> GetList(MediaRequest request, CancellationToken cancellationToken)
   {
-    var res = await _mediaService.GetListAsync(request);
+    var res = await _mediaService.GetListAsync(request, cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.Media.ADD_MEDIA)]
 
   [HttpPost]
-  public async Task<ActionResult<ApiResponse<string>>> Post([FromForm] CreateMediaRequest request)
+  public async Task<ActionResult<ApiResponse<string>>> Post([FromForm] CreateMediaRequest request, CancellationToken cancellationToken)
   {
-    var res = await _mediaService.AddAsync(request);
+    var res = await _mediaService.AddAsync(request, cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.Media.ADD_MEDIA_RANGE)]
 
   [HttpPost("AddRange")]
-  public async Task<ActionResult<ApiResponse<string>>> PostRange([FromForm] CreateMediaRequest request)
+  public async Task<ActionResult<ApiResponse<string>>> PostRange([FromForm] CreateMediaRequest request, CancellationToken cancellationToken)
   {
-    var res = await _mediaService.AddListAsync(request);
+    var res = await _mediaService.AddListAsync(request, cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.Media.DELETE_MEDIA)]
 
   [HttpDelete("{id}")]
-  public async Task<ActionResult<ApiResponse<string>>> Delete(int id)
+  public async Task<ActionResult<ApiResponse<string>>> Delete(int id, CancellationToken cancellationToken)
   {
-    var res = await _mediaService.DeleteAsync(id);
+    var res = await _mediaService.DeleteAsync(id, cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.Media.DOWNLOAD_MEDIA)]
 
   [HttpGet("Download/{id}")]
-  public async Task<IActionResult> Download(int id)
+  public async Task<IActionResult> Download(int id, CancellationToken cancellationToken)
   {
-    var res = await _mediaService.DownloadAsync(id);
+    var res = await _mediaService.DownloadAsync(id, cancellationToken);
 
     try
     {

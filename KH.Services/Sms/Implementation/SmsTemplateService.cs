@@ -23,7 +23,7 @@ public class SmsTemplateService : ISmsTemplateService
     _unitOfWork = unitOfWork;
   }
 
-  public async Task<ApiResponse<SmsTemplateResponse>> GetSmsTemplateAsync(string smsType)
+  public async Task<ApiResponse<SmsTemplateResponse>> GetSmsTemplateAsync(string smsType, CancellationToken cancellationToken)
   {
     var res = new ApiResponse<SmsTemplateResponse>((int)HttpStatusCode.OK);
 
@@ -42,7 +42,7 @@ public class SmsTemplateService : ISmsTemplateService
     res.Data = new SmsTemplateResponse(entityFromDB);
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<SmsTemplateResponse>>> GetSmsTemplateListAsync(SmsTrackerFilterRequest request)
+  public async Task<ApiResponse<PagedResponse<SmsTemplateResponse>>> GetSmsTemplateListAsync(SmsTrackerFilterRequest request, CancellationToken cancellationToken)
   {
     var apiResponse = new ApiResponse<PagedResponse<SmsTemplateResponse>>((int)HttpStatusCode.OK);
 
@@ -72,11 +72,11 @@ public class SmsTemplateService : ISmsTemplateService
 
     return apiResponse;
   }
-  public async Task<ApiResponse<string>> AddSmsTemplateAsync(CreateSmsTemplateRequest request)
+  public async Task<ApiResponse<string>> AddSmsTemplateAsync(CreateSmsTemplateRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken: cancellationToken);
 
     try
     {
@@ -94,18 +94,18 @@ public class SmsTemplateService : ISmsTemplateService
 
       var repository = _unitOfWork.Repository<SmsTemplate>();
 
-      await repository.AddAsync(request.ToEntity());
+      await repository.AddAsync(request.ToEntity(), cancellationToken: cancellationToken);
 
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
       res.Data = request.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken: cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -114,7 +114,7 @@ public class SmsTemplateService : ISmsTemplateService
     }
   }
 
-  public async Task<ApiResponse<string>> UpdateAsync(CreateSmsTemplateRequest request)
+  public async Task<ApiResponse<string>> UpdateAsync(CreateSmsTemplateRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -124,7 +124,10 @@ public class SmsTemplateService : ISmsTemplateService
     if (!request.Id.HasValue)
       throw new Exception("id is required");
 
-    var entityFromDb = await repository.GetAsync(request.Id.Value, tracking: true);
+    var entityFromDb = await repository
+      .GetAsync(request.Id.Value,
+      tracking: true,
+      cancellationToken: cancellationToken);
 
     if (entityFromDb == null)
       throw new Exception("Invalid Parameter");
@@ -133,12 +136,12 @@ public class SmsTemplateService : ISmsTemplateService
     entityFromDb.TextEn = entityAfterMapping.TextEn;
     entityFromDb.SmsType = entityAfterMapping.SmsType;
 
-    await _unitOfWork.CommitAsync();
+    await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
     res.Data = entityAfterMapping.Id.ToString();
     return res;
   }
-  public async Task<ApiResponse<string>> DeleteAsync(long id)
+  public async Task<ApiResponse<string>> DeleteAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -146,12 +149,12 @@ public class SmsTemplateService : ISmsTemplateService
     {
       var repository = _unitOfWork.Repository<SmsTemplate>();
 
-      var entityFromDB = await repository.GetAsync(id);
+      var entityFromDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
       if (entityFromDB == null)
         throw new Exception("Invalid user");
 
       repository.DeleteTracked(entityFromDB);
-      await _unitOfWork.CommitAsync();
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
       res.Data = entityFromDB.Id.ToString();
       return res;

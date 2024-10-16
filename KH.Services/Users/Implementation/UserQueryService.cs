@@ -24,11 +24,11 @@ public class UserQueryService : IUserQueryService
     _logger = logger;
   }
 
-  public Task<ApiResponse<string>> CountUsersByAsync(UserFilterRequest request)
+  public Task<ApiResponse<string>> CountUsersByAsync(UserFilterRequest request, CancellationToken cancellationToken)
   {
     throw new NotImplementedException();
   }
-  public async Task<ApiResponse<UserDetailsResponse>> GetAsync(long id)
+  public async Task<ApiResponse<UserDetailsResponse>> GetAsync(long id, CancellationToken cancellationToken)
   {
     //below there will be multiple query technique so u can open sql profile and see translated query for each
 
@@ -71,7 +71,7 @@ public class UserQueryService : IUserQueryService
     res.Data = userDetailsResponse;
     return res;
   }
-  public async Task<ApiResponse<UserDetailsResponse>> GetAsync(UserFilterRequest request)
+  public async Task<ApiResponse<UserDetailsResponse>> GetAsync(UserFilterRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<UserDetailsResponse>? res = new ApiResponse<UserDetailsResponse>((int)HttpStatusCode.OK);
 
@@ -108,7 +108,7 @@ public class UserQueryService : IUserQueryService
     res.Data = entityResponse;
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListAsync(UserFilterRequest request)
+  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListAsync(UserFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<User>();
 
@@ -140,7 +140,7 @@ public class UserQueryService : IUserQueryService
 
     return apiResponse;
   }
-  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingIQueryableAsync(UserFilterRequest request)
+  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingIQueryableAsync(UserFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<User>();
     IQueryable<User> query = repository.GetQueryable();
@@ -183,7 +183,7 @@ public class UserQueryService : IUserQueryService
 
     return apiResponse;
   }
-  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingProjectionAsync(UserFilterRequest request)
+  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingProjectionAsync(UserFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<User>();
 

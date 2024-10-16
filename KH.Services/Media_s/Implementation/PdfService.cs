@@ -15,9 +15,9 @@ public class PdfService : IPdfService
     //_razorRenderer = razorRenderer;
   }
 
-  public async Task<byte[]> ExportUserDetailsPdfAsync(UserFilterRequest param)
+  public async Task<byte[]> ExportUserDetailsPdfAsync(UserFilterRequest param, CancellationToken cancellationToken)
   {
-    var response = await _userService.GetAsync(param.Id.Value);
+    var response = await _userService.GetAsync(param.Id.Value, cancellationToken);
     var entityFromDB = response.Data;
 
     string filePathForTemplateBody = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "PDF", "CustomerPdfTemplateBody.html");

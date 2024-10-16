@@ -30,7 +30,7 @@ public class EmailService : IEmailService
     _unitOfWork = unitOfWork;
   }
 
-  public async Task<ApiResponse<object>> SendEmailAsync(MailRequest mailRequest)
+  public async Task<ApiResponse<object>> SendEmailAsync(MailRequest mailRequest, CancellationToken cancellationToken)
   {
     var res = new ApiResponse<object>((int)HttpStatusCode.OK);
     List<MemoryStream> memoryStreams = new List<MemoryStream>();
@@ -65,7 +65,7 @@ public class EmailService : IEmailService
         {
           case MailTypeEnum.WelcomeTemplate:
             {
-              var targetUser = await _userQueryService.GetAsync(mailRequest.ModelId);
+              var targetUser = await _userQueryService.GetAsync(mailRequest.ModelId, cancellationToken);
               if (targetUser.Data is not object)
                 throw new Exception("No user defiend with this id for this email type");
 
@@ -77,7 +77,7 @@ public class EmailService : IEmailService
                                 .Subject(mailRequest.Subject)
                                 .UsingTemplateFromFile(filePath, userInfo);
 
-              await emailTemplateResult.SendAsync();
+              await emailTemplateResult.SendAsync(cancellationToken);
               isSent = true;
               break;
             }
@@ -93,7 +93,7 @@ public class EmailService : IEmailService
                                 .CC(ccRecipients)
                                 .Subject(mailRequest.Subject)
                                 .Body(mailRequest.Body, true)
-                                .SendAsync();
+                                .SendAsync(cancellationToken);
               isSent = true;
               break;
             }
@@ -124,18 +124,18 @@ public class EmailService : IEmailService
       mailEntity.IsSent = isSent;
       mailEntity.FailReasons = failerReasons;
 
-      await AddAsync(mailEntity);
+      await AddAsync(mailEntity, cancellationToken);
     }
   }
 
-  public async Task<ApiResponse<EmailTrackerResponse>> GetAsync(long id)
+  public async Task<ApiResponse<EmailTrackerResponse>> GetAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<EmailTrackerResponse>? res = new ApiResponse<EmailTrackerResponse>((int)HttpStatusCode.OK);
 
     var repository = _unitOfWork.Repository<EmailTracker>();
 
     //light user query to make sure the user exist
-    var entityFromDB = await repository.GetAsync(id);
+    var entityFromDB = await repository.GetAsync(id,cancellationToken:cancellationToken);
 
     if (entityFromDB == null)
     {
@@ -149,7 +149,7 @@ public class EmailService : IEmailService
     return res;
   }
 
-  public async Task<ApiResponse<PagedResponse<EmailTrackerResponse>>> GetListAsync(MailRequest request)
+  public async Task<ApiResponse<PagedResponse<EmailTrackerResponse>>> GetListAsync(MailRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<PagedResponse<EmailTrackerResponse>> apiResponse = new ApiResponse<PagedResponse<EmailTrackerResponse>>((int)HttpStatusCode.OK);
 
@@ -165,7 +165,8 @@ public class EmailService : IEmailService
 
     projectionExpression: u => new EmailTrackerResponse(u),
     orderBy: query => query.OrderBy(u => u.Id),  // Sort by Id
-    tracking: false  // Disable tracking for read-only queries
+    tracking: false,  // Disable tracking for read-only queries
+    cancellationToken: cancellationToken
 );
 
     var entitiesResponses = pagedEntities.Select(x => x).ToList();
@@ -183,13 +184,13 @@ public class EmailService : IEmailService
   }
 
 
-  private async Task<ApiResponse<string>> AddAsync(EmailTracker request)
+  private async Task<ApiResponse<string>> AddAsync(EmailTracker request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
     bool isModelExists = Enum.IsDefined(typeof(ModelEnum), request.Model);
 
-    await _unitOfWork.BeginTransactionAsync();
+    await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
     try
     {
@@ -206,17 +207,17 @@ public class EmailService : IEmailService
 
       var repository = _unitOfWork.Repository<EmailTracker>();
 
-      await repository.AddAsync(request);
-      await _unitOfWork.CommitAsync();
+      await repository.AddAsync(request, cancellationToken: cancellationToken);
+      await _unitOfWork.CommitAsync(cancellationToken);
 
-      await _unitOfWork.CommitTransactionAsync();
+      await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
       res.Data = request.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync();
+      await _unitOfWork.RollBackTransactionAsync(cancellationToken);
 
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.Data = ex.Message;
@@ -262,62 +263,6 @@ public class EmailService : IEmailService
             Filename = file.FileName,
             Data = ms,
             ContentType = file.ContentType
-          });
-
-          // Track the memory stream for disposal later
-          memoryStreams.Add(ms);
-        }
-      }
-    }
-
-    return emailAttachments;
-  }
-  private static List<FluentEmail.Core.Models.Attachment> SetEmailAttachmentsXX(List<IFormFile>? attachments, List<string>? filePaths, List<MemoryStream> memoryStreams)
-  {
-    var emailAttachments = new List<FluentEmail.Core.Models.Attachment>();
-
-    // Handle attachments from IFormFile
-    if (attachments != null)
-    {
-      foreach (var file in attachments)
-      {
-        if (file.Length > 0)
-        {
-          var ms = new MemoryStream();
-          file.CopyTo(ms);
-
-          // Ensure the stream is flushed and ready
-          ms.Flush();
-          ms.Position = 0; // Reset the position to ensure it's ready for reading
-
-          // Add to the attachments
-          emailAttachments.Add(new FluentEmail.Core.Models.Attachment
-          {
-            Filename = file.FileName,
-            Data = ms,
-            ContentType = file.ContentType
-          });
-
-          // Track the memory stream for disposal later
-          memoryStreams.Add(ms);
-        }
-      }
-    }
-
-    // Handle file attachments directly from the disk using file paths
-    if (filePaths != null)
-    {
-      foreach (var filePath in filePaths)
-      {
-        if (File.Exists(filePath))
-        {
-          var ms = new MemoryStream(File.ReadAllBytes(filePath));
-
-          emailAttachments.Add(new FluentEmail.Core.Models.Attachment
-          {
-            Filename = Path.GetFileName(filePath),
-            Data = ms,
-            ContentType = GetContentType(filePath) // Auto-detect content type based on file extension
           });
 
           // Track the memory stream for disposal later
