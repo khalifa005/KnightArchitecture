@@ -30,11 +30,11 @@ public class EmailController : BaseApiController
 
   [PermissionAuthorize(PermissionKeysConstant.Emails.SEND_EMAIL)]
   [HttpPost("Send")]
-  public async Task<IActionResult> SendEmail([FromForm] MailRequest request, CancellationToken cancellationToken)
+  public async Task<ActionResult<ApiResponse<string>>> SendEmail([FromForm] MailRequest request, CancellationToken cancellationToken)
   {
-    await _emailService.SendEmailAsync(request, cancellationToken);
+    var res = await _emailService.SendEmailAsync(request, cancellationToken);
 
-    return Ok("Confirmation Email Sent!");
+    return AsActionResult(res);
   }
 }
 

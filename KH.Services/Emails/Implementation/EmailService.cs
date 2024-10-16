@@ -33,9 +33,9 @@ public class EmailService : IEmailService
     _env = env;
   }
 
-  public async Task<ApiResponse<object>> SendEmailAsync(MailRequest mailRequest, CancellationToken cancellationToken)
+  public async Task<ApiResponse<string>> SendEmailAsync(MailRequest mailRequest, CancellationToken cancellationToken)
   {
-    var res = new ApiResponse<object>((int)HttpStatusCode.OK);
+    var res = new ApiResponse<string>((int)HttpStatusCode.OK);
     List<MemoryStream> memoryStreams = new List<MemoryStream>();
     bool isSent = false;
     string failerReasons = "";
@@ -92,6 +92,7 @@ public class EmailService : IEmailService
 
               await emailTemplateResult.SendAsync(cancellationToken);
               isSent = true;
+              res.Data = "welcome-email-sent";
               break;
             }
           case MailTypeEnum.TicketEscalation:
