@@ -8,7 +8,9 @@ using KH.Services.Lookups.Roles.Contracts;
 using KH.Services.Media_s.Contracts;
 using KH.Services.Media_s.Implementation;
 using KH.Services.Sms.Contracts;
-
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using KH.Dto.Models.UserDto.Validation;
 namespace KH.Services;
 
 public static class ServicesRegisterationService
@@ -36,6 +38,10 @@ public static class ServicesRegisterationService
 
     // Register DinkToPdf converter
     services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
+    // Add FluentValidation
+    services.AddFluentValidationAutoValidation();
+    services.AddValidatorsFromAssemblyContaining<CreateUserRequestListValidator>();
 
     //-- SET Fluent Email
     var mailSettings = configuration.GetSection("MailSettings");

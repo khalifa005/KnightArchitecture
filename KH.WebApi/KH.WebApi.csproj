@@ -4,8 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <!--<PreserveCompilationReferences>true</PreserveCompilationReferences>-->
-    <!--<PreserveCompilationContext>true</PreserveCompilationContext>-->
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
     <UserSecretsId>bdde68c3-53c2-4eed-98bd-a4afbb66cab1</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
