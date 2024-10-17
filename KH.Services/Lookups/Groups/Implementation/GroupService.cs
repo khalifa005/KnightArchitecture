@@ -1,6 +1,8 @@
 using KH.Dto.lookups.GroupDto.Request;
 using KH.Dto.lookups.GroupDto.Response;
+using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.GroupDto.Request;
+using KH.Dto.Lookups.RoleDto.Request;
 using KH.Services.Lookups.Groups.Contracts;
 
 public class GroupService : IGroupService
@@ -40,7 +42,26 @@ public class GroupService : IGroupService
     res.Data = entityDetailsResponse;
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<GroupListResponse>>> GetListAsync(GroupFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<List<GroupListResponse>>> GetListAsync(GroupFilterRequest request, CancellationToken cancellationToken)
+  {
+    var repository = _unitOfWork.Repository<KH.Domain.Entities.lookups.Group>();
+
+    var listResult = await repository.GetAllAsync(
+    include:null,
+    tracking: false,
+    useCache: true,
+    cancellationToken: cancellationToken);
+
+    var mappedListResult = listResult
+      .Where(x => x.IsDeleted == request.IsDeleted)
+      .Select(x => new GroupListResponse(x)).ToList();
+
+    var apiResponse = new ApiResponse<List<GroupListResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = mappedListResult;
+
+    return apiResponse;
+  }
+  public async Task<ApiResponse<PagedResponse<GroupListResponse>>> GetPagedListAsync(GroupFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<KH.Domain.Entities.lookups.Group>();
 
@@ -85,7 +106,7 @@ public class GroupService : IGroupService
       await _unitOfWork.CommitAsync(cancellationToken);
 
       await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
+      repository.RemoveCache();
       res.Data = entity.Id.ToString();
       return res;
     }
@@ -122,7 +143,7 @@ public class GroupService : IGroupService
 
       await _unitOfWork.CommitAsync(cancellationToken);
       await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
+      repository.RemoveCache();
       res.Data = entityAfterMapping.Id.ToString();
       return res;
     }
@@ -147,7 +168,7 @@ public class GroupService : IGroupService
 
       repository.Delete(entityFromDB);
       await _unitOfWork.CommitAsync(cancellationToken);
-
+      repository.RemoveCache();
       res.Data = entityFromDB.Id.ToString();
       return res;
     }

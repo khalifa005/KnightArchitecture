@@ -1,7 +1,9 @@
 using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
 using KH.Dto.lookups.DepartmentDto.Response;
+using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.DepartmentDto.Request;
+using KH.Dto.Lookups.RoleDto.Request;
 using KH.Services.Lookups.Departments.Contracts;
 
 namespace KH.WebApi.Controllers;
@@ -23,10 +25,19 @@ public class DepartmentsController : BaseApiController
   }
   [PermissionAuthorize(PermissionKeysConstant.Departments.LIST_DEPARTMENTS)]
 
-  [HttpPost("list")]
-  public async Task<ActionResult<ApiResponse<PagedResponse<DepartmentListResponse>>>> GetList(DepartmentFilterRequest request, CancellationToken cancellationToken)
+  [HttpPost("ListAll")]
+  public async Task<ActionResult<ApiResponse<List<DepartmentListResponse>>>> ListAll(DepartmentFilterRequest request, CancellationToken cancellationToken)
   {
     var res = await _lookupService.GetListAsync(request, cancellationToken);
+    return AsActionResult(res);
+  }
+
+  [HttpPost("PagedList")]
+  [PermissionAuthorize(PermissionKeysConstant.Departments.LIST_DEPARTMENTS)]
+
+  public async Task<ActionResult<ApiResponse<PagedResponse<DepartmentListResponse>>>> GetPagedList(DepartmentFilterRequest request, CancellationToken cancellationToken)
+  {
+    var res = await _lookupService.GetPagedListAsync(request, cancellationToken);
     return AsActionResult(res);
   }
 

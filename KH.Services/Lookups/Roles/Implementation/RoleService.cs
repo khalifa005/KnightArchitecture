@@ -46,19 +46,30 @@ public class RoleService : IRoleService
     res.Data = entityDetailsResponse;
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<RoleListResponse>>> GetListAsync(RoleFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<List<RoleListResponse>>> GetListAsync(RoleFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<Role>();
 
-    var roles = await repository.GetAllAsync(
+    var rolesListResult = await repository.GetAllAsync(
     include: query => query.Include(r => r.SubRoles)
                            .Include(r => r.RolePermissions)
                            .ThenInclude(p=>p.Permission),
     tracking: false,
     useCache: true,
-    cancellationToken: cancellationToken
-);
+    cancellationToken: cancellationToken);
 
+    var mappedRolesListResult = rolesListResult
+      .Where(x=> x.IsDeleted == request.IsDeleted)
+      .Select(x => new RoleListResponse(x)).ToList();
+
+    var apiResponse = new ApiResponse<List<RoleListResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = mappedRolesListResult;
+
+    return apiResponse;
+  }
+  public async Task<ApiResponse<PagedResponse<RoleListResponse>>> GetPagedListAsync(RoleFilterRequest request, CancellationToken cancellationToken)
+  {
+    var repository = _unitOfWork.Repository<Role>();
 
     var pagedEntities = await repository.GetPagedWithProjectionAsync<RoleListResponse>(
     pageNumber: 1,
@@ -102,6 +113,7 @@ public class RoleService : IRoleService
       await _unitOfWork.CommitAsync(cancellationToken);
 
       await _unitOfWork.CommitTransactionAsync(cancellationToken);
+      repository.RemoveCache();
 
       res.Data = entity.Id.ToString();
       return res;
@@ -140,6 +152,7 @@ public class RoleService : IRoleService
 
       await _unitOfWork.CommitAsync(cancellationToken);
       await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
+      repository.RemoveCache();
 
       res.Data = entityAfterMapping.Id.ToString();
       return res;
@@ -206,6 +219,7 @@ public class RoleService : IRoleService
 
       await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
       await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
+      repository.RemoveCache();
 
       res.Data = entityAfterMapping.Id.ToString();
       return res;
@@ -260,6 +274,7 @@ public class RoleService : IRoleService
       }
       await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
       await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
+      repository.RemoveCache();
 
       res.Data = entityAfterMapping.Id.ToString();
       return res;
@@ -288,6 +303,7 @@ public class RoleService : IRoleService
 
       repository.Delete(entityFromDB);
       await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
+      repository.RemoveCache();
 
       res.Data = entityFromDB.Id.ToString();
       return res;

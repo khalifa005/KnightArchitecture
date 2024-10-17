@@ -1,5 +1,7 @@
+using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.PermissionsDto.Request;
 using KH.Dto.Lookups.PermissionsDto.Response;
+using KH.Dto.Lookups.RoleDto.Request;
 using KH.Services.Lookups.Permissions.Contracts;
 
 public class PermissionService : IPermissionService
@@ -57,7 +59,7 @@ public class PermissionService : IPermissionService
       await _unitOfWork.CommitAsync(cancellationToken);
 
       await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
+      repository.RemoveCache();
       res.Data = entity.Id.ToString();
       return res;
     }
@@ -94,7 +96,7 @@ public class PermissionService : IPermissionService
 
       await _unitOfWork.CommitAsync(cancellationToken);
       await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
+      repository.RemoveCache();
       res.Data = entityAfterMapping.Id.ToString();
       return res;
     }
@@ -119,7 +121,7 @@ public class PermissionService : IPermissionService
 
       repository.Delete(entityFromDB);
       await _unitOfWork.CommitAsync(cancellationToken);
-
+      repository.RemoveCache();
       res.Data = entityFromDB.Id.ToString();
       return res;
     }
@@ -128,32 +130,21 @@ public class PermissionService : IPermissionService
       return ex.HandleException(res, _env, _logger);
     }
   }
-  public async Task<ApiResponse<PagedResponse<PermissionResponse>>> GetListAsync(CancellationToken cancellationToken)
+  public async Task<ApiResponse<List<PermissionResponse>>> GetListAsync(CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<Permission>();
 
-    var pagedEntities = await repository.GetPagedWithProjectionAsync<PermissionResponse>(
-    pageNumber: 1,
-    pageSize: 500,
-    filterExpression: u => u.IsDeleted == false,
-    projectionExpression: u => new PermissionResponse(u),
+    var listResult = await repository.GetAllAsync(
     include: null,
-    orderBy: query => query.OrderBy(u => u.Id),
-    tracking: false,
-    cancellationToken: cancellationToken
-);
+    useCache: true,
+    cancellationToken: cancellationToken);
 
-    var entityListResponses = pagedEntities.Select(x => x).ToList();
+    var mappedListResult = listResult
+      .Where(x => x.IsDeleted == false)
+      .Select(x => new PermissionResponse(x)).ToList();
 
-    var pagedResponse = new PagedResponse<PermissionResponse>(
-      entityListResponses,
-       pagedEntities.CurrentPage,
-       pagedEntities.TotalPages,
-       pagedEntities.PageSize,
-       pagedEntities.TotalCount);
-
-    var apiResponse = new ApiResponse<PagedResponse<PermissionResponse>>((int)HttpStatusCode.OK);
-    apiResponse.Data = pagedResponse;
+    var apiResponse = new ApiResponse<List<PermissionResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = mappedListResult;
 
     return apiResponse;
   }

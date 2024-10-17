@@ -1,7 +1,9 @@
 using KH.BuildingBlocks.Apis.Extentions;
 using KH.Dto.lookups.GroupDto.Request;
 using KH.Dto.lookups.GroupDto.Response;
+using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.GroupDto.Request;
+using KH.Dto.Lookups.RoleDto.Request;
 using KH.Services.Lookups.Groups.Contracts;
 
 namespace KH.WebApi.Controllers;
@@ -20,12 +22,21 @@ public class GroupsController : BaseApiController
     var res = await _lookupService.GetAsync(id, cancellationToken);
     return AsActionResult(res);
   }
-  [HttpPost("list")]
-  public async Task<ActionResult<ApiResponse<PagedResponse<GroupListResponse>>>> GetList(GroupFilterRequest request, CancellationToken cancellationToken)
+
+  [HttpPost("ListAll")]
+  public async Task<ActionResult<ApiResponse<List<GroupListResponse>>>> ListAll(GroupFilterRequest request, CancellationToken cancellationToken)
   {
     var res = await _lookupService.GetListAsync(request, cancellationToken);
     return AsActionResult(res);
   }
+
+  [HttpPost("PagedList")]
+  public async Task<ActionResult<ApiResponse<PagedResponse<GroupListResponse>>>> GetPagedList(GroupFilterRequest request, CancellationToken cancellationToken)
+  {
+    var res = await _lookupService.GetPagedListAsync(request, cancellationToken);
+    return AsActionResult(res);
+  }
+
   [HttpPost]
   public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreateGroupRequest request, CancellationToken cancellationToken)
   {

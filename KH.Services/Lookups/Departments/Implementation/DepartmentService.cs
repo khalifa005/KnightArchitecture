@@ -1,6 +1,8 @@
 using KH.Domain.Entities.lookups;
 using KH.Dto.lookups.DepartmentDto.Response;
+using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.DepartmentDto.Request;
+using KH.Dto.Lookups.RoleDto.Request;
 using KH.Services.Lookups.Departments.Contracts;
 
 public class DepartmentService : IDepartmentService
@@ -41,7 +43,27 @@ public class DepartmentService : IDepartmentService
     res.Data = entityDetailsResponse;
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<DepartmentListResponse>>> GetListAsync(DepartmentFilterRequest request, CancellationToken cancellationToken)
+
+  public async Task<ApiResponse<List<DepartmentListResponse>>> GetListAsync(DepartmentFilterRequest request, CancellationToken cancellationToken)
+  {
+    var repository = _unitOfWork.Repository<Department>();
+
+    var listResult = await repository.GetAllAsync(
+    include:null,
+    tracking: false,
+    useCache: true,
+    cancellationToken: cancellationToken);
+
+    var mappedlistResult = listResult
+      .Where(x => x.IsDeleted == request.IsDeleted)
+      .Select(x => new DepartmentListResponse(x)).ToList();
+
+    var apiResponse = new ApiResponse<List<DepartmentListResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = mappedlistResult;
+
+    return apiResponse;
+  }
+  public async Task<ApiResponse<PagedResponse<DepartmentListResponse>>> GetPagedListAsync(DepartmentFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<Department>();
 
@@ -86,7 +108,7 @@ public class DepartmentService : IDepartmentService
       await _unitOfWork.CommitAsync(cancellationToken);
 
       await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
+      repository.RemoveCache();
       res.Data = entity.Id.ToString();
       return res;
     }
@@ -123,7 +145,7 @@ public class DepartmentService : IDepartmentService
       await _unitOfWork.CommitAsync(cancellationToken);
 
       await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
+      repository.RemoveCache();
       res.Data = entityAfterMapping.Id.ToString();
       return res;
     }
@@ -148,7 +170,7 @@ public class DepartmentService : IDepartmentService
 
       repository.Delete(entityFromDB);
       await _unitOfWork.CommitAsync(cancellationToken);
-
+      repository.RemoveCache();
       res.Data = entityFromDB.Id.ToString();
       return res;
     }
