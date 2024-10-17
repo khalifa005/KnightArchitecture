@@ -90,7 +90,7 @@ public class PermissionsMiddleware
         {
           ErrorMessage = "access-denied",
           ErrorMessageAr = "وصول غير مصرح به",
-          Errors = new List<string> { "User is not authenticated" }
+          Errors = new List<string> { "user-is-not-authorize" }
         };
 
         context.Response.StatusCode = StatusCodes.Status401Unauthorized;
