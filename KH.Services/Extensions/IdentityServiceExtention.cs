@@ -23,6 +23,7 @@ public static class IdentityServiceExtention
     //      .RequireAuthenticatedUser()
     //      .Build();
     //});
+    services.AddAuthorization();
 
     services.AddAuthentication(options =>
     {

@@ -108,38 +108,6 @@ public class UserQueryService : IUserQueryService
     res.Data = entityResponse;
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListAsync(UserFilterRequest request, CancellationToken cancellationToken)
-  {
-    var repository = _unitOfWork.Repository<User>();
-
-    //example with internal predicate
-    var result = await repository.GetPagedAsync(
-      request.PageIndex,
-      request.PageSize,
-      u =>
-    u.FirstName.Contains(request.Search)
-    || u.LastName.Contains(request.Search),
-
-    q => q.Include(u => u.UserRoles)
-    .ThenInclude(ur => ur.Role)
-    .Include(u => u.UserGroups)
-    .Include(u => u.UserDepartments));
-
-
-    var userListResponses = result.Select(x => new UserListResponse(x)).ToList();
-
-    var pagedResponse = new PagedResponse<UserListResponse>(
-      userListResponses,
-       result.CurrentPage,
-       result.TotalPages,
-       result.PageSize,
-       result.TotalCount);
-
-    ApiResponse<PagedResponse<UserListResponse>> apiResponse = new ApiResponse<PagedResponse<UserListResponse>>((int)HttpStatusCode.OK);
-    apiResponse.Data = pagedResponse;
-
-    return apiResponse;
-  }
   public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingIQueryableAsync(UserFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<User>();

@@ -50,6 +50,16 @@ public class RoleService : IRoleService
   {
     var repository = _unitOfWork.Repository<Role>();
 
+    var roles = await repository.GetAllAsync(
+    include: query => query.Include(r => r.SubRoles)
+                           .Include(r => r.RolePermissions)
+                           .ThenInclude(p=>p.Permission),
+    tracking: false,
+    useCache: true,
+    cancellationToken: cancellationToken
+);
+
+
     var pagedEntities = await repository.GetPagedWithProjectionAsync<RoleListResponse>(
     pageNumber: 1,
     pageSize: 10,

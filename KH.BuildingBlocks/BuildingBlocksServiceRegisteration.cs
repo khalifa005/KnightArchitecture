@@ -1,5 +1,8 @@
 
 
+using KH.BuildingBlocks.Cache.Enums;
+using KH.BuildingBlocks.Cache.Interfaces;
+
 namespace KH.BuildingBlocks;
 
 public static class BuildingBlocksServiceRegisteration
@@ -15,20 +18,20 @@ public static class BuildingBlocksServiceRegisteration
     services.AddServerLocalization();
     //services.AddScoped(typeof(Lazy<>), typeof(LazilyResolved<>));
 
+    #region KeyedServices
+    services.AddKeyedTransient<ICacheService, MemoryCacheService>(CacheTechEnum.Memory);
+    services.AddKeyedTransient<ICacheService, RedisCacheService>(CacheTechEnum.Redis);
+    #endregion
+
 
     #region Settings
 
-    //use options patterns if u want to add validation while startup pn the json files
-    //or reload the values when file changes
     var globalSettingSection = configuration.GetSection("GlobalSettings");
     services.Configure<GlobalSettings>(globalSettingSection);
 
-    //var fileSettingsSection = configuration.GetSection("FileSettings");
-    //services.Configure<FileSettings>(fileSettingsSection);
     services.AddOptions<FileSettings>()
       .Bind(configuration.GetSection("FileSettings"))
-      .ValidateDataAnnotations(); // Optional validation if using annotations
-
+      .ValidateDataAnnotations();
 
     var tokenSettingsSection = configuration.GetSection("TokenSettings");
     services.Configure<TokenSettings>(tokenSettingsSection);
@@ -40,8 +43,6 @@ public static class BuildingBlocksServiceRegisteration
     var mailTemplateSettings = configuration.GetSection("MailTemplatesSettings");
     services.Configure<MailTemplatesSettings>(mailTemplateSettings);
 
-
-    //-- SET Fluent Email
     var mailSettings = configuration.GetSection("MailSettings");
 
     services.AddOptions<MailSettings>()
@@ -51,6 +52,11 @@ public static class BuildingBlocksServiceRegisteration
     var SmsSettings = configuration.GetSection("SmsSettings");
     services.AddOptions<SmsSettings>()
      .Bind(SmsSettings)
+     .ValidateDataAnnotations();
+
+    var CacheSettings = configuration.GetSection("CacheSettings");
+    services.AddOptions<CacheSettings>()
+     .Bind(CacheSettings)
      .ValidateDataAnnotations();
 
     #endregion
@@ -78,7 +84,6 @@ public static class BuildingBlocksServiceRegisteration
     var storageService = serviceProvider.GetService<ServerPreferenceManager>();
     if (storageService != null)
     {
-      // TODO - should implement ServerStorageProvider to work correctly!
       CultureInfo culture;
       if (await storageService.GetPreference() is ServerPreference preference)
         culture = new(preference.LanguageCode);

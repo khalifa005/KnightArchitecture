@@ -1,3 +1,4 @@
+using Hangfire;
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Middlewares;
 using KH.PersistenceInfra.Repositories;
@@ -15,7 +16,8 @@ public static class InfrastructureServiceRegisteration
     services.AddScoped<IUnitOfWork, UnitOfWork>();
     services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-
+    services.AddHangfire(x => x.UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection")));
+    services.AddHangfireServer();
     return services;
   }
 
@@ -27,6 +29,7 @@ public static class InfrastructureServiceRegisteration
       //CleanArchitectDbContext.SeedAsync(context, logger).Wait();
     });
 
+    app.UseHangfireDashboard("/jobs");
 
     return app;
   }

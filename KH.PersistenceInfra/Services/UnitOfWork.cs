@@ -1,4 +1,6 @@
 using KH.BuildingBlocks.Apis.Entities;
+using KH.BuildingBlocks.Cache.Enums;
+using KH.BuildingBlocks.Cache.Interfaces;
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Repositories;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -14,11 +16,13 @@ public partial class UnitOfWork : IUnitOfWork
   private readonly AppDbContext _dbContext;
   private ConcurrentDictionary<string, object> _repositories;
   private IDbContextTransaction _currentTransaction;
+  private readonly ICacheService _cacheService;
 
-  public UnitOfWork(AppDbContext dbContext)
+  public UnitOfWork(AppDbContext dbContext, [FromKeyedServices(CacheTechEnum.Memory)] ICacheService memoryCache)
   {
     _dbContext = dbContext;
     _repositories = new ConcurrentDictionary<string, object>();
+    _cacheService = memoryCache;
   }
 
   /// <summary>
@@ -109,14 +113,23 @@ public partial class UnitOfWork : IUnitOfWork
     _dbContext.Dispose();
   }
 
+  //public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
+  //{
+  //  var typeName = typeof(TEntity).Name;
+
+  //  // GetOrAdd ensures thread-safe retrieval or creation of the repository instance
+  //  return (IGenericRepository<TEntity>)_repositories.GetOrAdd(typeName,
+  //      (key) => Activator.CreateInstance(typeof(GenericRepository<>).MakeGenericType(typeof(TEntity)), _dbContext));
+  //}
+
   public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
   {
     var typeName = typeof(TEntity).Name;
 
     // GetOrAdd ensures thread-safe retrieval or creation of the repository instance
     return (IGenericRepository<TEntity>)_repositories.GetOrAdd(typeName,
-        (key) => Activator.CreateInstance(typeof(GenericRepository<>).MakeGenericType(typeof(TEntity)), _dbContext));
+        key => Activator.CreateInstance(
+            typeof(GenericRepository<>).MakeGenericType(typeof(TEntity)),
+            _dbContext, _cacheService)); // Pass _cacheService along with _dbContext
   }
-
-
 }
