@@ -1,29 +1,46 @@
 
 namespace KH.BuildingBlocks.Auth.User;
-
 public interface ICurrentUserService
 {
   string UserId { get; }
-  public List<string> RolesIds { get; }
+  string FirstName { get; }
+  string LastName { get; }
+  string Email { get; }
+  string MobileNumber { get; }
+  List<string> RolesIds { get; }
+  List<KeyValuePair<string, string>> Claims { get; }
 }
+
 public class CurrentUserService : ICurrentUserService
 {
-
   public CurrentUserService(IHttpContextAccessor httpContextAccessor)
   {
-    UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+    var user = httpContextAccessor?.HttpContext?.User;
 
-    RolesIds = httpContextAccessor.HttpContext?.User?.Claims
-    .Where(c => c.Type == ClaimTypes.Role)
-    .Select(c => c.Value)
-    .ToList();
+    // Filling user claims with null-coalescing operators to avoid null values
+    UserId = user?.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
+    FirstName = user?.FindFirstValue(ClaimTypes.Name) ?? string.Empty;
+    LastName = user?.FindFirstValue(ClaimTypes.Surname) ?? string.Empty;
+    Email = user?.FindFirstValue(ClaimTypes.Email) ?? string.Empty;
+    MobileNumber = user?.FindFirstValue(ClaimTypes.GivenName) ?? string.Empty;
 
-    Claims = httpContextAccessor.HttpContext?.User?.Claims.AsEnumerable().Select(item => new KeyValuePair<string, string>(item.Type, item.Value)).ToList();
+    // Filling role claims safely
+    RolesIds = user?.Claims
+        .Where(c => c.Type == ClaimTypes.Role)
+        .Select(c => c.Value)
+        .ToList() ?? new List<string>();
+
+    // Storing all claims safely
+    Claims = user?.Claims
+        .Select(item => new KeyValuePair<string, string>(item.Type, item.Value))
+        .ToList() ?? new List<KeyValuePair<string, string>>();
   }
 
   public string UserId { get; }
+  public string FirstName { get; }
+  public string LastName { get; }
+  public string Email { get; }
+  public string MobileNumber { get; }
   public List<string> RolesIds { get; }
   public List<KeyValuePair<string, string>> Claims { get; set; }
-
-
 }

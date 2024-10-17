@@ -8,5 +8,5 @@ public interface IUserPermissionService
   /// </summary>
   /// <param name="userId">The user external id (sub claim)</param>
   /// <param name="cancellationToken"></param>
-  ValueTask<ClaimsIdentity?> GetUserPermissionsIdentity(int userId, string? systemType, CancellationToken cancellationToken);
+  ValueTask<ClaimsIdentity?> GetUserPermissionsIdentity(long userId, string? systemType, CancellationToken cancellationToken);
 }

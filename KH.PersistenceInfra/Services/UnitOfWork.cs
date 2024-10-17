@@ -113,15 +113,6 @@ public partial class UnitOfWork : IUnitOfWork
     _dbContext.Dispose();
   }
 
-  //public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
-  //{
-  //  var typeName = typeof(TEntity).Name;
-
-  //  // GetOrAdd ensures thread-safe retrieval or creation of the repository instance
-  //  return (IGenericRepository<TEntity>)_repositories.GetOrAdd(typeName,
-  //      (key) => Activator.CreateInstance(typeof(GenericRepository<>).MakeGenericType(typeof(TEntity)), _dbContext));
-  //}
-
   public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
   {
     var typeName = typeof(TEntity).Name;

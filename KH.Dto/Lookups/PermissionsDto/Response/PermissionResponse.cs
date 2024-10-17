@@ -23,6 +23,7 @@ public class PermissionResponse
   public PermissionResponse(Permission e)
   {
     Id = e.Id;
+    Key = e.Key;
     NameAr = e.NameAr;
     NameEn = e.NameEn;
     SortKey = e.SortKey;

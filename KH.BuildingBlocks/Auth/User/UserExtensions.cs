@@ -139,33 +139,6 @@ public static class UserExtensions
     return claim.Value;
   }
 
-  /// <summary>
-  /// GET User Roles
-  /// </summary>
-  /// <param name="identity"></param>
-  /// <returns></returns>
-  public static string GetUserRole(this ClaimsPrincipal identity)
-  {
-    Claim claim = identity?.Claims.Where(c => c.Type == ClaimTypes.Role).SingleOrDefault();
-
-    if (claim == null)
-      return null;
-
-    return claim.Value;
-  }
-
-  public static IEnumerable<string> GetUserRoles(this ClaimsPrincipal identity)
-  {
-    if (identity == null)
-      return null;
-
-    var roles = identity.Claims
-                        .Where(c => c.Type == ClaimTypes.Role)
-                        .Select(c => c.Value);
-
-    return roles;
-  }
-
 
   /// <summary>
   /// GET System Type

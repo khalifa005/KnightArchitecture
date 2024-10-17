@@ -14,12 +14,13 @@ public interface IGenericRepository<T> where T : BaseEntity
   void DeleteTracked(T entity);
   Task<IReadOnlyList<T>> FindByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, CancellationToken cancellationToken = default);
   Task<int> CountByAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, CancellationToken cancellationToken = default);
-  Task<IReadOnlyList<T>> GetAllAsync(
-      Func<IQueryable<T>,
-      IIncludableQueryable<T, object>> include = null,
-      bool tracking = false,
-      bool useCache = true,
-      CancellationToken cancellationToken = default);
+
+   Task<IReadOnlyList<T>> GetAllAsync(
+    Expression<Func<T, bool>> filter = null,
+    Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
+    bool tracking = false,
+    bool useCache = true,
+    CancellationToken cancellationToken = default);
   Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object?>?>? include = null, bool tracking = false, bool splitQuery = false, CancellationToken cancellationToken = default);
   Task<T> GetByExpressionAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, bool tracking = false, CancellationToken cancellationToken = default);
   void UpdateDetachedEntity(T entity);
@@ -37,4 +38,5 @@ public interface IGenericRepository<T> where T : BaseEntity
       CancellationToken cancellationToken = default);
   Task<int> BatchUpdateAsync(Expression<Func<T, bool>> filterExpression, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> updateExpression, CancellationToken cancellationToken = default);
   Task<int> BatchDeleteAsync(Expression<Func<T, bool>> filterExpression, CancellationToken cancellationToken = default);
+  void RemoveCache();
 }

@@ -82,10 +82,8 @@ public class PermissionsMiddleware
       }
 
       var systemType = context.User.GetSystemType();
-      var userRole = context.User.GetUserRole();
-      var userRoles = context.User.GetUserRoles();
 
-      permissionsIdentity = await permissionService.GetUserPermissionsIdentity(int.Parse(userId), systemType, cancellationToken);
+      permissionsIdentity = await permissionService.GetUserPermissionsIdentity(long.Parse(userId), systemType, cancellationToken);
       if (permissionsIdentity == null)
       {
         var apiResponse = new ApiResponse<object>(StatusCodes.Status401Unauthorized)

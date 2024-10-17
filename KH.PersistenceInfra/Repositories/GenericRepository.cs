@@ -9,7 +9,6 @@ namespace KH.PersistenceInfra.Repositories;
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
   private readonly AppDbContext _dbContext;
-  private readonly static CacheTechEnum cacheTech = CacheTechEnum.Memory;
   private readonly string cacheKey = $"{typeof(T)}";
   private readonly ICacheService _cacheService;
   public GenericRepository(
@@ -20,11 +19,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     _cacheService = memoryCache;
   }
 
-  public async Task RefreshCache()
+  public void RemoveCache()
   {
     _cacheService.Remove(cacheKey);
-    var cachedList = await _dbContext.Set<T>().ToListAsync();
-    _cacheService.Set(cacheKey, cachedList);
+    //var cachedList = await _dbContext.Set<T>().ToListAsync();
+    //_cacheService.Set(cacheKey, cachedList);
   }
 
   public IQueryable<T> GetQueryable()
@@ -75,6 +74,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
   }
 
   public async Task<IReadOnlyList<T>> GetAllAsync(
+      Expression<Func<T, bool>> filter = null,
       Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
       bool tracking = false,
       bool useCache = true,
@@ -82,13 +82,14 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
   {
     var query = ApplyIncludes(include, tracking);
 
-    // Check if the type T is a LookupEntity or its descendant
-    if (typeof(LookupEntity).IsAssignableFrom(typeof(T)))
+    if (filter != null)
     {
-      var test = "cached";
+      query = query.Where(filter);
     }
 
-    if (useCache)
+    // Check if the type T is a LookupEntity or its descendant because this will be very risky
+    // if the entity is't a lookup 
+    if (typeof(LookupEntity).IsAssignableFrom(typeof(T)) && useCache)
     {
       if (!_cacheService.TryGet(cacheKey, out IReadOnlyList<T> cachedList))
       {
