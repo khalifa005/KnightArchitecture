@@ -18,6 +18,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
   // Add Controllers
   services.AddCustomControllers();
+  services.AddSignalR();
 
   // Add Memory Cache
   services.AddMemoryCache();
