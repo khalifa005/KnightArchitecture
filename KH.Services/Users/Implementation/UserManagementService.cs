@@ -7,7 +7,6 @@ public class UserManagementService : IUserManagementService
 {
   private readonly IUnitOfWork _unitOfWork;
   private readonly ITokenService _tokenService;
-  private readonly IServiceProvider _serviceProvider;
   private readonly IMapper _mapper;
   private readonly ICurrentUserService _currentUserService;
   private readonly ISmsService _smsService;
@@ -20,7 +19,6 @@ public class UserManagementService : IUserManagementService
     IUnitOfWork unitOfWork,
     ICurrentUserService currentUserService,
     ITokenService tokenService,
-    IServiceProvider serviceProvider,
     ISmsService smsService,
     ISmsTemplateService smsTemplateService,
     IMapper mapper,
@@ -32,7 +30,6 @@ public class UserManagementService : IUserManagementService
     _unitOfWork = unitOfWork;
     _currentUserService = currentUserService;
     _tokenService = tokenService;
-    _serviceProvider = serviceProvider;
     _userValidationService = userValidationService;
     _smsService = smsService;
     _smsTemplateService = smsTemplateService;
@@ -44,7 +41,6 @@ public class UserManagementService : IUserManagementService
 
   public async Task<ApiResponse<string>> AddAsync(CreateUserRequest request, CancellationToken cancellationToken)
   {
-    var actionMadeByUserId = _serviceProvider.GetUserId();
     var currentUserId = _currentUserService.UserId;
 
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);

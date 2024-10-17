@@ -64,8 +64,6 @@ public class UserPermissionService : IUserPermissionService
         .SelectMany(x => x.RolePermissions)
         .ToList();
 
-
-
       userPermissions =
          (from perm in userRelatedRolesPermissions
           select new Claim(PermissionRequirement.ClaimType, perm.Permission?.Key ?? "")).ToList();
