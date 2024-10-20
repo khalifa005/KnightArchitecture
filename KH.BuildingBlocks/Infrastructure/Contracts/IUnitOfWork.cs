@@ -11,4 +11,5 @@ public interface IUnitOfWork : IDisposable
   Task BeginTransactionAsync(IsolationLevel isolationLevel = IsolationLevel.ReadUncommitted, CancellationToken cancellationToken = default);
   Task RollBackTransactionAsync(CancellationToken cancellationToken = default);
   Task CommitTransactionAsync(CancellationToken cancellationToken = default);
+  bool HasActiveTransaction { get; }
 }

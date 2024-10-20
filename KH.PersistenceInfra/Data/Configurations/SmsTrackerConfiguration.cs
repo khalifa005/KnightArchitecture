@@ -1,7 +1,7 @@
 
 namespace KH.PersistenceInfra.Data.Configurations;
 
-public abstract class SMSFollowUpConfiguration : IEntityTypeConfiguration<SmsTracker>
+public abstract class SmsTrackerConfiguration : IEntityTypeConfiguration<SmsTracker>
 {
   public virtual void Configure(EntityTypeBuilder<SmsTracker> builder)
   {

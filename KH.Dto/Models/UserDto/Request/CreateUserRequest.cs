@@ -11,6 +11,7 @@ public class CreateUserRequest
 
   public long? Id { get; set; }
   public bool? IsUpdateMode { get; set; }
+  public string? SensitiveData { get; set; }
   public string? FirstName { get; set; }
   public string? MiddleName { get; set; }
   public string? LastName { get; set; }
@@ -53,6 +54,7 @@ public class CreateUserRequest
   {
     var user = new User
     {
+      SensitiveData = SensitiveData,
       FirstName = FirstName,
       MiddleName = MiddleName,
       LastName = LastName,

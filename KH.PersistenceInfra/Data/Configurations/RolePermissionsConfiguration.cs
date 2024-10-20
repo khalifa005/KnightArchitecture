@@ -1,6 +1,6 @@
 namespace KH.PersistenceInfra.Data.Configurations;
 
-public class RoleFunctionConfiguration : IEntityTypeConfiguration<RolePermissions>
+public class RolePermissionsConfiguration : IEntityTypeConfiguration<RolePermissions>
 {
   public void Configure(EntityTypeBuilder<RolePermissions> builder)
   {

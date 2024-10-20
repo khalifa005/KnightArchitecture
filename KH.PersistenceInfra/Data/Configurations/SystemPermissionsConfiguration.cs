@@ -1,7 +1,7 @@
 
 namespace KH.PersistenceInfra.Data.Configurations;
 
-public class SystemFunctionConfiguration : IEntityTypeConfiguration<Permission>
+public class SystemPermissionsConfiguration : IEntityTypeConfiguration<Permission>
 {
   public void Configure(EntityTypeBuilder<Permission> builder)
   {

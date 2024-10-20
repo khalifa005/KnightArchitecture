@@ -188,6 +188,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     return new PagedList<TProjection>(items, count, pageNumber, pageSize);
   }
 
+
   private IQueryable<T> ApplyIncludes(Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null, bool tracking = false)
   {
     IQueryable<T> query = _dbContext.Set<T>();
@@ -211,6 +212,5 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     var query = _dbContext.Set<T>().Where(filterExpression);
     return await query.ExecuteDeleteAsync(cancellationToken);
   }
-
 
 }

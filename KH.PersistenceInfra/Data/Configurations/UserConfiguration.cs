@@ -1,3 +1,6 @@
+using KH.BuildingBlocks.Apis.Helpers;
+using Microsoft.EntityFrameworkCore;
+
 namespace KH.PersistenceInfra.Data.Configurations;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
@@ -18,7 +21,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
     //builder.Property(p => p.RowVersion)
     //  .IsRowVersion(); // EF will use this column for concurrency checks;
-
+    builder.Property(u => u.SensitiveData)
+        .HasConversion(new EncryptedStringConverter());
 
 
     builder.HasMany(t => t.UserRoles)

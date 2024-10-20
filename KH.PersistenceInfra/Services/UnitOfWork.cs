@@ -25,6 +25,8 @@ public partial class UnitOfWork : IUnitOfWork
     _cacheService = memoryCache;
   }
 
+  public bool HasActiveTransaction => _currentTransaction != null;
+
   /// <summary>
   /// Commits the current changes to the database.
   /// </summary>

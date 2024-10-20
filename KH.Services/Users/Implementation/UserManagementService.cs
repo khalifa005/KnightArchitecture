@@ -85,23 +85,24 @@ public class UserManagementService : IUserManagementService
 
       await _unitOfWork.CommitAsync();
 
-      var smsWelcomeTemplateResult = await _smsTemplateService.GetSmsTemplateAsync(SmsTypeEnum.WelcomeUser.ToString(), cancellationToken: cancellationToken);
-      if (smsWelcomeTemplateResult.StatusCode == StatusCodes.Status200OK && smsWelcomeTemplateResult.Data is object)
-      {
-        var template = smsWelcomeTemplateResult.Data;
-        var templateContetBasedOnLanguage = _smsTemplateService.GetTemplateForLanguage(template, LanguageEnum.English);
-        var welcomeSmsMessageFormatted = _smsTemplateService.ReplaceWelcomeSmsPlaceholders(templateContetBasedOnLanguage, userEntity);
+      //var smsWelcomeTemplateResult = await _smsTemplateService.GetSmsTemplateAsync(SmsTypeEnum.WelcomeUser.ToString(), cancellationToken: cancellationToken);
+      //if (smsWelcomeTemplateResult.StatusCode == StatusCodes.Status200OK && smsWelcomeTemplateResult.Data is object)
+      //{
+      //  var template = smsWelcomeTemplateResult.Data;
+      //  var templateContetBasedOnLanguage = _smsTemplateService.GetTemplateForLanguage(template, LanguageEnum.English);
+      //  var welcomeSmsMessageFormatted = _smsTemplateService.ReplaceWelcomeSmsPlaceholders(templateContetBasedOnLanguage, userEntity);
 
-        var smsTrackerForm = new CreateSmsTrackerRequest()
-        {
-          MobileNumber = userEntity.MobileNumber,
-          Message = welcomeSmsMessageFormatted,
-          Model = ModelEnum.User.ToString(),
-          ModelId = userEntity.Id
-        };
+      //  var smsTrackerForm = new CreateSmsTrackerRequest()
+      //  {
+      //    MobileNumber = userEntity.MobileNumber,
+      //    Message = welcomeSmsMessageFormatted,
+      //    Model = ModelEnum.User.ToString(),
+      //    ModelId = userEntity.Id
+      //  };
 
-        var smsResult = await _smsService.SendSmsAsync(smsTrackerForm, cancellationToken: cancellationToken);
-      }
+      //  var smsResult = await _smsService.SendSmsAsync(smsTrackerForm, cancellationToken: cancellationToken);
+      //}
+      var smsResult = await SendUserWelcomeSmsAsync(userEntity, cancellationToken);
 
       await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
@@ -115,6 +116,8 @@ public class UserManagementService : IUserManagementService
       return ex.HandleException(res, _env, _logger);
     }
   }
+
+  
   public async Task<ApiResponse<string>> AddListAsync(List<CreateUserRequest> request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
@@ -296,5 +299,27 @@ public class UserManagementService : IUserManagementService
     }
 
     return res;
+  }
+  private async Task<ApiResponse<string>> SendUserWelcomeSmsAsync(User userEntity, CancellationToken cancellationToken)
+  {
+    //ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    var smsWelcomeTemplateResult = await _smsTemplateService.GetSmsTemplateAsync(SmsTypeEnum.WelcomeUser.ToString(), cancellationToken);
+    if (smsWelcomeTemplateResult.StatusCode != StatusCodes.Status200OK || smsWelcomeTemplateResult.Data == null)
+      return new ApiResponse<string>((int)HttpStatusCode.BadRequest);
+
+    var templateContent = _smsTemplateService.GetTemplateForLanguage(smsWelcomeTemplateResult.Data, LanguageEnum.English);
+    var formattedMessage = _smsTemplateService.ReplaceWelcomeSmsPlaceholders(templateContent, userEntity);
+
+    var smsTrackerForm = new CreateSmsTrackerRequest
+    {
+      MobileNumber = userEntity.MobileNumber,
+      Message = formattedMessage,
+      Model = ModelEnum.User.ToString(),
+      ModelId = userEntity.Id
+    };
+
+    var result = await _smsService.SendSmsAsync(smsTrackerForm, cancellationToken);
+    return result;
   }
 }

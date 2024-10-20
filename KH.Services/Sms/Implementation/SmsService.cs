@@ -246,8 +246,13 @@ public class SmsService : ISmsService
 
       await repository.AddAsync(smsEntity);
 
-      await _unitOfWork.CommitAsync();
+      var isTransactionActive = _unitOfWork.HasActiveTransaction; // Assuming this property/method exists
 
+      if (!isTransactionActive)
+      {
+      }
+
+      await _unitOfWork.CommitAsync();
 
       res.Data = smsEntity.Id.ToString();
       return res;

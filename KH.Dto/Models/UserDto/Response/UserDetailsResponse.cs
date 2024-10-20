@@ -4,7 +4,7 @@ namespace KH.Dto.Models.UserDto.Response;
 
 public class UserDetailsResponse : BasicTrackerEntityDto
 {
-
+  public string? SensitiveData { get; set; }
   public string? FirstName { get; set; }
   public string? MiddleName { get; set; }
   public string? LastName { get; set; }
@@ -37,6 +37,7 @@ public class UserDetailsResponse : BasicTrackerEntityDto
   // Constructor to map from User entity to UserDetailsResponse
   public UserDetailsResponse(User user)
   {
+    SensitiveData = user.SensitiveData;
     FirstName = user.FirstName;
     MiddleName = user.MiddleName;
     LastName = user.LastName;
