@@ -1,5 +1,38 @@
 
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+//Log.Logger = new LoggerConfiguration()
+//    .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
+//    .Enrich.FromLogContext()
+//    .WriteTo.Console() // Adds console sink
+//    .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day) // Adds file sink with daily rolling
+//    .CreateLogger();
+
+//Log.Logger = new LoggerConfiguration()
+//    .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
+//    .Enrich.FromLogContext()
+//    .WriteTo.Console() // Adds console sink
+//    .WriteTo.File(builder.Configuration["Serilog:WriteTo:1:Args:path"], rollingInterval: RollingInterval.Day) // Adds file sink with daily rolling
+//    .WriteTo.MSSqlServer(
+//        connectionString: builder.Configuration.GetConnectionString("DefaultConnection"),
+//        tableName: "AppLogs",
+//        autoCreateSqlTable: true,
+//        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information
+//    )
+//    .CreateLogger();
+
+
+// Add Serilog to the builder
+builder.Host.UseSerilog();
+
 ConfigureServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
@@ -12,6 +45,7 @@ app.Run();
 /// </summary>
 void ConfigureServices(IServiceCollection services, IConfiguration configuration)
 {
+
   // Add HttpClient and Custom Http Request service
   services.AddHttpClient();
   services.AddTransient<CustomHttpRequestService>();
@@ -71,4 +105,5 @@ void ConfigureMiddlewares(WebApplication app)
   // Serve static files and map controllers
   app.UseStaticFiles();
   app.MapControllers();
+  app.UseSerilogRequestLogging(); // Enable Serilog request logging
 }

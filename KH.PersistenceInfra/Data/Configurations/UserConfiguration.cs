@@ -24,6 +24,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     builder.Property(u => u.SensitiveData)
         .HasConversion(new EncryptedStringConverter());
 
+    builder.Property(u => u.RowVersion)
+      .IsRowVersion();
 
     builder.HasMany(t => t.UserRoles)
            .WithOne(c => c.User)

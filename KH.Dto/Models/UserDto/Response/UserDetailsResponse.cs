@@ -37,6 +37,7 @@ public class UserDetailsResponse : BasicTrackerEntityDto
   // Constructor to map from User entity to UserDetailsResponse
   public UserDetailsResponse(User user)
   {
+    Id = user.Id;
     SensitiveData = user.SensitiveData;
     FirstName = user.FirstName;
     MiddleName = user.MiddleName;

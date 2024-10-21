@@ -1,4 +1,4 @@
-
+using Serilog.Context;
 
 namespace KH.BuildingBlocks.Auth.Midilleware;
 
@@ -104,7 +104,13 @@ public class PermissionsMiddleware
     // User has permissions, so we add the extra identity containing the "permissions" claims
     context.User.AddIdentity(permissionsIdentity);
 
-    await _request(context);
+    // Log the UserId with Serilog's LogContext for this request
+    using (LogContext.PushProperty("UserId", context.User.GetId()))
+    {
+      _logger.LogInformation("Retrieved UserId: {UserId}", context.User.GetId()); // Log user ID before pushing it to the context
+
+      await _request(context);
+    }
   }
 }
 

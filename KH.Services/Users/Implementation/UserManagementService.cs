@@ -81,6 +81,8 @@ public class UserManagementService : IUserManagementService
 
       var repository = _unitOfWork.Repository<User>();
 
+
+
       await repository.AddAsync(userEntity);
 
       await _unitOfWork.CommitAsync();
