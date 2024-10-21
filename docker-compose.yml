@@ -9,7 +9,6 @@ services:
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     environment:
-      - xpack.monitoring.enabled=true
       - xpack.watcher.enabled=false
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
       - discovery.type=single-node
@@ -28,11 +27,9 @@ services:
     networks:
       - elastic
 
-
 networks:
   elastic:
     driver: bridge
 
 volumes:
   elasticsearch-data:
-  uploads:

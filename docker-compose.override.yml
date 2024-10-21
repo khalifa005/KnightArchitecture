@@ -3,9 +3,9 @@ version: '3.4'
 services:
   elasticsearch:
     environment:
-      - xpack.monitoring.enabled=true
+      - xpack.monitoring.templates.enabled=true  # Enables monitoring templates
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"  # You can adjust the memory settings as needed
       - discovery.type=single-node
-      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
 
   kibana:
     environment:
