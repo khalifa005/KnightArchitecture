@@ -1,6 +1,6 @@
 using KH.Services.Emails.Contracts;
 
-namespace KH.Services.BackgroundServices;
+namespace KH.Services.BackgroundJobs.QuartzJobs;
 [DisallowConcurrentExecution]
 public class EmailSenderJob : IJob
 {

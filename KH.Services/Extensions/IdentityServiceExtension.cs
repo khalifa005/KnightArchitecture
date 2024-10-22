@@ -8,8 +8,8 @@ using Newtonsoft.Json;
 using System.Text;
 
 namespace KH.Services;
-
-public static class IdentityServiceExtention
+                    
+public static class IdentityServiceExtension
 {
   public static IServiceCollection AddIdentityService(this IServiceCollection services, IConfiguration configuration)
   {

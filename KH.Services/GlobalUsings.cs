@@ -16,7 +16,6 @@ global using KH.Dto.Models.AuthenticationDto.Request;
 global using KH.Dto.Models.AuthenticationDto.Response;
 global using KH.Dto.Models.UserDto.Request;
 global using KH.Dto.Models.UserDto.Response;
-global using KH.Services.BackgroundServices;
 global using KH.Services.Users.Contracts;
 global using KH.Services.Users.Implementation;
 global using Microsoft.AspNetCore.Http;

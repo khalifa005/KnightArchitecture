@@ -1,4 +1,4 @@
-﻿namespace KH.BuildingBlocks.Cache.Interfaces;
+namespace KH.BuildingBlocks.Cache.Interfaces;
 
 public class RedisCacheService : ICacheService
 {

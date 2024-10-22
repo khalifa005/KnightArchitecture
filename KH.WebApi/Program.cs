@@ -1,4 +1,6 @@
 
+using Hangfire;
+using KH.Services.BackgroundJobs.HangfireJobs;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -56,6 +58,15 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
   // Add Memory Cache
   services.AddMemoryCache();
+  builder.Services.AddStackExchangeRedisCache(options =>
+  {
+    options.Configuration = "localhost";
+    options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions()
+    {
+      AbortOnConnectFail = true,
+      EndPoints = { options.Configuration }
+    };
+  });
 
   // Add CORS policy
   services.AddCustomCors();
@@ -75,13 +86,12 @@ void ConfigureMiddlewares(WebApplication app)
   var env = app.Environment;
   var configuration = app.Configuration;
 
-  // Correlation ID Middleware
-  app.UseMiddleware<CorrelationIdMiddleware>();
-
   // Status Code Pages
   app.UseStatusCodePagesWithReExecute("/errors/{0}");
+  app.UseHangfireMiddleware(configuration);
 
-  // Custom Infrastructure Middlewares
+  // Custom Middlewares
+  app.UseMiddleware<CorrelationIdMiddleware>();
   app.UseInfrastructureMiddleware(configuration);
   app.UseMiddleware<ExceptionMiddleware>();
 

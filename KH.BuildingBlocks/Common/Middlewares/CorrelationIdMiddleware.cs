@@ -14,22 +14,17 @@ public class CorrelationIdMiddleware
 
   public async Task InvokeAsync(HttpContext context)
   {
-    // Get the automatically assigned RequestId
-    //this to match the serilog with our auditing tracing 
+    // Retrieve the TraceIdentifier as the fallback correlation ID
     var requestId = context.TraceIdentifier;
-    var correlationId = requestId.ToString();
 
-    // Check if request has a correlation ID, otherwise generate one
-    //if (!context.Request.Headers.TryGetValue(CorrelationIdHeader, out var correlationId))
-    //{
-    //  correlationId = Guid.NewGuid().ToString();
-    //  context.Request.Headers[CorrelationIdHeader] = correlationId;
-    //}
-
-    context.Request.Headers[CorrelationIdHeader] = correlationId;
+    // Check if the request already has a correlation ID in the headers
+    string? correlationId = context.Request.Headers.TryGetValue(CorrelationIdHeader, out var headerValue)
+                            && !string.IsNullOrEmpty(headerValue)
+                            ? headerValue.ToString()
+                            : requestId;
 
     // Add the correlation ID to the response headers
-    context.Response.Headers.Add(CorrelationIdHeader, correlationId);
+    context.Response.Headers[CorrelationIdHeader] = correlationId;
 
     // Attach correlation ID to the request so it can be used elsewhere in the pipeline
     context.Items[CorrelationIdHeader] = correlationId;

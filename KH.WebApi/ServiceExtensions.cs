@@ -1,3 +1,8 @@
+using Hangfire;
+using KH.PersistenceInfra.Data;
+using KH.PersistenceInfra.Middlewares;
+using KH.Services.BackgroundJobs.HangfireJobs;
+
 namespace KH.Services;
 
 public static class ServiceExtensions
@@ -63,4 +68,17 @@ public static class ServiceExtensions
 
     return services;
   }
+
+  public static IApplicationBuilder UseHangfireMiddleware(this IApplicationBuilder app, IConfiguration configuration)
+  {
+    app.UseHangfireDashboard("/jobs");
+    //app.UseHangfireDashboard("/jobs", new DashboardOptions
+    //{
+    //  Authorization = new[] { new MyAuthorizationFilter() }
+    //});
+
+    return app;
+  }
+
 }
+
