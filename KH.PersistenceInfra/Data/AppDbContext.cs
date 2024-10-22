@@ -134,12 +134,9 @@ public class AppDbContext : DbContext
     ChangeTracker.DetectChanges();
     var auditEntries = new List<AuditEntry>();
 
-    // Retrieve the CorrelationId from HTTP headers, or generate a new one if it doesn't exist
-    var correlationId = _httpContextAccessor
-      .HttpContext?
-      .Request
-      .Headers[ApplicationConstant.X_Correlation_ID]
-      .FirstOrDefault();
+    // Retrieve the TraceIdentifier from the current HttpContext this will keep the serilogs = auditing correlationId
+    //to track the request life cycle starting  from request logs by serilog and auditing actions made by the user
+    var correlationId = _httpContextAccessor.HttpContext?.TraceIdentifier;
 
     foreach (var entry in ChangeTracker.Entries())
     {

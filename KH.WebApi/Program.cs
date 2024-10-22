@@ -91,7 +91,7 @@ void ConfigureMiddlewares(WebApplication app)
   app.UseHangfireMiddleware(configuration);
 
   // Custom Middlewares
-  app.UseMiddleware<CorrelationIdMiddleware>();
+  //app.UseMiddleware<CorrelationIdMiddleware>();
   app.UseInfrastructureMiddleware(configuration);
   app.UseMiddleware<ExceptionMiddleware>();
 
