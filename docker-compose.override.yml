@@ -3,10 +3,14 @@ version: '3.4'
 services:
   elasticsearch:
     environment:
-      - xpack.monitoring.templates.enabled=true  # Enables monitoring templates
-      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"  # You can adjust the memory settings as needed
       - discovery.type=single-node
+      - xpack.security.enabled=true  # Enable security for Elasticsearch
+      - xpack.security.enrollment.enabled=true  # Enrollment enabled to generate tokens
+      - xpack.security.authc.api_key.enabled=true  # Enable API keys
+      - ELASTIC_PASSWORD=changeme  # Set the default password for 'elastic' user
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"  # Adjust memory settings
 
   kibana:
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_HOSTS=["http://elasticsearch:9200"]
+      - SERVER_PUBLICBASEURL="http://localhost:5601"  # Set Kibana public URL
