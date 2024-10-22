@@ -6,8 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KH.Domain.Entities;
 //[NoAudit]
-public class User : TrackerEntity, IMustHaveTenant { 
-//public string TenantId { get; set; }
+public class User : TrackerEntity { 
 
 [Timestamp]
 public byte[]? RowVersion { get; set; }
