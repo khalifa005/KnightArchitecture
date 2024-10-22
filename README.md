@@ -282,16 +282,16 @@ Here is a list of key packages used in this project and their purpose:
 
 We are actively working on new features to improve the architecture and user experience. Here is a list of upcoming features that will be added soon:
 
-1. **Role-Based Access Control (RBAC)**:
+1. **Role-Based Access Control (RBAC )done**:
    - Enhance user authorization by implementing a full role-based access control system with fine-grained permissions.
 
-2. **Audit Logging**:
+2. **Audit Logging done**:
    - Implement audit logging to track and log all significant user actions, such as data creation, updates, and deletions.
 
 3. **Rate Limiting**:
    - Add rate-limiting middleware to prevent abuse and manage traffic to the API, ensuring fair usage across all clients.
 
-4. **Caching Improvements**:
+4. **Caching Improvements done**:
    - Implement distributed caching mechanisms like Redis to enhance performance, particularly for high-traffic data endpoints.
 
 5. **Real-Time Notifications**:
@@ -300,14 +300,14 @@ We are actively working on new features to improve the architecture and user exp
 6. **Localization Support**:
    - Add multi-language support, enabling the application to serve content in different languages based on user preferences.
 
-7. **Elastic Search**:
+7. **Elastic Search done**:
    -Global loggig
    
-9. **Permission Management**:
+9. **Permission Management done**:
    -
 10. **JWT**:
    -
-11. **IOption Pattern**: done with file seetings
+11. **IOption Pattern done**: done with file seetings
    -        
 
 11. **Bulk add - update**:
@@ -315,10 +315,10 @@ We are actively working on new features to improve the architecture and user exp
    -        
     
    -        
-13. **Hangfire**:
+13. **Hangfire done**:
    -   
 
-14. **Fluent Email**:
+14. **Fluent Email done**:
 
 17. ** **:
    -
@@ -327,7 +327,7 @@ We are actively working on new features to improve the architecture and user exp
    -
  
 
-**Global File management**: done
+**Global File management done **: done
 Users CRUD done 
 ---
 
