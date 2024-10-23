@@ -158,7 +158,6 @@ public class UserQueryService : IUserQueryService
   {
     var repository = _unitOfWork.Repository<User>();
 
-    //QuerySplittingBehavior Warning
     var pagedUsers = await repository.GetPagedWithProjectionAsync<UserListResponse>(
     pageNumber: 1,
     pageSize: 10,
@@ -173,9 +172,9 @@ public class UserQueryService : IUserQueryService
     },
     include: query => query
         .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
-        .Include(u => u.UserDepartments).ThenInclude(ud => ud.Department),  // Include related data
-    orderBy: query => query.OrderBy(u => u.Id),  // Sort by Id
-    tracking: false  // Disable tracking for read-only queries
+        .Include(u => u.UserDepartments).ThenInclude(ud => ud.Department),
+    orderBy: query => query.OrderBy(u => u.Id),  
+    tracking: false  
 );
 
 

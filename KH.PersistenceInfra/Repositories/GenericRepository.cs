@@ -87,7 +87,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
       query = query.Where(filter);
     }
 
-    // Check if the type T is a LookupEntity or its descendant because this will be very risky
+    // Check if the type T is a LookupEntity because this will be very risky
     // if the entity is't a lookup 
     if (typeof(LookupEntity).IsAssignableFrom(typeof(T)) && useCache)
     {

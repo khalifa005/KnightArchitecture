@@ -2,8 +2,6 @@ using FluentEmail.Core;
 using KH.BuildingBlocks.Apis.Constant;
 using KH.BuildingBlocks.Apis.Entities;
 using KH.Services.Audits.Contracts;
-using Microsoft.Extensions.Localization;
-using Newtonsoft.Json.Linq;
 using System.Data;
 using System.Globalization;
 using System.Text.Json;
@@ -41,9 +39,16 @@ public class AuditService : IAuditService
 
     var repository = _unitOfWork.Repository<Audit>();
 
-    var context = repository.GetQueryable();
-    var trails = await context.Where(a => a.UserId == userId).OrderByDescending(a => a.Id).Take(250).ToListAsync(cancellationToken);
-    var mappedLogs = _mapper.Map<List<AuditResponse>>(trails);
+    var pagedAuditListResult = await repository.GetPagedWithProjectionAsync<AuditResponse>(
+    pageNumber: 1,
+    pageSize: 250,
+    filterExpression: a => a.UserId == userId,
+    projectionExpression: a => new AuditResponse(a),
+    orderBy: query => query.OrderByDescending(u => u.Id),
+    tracking: false
+);
+    var mappedLogs = pagedAuditListResult.Select(x => x).ToList();
+
 
     // Reformat the serialized values in each log
     foreach (var log in mappedLogs)
@@ -58,7 +63,6 @@ public class AuditService : IAuditService
 
       // Format DateTime field to be more readable
       log.DateTime = FormatDateTime(Convert.ToDateTime(log.DateTime));
-
     }
 
     res.Data = mappedLogs;
@@ -75,21 +79,19 @@ public class AuditService : IAuditService
     var res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
     // Reformat the serialized values in each log
-    foreach (var log in trails)
+    foreach (var audit in trails)
     {
       // Reformat oldValues and newValues by cleaning up and deserializing, also handle PascalCase keys
-      log.OldValues = FormatAsKeyValueWithReadableKeys(log.OldValues);
-      log.NewValues = FormatAsKeyValueWithReadableKeys(log.NewValues);
+      audit.OldValues = FormatAsKeyValueWithReadableKeys(audit.OldValues);
+      audit.NewValues = FormatAsKeyValueWithReadableKeys(audit.NewValues);
 
       // Reformat affectedColumns and primaryKey similarly
-      log.AffectedColumns = FormatAffectedColumns(log.AffectedColumns);
-      log.PrimaryKey = FormatAsKeyValue(log.PrimaryKey);
+      audit.AffectedColumns = FormatAffectedColumns(audit.AffectedColumns);
+      audit.PrimaryKey = FormatAsKeyValue(audit.PrimaryKey);
 
       // Format DateTime field to be more readable
-      log.DateTime = log.DateTime;
-
+      audit.DateTime = audit.DateTime;
     }
-
 
     var data = await _excelService.ExportAsync(trails, sheetName: "Audit trails",
     mappers: new Dictionary<string, Func<Audit, object>>

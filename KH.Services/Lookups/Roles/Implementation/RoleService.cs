@@ -299,7 +299,10 @@ public class RoleService : IRoleService
 
       var entityFromDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
       if (entityFromDB == null)
-        throw new Exception("Invalid user");
+        throw new Exception("invalid-role");
+
+      if (entityFromDB.IsDeleted == true)
+        throw new Exception("already-deleted");
 
       repository.Delete(entityFromDB);
       await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);

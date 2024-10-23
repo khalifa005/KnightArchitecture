@@ -1,10 +1,6 @@
 using Serilog.Context;
 
 namespace KH.BuildingBlocks.Auth.Midilleware;
-
-/// <summary>
-/// The goal of our middleware is to create a ClaimsIdentity containing all the user permissions as Claim
-/// </summary>
 public class PermissionsMiddleware
 {
   private readonly RequestDelegate _request;
@@ -107,8 +103,6 @@ public class PermissionsMiddleware
     // Log the UserId with Serilog's LogContext for this request
     using (LogContext.PushProperty("UserId", context.User.GetId()))
     {
-      _logger.LogInformation("Retrieved UserId: {UserId}", context.User.GetId()); // Log user ID before pushing it to the context
-
       await _request(context);
     }
   }

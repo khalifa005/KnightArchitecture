@@ -11,27 +11,6 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .CreateLogger();
 
-//Log.Logger = new LoggerConfiguration()
-//    .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
-//    .Enrich.FromLogContext()
-//    .WriteTo.Console() // Adds console sink
-//    .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day) // Adds file sink with daily rolling
-//    .CreateLogger();
-
-//Log.Logger = new LoggerConfiguration()
-//    .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
-//    .Enrich.FromLogContext()
-//    .WriteTo.Console() // Adds console sink
-//    .WriteTo.File(builder.Configuration["Serilog:WriteTo:1:Args:path"], rollingInterval: RollingInterval.Day) // Adds file sink with daily rolling
-//    .WriteTo.MSSqlServer(
-//        connectionString: builder.Configuration.GetConnectionString("DefaultConnection"),
-//        tableName: "AppLogs",
-//        autoCreateSqlTable: true,
-//        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information
-//    )
-//    .CreateLogger();
-
-
 // Add Serilog to the builder
 builder.Host.UseSerilog();
 
@@ -91,7 +70,6 @@ void ConfigureMiddlewares(WebApplication app)
   app.UseHangfireMiddleware(configuration);
 
   // Custom Middlewares
-  //app.UseMiddleware<CorrelationIdMiddleware>();
   app.UseInfrastructureMiddleware(configuration);
   app.UseMiddleware<ExceptionMiddleware>();
 
