@@ -39,6 +39,8 @@ public static class ServicesRegisterationService
     services.AddScoped<IUserManagementService, UserManagementService>();
     services.AddScoped<IUserQueryService, UserQueryService>();
     services.AddScoped<IUserValidationService, UserValidationService>();
+    services.AddScoped<IEmailTrackerQueryService, EmailTrackerQueryService>();
+    services.AddScoped<IUserNotificationService, UserNotificationService>();
 
     //background jobs
     services.AddScoped<IJobTestService, JobTestService>();
@@ -67,9 +69,9 @@ public static class ServicesRegisterationService
       });
 
       var serviceProvider = services.BuildServiceProvider();
-      var logger = serviceProvider.GetService<ILogger<EmailSenderJob>>();
+      var logger = serviceProvider.GetService<ILogger<MissedEmailRetryJob>>();
 
-      q.AddJobAndTrigger<EmailSenderJob>(configuration, logger);
+      q.AddJobAndTrigger<MissedEmailRetryJob>(configuration, logger);
     });
 
     services.AddQuartzHostedService(opt =>

@@ -1,4 +1,6 @@
+using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.SMSDto.Request;
+using KH.Services.Emails.Contracts;
 using KH.Services.Sms.Contracts;
 
 namespace KH.Services.Users.Implementation;
@@ -11,21 +13,26 @@ public class UserManagementService : IUserManagementService
   private readonly ICurrentUserService _currentUserService;
   private readonly ISmsService _smsService;
   private readonly ISmsTemplateService _smsTemplateService;
+  private readonly IEmailService _emailService;
+
+  private readonly IUserNotificationService _userNotificationService;
   private readonly IHttpContextAccessor _httpContextAccessor;
   private readonly IUserValidationService _userValidationService;
   private readonly IHostEnvironment _env;
-  private readonly ILogger<RoleService> _logger;
+  private readonly ILogger<UserManagementService> _logger;
   public UserManagementService(
     IUnitOfWork unitOfWork,
     ICurrentUserService currentUserService,
     ITokenService tokenService,
     ISmsService smsService,
     ISmsTemplateService smsTemplateService,
+    IEmailService emailService,
     IMapper mapper,
     IUserValidationService userValidationService,
+    IUserNotificationService userNotificationService,
     IHttpContextAccessor httpContextAccessor,
     IHostEnvironment env,
-    ILogger<RoleService> logger)
+    ILogger<UserManagementService> logger)
   {
     _unitOfWork = unitOfWork;
     _currentUserService = currentUserService;
@@ -33,8 +40,10 @@ public class UserManagementService : IUserManagementService
     _userValidationService = userValidationService;
     _smsService = smsService;
     _smsTemplateService = smsTemplateService;
+    _emailService = emailService;
     _mapper = mapper;
     _httpContextAccessor = httpContextAccessor;
+    _userNotificationService = userNotificationService;
     _env = env;
     _logger = logger;
   }
@@ -81,33 +90,26 @@ public class UserManagementService : IUserManagementService
 
       var repository = _unitOfWork.Repository<User>();
 
-
-
       await repository.AddAsync(userEntity);
 
       await _unitOfWork.CommitAsync();
 
-      //var smsWelcomeTemplateResult = await _smsTemplateService.GetSmsTemplateAsync(SmsTypeEnum.WelcomeUser.ToString(), cancellationToken: cancellationToken);
-      //if (smsWelcomeTemplateResult.StatusCode == StatusCodes.Status200OK && smsWelcomeTemplateResult.Data is object)
-      //{
-      //  var template = smsWelcomeTemplateResult.Data;
-      //  var templateContetBasedOnLanguage = _smsTemplateService.GetTemplateForLanguage(template, LanguageEnum.English);
-      //  var welcomeSmsMessageFormatted = _smsTemplateService.ReplaceWelcomeSmsPlaceholders(templateContetBasedOnLanguage, userEntity);
-
-      //  var smsTrackerForm = new CreateSmsTrackerRequest()
-      //  {
-      //    MobileNumber = userEntity.MobileNumber,
-      //    Message = welcomeSmsMessageFormatted,
-      //    Model = ModelEnum.User.ToString(),
-      //    ModelId = userEntity.Id
-      //  };
-
-      //  var smsResult = await _smsService.SendSmsAsync(smsTrackerForm, cancellationToken: cancellationToken);
-      //}
-      var smsResult = await SendUserWelcomeSmsAsync(userEntity, cancellationToken);
-
       await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
+      // Now, handle SMS and Email after the transaction is successful
+      var smsResult = await _userNotificationService.SendUserWelcomeSmsAsync(userEntity, cancellationToken);
+      if (smsResult.StatusCode != StatusCodes.Status200OK)
+      {
+        _logger.LogError($"Failed to send SMS to user {userEntity.Id}: {smsResult.ErrorMessage}");
+        // Handle the failure but don't rollback the transaction
+      }
+
+      var emailResult = await _userNotificationService.SendUserWelcomeEmailAsync(userEntity, cancellationToken);
+      if (emailResult.StatusCode != StatusCodes.Status200OK)
+      {
+        _logger.LogError($"Failed to send email to user {userEntity.Id}: {emailResult.ErrorMessage}");
+        // Handle the failure but don't rollback the transaction
+      }
       res.Data = userEntity.Id.ToString();
       return res;
     }
@@ -118,8 +120,6 @@ public class UserManagementService : IUserManagementService
       return ex.HandleException(res, _env, _logger);
     }
   }
-
-  
   public async Task<ApiResponse<string>> AddListAsync(List<CreateUserRequest> request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
@@ -302,26 +302,5 @@ public class UserManagementService : IUserManagementService
 
     return res;
   }
-  private async Task<ApiResponse<string>> SendUserWelcomeSmsAsync(User userEntity, CancellationToken cancellationToken)
-  {
-    //ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
-
-    var smsWelcomeTemplateResult = await _smsTemplateService.GetSmsTemplateAsync(SmsTypeEnum.WelcomeUser.ToString(), cancellationToken);
-    if (smsWelcomeTemplateResult.StatusCode != StatusCodes.Status200OK || smsWelcomeTemplateResult.Data == null)
-      return new ApiResponse<string>((int)HttpStatusCode.BadRequest);
-
-    var templateContent = _smsTemplateService.GetTemplateForLanguage(smsWelcomeTemplateResult.Data, LanguageEnum.English);
-    var formattedMessage = _smsTemplateService.ReplaceWelcomeSmsPlaceholders(templateContent, userEntity);
-
-    var smsTrackerForm = new CreateSmsTrackerRequest
-    {
-      MobileNumber = userEntity.MobileNumber,
-      Message = formattedMessage,
-      Model = ModelEnum.User.ToString(),
-      ModelId = userEntity.Id
-    };
-
-    var result = await _smsService.SendSmsAsync(smsTrackerForm, cancellationToken);
-    return result;
-  }
+  
 }

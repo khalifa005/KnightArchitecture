@@ -3,18 +3,18 @@ using KH.Services.Emails.Contracts;
 
 namespace KH.Services.BackgroundJobs.QuartzJobs;
 [DisallowConcurrentExecution]
-public class EmailSenderJob : IJob
+public class MissedEmailRetryJob : IJob
 {
-  private readonly ILogger<EmailSenderJob> _logger;
+  private readonly ILogger<MissedEmailRetryJob> _logger;
   private readonly IEmailService _mailService;
 
   private readonly IUnitOfWork _unitOfWork;
-  const string TaskName = nameof(EmailSenderJob);
+  const string TaskName = nameof(MissedEmailRetryJob);
   private long _iteration;
-  public EmailSenderJob(
+  public MissedEmailRetryJob(
       IUnitOfWork unitOfWork,
       IEmailService mailService,
-      ILogger<EmailSenderJob> logger)
+      ILogger<MissedEmailRetryJob> logger)
   {
     _unitOfWork = unitOfWork;
     _logger = logger;
@@ -24,12 +24,11 @@ public class EmailSenderJob : IJob
   public async Task Execute(IJobExecutionContext context)
   {
     _logger.LogInformation("{Task} Service is starting.", TaskName);
+    var cancellationToken = context.CancellationToken;
 
     try
     {
-      //MailRequest.
-      //var emailListResponse = await _mailService.GetListAsync();
-
+      var emailListResponse = await _mailService.ResendRangeOfMissedEmailsAsync(batchSize:10, cancellationToken: cancellationToken);
     }
     catch (Exception ex)
     {
