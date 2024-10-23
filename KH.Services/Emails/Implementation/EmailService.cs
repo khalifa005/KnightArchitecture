@@ -3,7 +3,6 @@ using FluentEmail.Core.Models;
 using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.EmailDto.Response;
 using Microsoft.Extensions.Options;
-using FluentEmail.Core.Models;
 using KH.Services.Emails.Contracts;
 
 public class EmailService : IEmailService
@@ -33,7 +32,7 @@ public class EmailService : IEmailService
     _env = env;
   }
 
-  public async Task<ApiResponse<string>> SendEmailAsync(MailRequest mailRequest, CancellationToken cancellationToken)
+  public async Task<ApiResponse<string>> SendEmailAsync(MailRequest mailRequest, CancellationToken cancellationToken, bool isResend = false)
   {
     var res = new ApiResponse<string>((int)HttpStatusCode.OK);
     List<MemoryStream> memoryStreams = new List<MemoryStream>();
@@ -42,79 +41,26 @@ public class EmailService : IEmailService
 
     try
     {
-      _logger.LogInformation("SendEmailAsync started type {etype}", mailRequest.MailType.ToString());
+      _logger.LogDebug("SendEmailAsync started type {etype}", mailRequest.MailType.ToString());
 
-      if (mailRequest == null)
-        throw new Exception("Invalid Parameter");
-
-
-      if (mailRequest.Model is null || mailRequest.ModelId == 0)
-        throw new Exception("Invalid Parameter");
-
+      if (mailRequest == null || mailRequest.ModelId == 0 || mailRequest.Model == null)
+        throw new ArgumentException("Invalid mail request parameters.");
 
       if (!_mailSettings.Disable)
       {
-        string filePath = "";
-
-        if (mailRequest.MailType != MailTypeEnum.Default)
-        {
-          var templatePath = _mailTemplatesSettings.Types.Where(o => o.MailType == mailRequest?.MailType).FirstOrDefault()?.TemplatePath ?? "";
-          if (templatePath.IsNullOrEmpty())
-            throw new Exception("No template path defiend for this email type");
-
-          filePath = $"{Directory.GetCurrentDirectory()}\\Templates\\Emails\\{templatePath}";
-          //check if the filePath exist
-        }
-        else if (mailRequest.MailType == MailTypeEnum.Default && mailRequest.Body.IsNullOrEmpty())
-          throw new Exception("No body defiend for this email type");
-
+        ///new code
+        string filePath = GetEmailTemplatePath(mailRequest);
         var toRecipients = SetEmailRecipients(mailRequest.ToEmail);
         var ccRecipients = SetEmailRecipients(mailRequest.ToCCEmail);
         var attachments = SetEmailAttachments(mailRequest.Attachments, memoryStreams);
 
-        switch (mailRequest.MailType)
-        {
-          case MailTypeEnum.WelcomeTemplate:
-            {
-              var targetUser = await _userQueryService.GetAsync(mailRequest.ModelId, cancellationToken);
-              if (targetUser.Data is not object)
-                throw new Exception("No user defiend with this id for this email type");
+        await SendEmailByTypeAsync(mailRequest, filePath, toRecipients, ccRecipients, attachments, cancellationToken);
+        isSent = true;
+        res.Data = "Email sent successfully.";
+        _logger.LogDebug($"send Email to ({string.Join(",", toRecipients.Select(o => o.EmailAddress))}) for model Id ({mailRequest.ModelId}) with Type ({mailRequest.MailType}) Succesded");
 
-              var userInfo = targetUser.Data;
-              userInfo.PrefaredLanguageKey = mailRequest.PrefaredLanguageKey;
-
-
-              var emailTemplateResult = _fluentEmail.Create().To(toRecipients)
-                                .CC(ccRecipients)
-                                .Attach(attachments)
-                                .Subject(mailRequest.Subject)
-                                .UsingTemplateFromFile(filePath, userInfo);
-
-              await emailTemplateResult.SendAsync(cancellationToken);
-              isSent = true;
-              res.Data = "welcome-email-sent";
-              break;
-            }
-          case MailTypeEnum.TicketEscalation:
-            {
-              _logger.LogInformation(" prepare the query of the ticket Email");
-              isSent = true;
-              break;
-            }
-          default:
-            {
-              await _fluentEmail.Create().To(toRecipients)
-                                .CC(ccRecipients)
-                                .Subject(mailRequest.Subject)
-                                .Body(mailRequest.Body, true)
-                                .SendAsync(cancellationToken);
-              isSent = true;
-              break;
-            }
-        }
-
-        _logger.LogInformation($"send Email to ({string.Join(",", toRecipients.Select(o => o.EmailAddress))}) for model Id ({mailRequest.ModelId}) with Type ({mailRequest.MailType}) Succesded");
       }
+
       return res;
     }
     catch (Exception ex)
@@ -134,14 +80,176 @@ public class EmailService : IEmailService
         stream.Dispose();
       }
 
-      var mailEntity = mailRequest.ToEntity();
-      mailEntity.IsSent = isSent;
-      mailEntity.FailReasons = failerReasons;
+      if (!isResend)
+      {
+        var mailEntity = mailRequest.ToEntity();
+        mailEntity.IsSent = isSent;
+        mailEntity.FailReasons = failerReasons;
+        await AddAsync(mailEntity, cancellationToken);
+      }
 
-      await AddAsync(mailEntity, cancellationToken);
     }
   }
+  public async Task<ApiResponse<string>> ResendEmailAsync(long emailTrackerId, CancellationToken cancellationToken)
+  {
+    var response = new ApiResponse<string>((int)HttpStatusCode.OK);
 
+    try
+    {
+      var repository = _unitOfWork.Repository<EmailTracker>();
+      var emailTracker = await repository.GetAsync(emailTrackerId,tracking:true, cancellationToken: cancellationToken);
+
+      if (emailTracker == null)
+      {
+        response.StatusCode = (int)HttpStatusCode.BadRequest;
+        response.ErrorMessage = "Email not found.";
+        return response;
+      }
+
+      // Prepare the resend using the emailTracker details
+      var mailRequest = new MailRequest
+      {
+        ToEmail = new List<string> { emailTracker.ToEmail },
+        Subject = emailTracker.Subject,
+        Body = emailTracker.Body,
+        Attachments = null // Handle attachments if necessary
+      };
+
+      // Call SendEmailAsync but prevent it from creating a new EmailTracker
+      var isResend = true; // Pass this flag to avoid creating a new EmailTracker
+      await SendEmailAsync(mailRequest, cancellationToken, isResend);
+
+      // Update the existing tracker entry to reflect that the email was resent
+      emailTracker.IsSent = true;
+
+      await _unitOfWork.CommitAsync(cancellationToken);
+
+      response.Data = "Email resent successfully.";
+    }
+    catch (Exception ex)
+    {
+      _logger.LogError($"Error resending email: {ex.Message}");
+      response.StatusCode = (int)HttpStatusCode.InternalServerError;
+      response.ErrorMessage = "Error occurred while resending email.";
+    }
+
+    return response;
+  }
+  public async Task<ApiResponse<string>> ResendRangeOfMissedEmailsAsync(int batchSize, CancellationToken cancellationToken)
+  {
+    var res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    try
+    {
+      var repository = _unitOfWork.Repository<EmailTracker>();
+      int currentPage = 1;
+      bool hasMoreEmails = true;
+
+      // Process emails in batches
+      while (hasMoreEmails)
+      {
+        // Get a batch of unsent emails
+        var missedEmails = await repository.GetPagedWithProjectionAsync<EmailTracker>(
+            pageNumber: currentPage,
+            pageSize: batchSize,
+            filterExpression: e => !e.IsSent, // Unsent emails
+            projectionExpression: e => e, // Direct projection
+            orderBy: query => query.OrderBy(e => e.Id), // Order by ID for consistency
+            tracking: true, // Enable tracking so we can update status
+            cancellationToken: cancellationToken
+        );
+
+        if (!missedEmails.Any())
+        {
+          hasMoreEmails = false;
+          break;
+        }
+
+        // Send emails in parallel (we limit concurrency to avoid overloading the system)
+        var emailTasks = missedEmails.Select(email => Task.Run(async () =>
+        {
+          try
+          {
+            var mailRequest = new MailRequest
+            {
+              ToEmail = email.ToEmail.Split(',').ToList(),
+              ToCCEmail = email.ToCCEmail?.Split(',').ToList(),
+              Subject = email.Subject,
+              Body = email.Body,
+              MailType = GetMailTypeEnum(email.MailType),
+              ModelId = email.ModelId,
+              Attachments = null // Assuming attachments are not stored in EmailTracker
+            };
+
+            // Send the email
+            var sendResult = await SendEmailAsync(mailRequest, cancellationToken);
+
+            // Update the email tracker after sending
+            if (sendResult.StatusCode == (int)HttpStatusCode.OK)
+            {
+              email.IsSent = true;
+              email.FailReasons = string.Empty;
+            }
+            else
+            {
+              email.FailReasons = sendResult.ErrorMessage;
+            }
+          }
+          catch (Exception ex)
+          {
+            _logger.LogError($"Failed to resend email with ID {email.Id}: {ex.Message}");
+            email.FailReasons = ex.Message;
+          }
+        }));
+
+        // Wait for all tasks in this batch to complete
+        await Task.WhenAll(emailTasks);
+
+        // Commit updates to all emails in the batch
+        await _unitOfWork.CommitAsync(cancellationToken);
+
+        // Move to the next page
+        currentPage++;
+      }
+
+      res.Data = "Resend process for missed emails completed.";
+    }
+    catch (Exception ex)
+    {
+      _logger.LogError($"Error in ResendRangeOfMissedEmailsAsync: {ex.Message}");
+      res.ErrorMessage = ex.Message;
+      res.StatusCode = (int)HttpStatusCode.InternalServerError;
+    }
+
+    return res;
+  }
+  public async Task<ApiResponse<string>> SendMultipleEmailsAsync(List<MailRequest> mailRequests, CancellationToken cancellationToken)
+  {
+    var response = new ApiResponse<string>((int)HttpStatusCode.OK);
+    var tasks = new List<Task>(); // A list to hold all email sending tasks
+
+    try
+    {
+      // Parallelize sending each email in the list
+      foreach (var mailRequest in mailRequests)
+      {
+        tasks.Add(SendEmailAsync(mailRequest, cancellationToken));
+      }
+
+      // Await all email sending tasks
+      await Task.WhenAll(tasks);
+
+      response.Data = "All emails sent successfully.";
+    }
+    catch (Exception ex)
+    {
+      _logger.LogError($"Error in sending multiple emails: {ex.Message}");
+      response.StatusCode = (int)HttpStatusCode.InternalServerError;
+      response.ErrorMessage = "Error occurred while sending multiple emails.";
+    }
+
+    return response;
+  }
   public async Task<ApiResponse<EmailTrackerResponse>> GetAsync(long id, CancellationToken cancellationToken)
   {
     ApiResponse<EmailTrackerResponse>? res = new ApiResponse<EmailTrackerResponse>((int)HttpStatusCode.OK);
@@ -162,7 +270,6 @@ public class EmailService : IEmailService
     res.Data = entityResponse;
     return res;
   }
-
   public async Task<ApiResponse<PagedResponse<EmailTrackerResponse>>> GetListAsync(MailRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<PagedResponse<EmailTrackerResponse>> apiResponse = new ApiResponse<PagedResponse<EmailTrackerResponse>>((int)HttpStatusCode.OK);
@@ -196,8 +303,6 @@ public class EmailService : IEmailService
 
     return apiResponse;
   }
-
-
   private async Task<ApiResponse<string>> AddAsync(EmailTracker request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
@@ -226,7 +331,6 @@ public class EmailService : IEmailService
       return ex.HandleException(res, _env, _logger);
     }
   }
-
   private static List<Address> SetEmailRecipients(List<string?>? emailRecipients)
   {
     var toRecipients = new List<Address>();
@@ -287,4 +391,53 @@ public class EmailService : IEmailService
       _ => "application/octet-stream",
     };
   }
+
+  private MailTypeEnum GetMailTypeEnum(string mailType)
+  {
+    return (MailTypeEnum)Enum.Parse(typeof(MailTypeEnum), mailType, true);
+  }
+
+  private string GetEmailTemplatePath(MailRequest mailRequest)
+  {
+    if (mailRequest.MailType != MailTypeEnum.Default)
+    {
+      var templatePath = _mailTemplatesSettings.Types.FirstOrDefault(o => o.MailType == mailRequest.MailType)?.TemplatePath;
+      if (string.IsNullOrEmpty(templatePath))
+        throw new Exception("No template path defined for this email type");
+      return $"{Directory.GetCurrentDirectory()}\\Templates\\Emails\\{templatePath}";
+    }
+    return string.Empty;
+  }
+
+  private async Task SendEmailByTypeAsync(MailRequest mailRequest, string filePath, List<Address> toRecipients, List<Address> ccRecipients, List<FluentEmail.Core.Models.Attachment> attachments, CancellationToken cancellationToken)
+  {
+    switch (mailRequest.MailType)
+    {
+      case MailTypeEnum.WelcomeTemplate:
+        var targetUser = await _userQueryService.GetAsync(mailRequest.ModelId, cancellationToken);
+        if (targetUser.Data is not object)
+          throw new Exception("No user defined with this ID for this email type");
+
+        var emailTemplateResult = _fluentEmail.Create()
+            .To(toRecipients)
+            .CC(ccRecipients)
+            .Attach(attachments)
+            .Subject(mailRequest.Subject)
+            .UsingTemplateFromFile(filePath, targetUser.Data);
+
+        await emailTemplateResult.SendAsync(cancellationToken);
+        break;
+
+      default:
+        await _fluentEmail.Create()
+            .To(toRecipients)
+            .CC(ccRecipients)
+            .Subject(mailRequest.Subject)
+            .Body(mailRequest.Body, true)
+            .Attach(attachments)
+            .SendAsync(cancellationToken);
+        break;
+    }
+  }
+
 }

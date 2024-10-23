@@ -49,7 +49,6 @@ public class AuditService : IAuditService
 );
     var mappedLogs = pagedAuditListResult.Select(x => x).ToList();
 
-
     // Reformat the serialized values in each log
     foreach (var log in mappedLogs)
     {
@@ -106,7 +105,6 @@ public class AuditService : IAuditService
         { "New Values", item => item.NewValues },
         { "Affected Columns", item => item.AffectedColumns},
     });
-
 
     res.Data = data;
     return res;

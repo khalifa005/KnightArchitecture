@@ -1,3 +1,4 @@
+using KH.Dto.Models.EmailDto.Request;
 using KH.Services.Emails.Contracts;
 
 namespace KH.Services.BackgroundJobs.QuartzJobs;
@@ -26,18 +27,8 @@ public class EmailSenderJob : IJob
 
     try
     {
-      var startTime = DateTime.Now;
-      _logger.LogInformation("{Task} Execution started at: {StartTime}", TaskName, startTime);
-
-      // Delay the execution for 5 minutes (300,000 milliseconds)
-      await Task.Delay(TimeSpan.FromMinutes(5));
-
-      var endTime = DateTime.Now;
-      _logger.LogInformation("{Task} Execution resumed after delay at: {EndTime}", TaskName, endTime);
-
-      var currentDate = DateTime.Now;
-
-      // Your logic here after the delay
+      //MailRequest.
+      //var emailListResponse = await _mailService.GetListAsync();
 
     }
     catch (Exception ex)
