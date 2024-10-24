@@ -3,7 +3,7 @@ using KH.BuildingBlocks.Apis.Entities;
 
 namespace KH.Domain.Entities;
 
-public class EmailTracker : BaseEntity
+public class EmailTracker : TrackerEntity
 {
   public string Model { get; set; }
   public long ModelId { get; set; }
@@ -13,6 +13,7 @@ public class EmailTracker : BaseEntity
   public string? Body { get; set; }
   public string MailType { get; set; }
   public bool IsSent { get; set; }
+  public DateTime? ScheduleSendDate { get; set; }
   public string? FailReasons { get; set; }
 
 }

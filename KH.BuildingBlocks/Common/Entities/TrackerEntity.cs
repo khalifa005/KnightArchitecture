@@ -4,8 +4,6 @@ namespace KH.BuildingBlocks.Apis.Entities;
 
 public abstract partial class TrackerEntity : BaseEntity
 {
-  //what about the relations for created users !! FK's
-
   [Column(Order = 101)]
   public DateTime CreatedDate { get; set; }
   [Column(Order = 102)]

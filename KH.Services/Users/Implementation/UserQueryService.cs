@@ -42,7 +42,7 @@ public class UserQueryService : IUserQueryService
     if (userFromDB == null)
       throw new Exception("Invalid Parameter");
 
-    //complex user query using spliting
+    //complex user query using splitting
     var detailsUserFromDB = await repository.GetAsync(id,
     q => q.Include(u => u.UserRoles)
            .ThenInclude(ur => ur.Role)
@@ -56,7 +56,7 @@ public class UserQueryService : IUserQueryService
 
     if (false)
     {
-      //crazy query example that needs spliting or it will cause performance issues
+      //crazy query example that needs splitting or it will cause performance issues
       var detailsUserFromDBx = await repository.GetAsync(id,
       q => q.Include(u => u.UserRoles)
       .ThenInclude(ur => ur.Role)
@@ -69,7 +69,6 @@ public class UserQueryService : IUserQueryService
     }
 
     UserDetailsResponse userDetailsResponse = new UserDetailsResponse(detailsUserFromDB);
-    //var userResponseByAutoMapper = _mapper.Map<UserDetailsResponse>(detailsUserFromDB);
 
     res.Data = userDetailsResponse;
     return res;
@@ -168,7 +167,7 @@ public class UserQueryService : IUserQueryService
       Username = u.Username,
       LastName = u.LastName,
       UserRoles = u.UserRoles.Select(ur => new UserRoleResponse(ur)).ToList(),
-      DepartmentNames = u.UserDepartments.Select(ud => ud.Department.NameEn).ToList()
+      DepartmentNames = u.UserDepartments.Select(ud => ud.Department!.NameEn).ToList()
     },
     include: query => query
         .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)

@@ -28,14 +28,14 @@ public interface IGenericRepository<T> where T : BaseEntity
   void UpdateRange(ICollection<T> entities);
   Task<PagedList<T>> GetPagedUsingQueryAsync(int pageNumber, int pageSize, IQueryable<T> query, CancellationToken cancellationToken = default);
   Task<PagedList<TProjection>> GetPagedWithProjectionAsync<TProjection>(
-      int pageNumber,
-      int pageSize,
-      Expression<Func<T, bool>> filterExpression,
-      Expression<Func<T, TProjection>> projectionExpression,
-      Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
-      Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-      bool tracking = false,
-      CancellationToken cancellationToken = default);
+       int pageNumber,
+       int pageSize,
+       Expression<Func<T, bool>>? filterExpression,
+       Expression<Func<T, TProjection>> projectionExpression,
+       Func<IQueryable<T>, IIncludableQueryable<T, object?>>? include = null,
+       Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+       bool tracking = false,
+       CancellationToken cancellationToken = default);
   Task<int> BatchUpdateAsync(Expression<Func<T, bool>> filterExpression, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> updateExpression, CancellationToken cancellationToken = default);
   Task<int> BatchDeleteAsync(Expression<Func<T, bool>> filterExpression, CancellationToken cancellationToken = default);
   void RemoveCache();

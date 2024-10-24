@@ -8,6 +8,8 @@ public class SmsTracker : TrackerEntity
   public string Message { get; set; }
   public bool? IsSent { get; set; }
   public string? FailureReasons { get; set; }
+  public DateTime? ScheduleSendDate { get; set; }
+
   //related to SmsStatusEnum
   public string Status { get; set; }
   //related to ModelEnum

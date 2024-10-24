@@ -1,183 +1,128 @@
 
+using KH.BuildingBlocks.Apis.Constant;
+
 namespace KH.BuildingBlocks.Auth.User;
 
 public static class UserExtensions
 {
-  public const int SUPER_ADMIN_ROLE_ID = (int)RoleEnum.SuperAdmin;
-  public const string departmentIdClaim = "departmentId";
-  public const string isManagerClaim = "is_manager";
-  public const string engineeringOfficeID = "engineeringOfficeID";
-  public const string groupids = "groupsPaths";
-  public const string preferred_username = "preferred_username";
-  public const string clientId = "azp";
-  public const string departmentName = "departmentName";
-  public const string title = "title";
-
-  /*public static List<string> GetPropsValues()
+  public static int? GetDepartmentId(this ClaimsPrincipal? identity)
   {
-
-      return null;
-  }*/
-
-  public static int? GetDepartmentId(this ClaimsPrincipal identity)
-  {
-    Claim claim = identity?.FindFirst(departmentIdClaim);
+    Claim? claim = identity?.FindFirst(ApplicationConstant.DEPARTMENT_ID_CLAIM);
 
     if (claim == null)
       return null;
 
-    return int.Parse(claim.Value);
+    return int.TryParse(claim.Value, out var departmentId) ? departmentId : (int?)null;
   }
 
-  public static bool IsManager(this ClaimsPrincipal identity)
+  public static bool IsManager(this ClaimsPrincipal? identity)
   {
-    Claim claim = identity?.FindFirst(isManagerClaim);
+    Claim? claim = identity?.FindFirst(ApplicationConstant.IS_MANAGER_CLAIM);
 
     if (claim == null)
       return false;
 
-    return bool.Parse(claim.Value);
+    return bool.TryParse(claim.Value, out var isManager) && isManager;
   }
 
   public static long? GetUserId(this IServiceProvider serviceProvider)
   {
     var context = serviceProvider.GetService<IHttpContextAccessor>();
-    Claim claim = context.HttpContext?.User?.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).SingleOrDefault();
+    Claim? claim = context?.HttpContext?.User?.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
 
     if (claim == null)
       return null;
 
-    return int.Parse(claim.Value);
+    return long.TryParse(claim.Value, out var userId) ? userId : (long?)null;
   }
 
-  public static string GetId(this ClaimsPrincipal identity)
+  public static string? GetId(this ClaimsPrincipal? identity)
   {
-    Claim claim = identity?.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).SingleOrDefault();
+    Claim? claim = identity?.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
 
-    if (claim == null)
+    return claim?.Value;
+  }
+
+  public static string[] GetGroupIds(this ClaimsPrincipal? identity)
+  {
+    return identity?.Claims
+        .Where(c => c.Type == ApplicationConstant.GROUP_IDS)
+        .Select(c => c.Value)
+        .ToArray() ?? Array.Empty<string>();
+  }
+
+  public static string? GetFullName(this ClaimsPrincipal? identity)
+  {
+    Claim? firstClaim = identity?.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Name);
+    Claim? secondClaim = identity?.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Surname);
+
+    if (firstClaim == null || secondClaim == null)
       return null;
 
-    return claim.Value;
+    return $"{firstClaim.Value} {secondClaim.Value}";
   }
 
-  public static string[] GetGroupIds(this ClaimsPrincipal identity)
+  public static string? GetFirstName(this ClaimsPrincipal? identity)
   {
-    return identity?.Claims.Where(c => c.Type == groupids).Select(c => c.Value).ToArray();
+    Claim? claim = identity?.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Name);
+
+    return claim?.Value;
   }
 
-  public static int? GetEngineeringOfficeID(this ClaimsPrincipal identity)
+  public static string? GetFamily(this ClaimsPrincipal? identity)
   {
-    Claim claim = identity?.FindFirst(engineeringOfficeID);
+    Claim? claim = identity?.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Surname);
 
-    if (claim == null)
-      return null;
-
-    return int.Parse(claim.Value);
+    return claim?.Value;
   }
 
-  public static string GetFullName(this ClaimsPrincipal identity)
+  public static string? GetDepartmentName(this ClaimsPrincipal? identity)
   {
-    Claim firstClaim = identity?.Claims.Where(c => c.Type == ClaimTypes.Name).SingleOrDefault();
-    if (firstClaim == null)
-      return null;
+    Claim? claim = identity?.Claims.SingleOrDefault(c => c.Type == ApplicationConstant.DEPARTMENT_NAME);
 
-    Claim secondClaim = identity?.Claims.Where(c => c.Type == ClaimTypes.Surname).SingleOrDefault();
-    if (secondClaim == null)
-      return null;
-
-
-    return firstClaim.Value + " " + secondClaim.Value;
+    return claim?.Value;
   }
 
-  public static string GetFristName(this ClaimsPrincipal identity)
+  public static string? GetTitleName(this ClaimsPrincipal? identity)
   {
-    Claim claim = identity?.Claims.Where(c => c.Type == ClaimTypes.Name).SingleOrDefault();
+    Claim? claim = identity?.Claims.SingleOrDefault(c => c.Type == ApplicationConstant.TITLE);
 
-    if (claim == null)
-      return null;
-
-    return claim.Value;
+    return claim?.Value;
   }
 
-  public static string GetFamily(this ClaimsPrincipal identity)
+  public static string? GetClientId(this ClaimsPrincipal? identity)
   {
-    Claim claim = identity?.Claims.Where(c => c.Type == ClaimTypes.Surname).SingleOrDefault();
+    Claim? claim = identity?.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
 
-    if (claim == null)
-      return null;
-
-    return claim.Value;
+    return claim?.Value;
   }
-
-  public static string GetDepartmentName(this ClaimsPrincipal identity)
-  {
-    Claim claim = identity?.Claims.Where(c => c.Type == departmentName).SingleOrDefault();
-
-    if (claim == null)
-      return null;
-
-    return claim.Value;
-  }
-
-  public static string GetTitleName(this ClaimsPrincipal identity)
-  {
-    Claim claim = identity?.Claims.Where(c => c.Type == title).SingleOrDefault();
-
-    if (claim == null)
-      return null;
-
-    return claim.Value;
-  }
-
-  public static string GetClientId(this ClaimsPrincipal identity)
-  {
-    Claim claim = identity?.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).SingleOrDefault();
-
-    if (claim == null)
-      return null;
-
-    return claim.Value;
-  }
-
 
   /// <summary>
   /// GET System Type
   /// </summary>
-  /// <param name="identity"></param>
-  /// <returns></returns>
-  public static string GetSystemType(this ClaimsPrincipal identity)
+  public static string? GetSystemType(this ClaimsPrincipal? identity)
   {
-    Claim claim = identity?.Claims.Where(c => c.Type == ClaimTypes.System).SingleOrDefault();
+    Claim? claim = identity?.Claims.SingleOrDefault(c => c.Type == ClaimTypes.System);
 
-    if (claim == null)
-      return null;
-
-    return claim.Value;
+    return claim?.Value;
   }
-
 
   /// <summary>
   /// Has Super Admin Role
   /// </summary>
-  /// <param name="identity"></param>
-  /// <returns></returns>
-  public static bool HasSuperAdminRole(this ClaimsPrincipal identity)
+  public static bool HasSuperAdminRole(this ClaimsPrincipal? identity)
   {
-    // Check if the identity has any role claims
     if (identity?.Claims == null || !identity.Claims.Any(c => c.Type == ClaimTypes.Role))
       return false;
 
-    // Iterate over all role claims and check if any match the SUPER_ADMIN_ROLE_ID
     foreach (var claim in identity.Claims.Where(c => c.Type == ClaimTypes.Role))
     {
-      if (int.TryParse(claim.Value, out int roleId) && roleId == SUPER_ADMIN_ROLE_ID)
+      if (int.TryParse(claim.Value, out int roleId) && roleId == ApplicationConstant.SUPER_ADMIN_ROLE_ID)
       {
-        return true; // Found the super admin role
+        return true;
       }
     }
 
-    return false; // No matching role found
+    return false;
   }
-
 }
-

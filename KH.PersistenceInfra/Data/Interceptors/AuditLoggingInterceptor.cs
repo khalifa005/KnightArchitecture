@@ -84,7 +84,7 @@ public class AuditLoggingInterceptor : SaveChangesInterceptor
       {
         TableName = entry.Entity.GetType().Name,
         UserId = userId,
-        CorrelationId = _httpContextAccessor.HttpContext?.TraceIdentifier ?? "internal-process"
+        RequestId = _httpContextAccessor.HttpContext?.TraceIdentifier ?? "internal-process"
       };
 
       foreach (var property in entry.Properties)

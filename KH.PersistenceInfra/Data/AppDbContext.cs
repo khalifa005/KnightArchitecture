@@ -136,7 +136,7 @@ public class AppDbContext : DbContext
 
     // Retrieve the TraceIdentifier from the current HttpContext this will keep the serilogs = auditing correlationId
     //to track the request life cycle starting  from request logs by serilog and auditing actions made by the user
-    var correlationId = _httpContextAccessor.HttpContext?.TraceIdentifier ?? "internal-process";
+    var requestId = _httpContextAccessor.HttpContext?.TraceIdentifier ?? "internal-process";
 
     foreach (var entry in ChangeTracker.Entries())
     {
@@ -152,7 +152,7 @@ public class AppDbContext : DbContext
       {
         TableName = entry.Entity.GetType().Name,
         UserId = userId,
-        CorrelationId = correlationId
+        RequestId = requestId
       };
 
       auditEntries.Add(auditEntry);

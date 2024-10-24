@@ -1,5 +1,4 @@
 using FluentEmail.Core;
-using KH.BuildingBlocks.Apis.Constant;
 using KH.BuildingBlocks.Apis.Entities;
 using KH.Services.Audits.Contracts;
 using System.Data;
@@ -130,7 +129,7 @@ public class AuditService : IAuditService
     // Import the file using the Excel service
     var result = await _excelService.ImportAsync(stream, mappers: new Dictionary<string, Func<DataRow, Audit, object>>
     {
-         { "Table Name", (row, item) => item.TableName = row["Table Name"].ToString() },
+        { "Table Name", (row, item) => item.TableName = row["Table Name"].ToString() },
         { "Type", (row, item) => item.Type = row["Type"].ToString() },
         { "User Id", (row, item) => item.UserId= row["User Id"].ToString() },
         { "Date Time (Local)", (row, item) => item.DateTime = DateTime.TryParse(row["Date Time (Local)"].ToString(), out var localDateTime) ? localDateTime : default },
@@ -139,18 +138,15 @@ public class AuditService : IAuditService
         { "Old Values", (row, item) => item.OldValues = row["Old Values"].ToString() },
         { "New Values", (row, item) => item.NewValues = row["New Values"].ToString() }
     }, "Audit trails");
-    //above sheetname must be as file Audit trails
+    //above sheet name must be as file Audit trails
 
     // Process the result
     if (result.Succeeded)
     {
-      var correlationId = _httpContextAccessor
-  .HttpContext?
-  .Request
-  .Headers[ApplicationConstant.X_Correlation_ID]
-  .FirstOrDefault();
+      var requestId = _httpContextAccessor.HttpContext?.TraceIdentifier ?? "internal-process";
 
-      result.Data.ForEach(x => x.CorrelationId = correlationId);
+
+      result.Data.ForEach(x => x.RequestId = requestId);
       var importedData = result.Data;
 
       await _unitOfWork.Repository<Audit>().AddRangeAsync(importedData.ToList(), cancellationToken);

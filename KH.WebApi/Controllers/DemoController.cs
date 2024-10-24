@@ -64,7 +64,7 @@ public class DemoController : ControllerBase
       }
       catch (FormatException ex)
       {
-        return BadRequest("Invalid base64 string format.");
+        return BadRequest($"Invalid base64 string format {ex.Message}");
       }
     }
 
