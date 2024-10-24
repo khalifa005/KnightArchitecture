@@ -1,6 +1,4 @@
-using KH.BuildingBlocks.Apis.Responses;
 using Microsoft.AspNetCore.WebUtilities;
-using Newtonsoft.Json;
 using System.Net.Mime;
 
 namespace KH.BuildingBlocks.Apis.Services;
@@ -24,8 +22,6 @@ public class CustomHttpRequestService
 
     httpRequestMessage.RequestUri = new Uri(Endpoint);
 
-    //httpRequestMessage.Content.Headers.ContentType
-    //    = new System.Net.Http.Headers.MediaTypeHeaderValue(MediaTypeHeaderTypes.ApplicationJson);
     if (!string.IsNullOrEmpty(token))
     {
       httpRequestMessage.Headers.Authorization
@@ -53,21 +49,6 @@ public class CustomHttpRequestService
       Console.WriteLine(content);
       return HeroResult<T>.False(content);
     }
-
-    //if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-    //{
-    //    return Result<T>.False(content);
-    //}
-    //else if (result.StatusCode == System.Net.HttpStatusCode.InternalServerError)
-    //{
-    //    System.Console.WriteLine(content);
-    //    return Result<T>.False(content);
-    //}
-    //else if (result.StatusCode == System.Net.HttpStatusCode.NotFound)
-    //{
-    //    System.Console.WriteLine(content);
-    //    return Result<T>.False(content);
-    //}
 
     try
     {

@@ -17,7 +17,7 @@ using KH.Services.BackgroundJobs.HangfireJobs.Implementation;
 using Hangfire;
 namespace KH.Services;
 
-public static class ServicesRegisterationService
+public static class ServicesRegistrationService
 {
   public static IServiceCollection AddBusinessService(this IServiceCollection services, IConfiguration configuration)
   {
@@ -62,9 +62,9 @@ public static class ServicesRegisterationService
         // Perform schema validation
         options.PerformSchemaValidation = true;
         options.UseProperties = true; // Use properties
-        options.UseSqlServer(connectionString: configuration.GetConnectionString("DefaultConnection"));
+        options.UseSqlServer(connectionString: configuration.GetConnectionString("DefaultConnection")!);
 
-        // Explicitly set JSON serializer
+        // Explicitly set JSON serialize
         options.UseNewtonsoftJsonSerializer();
       });
 

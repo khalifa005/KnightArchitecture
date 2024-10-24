@@ -312,7 +312,6 @@ public class EmailService : IEmailService
 
         var sentResult = await emailTemplateResult.SendAsync(cancellationToken);
         return sentResult;
-        break;
 
       default:
         var defaultSentResult =  await _fluentEmail.Create()
@@ -324,7 +323,6 @@ public class EmailService : IEmailService
             .SendAsync(cancellationToken);
         return defaultSentResult;
 
-        break;
     }
   }
 

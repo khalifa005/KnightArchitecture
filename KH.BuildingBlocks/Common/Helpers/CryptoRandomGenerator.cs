@@ -1,20 +1,20 @@
 namespace KH.BuildingBlocks.Apis.Helpers;
 
-public class SecureRandom
+public class CryptoRandomGenerator
 {
   #region Constants
-  private const int INT_SIZE = 2;
+  private const int INT_SIZE = 4;  // Corrected INT_SIZE to 4 bytes for int32
   private const int INT64_SIZE = 8;
   #endregion
 
   #region Fields
-  private static RandomNumberGenerator _Random;
+  private static readonly System.Security.Cryptography.RandomNumberGenerator _random;
   #endregion
 
   #region Constructor
-  static SecureRandom()
+  static CryptoRandomGenerator()
   {
-    _Random = new RNGCryptoServiceProvider();
+    _random = System.Security.Cryptography.RandomNumberGenerator.Create();
   }
   #endregion
 
@@ -26,64 +26,53 @@ public class SecureRandom
   public static int Next()
   {
     byte[] data = new byte[INT_SIZE];
-    int[] result = new int[1];
-
-    _Random.GetBytes(data);
-    Buffer.BlockCopy(data, 0, result, 0, INT_SIZE);
-
-    return result[0];
+    _random.GetBytes(data);
+    return BitConverter.ToInt32(data, 0);
   }
 
   /// <summary>
   /// Get the next random integer to a maximum value
   /// </summary>
-  /// <param name="MaxValue">Maximum value</param>
+  /// <param name="maxValue">Maximum value</param>
   /// <returns>Random [Int32]</returns>
-  public static int Next(int MaxValue)
+  public static int Next(int maxValue)
   {
-    int result = 0;
-
+    int result;
     do
     {
       result = Next();
-    } while (result > MaxValue);
-
+    } while (result > maxValue || result < 0);  // Ensuring positive integers
     return result;
   }
 
-
   /// <summary>
-  /// Get the next random integer to a maximum value
+  /// Get the next random integer for Ticket ID generation
   /// </summary>
-  /// <param name="MaxValue">Maximum value</param>
   /// <returns>Random [Int32]</returns>
   public static int TicketIdGenerator()
   {
-    int result = 0;
-    int minValue = 0;
-
+    int result;
     do
     {
       result = Next();
-    } while (result < minValue);
-
+    } while (result < 0);  // Ensuring positive integers
     return result;
   }
 
   /// <summary>
-  /// Generate One Time Password
+  /// Generate One Time Password (OTP)
   /// </summary>
   /// <param name="otpLength"></param>
   /// <param name="maxValue"></param>
   /// <returns></returns>
   public static string GenerateOTP(int otpLength = 4, int maxValue = 9)
   {
-    string otp = string.Empty;
+    StringBuilder otp = new StringBuilder();
     for (int i = 0; i < otpLength; i++)
     {
-      otp += Next(maxValue);
+      otp.Append(Next(maxValue));
     }
-    return otp;
+    return otp.ToString();
   }
   #endregion
 
@@ -95,102 +84,78 @@ public class SecureRandom
   public static uint NextUInt()
   {
     byte[] data = new byte[INT_SIZE];
-    int[] result = new int[1];
-
-    do
-    {
-      _Random.GetBytes(data);
-      Buffer.BlockCopy(data, 0, result, 0, INT_SIZE);
-    } while (result[0] < 0);
-
-    return (uint)result[0];
+    _random.GetBytes(data);
+    return BitConverter.ToUInt32(data, 0);
   }
 
   /// <summary>
   /// Get the next random unsigned integer to a maximum value
   /// </summary>
-  /// <param name="MaxValue">Maximum value</param>
+  /// <param name="maxValue">Maximum value</param>
   /// <returns>Random [UInt32]</returns>
-  public static uint NextUInt(uint MaxValue)
+  public static uint NextUInt(uint maxValue)
   {
-    uint result = 0;
-
+    uint result;
     do
     {
       result = NextUInt();
-    } while (result > MaxValue);
-
+    } while (result > maxValue);
     return result;
   }
   #endregion
 
   #region Random Int64
   /// <summary>
-  /// Get the next random integer
+  /// Get the next random long integer
   /// </summary>
-  /// <returns>Random [Int32]</returns>
+  /// <returns>Random [Int64]</returns>
   public static long NextLong()
   {
     byte[] data = new byte[INT64_SIZE];
-    long[] result = new long[1];
-
-    _Random.GetBytes(data);
-    Buffer.BlockCopy(data, 0, result, 0, INT64_SIZE);
-
-    return result[0];
+    _random.GetBytes(data);
+    return BitConverter.ToInt64(data, 0);
   }
 
   /// <summary>
-  /// Get the next random unsigned long to a maximum value
+  /// Get the next random long integer to a maximum value
   /// </summary>
-  /// <param name="MaxValue">Maximum value</param>
-  /// <returns>Random [UInt64]</returns>
-  public static long NextLong(long MaxValue)
+  /// <param name="maxValue">Maximum value</param>
+  /// <returns>Random [Int64]</returns>
+  public static long NextLong(long maxValue)
   {
-    long result = 0;
-
+    long result;
     do
     {
       result = NextLong();
-    } while (result > MaxValue);
-
+    } while (result > maxValue || result < 0);  // Ensuring positive integers
     return result;
   }
   #endregion
 
-  #region Random UInt32
+  #region Random UInt64
   /// <summary>
-  /// Get the next random unsigned long
+  /// Get the next random unsigned long integer
   /// </summary>
   /// <returns>Random [UInt64]</returns>
   public static ulong NextULong()
   {
     byte[] data = new byte[INT64_SIZE];
-    long[] result = new long[1];
-
-    do
-    {
-      _Random.GetBytes(data);
-      Buffer.BlockCopy(data, 0, result, 0, INT64_SIZE);
-    } while (result[0] < 0);
-
-    return (ulong)result[0];
+    _random.GetBytes(data);
+    return BitConverter.ToUInt64(data, 0);
   }
 
   /// <summary>
   /// Get the next random unsigned long to a maximum value
   /// </summary>
-  /// <param name="MaxValue">Maximum value</param>
+  /// <param name="maxValue">Maximum value</param>
   /// <returns>Random [UInt64]</returns>
-  public static ulong NextULong(ulong MaxValue)
+  public static ulong NextULong(ulong maxValue)
   {
-    ulong result = 0;
-
+    ulong result;
     do
     {
       result = NextULong();
-    } while (result > MaxValue);
-
+    } while (result > maxValue);
     return result;
   }
   #endregion
@@ -199,11 +164,12 @@ public class SecureRandom
   /// <summary>
   /// Get random bytes
   /// </summary>
-  /// <param name="data">Random [byte array]</param>
-  public static byte[] NextBytes(long Size)
+  /// <param name="size">Size of the random byte array</param>
+  /// <returns>Random [byte array]</returns>
+  public static byte[] NextBytes(long size)
   {
-    byte[] data = new byte[Size];
-    _Random.GetBytes(data);
+    byte[] data = new byte[size];
+    _random.GetBytes(data);
     return data;
   }
   #endregion

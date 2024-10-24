@@ -188,7 +188,7 @@ public class AuthenticationService : IAuthenticationService
 
       //Hashed Password Check
       var passwordVerificationResult = new PasswordHasher<object?>()
-        .VerifyHashedPassword(null, entityFromDB.Password, request.Password);
+        .VerifyHashedPassword(null, entityFromDB.Password!, request.Password!);
       if (passwordVerificationResult != PasswordVerificationResult.Success)
         throw new Exception("Invalid User!");
 

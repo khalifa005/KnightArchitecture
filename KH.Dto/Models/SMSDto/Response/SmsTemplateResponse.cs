@@ -7,11 +7,6 @@ public class SmsTemplateResponse : BasicTrackerEntityDto
   public string SmsType { get; set; }
   public string TextEn { get; set; }
   public string TextAr { get; set; }
-  public DateTime CreatedDate { get; set; }
-  public long? CreatedById { get; set; }
-  public DateTime? UpdatedDate { get; set; }
-  public long? UpdatedById { get; set; }
-  public bool IsDeleted { get; set; }
 
   public SmsTemplateResponse()
   {

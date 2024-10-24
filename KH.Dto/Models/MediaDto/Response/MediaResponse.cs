@@ -7,7 +7,6 @@ public class MediaResponse : BasicTrackerEntityDto
 {
   public FileContentResult? FileContentResult { get; set; }
   public bool IsValidToDownload { get; set; }
-  public bool IsDeleted { get; set; }
   public string Message { get; set; }
   public string FileName { get; set; }
   public string OrignalName { get; set; }

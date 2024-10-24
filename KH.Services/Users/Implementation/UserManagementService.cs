@@ -62,11 +62,11 @@ public class UserManagementService : IUserManagementService
         throw new Exception("invalid-user-id-in-add-mode");
 
       //-- Check User Duplication
-      var isThereDuplicatedUser = await _userValidationService.IsThereMatchedUserAsync(request.Email, request.Username, cancellationToken: cancellationToken);
+      var isThereDuplicatedUser = await _userValidationService.IsThereMatchedUserAsync(request.Email!, request.Username!, cancellationToken: cancellationToken);
       if (isThereDuplicatedUser)
         throw new Exception("duplicated username or email");
 
-      var isThereDuplicatedUserWithTheSamePhone = await _userValidationService.IsThereMatchedUserWithTheSamePhoneNumberAsync(request.MobileNumber, cancellationToken: cancellationToken);
+      var isThereDuplicatedUserWithTheSamePhone = await _userValidationService.IsThereMatchedUserWithTheSamePhoneNumberAsync(request.MobileNumber!, cancellationToken: cancellationToken);
       if (isThereDuplicatedUserWithTheSamePhone)
         throw new Exception("duplicated phone number");
 
