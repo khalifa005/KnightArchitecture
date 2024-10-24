@@ -34,8 +34,6 @@ public class UserNotificationService : IUserNotificationService
 
   public async Task<ApiResponse<string>> SendUserWelcomeSmsAsync(User userEntity, CancellationToken cancellationToken)
   {
-    //ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
-
     var smsWelcomeTemplateResult = await _smsTemplateService.GetSmsTemplateAsync(SmsTypeEnum.WelcomeUser.ToString(), cancellationToken);
     if (smsWelcomeTemplateResult.StatusCode != StatusCodes.Status200OK || smsWelcomeTemplateResult.Data == null)
       return new ApiResponse<string>((int)HttpStatusCode.BadRequest);
