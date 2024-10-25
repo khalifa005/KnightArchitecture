@@ -65,13 +65,9 @@ public class AppDbContext : DbContext
     LookupContextSeeder.SeedDepartment(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedGroups(modelBuilder, _loggerFactory);
     LookupContextSeeder.SeedRoles(modelBuilder, _loggerFactory);
-
     PermissionsContextSeeder.SeedSystemPermissions(modelBuilder, _loggerFactory);
     PermissionsContextSeeder.SeedCEORolePermissions(modelBuilder, _loggerFactory);
-
     SmsTemplateContextSeeder.SeedTemplates(modelBuilder, _loggerFactory);
-
-    UsersContextSeeder.SeedCustomer(modelBuilder, _loggerFactory);
     UsersContextSeeder.SeedUser(modelBuilder, _loggerFactory);
 
   }

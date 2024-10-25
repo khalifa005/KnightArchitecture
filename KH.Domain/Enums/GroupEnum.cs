@@ -2,6 +2,7 @@ namespace KH.BuildingBlocks.Apis.Enums;
 
 public enum GroupEnum
 {
-  ExternalRequest = 1,
-  SellingTeam = 2,
+  Managers = 1,
+  ExternalRequest = 2,
+  SellingTeam = 3,
 }

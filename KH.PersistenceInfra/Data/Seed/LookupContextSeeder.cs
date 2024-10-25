@@ -59,8 +59,9 @@ public class LookupContextSeeder
     {
       List<Group> entities = new List<Group>();
 
-      entities.Add(new Group { Id = 1, NameEn = " Request Group", NameAr = "الطلبات الخارجيه", TicketCategoryId = (int)TicketCategoryEnum.Request });
-      entities.Add(new Group { Id = 2, NameEn = "Team Selling", NameAr = "المبيعات", TicketCategoryId = (int)TicketCategoryEnum.Request });
+      entities.Add(new Group { Id = 1, NameEn = "Managers Group", NameAr = "المدراء", TicketCategoryId = (int)TicketCategoryEnum.Request });
+      entities.Add(new Group { Id = 2, NameEn = " Request Group", NameAr = "الطلبات الخارجيه", TicketCategoryId = (int)TicketCategoryEnum.Request });
+      entities.Add(new Group { Id = 3, NameEn = "Team Selling", NameAr = "المبيعات", TicketCategoryId = (int)TicketCategoryEnum.Request });
 
       builder.Entity<Group>().HasData(entities);
 
