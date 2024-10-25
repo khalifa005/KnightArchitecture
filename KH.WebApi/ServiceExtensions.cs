@@ -1,8 +1,3 @@
-using Hangfire;
-using KH.PersistenceInfra.Data;
-using KH.PersistenceInfra.Middlewares;
-using KH.Services.BackgroundJobs.HangfireJobs;
-
 namespace KH.Services;
 
 public static class ServiceExtensions

@@ -2,7 +2,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-ConfigureLogging(builder); // Call the method to configure Serilog
+ConfigureLogging(builder);
 
 ConfigureServices(builder.Services, builder.Configuration);
 
