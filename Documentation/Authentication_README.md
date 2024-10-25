@@ -1,78 +1,18 @@
+# Dual Authentication - Dynamic permissions management
 
-# Authentication, Authorization, and Permissions Process in This Repository
-Protecting your API endpoints with dynamic policies in ASP.NET Core 
-This project utilizes JWT-based authentication and role-based authorization to protect its API endpoints. Additionally, custom permissions are implemented using middleware to ensure that users have the necessary access rights to specific resources based on their roles.
+## Overview
+The KnightArchitecture project uses a robust authentication and authorization framework. It leverages JWT (JSON Web Token)-based and Basic authentication schemes for identity verification, coupled with a middleware-driven permissions management system that operates through dynamic policies. This structure is designed to support flexible, role-based access and modular permissions for user access control.
 
-## Overall Process Flow
-
-### User Request:
-The process begins when a user makes a request to the API. The request contains a JWT token that is included in the headers, which will be validated for authentication.
-
-### `UseAuthentication` Middleware:
-- The first step in the process is authentication. The `UseAuthentication()` middleware inspects the request and checks the JWT token to authenticate the user.
-  - If the token is valid, the user's identity and claims are set in the `HttpContext.User`.
-  - If the user is not authenticated (e.g., the token is missing or invalid), a `401 Unauthorized` response is returned, and the request does not proceed any further.
-
-### `PermissionsMiddleware`:
-- After authentication, the `PermissionsMiddleware` is invoked. This middleware performs two key tasks:
-  1. **Check for Authentication**: If the user is authenticated, it proceeds to the next step.
-  2. **Fetch and Validate Permissions**: The `IUserPermissionService` fetches the permissions assigned to the user based on their role. These permissions are added to the user's claims.
-     - If the user lacks the necessary permissions, an Access Denied message is returned. Permissions are fetched from the database or cache and may depend on the user's specific role.
-
-### `UseAuthorization` Middleware:
-- After permissions are validated, the `UseAuthorization()` middleware ensures that the user has the correct authorization level (e.g., roles or policies) to access the requested resource.
-- Authorization is enforced based on the claims that were set during the previous steps.
-
-### Controller Action Execution:
-- Once authentication, permissions, and authorization checks are successfully passed, the API controller action is executed, and the requested resource is processed and returned.
-
-## Permissions Process
-
-In addition to standard role-based authorization, this project uses a custom permissions-based approach to fine-tune user access control. Here’s how permissions are handled:
-
-### `PermissionsMiddleware`:
-- The `PermissionsMiddleware` ensures that authenticated users have the necessary permissions to access specific endpoints or resources. This middleware leverages `IUserPermissionService`, which fetches user permissions from the database.
-
-### Permission Claims:
-- Once the user's permissions are fetched, they are added to the user’s claims. These claims can be checked at any point within the API to ensure that the user has the necessary rights to perform actions (e.g., view, edit, delete).
-
-### Database-Based Permissions:
-- Permissions are stored in the database and are tied to user roles. Each role can have different sets of permissions, and these are fetched dynamically during each request.
-
-### Authorization Based on Permissions:
-- Once the user's permissions are added to the claims, authorization policies are enforced based on these permissions. If a user lacks the required permission for an action, access is denied.
-
-## Visual Flowchart
-(TODO: Add a flowchart here to visualize the process)
-
-## Detailed Example of Permissions Handling
-
-Consider an example where an API endpoint requires the user to have a specific permission to access financial data. Here's how the flow would work:
-
-1. The user makes a request to `/api/finance/report`.
-2. The JWT token is validated by `UseAuthentication()`.
-3. The `PermissionsMiddleware` checks if the user is authenticated and fetches permissions (e.g., `ViewFinancialReports`).
-4. The permissions are added to the user's claims.
-5. The `UseAuthorization` middleware checks if the user has the `ViewFinancialReports` permission.
-6. If the user has the required permission, the request proceeds to the controller, and the financial report is returned.
-7. If the user lacks the required permission, a `403 Forbidden` response is returned, indicating that the user doesn't have the necessary access rights.
-
-## Middleware Configuration in `Startup.cs`
-
-The `Startup.cs` file configures the authentication, permissions, and authorization middleware:
-
+## Middleware Configuration in Startup
+The `Startup.cs` file configures authentication, permissions, and authorization middleware:
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
-    app.UseAuthentication();  // Handles authentication (JWT)
-    app.UseMiddleware<PermissionsMiddleware>();  // Custom permissions handling
-    app.UseAuthorization();  // Role-based authorization
+    app.UseAuthentication();
+    app.UseMiddleware<PermissionsMiddleware>();
+    app.UseAuthorization();
 }
 ```
-
-# .NET 8 Application - Authentication and Authorization Flow
-
-This application implements a flexible and secure authentication, authorization, and permissions management system. It utilizes JWT and Basic authentication schemes, dynamic permission policies, and a middleware-based permissions management approach.
 
 ## Key Features
 
@@ -84,15 +24,9 @@ This application implements a flexible and secure authentication, authorization,
 - **Basic or JWT Authentication:** The app supports both JWT and Basic authentication schemes, selecting the appropriate one based on the `Authorization` header.
 - **Single Entry Point:** The `BasicOrJwt` policy ensures seamless authentication for both scheme types.
 
-### 3. **SuperAdmin Role Override**
-- **SuperAdmin Bypass:** Users with the `SuperAdminRole` can bypass permission checks, which simplifies management for administrative operations.
-
-### 4. **Middleware-Based Permission Management**
+### 3. **Middleware-Based Permission Management**
 - **Scalable Design:** The `PermissionsMiddleware` dynamically retrieves and attaches permissions to the user’s claims and can be extended with caching for improved performance.
 - **Pluggable Permission System:** The permissions middleware centralizes permission management, allowing easy adaptation to new requirements.
-
-### 5. **Comprehensive Error Handling**
-- **Localized Error Responses:** Custom error responses are provided for various authentication and authorization scenarios, with support for both English and Arabic.
 
 ---
 
@@ -141,3 +75,97 @@ Here’s how the authentication, authorization, and permissions management syste
 - **SuperAdmin Override:** Simplified management for administrative users.
 - **Middleware-Based:** Centralized permission management, making it modular and scalable.
 - **Localized Errors:** Detailed error messages in both English and Arabic for better user experience.
+
+## Key Components and Responsibilities
+
+### Authentication Layer
+Managed by JWT and Basic schemes for user validation, this layer includes:
+- **`AuthenticationService.cs`**: Handles login, token generation, and session management.
+- **`TokenService.cs`**: Creates JWT tokens with user claims and roles for future requests.
+- **`AuthenticationController.cs`**: Exposes login and token refresh endpoints.
+
+### Authorization Layer
+Enforces role-based access using middleware and policies:
+- **`PermissionAuthorizeAttribute.cs`**: Custom attribute enforcing strict control over API endpoints.
+- **`PermissionAuthorizationPolicyProvider.cs`**: Generates policies based on required permissions.
+- **`PermissionRequirement.cs`**: Defines and validates custom authorization requirements.
+
+### Permissions Management Layer
+Permissions are dynamically managed through middleware:
+- **`PermissionsMiddleware.cs`**: Retrieves and verifies user permissions for each request.
+- **`IUserPermissionService.cs`**: Interface defining the contract for permissions retrieval.
+- **`PermissionService.cs`**: Manages CRUD operations for permissions.
+- **`PermissionController.cs`**: API controller for permissions management.
+
+```
+var permissionsIdentity = await permissionService.GetUserPermissionsIdentity(long.Parse(userId), systemType, cancellationToken);
+if (permissionsIdentity == null) {
+    // User lacks necessary permissions, return 401 Unauthorized
+    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+    await context.Response.WriteAsync("Unauthorized access");
+    return;
+}
+context.User.AddIdentity(permissionsIdentity); // Adds permissions as claims
+```
+
+## 4. Dynamic Policy Creation
+**File(s):**
+- `KH.BuildingBlocks/Auth/PermissionAuthorizationPolicyProvider.cs`
+- `KH.BuildingBlocks/Auth/Attributes/PermissionAuthorizeAttribute.cs`
+
+**Process:**
+- **Policy Provider (PermissionAuthorizationPolicyProvider):**
+  - For endpoints protected with `PermissionAuthorizeAttribute`, the `PermissionAuthorizationPolicyProvider` dynamically creates an authorization policy based on permissions (e.g., `VIEW_CUSTOMER`).
+  - The provider interprets required permissions using the `PolicyPrefix` and generates policies to enforce fine-grained access control.
+
+- **Policy Enforcement:**
+  - The policy is checked against the user’s claims.
+  - If the policy’s permissions match the user’s claims, the request proceeds to the next stage; otherwise, a `403 Forbidden` is returned.
+
+**Example Code in PermissionAuthorizationPolicyProvider.cs:**
+
+```csharp
+var requirement = new PermissionRequirement(PermissionOperatorEnum.And, permissions);
+return new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .AddRequirements(requirement) // Enforces permissions on this endpoint
+    .Build();
+```
+
+## 5. Controller Endpoint Protection
+**File(s):**
+- `KH.WebApi/Controllers/PermissionsController.cs`
+- `KH.BuildingBlocks/Auth/Constant/PermissionKeysConstant.cs`
+
+**Process:**
+- **Endpoint Definition (PermissionsController):**
+  - Each endpoint requiring permission is protected with `PermissionAuthorizeAttribute`. For example, the `Get` method requires `PermissionKeysConstant.Customers.VIEW_CUSTOMER`.
+
+- **Access Control:**
+  - The attribute checks if the user has the necessary permission claim (`VIEW_CUSTOMER`). If not, it denies access with a `403 Forbidden`.
+
+**Example Code in PermissionsController.cs:**
+```csharp
+
+[PermissionAuthorize(PermissionKeysConstant.Customers.VIEW_CUSTOMER)]
+[HttpGet("{id}")]
+public async Task<ActionResult<ApiResponse<CustomerResponse>>> Get(int id, CancellationToken cancellationToken) {
+    var res = await _lookupService.GetCustomerAsync(id, cancellationToken);
+    return AsActionResult(res); // Only accessible if user has VIEW_CUSTOMER permission
+}
+```
+## 6. Response Handling
+
+- **Successful Access:**
+  - If the Sales Manager has `VIEW_CUSTOMER` permission, they receive the requested customer details.
+
+- **Access Denied:**
+  - If permissions are lacking (e.g., trying to delete without `DELETE_CUSTOMER`), a `403 Forbidden` response with a message, potentially in multiple languages, is returned.
+
+### Advantages of This Approach
+- **Centralized, Scalable Permissions Management:** The `PermissionsMiddleware` handles all permission checks, centralizing access control and simplifying adjustments.
+- **Flexible Role Management:** With the ability to define policies dynamically and manage permissions centrally, the system adapts easily to changes in business requirements.
+- **Granular Access Control:** Dynamic policies with AND/OR operators allow complex access control scenarios, supporting a wide range of user roles and permissions.
+- **SuperAdmin Override:** SuperAdmins bypass all permission checks, making administrative actions streamlined and secure.
+- **Localized Error Responses:** Users are informed of errors in multiple languages, improving usability and accessibility.
+
