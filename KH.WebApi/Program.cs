@@ -1,18 +1,8 @@
-
-using Hangfire;
-using KH.Services.BackgroundJobs.HangfireJobs;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure Serilog
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
-    .Enrich.FromLogContext()
-    .CreateLogger();
-
-// Add Serilog to the builder
-builder.Host.UseSerilog();
+ConfigureLogging(builder); // Call the method to configure Serilog
 
 ConfigureServices(builder.Services, builder.Configuration);
 
@@ -20,6 +10,26 @@ var app = builder.Build();
 ConfigureMiddlewares(app);
 
 app.Run();
+
+/// <summary>
+/// Configures Serilog as the logging provider.
+/// </summary>
+void ConfigureLogging(WebApplicationBuilder builder)
+{
+  try
+  {
+    Log.Logger = new LoggerConfiguration()
+      .ReadFrom.Configuration(builder.Configuration) // Reads settings from appsettings.json
+      .Enrich.FromLogContext()
+      .CreateLogger();
+    builder.Host.UseSerilog();
+  }
+  catch
+  {
+    // Handle any issues with database connectivity or proceed without Serilog
+  }
+  
+}
 
 /// <summary>
 /// Configures all the services required for the application.

@@ -1,20 +1,4 @@
-using KH.Services.Audits.Contracts;
-using KH.Services.Audits.Implementation;
-using KH.Services.Emails.Contracts;
-using KH.Services.Lookups.Departments.Contracts;
-using KH.Services.Lookups.Groups.Contracts;
-using KH.Services.Lookups.Permissions.Contracts;
-using KH.Services.Lookups.Roles.Contracts;
-using KH.Services.Media_s.Contracts;
-using KH.Services.Media_s.Implementation;
-using KH.Services.Sms.Contracts;
-using FluentValidation;
-using FluentValidation.AspNetCore;
-using KH.Dto.Models.UserDto.Validation;
-using KH.Services.BackgroundJobs.QuartzJobs;
-using KH.Services.BackgroundJobs.HangfireJobs.Contracts;
-using KH.Services.BackgroundJobs.HangfireJobs.Implementation;
-using Hangfire;
+
 namespace KH.Services;
 
 public static class ServicesRegistrationService
@@ -45,41 +29,51 @@ public static class ServicesRegistrationService
     //background jobs
     services.AddScoped<IJobTestService, JobTestService>();
 
+    // Add Quartz services
     services.AddQuartz(q =>
     {
-      // Use a Scoped container to create jobs
-      q.UseJobFactory<MicrosoftDependencyInjectionJobFactory>();
-
-      // Scheduler ID and Name for single instance
-      q.SchedulerId = "AUTO";
-      q.SchedulerName = "SingleScheduler"; // Give it a more suitable name for single instance
-      // Misfire handling and recovery settings
-      q.MisfireThreshold = TimeSpan.FromMinutes(1);  // 1-minute tolerance for missed jobs
-
-      // Add job store TX (persistent job store)
-      q.UsePersistentStore(options =>
-      {
-        // Perform schema validation
-        options.PerformSchemaValidation = true;
-        options.UseProperties = true; // Use properties
-        options.UseSqlServer(connectionString: configuration.GetConnectionString("DefaultConnection")!);
-
-        // Explicitly set JSON serialize
-        options.UseNewtonsoftJsonSerializer();
-      });
-
-      var serviceProvider = services.BuildServiceProvider();
-      var logger = serviceProvider.GetService<ILogger<MissedEmailRetryJob>>();
-
-      q.AddJobAndTrigger<MissedEmailRetryJob>(configuration, logger);
+      // Use the extension method to add jobs and triggers from appsettings
+      q.AddJobAndTrigger<MissedEmailRetryJob>(configuration);
     });
-
     services.AddQuartzHostedService(opt =>
     {
       opt.WaitForJobsToComplete = true;
     });
-    //hangfire
 
+    //to use persistence store db
+    //services.AddQuartz(q =>
+    //{
+    //  // Use a Scoped container to create jobs
+    //  q.UseJobFactory<MicrosoftDependencyInjectionJobFactory>();
+
+    //  // Scheduler ID and Name for single instance
+    //  q.SchedulerId = "AUTO";
+    //  q.SchedulerName = "SingleScheduler"; 
+
+    //  // Misfire handling and recovery settings
+    //  q.MisfireThreshold = TimeSpan.FromMinutes(1);  // 1-minute tolerance for missed jobs
+
+    //  // Add job store TX (persistent job store)
+    //  q.UsePersistentStore(options =>
+    //  {
+    //    // Perform schema validation
+    //    options.PerformSchemaValidation = true;
+    //    options.UseProperties = true
+    //    options.UseSqlServer(connectionString: configuration.GetConnectionString("DefaultConnection")!);
+
+    //    // Explicitly set JSON serialize
+    //    options.UseNewtonsoftJsonSerializer();
+    //  });
+
+    //  var serviceProvider = services.BuildServiceProvider();
+    //  var logger = serviceProvider.GetService<ILogger<MissedEmailRetryJob>>();
+
+    //  q.AddJobAndTrigger<MissedEmailRetryJob>(configuration, logger);
+    //});
+
+
+
+    //Register Hangfire
     services
       .AddHangfire(x =>
       {

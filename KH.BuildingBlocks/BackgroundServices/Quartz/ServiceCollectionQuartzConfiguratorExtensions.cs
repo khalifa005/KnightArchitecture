@@ -2,50 +2,60 @@ using Quartz;
 
 namespace KH.Services;
 
-public static class ServiceCollectionQuartzConfiguratorExtensions
-{
-  public static void AddJobAndTrigger<T>(
-      this IServiceCollectionQuartzConfigurator quartz,
-      IConfiguration config,
-      ILogger<T> logger,
-      bool immidateExecution = false)
-      where T : IJob
+using Quartz;
+
+  public static class ServiceCollectionQuartzConfiguratorExtensions
   {
-    // Use the name of the IJob as the appsettings.json key
-    string jobName = typeof(T).Name;
-
-    // Try and load the schedule from configuration
-    var configKey = $"Quartz:{jobName}";
-
-
-    // register the job as before
-    var jobKey = new JobKey(jobName);
-    quartz.AddJob<T>(opts => opts.WithIdentity(jobKey));
-
-    if (immidateExecution)
+    public static void AddJobAndTrigger<T>(
+        this IServiceCollectionQuartzConfigurator quartz,
+        IConfiguration config,
+        bool immediateExecution = false)
+        where T : IJob
     {
-      quartz.AddTrigger(opts => opts
-          .ForJob(jobKey)
-          .WithIdentity(jobName + "-trigger")
-          .StartNow());
-    }
-    else
-    {
-      var cronSchedule = config[configKey];//from appsetting
+      // Use the name of the IJob as the appsettings.json key
+      string jobName = typeof(T).Name;
+      var configKey = $"Quartz:Jobs:{jobName}";
 
-      // Some minor validation
-      if (string.IsNullOrEmpty(cronSchedule))
+      // Register the job as before
+      var jobKey = new JobKey(jobName);
+      quartz.AddJob<T>(opts => opts.WithIdentity(jobKey));
+
+      // Check if StartNow is configured in appsettings
+      var startNow = config.GetValue<bool>($"{configKey}:StartNow");
+
+      if (immediateExecution || startNow)
       {
-        logger.LogError($"cronSchedule key in app seeting does not exist {cronSchedule}");
-        //LOG AND SEND EMAIL
-        //throw new Exception($"No Quartz.NET Cron schedule found for job in configuration at {configKey}");
+        quartz.AddTrigger(opts => opts
+            .ForJob(jobKey)
+            .WithIdentity(jobName + "-trigger")
+            .StartNow());
       }
+      else
+      {
+        var cronSchedule = config[$"{configKey}:CronSchedule"];
+        var intervalInMinutes = config.GetValue<int?>($"{configKey}:IntervalInMinutes");
 
-      quartz.AddTrigger(opts => opts
-      .ForJob(jobKey)
-      .WithIdentity(jobName + "-trigger")
-      .WithCronSchedule(cronSchedule)); // use the schedule from configuration
+        // Validation for cron or interval schedule
+        if (!string.IsNullOrEmpty(cronSchedule))
+        {
+          quartz.AddTrigger(opts => opts
+              .ForJob(jobKey)
+              .WithIdentity(jobName + "-trigger")
+              .WithCronSchedule(cronSchedule)); // Use cron-based schedule
+        }
+        else if (intervalInMinutes.HasValue)
+        {
+          quartz.AddTrigger(opts => opts
+              .ForJob(jobKey)
+              .WithIdentity(jobName + "-trigger")
+              .WithSimpleSchedule(x => x
+                  .WithIntervalInMinutes(intervalInMinutes.Value)
+                  .RepeatForever())); // Use simple schedule
+        }
+        else
+        {
+          throw new Exception($"No valid schedule found for job in configuration at {configKey}");
+        }
+      }
     }
   }
-
-}

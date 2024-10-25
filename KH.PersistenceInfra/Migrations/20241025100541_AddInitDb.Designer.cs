@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KH.PersistenceInfra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241002062809_renamingovertables")]
-    partial class renamingovertables
+    [Migration("20241025100541_AddInitDb")]
+    partial class AddInitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,54 @@ namespace KH.PersistenceInfra.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("KH.BuildingBlocks.Apis.Entities.Audit", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("AffectedColumns")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NewValues")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OldValues")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrimaryKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TableName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AuditTrails");
+                });
 
             modelBuilder.Entity("KH.Domain.Entities.Calendar", b =>
                 {
@@ -51,6 +99,7 @@ namespace KH.PersistenceInfra.Migrations
                         .HasColumnOrder(106);
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("HolidayDate")
@@ -50026,8 +50075,28 @@ namespace KH.PersistenceInfra.Migrations
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("CreatedById")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(102);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(101);
+
+                    b.Property<long?>("DeletedById")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(107);
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(106);
+
                     b.Property<string>("FailReasons")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(105);
 
                     b.Property<bool>("IsSent")
                         .HasColumnType("bit");
@@ -50049,6 +50118,9 @@ namespace KH.PersistenceInfra.Migrations
                         .HasColumnType("bigint")
                         .HasColumnOrder(3);
 
+                    b.Property<DateTime?>("ScheduleSendDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Subject")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -50060,6 +50132,14 @@ namespace KH.PersistenceInfra.Migrations
                     b.Property<string>("ToEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("UpdatedById")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(104);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(103);
 
                     b.HasKey("Id");
 
@@ -50132,6 +50212,753 @@ namespace KH.PersistenceInfra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Media");
+                });
+
+            modelBuilder.Entity("KH.Domain.Entities.Permission", b =>
+                {
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    b.Property<long?>("CreatedById")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(102);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(101);
+
+                    b.Property<long?>("DeletedById")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(107);
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(106);
+
+                    b.Property<long?>("DependOnId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(7);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnOrder(4);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(105);
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnOrder(2);
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnOrder(3);
+
+                    b.Property<long?>("ParentId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(5);
+
+                    b.Property<int>("SortKey")
+                        .HasColumnType("int")
+                        .HasColumnOrder(6);
+
+                    b.Property<long?>("UpdatedById")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(104);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(103);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("Permissions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "lookups",
+                            NameAr = "البيانات الاساسية",
+                            NameEn = "Basic Data",
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "categories",
+                            NameAr = "فئات الطلبات",
+                            NameEn = "Request Categories",
+                            ParentId = 1L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "add-category",
+                            NameAr = "إضافة فئة طلب",
+                            NameEn = "Add Request Category",
+                            ParentId = 2L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "edit-category",
+                            NameAr = "تعديل فئة طلب",
+                            NameEn = "Edit Request Category",
+                            ParentId = 2L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "delete-category",
+                            NameAr = "حذف فئة طلب",
+                            NameEn = "Delete Request Category",
+                            ParentId = 2L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "status",
+                            NameAr = "حالات الطلبات",
+                            NameEn = "Request Status",
+                            ParentId = 1L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "edit-status",
+                            NameAr = "تعديل حالة طلب",
+                            NameEn = "Edit Request Status",
+                            ParentId = 6L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "delete-status",
+                            NameAr = "حذف حالة طلب",
+                            NameEn = "Delete Request Status",
+                            ParentId = 6L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 69L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "user-management",
+                            NameAr = "الإدارة",
+                            NameEn = "User Management",
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 70L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "roles-management",
+                            NameAr = "إدارة أدوار المستخدمين",
+                            NameEn = "Roles Management",
+                            ParentId = 69L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 71L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "users",
+                            NameAr = "المستخدمين",
+                            NameEn = "Users",
+                            ParentId = 69L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 72L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "add-user",
+                            NameAr = "إضافة مستخدم",
+                            NameEn = "Add User",
+                            ParentId = 71L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 73L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "edit-user",
+                            NameAr = "تعديل مستخدم",
+                            NameEn = "Edit User",
+                            ParentId = 71L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 74L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "delete-user",
+                            NameAr = "حذف مستخدم",
+                            NameEn = "Delete User",
+                            ParentId = 71L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 75L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "calendar",
+                            NameAr = "التورايخ",
+                            NameEn = "Calendar",
+                            ParentId = 69L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 76L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "add-calendar-holiday",
+                            NameAr = "إضافة تاريخ اجازة",
+                            NameEn = "Add Calendar Holiday",
+                            ParentId = 75L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 77L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "edit-calendar-holiday",
+                            NameAr = "تعديل تاريخ اجازة",
+                            NameEn = "Edit Calendar Holiday",
+                            ParentId = 75L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 78L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "service-one",
+                            NameAr = "الخدمة الاولى",
+                            NameEn = "Service One",
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 80L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "add-service-one",
+                            NameAr = "إضافة شكوى او طلب",
+                            NameEn = "Add Complaint or Request",
+                            ParentId = 78L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 81L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "edit-service-one",
+                            NameAr = "تعديل شكوى او طلب",
+                            NameEn = "Edit Complaint or Request",
+                            ParentId = 78L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 82L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "close-service-one",
+                            NameAr = "إغلاق شكوى او طلب",
+                            NameEn = "Close Complaint or Request",
+                            ParentId = 78L,
+                            SortKey = 4,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 84L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "change-category-service-one",
+                            NameAr = "تغيير فئة شكوى او طلب",
+                            NameEn = "Change Complaint or Request Category",
+                            ParentId = 78L,
+                            SortKey = 6,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 85L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "add-comment-service-one",
+                            NameAr = "إضافة تعليق على شكوى او طلب",
+                            NameEn = "Add Comment to Complaint or Request",
+                            ParentId = 78L,
+                            SortKey = 7,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 86L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "customers",
+                            NameAr = "العملاء",
+                            NameEn = "Customers",
+                            SortKey = 4,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 87L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "add-customer",
+                            NameAr = "إضافة عميل",
+                            NameEn = "Add Customer",
+                            ParentId = 86L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 88L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "edit-customer",
+                            NameAr = "تعديل عميل",
+                            NameEn = "Edit Customer",
+                            ParentId = 86L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 89L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "delete-customer",
+                            NameAr = "حذف عميل",
+                            NameEn = "Delete Customer",
+                            ParentId = 86L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 100L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "audits",
+                            NameAr = "سجلات التدقيق",
+                            NameEn = "Audit Trails",
+                            SortKey = 10,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 101L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "view-audits",
+                            NameAr = "عرض سجلات التدقيق",
+                            NameEn = "View Audit Trails",
+                            ParentId = 100L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 102L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "export-audits",
+                            NameAr = "تصدير سجلات التدقيق إلى Excel",
+                            NameEn = "Export Audit Trails to Excel",
+                            ParentId = 100L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 103L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "import-audits",
+                            NameAr = "استيراد سجلات التدقيق الخارجية",
+                            NameEn = "Import External Audit Trails",
+                            ParentId = 100L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 110L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "departments",
+                            NameAr = "الإدارات",
+                            NameEn = "Departments",
+                            SortKey = 11,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 111L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "view-department",
+                            NameAr = "عرض إدارة",
+                            NameEn = "View Department",
+                            ParentId = 110L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 112L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "list-departments",
+                            NameAr = "قائمة الإدارات",
+                            NameEn = "List Departments",
+                            ParentId = 110L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 113L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "add-department",
+                            NameAr = "إضافة إدارة",
+                            NameEn = "Add Department",
+                            ParentId = 110L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 114L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "edit-department",
+                            NameAr = "تعديل إدارة",
+                            NameEn = "Edit Department",
+                            ParentId = 110L,
+                            SortKey = 4,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 115L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "delete-department",
+                            NameAr = "حذف إدارة",
+                            NameEn = "Delete Department",
+                            ParentId = 110L,
+                            SortKey = 5,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 120L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "emails",
+                            NameAr = "البريد الإلكتروني",
+                            NameEn = "Emails",
+                            SortKey = 12,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 121L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "view-email",
+                            NameAr = "عرض البريد الإلكتروني",
+                            NameEn = "View Email",
+                            ParentId = 120L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 122L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "list-emails",
+                            NameAr = "قائمة البريد الإلكتروني",
+                            NameEn = "List Emails",
+                            ParentId = 120L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 123L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "send-email",
+                            NameAr = "إرسال البريد الإلكتروني",
+                            NameEn = "Send Email",
+                            ParentId = 120L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 130L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "media",
+                            NameAr = "الوسائط",
+                            NameEn = "Media",
+                            SortKey = 13,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 131L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "view-media",
+                            NameAr = "عرض الوسائط",
+                            NameEn = "View Media",
+                            ParentId = 130L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 132L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "list-media",
+                            NameAr = "قائمة الوسائط",
+                            NameEn = "List Media",
+                            ParentId = 130L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 133L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "add-media",
+                            NameAr = "إضافة الوسائط",
+                            NameEn = "Add Media",
+                            ParentId = 130L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 134L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "add-media-range",
+                            NameAr = "إضافة مجموعة وسائط",
+                            NameEn = "Add Media Range",
+                            ParentId = 130L,
+                            SortKey = 4,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 135L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "delete-media",
+                            NameAr = "حذف الوسائط",
+                            NameEn = "Delete Media",
+                            ParentId = 130L,
+                            SortKey = 5,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 136L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "download-media",
+                            NameAr = "تحميل الوسائط",
+                            NameEn = "Download Media",
+                            ParentId = 130L,
+                            SortKey = 6,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 137L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "submit-formly-media",
+                            NameAr = "إرسال نموذج مع وسائط",
+                            NameEn = "Submit Form with Media",
+                            ParentId = 130L,
+                            SortKey = 7,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 140L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "pdf",
+                            NameAr = "ملفات PDF",
+                            NameEn = "PDF Files",
+                            SortKey = 14,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 141L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "export-pdf",
+                            NameAr = "تصدير تفاصيل المستخدم إلى PDF",
+                            NameEn = "Export User Details to PDF",
+                            ParentId = 140L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 150L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "permission-management",
+                            NameAr = "إدارة الأذونات",
+                            NameEn = "Permission Management",
+                            SortKey = 15,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 151L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "view-permission",
+                            NameAr = "عرض إذن",
+                            NameEn = "View Permission",
+                            ParentId = 150L,
+                            SortKey = 1,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 152L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "list-permissions",
+                            NameAr = "قائمة الأذونات",
+                            NameEn = "List Permissions",
+                            ParentId = 150L,
+                            SortKey = 2,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 153L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "add-permission",
+                            NameAr = "إضافة إذن",
+                            NameEn = "Add Permission",
+                            ParentId = 150L,
+                            SortKey = 3,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 154L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "edit-permission",
+                            NameAr = "تعديل إذن",
+                            NameEn = "Edit Permission",
+                            ParentId = 150L,
+                            SortKey = 4,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        },
+                        new
+                        {
+                            Id = 155L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            Key = "delete-permission",
+                            NameAr = "حذف إذن",
+                            NameEn = "Delete Permission",
+                            ParentId = 150L,
+                            SortKey = 5,
+                            UpdatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        });
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.Role", b =>
@@ -50313,13 +51140,13 @@ namespace KH.PersistenceInfra.Migrations
                         .HasColumnType("bit")
                         .HasColumnOrder(105);
 
+                    b.Property<long>("PermissionId")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(2);
+
                     b.Property<long>("RoleId")
                         .HasColumnType("bigint")
                         .HasColumnOrder(3);
-
-                    b.Property<long>("SystemActionsId")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(2);
 
                     b.Property<long?>("UpdatedById")
                         .HasColumnType("bigint")
@@ -50331,14 +51158,392 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PermissionId");
+
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("SystemActionsId");
-
                     b.ToTable("RolePermissions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 1L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 2L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 3L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 4L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 5L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 6L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 8L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 9L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 69L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 70L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 11L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 71L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 12L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 72L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 13L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 73L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 14L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 74L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 15L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 75L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 16L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 76L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 77L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 100L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 101L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 102L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 21L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 103L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 22L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 110L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 23L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 111L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 24L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 112L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 25L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 113L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 26L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 114L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 27L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 115L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 28L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 120L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 29L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 121L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 30L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 122L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 31L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 123L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 32L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 130L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 33L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 131L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 34L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 132L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 35L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 133L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 36L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 134L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 37L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 135L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 38L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 136L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 39L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 137L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 40L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 140L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 41L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 141L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 42L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 150L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 43L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 151L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 44L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 152L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 45L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 153L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 46L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 154L,
+                            RoleId = 2L
+                        },
+                        new
+                        {
+                            Id = 47L,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            PermissionId = 155L,
+                            RoleId = 2L
+                        });
                 });
 
-            modelBuilder.Entity("KH.Domain.Entities.SMSFollowUp", b =>
+            modelBuilder.Entity("KH.Domain.Entities.SmsTemplate", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -50363,7 +51568,81 @@ namespace KH.PersistenceInfra.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(106);
 
-                    b.Property<string>("FailReason")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(105);
+
+                    b.Property<string>("SmsType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextAr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TextEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("UpdatedById")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(104);
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(103);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SmsTemplates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            SmsType = "WelcomeUser",
+                            TextAr = "مرحبًا {FirstName}، رمز التحقق الخاص بك هو {OtpCode}.",
+                            TextEn = "Welcome {FirstName}, your OTP code is {OtpCode}."
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            IsDeleted = false,
+                            SmsType = "OTP",
+                            TextAr = "مرحبًا {Username}، استخدم هذا الرمز {OtpCode} لإعادة تعيين كلمة المرور.",
+                            TextEn = "Hello {Username}, use this OTP {OtpCode} to reset your password."
+                        });
+                });
+
+            modelBuilder.Entity("KH.Domain.Entities.SmsTracker", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("CreatedById")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(102);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(101);
+
+                    b.Property<long?>("DeletedById")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(107);
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(106);
+
+                    b.Property<string>("FailureReasons")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -50385,8 +51664,11 @@ namespace KH.PersistenceInfra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ModelId")
-                        .HasColumnType("int");
+                    b.Property<long>("ModelId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("ScheduleSendDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -50402,492 +51684,7 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SMSFollowUp");
-                });
-
-            modelBuilder.Entity("KH.Domain.Entities.SystemActions", b =>
-                {
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(1);
-
-                    b.Property<long?>("CreatedById")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(102);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnOrder(101);
-
-                    b.Property<long?>("DeletedById")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(107);
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnOrder(106);
-
-                    b.Property<long?>("DependOnID")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(7);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnOrder(4);
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit")
-                        .HasColumnOrder(105);
-
-                    b.Property<string>("NameAr")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnOrder(2);
-
-                    b.Property<string>("NameEn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnOrder(3);
-
-                    b.Property<long?>("ParentID")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(5);
-
-                    b.Property<int>("SortKey")
-                        .HasColumnType("int")
-                        .HasColumnOrder(6);
-
-                    b.Property<long?>("UpdatedById")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(104);
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnOrder(103);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentID");
-
-                    b.ToTable("SystemActions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "البيانات الاساسية",
-                            NameEn = "lookups",
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "فئات الطلبات",
-                            NameEn = "categories",
-                            ParentID = 1L,
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "إضافة فئة طلب",
-                            NameEn = "add-category",
-                            ParentID = 2L,
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل فئة طلب",
-                            NameEn = "edit-category",
-                            ParentID = 2L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "حذف فئة طلب",
-                            NameEn = "delete-category",
-                            ParentID = 2L,
-                            SortKey = 3
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "حالات الطلبات",
-                            NameEn = "status",
-                            ParentID = 1L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل حالة طلب",
-                            NameEn = "edit-status",
-                            ParentID = 6L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "حذف حالة طلب",
-                            NameEn = "delete-status",
-                            ParentID = 6L,
-                            SortKey = 3
-                        },
-                        new
-                        {
-                            Id = 18L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "المدن",
-                            NameEn = "cities",
-                            ParentID = 1L,
-                            SortKey = 5
-                        },
-                        new
-                        {
-                            Id = 19L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "إضافة مدينه",
-                            NameEn = "add-city",
-                            ParentID = 18L,
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 20L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل مدينه",
-                            NameEn = "edit-city",
-                            ParentID = 18L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 21L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "حذف مدينه",
-                            NameEn = "delete-city",
-                            ParentID = 18L,
-                            SortKey = 3
-                        },
-                        new
-                        {
-                            Id = 22L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "المجموعات",
-                            NameEn = "groups",
-                            ParentID = 1L,
-                            SortKey = 6
-                        },
-                        new
-                        {
-                            Id = 23L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "إضافة مجموعه",
-                            NameEn = "add-group",
-                            ParentID = 22L,
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 24L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل مجموعه",
-                            NameEn = "edit-group",
-                            ParentID = 22L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 25L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "حذف مجموعه",
-                            NameEn = "delete-group",
-                            ParentID = 22L,
-                            SortKey = 3
-                        },
-                        new
-                        {
-                            Id = 30L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "الأدوار",
-                            NameEn = "roles",
-                            ParentID = 1L,
-                            SortKey = 8
-                        },
-                        new
-                        {
-                            Id = 31L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل دور مستخدم",
-                            NameEn = "edit-role",
-                            ParentID = 30L,
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 32L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "حذف دور مستخدم",
-                            NameEn = "delete-role",
-                            ParentID = 30L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 33L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "الإدارات والأقسام",
-                            NameEn = "departments",
-                            ParentID = 1L,
-                            SortKey = 9
-                        },
-                        new
-                        {
-                            Id = 34L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "إضافة قسم",
-                            NameEn = "add-department",
-                            ParentID = 33L,
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 35L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل قسم",
-                            NameEn = "edit-department",
-                            ParentID = 33L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 36L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "حذف قسم",
-                            NameEn = "delete-department",
-                            ParentID = 33L,
-                            SortKey = 3
-                        },
-                        new
-                        {
-                            Id = 69L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "الإدارة",
-                            NameEn = "user-management",
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 70L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "إدارة أدوار المستخدمين",
-                            NameEn = "roles-management",
-                            ParentID = 69L,
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 71L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "المستخدمين",
-                            NameEn = "users",
-                            ParentID = 69L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 72L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = " إضافة مستخدم",
-                            NameEn = "add-user",
-                            ParentID = 71L,
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 73L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل مستخدم ",
-                            NameEn = "edit-user",
-                            ParentID = 71L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 74L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "حذف مستخدم ",
-                            NameEn = "delete-user",
-                            ParentID = 71L,
-                            SortKey = 3
-                        },
-                        new
-                        {
-                            Id = 75L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "التورايخ",
-                            NameEn = "calender",
-                            ParentID = 69L,
-                            SortKey = 3
-                        },
-                        new
-                        {
-                            Id = 76L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = " إضافة تاريخ اجازة",
-                            NameEn = "add-calender-holiday",
-                            ParentID = 75L,
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 77L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل تاريخ اجازة ",
-                            NameEn = "edit-calender-holiday",
-                            ParentID = 75L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 78L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "الخدمة الاولى",
-                            NameEn = "servic-one",
-                            SortKey = 3
-                        },
-                        new
-                        {
-                            Id = 80L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "إضافة شكوى او طلب",
-                            NameEn = "add-service-one",
-                            ParentID = 78L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 81L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل شكوى او طلب",
-                            NameEn = "edit-service-one",
-                            ParentID = 78L,
-                            SortKey = 3
-                        },
-                        new
-                        {
-                            Id = 82L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل شكوى او طلب",
-                            NameEn = "close-service-one",
-                            ParentID = 78L,
-                            SortKey = 4
-                        },
-                        new
-                        {
-                            Id = 84L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تغيير فئة شكوى او طلب",
-                            NameEn = "change-category-service-one",
-                            ParentID = 78L,
-                            SortKey = 6
-                        },
-                        new
-                        {
-                            Id = 85L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "إضافة تعليق على شكوى او طلب",
-                            NameEn = "add-comment-service-one",
-                            ParentID = 78L,
-                            SortKey = 7
-                        },
-                        new
-                        {
-                            Id = 86L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "العملاء",
-                            NameEn = "Customers",
-                            SortKey = 4
-                        },
-                        new
-                        {
-                            Id = 87L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "إضافة عميل",
-                            NameEn = "add-Customer",
-                            ParentID = 86L,
-                            SortKey = 1
-                        },
-                        new
-                        {
-                            Id = 88L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "تعديل عميل",
-                            NameEn = "edit-Customer",
-                            ParentID = 86L,
-                            SortKey = 2
-                        },
-                        new
-                        {
-                            Id = 89L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            NameAr = "حذف عميل",
-                            NameEn = "delete-Customer",
-                            ParentID = 86L,
-                            SortKey = 3
-                        });
+                    b.ToTable("SmsTracker");
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.User", b =>
@@ -50967,6 +51764,26 @@ namespace KH.PersistenceInfra.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenCreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("RefreshTokenRevokedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("SensitiveData")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<long?>("UpdatedById")
                         .HasColumnType("bigint")
                         .HasColumnOrder(104);
@@ -50986,20 +51803,6 @@ namespace KH.PersistenceInfra.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
-                            BirthDate = new DateTime(2023, 6, 18, 12, 37, 20, 934, DateTimeKind.Unspecified).AddTicks(518),
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "superadmin@gmail.com",
-                            FirstName = "super",
-                            IsDeleted = false,
-                            IsOtpVerified = false,
-                            LastName = "for Admins",
-                            MiddleName = "admin",
-                            MobileNumber = "0535701842",
-                            Username = "admin"
-                        },
-                        new
-                        {
                             Id = 2L,
                             BirthDate = new DateTime(2023, 6, 18, 12, 37, 20, 934, DateTimeKind.Unspecified).AddTicks(518),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -51010,6 +51813,7 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Motors",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "CEO"
                         },
                         new
@@ -51024,6 +51828,7 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Medical",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "CEO"
                         },
                         new
@@ -51038,6 +51843,7 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Motors",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "VicePresident"
                         },
                         new
@@ -51052,6 +51858,7 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Medical",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "MVicePresident"
                         },
                         new
@@ -51066,6 +51873,7 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Motors",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "DeptManager"
                         },
                         new
@@ -51080,6 +51888,7 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Medical",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "DeptManagerM"
                         },
                         new
@@ -51094,6 +51903,7 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Motors",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "UnitHead"
                         },
                         new
@@ -51108,6 +51918,8 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Medical",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            Password = "AQAAAAIAAYagAAAAEIAW+6BlJBTvMDShf7A43Qti+mTql7IHvCJx4zLDkz1FONLS6rE9m85uLGfT1jd9Jg==",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "UnitHeadM"
                         },
                         new
@@ -51122,6 +51934,7 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Motors",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "Supervisor"
                         },
                         new
@@ -51136,6 +51949,7 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Medical",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "SupervisorM"
                         },
                         new
@@ -51150,6 +51964,7 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Motors",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "CPA"
                         },
                         new
@@ -51164,7 +51979,24 @@ namespace KH.PersistenceInfra.Migrations
                             LastName = "Medical",
                             MiddleName = "For ",
                             MobileNumber = "0535701842",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Username = "CPAM"
+                        },
+                        new
+                        {
+                            Id = 1L,
+                            BirthDate = new DateTime(2023, 6, 18, 12, 37, 20, 934, DateTimeKind.Unspecified).AddTicks(518),
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "superadmin@gmail.com",
+                            FirstName = "Super",
+                            IsDeleted = false,
+                            IsOtpVerified = false,
+                            LastName = "Admin",
+                            MiddleName = "_",
+                            MobileNumber = "0566255570",
+                            Password = "AQAAAAIAAYagAAAAEIAW+6BlJBTvMDShf7A43Qti+mTql7IHvCJx4zLDkz1FONLS6rE9m85uLGfT1jd9Jg==",
+                            RefreshTokenCreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Username = "super-admin"
                         });
                 });
 
@@ -51812,10 +52644,20 @@ namespace KH.PersistenceInfra.Migrations
                         });
                 });
 
+            modelBuilder.Entity("KH.Domain.Entities.Permission", b =>
+                {
+                    b.HasOne("KH.Domain.Entities.Permission", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Parent");
+                });
+
             modelBuilder.Entity("KH.Domain.Entities.Role", b =>
                 {
                     b.HasOne("KH.Domain.Entities.Role", "ReportToRole")
-                        .WithMany()
+                        .WithMany("SubRoles")
                         .HasForeignKey("ReportToRoleId")
                         .OnDelete(DeleteBehavior.Restrict);
 
@@ -51824,31 +52666,21 @@ namespace KH.PersistenceInfra.Migrations
 
             modelBuilder.Entity("KH.Domain.Entities.RolePermissions", b =>
                 {
-                    b.HasOne("KH.Domain.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("KH.Domain.Entities.Permission", "Permission")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("KH.Domain.Entities.SystemActions", "SystemActions")
-                        .WithMany()
-                        .HasForeignKey("SystemActionsId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("KH.Domain.Entities.Role", "Role")
+                        .WithMany("RolePermissions")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Permission");
 
                     b.Navigation("Role");
-
-                    b.Navigation("SystemActions");
-                });
-
-            modelBuilder.Entity("KH.Domain.Entities.SystemActions", b =>
-                {
-                    b.HasOne("KH.Domain.Entities.SystemActions", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.UserDepartment", b =>
@@ -51856,7 +52688,7 @@ namespace KH.PersistenceInfra.Migrations
                     b.HasOne("KH.Domain.Entities.lookups.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KH.Domain.Entities.User", "User")
@@ -51875,13 +52707,13 @@ namespace KH.PersistenceInfra.Migrations
                     b.HasOne("KH.Domain.Entities.lookups.Group", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KH.Domain.Entities.User", "User")
                         .WithMany("UserGroups")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Group");
@@ -51894,18 +52726,32 @@ namespace KH.PersistenceInfra.Migrations
                     b.HasOne("KH.Domain.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KH.Domain.Entities.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("KH.Domain.Entities.Permission", b =>
+                {
+                    b.Navigation("Children");
+
+                    b.Navigation("RolePermissions");
+                });
+
+            modelBuilder.Entity("KH.Domain.Entities.Role", b =>
+                {
+                    b.Navigation("RolePermissions");
+
+                    b.Navigation("SubRoles");
                 });
 
             modelBuilder.Entity("KH.Domain.Entities.User", b =>

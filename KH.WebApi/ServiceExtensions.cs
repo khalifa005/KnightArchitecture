@@ -71,7 +71,7 @@ public static class ServiceExtensions
 
   public static IApplicationBuilder UseHangfireMiddleware(this IApplicationBuilder app, IConfiguration configuration)
   {
-    app.UseHangfireDashboard("/jobs");
+    //app.UseHangfireDashboard("/jobs");
     //app.UseHangfireDashboard("/jobs", new DashboardOptions
     //{
     //  Authorization = new[] { new MyAuthorizationFilter() }

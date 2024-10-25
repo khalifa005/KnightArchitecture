@@ -1,4 +1,3 @@
-using KH.Dto.Models.EmailDto.Request;
 using KH.Services.Emails.Contracts;
 
 namespace KH.Services.BackgroundJobs.QuartzJobs;

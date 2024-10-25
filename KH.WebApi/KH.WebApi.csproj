@@ -6,15 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <PreserveCompilationReferences>true</PreserveCompilationReferences>
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <UserSecretsId>bdde68c3-53c2-4eed-98bd-a4afbb66cab1</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
-  <NoWarn>$(NoWarn);ASP0023</NoWarn>
     <NoWarn>$(NoWarn);ASP0023</NoWarn>
-
   </PropertyGroup>
 
   <ItemGroup>
+ 
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

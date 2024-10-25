@@ -1,6 +1,5 @@
 using Hangfire;
 using KH.PersistenceInfra.Data;
-using KH.PersistenceInfra.Data.Interceptors;
 using KH.PersistenceInfra.Middlewares;
 using KH.PersistenceInfra.Repositories;
 using KH.PersistenceInfra.Services;
@@ -12,14 +11,9 @@ public static class InfrastructureServiceRegisteration
 {
   public static IServiceCollection AddInfrastructureService(this IServiceCollection services, IConfiguration configuration)
   {
-    //services.AddScoped<AuditLoggingInterceptor>();
 
-    services.AddDbContext<AppDbContext>((sp, db) =>
-    db.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
-    .AddInterceptors(
-      //sp.GetRequiredService<AuditLoggingInterceptor>()
-      )
-    );
+    services.AddDbContext<AppDbContext>(db =>
+    db.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
     //services.AddSingleton<DapperContext>();
     services.AddScoped<IUnitOfWork, UnitOfWork>();
     services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -32,7 +26,6 @@ public static class InfrastructureServiceRegisteration
     app.MigrateDatabase<AppDbContext>((context, services) =>
     {
       var logger = services.GetRequiredService<ILogger<AppDbContext>>();
-      //CleanArchitectDbContext.SeedAsync(context, logger).Wait();
     });
 
     return app;

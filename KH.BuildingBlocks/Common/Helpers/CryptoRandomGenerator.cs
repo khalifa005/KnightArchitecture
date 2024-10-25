@@ -68,12 +68,17 @@ public class CryptoRandomGenerator
   public static string GenerateOTP(int otpLength = 4, int maxValue = 9)
   {
     StringBuilder otp = new StringBuilder();
+    Random random = new Random();
+
     for (int i = 0; i < otpLength; i++)
     {
-      otp.Append(Next(maxValue));
+      // Generate a random number between 0 and maxValue (inclusive)
+      otp.Append(random.Next(0, maxValue + 1));
     }
+
     return otp.ToString();
   }
+
   #endregion
 
   #region Random UInt32

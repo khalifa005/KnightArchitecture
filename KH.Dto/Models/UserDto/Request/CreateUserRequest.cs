@@ -72,7 +72,7 @@ public class CreateUserRequest
     }
     else
     {
-      user.Password = string.IsNullOrEmpty(Password) ? Password : new PasswordHasher<object?>().HashPassword(null, Password);
+      user.Password = new PasswordHasher<object?>().HashPassword(null, Password);
       user.OtpCode = CryptoRandomGenerator.GenerateOTP();
       user.IsOtpVerified = false;
     }
