@@ -4,6 +4,7 @@ using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KH.PersistenceInfra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241025102632_AddInitDb")]
+    partial class AddInitDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1907,6 +1910,15 @@ namespace KH.PersistenceInfra.Migrations
 
                     b.Property<bool>("IsOtpVerified")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastAssignDateAsAssignTo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastAssignDateAsCaseOwner")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastAssignDateAsSupervisor")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .IsRequired()

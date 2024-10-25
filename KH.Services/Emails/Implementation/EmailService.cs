@@ -119,7 +119,6 @@ public class EmailService : IEmailService
 
     return response;
   }
-
   public async Task<ApiResponse<string>> ResendEmailAsync(long emailTrackerId, CancellationToken cancellationToken)
   {
     var response = new ApiResponse<string>((int)HttpStatusCode.OK);
@@ -172,7 +171,7 @@ public class EmailService : IEmailService
 
     return response;
   }
-  public async Task<ApiResponse<string>> ResendRangeOfMissedEmailsAsync(int batchSize, CancellationToken cancellationToken)
+  public async Task<ApiResponse<string>> ResendRangeOfScheduledEmailsAsync(int batchSize, CancellationToken cancellationToken)
   {
     var res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
@@ -189,7 +188,7 @@ public class EmailService : IEmailService
         var missedEmails = await repository.GetPagedWithProjectionAsync<EmailTracker>(
             pageNumber: currentPage,
             pageSize: batchSize,
-            filterExpression: e => !e.IsSent, // Unsent emails
+            filterExpression: e => !e.IsSent, // Unsent emails - more specific depend on schedule datetime
             projectionExpression: e => e, // Direct projection
             orderBy: query => query.OrderBy(e => e.Id), // Order by ID for consistency
             tracking: true, // Enable tracking so we can update status
@@ -261,6 +260,37 @@ public class EmailService : IEmailService
 
     return res;
   }
+  public async Task<ApiResponse<string>> ScheduleEmailAsync(MailRequest mailRequest, DateTime? scheduledTime, CancellationToken cancellationToken)
+  {
+    var response = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    try
+    {
+      _logger.LogDebug("Scheduling email for later time.");
+
+      if (mailRequest == null || mailRequest.ModelId == 0 || mailRequest.Model == null)
+        throw new ArgumentException("Invalid mail request parameters.");
+
+      var emailEntity = mailRequest.ToEntity();
+      emailEntity.IsSent = false; // Mark as unsent
+      emailEntity.ScheduleSendDate = scheduledTime; // Set the scheduled time for sending
+
+      // Save to database but do not send
+      await SaveEmailAsync(emailEntity, cancellationToken);
+
+      response.Data = "Email scheduled successfully.";
+      _logger.LogDebug($"Email scheduled to send at {scheduledTime} for recipient(s) {string.Join(",", mailRequest.ToEmail)}");
+
+      return response;
+    }
+    catch (Exception ex)
+    {
+      _logger.LogError($"Error scheduling email: {ex.Message}");
+      response.StatusCode = (int)HttpStatusCode.InternalServerError;
+      response.ErrorMessage = "Error occurred while scheduling email.";
+      return response;
+    }
+  }
 
   private async Task<ApiResponse<string>> SaveEmailAsync(EmailTracker request, CancellationToken cancellationToken)
   {
@@ -268,25 +298,19 @@ public class EmailService : IEmailService
 
     bool isModelExists = Enum.IsDefined(typeof(ModelEnum), request.Model);
 
-    await _unitOfWork.BeginTransactionAsync(cancellationToken);
-
     try
     {
-
 
       var repository = _unitOfWork.Repository<EmailTracker>();
 
       await repository.AddAsync(request, cancellationToken: cancellationToken);
       await _unitOfWork.CommitAsync(cancellationToken);
 
-      await _unitOfWork.CommitTransactionAsync(cancellationToken);
-
       res.Data = request.Id.ToString();
       return res;
     }
     catch (Exception ex)
     {
-      await _unitOfWork.RollBackTransactionAsync(cancellationToken);
       return ex.HandleException(res, _env, _logger);
     }
   }

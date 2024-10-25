@@ -33,7 +33,7 @@ public static class ServicesRegistrationService
     services.AddQuartz(q =>
     {
       // Use the extension method to add jobs and triggers from appsettings
-      q.AddJobAndTrigger<MissedEmailRetryJob>(configuration);
+      q.AddJobAndTrigger<ScheduleEmailSenderJob>(configuration);
     });
     services.AddQuartzHostedService(opt =>
     {

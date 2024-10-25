@@ -1,11 +1,8 @@
 
-using KH.BuildingBlocks.Apis.Contracts;
 using KH.BuildingBlocks.Apis.Entities;
-using KH.BuildingBlocks.Common.Attributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace KH.Domain.Entities;
-//[NoAudit]
 public class User : TrackerEntity { 
 
 [Timestamp]
@@ -27,10 +24,6 @@ public string? RefreshToken { get; set; }
 public DateTime? RefreshTokenExpiryTime { get; set; }
 public DateTime RefreshTokenCreatedDate { get; set; }
 public DateTime? RefreshTokenRevokedDate { get; set; }
-
-public DateTime? LastAssignDateAsSupervisor { get; set; }
-public DateTime? LastAssignDateAsCaseOwner { get; set; }
-public DateTime? LastAssignDateAsAssignTo { get; set; }
 
 public ICollection<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
 public ICollection<UserGroup> UserGroups { get; set; } = new HashSet<UserGroup>();

@@ -52,7 +52,7 @@ public class UserNotificationService : IUserNotificationService
     var result = await _smsService.SendSmsAsync(smsTrackerForm, cancellationToken);
     return result;
   }
-  public async Task<ApiResponse<string>> SendUserWelcomeEmailAsync(User userEntity, CancellationToken cancellationToken)
+  public async Task<ApiResponse<string>> SendUserWelcomeEmailAsync(User userEntity, DateTime? scheduleSendDateTime, CancellationToken cancellationToken)
   {
     var mailRequest = new MailRequest
     {
@@ -63,7 +63,7 @@ public class UserNotificationService : IUserNotificationService
       ToEmail = new List<string?> { userEntity.Email },
       PrefaredLanguageKey = "En"
     };
-    var res = await _emailService.SendEmailAsync(mailRequest, cancellationToken);
+    var res = await _emailService.ScheduleEmailAsync(mailRequest, scheduleSendDateTime , cancellationToken);
 
     return res;
   }

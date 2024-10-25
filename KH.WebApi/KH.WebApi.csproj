@@ -32,5 +32,9 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Fake SMS\" />
+  </ItemGroup>
   
 </Project>

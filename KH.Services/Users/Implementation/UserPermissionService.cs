@@ -15,7 +15,6 @@ public class UserPermissionService : IUserPermissionService
     _currentUserService = currentUserService;
   }
 
-  //??
   public IUnitOfWork UnitOfWork() => _unitOfWork;
 
   public async ValueTask<ClaimsIdentity?> GetUserPermissionsIdentity(
@@ -28,18 +27,6 @@ public class UserPermissionService : IUserPermissionService
     }
     else
     {
-      //we can get user roles from token + we can get the permissions from cache
-      //   var userRoles = await _unitOfWork.Repository<UserRole>().FindByAsync(x => x.UserId == userId && x.IsDeleted == false);
-
-      //   var dbRolesFunctions = await _unitOfWork
-      //     .Repository<RolePermissions>()
-      //     .FindByAsync(x => userRoles.Select(o => o.RoleId).Contains(x.RoleId),
-      //     q => q.Include(u => u.Permission));
-
-      //   userPermissions =
-      //(from perm in dbRolesFunctions
-      // select new Claim(PermissionRequirement.ClaimType, perm.Permission?.Key ?? "")).ToList();
-
       //get user roles from token + permissions from cache
       var userRolesFromToken = _currentUserService.RolesIds;
       var userIdFromToken = _currentUserService.UserId;

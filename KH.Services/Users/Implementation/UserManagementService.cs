@@ -104,7 +104,7 @@ public class UserManagementService : IUserManagementService
         // Handle the failure but don't rollback the transaction
       }
 
-      var emailResult = await _userNotificationService.SendUserWelcomeEmailAsync(userEntity, cancellationToken);
+      var emailResult = await _userNotificationService.SendUserWelcomeEmailAsync(userEntity,scheduleSendDateTime:null, cancellationToken);
       if (emailResult.StatusCode != StatusCodes.Status200OK)
       {
         _logger.LogError($"Failed to send email to user {userEntity.Id}: {emailResult.ErrorMessage}");

@@ -1,9 +1,7 @@
-using Hangfire;
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Middlewares;
 using KH.PersistenceInfra.Repositories;
 using KH.PersistenceInfra.Services;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace KH.PersistenceInfra;
 

@@ -8,6 +8,373 @@
 	},
 	"item": [
 		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"// Stores the accessToken in an environment variable\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"accessToken\", jsonData.data.accessToken);\r",
+									"pm.environment.set(\"refreshToken\", jsonData.data.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Username\": \"khalifaceo\",\r\n  \"Password\": \"KhalifaPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DevServerURL}}/api/Authentication/Login",
+							"host": [
+								"{{DevServerURL}}"
+							],
+							"path": [
+								"api",
+								"Authentication",
+								"Login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Username\": \"khalifaceo\",\r\n  \"Password\": \"KhalifaPassword\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DevServerURL}}/api/Authentication/Login",
+									"host": [
+										"{{DevServerURL}}"
+									],
+									"path": [
+										"api",
+										"Authentication",
+										"Login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "684"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Oct 2024 08:11:42 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zeXN0ZW0iOiJJbnRlcm5hbEFkbWluIiwibmFtZWlkIjoiMjMiLCJ1bmlxdWVfbmFtZSI6Ik1haG1vdWQiLCJmYW1pbHlfbmFtZSI6IktoYWxpZmEiLCJlbWFpbCI6ImNlb0BleGFtcGxlLmNvbSIsImdpdmVuX25hbWUiOiIwNTY2MjM4MzU1MjQzMjIzIiwicm9sZSI6IjIiLCJuYmYiOjE3Mjg5Nzk5MDMsImV4cCI6MTcyOTA2NjMwMywiaWF0IjoxNzI4OTc5OTAzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo0MjAwIn0.ajOTRvGhMSujrufBc_a7ju2TSIQzanuUgwiKBEbdruQ; expires=Fri, 25 Oct 2024 08:11:43 GMT; path=/; httponly"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "refreshToken=TKOv8sHfmrEoz2BjsLEKmvOsPKFN1yPgAJteILxIRZ8%3D; expires=Fri, 25 Oct 2024 08:11:43 GMT; path=/; httponly"
+								},
+								{
+									"key": "X-Correlation-ID",
+									"value": "a9a79dde-952d-4759-aa57-1c1c9e42bd0d"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zeXN0ZW0iOiJJbnRlcm5hbEFkbWluIiwibmFtZWlkIjoiMjMiLCJ1bmlxdWVfbmFtZSI6Ik1haG1vdWQiLCJmYW1pbHlfbmFtZSI6IktoYWxpZmEiLCJlbWFpbCI6ImNlb0BleGFtcGxlLmNvbSIsImdpdmVuX25hbWUiOiIwNTY2MjM4MzU1MjQzMjIzIiwicm9sZSI6IjIiLCJuYmYiOjE3Mjg5Nzk5MDMsImV4cCI6MTcyOTA2NjMwMywiaWF0IjoxNzI4OTc5OTAzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo0MjAwIn0.ajOTRvGhMSujrufBc_a7ju2TSIQzanuUgwiKBEbdruQ\",\n        \"refreshToken\": \"TKOv8sHfmrEoz2BjsLEKmvOsPKFN1yPgAJteILxIRZ8=\",\n        \"needVerification\": null,\n        \"userRoles\": null\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
+						}
+					]
+				},
+				{
+					"name": "RefreshUserToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Stores the accessToken in an environment variable\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"accessToken\", jsonData.data.accessToken);\r",
+									"pm.environment.set(\"refreshToken\", jsonData.data.refreshToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"RefreshToken\":\"{{refreshToken}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DevServerURL}}/api/Authentication/RefreshUserToken",
+							"host": [
+								"{{DevServerURL}}"
+							],
+							"path": [
+								"api",
+								"Authentication",
+								"RefreshUserToken"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RefreshUserToken",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"RefreshToken\":\"{{refreshToken}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DevServerURL}}/api/Authentication/RefreshUserToken",
+									"host": [
+										"{{DevServerURL}}"
+									],
+									"path": [
+										"api",
+										"Authentication",
+										"RefreshUserToken"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "684"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Oct 2024 08:11:57 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "X-Correlation-ID",
+									"value": "5c9442f1-4dc0-49b8-a0a5-191c65432fc0"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zeXN0ZW0iOiJJbnRlcm5hbEFkbWluIiwibmFtZWlkIjoiMjMiLCJ1bmlxdWVfbmFtZSI6Ik1haG1vdWQiLCJmYW1pbHlfbmFtZSI6IktoYWxpZmEiLCJlbWFpbCI6ImNlb0BleGFtcGxlLmNvbSIsImdpdmVuX25hbWUiOiIwNTY2MjM4MzU1MjQzMjIzIiwicm9sZSI6IjIiLCJuYmYiOjE3Mjg5Nzk5MTcsImV4cCI6MTcyOTA2NjMxNywiaWF0IjoxNzI4OTc5OTE3LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo0MjAwIn0.SSPhuNY9q5QCavd-gBuBUXQQDHbEeOGgbLQbnVP1Hb0\",\n        \"refreshToken\": \"NwcLK2bgyBrh4YHEFqUBOZTV1Whej1q8IKHWGhjlu/g=\",\n        \"needVerification\": null,\n        \"userRoles\": null\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
+						}
+					]
+				},
+				{
+					"name": "SuperAdminLogin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"// Stores the accessToken in an environment variable\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"accessToken\", jsonData.data.accessToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "tenant",
+								"value": "alpha",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"super-admin\",\r\n    \"Password\": \"KhalifaPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DevServerURL}}/api/Authentication/Login",
+							"host": [
+								"{{DevServerURL}}"
+							],
+							"path": [
+								"api",
+								"Authentication",
+								"Login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SuperAdminLogin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Username\": \"super-admin\",\r\n    \"Password\": \"KhalifaPassword\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DevServerURL}}/api/Authentication/Login",
+									"host": [
+										"{{DevServerURL}}"
+									],
+									"path": [
+										"api",
+										"Authentication",
+										"Login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "676"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 15 Oct 2024 07:47:14 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zeXN0ZW0iOiJJbnRlcm5hbEFkbWluIiwibmFtZWlkIjoiMSIsInVuaXF1ZV9uYW1lIjoiU3VwZXIiLCJmYW1pbHlfbmFtZSI6IkFkbWluIiwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiIwNTY2MjU1NTcwIiwicm9sZSI6IjEiLCJuYmYiOjE3Mjg5Nzg0MzQsImV4cCI6MTcyOTA2NDgzNCwiaWF0IjoxNzI4OTc4NDM0LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo0MjAwIn0.TaNPDdoiVhTnbyNYaDpf9a-AaZKBWgQlklk7VoR5Dtc; expires=Fri, 25 Oct 2024 07:47:14 GMT; path=/; httponly"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "refreshToken=AypDTeVkQ%2BmFlVCIK%2FfITB0jdkcMABAMoEisx15L5gA%3D; expires=Fri, 25 Oct 2024 07:47:14 GMT; path=/; httponly"
+								},
+								{
+									"key": "X-Correlation-ID",
+									"value": "9fe2720a-c27d-491b-944e-3bf858de859f"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zeXN0ZW0iOiJJbnRlcm5hbEFkbWluIiwibmFtZWlkIjoiMSIsInVuaXF1ZV9uYW1lIjoiU3VwZXIiLCJmYW1pbHlfbmFtZSI6IkFkbWluIiwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiIwNTY2MjU1NTcwIiwicm9sZSI6IjEiLCJuYmYiOjE3Mjg5Nzg0MzQsImV4cCI6MTcyOTA2NDgzNCwiaWF0IjoxNzI4OTc4NDM0LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo0MjAwIn0.TaNPDdoiVhTnbyNYaDpf9a-AaZKBWgQlklk7VoR5Dtc\",\n        \"refreshToken\": \"AypDTeVkQ+mFlVCIK/fITB0jdkcMABAMoEisx15L5gA=\",\n        \"needVerification\": null,\n        \"userRoles\": null\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
 			"name": "Lookups",
 			"item": [
 				{
@@ -87,17 +454,27 @@
 						{
 							"name": "Delete",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{DevServerURL}}/api/Roles/20",
+									"raw": "{{DevServerURL}}/api/Roles/2000",
 									"host": [
 										"{{DevServerURL}}"
 									],
 									"path": [
 										"api",
 										"Roles",
-										"20"
+										"2000"
 									]
 								}
 							},
@@ -120,7 +497,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\r\n  \"Id\": \"100\",\r\n  \"NameEn\": \"Admin 100\",\r\n  \"NameAr\": \"Admin 100\",\r\n  \"Description\": \"Admin DES\"\r\n}\r\n",
+									"raw": "{\r\n\r\n  \"Id\": \"2000\",\r\n  \"NameEn\": \"Admin \",\r\n  \"NameAr\": \"Admin \",\r\n  \"Description\": \"Admin\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -157,7 +534,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\r\n  \"Id\": \"100\",\r\n  \"RolePermissionsIds\": [70,71],\r\n//   \"RolePermissionsIds\": [70,71,72,73],\r\n  \"HasPermissionsUpdates\": true,\r\n  \"NameEn\": \"Admin 100\",\r\n  \"NameAr\": \"Admin 100\",\r\n  \"Description\": \"Admin DES\"\r\n}\r\n",
+									"raw": "{\r\n\r\n  \"Id\": \"2000\",\r\n  \"RolePermissionsIds\": [70,71],\r\n//   \"RolePermissionsIds\": [70,71,72,73],\r\n  \"HasPermissionsUpdates\": true,\r\n  \"NameEn\": \"Admin \",\r\n  \"NameAr\": \"Admin \",\r\n  \"Description\": \"Admin DES\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -195,7 +572,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\r\n  \"Id\": \"12300\",\r\n  \"RolePermissionsIds\": [100],\r\n  \"NameEn\": \"Admin 100\",\r\n  \"NameAr\": \"Admin 100\",\r\n  \"Description\": \"Admin DES\"\r\n}\r\n",
+									"raw": "{\r\n\r\n  \"Id\": \"2000\",\r\n  \"RolePermissionsIds\": [100],\r\n  \"NameEn\": \"Admin 100\",\r\n  \"NameAr\": \"Admin 100\",\r\n  \"Description\": \"Admin DES\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -319,7 +696,154 @@
 							]
 						},
 						{
-							"name": "Get List",
+							"name": "ListAll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isDeleted\": false,\r\n    \"search\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DevServerURL}}/api/Roles/ListAll",
+									"host": [
+										"{{DevServerURL}}"
+									],
+									"path": [
+										"api",
+										"Roles",
+										"ListAll"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get List",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"isDeleted\": false,\r\n    \"search\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DevServerURL}}/api/Roles/ListAll",
+											"host": [
+												"{{DevServerURL}}"
+											],
+											"path": [
+												"api",
+												"Roles",
+												"ListAll"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "172"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Oct 2024 11:27:52 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "X-Correlation-ID",
+											"value": "12b9eef3-b267-44da-b0ee-a8b374f23ba5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": [\n        {\n            \"id\": 1200,\n            \"nameAr\": \"Admin 100\",\n            \"nameEn\": \"Admin 100\",\n            \"description\": \"Admin DES\"\n        }\n    ],\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
+								},
+								{
+									"name": "Get List",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"isDeleted\": false,\r\n    \"search\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DevServerURL}}/api/Roles/ListAll",
+											"host": [
+												"{{DevServerURL}}"
+											],
+											"path": [
+												"api",
+												"Roles",
+												"ListAll"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "1042"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Oct 2024 11:28:12 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "X-Correlation-ID",
+											"value": "6982490c-ccc5-4427-a306-a42deede1ef0"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"nameAr\": \"مدير النظام الكلي\",\n            \"nameEn\": \"Super admin\",\n            \"description\": null\n        },\n        {\n            \"id\": 2,\n            \"nameAr\": \"مدير المؤسسة\",\n            \"nameEn\": \"CEO\",\n            \"description\": null\n        },\n        {\n            \"id\": 3,\n            \"nameAr\": \"نائب مدير المؤسسة\",\n            \"nameEn\": \"Vice President\",\n            \"description\": null\n        },\n        {\n            \"id\": 4,\n            \"nameAr\": \"مدير القسم\",\n            \"nameEn\": \"Dept. Manager\",\n            \"description\": null\n        },\n        {\n            \"id\": 5,\n            \"nameAr\": \"رئيس وحدة\",\n            \"nameEn\": \"Unit Head\",\n            \"description\": null\n        },\n        {\n            \"id\": 6,\n            \"nameAr\": \"مشرف\",\n            \"nameEn\": \"Supervisor\",\n            \"description\": null\n        },\n        {\n            \"id\": 7,\n            \"nameAr\": \"الموظف\",\n            \"nameEn\": \"CPA\",\n            \"description\": null\n        },\n        {\n            \"id\": 8,\n            \"nameAr\": \"مدير خدمة العملاء\",\n            \"nameEn\": \"Customer Service Manager\",\n            \"description\": null\n        },\n        {\n            \"id\": 9,\n            \"nameAr\": \"مشرف خدمة العملاء\",\n            \"nameEn\": \"Customer Service Supervisor\",\n            \"description\": null\n        },\n        {\n            \"id\": 10,\n            \"nameAr\": \"وكيل عملاء\",\n            \"nameEn\": \"Agent user\",\n            \"description\": null\n        },\n        {\n            \"id\": 100,\n            \"nameAr\": \"Admin 100\",\n            \"nameEn\": \"Admin 100\",\n            \"description\": \"Admin DES\"\n        }\n    ],\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
+								}
+							]
+						},
+						{
+							"name": "PagedList",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -343,18 +867,73 @@
 									}
 								},
 								"url": {
-									"raw": "{{DevServerURL}}/api/Roles/list",
+									"raw": "{{DevServerURL}}/api/Roles/PagedList",
 									"host": [
 										"{{DevServerURL}}"
 									],
 									"path": [
 										"api",
 										"Roles",
-										"list"
+										"PagedList"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Get List Copy",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 20,\r\n    \"search\": \"John\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DevServerURL}}/api/Roles/PagedList",
+											"host": [
+												"{{DevServerURL}}"
+											],
+											"path": [
+												"api",
+												"Roles",
+												"PagedList"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "1034"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Oct 2024 11:06:33 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "X-Correlation-ID",
+											"value": "33717b23-c105-4aa7-bf63-0e75d482c4ef"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": 1,\n                \"nameAr\": \"مدير النظام الكلي\",\n                \"nameEn\": \"Super admin\",\n                \"description\": null\n            },\n            {\n                \"id\": 2,\n                \"nameAr\": \"مدير المؤسسة\",\n                \"nameEn\": \"CEO\",\n                \"description\": null\n            },\n            {\n                \"id\": 3,\n                \"nameAr\": \"نائب مدير المؤسسة\",\n                \"nameEn\": \"Vice President\",\n                \"description\": null\n            },\n            {\n                \"id\": 4,\n                \"nameAr\": \"مدير القسم\",\n                \"nameEn\": \"Dept. Manager\",\n                \"description\": null\n            },\n            {\n                \"id\": 5,\n                \"nameAr\": \"رئيس وحدة\",\n                \"nameEn\": \"Unit Head\",\n                \"description\": null\n            },\n            {\n                \"id\": 6,\n                \"nameAr\": \"مشرف\",\n                \"nameEn\": \"Supervisor\",\n                \"description\": null\n            },\n            {\n                \"id\": 7,\n                \"nameAr\": \"الموظف\",\n                \"nameEn\": \"CPA\",\n                \"description\": null\n            },\n            {\n                \"id\": 8,\n                \"nameAr\": \"مدير خدمة العملاء\",\n                \"nameEn\": \"Customer Service Manager\",\n                \"description\": null\n            },\n            {\n                \"id\": 9,\n                \"nameAr\": \"مشرف خدمة العملاء\",\n                \"nameEn\": \"Customer Service Supervisor\",\n                \"description\": null\n            },\n            {\n                \"id\": 10,\n                \"nameAr\": \"وكيل عملاء\",\n                \"nameEn\": \"Agent user\",\n                \"description\": null\n            }\n        ],\n        \"currentPage\": 1,\n        \"totalPages\": 2,\n        \"pageSize\": 10,\n        \"totalCount\": 11\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
+								}
+							]
 						}
 					]
 				},
@@ -362,38 +941,104 @@
 					"name": "Groups",
 					"item": [
 						{
-							"name": "Get Copy",
+							"name": "Get",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{DevServerURL}}/api/Groups/3",
+									"raw": "{{DevServerURL}}/api/Groups/1",
 									"host": [
 										"{{DevServerURL}}"
 									],
 									"path": [
 										"api",
 										"Groups",
-										"3"
+										"1"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Get Copy",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{DevServerURL}}/api/Groups/1",
+											"host": [
+												"{{DevServerURL}}"
+											],
+											"path": [
+												"api",
+												"Groups",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "357"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 22 Oct 2024 12:08:32 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "X-Correlation-ID",
+											"value": "0HN7II8I39DLE:00000002"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"ticketCategoryId\": 5,\n        \"nameAr\": \"الطلبات الخارجيه\",\n        \"nameEn\": \" Request Group\",\n        \"description\": null,\n        \"createdDate\": \"0001-01-01T00:00:00\",\n        \"createdById\": null,\n        \"updatedDate\": null,\n        \"updatedById\": null,\n        \"isDeleted\": false,\n        \"deletedDate\": null,\n        \"deletedById\": null,\n        \"id\": 1\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
+								}
+							]
 						},
 						{
 							"name": "Delete Copy",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{DevServerURL}}/api/Groups/20",
+									"raw": "{{DevServerURL}}/api/Groups/1",
 									"host": [
 										"{{DevServerURL}}"
 									],
 									"path": [
 										"api",
 										"Groups",
-										"20"
+										"1"
 									]
 								}
 							},
@@ -454,13 +1099,23 @@
 							"response": []
 						},
 						{
-							"name": "Get List Copy",
+							"name": "PagedList",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"id\": 20,\r\n    \"search\": \"John\"\r\n}",
+									"raw": "{\r\n    \"id\": 20,\r\n    \"search\": \"\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -468,18 +1123,166 @@
 									}
 								},
 								"url": {
-									"raw": "{{DevServerURL}}/api/Groups/list",
+									"raw": "{{DevServerURL}}/api/Groups/PagedList",
 									"host": [
 										"{{DevServerURL}}"
 									],
 									"path": [
 										"api",
 										"Groups",
-										"list"
+										"PagedList"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "PagedList",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 20,\r\n    \"search\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DevServerURL}}/api/Groups/PagedList",
+											"host": [
+												"{{DevServerURL}}"
+											],
+											"path": [
+												"api",
+												"Groups",
+												"PagedList"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "345"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Oct 2024 12:54:27 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "X-Correlation-ID",
+											"value": "355ce1e4-1fa3-4235-abf0-85952b6c2f18"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": null,\n                \"nameAr\": \"الطلبات الخارجيه\",\n                \"nameEn\": \" Request Group\",\n                \"description\": null\n            },\n            {\n                \"id\": null,\n                \"nameAr\": \"المبيعات\",\n                \"nameEn\": \"Team Selling\",\n                \"description\": null\n            }\n        ],\n        \"currentPage\": 1,\n        \"totalPages\": 1,\n        \"pageSize\": 10,\n        \"totalCount\": 2\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
+								}
+							]
+						},
+						{
+							"name": "ListAll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 20,\r\n    \"search\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DevServerURL}}/api/Groups/ListAll",
+									"host": [
+										"{{DevServerURL}}"
+									],
+									"path": [
+										"api",
+										"Groups",
+										"ListAll"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "ListAll Copy",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 20,\r\n    \"search\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DevServerURL}}/api/Groups/ListAll",
+											"host": [
+												"{{DevServerURL}}"
+											],
+											"path": [
+												"api",
+												"Groups",
+												"ListAll"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "275"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Oct 2024 12:54:18 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "X-Correlation-ID",
+											"value": "3fcd8ba3-f277-4554-890b-4e42f6f5e30b"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": [\n        {\n            \"id\": null,\n            \"nameAr\": \"الطلبات الخارجيه\",\n            \"nameEn\": \" Request Group\",\n            \"description\": null\n        },\n        {\n            \"id\": null,\n            \"nameAr\": \"المبيعات\",\n            \"nameEn\": \"Team Selling\",\n            \"description\": null\n        }\n    ],\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
+								}
+							]
 						}
 					]
 				},
@@ -531,14 +1334,14 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{DevServerURL}}/api/Departments/21",
+									"raw": "{{DevServerURL}}/api/Departments/1",
 									"host": [
 										"{{DevServerURL}}"
 									],
 									"path": [
 										"api",
 										"Departments",
-										"21"
+										"1"
 									]
 								}
 							},
@@ -619,7 +1422,7 @@
 							"response": []
 						},
 						{
-							"name": "Get List",
+							"name": "PagedList",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -643,14 +1446,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{DevServerURL}}/api/Departments/list",
+									"raw": "{{DevServerURL}}/api/Departments/PagedList",
 									"host": [
 										"{{DevServerURL}}"
 									],
 									"path": [
 										"api",
 										"Departments",
-										"list"
+										"PagedList"
 									]
 								}
 							},
@@ -756,6 +1559,99 @@
 									"body": "{\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": null,\n                \"nameAr\": \"Motor Claim / Providers & Salvage\",\n                \"nameEn\": \"Motor Claim / Providers & Salvage\",\n                \"description\": null\n            },\n            {\n                \"id\": null,\n                \"nameAr\": \"خدمة عملاء\",\n                \"nameEn\": \"Call Center\",\n                \"description\": null\n            },\n            {\n                \"id\": null,\n                \"nameAr\": \"مطالبات\",\n                \"nameEn\": \"Claim\",\n                \"description\": null\n            },\n            {\n                \"id\": null,\n                \"nameAr\": \"الطبي\",\n                \"nameEn\": \"Medical\",\n                \"description\": null\n            },\n            {\n                \"id\": null,\n                \"nameAr\": \"التقني\",\n                \"nameEn\": \"It\",\n                \"description\": null\n            },\n            {\n                \"id\": null,\n                \"nameAr\": \"المالية\",\n                \"nameEn\": \"Finance\",\n                \"description\": null\n            }\n        ],\n        \"currentPage\": 1,\n        \"totalPages\": 1,\n        \"pageSize\": 10,\n        \"totalCount\": 6\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
 								}
 							]
+						},
+						{
+							"name": "ListAll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 20,\r\n    \"search\": \"John\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{DevServerURL}}/api/Departments/ListAll",
+									"host": [
+										"{{DevServerURL}}"
+									],
+									"path": [
+										"api",
+										"Departments",
+										"ListAll"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "ListAll",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": 20,\r\n    \"search\": \"John\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{DevServerURL}}/api/Departments/ListAll",
+											"host": [
+												"{{DevServerURL}}"
+											],
+											"path": [
+												"api",
+												"Departments",
+												"ListAll"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Length",
+											"value": "589"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 17 Oct 2024 12:43:37 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Kestrel"
+										},
+										{
+											"key": "X-Correlation-ID",
+											"value": "5b8b086c-0cb5-41e2-afd7-3f77d76fea55"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": [\n        {\n            \"id\": null,\n            \"nameAr\": \"Motor Claim / Providers & Salvage\",\n            \"nameEn\": \"Motor Claim / Providers & Salvage\",\n            \"description\": null\n        },\n        {\n            \"id\": null,\n            \"nameAr\": \"خدمة عملاء\",\n            \"nameEn\": \"Call Center\",\n            \"description\": null\n        },\n        {\n            \"id\": null,\n            \"nameAr\": \"مطالبات\",\n            \"nameEn\": \"Claim\",\n            \"description\": null\n        },\n        {\n            \"id\": null,\n            \"nameAr\": \"الطبي\",\n            \"nameEn\": \"Medical\",\n            \"description\": null\n        },\n        {\n            \"id\": null,\n            \"nameAr\": \"التقني\",\n            \"nameEn\": \"It\",\n            \"description\": null\n        },\n        {\n            \"id\": null,\n            \"nameAr\": \"المالية\",\n            \"nameEn\": \"Finance\",\n            \"description\": null\n        }\n    ],\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
+								}
+							]
 						}
 					]
 				},
@@ -763,7 +1659,7 @@
 					"name": "Permissions",
 					"item": [
 						{
-							"name": "Get List",
+							"name": "ListAll",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -778,14 +1674,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{DevServerURL}}/api/Permissions/List",
+									"raw": "{{DevServerURL}}/api/Permissions/ListAll",
 									"host": [
 										"{{DevServerURL}}"
 									],
 									"path": [
 										"api",
 										"Permissions",
-										"List"
+										"ListAll"
 									]
 								}
 							},
@@ -1105,368 +2001,6 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "Authentication",
-					"item": [
-						{
-							"name": "Login",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"\r",
-											"// Stores the accessToken in an environment variable\r",
-											"var jsonData = pm.response.json();\r",
-											"pm.environment.set(\"accessToken\", jsonData.data.accessToken);\r",
-											"pm.environment.set(\"refreshToken\", jsonData.data.refreshToken);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"Username\": \"khalifaceo\",\r\n  \"Password\": \"KhalifaPassword\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{DevServerURL}}/api/Authentication/Login",
-									"host": [
-										"{{DevServerURL}}"
-									],
-									"path": [
-										"api",
-										"Authentication",
-										"Login"
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "Login",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"Username\": \"khalifaceo\",\r\n  \"Password\": \"KhalifaPassword\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{DevServerURL}}/api/Authentication/Login",
-											"host": [
-												"{{DevServerURL}}"
-											],
-											"path": [
-												"api",
-												"Authentication",
-												"Login"
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Length",
-											"value": "684"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8"
-										},
-										{
-											"key": "Date",
-											"value": "Tue, 15 Oct 2024 08:11:42 GMT"
-										},
-										{
-											"key": "Server",
-											"value": "Kestrel"
-										},
-										{
-											"key": "Set-Cookie",
-											"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zeXN0ZW0iOiJJbnRlcm5hbEFkbWluIiwibmFtZWlkIjoiMjMiLCJ1bmlxdWVfbmFtZSI6Ik1haG1vdWQiLCJmYW1pbHlfbmFtZSI6IktoYWxpZmEiLCJlbWFpbCI6ImNlb0BleGFtcGxlLmNvbSIsImdpdmVuX25hbWUiOiIwNTY2MjM4MzU1MjQzMjIzIiwicm9sZSI6IjIiLCJuYmYiOjE3Mjg5Nzk5MDMsImV4cCI6MTcyOTA2NjMwMywiaWF0IjoxNzI4OTc5OTAzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo0MjAwIn0.ajOTRvGhMSujrufBc_a7ju2TSIQzanuUgwiKBEbdruQ; expires=Fri, 25 Oct 2024 08:11:43 GMT; path=/; httponly"
-										},
-										{
-											"key": "Set-Cookie",
-											"value": "refreshToken=TKOv8sHfmrEoz2BjsLEKmvOsPKFN1yPgAJteILxIRZ8%3D; expires=Fri, 25 Oct 2024 08:11:43 GMT; path=/; httponly"
-										},
-										{
-											"key": "X-Correlation-ID",
-											"value": "a9a79dde-952d-4759-aa57-1c1c9e42bd0d"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zeXN0ZW0iOiJJbnRlcm5hbEFkbWluIiwibmFtZWlkIjoiMjMiLCJ1bmlxdWVfbmFtZSI6Ik1haG1vdWQiLCJmYW1pbHlfbmFtZSI6IktoYWxpZmEiLCJlbWFpbCI6ImNlb0BleGFtcGxlLmNvbSIsImdpdmVuX25hbWUiOiIwNTY2MjM4MzU1MjQzMjIzIiwicm9sZSI6IjIiLCJuYmYiOjE3Mjg5Nzk5MDMsImV4cCI6MTcyOTA2NjMwMywiaWF0IjoxNzI4OTc5OTAzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo0MjAwIn0.ajOTRvGhMSujrufBc_a7ju2TSIQzanuUgwiKBEbdruQ\",\n        \"refreshToken\": \"TKOv8sHfmrEoz2BjsLEKmvOsPKFN1yPgAJteILxIRZ8=\",\n        \"needVerification\": null,\n        \"userRoles\": null\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
-								}
-							]
-						},
-						{
-							"name": "RefreshUserToken",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"// Stores the accessToken in an environment variable\r",
-											"var jsonData = pm.response.json();\r",
-											"pm.environment.set(\"accessToken\", jsonData.data.accessToken);\r",
-											"pm.environment.set(\"refreshToken\", jsonData.data.refreshToken);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{accessToken}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"RefreshToken\":\"{{refreshToken}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{DevServerURL}}/api/Authentication/RefreshUserToken",
-									"host": [
-										"{{DevServerURL}}"
-									],
-									"path": [
-										"api",
-										"Authentication",
-										"RefreshUserToken"
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "RefreshUserToken",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"RefreshToken\":\"{{refreshToken}}\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{DevServerURL}}/api/Authentication/RefreshUserToken",
-											"host": [
-												"{{DevServerURL}}"
-											],
-											"path": [
-												"api",
-												"Authentication",
-												"RefreshUserToken"
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Length",
-											"value": "684"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8"
-										},
-										{
-											"key": "Date",
-											"value": "Tue, 15 Oct 2024 08:11:57 GMT"
-										},
-										{
-											"key": "Server",
-											"value": "Kestrel"
-										},
-										{
-											"key": "X-Correlation-ID",
-											"value": "5c9442f1-4dc0-49b8-a0a5-191c65432fc0"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zeXN0ZW0iOiJJbnRlcm5hbEFkbWluIiwibmFtZWlkIjoiMjMiLCJ1bmlxdWVfbmFtZSI6Ik1haG1vdWQiLCJmYW1pbHlfbmFtZSI6IktoYWxpZmEiLCJlbWFpbCI6ImNlb0BleGFtcGxlLmNvbSIsImdpdmVuX25hbWUiOiIwNTY2MjM4MzU1MjQzMjIzIiwicm9sZSI6IjIiLCJuYmYiOjE3Mjg5Nzk5MTcsImV4cCI6MTcyOTA2NjMxNywiaWF0IjoxNzI4OTc5OTE3LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo0MjAwIn0.SSPhuNY9q5QCavd-gBuBUXQQDHbEeOGgbLQbnVP1Hb0\",\n        \"refreshToken\": \"NwcLK2bgyBrh4YHEFqUBOZTV1Whej1q8IKHWGhjlu/g=\",\n        \"needVerification\": null,\n        \"userRoles\": null\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
-								}
-							]
-						},
-						{
-							"name": "SuperAdminLogin",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"\r",
-											"// Stores the accessToken in an environment variable\r",
-											"var jsonData = pm.response.json();\r",
-											"pm.environment.set(\"accessToken\", jsonData.data.accessToken);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"Username\": \"super-admin\",\r\n    \"Password\": \"KhalifaPassword\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{DevServerURL}}/api/Authentication/Login",
-									"host": [
-										"{{DevServerURL}}"
-									],
-									"path": [
-										"api",
-										"Authentication",
-										"Login"
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "SuperAdminLogin",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"Username\": \"super-admin\",\r\n    \"Password\": \"KhalifaPassword\"\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{DevServerURL}}/api/Authentication/Login",
-											"host": [
-												"{{DevServerURL}}"
-											],
-											"path": [
-												"api",
-												"Authentication",
-												"Login"
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Length",
-											"value": "676"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json; charset=utf-8"
-										},
-										{
-											"key": "Date",
-											"value": "Tue, 15 Oct 2024 07:47:14 GMT"
-										},
-										{
-											"key": "Server",
-											"value": "Kestrel"
-										},
-										{
-											"key": "Set-Cookie",
-											"value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zeXN0ZW0iOiJJbnRlcm5hbEFkbWluIiwibmFtZWlkIjoiMSIsInVuaXF1ZV9uYW1lIjoiU3VwZXIiLCJmYW1pbHlfbmFtZSI6IkFkbWluIiwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiIwNTY2MjU1NTcwIiwicm9sZSI6IjEiLCJuYmYiOjE3Mjg5Nzg0MzQsImV4cCI6MTcyOTA2NDgzNCwiaWF0IjoxNzI4OTc4NDM0LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo0MjAwIn0.TaNPDdoiVhTnbyNYaDpf9a-AaZKBWgQlklk7VoR5Dtc; expires=Fri, 25 Oct 2024 07:47:14 GMT; path=/; httponly"
-										},
-										{
-											"key": "Set-Cookie",
-											"value": "refreshToken=AypDTeVkQ%2BmFlVCIK%2FfITB0jdkcMABAMoEisx15L5gA%3D; expires=Fri, 25 Oct 2024 07:47:14 GMT; path=/; httponly"
-										},
-										{
-											"key": "X-Correlation-ID",
-											"value": "9fe2720a-c27d-491b-944e-3bf858de859f"
-										}
-									],
-									"cookie": [],
-									"body": "{\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zeXN0ZW0iOiJJbnRlcm5hbEFkbWluIiwibmFtZWlkIjoiMSIsInVuaXF1ZV9uYW1lIjoiU3VwZXIiLCJmYW1pbHlfbmFtZSI6IkFkbWluIiwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiIwNTY2MjU1NTcwIiwicm9sZSI6IjEiLCJuYmYiOjE3Mjg5Nzg0MzQsImV4cCI6MTcyOTA2NDgzNCwiaWF0IjoxNzI4OTc4NDM0LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo0MjAwIn0.TaNPDdoiVhTnbyNYaDpf9a-AaZKBWgQlklk7VoR5Dtc\",\n        \"refreshToken\": \"AypDTeVkQ+mFlVCIK/fITB0jdkcMABAMoEisx15L5gA=\",\n        \"needVerification\": null,\n        \"userRoles\": null\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
-								}
-							]
-						}
-					]
-				},
-				{
 					"name": "Get User",
 					"request": {
 						"auth": {
@@ -1482,14 +2016,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{DevServerURL}}/api/users/23",
+							"raw": "{{DevServerURL}}/api/users/36",
 							"host": [
 								"{{DevServerURL}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"23"
+								"36"
 							]
 						}
 					},
@@ -1715,7 +2249,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n  \"Id\": 28,\r\n  \"FirstName\": \"Updated Mahmoud1\",\r\n  \"MiddleName\": \"A.\",\r\n  \"LastName\": \"Mohamed\",\r\n  \"Email\": \"Updated@example.com\",\r\n  \"BirthDate\": \"1985-07-24T00:00:00Z\",\r\n  \"MobileNumber\": \"12334567890\",\r\n  \"GroupId\": 2,\r\n  \"DepartmentId\": 5,\r\n  \"RoleIds\": [3, 5]\r\n}\r\n",
+							"raw": "{\r\n\r\n  \"Id\": 41,\r\n  \"FirstName\": \" Mahmoud\",\r\n  \"MiddleName\": \"A.\",\r\n  \"LastName\": \"Mohamed\",\r\n  \"Email\": \"Updated@example.com\",\r\n  \"BirthDate\": \"1985-07-24T00:00:00Z\",\r\n  \"MobileNumber\": \"12334567890\",\r\n  \"GroupId\": 2,\r\n  \"DepartmentId\": 5,\r\n  \"RoleIds\": [5]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1806,7 +2340,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n  \"FirstName\": \"XMahmoud\",\r\n  \"MiddleName\": \"CEO\",\r\n  \"LastName\": \"Khalifa\",\r\n  \"Password\": \"KhalifaPassword\",\r\n  \r\n  \"Email\": \"ceo442@example.com\",\r\n  \"MobileNumber\": \"0563622383552432423\",\r\n  \"Username\": \"Xkhalifaceo42\",\r\n\r\n  \"BirthDate\": \"1995-07-24T00:00:00Z\",\r\n  \"GroupId\": 2,\r\n  \"DepartmentId\": 5,\r\n  \"RoleIds\": [2,3]\r\n}\r\n",
+							"raw": "{\r\n\r\n  \"SensitiveData\": \"AccountNumberExample\",\r\n  \"FirstName\": \"Mahmoud\",\r\n  \"MiddleName\": \"Mohamed\",\r\n  \"LastName\": \"Khalifa\",\r\n  \"Password\": \"KhalifaPassword\",\r\n  \r\n  \"Email\": \"MahmoudCEO111111111@example.com\",\r\n  \"MobileNumber\": \"056628557411111111\",\r\n  \"Username\": \"KH_CEO11111111\",\r\n\r\n  \"BirthDate\": \"1995-07-24T00:00:00Z\",\r\n  \"GroupId\": 2,\r\n  \"DepartmentId\": 5,\r\n  \"RoleIds\": [4]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1990,7 +2524,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 20,\r\n    \"IsDeleted\": false,\r\n    \"search\": \"John\"\r\n}",
+							"raw": "{\r\n    \"id\": 20,\r\n    \"IsDeleted\": false,\r\n    \"search\": \"\"\r\n}   ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2156,7 +2690,7 @@
 					]
 				},
 				{
-					"name": "Delete Users",
+					"name": "Delete",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2171,14 +2705,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{DevServerURL}}/api/users/28",
+							"raw": "{{DevServerURL}}/api/users/42",
 							"host": [
 								"{{DevServerURL}}"
 							],
 							"path": [
 								"api",
 								"users",
-								"28"
+								"42"
 							]
 						}
 					},
@@ -2773,7 +3307,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"IsSent\": true,\r\n    \"ModelId\": 23,\r\n    \"Model\": \"User\"\r\n}",
+							"raw": "{\r\n    \"IsSent\": true,\r\n    \"ModelId\": 42,\r\n    \"Model\": \"User\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3536,22 +4070,24 @@
 								},
 								{
 									"key": "Body",
-									"value": "KnightHedgeArchitecture Body",
+									"value": "KnightTemplate",
 									"type": "text"
 								},
 								{
 									"key": "ToEmail",
 									"value": "mahmudkhalifa@outlook.com",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "ToCCEmail",
 									"value": "mahmudkhalifa1@outlook.com",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "Subject",
-									"value": "Knight Hedge Architecture",
+									"value": "KnightTemplate",
 									"type": "text"
 								},
 								{
@@ -3561,207 +4097,24 @@
 								},
 								{
 									"key": "ModelId",
-									"value": "23",
+									"value": "2",
 									"type": "text"
 								},
 								{
 									"key": "Attachments",
 									"type": "file",
-									"src": [
-										"/C:/Users/Lenovo/Desktop/mahmoud kahlifa.jpg",
-										"/C:/Users/Lenovo/Desktop/keyboard-shortcuts.pdf"
-									]
-								},
-								{
-									"key": "MailTypeId",
-									"value": "2",
-									"type": "text",
-									"disabled": true
+									"src": "/C:/Users/Lenovo/Downloads/images.png"
 								},
 								{
 									"key": "Model",
 									"value": "user",
 									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{DevServerURL}}/api/Email/Send",
-							"host": [
-								"{{DevServerURL}}"
-							],
-							"path": [
-								"api",
-								"Email",
-								"Send"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Send",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "ToEmail",
-											"value": "mahmudkhalifa1@gmail.com",
-											"type": "text"
-										},
-										{
-											"key": "Body",
-											"value": "KnightHedgeArchitecture Body",
-											"type": "text"
-										},
-										{
-											"key": "ToEmail",
-											"value": "mahmudkhalifa@outlook.com",
-											"type": "text"
-										},
-										{
-											"key": "ToCCEmail",
-											"value": "mahmudkhalifa1@outlook.com",
-											"type": "text"
-										},
-										{
-											"key": "Subject",
-											"value": "Knight Hedge Architecture",
-											"type": "text"
-										},
-										{
-											"key": "MailType",
-											"value": "WelcomeTemplate",
-											"type": "text"
-										},
-										{
-											"key": "ModelId",
-											"value": "23",
-											"type": "text"
-										},
-										{
-											"key": "Attachments",
-											"type": "file",
-											"src": [
-												"/C:/Users/Lenovo/Desktop/mahmoud kahlifa.jpg",
-												"/C:/Users/Lenovo/Desktop/keyboard-shortcuts.pdf"
-											]
-										},
-										{
-											"key": "MailTypeId",
-											"value": "2",
-											"type": "text",
-											"disabled": true
-										},
-										{
-											"key": "Model",
-											"value": "user",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{DevServerURL}}/api/Email/Send",
-									"host": [
-										"{{DevServerURL}}"
-									],
-									"path": [
-										"api",
-										"Email",
-										"Send"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "plain",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "text/plain; charset=utf-8"
 								},
 								{
-									"key": "Date",
-									"value": "Tue, 15 Oct 2024 10:17:18 GMT"
-								},
-								{
-									"key": "Server",
-									"value": "Kestrel"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "X-Correlation-ID",
-									"value": "a8943f3d-6c34-4b7c-aa73-4b68de8c777a"
-								}
-							],
-							"cookie": [],
-							"body": "Confirmation Email Sent!"
-						}
-					]
-				},
-				{
-					"name": "Send Without Files",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "ToEmail",
-									"value": "mahmudkhalifa1@gmail.com",
+									"key": "PrefaredLanguageKey",
+									"value": "En",
+									"description": "Ar - En",
 									"type": "text"
-								},
-								{
-									"key": "ToEmail",
-									"value": "mahmudkhalifa@outlook.com",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "ToCCEmail",
-									"value": "mahmudkhalifa1@outlook.com",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "Subject",
-									"value": "KH-TemplateV2",
-									"type": "text"
-								},
-								{
-									"key": "MailType",
-									"value": "WelcomeTemplate",
-									"type": "text"
-								},
-								{
-									"key": "MailTypeId",
-									"value": "2",
-									"type": "text"
-								},
-								{
-									"key": "Body",
-									"value": "test Body",
-									"type": "text"
-								},
-								{
-									"key": "UserId",
-									"value": "20",
-									"type": "text"
-								},
-								{
-									"key": "Attachments",
-									"type": "file",
-									"src": [
-										"/C:/Users/Lenovo/Desktop/mahmoud kahlifa.jpg",
-										"/C:/Users/Lenovo/Desktop/keyboard-shortcuts.pdf"
-									],
-									"disabled": true
 								}
 							]
 						},
@@ -3796,7 +4149,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"PageIndex\":1,\r\n    \"PageSize\":20,\r\n    \"IsSent\":true,\r\n    \"Model\":\"user\",\r\n    \"ModelId\":23\r\n    \r\n}",
+							"raw": "{\r\n    \"PageIndex\":1,\r\n    \"PageSize\":20,\r\n    \"IsSent\":true,\r\n    \"Model\":\"user\",\r\n    \"PrefaredLanguageKey\":\"Ar\",\r\n    \"ModelId\":23\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3815,62 +4168,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "Get List",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"PageIndex\":1,\r\n    \"PageSize\":20,\r\n    \"IsSent\":true,\r\n    \"Model\":\"user\",\r\n    \"ModelId\":23\r\n    \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{DevServerURL}}/api/Email/list",
-									"host": [
-										"{{DevServerURL}}"
-									],
-									"path": [
-										"api",
-										"Email",
-										"list"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Length",
-									"value": "439"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 15 Oct 2024 10:17:25 GMT"
-								},
-								{
-									"key": "Server",
-									"value": "Kestrel"
-								},
-								{
-									"key": "X-Correlation-ID",
-									"value": "dbde8f60-4b87-4b81-beb0-7d849c1f0f48"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"data\": {\n        \"items\": [\n            {\n                \"model\": \"user\",\n                \"modelId\": 23,\n                \"toEmail\": \"mahmudkhalifa1@gmail.com,mahmudkhalifa@outlook.com\",\n                \"toCCEmail\": \"mahmudkhalifa1@outlook.com\",\n                \"subject\": \"Knight Hedge Architecture\",\n                \"body\": \"KnightHedgeArchitecture Body\",\n                \"mailType\": \"WelcomeTemplate\",\n                \"isSent\": true,\n                \"failReasons\": \"\",\n                \"id\": 2\n            }\n        ],\n        \"currentPage\": 1,\n        \"totalPages\": 1,\n        \"pageSize\": 20,\n        \"totalCount\": 1\n    },\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
-						}
-					]
+					"response": []
 				}
 			]
 		},
@@ -3894,7 +4192,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Id\":21\r\n}",
+							"raw": "{\r\n    \"Id\":33\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3936,7 +4234,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{DevServerURL}}/api/Audits/GetUserAudits/23",
+							"raw": "{{DevServerURL}}/api/Audits/GetUserAudits/1",
 							"host": [
 								"{{DevServerURL}}"
 							],
@@ -3944,7 +4242,7 @@
 								"api",
 								"Audits",
 								"GetUserAudits",
-								"23"
+								"1"
 							]
 						}
 					},
@@ -4049,7 +4347,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{DevServerURL}}/api/Audits/ExportUserAudits/23",
+							"raw": "{{DevServerURL}}/api/Audits/ExportUserAudits/1",
 							"host": [
 								"{{DevServerURL}}"
 							],
@@ -4057,7 +4355,7 @@
 								"api",
 								"Audits",
 								"ExportUserAudits",
-								"23"
+								"1"
 							]
 						}
 					},
@@ -4228,6 +4526,151 @@
 							"body": "{\n    \"data\": \"imported\",\n    \"statusCode\": 200,\n    \"errors\": [],\n    \"errorMessage\": \"\",\n    \"errorCode\": \"\",\n    \"errorMessageAr\": \"\"\n}"
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "BackgroundJobs",
+			"item": [
+				{
+					"name": "FireAndForgetJob",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DevServerURL}}/api/JobTest/FireAndForgetJob",
+							"host": [
+								"{{DevServerURL}}"
+							],
+							"path": [
+								"api",
+								"JobTest",
+								"FireAndForgetJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DelayedJob",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DevServerURL}}/api/JobTest/DelayedJob",
+							"host": [
+								"{{DevServerURL}}"
+							],
+							"path": [
+								"api",
+								"JobTest",
+								"DelayedJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ContinuationJob",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DevServerURL}}/api/JobTest/ContinuationJob",
+							"host": [
+								"{{DevServerURL}}"
+							],
+							"path": [
+								"api",
+								"JobTest",
+								"ContinuationJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ReccuringJob",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DevServerURL}}/api/JobTest/ReccuringJob",
+							"host": [
+								"{{DevServerURL}}"
+							],
+							"path": [
+								"api",
+								"JobTest",
+								"ReccuringJob"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
