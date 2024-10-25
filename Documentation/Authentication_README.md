@@ -169,3 +169,10 @@ public async Task<ActionResult<ApiResponse<CustomerResponse>>> Get(int id, Cance
 - **SuperAdmin Override:** SuperAdmins bypass all permission checks, making administrative actions streamlined and secure.
 - **Localized Error Responses:** Users are informed of errors in multiple languages, improving usability and accessibility.
 
+
+
+
+![Untitled diagram-2024-10-25-125950](https://github.com/user-attachments/assets/d24a3dcf-d7a6-436f-b283-81ad8ca0b37e)
+
+
+
