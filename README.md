@@ -25,6 +25,66 @@ This repository is structured following the principles of **Clean Architecture**
 ---
 
 ## KH.Core
+
+
+### 1. Dual Authentication Mechanism
+   - **Supports JWT and Basic Authentication**: Enables flexible identity verification for both internal and external users.
+   - **Secure Access Control**: Provides token-based and session-based authentication, catering to various user roles and requirements.
+
+### 2. Dynamic, Role-Based Permission Management
+   - **Middleware-Driven Permissions**: Leverages middleware with `AND/OR` logic, allowing complex, fine-grained control over user access.
+   - **Dynamic Policies**: Allows for policy updates without changing core code, ensuring adaptability to evolving business requirements.
+   - **Centralized Permission Checks**: Simplifies permission management and improves scalability.
+
+### 3. Auditing and Change Tracking
+   - **Tracks User Actions**: Logs modifications with old and new values for compliance and detailed auditing.
+   - **Excel Export/Import**: Exports and imports audit logs, making data accessible and easy to analyze.
+   - **Customizable Audit Viewing**: Access is permission-controlled, allowing only authorized users to view audit trails.
+
+### 4. Localized Error Handling
+   - **Multi-Language Support**: Provides error messages in multiple languages, such as English and Arabic, enhancing accessibility.
+   - **User-Friendly Debugging**: Delivers detailed error feedback to simplify troubleshooting and improve the user experience.
+
+### 5. Middleware-Based Access Control
+   - **PermissionsMiddleware**: Centralizes access control, enforcing permission checks on each request.
+   - **SuperAdmin Bypass**: Allows SuperAdmins to bypass permission checks, streamlining high-level administrative tasks.
+
+### 6. Comprehensive Background Job Support
+   - **Quartz.NET Integration**: Supports scheduling and running background jobs like email dispatch and SMS notifications.
+   - **Enhanced Automation**: Allows scheduled tasks, improving user engagement and operational efficiency.
+
+### 7. Modular Architecture for Extensibility
+   - **Easy Integration of New Modules**: Allows for seamless addition of new features.
+   - **Modular Services**: Provides services for caching, file management, auditing, and notifications, simplifying future enhancements.
+
+### 8. Granular and Configurable Caching Support
+   - **Redis and In-Memory Caching**: Offers flexible caching options for optimized data storage.
+   - **Distributed Caching Support**: Ensures enhanced performance, ideal for scalable environments.
+
+### 9. Advanced Notification System
+   - **SMS and Email Notifications**: Manages notifications with customizable templates.
+   - **Tracking and Logging**: Logs SMS and email statuses, maintaining a detailed record of communications.
+
+### 10. Excel Export and File Management Services
+   - **Data Export to Excel**: Allows users to export reports and audits for offline access.
+   - **Secure File Management**: Validates file uploads with format checks, ensuring safe and compliant handling.
+
+### 11. Scalable Localization and Preference Management
+   - **User Preferences and Language Support**: Centralizes user preferences and supports multiple languages, making it ideal for global applications.
+   - **ServerPreferenceManager**: Centralizes and manages user preferences across services.
+
+### 12. Customizable Controllers and API Endpoint Security
+   - **Custom Attributes for Endpoint Protection**: Implements `PermissionAuthorizeAttribute` for fine-grained endpoint security.
+   - **Dynamic Permission Policies**: Allows easy customization of API access based on role and permissions.
+
+---
+
+Each of these features contributes to a secure, flexible, and scalable system designed to meet the needs of enterprise-level applications. `KnightHedgeArchitecture` provides the tools necessary for comprehensive user management, auditing, and secure, extensible API development.
+
+---
+
+
+
 ## Used Packages
 
 Here is a list of key packages used in this project and their purpose:
