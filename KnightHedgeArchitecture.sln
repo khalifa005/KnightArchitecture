@@ -16,6 +16,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KH.BuildingBlocks", "KH.BuildingBlocks\KH.BuildingBlocks.csproj", "{F18336EF-F9FC-4FB1-A481-BF20CC117DE5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{14EF3F37-F24C-4B51-9B5C-5CB6D11D0056}"
+	ProjectSection(SolutionItems) = preProject
+		Authentication_README.md = Authentication_README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
