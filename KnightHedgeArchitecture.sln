@@ -17,7 +17,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KH.BuildingBlocks", "KH.Bui
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{14EF3F37-F24C-4B51-9B5C-5CB6D11D0056}"
 	ProjectSection(SolutionItems) = preProject
+		Auditing_README.md = Auditing_README.md
 		Authentication_README.md = Authentication_README.md
+		BackgroundJobs_README.md = BackgroundJobs_README.md
+		CompleteUseCaseWorkflow_README.md = CompleteUseCaseWorkflow_README.md
+		EntityFrameworkGenericRepo_README.md = EntityFrameworkGenericRepo_README.md
+		Excell_README.md = Excell_README.md
+		FilesManagement_README.md = FilesManagement_README.md
+		Loging_README.md = Loging_README.md
+		Notification_README.md = Notification_README.md
+		Pdf_README.md = Pdf_README.md
+		UpcomingVersions_README.md = UpcomingVersions_README.md
 	EndProjectSection
 EndProject
 Global
