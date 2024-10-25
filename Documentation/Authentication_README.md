@@ -3,6 +3,17 @@
 ## Overview
 The KnightArchitecture project uses a robust authentication and authorization framework. It leverages JWT (JSON Web Token)-based and Basic authentication schemes for identity verification, coupled with a middleware-driven permissions management system that operates through dynamic policies. This structure is designed to support flexible, role-based access and modular permissions for user access control.
 
+## Advantages
+- **Dynamic Policies:** Flexible and easy-to-extend authorization rules.
+- **Hybrid Authentication:** Supports both JWT and Basic authentication, allowing different types of users.
+- **Centralized, Scalable Permissions Management:** The `PermissionsMiddleware` handles all permission checks, centralizing access control and simplifying adjustments.
+- **Flexible Role Management:** With the ability to define policies dynamically and manage permissions centrally, the system adapts easily to changes in business requirements.
+- **Granular Access Control:** Dynamic policies with AND/OR operators allow complex access control scenarios, supporting a wide range of user roles and permissions.
+- **SuperAdmin Override:** SuperAdmins bypass all permission checks, making administrative actions streamlined and secure.
+- **SuperAdmin Override:** Simplified management for administrative users.
+- **Middleware-Based:** Centralized permission management, making it modular and scalable.
+- **Localized Errors:** Detailed error messages in both English and Arabic for better user experience.
+- 
 ## Middleware Configuration in Startup
 The `Startup.cs` file configures authentication, permissions, and authorization middleware:
 ```csharp
@@ -66,15 +77,9 @@ Here’s how the authentication, authorization, and permissions management syste
 ### 9. **Error Handling and Feedback**
 - If authentication or authorization fails, appropriate 401 (Unauthorized) or 403 (Forbidden) responses are returned, with localized error messages.
 
+
+![Untitled diagram-2024-10-25-125950](https://github.com/user-attachments/assets/d24a3dcf-d7a6-436f-b283-81ad8ca0b37e)
 ---
-
-## Advantages
-
-- **Dynamic Policies:** Flexible and easy-to-extend authorization rules.
-- **Hybrid Authentication:** Supports both JWT and Basic authentication, allowing different types of users.
-- **SuperAdmin Override:** Simplified management for administrative users.
-- **Middleware-Based:** Centralized permission management, making it modular and scalable.
-- **Localized Errors:** Detailed error messages in both English and Arabic for better user experience.
 
 ## Key Components and Responsibilities
 
@@ -162,17 +167,9 @@ public async Task<ActionResult<ApiResponse<CustomerResponse>>> Get(int id, Cance
 - **Access Denied:**
   - If permissions are lacking (e.g., trying to delete without `DELETE_CUSTOMER`), a `403 Forbidden` response with a message, potentially in multiple languages, is returned.
 
-### Advantages of This Approach
-- **Centralized, Scalable Permissions Management:** The `PermissionsMiddleware` handles all permission checks, centralizing access control and simplifying adjustments.
-- **Flexible Role Management:** With the ability to define policies dynamically and manage permissions centrally, the system adapts easily to changes in business requirements.
-- **Granular Access Control:** Dynamic policies with AND/OR operators allow complex access control scenarios, supporting a wide range of user roles and permissions.
-- **SuperAdmin Override:** SuperAdmins bypass all permission checks, making administrative actions streamlined and secure.
-- **Localized Error Responses:** Users are informed of errors in multiple languages, improving usability and accessibility.
 
 
 
-
-![Untitled diagram-2024-10-25-125950](https://github.com/user-attachments/assets/d24a3dcf-d7a6-436f-b283-81ad8ca0b37e)
 
 
 
