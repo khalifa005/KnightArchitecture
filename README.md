@@ -13,11 +13,7 @@
       <b>V3 Arabian knight</b>
     </td>
   </tr>
-
 </table>
-
-
-
 
 ## Table of Contents
 1. [Knight Template Overview](#knight-template-overview)
@@ -30,6 +26,7 @@
 8. [Upcoming in Version 2: Ultimate Knight Hedge](#upcoming-in-version-2-ultimate-knight-hedge)
 9. [Postman collection](#postman-collection)
 10. [Getting Started](#getting-started)
+11. [Contact owner](#contact-owner)
 
 
 ## Knight Template Overview
@@ -287,6 +284,8 @@ All API found here.
 ![image](https://github.com/user-attachments/assets/b938fdf6-0d56-4b05-bffd-70ee31a99158)
 
 ---
+## Contact owner
+[<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg' alt='linkedin' height='40'>](https://www.linkedin.com/in/mahmoud-khalifa-643936138/)  
 
 ## Getting Started
 
