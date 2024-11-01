@@ -28,7 +28,8 @@
 6. [Screenshots](#screenshots)
 7. [Used Packages](#used-packages)
 8. [Upcoming in Version 2: Ultimate Knight Hedge](#upcoming-in-version-2-ultimate-knight-hedge)
-9. [Getting Started](#getting-started)
+9. [Postman collection](#postman-collection)
+10. [Getting Started](#getting-started)
 
 
 ## Knight Template Overview
@@ -190,7 +191,6 @@ Example Auditing data generated automatically by ef core.
 ![image](https://github.com/user-attachments/assets/2f862e4e-074a-4bb3-9ac7-33cba1f36d65)
 
 
-
 ## Used Packages
 
 Here is a list of key packages used in this project and their purpose:
@@ -268,6 +268,16 @@ The upcoming version, **Ultimate Knight Hedge**, introduces new, trending .NET l
 - **Rate Limiting**: Improved rate-limiting controls to manage API consumption, preventing abuse and ensuring fair resource usage. This will provide better control over API traffic and reduce the risk of service overload.
   
 - **Enhanced Modular Architecture**: With additional extensions, such as better support for microservices and domain-driven design (DDD) patterns, Ultimate Knight Hedge will allow for more fine-grained customization and scalability across services.
+
+---
+
+## Postman collection 
+
+All API found here.
+
+ [![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/KnightHedge.postman_collection.json)
+
+![image](https://github.com/user-attachments/assets/b938fdf6-0d56-4b05-bffd-70ee31a99158)
 
 ---
 
