@@ -265,7 +265,10 @@ Here is a list of key packages used in this project and their purpose:
 The upcoming version, **Ultimate Knight Hedge**, introduces new, trending .NET libraries and tools to enhance functionality, improve performance, and simplify integrations. Below are some key additions planned for version 2:
 
 - **Polly**: Advanced resilience and transient fault-handling library. Polly will enable the application to handle retries, circuit breakers, and fallback mechanisms gracefully, improving system reliability.
-  
+- **Keycloak**: For secure authentication and authorization.
+- **Camunda**: Powerful process automation and workflow management.
+- **Angular Dashboard**: An intuitive, responsive UI for managing application data and operations.
+- Escalation   
 - **Refit**: A RESTful API client library for .NET. Refit will simplify API integrations, enabling effortless setup of HTTP clients with strongly-typed, interface-based HTTP requests.
   
 - **Fluent Assertions**: A powerful assertion library for .NET, designed to improve the readability and maintainability of tests. Fluent Assertions will be used to write expressive, readable test assertions, making unit testing more efficient and reliable.
@@ -273,7 +276,8 @@ The upcoming version, **Ultimate Knight Hedge**, introduces new, trending .NET l
 - **GitHub Actions**: Built-in CI/CD support using GitHub Actions for automated testing, deployment, and monitoring. Version 2 will provide pre-configured GitHub Action workflows, making continuous integration and deployment simpler and faster.
   
 - **Rate Limiting**: Improved rate-limiting controls to manage API consumption, preventing abuse and ensuring fair resource usage. This will provide better control over API traffic and reduce the risk of service overload.
-  
+- **Auto Escalation**: Automatically escalate tasks or incidents based on predefined rules and timelines, ensuring timely responses and efficient workflow management.
+
 - **Enhanced Modular Architecture**: With additional extensions, such as better support for microservices and domain-driven design (DDD) patterns, Ultimate Knight Hedge will allow for more fine-grained customization and scalability across services.
 
 ---
