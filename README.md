@@ -1,14 +1,22 @@
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/cf93aafa-4192-49c7-8228-471aa979b43c" width="300" height="300" alt="Top"><br>
+      <b>V1 Primary knight</b>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/faba266c-3eba-4fce-afec-ccd04f2efe3b" width="300" height="300" alt="a94ac067-c12c-4357-86f0-62d2cdb8652f"><br>
+      <b>V2 Moon knight</b>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/1bb1b5c9-73fd-4aa5-9a2e-02b0be9417a0" width="300" height="300" alt="Arabian Knight"><br>
+      <b>V3 Arabian knight</b>
+    </td>
+  </tr>
+
+</table>
 
 
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/159a3ae0-72be-48d6-99fc-c9d429ed8ee7" alt="v2 - Copy" width="300" height="300" />
-</p>
-
-
-## Knight Template Overview
-
-The `KnightArchitecture` template is a comprehensive, modular solution for developers looking to accelerate the development of enterprise-grade applications. This template provides a solid foundation of essential building blocks such as authentication, authorization, auditing, caching, background jobs, and real-time notifications. Each component is crafted with simplicity and scalability in mind, allowing developers to focus on core business logic rather than setting up repetitive foundational features.
 
 
 ## Table of Contents
@@ -21,6 +29,11 @@ The `KnightArchitecture` template is a comprehensive, modular solution for devel
 7. [Used Packages](#used-packages)
 8. [Upcoming in Version 2: Ultimate Knight Hedge](#upcoming-in-version-2-ultimate-knight-hedge)
 9. [Getting Started](#getting-started)
+
+
+## Knight Template Overview
+
+The `KnightArchitecture` template is a comprehensive, modular solution for developers looking to accelerate the development of enterprise-grade applications. This template provides a solid foundation of essential building blocks such as authentication, authorization, auditing, caching, background jobs, and real-time notifications. Each component is crafted with simplicity and scalability in mind, allowing developers to focus on core business logic rather than setting up repetitive foundational features.
 
 ---
 
@@ -141,6 +154,11 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 - **Configurable CORS Policies**: Allows secure cross-domain interactions based on origin.
 
 ---
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/159a3ae0-72be-48d6-99fc-c9d429ed8ee7" alt="v2 - Copy" width="300" height="300" />
+</p>
+
 
 ## Screenshots
 
