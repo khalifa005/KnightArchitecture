@@ -1,14 +1,22 @@
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/cf93aafa-4192-49c7-8228-471aa979b43c" width="300" height="300" alt="Top"><br>
+      <b>V1 Primary knight</b>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/faba266c-3eba-4fce-afec-ccd04f2efe3b" width="300" height="300" alt="a94ac067-c12c-4357-86f0-62d2cdb8652f"><br>
+      <b>V2 Moon knight</b>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/1bb1b5c9-73fd-4aa5-9a2e-02b0be9417a0" width="300" height="300" alt="Arabian Knight"><br>
+      <b>V3 Arabian knight</b>
+    </td>
+  </tr>
+
+</table>
 
 
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/159a3ae0-72be-48d6-99fc-c9d429ed8ee7" alt="v2 - Copy" width="300" height="300" />
-</p>
-
-
-## Knight Template Overview
-
-The `KnightArchitecture` template is a comprehensive, modular solution for developers looking to accelerate the development of enterprise-grade applications. This template provides a solid foundation of essential building blocks such as authentication, authorization, auditing, caching, background jobs, and real-time notifications. Each component is crafted with simplicity and scalability in mind, allowing developers to focus on core business logic rather than setting up repetitive foundational features.
 
 
 ## Table of Contents
@@ -21,6 +29,11 @@ The `KnightArchitecture` template is a comprehensive, modular solution for devel
 7. [Used Packages](#used-packages)
 8. [Upcoming in Version 2: Ultimate Knight Hedge](#upcoming-in-version-2-ultimate-knight-hedge)
 9. [Getting Started](#getting-started)
+
+
+## Knight Template Overview
+
+The `KnightArchitecture` template is a comprehensive, modular solution for developers looking to accelerate the development of enterprise-grade applications. This template provides a solid foundation of essential building blocks such as authentication, authorization, auditing, caching, background jobs, and real-time notifications. Each component is crafted with simplicity and scalability in mind, allowing developers to focus on core business logic rather than setting up repetitive foundational features.
 
 ---
 
@@ -142,6 +155,11 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 
 ---
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/159a3ae0-72be-48d6-99fc-c9d429ed8ee7" alt="v2 - Copy" width="300" height="300" />
+</p>
+
+
 ## Screenshots
 
 This section provides visual examples of key output formats in KnightHedgeArchitecture, including PDF exports, email templates, and SMS notifications.
@@ -149,27 +167,27 @@ This section provides visual examples of key output formats in KnightHedgeArchit
 ### PDF Export
 
 Below is an example of a generated PDF document for transactional records or user reports. This PDF is generated using **DinkToPdf**, ensuring customized layouts and consistency across exports.
-
-![PDF Export Screenshot](link-to-pdf-screenshot.png)
+![image](https://github.com/user-attachments/assets/13cd6047-395c-42c3-9877-37451e8b5282)
 
 ### Email Template
 
 Here’s a sample email sent through the **Email Service**, utilizing Razor templates for a professional, branded appearance. Emails can be customized for different notifications, such as welcome emails, alerts, or updates.
 
-![Email Template Screenshot](link-to-email-screenshot.png)
+![image](https://github.com/user-attachments/assets/9dc4ee9c-9578-4866-86bd-82a54b7a7004)
+
 
 ### SMS Notification
 
 Example SMS message generated for alerts and notifications. SMS notifications are template-based, allowing easy customization for different types of messages.
 
-![SMS Notification Screenshot](link-to-sms-screenshot.png)
+![image](https://github.com/user-attachments/assets/adc654b8-8b51-43fd-b1e1-1d7674a8de6e)
 
 
 ### Auto Ef core Auditing 
 
-Example SMS message generated for alerts and notifications. SMS notifications are template-based, allowing easy customization for different types of messages.
+Example Auditing data generated automatically by ef core.
 
-![SMS Notification Screenshot](link-to-sms-screenshot.png)
+![image](https://github.com/user-attachments/assets/2f862e4e-074a-4bb3-9ac7-33cba1f36d65)
 
 
 
