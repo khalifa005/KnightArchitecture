@@ -154,6 +154,13 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 18. Cross-Origin Resource Sharing (CORS)
 - **Configurable CORS Policies**: Allows secure cross-domain interactions based on origin.
 
+### 19. Advanced Entity Framework Generic repo
+1. **Simplified CRUD Operations**: Standard methods for Create, Read, Update, and Delete make data interactions consistent across all entities.
+2. **Reusability and Maintainability**: A single repository for all entities means less code duplication, reduced errors, and easy maintenance.
+3. **Enhanced Performance with Caching**: Built-in support for caching frequently accessed data reduces load on the database.
+4. **Advanced Querying**: Supports complex filters, eager loading, pagination, and projections, offering flexibility for data retrieval.
+[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/EntityFrameworkGenericRepo_README.md)
+
 ---
 
 <p align="center">
