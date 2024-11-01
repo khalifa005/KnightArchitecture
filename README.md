@@ -1,4 +1,7 @@
 
+[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://documentation-link.com/authentication-and-authorization)
+
+
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/159a3ae0-72be-48d6-99fc-c9d429ed8ee7" alt="v2 - Copy" width="300" height="300" />
@@ -8,6 +11,20 @@
 ## Knight Template Overview
 
 The `KnightArchitecture` template is a comprehensive, modular solution for developers looking to accelerate the development of enterprise-grade applications. This template provides a solid foundation of essential building blocks such as authentication, authorization, auditing, caching, background jobs, and real-time notifications. Each component is crafted with simplicity and scalability in mind, allowing developers to focus on core business logic rather than setting up repetitive foundational features.
+
+
+## Table of Contents
+1. [Knight Template Overview](#knight-template-overview)
+2. [Aim and Purpose](#aim-and-purpose)
+3. [Why KnightHedgeArchitecture?](#why-knighthedgearchitecture)
+4. [Design Approach](#design-approach)
+5. [Features](#features)
+6. [Screenshots](#screenshots)
+7. [Used Packages](#used-packages)
+8. [Upcoming in Version 2: Ultimate Knight Hedge](#upcoming-in-version-2-ultimate-knight-hedge)
+9. [Getting Started](#getting-started)
+
+---
 
 ## Aim and Purpose
 
@@ -37,18 +54,6 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 - **Configuration-Driven**: Using configuration files, developers can quickly set up or modify features (e.g., caching, logging, background jobs) without diving into the codebase.
 - **Separation of Concerns**: The codebase is organized into layers (e.g., Domain, Application, Infrastructure), ensuring a clean separation between core logic, infrastructure dependencies, and API logic.
 
-
-## Table of Contents
-1. [KH.Core](#KHCore)
-2. [KH.Domain](#KHDomain)
-3. [KH.Dto](#KHDto)
-4. [KH.PersistenceInfra](#KHPersistenceInfra)
-5. [KH.Services](#KHServices)
-6. [KH.WebApi](#KHWebApi)
-7. [Used Packages](#UsedPackages)
-8. [Upcoming Features](#UpcomingFeatures)
-9. [How to Run the Project](#HowToRun)
-
 ---
 
 ## Features
@@ -57,6 +62,8 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 - **Dual Authentication (JWT & Basic)**: Enables flexible identity verification.
 - **Role-Based Access Control**: Manages user access with roles and permissions.
 - **Permission Middleware**: Enforces granular access control on endpoints.
+[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/Authentication_README.md)
+
 
 ### 2. Customizable API Endpoint Security
 - **Permission-Based Protection**: Implements `PermissionAuthorizeAttribute` for secure API endpoints.
@@ -69,6 +76,7 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 4. Auditing and Activity Logging
 - **Change Tracking**: Logs create, update, and delete actions with detailed record history.
 - **Excel Export of Logs**: Allows exporting audit trails for compliance and review purposes.
+[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/Auditing_README.md)
 
 ### 5. Centralized Logging with Serilog
 - **Request and Error Logging**: Tracks HTTP requests, responses, and errors for audit and troubleshooting.
@@ -85,10 +93,12 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 8. Advanced Notification System
 - **SMS and Email Notifications**: Manages notifications with customizable templates.
 - **Tracking and Logging**: Logs SMS and email statuses, maintaining a detailed record of communications.
+[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/Notification_README.md)
 
 ### 9. Background Job Scheduling
 - **Quartz.NET and Hangfire Integration**: Manages scheduled jobs and supports retries.
 - **Automated Tasks**: Supports tasks like email dispatch and SMS notifications.
+[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/BackgroundJobs_README.md)
 
 ### 10. PDF Exporting
 - **DinkToPdf Integration**: Provides PDF generation capabilities.
@@ -101,6 +111,7 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 12. Redis and In-Memory Caching
 - **StackExchange.Redis Integration**: Distributed caching to reduce database load.
 - **Flexible Caching**: Enhances data retrieval efficiency and performance.
+[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/Caching_README.md)
 
 ### 13. Localization and Multi-language Support
 - **Localized Error Messages**: Supports languages like English and Arabic.
@@ -117,6 +128,7 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 16. File Management and Storage
 - **Secure File Uploads**: Processes files with validation checks.
 - **Media Management**: Organizes and retrieves media files efficiently.
+[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/FileManagement_README.md)
 
 ### 17. Real-Time SignalR Hub Integration
 - **Push Notifications**: Provides real-time updates using SignalR.
