@@ -39,7 +39,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"Username\": \"khalifaceo\",\r\n  \"Password\": \"KhalifaPassword\"\r\n}",
+							"raw": "{\r\n  \"Username\": \"khalifa_CEO\",\r\n  \"Password\": \"KhalifaPassword\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2340,7 +2340,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n  \"SensitiveData\": \"AccountNumberExample\",\r\n  \"FirstName\": \"Mahmoud\",\r\n  \"MiddleName\": \"Mohamed\",\r\n  \"LastName\": \"Khalifa\",\r\n  \"Password\": \"KhalifaPassword\",\r\n  \r\n  \"Email\": \"MahmoudCEO111111111@example.com\",\r\n  \"MobileNumber\": \"056628557411111111\",\r\n  \"Username\": \"KH_CEO11111111\",\r\n\r\n  \"BirthDate\": \"1995-07-24T00:00:00Z\",\r\n  \"GroupId\": 2,\r\n  \"DepartmentId\": 5,\r\n  \"RoleIds\": [4]\r\n}\r\n",
+							"raw": "{\r\n  \"FirstName\": \"Mahmoud\",\r\n  \"MiddleName\": \"Mohamed\",\r\n  \"LastName\": \"Khalifa\",\r\n  \"Password\": \"KhalifaPassword\",\r\n  \r\n  \"Email\": \"khalifa_CEO@example.com\",\r\n  \"MobileNumber\": \"0510000000\",\r\n  \"Username\": \"khalifa_CEO\",\r\n\r\n  \"SensitiveData\": \"AccountNumberExample\",\r\n  \"BirthDate\": \"1995-07-24\",\r\n  \"GroupId\": 2,\r\n  \"DepartmentId\": 5,\r\n  \"RoleIds\": [2]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4065,8 +4065,20 @@
 							"formdata": [
 								{
 									"key": "ToEmail",
-									"value": "mahmudkhalifa1@gmail.com",
+									"value": "exaample@gmail.com",
 									"type": "text"
+								},
+								{
+									"key": "ToEmail",
+									"value": "exaample@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ToCCEmail",
+									"value": "exaample@gmail.com",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "Body",
@@ -4074,16 +4086,9 @@
 									"type": "text"
 								},
 								{
-									"key": "ToEmail",
-									"value": "mahmudkhalifa@outlook.com",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "ToCCEmail",
-									"value": "mahmudkhalifa1@outlook.com",
-									"type": "text",
-									"disabled": true
+									"key": "Attachments",
+									"type": "file",
+									"src": "/C:/Users/Lenovo/Downloads/images.png"
 								},
 								{
 									"key": "Subject",
@@ -4096,14 +4101,10 @@
 									"type": "text"
 								},
 								{
-									"key": "ModelId",
-									"value": "2",
+									"key": "PrefaredLanguageKey",
+									"value": "En",
+									"description": "Ar - En",
 									"type": "text"
-								},
-								{
-									"key": "Attachments",
-									"type": "file",
-									"src": "/C:/Users/Lenovo/Downloads/images.png"
 								},
 								{
 									"key": "Model",
@@ -4111,9 +4112,8 @@
 									"type": "text"
 								},
 								{
-									"key": "PrefaredLanguageKey",
-									"value": "En",
-									"description": "Ar - En",
+									"key": "ModelId",
+									"value": "2",
 									"type": "text"
 								}
 							]
