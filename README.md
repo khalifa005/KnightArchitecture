@@ -149,27 +149,27 @@ This section provides visual examples of key output formats in KnightHedgeArchit
 ### PDF Export
 
 Below is an example of a generated PDF document for transactional records or user reports. This PDF is generated using **DinkToPdf**, ensuring customized layouts and consistency across exports.
-
-![PDF Export Screenshot](link-to-pdf-screenshot.png)
+![image](https://github.com/user-attachments/assets/13cd6047-395c-42c3-9877-37451e8b5282)
 
 ### Email Template
 
 Here’s a sample email sent through the **Email Service**, utilizing Razor templates for a professional, branded appearance. Emails can be customized for different notifications, such as welcome emails, alerts, or updates.
 
-![Email Template Screenshot](link-to-email-screenshot.png)
+![image](https://github.com/user-attachments/assets/9dc4ee9c-9578-4866-86bd-82a54b7a7004)
+
 
 ### SMS Notification
 
 Example SMS message generated for alerts and notifications. SMS notifications are template-based, allowing easy customization for different types of messages.
 
-![SMS Notification Screenshot](link-to-sms-screenshot.png)
+![image](https://github.com/user-attachments/assets/adc654b8-8b51-43fd-b1e1-1d7674a8de6e)
 
 
 ### Auto Ef core Auditing 
 
-Example SMS message generated for alerts and notifications. SMS notifications are template-based, allowing easy customization for different types of messages.
+Example Auditing data generated automatically by ef core.
 
-![SMS Notification Screenshot](link-to-sms-screenshot.png)
+![image](https://github.com/user-attachments/assets/2f862e4e-074a-4bb3-9ac7-33cba1f36d65)
 
 
 
