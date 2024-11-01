@@ -260,7 +260,7 @@ Here is a list of key packages used in this project and their purpose:
 ---
 ## Upcoming in Version 2: Ultimate Moon knight
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/2dd2ad50-f923-4c2c-900a-b1ada84b15a9" alt="v2 - Copy" width="300" height="300" />
+  <img src="https://github.com/user-attachments/assets/faba266c-3eba-4fce-afec-ccd04f2efe3b" width="300" height="300" alt="a94ac067-c12c-4357-86f0-62d2cdb8652f" alt="v2 - Copy" width="300" height="300" />
 </p>
 The upcoming version, **Ultimate Knight Hedge**, introduces new, trending .NET libraries and tools to enhance functionality, improve performance, and simplify integrations. Below are some key additions planned for version 2:
 
