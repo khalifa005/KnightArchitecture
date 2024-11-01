@@ -1,6 +1,4 @@
 
-[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://documentation-link.com/authentication-and-authorization)
-
 
 
 <p align="center">
@@ -62,8 +60,8 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 - **Dual Authentication (JWT & Basic)**: Enables flexible identity verification.
 - **Role-Based Access Control**: Manages user access with roles and permissions.
 - **Permission Middleware**: Enforces granular access control on endpoints.
-[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/Authentication_README.md)
 
+ [![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/Authentication_README.md)
 
 ### 2. Customizable API Endpoint Security
 - **Permission-Based Protection**: Implements `PermissionAuthorizeAttribute` for secure API endpoints.
@@ -76,6 +74,7 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 4. Auditing and Activity Logging
 - **Change Tracking**: Logs create, update, and delete actions with detailed record history.
 - **Excel Export of Logs**: Allows exporting audit trails for compliance and review purposes.
+  
 [![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/Auditing_README.md)
 
 ### 5. Centralized Logging with Serilog
@@ -93,11 +92,13 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 8. Advanced Notification System
 - **SMS and Email Notifications**: Manages notifications with customizable templates.
 - **Tracking and Logging**: Logs SMS and email statuses, maintaining a detailed record of communications.
+  
 [![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/Notification_README.md)
 
 ### 9. Background Job Scheduling
 - **Quartz.NET and Hangfire Integration**: Manages scheduled jobs and supports retries.
 - **Automated Tasks**: Supports tasks like email dispatch and SMS notifications.
+  
 [![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/BackgroundJobs_README.md)
 
 ### 10. PDF Exporting
@@ -111,6 +112,7 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 12. Redis and In-Memory Caching
 - **StackExchange.Redis Integration**: Distributed caching to reduce database load.
 - **Flexible Caching**: Enhances data retrieval efficiency and performance.
+  
 [![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/Caching_README.md)
 
 ### 13. Localization and Multi-language Support
@@ -128,6 +130,7 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 16. File Management and Storage
 - **Secure File Uploads**: Processes files with validation checks.
 - **Media Management**: Organizes and retrieves media files efficiently.
+  
 [![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/FileManagement_README.md)
 
 ### 17. Real-Time SignalR Hub Integration
