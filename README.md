@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/2dd2ad50-f923-4c2c-900a-b1ada84b15a9" alt="v2 - Copy" width="300" height="300" />
-</p>
+
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/159a3ae0-72be-48d6-99fc-c9d429ed8ee7" alt="v2 - Copy" width="300" height="300" />
@@ -24,64 +22,110 @@ This repository is structured following the principles of **Clean Architecture**
 
 ---
 
-## KH.Core
+## Features
 
+### 1. Authentication and Authorization
+- **Dual Authentication (JWT & Basic)**: Enables flexible identity verification.
+- **Role-Based Access Control**: Manages user access with roles and permissions.
+- **Permission Middleware**: Enforces granular access control on endpoints.
 
-### 1. Dual Authentication Mechanism
-   - **Supports JWT and Basic Authentication**: Enables flexible identity verification for both internal and external users.
-   - **Secure Access Control**: Provides token-based and session-based authentication, catering to various user roles and requirements.
+### 2. Customizable API Endpoint Security
+- **Permission-Based Protection**: Implements `PermissionAuthorizeAttribute` for secure API endpoints.
+- **Dynamic Policies**: Allows configurable policies based on role and permission changes without modifying code.
 
-### 2. Dynamic, Role-Based Permission Management
-   - **Middleware-Driven Permissions**: Leverages middleware with `AND/OR` logic, allowing complex, fine-grained control over user access.
-   - **Dynamic Policies**: Allows for policy updates without changing core code, ensuring adaptability to evolving business requirements.
-   - **Centralized Permission Checks**: Simplifies permission management and improves scalability.
+### 3. User and Role Management
+- **User Registration and Profile Management**: Enables user sign-up, profile updates, and role assignment.
+- **Role and Permission Management**: Admins can dynamically manage roles and permissions.
 
-### 3. Auditing and Change Tracking
-   - **Tracks User Actions**: Logs modifications with old and new values for compliance and detailed auditing.
-   - **Excel Export/Import**: Exports and imports audit logs, making data accessible and easy to analyze.
-   - **Customizable Audit Viewing**: Access is permission-controlled, allowing only authorized users to view audit trails.
+### 4. Auditing and Activity Logging
+- **Change Tracking**: Logs create, update, and delete actions with detailed record history.
+- **Excel Export of Logs**: Allows exporting audit trails for compliance and review purposes.
 
-### 4. Localized Error Handling
-   - **Multi-Language Support**: Provides error messages in multiple languages, such as English and Arabic, enhancing accessibility.
-   - **User-Friendly Debugging**: Delivers detailed error feedback to simplify troubleshooting and improve the user experience.
+### 5. Centralized Logging with Serilog
+- **Request and Error Logging**: Tracks HTTP requests, responses, and errors for audit and troubleshooting.
 
-### 5. Middleware-Based Access Control
-   - **PermissionsMiddleware**: Centralizes access control, enforcing permission checks on each request.
-   - **SuperAdmin Bypass**: Allows SuperAdmins to bypass permission checks, streamlining high-level administrative tasks.
+### 6. Email Service
+- **Single and Bulk Emails**: Supports customized templates for welcome and notification emails.
+- **Email Tracking**: Logs email statuses for audits and follow-up.
+- **Retry and Scheduling**: Failed emails can be retried or scheduled for future delivery.
 
-### 6. Comprehensive Background Job Support
-   - **Quartz.NET Integration**: Supports scheduling and running background jobs like email dispatch and SMS notifications.
-   - **Enhanced Automation**: Allows scheduled tasks, improving user engagement and operational efficiency.
+### 7. SMS Notification Service
+- **Template-based Messaging**: Customizable SMS templates for various alerts.
+- **Logging**: Tracks SMS delivery statuses, including failures.
 
-### 7. Modular Architecture for Extensibility
-   - **Easy Integration of New Modules**: Allows for seamless addition of new features.
-   - **Modular Services**: Provides services for caching, file management, auditing, and notifications, simplifying future enhancements.
+### 8. Advanced Notification System
+- **SMS and Email Notifications**: Manages notifications with customizable templates.
+- **Tracking and Logging**: Logs SMS and email statuses, maintaining a detailed record of communications.
 
-### 8. Granular and Configurable Caching Support
-   - **Redis and In-Memory Caching**: Offers flexible caching options for optimized data storage.
-   - **Distributed Caching Support**: Ensures enhanced performance, ideal for scalable environments.
+### 9. Background Job Scheduling
+- **Quartz.NET and Hangfire Integration**: Manages scheduled jobs and supports retries.
+- **Automated Tasks**: Supports tasks like email dispatch and SMS notifications.
 
-### 9. Advanced Notification System
-   - **SMS and Email Notifications**: Manages notifications with customizable templates.
-   - **Tracking and Logging**: Logs SMS and email statuses, maintaining a detailed record of communications.
+### 10. PDF Exporting
+- **DinkToPdf Integration**: Provides PDF generation capabilities.
+- **Automated Export**: Supports transactional documents and custom reports.
 
-### 10. Excel Export and File Management Services
-   - **Data Export to Excel**: Allows users to export reports and audits for offline access.
-   - **Secure File Management**: Validates file uploads with format checks, ensuring safe and compliant handling.
+### 11. Excel Export and Import
+- **Data Export**: Allows offline reporting and analysis.
+- **Bulk Data Import**: Supports audit logs and user lists, maintaining a consistent format with customizable templates.
 
-### 11. Scalable Localization and Preference Management
-   - **User Preferences and Language Support**: Centralizes user preferences and supports multiple languages, making it ideal for global applications.
-   - **ServerPreferenceManager**: Centralizes and manages user preferences across services.
+### 12. Redis and In-Memory Caching
+- **StackExchange.Redis Integration**: Distributed caching to reduce database load.
+- **Flexible Caching**: Enhances data retrieval efficiency and performance.
 
-### 12. Customizable Controllers and API Endpoint Security
-   - **Custom Attributes for Endpoint Protection**: Implements `PermissionAuthorizeAttribute` for fine-grained endpoint security.
-   - **Dynamic Permission Policies**: Allows easy customization of API access based on role and permissions.
+### 13. Localization and Multi-language Support
+- **Localized Error Messages**: Supports languages like English and Arabic.
+- **User Language Preferences**: Customizable for a personalized experience.
+
+### 14. Modular Architecture
+- **Independent Services**: Provides separate modules for notifications, caching, auditing, and file handling.
+- **Scalability**: Allows easy addition of new modules and features.
+
+### 15. Error Handling and Validation
+- **FluentValidation**: Ensures structured model validation.
+- **Localized Error Handling**: Provides language-specific error messages.
+
+### 16. File Management and Storage
+- **Secure File Uploads**: Processes files with validation checks.
+- **Media Management**: Organizes and retrieves media files efficiently.
+
+### 17. Real-Time SignalR Hub Integration
+- **Push Notifications**: Provides real-time updates using SignalR.
+- **Compatibility**: Supports WebSockets and Long Polling.
+
+### 18. Cross-Origin Resource Sharing (CORS)
+- **Configurable CORS Policies**: Allows secure cross-domain interactions based on origin.
 
 ---
 
-Each of these features contributes to a secure, flexible, and scalable system designed to meet the needs of enterprise-level applications. `KnightHedgeArchitecture` provides the tools necessary for comprehensive user management, auditing, and secure, extensible API development.
+## Screenshots
 
----
+This section provides visual examples of key output formats in KnightHedgeArchitecture, including PDF exports, email templates, and SMS notifications.
+
+### PDF Export
+
+Below is an example of a generated PDF document for transactional records or user reports. This PDF is generated using **DinkToPdf**, ensuring customized layouts and consistency across exports.
+
+![PDF Export Screenshot](link-to-pdf-screenshot.png)
+
+### Email Template
+
+Here’s a sample email sent through the **Email Service**, utilizing Razor templates for a professional, branded appearance. Emails can be customized for different notifications, such as welcome emails, alerts, or updates.
+
+![Email Template Screenshot](link-to-email-screenshot.png)
+
+### SMS Notification
+
+Example SMS message generated for alerts and notifications. SMS notifications are template-based, allowing easy customization for different types of messages.
+
+![SMS Notification Screenshot](link-to-sms-screenshot.png)
+
+
+### Auto Ef core Auditing 
+
+Example SMS message generated for alerts and notifications. SMS notifications are template-based, allowing easy customization for different types of messages.
+
+![SMS Notification Screenshot](link-to-sms-screenshot.png)
 
 
 
@@ -89,34 +133,81 @@ Each of these features contributes to a secure, flexible, and scalable system de
 
 Here is a list of key packages used in this project and their purpose:
 
-1. **Entity Framework Core**:
-   - Used for Object-Relational Mapping (ORM) to interact with databases.
-   - Provides migrations, change tracking, and database querying capabilities.
+### 1. Entity Framework Core
 
-2. **Dapper**:
-   - A lightweight ORM for more efficient SQL queries and database access.
-   - Used in performance-critical operations where Entity Framework might be slower.
+- **Purpose**: Provides Object-Relational Mapping (ORM) to interact with databases.
+- **Features**: Supports migrations, change tracking, and database querying capabilities, making database operations simpler and more organized.
 
-3. **AutoMapper**:
-   - Used to map domain entities to DTOs and vice versa, simplifying data transfer and avoiding boilerplate mapping code.
+### 2. Dapper
 
-4. **FluentValidation**:
-   - A validation framework used to validate DTOs and requests.
-   - Ensures that incoming data is in the correct format before processing.
+- **Purpose**: Lightweight ORM for more efficient SQL queries and database access.
+- **Usage**: Used in performance-critical operations where Entity Framework might be slower, enabling rapid and optimized data retrieval.
 
-5. **Swashbuckle (Swagger)**:
-   - Used to generate API documentation and provide an interactive API interface.
-   - Enables testing and visualization of API endpoints via Swagger UI.
+### 3. AutoMapper
 
-6. **Serilog**:
-   - A structured logging library that provides easy-to-read logs, helping to track application behavior and troubleshoot issues.
+- **Purpose**: Simplifies object-to-object mapping, reducing boilerplate code.
+- **Usage**: Maps domain entities to Data Transfer Objects (DTOs) and vice versa, used across services and entities to enhance modularity and maintainability.
 
-7. **Newtonsoft.Json**:
-   - A powerful JSON library used to serialize and deserialize objects to and from JSON.
-   - Commonly used in APIs to format and process JSON requests and responses.
+### 4. FluentValidation
+
+- **Purpose**: Validation framework used to enforce data integrity.
+- **Usage**: Validates DTOs and requests, ensuring that incoming data conforms to expected formats in API controllers and services.
+
+### 5. Swashbuckle (Swagger)
+
+- **Purpose**: Generates interactive API documentation.
+- **Usage**: Provides a visual interface for API endpoints via Swagger UI, allowing for easy testing and documentation of API functions.
+
+### 6. Serilog
+
+- **Purpose**: Structured logging for easy-to-read logs.
+- **Usage**: Logs application behavior and helps with troubleshooting, enhancing error tracking and performance monitoring.
+
+### 7. Newtonsoft.Json
+
+- **Purpose**: JSON library for serialization and deserialization.
+- **Usage**: Formats and processes JSON requests and responses, crucial for APIs that handle JSON data.
+
+### 8. Quartz.NET
+
+- **Purpose**: Robust job scheduling library.
+- **Usage**: Enables background job scheduling, allowing automation of repetitive tasks and scheduled processing.
+
+### 9. DinkToPdf
+
+- **Purpose**: PDF generation library.
+- **Usage**: Used for creating and customizing PDF documents, particularly in reporting and documentation modules.
+
+### 10. StackExchange.Redis
+
+- **Purpose**: Redis cache support for distributed caching.
+- **Usage**: Reduces database load and improves performance by caching frequently accessed data.
+
+### 11. Hangfire
+
+- **Purpose**: Background job processing library.
+- **Usage**: Manages tasks like email dispatching, SMS notifications, and other background processes, making asynchronous task handling efficient.
 
 ---
+## Upcoming in Version 2: Ultimate Knight Hedge
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/2dd2ad50-f923-4c2c-900a-b1ada84b15a9" alt="v2 - Copy" width="300" height="300" />
+</p>
+The upcoming version, **Ultimate Knight Hedge**, introduces new, trending .NET libraries and tools to enhance functionality, improve performance, and simplify integrations. Below are some key additions planned for version 2:
 
+- **Polly**: Advanced resilience and transient fault-handling library. Polly will enable the application to handle retries, circuit breakers, and fallback mechanisms gracefully, improving system reliability.
+  
+- **Refit**: A RESTful API client library for .NET. Refit will simplify API integrations, enabling effortless setup of HTTP clients with strongly-typed, interface-based HTTP requests.
+  
+- **Fluent Assertions**: A powerful assertion library for .NET, designed to improve the readability and maintainability of tests. Fluent Assertions will be used to write expressive, readable test assertions, making unit testing more efficient and reliable.
+  
+- **GitHub Actions**: Built-in CI/CD support using GitHub Actions for automated testing, deployment, and monitoring. Version 2 will provide pre-configured GitHub Action workflows, making continuous integration and deployment simpler and faster.
+  
+- **Rate Limiting**: Improved rate-limiting controls to manage API consumption, preventing abuse and ensuring fair resource usage. This will provide better control over API traffic and reduce the risk of service overload.
+  
+- **Enhanced Modular Architecture**: With additional extensions, such as better support for microservices and domain-driven design (DDD) patterns, Ultimate Knight Hedge will allow for more fine-grained customization and scalability across services.
+
+---
 ## How to Run
 
 ### Prerequisites:
