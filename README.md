@@ -258,7 +258,7 @@ Here is a list of key packages used in this project and their purpose:
 - **Usage**: Manages tasks like email dispatching, SMS notifications, and other background processes, making asynchronous task handling efficient.
 
 ---
-## Upcoming in Version 2: Ultimate Knight Hedge
+## Upcoming in Version 2: Ultimate Moon knight
 <p align="center">
   <img src="https://github.com/user-attachments/assets/2dd2ad50-f923-4c2c-900a-b1ada84b15a9" alt="v2 - Copy" width="300" height="300" />
 </p>
