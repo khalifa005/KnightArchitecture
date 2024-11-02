@@ -188,7 +188,7 @@ Here’s a sample email sent through the **Email Service**, utilizing Razor temp
 
 Example SMS message generated for alerts and notifications. SMS notifications are template-based, allowing easy customization for different types of messages.
 
-![image](https://github.com/user-attachments/assets/adc654b8-8b51-43fd-b1e1-1d7674a8de6e)
+![image](https://github.com/user-attachments/assets/8d9c96a7-4884-4326-8eb3-b448e98a5a57)
 
 
 ### Auto Ef core Auditing 
