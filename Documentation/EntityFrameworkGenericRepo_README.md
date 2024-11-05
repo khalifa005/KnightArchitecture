@@ -243,3 +243,58 @@ This includes basic information such as:
 This approach, without query splitting, retrieves all related data in one large query using `LEFT JOIN` and `INNER JOIN` clauses. While it reduces the number of database round-trips, it can result in performance issues and data duplication, especially as the dataset grows larger. For complex entity relationships, it is generally recommended to use query splitting to improve performance and manageability.
 
 ---
+## Sensitive Data Encryption in User Entity
+
+The `User` entity in KnightArchitecture has built-in support for encrypting sensitive data, ensuring security when stored in the database using Entity Framework Core.
+
+### How It Works
+
+1. **Sensitive Data Property**:
+   - The `User` entity includes a `SensitiveData` property, intended to hold confidential information.
+
+```csharp
+   public string? SensitiveData { get; set; }
+```
+
+Encryption with EncryptedStringConverter:
+
+The EncryptedStringConverter class handles encryption and decryption automatically.
+It uses Encrypt and Decrypt methods to secure data when saving to and retrieving from the database
+
+```csharp
+public class EncryptedStringConverter : ValueConverter<string, string>
+{
+    public EncryptedStringConverter() : base(
+        v => Encrypt(v),    // Encryption logic
+        v => Decrypt(v))    // Decryption logic
+    {
+    }
+    private static string Encrypt(string plainText) => 
+        Convert.ToBase64String(Encoding.UTF8.GetBytes(plainText));
+
+    private static string Decrypt(string cipherText) => 
+        Encoding.UTF8.GetString(Convert.FromBase64String(cipherText));
+}
+```
+Applying the Converter in DbContext:
+
+In DbContext, configure the SensitiveData property to use EncryptedStringConverter. This ensures encryption before saving and decryption when reading from the database.
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>()
+        .Property(u => u.SensitiveData)
+        .HasConversion(new EncryptedStringConverter());
+}
+```
+How I sent the data
+
+![image](https://github.com/user-attachments/assets/ac881962-986a-4051-915f-6fcbd69356a6)
+
+How it will be in DB
+
+![image](https://github.com/user-attachments/assets/a7795ad3-b2c2-46fc-a206-b7805bea9343)
+![Knight-Template](https://github.com/user-attachments/assets/ebb19a6f-f692-4969-80c9-46b9c2315617)
+
+
+
