@@ -1,22 +1,22 @@
 
 <h2 align="center">⭐⭐ When imagination meets innovation, dreams become reality. ⭐⭐</h2>
-
 <table>
   <tr>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/cf93aafa-4192-49c7-8228-471aa979b43c" width="300" height="300" alt="Top"><br>
+    <td align="center" style="width: 100%; max-width: 300px; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/cf93aafa-4192-49c7-8228-471aa979b43c" style="width: 100%; height: auto;" alt="Top"><br>
       <b>V1 Primary knight</b>
     </td>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/faba266c-3eba-4fce-afec-ccd04f2efe3b" width="300" height="300" alt="a94ac067-c12c-4357-86f0-62d2cdb8652f"><br>
+    <td align="center" style="width: 100%; max-width: 300px; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/faba266c-3eba-4fce-afec-ccd04f2efe3b" style="width: 100%; height: auto;" alt="a94ac067-c12c-4357-86f0-62d2cdb8652f"><br>
       <b>V2 Moon knight</b>
     </td>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/1bb1b5c9-73fd-4aa5-9a2e-02b0be9417a0" width="300" height="300" alt="Arabian Knight"><br>
+    <td align="center" style="width: 100%; max-width: 300px; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/1bb1b5c9-73fd-4aa5-9a2e-02b0be9417a0" style="width: 100%; height: auto;" alt="Arabian Knight"><br>
       <b>V3 Arabian knight</b>
     </td>
   </tr>
 </table>
+
 
 ## Table of Contents
 1. [Knight Template Overview](#knight-template-overview)
