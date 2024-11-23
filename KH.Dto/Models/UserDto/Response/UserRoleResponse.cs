@@ -4,7 +4,7 @@ using KH.Dto.Lookups.RoleDto.Response;
 
 namespace KH.Dto.Models.UserDto.Response;
 
-public class UserRoleResponse
+public partial class UserRoleResponse
 {
   public long UserId { get; set; }
   //public UserListResponse? User { get; set; }

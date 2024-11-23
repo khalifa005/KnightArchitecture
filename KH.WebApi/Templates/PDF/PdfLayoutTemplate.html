@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.5;
+      direction: ltr; /* Default direction for English */
+    }
+
+      body.arabic {
+        direction: rtl; /* Right-to-left for Arabic */
+        font-family: "Arial", "Tajawal", sans-serif; /* Support Arabic fonts */
+      }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 0.8em;
+      color: gray;
+    }
+
+    .content {
+      margin-top: 20px;
+    }
+
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+      .invoice-table th, .invoice-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      .invoice-table th {
+        background-color: #f4f4f4;
+        text-align: left;
+      }
+
+    .signature {
+      margin-top: 40px;
+      text-align: right;
+    }
+
+      .signature img {
+        width: 150px;
+        height: auto;
+        display: block;
+        margin-right: 20px;
+      }
+
+      .signature p {
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #333;
+      }
+  </style>
+</head>
+<body class="{{LANGUAGE_DIRECTION}}">
+  <header>
+    <h1>{{TITLE}}</h1>
+  </header>
+  <div class="content">
+    {{CONTENT_PLACEHOLDER}}
+  </div>
+  <div class="signature">
+    <img src="https://via.placeholder.com/150x50?text=Signature" alt="Signature">
+    <p>{{SIGNATURE_TEXT}}</p>
+  </div>
+  <footer>
+    Generated on [date] | Page [page] of [toPage]
+  </footer>
+</body>
+</html>

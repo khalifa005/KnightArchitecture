@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <Folder Include="Fake SMS\" />
+    <Folder Include="Templates\PDF\Layout\" />
   </ItemGroup>
   
 </Project>

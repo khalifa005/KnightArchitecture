@@ -4,6 +4,7 @@ public interface IPdfService
 {
   Task<byte[]> ExportUserDetailsPdfAsync(UserFilterRequest request, CancellationToken cancellationToken);
   Task<byte[]> GeneratePdf(string htmlContent);
+  Task<byte[]> GenerateInvoicePdf();
 
 }
 

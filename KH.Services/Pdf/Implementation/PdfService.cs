@@ -1,4 +1,6 @@
 using KH.BuildingBlocks.Apis.Services;
+using System.Text;
+using static KH.Dto.Models.UserDto.Response.UserRoleResponse;
 
 namespace KH.Services.Pdf.Implementation;
 
@@ -144,4 +146,116 @@ public class PdfService : IPdfService
   }
 
   
+  public async Task<byte[]> GeneratePdfWithDynamicContent(string templatePath, Dictionary<string, string> dynamicContent, string language = "en")
+  {
+    // Path to layout template
+    string layoutFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "PDF", "PdfLayoutTemplate.html");
+    string layoutContent = await File.ReadAllTextAsync(layoutFilePath);
+
+    string templateContent = await File.ReadAllTextAsync(templatePath);
+
+    if (string.IsNullOrEmpty(layoutContent) || string.IsNullOrEmpty(templateContent))
+      throw new ArgumentException("Template content cannot be null or empty.");
+
+    // Replace placeholders in the dynamic content template
+    foreach (var placeholder in dynamicContent)
+    {
+      templateContent = templateContent.Replace($"{{{{{placeholder.Key}}}}}", placeholder.Value);
+    }
+
+    // Determine language direction
+    string languageDirection = language == "ar" ? "arabic" : "ltr";
+
+    // Insert populated content and language direction into layout
+    string finalHtml = layoutContent
+        .Replace("{{CONTENT_PLACEHOLDER}}", templateContent)
+        .Replace("{{LANGUAGE_DIRECTION}}", languageDirection)
+        .Replace("{{TITLE}}", dynamicContent.ContainsKey("TITLE") ? dynamicContent["TITLE"] : "Document")
+        .Replace("{{SIGNATURE_TEXT}}", dynamicContent.ContainsKey("SIGNATURE_TEXT") ? dynamicContent["SIGNATURE_TEXT"] : "Authorized Signature");
+
+    // Configure the PDF document
+    var pdfDocument = new HtmlToPdfDocument
+    {
+      GlobalSettings =
+      {
+        ColorMode = ColorMode.Color,
+        Orientation = Orientation.Portrait,
+        PaperSize = PaperKind.A4
+      },
+      Objects = 
+        {
+            new ObjectSettings
+            {
+                HtmlContent = finalHtml,
+                WebSettings = new WebSettings
+                {
+                    DefaultEncoding = "utf-8"
+                },
+                HeaderSettings = new HeaderSettings
+                {
+                    FontSize = 10,
+                    Right = "Page [page] of [toPage]",
+                    Line = true
+                },
+                FooterSettings = new FooterSettings
+                {
+                    FontSize = 10,
+                    Center = "Generated on [date]"
+                }
+            }
+        }
+    };
+
+    // Convert the HTML to PDF and return as byte array
+    return _converter.Convert(pdfDocument);
+  }
+
+  
+
+  public async Task<byte[]> GenerateInvoicePdf()
+  {
+    string invoiceTemplatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "PDF", "InvoiceTemplate.html");
+
+    // Example dynamic content
+    var dynamicContent = new Dictionary<string, string>
+    {
+        { "SENDER_NAME", "Acme Corporation" },
+        { "SENDER_ADDRESS", "123 Business Rd, Business City" },
+        { "RECIPIENT_NAME", "John Doe" },
+        { "RECIPIENT_ADDRESS", "456 Residential St, Hometown" },
+        { "INVOICE_ROWS", GenerateInvoiceRows(new List<UserInvoiceItemResponse>
+            {
+                new UserInvoiceItemResponse { Description = "Web Design", Quantity = 1, UnitPrice = 500 },
+                new UserInvoiceItemResponse{ Description = "Hosting", Quantity = 12, UnitPrice = 10 }
+            })
+        },
+        { "TOTAL_AMOUNT", "$620" },
+        { "TITLE", "Invoice" },
+        { "SIGNATURE_TEXT", "Authorized Signature" }
+    };
+
+    return await GeneratePdfWithDynamicContent(invoiceTemplatePath, dynamicContent, "ar"); // Pass "ar" for Arabic
+  }
+  private string GenerateInvoiceRows(List<UserInvoiceItemResponse> items)
+  {
+    var sb = new StringBuilder();
+
+    for (int i = 0; i < items.Count; i++)
+    {
+      var item = items[i];
+      sb.Append($@"
+            <tr>
+                <td>{i + 1}</td>
+                <td>{item.Description}</td>
+                <td>{item.Quantity}</td>
+                <td>{item.UnitPrice:C}</td>
+                <td>{(item.Quantity * item.UnitPrice):C}</td>
+            </tr>");
+    }
+
+    return sb.ToString();
+  }
+
+  
+
 }

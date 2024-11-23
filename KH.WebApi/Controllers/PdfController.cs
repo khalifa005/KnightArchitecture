@@ -48,4 +48,22 @@ public class PdfController : BaseApiController
     return BadRequest("invalid-parameters");
   }
 
+
+  [PermissionAuthorize(PermissionKeysConstant.Pdf.EXPORT_PDF)]
+
+  [HttpPost("DownloadInvoiceTemplate")]
+
+  public async Task<IActionResult> DownloadInvoiceTemplate([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
+  {
+    var pdfBytes = await _pdfService.GenerateInvoicePdf();
+
+    if (pdfBytes is object && pdfBytes.Length > 0)
+    {
+      return File(pdfBytes, "application/pdf", $"UserDetails_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.pdf");
+
+    }
+
+    return BadRequest("invalid-parameters");
+  }
+
 }
