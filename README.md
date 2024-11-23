@@ -1,22 +1,21 @@
+
+<h2 align="center">⭐⭐ When imagination meets innovation, dreams become reality. ⭐⭐</h2>
 <table>
   <tr>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/cf93aafa-4192-49c7-8228-471aa979b43c" width="300" height="300" alt="Top"><br>
+    <td align="center" style="width: 100%; max-width: 300px; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/cf93aafa-4192-49c7-8228-471aa979b43c" style="width: 100%; height: auto;" alt="Top"><br>
       <b>V1 Primary knight</b>
     </td>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/faba266c-3eba-4fce-afec-ccd04f2efe3b" width="300" height="300" alt="a94ac067-c12c-4357-86f0-62d2cdb8652f"><br>
+    <td align="center" style="width: 100%; max-width: 300px; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/faba266c-3eba-4fce-afec-ccd04f2efe3b" style="width: 100%; height: auto;" alt="a94ac067-c12c-4357-86f0-62d2cdb8652f"><br>
       <b>V2 Moon knight</b>
     </td>
-    <td align="center">
-      <img src="https://github.com/user-attachments/assets/1bb1b5c9-73fd-4aa5-9a2e-02b0be9417a0" width="300" height="300" alt="Arabian Knight"><br>
+    <td align="center" style="width: 100%; max-width: 300px; padding: 10px;">
+      <img src="https://github.com/user-attachments/assets/1bb1b5c9-73fd-4aa5-9a2e-02b0be9417a0" style="width: 100%; height: auto;" alt="Arabian Knight"><br>
       <b>V3 Arabian knight</b>
     </td>
   </tr>
-
 </table>
-
-
 
 
 ## Table of Contents
@@ -28,7 +27,9 @@
 6. [Screenshots](#screenshots)
 7. [Used Packages](#used-packages)
 8. [Upcoming in Version 2: Ultimate Knight Hedge](#upcoming-in-version-2-ultimate-knight-hedge)
-9. [Getting Started](#getting-started)
+9. [Postman collection](#postman-collection)
+10. [Getting Started](#getting-started)
+11. [Contact owner](#contact-owner)
 
 
 ## Knight Template Overview
@@ -153,6 +154,13 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 18. Cross-Origin Resource Sharing (CORS)
 - **Configurable CORS Policies**: Allows secure cross-domain interactions based on origin.
 
+### 19. Advanced Entity Framework Generic repo
+1. **Simplified CRUD Operations**: Standard methods for Create, Read, Update, and Delete make data interactions consistent across all entities.
+2. **Reusability and Maintainability**: A single repository for all entities means less code duplication, reduced errors, and easy maintenance.
+3. **Enhanced Performance with Caching**: Built-in support for caching frequently accessed data reduces load on the database.
+4. **Advanced Querying**: Supports complex filters, eager loading, pagination, and projections, offering flexibility for data retrieval.
+[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/EntityFrameworkGenericRepo_README.md)
+
 ---
 
 <p align="center">
@@ -180,7 +188,7 @@ Here’s a sample email sent through the **Email Service**, utilizing Razor temp
 
 Example SMS message generated for alerts and notifications. SMS notifications are template-based, allowing easy customization for different types of messages.
 
-![image](https://github.com/user-attachments/assets/adc654b8-8b51-43fd-b1e1-1d7674a8de6e)
+![image](https://github.com/user-attachments/assets/8d9c96a7-4884-4326-8eb3-b448e98a5a57)
 
 
 ### Auto Ef core Auditing 
@@ -188,7 +196,6 @@ Example SMS message generated for alerts and notifications. SMS notifications ar
 Example Auditing data generated automatically by ef core.
 
 ![image](https://github.com/user-attachments/assets/2f862e4e-074a-4bb3-9ac7-33cba1f36d65)
-
 
 
 ## Used Packages
@@ -251,14 +258,17 @@ Here is a list of key packages used in this project and their purpose:
 - **Usage**: Manages tasks like email dispatching, SMS notifications, and other background processes, making asynchronous task handling efficient.
 
 ---
-## Upcoming in Version 2: Ultimate Knight Hedge
+## Upcoming in Version 2: Ultimate Moon knight
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/2dd2ad50-f923-4c2c-900a-b1ada84b15a9" alt="v2 - Copy" width="300" height="300" />
+  <img src="https://github.com/user-attachments/assets/faba266c-3eba-4fce-afec-ccd04f2efe3b" width="300" height="300" alt="a94ac067-c12c-4357-86f0-62d2cdb8652f" alt="v2 - Copy" width="300" height="300" />
 </p>
 The upcoming version, **Ultimate Knight Hedge**, introduces new, trending .NET libraries and tools to enhance functionality, improve performance, and simplify integrations. Below are some key additions planned for version 2:
 
 - **Polly**: Advanced resilience and transient fault-handling library. Polly will enable the application to handle retries, circuit breakers, and fallback mechanisms gracefully, improving system reliability.
-  
+- **Keycloak**: For secure authentication and authorization.
+- **Camunda**: Powerful process automation and workflow management.
+- **Angular Dashboard**: An intuitive, responsive UI for managing application data and operations.
+- Escalation   
 - **Refit**: A RESTful API client library for .NET. Refit will simplify API integrations, enabling effortless setup of HTTP clients with strongly-typed, interface-based HTTP requests.
   
 - **Fluent Assertions**: A powerful assertion library for .NET, designed to improve the readability and maintainability of tests. Fluent Assertions will be used to write expressive, readable test assertions, making unit testing more efficient and reliable.
@@ -266,10 +276,23 @@ The upcoming version, **Ultimate Knight Hedge**, introduces new, trending .NET l
 - **GitHub Actions**: Built-in CI/CD support using GitHub Actions for automated testing, deployment, and monitoring. Version 2 will provide pre-configured GitHub Action workflows, making continuous integration and deployment simpler and faster.
   
 - **Rate Limiting**: Improved rate-limiting controls to manage API consumption, preventing abuse and ensuring fair resource usage. This will provide better control over API traffic and reduce the risk of service overload.
-  
+- **Auto Escalation**: Automatically escalate tasks or incidents based on predefined rules and timelines, ensuring timely responses and efficient workflow management.
+
 - **Enhanced Modular Architecture**: With additional extensions, such as better support for microservices and domain-driven design (DDD) patterns, Ultimate Knight Hedge will allow for more fine-grained customization and scalability across services.
 
 ---
+
+## Postman collection 
+
+All API found here.
+
+ [![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightHedgeArchitecture/blob/master/Documentation/KnightHedge.postman_collection.json)
+
+![image](https://github.com/user-attachments/assets/b938fdf6-0d56-4b05-bffd-70ee31a99158)
+
+---
+## Contact owner
+[<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg' alt='linkedin' height='40'>](https://www.linkedin.com/in/mahmoud-khalifa-643936138/)  
 
 ## Getting Started
 
