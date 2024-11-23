@@ -21,6 +21,7 @@ public class PdfController : BaseApiController
   public async Task<IActionResult> Download([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
   {
     var pdfBytes = await _pdfService.ExportUserDetailsPdfAsync(request, cancellationToken);
+
     if (pdfBytes is object && pdfBytes.Length > 0)
     {
       return File(pdfBytes, "application/pdf", $"UserDetails_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.pdf");
@@ -28,7 +29,23 @@ public class PdfController : BaseApiController
     }
 
     return BadRequest("invalid-parameters");
-
-  
   }
+
+  [PermissionAuthorize(PermissionKeysConstant.Pdf.EXPORT_PDF)]
+
+  [HttpPost("DownloadBasicTemplate")]
+
+  public async Task<IActionResult> DownloadBasicTemplate([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
+  {
+    var pdfBytes = await _pdfService.GeneratePdf("");
+
+    if (pdfBytes is object && pdfBytes.Length > 0)
+    {
+      return File(pdfBytes, "application/pdf", $"UserDetails_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.pdf");
+
+    }
+
+    return BadRequest("invalid-parameters");
+  }
+
 }

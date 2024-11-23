@@ -1,3 +1,5 @@
+using KH.BuildingBlocks.Apis.Services;
+
 namespace KH.Services.Pdf.Implementation;
 
 public class PdfService : IPdfService
@@ -5,14 +7,14 @@ public class PdfService : IPdfService
   private readonly IUserQueryService _userService;
   private readonly IConverter _converter;
   private readonly ILogger<PdfService> _logger;
-  //private readonly IRazorViewToStringRenderer _razorRenderer; // Inject Razor renderer
 
-  public PdfService(IUserQueryService userService, IConverter converter, ILogger<PdfService> logger)
+  public PdfService(IUserQueryService userService,
+    IConverter converter,
+    ILogger<PdfService> logger)
   {
     _userService = userService;
     _converter = converter;
     _logger = logger;
-    //_razorRenderer = razorRenderer;
   }
 
   public async Task<byte[]> ExportUserDetailsPdfAsync(UserFilterRequest param, CancellationToken cancellationToken)
@@ -99,7 +101,7 @@ public class PdfService : IPdfService
     string htmlFileContentForLayout = await File.ReadAllTextAsync(filePathForTemplateLayout);
 
 
-    if (string.IsNullOrEmpty(htmlContent))
+    if (string.IsNullOrEmpty(htmlFileContentForLayout))
       throw new ArgumentException("HTML content cannot be null or empty.", nameof(htmlContent));
 
     // Configure the PDF document
@@ -116,7 +118,7 @@ public class PdfService : IPdfService
             {
                 new ObjectSettings
                 {
-                    HtmlContent = htmlContent,
+                    HtmlContent = htmlFileContentForLayout,
                     WebSettings = new WebSettings
                     {
                         DefaultEncoding = "utf-8",
@@ -141,4 +143,5 @@ public class PdfService : IPdfService
     return _converter.Convert(pdfDocument);
   }
 
+  
 }

@@ -54,4 +54,9 @@ public class UserDetailsResponse : BasicTrackerEntityDto
     UserDepartments = user.UserDepartments.Select(ud => new UserDepartmentResponse(ud)).ToList();
   }
 
+  public UserDetailsResponse()
+  {
+        
+  }
+
 }

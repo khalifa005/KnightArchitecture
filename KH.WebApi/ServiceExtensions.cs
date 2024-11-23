@@ -61,6 +61,7 @@ public static class ServiceExtensions
       options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
     });
 
+   
     return services;
   }
 
