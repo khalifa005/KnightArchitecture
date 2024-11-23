@@ -1,5 +1,6 @@
 using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.SMSDto.Request;
+using KH.Services.Auth.Contracts;
 using KH.Services.Emails.Contracts;
 using KH.Services.Sms.Contracts;
 

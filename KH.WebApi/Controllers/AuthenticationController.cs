@@ -1,3 +1,5 @@
+using KH.Services.Auth.Contracts;
+
 namespace KH.WebApi.Controllers;
 
 public class AuthenticationController : BaseApiController

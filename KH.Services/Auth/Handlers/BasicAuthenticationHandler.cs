@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 
 
-namespace KH.Services.Users.Handlers;
+namespace KH.Services.Auth.Handlers;
 
 public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {

@@ -1,3 +1,5 @@
+using KH.Services.Auth.Contracts;
+
 namespace KH.Services.Users.Implementation;
 
 public class UserValidationService : IUserValidationService

@@ -1,14 +1,14 @@
 using KH.BuildingBlocks.Auth;
 using KH.BuildingBlocks.Auth.Contracts;
-using KH.Services.Users.Handlers;
+using KH.Services.Auth.Handlers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace KH.Services;
-                    
+namespace KH.Services.Auth.Extensions;
+
 public static class IdentityServiceExtension
 {
   public static IServiceCollection AddIdentityService(this IServiceCollection services, IConfiguration configuration)

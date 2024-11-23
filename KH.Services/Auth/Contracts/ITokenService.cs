@@ -1,7 +1,7 @@
 using KH.Dto.Models.AuthenticationDto;
 using System.Security.Claims;
 
-namespace KH.Services.Users.Contracts;
+namespace KH.Services.Auth.Contracts;
 
 public interface ITokenService
 {

@@ -17,7 +17,7 @@ public static class ExceptionExtensions
     logger.LogError($"StackTrace in {context}: {ex.StackTrace}");
     if (ex.InnerException != null)
     {
-      logger.LogError($"Inner Exception in {context}: {ex.InnerException.Message}");
+        
     }
 
     // Set the default status code and error messages

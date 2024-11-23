@@ -20,14 +20,15 @@ public class PdfController : BaseApiController
 
   public async Task<IActionResult> Download([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
   {
-    try
+    var pdfBytes = await _pdfService.ExportUserDetailsPdfAsync(request, cancellationToken);
+    if (pdfBytes is object && pdfBytes.Length > 0)
     {
-      var pdfBytes = await _pdfService.ExportUserDetailsPdfAsync(request, cancellationToken);
       return File(pdfBytes, "application/pdf", $"UserDetails_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.pdf");
+
     }
-    catch (Exception ex)
-    {
-      return BadRequest(ex.Message);
-    }
+
+    return BadRequest("invalid-parameters");
+
+  
   }
 }

@@ -1,3 +1,5 @@
+using KH.Services.Auth.Contracts;
+
 namespace KH.Services.Users.Implementation;
 
 public class UserQueryService : IUserQueryService
@@ -38,9 +40,14 @@ public class UserQueryService : IUserQueryService
 
     //light user query to make sure the user exist
     var userFromDB = await repository.GetAsync(id);
-
+    
     if (userFromDB == null)
-      throw new Exception("Invalid Parameter");
+    {
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.ErrorMessage = "invalid user";
+
+      return res;
+    }
 
     //complex user query using splitting
     var detailsUserFromDB = await repository.GetAsync(id,

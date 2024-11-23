@@ -1,10 +1,11 @@
 using KH.Dto.Models.AuthenticationDto;
+using KH.Services.Auth.Contracts;
 using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-namespace KH.Services.Users.Implementation;
+namespace KH.Services.Auth.Implementation;
 
 public class TokenService : ITokenService
 {
@@ -100,7 +101,7 @@ public class TokenService : ITokenService
   public RefreshTokenResponse GenerateRefreshToken()
   {
     var randomNumber = new byte[32];
-    using (var generator = System.Security.Cryptography.RandomNumberGenerator.Create())
+    using (var generator = RandomNumberGenerator.Create())
     {
       generator.GetBytes(randomNumber);
       return new RefreshTokenResponse
