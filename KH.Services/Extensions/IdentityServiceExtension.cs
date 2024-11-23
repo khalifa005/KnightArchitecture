@@ -148,7 +148,8 @@ public static class IdentityServiceExtension
           return Task.CompletedTask;
         }
       };
-    }).AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null); // Adding Basic Authentication
+    })
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null); // Adding Basic Authentication
 
     return services;
   }

@@ -1,6 +1,4 @@
-using KH.Services.Media_s.Contracts;
-
-namespace KH.Services.Media_s.Implementation;
+namespace KH.Services.Pdf.Implementation;
 
 public class PdfService : IPdfService
 {

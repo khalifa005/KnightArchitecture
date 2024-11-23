@@ -1,4 +1,6 @@
 
+using KH.Services.Pdf.Implementation;
+
 namespace KH.Services;
 
 public static class ServicesRegistrationService
