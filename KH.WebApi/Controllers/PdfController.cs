@@ -6,64 +6,37 @@ namespace KH.WebApi.Controllers;
 
 public class PdfController : BaseApiController
 {
-  public readonly IUserQueryService _userService;
   private readonly IPdfService _pdfService;
 
-  public PdfController(IUserQueryService userService, IPdfService pdfService)
+  public PdfController(IPdfService pdfService)
   {
-    _userService = userService;
     _pdfService = pdfService;
   }
-  [PermissionAuthorize(PermissionKeysConstant.Pdf.EXPORT_PDF)]
 
   [HttpPost("Download")]
-
+  [PermissionAuthorize(PermissionKeysConstant.Pdf.EXPORT_PDF)]
   public async Task<IActionResult> Download([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
   {
     var pdfBytes = await _pdfService.ExportUserDetailsPdfAsync(request, cancellationToken);
-
-    if (pdfBytes is object && pdfBytes.Length > 0)
-    {
-      return File(pdfBytes, "application/pdf", $"UserDetails_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.pdf");
-
-    }
-
-    return BadRequest("invalid-parameters");
+    return FileOrBadRequest(pdfBytes, "UserDetails");
   }
-
-  [PermissionAuthorize(PermissionKeysConstant.Pdf.EXPORT_PDF)]
-
-  [HttpPost("DownloadBasicTemplate")]
-
-  public async Task<IActionResult> DownloadBasicTemplate([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
-  {
-    var pdfBytes = await _pdfService.GeneratePdf("","");
-
-    if (pdfBytes is object && pdfBytes.Length > 0)
-    {
-      return File(pdfBytes, "application/pdf", $"UserDetails_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.pdf");
-
-    }
-
-    return BadRequest("invalid-parameters");
-  }
-
-
-  [PermissionAuthorize(PermissionKeysConstant.Pdf.EXPORT_PDF)]
 
   [HttpPost("DownloadInvoiceTemplate")]
-
+  [PermissionAuthorize(PermissionKeysConstant.Pdf.EXPORT_PDF)]
   public async Task<IActionResult> DownloadInvoiceTemplate([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
   {
-    var pdfBytes = await _pdfService.GenerateInvoicePdf(request.Language);
-
-    if (pdfBytes is object && pdfBytes.Length > 0)
-    {
-      return File(pdfBytes, "application/pdf", $"UserDetails_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.pdf");
-
-    }
-
-    return BadRequest("invalid-parameters");
+    var pdfBytes = await _pdfService.ExportUserInvoicePdf(request.Language);
+    return FileOrBadRequest(pdfBytes, "Invoice");
   }
 
+  private IActionResult FileOrBadRequest(byte[] pdfBytes, string filePrefix)
+  {
+    if (pdfBytes.Length > 0)
+    {
+      var fileName = $"{filePrefix}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.pdf";
+      return File(pdfBytes, "application/pdf", fileName);
+    }
+
+    return BadRequest("Invalid parameters.");
+  }
 }
