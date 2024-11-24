@@ -1,10 +1,8 @@
 <div class="invoice-header">
+  
   <div>
-    <strong>From:</strong>
     <p>{{SENDER_NAME}}<br>{{SENDER_ADDRESS}}</p>
-  </div>
-  <div>
-    <strong>To:</strong>
+    <strong>{{TO}}:</strong>
     <p>{{RECIPIENT_NAME}}<br>{{RECIPIENT_ADDRESS}}</p>
   </div>
 </div>
@@ -13,10 +11,10 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>Description</th>
-      <th>Quantity</th>
-      <th>Unit Price</th>
-      <th>Total</th>
+      <th>{{TABLE_HEADER_DESCRIPTION}}</th>
+      <th>{{TABLE_HEADER_QUANTITY}}</th>
+      <th>{{TABLE_HEADER_UNIT_PRICE}}</th>
+      <th>{{TABLE_HEADER_TOTAL}}</th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +22,7 @@
   </tbody>
 </table>
 
+
 <div class="invoice-footer">
-  <p><strong>Total Amount:</strong> {{TOTAL_AMOUNT}}</p>
+  <p><strong>{{TOTAL_AMOUNT_TITLE}} :</strong> {{TOTAL_AMOUNT}}</p>
 </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="{{LANGUAGE_DIRECTION}}">
 <head>
   <meta charset="UTF-8">
   <style>
@@ -11,8 +11,8 @@
     }
 
       body.arabic {
-        direction: rtl; /* Right-to-left for Arabic */
-        font-family: "Arial", "Tajawal", sans-serif; /* Support Arabic fonts */
+        direction: rtl;
+        font-family: "Tajawal", Arial, sans-serif;
       }
 
     header {
@@ -54,6 +54,10 @@
         text-align: left;
       }
 
+    body.arabic .invoice-table th, body.arabic .invoice-table td {
+      text-align: right;
+    }
+
     .signature {
       margin-top: 40px;
       text-align: right;
@@ -73,7 +77,7 @@
       }
   </style>
 </head>
-<body class="{{LANGUAGE_DIRECTION}}">
+<body class="{{LANGUAGE_CLASS}}">
   <header>
     <h1>{{TITLE}}</h1>
   </header>
@@ -85,7 +89,7 @@
     <p>{{SIGNATURE_TEXT}}</p>
   </div>
   <footer>
-    Generated on [date] | Page [page] of [toPage]
+    Generated on {{DATE}} | Page {{PAGE}} of {{TO_PAGE}}
   </footer>
 </body>
 </html>

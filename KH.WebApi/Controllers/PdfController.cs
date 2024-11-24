@@ -37,7 +37,7 @@ public class PdfController : BaseApiController
 
   public async Task<IActionResult> DownloadBasicTemplate([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
   {
-    var pdfBytes = await _pdfService.GeneratePdf("");
+    var pdfBytes = await _pdfService.GeneratePdf("","");
 
     if (pdfBytes is object && pdfBytes.Length > 0)
     {
@@ -55,7 +55,7 @@ public class PdfController : BaseApiController
 
   public async Task<IActionResult> DownloadInvoiceTemplate([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
   {
-    var pdfBytes = await _pdfService.GenerateInvoicePdf();
+    var pdfBytes = await _pdfService.GenerateInvoicePdf(request.Language);
 
     if (pdfBytes is object && pdfBytes.Length > 0)
     {
