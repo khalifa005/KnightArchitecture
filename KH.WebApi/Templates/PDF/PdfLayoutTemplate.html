@@ -2,12 +2,16 @@
 <html lang="en" dir="{{LANGUAGE_DIRECTION}}">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    /* General Body Styling */
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
-      line-height: 1.5;
-      direction: ltr; /* Default direction for English */
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+      background-color: #f3f4f6; /* Light gray background */
+      color: #4a4a4a; /* Neutral text color */
     }
 
       body.arabic {
@@ -15,49 +19,99 @@
         font-family: "Tajawal", Arial, sans-serif;
       }
 
+    /* Header Styling */
     header {
       text-align: center;
       margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #e0e0e0; /* Light border */
     }
 
-    footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      font-size: 0.8em;
-      color: gray;
-    }
+      header h1 {
+        font-size: 2em;
+        margin: 0;
+        color: black; /* Modern blue */
+      }
 
+    /* Content Area */
     .content {
-      margin-top: 20px;
+      margin: 20px 0;
     }
 
+    /* Invoice Header Section */
     .invoice-header {
       display: flex;
       justify-content: space-between;
       margin-bottom: 20px;
+      padding: 20px;
+      background-color: #ffffff; /* White background for contrast */
+      border: 1px solid #d1d5db; /* Soft border */
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     }
 
+      .invoice-header div {
+        width: 45%;
+      }
+
+      .invoice-header p {
+        margin: 5px 0;
+      }
+
+      .invoice-header strong {
+        display: block;
+        margin-top: 10px;
+        color: #111827; /* Dark text for emphasis */
+      }
+
+    /* Table Styling */
     .invoice-table {
       width: 100%;
       border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #ffffff; /* White background */
+      border-radius: 8px;
+      overflow: hidden;
     }
 
-      .invoice-table th, .invoice-table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-      }
-
-      .invoice-table th {
-        background-color: #f4f4f4;
+      .invoice-table th,
+      .invoice-table td {
+        border: 1px solid #e5e7eb; /* Light border */
+        padding: 12px;
         text-align: left;
       }
 
-    body.arabic .invoice-table th, body.arabic .invoice-table td {
+      .invoice-table th {
+        background-color: #f9fafb; /* Very light gray */
+        font-weight: bold;
+        color: #6b7280; /* Neutral gray */
+        text-transform: uppercase;
+        font-size: 0.9em;
+      }
+
+    body.arabic .invoice-table th,
+    body.arabic .invoice-table td {
       text-align: right;
     }
 
+    /* Footer Section */
+    .invoice-footer {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: right;
+    }
+
+      .invoice-footer p {
+        margin: 0;
+        font-size: 1.1em;
+        color: #1f2937; /* Dark neutral */
+      }
+
+    /* Signature Section */
     .signature {
       margin-top: 40px;
       text-align: right;
@@ -67,29 +121,32 @@
         width: 150px;
         height: auto;
         display: block;
-        margin-right: 20px;
       }
 
       .signature p {
         margin-top: 10px;
         font-size: 0.9em;
-        color: #333;
+        color: #4b5563; /* Neutral gray */
       }
+
+    /* Footer */
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 0.85em;
+      color: #6b7280; /* Neutral gray */
+    }
   </style>
 </head>
 <body class="{{LANGUAGE_CLASS}}">
   <header>
     <h1>{{TITLE}}</h1>
   </header>
-  <div class="content">
+  <main class="content">
     {{CONTENT_PLACEHOLDER}}
-  </div>
-  <div class="signature">
-    <img src="https://via.placeholder.com/150x50?text=Signature" alt="Signature">
-    <p><!--SIGNATURE_TEXT}}--></p>
-  </div>
+  </main>
   <footer>
-    <!--Generated on DATE | Page PAGE}} of TO_PAGE}}-->
+    <!--Generated on DATE | Page PAGE of TO_PAGE}}-->
   </footer>
 </body>
 </html>

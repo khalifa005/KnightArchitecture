@@ -57,6 +57,7 @@ public class PdfService : IPdfService
     return await GeneratePdfWithDynamicContent(invoiceTemplatePath, dynamicContent, language);
   }
 
+
   public async Task<byte[]> GeneratePdfWithDynamicContent(string templatePath, Dictionary<string, string> dynamicContent, string language = "en")
   {
     try
@@ -76,7 +77,47 @@ public class PdfService : IPdfService
     }
   }
 
-  
+  private byte[] GeneratePdf(string htmlContent, PaperKind paperKind)
+  {
+    var pdfDocument = new HtmlToPdfDocument
+    {
+      GlobalSettings =
+      {
+        ColorMode = ColorMode.Color,
+        Orientation = Orientation.Portrait,
+        PaperSize = paperKind,
+        Out = null
+      },
+      Objects =
+            {
+                new ObjectSettings
+                {
+                    HtmlContent = htmlContent,
+                    WebSettings = new WebSettings { DefaultEncoding = "utf-8" },
+                    HeaderSettings = new HeaderSettings
+                    {
+                        FontSize = 10,
+                        //Right = "Page [page] of [toPage]",
+                        //Line = true
+                    },
+                    FooterSettings = new FooterSettings
+                    {
+                        FontSize = 10,
+                        Center = "Generated on [date]"
+                    }
+                }
+            }
+    };
+
+    return _converter.Convert(pdfDocument);
+  }
+
+
+
+
+
+
+
   private string PopulateTemplateFromFile(string fileName, Dictionary<string, string> placeholders)
   {
     var filePath = GetTemplatePath(fileName);
@@ -180,40 +221,7 @@ public class PdfService : IPdfService
   }
 
 
-  private byte[] GeneratePdf(string htmlContent, PaperKind paperKind)
-  {
-    var pdfDocument = new HtmlToPdfDocument
-    {
-      GlobalSettings =
-      {
-        ColorMode = ColorMode.Color,
-        Orientation = Orientation.Portrait,
-        PaperSize = paperKind,
-        Out = null
-      },
-      Objects =
-            {
-                new ObjectSettings
-                {
-                    HtmlContent = htmlContent,
-                    WebSettings = new WebSettings { DefaultEncoding = "utf-8" },
-                    HeaderSettings = new HeaderSettings
-                    {
-                        FontSize = 10,
-                        Right = "Page [page] of [toPage]",
-                        Line = true
-                    },
-                    FooterSettings = new FooterSettings
-                    {
-                        FontSize = 10,
-                        Center = "Generated on [date]"
-                    }
-                }
-            }
-    };
-
-    return _converter.Convert(pdfDocument);
-  }
+ 
 
 
 }

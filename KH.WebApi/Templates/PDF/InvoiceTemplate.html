@@ -1,12 +1,11 @@
 <div class="invoice-header">
-  
   <div>
-    <p>{{SENDER_NAME}}<br>{{SENDER_ADDRESS}}</p>
-    <strong>{{TO}}:</strong>
-    <p>{{RECIPIENT_NAME}}<br>{{RECIPIENT_ADDRESS}}</p>
+    <p><strong>{{SENDER_NAME}}</strong></p>
+  </div>
+  <div>
+    <p><br>{{RECIPIENT_NAME}}<br>{{RECIPIENT_ADDRESS}}</p>
   </div>
 </div>
-
 <table class="invoice-table">
   <thead>
     <tr>
@@ -21,8 +20,10 @@
     {{INVOICE_ROWS}}
   </tbody>
 </table>
-
-
 <div class="invoice-footer">
-  <p><strong>{{TOTAL_AMOUNT_TITLE}} :</strong> {{TOTAL_AMOUNT}}</p>
+  <p><strong>{{TOTAL_AMOUNT_TITLE}}:</strong> {{TOTAL_AMOUNT}}</p>  
+</div>
+<div class="signature">
+  <img src="https://via.placeholder.com/150x50?text=Signature" alt="Signature">
+  <!--<p>SIGNATURE_TEXT}}</p>-->
 </div>
