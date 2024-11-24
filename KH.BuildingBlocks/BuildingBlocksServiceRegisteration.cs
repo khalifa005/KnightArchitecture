@@ -2,6 +2,7 @@
 
 using KH.BuildingBlocks.Cache.Enums;
 using KH.BuildingBlocks.Cache.Interfaces;
+using QuestPDF.Infrastructure;
 
 namespace KH.BuildingBlocks;
 
@@ -58,6 +59,13 @@ public static class BuildingBlocksServiceRegisteration
     services.AddOptions<CacheSettings>()
      .Bind(CacheSettings)
      .ValidateDataAnnotations();
+
+    #endregion
+
+
+    #region Packages License
+    // Configure QuestPDF license
+    QuestPDF.Settings.License = LicenseType.Community;
 
     #endregion
 

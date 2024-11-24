@@ -1,4 +1,6 @@
 using KH.BuildingBlocks.Apis.Services;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
 using System.Globalization;
 using System.Text;
 using static KH.Dto.Models.UserDto.Response.UserRoleResponse;
@@ -113,10 +115,97 @@ public class PdfService : IPdfService
   }
 
 
+  #region DemoQuestPDF
+  // Generate a PDF with user information
+  public async Task<byte[]> GeneratePdfAsync(UserFilterRequest param, CancellationToken cancellationToken)
+  {
+    var userResponse = await _userService.GetAsync(param.Id!.Value, cancellationToken);
 
+    if (userResponse.StatusCode != StatusCodes.Status200OK || userResponse.Data == null)
+    {
+      _logger.LogWarning($"Invalid user data for ID {param.Id}");
+      return Array.Empty<byte>();
+    }
 
+    var user = userResponse.Data;
 
+    var pdfBytes = Document.Create(container =>
+    {
+      container.Page(page =>
+      {
+        page.Margin(50);
+        page.Size(PageSizes.A4);
+        page.Background(Colors.White);
 
+        // Header
+        page.Header().Height(80).Background(Colors.Blue.Medium).AlignMiddle().AlignCenter()
+            .Text("Welcome Document")
+            .FontSize(24).FontColor(Colors.White).Bold();
+
+        // Content
+        page.Content().Column(column =>
+        {
+          column.Spacing(20);
+
+          // Personal Details
+          column.Item().Text($"Hello, {user.FirstName}!").FontSize(20).Bold().FontColor(Colors.Blue.Medium);
+          column.Item().Text($"Email: {user.Email}").FontSize(16).FontColor(Colors.Grey.Darken2);
+
+          // Roles Section
+          column.Item().Text("Your Roles:").FontSize(18).Bold().FontColor(Colors.Grey.Darken3);
+          foreach (var role in user.UserRoles.Select(r => r.Role.NameEn))
+          {
+            column.Item().Text($"- {role}").FontSize(14).FontColor(Colors.Blue.Darken2);
+          }
+
+          // Footer Note
+          column.Item().PaddingTop(20).Text("Thank you for being part of our service!")
+              .FontSize(14).Italic().FontColor(Colors.Grey.Darken1);
+        });
+
+        // Footer
+        page.Footer().Height(50).AlignMiddle().AlignRight().Text(text =>
+        {
+          text.Span("Generated with QuestPDF").FontColor(Colors.Grey.Darken1).FontSize(10);
+          text.Span(" | Page ").FontSize(10);
+          text.CurrentPageNumber().FontSize(10);
+        });
+      });
+    }).GeneratePdf();
+
+    return await Task.FromResult(pdfBytes);
+  }
+
+  // Merge multiple PDFs into one
+  public async Task<byte[]> MergePdfsAsync(List<byte[]> pdfs)
+  {
+    var mergedDocument = Document.Create(container =>
+    {
+      container.Page(page =>
+      {
+        page.Size(PageSizes.A4);
+        page.Margin(0);
+
+        page.Content().Column(column =>
+        {
+          foreach (var pdf in pdfs)
+          {
+            column.Item().Element(container =>
+            {
+              container.ShowEntire().Image(pdf); // Render each PDF as an image
+            });
+
+            column.Item().PageBreak(); // Ensure separation between PDFs
+          }
+        });
+      });
+    }).GeneratePdf();
+
+    return await Task.FromResult(mergedDocument);
+  }
+  #endregion
+
+  #region HelperMethods
 
   private string PopulateTemplateFromFile(string fileName, Dictionary<string, string> placeholders)
   {
@@ -156,6 +245,9 @@ public class PdfService : IPdfService
     return Path.Combine(Directory.GetCurrentDirectory(), "Templates", "PDF", fileName);
   }
 
+  #endregion
+
+  #region UnrelatedMethodJustForShowingADirectDemo
   private Dictionary<string, string> PrepareInvoiceContent(string language)
   {
     var rows = GenerateInvoiceRowsData(new List<UserInvoiceItemResponse>
@@ -221,7 +313,7 @@ public class PdfService : IPdfService
   }
 
 
- 
+  #endregion
 
 
 }

@@ -25,4 +25,7 @@ public interface IPdfService
   /// <param name="language">Language preference for the invoice (default is "en").</param>
   /// <returns>A byte array representing the generated PDF invoice.</returns>
   Task<byte[]> ExportUserInvoicePdf(string language = "en");
+
+  Task<byte[]> GeneratePdfAsync(UserFilterRequest param, CancellationToken cancellationToken);
+  Task<byte[]> MergePdfsAsync(List<byte[]> pdfs);
 }

@@ -39,4 +39,37 @@ public class PdfController : BaseApiController
 
     return BadRequest("Invalid parameters.");
   }
+
+  [HttpPost("GenerateWithQuest")]
+  public async Task<IActionResult> GeneratePdf([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
+  {
+    var pdfBytes = await _pdfService.GeneratePdfAsync(request, cancellationToken);
+    //return File(pdfBytes, "application/pdf", "Welcome.pdf");
+    return FileOrBadRequest(pdfBytes, "Welcome");
+  }
+
+  [HttpPost("MergeMultiplePdfs")]
+  public async Task<IActionResult> MergePdfs([FromForm] PdfMergeRequest request)
+  {
+    var pdfBytesList = new List<byte[]>
+        {
+            await ReadFileBytesAsync(request.Pdf1),
+            await ReadFileBytesAsync(request.Pdf2),
+            await ReadFileBytesAsync(request.Pdf3)
+        };
+
+    var mergedPdfBytes = await _pdfService.MergePdfsAsync(pdfBytesList);
+    //return File(mergedPdfBytes, "application/pdf", "MergedDocument.pdf");
+    return FileOrBadRequest(mergedPdfBytes, "MergedDocument");
+
+  }
+
+  private async Task<byte[]> ReadFileBytesAsync(IFormFile file)
+  {
+    using var memoryStream = new MemoryStream();
+    await file.CopyToAsync(memoryStream);
+    return memoryStream.ToArray();
+  }
+
+
 }
