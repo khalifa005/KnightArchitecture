@@ -28,4 +28,5 @@ public interface IPdfService
 
   Task<byte[]> GeneratePdfAsync(UserFilterRequest param, CancellationToken cancellationToken);
   Task<byte[]> MergePdfsAsync(List<byte[]> pdfs);
+  Task<byte[]> GenerateInvoicePdfWithQuestAsync();
 }

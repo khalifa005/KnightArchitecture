@@ -25,7 +25,7 @@ public class PdfService : IPdfService
     try
     {
       //we may want to pass the user data with the template name as params but this is a demo to be standalone
-     
+
       var userResponse = await _userService.GetAsync(param.Id!.Value, cancellationToken);
 
       if (userResponse.StatusCode != StatusCodes.Status200OK || userResponse.Data == null)
@@ -175,6 +175,18 @@ public class PdfService : IPdfService
 
     return await Task.FromResult(pdfBytes);
   }
+
+  public async Task<byte[]> GenerateInvoicePdfWithQuestAsync()
+  {
+    var model = InvoiceDocumentDataSource.GetInvoiceDetails();
+
+    // Generate PDF as byte array
+    var document = new InvoiceDocument(model);
+    var pdfBytes = document.GeneratePdf();
+    return pdfBytes;
+  }
+
+
 
   // Merge multiple PDFs into one
   public async Task<byte[]> MergePdfsAsync(List<byte[]> pdfs)

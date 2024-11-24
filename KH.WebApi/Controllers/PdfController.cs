@@ -43,8 +43,8 @@ public class PdfController : BaseApiController
   [HttpPost("GenerateWithQuest")]
   public async Task<IActionResult> GeneratePdf([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
   {
-    var pdfBytes = await _pdfService.GeneratePdfAsync(request, cancellationToken);
-    //return File(pdfBytes, "application/pdf", "Welcome.pdf");
+    //var pdfBytes = await _pdfService.GeneratePdfAsync(request, cancellationToken);
+    var pdfBytes = await _pdfService.GenerateInvoicePdfWithQuestAsync();
     return FileOrBadRequest(pdfBytes, "Welcome");
   }
 
@@ -59,7 +59,6 @@ public class PdfController : BaseApiController
         };
 
     var mergedPdfBytes = await _pdfService.MergePdfsAsync(pdfBytesList);
-    //return File(mergedPdfBytes, "application/pdf", "MergedDocument.pdf");
     return FileOrBadRequest(mergedPdfBytes, "MergedDocument");
 
   }
