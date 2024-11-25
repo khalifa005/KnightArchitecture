@@ -57,7 +57,14 @@ public class PdfService : IPdfService
       language);
   }
 
-
+  /// <summary>
+  /// this will control to use which package to generate html to pdf 
+  /// </summary>
+  /// <param name="templateName"></param>
+  /// <param name="layoutName"></param>
+  /// <param name="placeholdersWithValues"></param>
+  /// <param name="language"></param>
+  /// <returns></returns>
   public async Task<byte[]> GeneratePdfWithDynamicContent(string templateName, string layoutName, Dictionary<string, string> placeholdersWithValues, string language = "en")
   {
     try
@@ -78,6 +85,7 @@ public class PdfService : IPdfService
     }
   }
 
+  #region Dink
   private byte[] GeneratePdfWithDink(string htmlContent, PaperKind paperKind)
   {
     var pdfDocument = new HtmlToPdfDocument
@@ -113,6 +121,7 @@ public class PdfService : IPdfService
     return _converter.Convert(pdfDocument);
   }
 
+  #endregion
 
   #region QuestPDF
   public async Task<byte[]> GenerateBasicPdfQuestAsync(UserFilterRequest param, CancellationToken cancellationToken)
