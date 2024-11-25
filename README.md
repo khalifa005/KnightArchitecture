@@ -118,6 +118,7 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 10. PDF Exporting
 - **DinkToPdf Integration**: Provides PDF generation capabilities.
 - **Automated Export**: Supports transactional documents and custom reports.
+[![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightArchitecture/blob/master/Documentation/Pdf_README.md)
 
 ### 11. Excel Export and Import
 - **Data Export**: Allows offline reporting and analysis.
