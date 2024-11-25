@@ -17,7 +17,7 @@ public interface IPdfService
   /// <param name="dynamicContent">A dictionary of placeholders and their corresponding values.</param>
   /// <param name="language">Language preference for the content (default is "en").</param>
   /// <returns>A byte array representing the generated PDF.</returns>
-  Task<byte[]> GeneratePdfWithDynamicContent(string templatePath, Dictionary<string, string> dynamicContent, string language = "en");
+  Task<byte[]> GeneratePdfWithDynamicContent(string templateName, string layoutName, Dictionary<string, string> placeholdersWithValues, string language = "en");
 
   /// <summary>
   /// Generates a PDF invoice with dynamic content and localization.
@@ -26,7 +26,8 @@ public interface IPdfService
   /// <returns>A byte array representing the generated PDF invoice.</returns>
   Task<byte[]> ExportUserInvoicePdf(string language = "en");
 
-  Task<byte[]> GeneratePdfAsync(UserFilterRequest param, CancellationToken cancellationToken);
-  Task<byte[]> MergePdfsAsync(List<byte[]> pdfs);
+  Task<byte[]> GenerateBasicPdfQuestAsync(UserFilterRequest param, CancellationToken cancellationToken);
+  Task<byte[]> MergePdfsAsync(IEnumerable<IFormFile> formFiles);
   Task<byte[]> GenerateInvoicePdfWithQuestAsync();
+  byte[] GeneratePdfFromHtmlWithNReco(string htmlContent = "");
 }

@@ -15,7 +15,6 @@ public class FileManagerService
     IOptions<FileSettings> fileSettings)
   {
     _fileSettings = fileSettings.Value;
-    //_fileValidator = fileValidator;
   }
 
   public async Task<FileResponse> Upload(IFormFile file, string modelWithModelId)
@@ -226,6 +225,13 @@ public class FileManagerService
     }
   }
 
+  public async Task<byte[]> ConvertFormFileToBytesAsync(IFormFile file)
+  {
+    using var memoryStream = new MemoryStream();
+    await file.CopyToAsync(memoryStream);
+    return memoryStream.ToArray();
+  }
+
   private bool IsPhoto(string fileName)
   {
     return fileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase)
@@ -286,4 +292,6 @@ public class FileManagerService
       return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant().Substring(0, 8);  // First 8 characters
     }
   }
+
+
 }

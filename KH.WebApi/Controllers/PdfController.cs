@@ -1,4 +1,3 @@
-using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
 using KH.Services.Media_s.Contracts;
 
@@ -13,20 +12,46 @@ public class PdfController : BaseApiController
     _pdfService = pdfService;
   }
 
-  [HttpPost("Download")]
+  [HttpPost("WelcomePDFTemplateFromHTML")]
   [PermissionAuthorize(PermissionKeysConstant.Pdf.EXPORT_PDF)]
-  public async Task<IActionResult> Download([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
+  public async Task<IActionResult> WelcomePDFTemplateFromHtml([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
   {
     var pdfBytes = await _pdfService.ExportUserDetailsPdfAsync(request, cancellationToken);
     return FileOrBadRequest(pdfBytes, "UserDetails");
   }
 
-  [HttpPost("DownloadInvoiceTemplate")]
+  [HttpPost("InvoicePDFTemplateFromHTML")]
   [PermissionAuthorize(PermissionKeysConstant.Pdf.EXPORT_PDF)]
-  public async Task<IActionResult> DownloadInvoiceTemplate([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
+  public async Task<IActionResult> InvoicePDFTemplateFromHTML([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
   {
     var pdfBytes = await _pdfService.ExportUserInvoicePdf(request.Language);
     return FileOrBadRequest(pdfBytes, "Invoice");
+  }
+
+  [HttpPost("InvoicePDFTemplateWithQuest")]
+  public async Task<IActionResult> InvoicePDFTemplateWithQuest([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
+  {
+    //var pdfBytes = await _pdfService.GeneratePdfAsync(request, cancellationToken);
+    var pdfBytes = await _pdfService.GenerateInvoicePdfWithQuestAsync();
+    return FileOrBadRequest(pdfBytes, "Welcome");
+  }
+
+  [HttpPost("GenerateWithNreco")]
+  public async Task<IActionResult> GenerateWithNreco()
+  {
+    var pdfBytes =  _pdfService.GeneratePdfFromHtmlWithNReco();
+    return FileOrBadRequest(pdfBytes, "Welcome");
+  }
+
+
+  [HttpPost("MergeMultiplePdfsWithSharp")]
+  public async Task<IActionResult> MergeMultiplePdfsWithSharp([FromForm] List<IFormFile> files)
+  {
+    if (files == null || files.Count == 0)
+      return BadRequest("No files were provided.");
+
+    var mergedPdfBytes = await _pdfService.MergePdfsAsync(files);
+    return FileOrBadRequest(mergedPdfBytes, "MergedDocument");
   }
 
   private IActionResult FileOrBadRequest(byte[] pdfBytes, string filePrefix)
@@ -37,38 +62,6 @@ public class PdfController : BaseApiController
       return File(pdfBytes, "application/pdf", fileName);
     }
 
-    return BadRequest("Invalid parameters.");
+    return BadRequest("Invalid file.");
   }
-
-  [HttpPost("GenerateWithQuest")]
-  public async Task<IActionResult> GeneratePdf([FromBody] UserFilterRequest request, CancellationToken cancellationToken)
-  {
-    //var pdfBytes = await _pdfService.GeneratePdfAsync(request, cancellationToken);
-    var pdfBytes = await _pdfService.GenerateInvoicePdfWithQuestAsync();
-    return FileOrBadRequest(pdfBytes, "Welcome");
-  }
-
-  [HttpPost("MergeMultiplePdfs")]
-  public async Task<IActionResult> MergePdfs([FromForm] PdfMergeRequest request)
-  {
-    var pdfBytesList = new List<byte[]>
-        {
-            await ReadFileBytesAsync(request.Pdf1),
-            await ReadFileBytesAsync(request.Pdf2),
-            await ReadFileBytesAsync(request.Pdf3)
-        };
-
-    var mergedPdfBytes = await _pdfService.MergePdfsAsync(pdfBytesList);
-    return FileOrBadRequest(mergedPdfBytes, "MergedDocument");
-
-  }
-
-  private async Task<byte[]> ReadFileBytesAsync(IFormFile file)
-  {
-    using var memoryStream = new MemoryStream();
-    await file.CopyToAsync(memoryStream);
-    return memoryStream.ToArray();
-  }
-
-
 }

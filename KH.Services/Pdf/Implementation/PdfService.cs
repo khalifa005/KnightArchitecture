@@ -1,12 +1,7 @@
-using KH.BuildingBlocks.Apis.Services;
-using QuestPDF.Fluent;
-using QuestPDF.Helpers;
-using System.Globalization;
-using System.Text;
+using KH.BuildingBlocks.PDF.Quest;
 using static KH.Dto.Models.UserDto.Response.UserRoleResponse;
 
 namespace KH.Services.Pdf.Implementation;
-
 public class PdfService : IPdfService
 {
   private readonly IUserQueryService _userService;
@@ -35,12 +30,9 @@ public class PdfService : IPdfService
       }
 
       var user = userResponse.Data;
-      var placeholders = PrepareUseInfoContent(user);
+      var placeholdersWithValues = PrepareUseInfoContent(user);
 
-      string htmlBody = PopulateTemplateFromFile("CustomerPdfTemplateBody.html", placeholders);
-      string finalHtml = PopulateTemplateFromFile("CustomerPdfLayout.html", new Dictionary<string, string> { { "Htmlbody", htmlBody } });
-
-      return GeneratePdf(finalHtml, PaperKind.A3Extra);
+      return await GeneratePdfWithDynamicContent("CustomerPdfTemplateBody.html", "CustomerPdfLayout.html", placeholdersWithValues, param.Language);
     }
     catch (Exception ex)
     {
@@ -51,26 +43,24 @@ public class PdfService : IPdfService
 
   public async Task<byte[]> ExportUserInvoicePdf(string language = "en")
   {
-    var invoiceTemplatePath = GetTemplatePath("InvoiceTemplate.html");
+    var placeholdersWithValues = PrepareInvoiceContent(language);
+    AddInvoiceTableHeaders(placeholdersWithValues, language);
 
-    var dynamicContent = PrepareInvoiceContent(language);
-    AddInvoiceTableHeaders(dynamicContent, language);
-
-    return await GeneratePdfWithDynamicContent(invoiceTemplatePath, dynamicContent, language);
+    return await GeneratePdfWithDynamicContent("InvoiceTemplate.html", "PdfLayoutTemplate.html", placeholdersWithValues, language);
   }
 
 
-  public async Task<byte[]> GeneratePdfWithDynamicContent(string templatePath, Dictionary<string, string> dynamicContent, string language = "en")
+  public async Task<byte[]> GeneratePdfWithDynamicContent(string templateName, string layoutName, Dictionary<string, string> placeholdersWithValues, string language = "en")
   {
     try
     {
-      string layoutContent = await LoadTemplateContent("PdfLayoutTemplate.html");
-      string templateContent = await LoadTemplateContent(templatePath);
+      string layoutContent = await LoadTemplateContent(layoutName);
+      string templateContent = await LoadTemplateContent(templateName);
 
-      string populatedTemplate = ReplacePlaceholders(templateContent, dynamicContent);
-      string finalHtml = ReplacePlaceholders(layoutContent, dynamicContent, language, populatedTemplate);
+      string populatedTemplate = ReplacePlaceholders(templateContent, placeholdersWithValues);
+      string finalHtml = ReplacePlaceholders(layoutContent, placeholdersWithValues, language, populatedTemplate);
 
-      return GeneratePdf(finalHtml, PaperKind.A4);
+      return GeneratePdf(finalHtml, PaperKind.A3);
     }
     catch (Exception ex)
     {
@@ -115,9 +105,8 @@ public class PdfService : IPdfService
   }
 
 
-  #region DemoQuestPDF
-  // Generate a PDF with user information
-  public async Task<byte[]> GeneratePdfAsync(UserFilterRequest param, CancellationToken cancellationToken)
+  #region QuestPDF
+  public async Task<byte[]> GenerateBasicPdfQuestAsync(UserFilterRequest param, CancellationToken cancellationToken)
   {
     var userResponse = await _userService.GetAsync(param.Id!.Value, cancellationToken);
 
@@ -187,34 +176,181 @@ public class PdfService : IPdfService
   }
 
 
+  #endregion
 
-  // Merge multiple PDFs into one
-  public async Task<byte[]> MergePdfsAsync(List<byte[]> pdfs)
+  #region PDFsharp
+
+  public async Task<byte[]> MergePdfsAsync(IEnumerable<IFormFile> formFiles)
   {
-    var mergedDocument = Document.Create(container =>
+    const long MaxFileSizeBytes = 10 * 1024 * 1024; // 10 MB
+    const int MaxFileCount = 5;
+
+    // Validate the number of files
+    if (formFiles == null || !formFiles.Any())
     {
-      container.Page(page =>
+      throw new ArgumentException("No files provided for merging.");
+    }
+
+    if (formFiles.Count() > MaxFileCount)
+    {
+      throw new InvalidOperationException($"A maximum of {MaxFileCount} files can be merged at once.");
+    }
+
+    var outputDocument = new PdfDocument();
+
+    foreach (var file in formFiles)
+    {
+      // Validate file size
+      if (file.Length > MaxFileSizeBytes)
       {
-        page.Size(PageSizes.A4);
-        page.Margin(0);
+        throw new InvalidOperationException($"File {file.FileName} exceeds the size limit of 10 MB.");
+      }
 
-        page.Content().Column(column =>
-        {
-          foreach (var pdf in pdfs)
-          {
-            column.Item().Element(container =>
-            {
-              container.ShowEntire().Image(pdf); // Render each PDF as an image
-            });
+      // Validate file type
+      if (file.ContentType != "application/pdf")
+      {
+        throw new InvalidOperationException($"Invalid file format: {file.FileName}. Only PDF files are allowed.");
+      }
 
-            column.Item().PageBreak(); // Ensure separation between PDFs
-          }
-        });
-      });
-    }).GeneratePdf();
+      if (file.Length == 0)
+      {
+        throw new InvalidOperationException($"File {file.FileName} is empty.");
+      }
 
-    return await Task.FromResult(mergedDocument);
+      using var stream = file.OpenReadStream();
+      PdfDocument inputDocument;
+
+      try
+      {
+        inputDocument = PdfReader.Open(stream, PdfDocumentOpenMode.Import);
+      }
+      catch (Exception ex)
+      {
+        throw new InvalidOperationException($"Error reading PDF file: {file.FileName}.", ex);
+      }
+
+      for (int i = 0; i < inputDocument.PageCount; i++)
+      {
+        var page = inputDocument.Pages[i];
+        outputDocument.AddPage(page);
+      }
+    }
+
+    using var memoryStream = new MemoryStream();
+    outputDocument.Save(memoryStream);
+    memoryStream.Position = 0; // Reset stream position for reading
+
+    return memoryStream.ToArray();
   }
+
+  public MemoryStream GeneratePdfWithSharp(string title, string content)
+  {
+    var document = new PdfDocument();
+    var page = document.AddPage();
+    var gfx = XGraphics.FromPdfPage(page);
+
+    var titleFont = new XFont("Arial", 20, XFontStyle.Bold);
+    var contentFont = new XFont("Arial", 12, XFontStyle.Regular);
+
+    gfx.DrawString(title, titleFont, XBrushes.Black, new XRect(0, 20, page.Width, page.Height), XStringFormats.TopCenter);
+    gfx.DrawString(content, contentFont, XBrushes.Black, new XRect(40, 60, page.Width - 80, page.Height - 100), XStringFormats.TopLeft);
+
+    var memoryStream = new MemoryStream();
+    document.Save(memoryStream);
+    memoryStream.Position = 0; // Reset stream position for reading
+
+    return memoryStream;
+  }
+
+
+  public MemoryStream GenerateInvoiceWithSharp()
+  {
+    // Create a new PDF document
+    PdfDocument document = new PdfDocument();
+    document.Info.Title = "Invoice";
+
+    // Add a page
+    PdfPage page = document.AddPage();
+    XGraphics gfx = XGraphics.FromPdfPage(page);
+
+    // Set fonts
+    XFont headerFont = new XFont("Arial", 18, XFontStyle.Bold);
+    XFont subHeaderFont = new XFont("Arial", 14, XFontStyle.Regular);
+    XFont textFont = new XFont("Arial", 12, XFontStyle.Regular);
+
+    // Draw header
+    gfx.DrawString("INVOICE", headerFont, XBrushes.Black, new XPoint(page.Width / 2, 40), XStringFormats.TopCenter);
+
+    // Company Info
+    gfx.DrawString("Your Company Name", subHeaderFont, XBrushes.Black, 40, 80);
+    gfx.DrawString("1234 Example Street, Riyadh, SA", textFont, XBrushes.Black, 40, 100);
+    gfx.DrawString("Phone: +966 123 456 789", textFont, XBrushes.Black, 40, 120);
+    gfx.DrawString("Email: info@yourcompany.com", textFont, XBrushes.Black, 40, 140);
+
+    // Customer Info
+    gfx.DrawString("Billed To:", subHeaderFont, XBrushes.Black, 40, 180);
+    gfx.DrawString("John Doe", textFont, XBrushes.Black, 40, 200);
+    gfx.DrawString("5678 Sample Road, Medina, SA", textFont, XBrushes.Black, 40, 220);
+
+    // Invoice Details
+    gfx.DrawString("Invoice #: 12345", textFont, XBrushes.Black, 40, 260);
+    gfx.DrawString("Date: " + System.DateTime.Now.ToString("yyyy-MM-dd"), textFont, XBrushes.Black, 40, 280);
+
+    // Table Header
+    gfx.DrawString("Description", textFont, XBrushes.Black, 40, 320);
+    gfx.DrawString("Quantity", textFont, XBrushes.Black, 300, 320);
+    gfx.DrawString("Unit Price", textFont, XBrushes.Black, 400, 320);
+    gfx.DrawString("Total", textFont, XBrushes.Black, 500, 320);
+
+    gfx.DrawLine(XPens.Black, 40, 340, page.Width - 40, 340);
+
+    // Table Content (Static data for demonstration)
+    gfx.DrawString("Sample Product 1", textFont, XBrushes.Black, 40, 360);
+    gfx.DrawString("2", textFont, XBrushes.Black, 300, 360);
+    gfx.DrawString("500.00 SAR", textFont, XBrushes.Black, 400, 360);
+    gfx.DrawString("1000.00 SAR", textFont, XBrushes.Black, 500, 360);
+
+    gfx.DrawString("Sample Product 2", textFont, XBrushes.Black, 40, 380);
+    gfx.DrawString("1", textFont, XBrushes.Black, 300, 380);
+    gfx.DrawString("250.00 SAR", textFont, XBrushes.Black, 400, 380);
+    gfx.DrawString("250.00 SAR", textFont, XBrushes.Black, 500, 380);
+
+    // Total
+    gfx.DrawLine(XPens.Black, 40, 400, page.Width - 40, 400);
+    gfx.DrawString("Grand Total:", subHeaderFont, XBrushes.Black, 400, 420);
+    gfx.DrawString("1250.00 SAR", subHeaderFont, XBrushes.Black, 500, 420);
+
+    // Save to MemoryStream
+    var memoryStream = new MemoryStream();
+    document.Save(memoryStream);
+    memoryStream.Position = 0;
+
+    return memoryStream;
+  }
+
+  #endregion
+
+  #region NReco
+  public byte[] GeneratePdfFromHtmlWithNReco(string htmlContent = "")
+  {
+    htmlContent = "<h1>Invoice</h1><p>This is a sample invoice generated as a PDF.</p>";
+
+    if (string.IsNullOrWhiteSpace(htmlContent))
+    {
+      throw new ArgumentException("HTML content cannot be empty.");
+    }
+
+    var htmlToPdf = new HtmlToPdfConverter
+    {
+      // Optional: Configure the PDF options
+      Size = NReco.PdfGenerator.PageSize.A4,
+      Orientation = PageOrientation.Portrait,
+      CustomWkHtmlArgs = "--no-outline"
+    };
+
+    return htmlToPdf.GeneratePdf(htmlContent);
+  }
+
   #endregion
 
   #region HelperMethods

@@ -39,7 +39,11 @@
 
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 
+    <PackageReference Include="NReco" Version="2.0.3" />
+
     <PackageReference Include="NReco.PdfGenerator" Version="1.2.1" />
+
+    <PackageReference Include="PdfSharp.Core" Version="1.0.0" />
 
     <PackageReference Include="PuppeteerSharp" Version="20.0.2" />
 
