@@ -32,7 +32,11 @@ public class PdfService : IPdfService
       var user = userResponse.Data;
       var placeholdersWithValues = PrepareUseInfoContent(user);
 
-      return await GeneratePdfWithDynamicContent("CustomerPdfTemplateBody.html", "CustomerPdfLayout.html", placeholdersWithValues, param.Language);
+      return await GeneratePdfWithDynamicContent(
+        PdfTemplatesConstant.Templates.Customer_Welcome_Template,
+        PdfTemplatesConstant.Layouts.Customer_Welcome_Layout,
+        placeholdersWithValues,
+        param.Language);
     }
     catch (Exception ex)
     {
@@ -44,9 +48,13 @@ public class PdfService : IPdfService
   public async Task<byte[]> ExportUserInvoicePdf(string language = "en")
   {
     var placeholdersWithValues = PrepareInvoiceContent(language);
+
     AddInvoiceTableHeaders(placeholdersWithValues, language);
 
-    return await GeneratePdfWithDynamicContent("InvoiceTemplate.html", "PdfLayoutTemplate.html", placeholdersWithValues, language);
+    return await GeneratePdfWithDynamicContent(PdfTemplatesConstant.Templates.Invoice_Template,
+      PdfTemplatesConstant.Layouts.Main_Layout,
+      placeholdersWithValues,
+      language);
   }
 
 
@@ -60,7 +68,8 @@ public class PdfService : IPdfService
       string populatedTemplate = ReplacePlaceholders(templateContent, placeholdersWithValues);
       string finalHtml = ReplacePlaceholders(layoutContent, placeholdersWithValues, language, populatedTemplate);
 
-      return GeneratePdf(finalHtml, PaperKind.A3);
+      return GeneratePdfWithDink(finalHtml, PaperKind.A3);
+      //return GeneratePdfFromHtmlWithNReco(finalHtml);
     }
     catch (Exception ex)
     {
@@ -69,7 +78,7 @@ public class PdfService : IPdfService
     }
   }
 
-  private byte[] GeneratePdf(string htmlContent, PaperKind paperKind)
+  private byte[] GeneratePdfWithDink(string htmlContent, PaperKind paperKind)
   {
     var pdfDocument = new HtmlToPdfDocument
     {
@@ -333,17 +342,17 @@ public class PdfService : IPdfService
   #region NReco
   public byte[] GeneratePdfFromHtmlWithNReco(string htmlContent = "")
   {
-    htmlContent = "<h1>Invoice</h1><p>This is a sample invoice generated as a PDF.</p>";
 
     if (string.IsNullOrWhiteSpace(htmlContent))
     {
-      throw new ArgumentException("HTML content cannot be empty.");
+      htmlContent = "<h1>Invoice</h1><p>This is a sample invoice generated as a PDF.</p>";
+      //throw new ArgumentException("HTML content cannot be empty.");
     }
 
     var htmlToPdf = new HtmlToPdfConverter
     {
       // Optional: Configure the PDF options
-      Size = NReco.PdfGenerator.PageSize.A4,
+      Size = NReco.PdfGenerator.PageSize.A3,
       Orientation = PageOrientation.Portrait,
       CustomWkHtmlArgs = "--no-outline"
     };
