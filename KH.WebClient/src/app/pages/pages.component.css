@@ -27,18 +27,15 @@
   .sidebar-logo {
     position: relative;
     height: 64px;
-    padding-left: 24px; /* Default for LTR */
-    padding-right: 0; /* Ensures no padding in RTL by default */
+    padding-inline-start: 24px; /* Replaces padding-left */
+    padding-inline-end: 0; /* Replaces padding-right */
     overflow: hidden;
     line-height: 64px;
     background: #001529;
     transition: all 0.3s ease;
   }
   
-  [dir="rtl"] .sidebar-logo {
-    padding-left: 0; /* Removes LTR padding */
-    padding-right: 24px; /* Adds padding to the right for RTL layouts */
-  }
+  
   .sidebar-logo img {
     display: inline-block;
     height: 32px;
@@ -48,7 +45,9 @@
   
   .sidebar-logo h1 {
     display: inline-block;
-    margin: 0 0 0 20px;
+    margin: 0; /* Reset all margins */
+    margin-inline-start: 20px; /* Default margin for LTR */
+    margin-inline-end: 0; /* No margin for RTL by default */
     color: #fff;
     font-weight: 600;
     font-size: 14px;
