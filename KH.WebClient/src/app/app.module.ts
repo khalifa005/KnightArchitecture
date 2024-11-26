@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 registerLocaleData(ar);
 
@@ -28,7 +29,10 @@ registerLocaleData(ar);
     AppRoutingModule,
     IconsProviderModule,
     NzLayoutModule,
-    NzMenuModule
+    NzMenuModule,
+
+    NzIconModule.forRoot([]), // Add icons here if needed
+
   ],
   providers: [
     { provide: NZ_I18N, useValue: ar_EG }
