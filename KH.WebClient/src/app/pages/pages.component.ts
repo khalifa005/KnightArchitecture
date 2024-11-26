@@ -45,7 +45,11 @@ export class PagesComponent implements OnInit, OnDestroy {
      document.dir = direction;
 
   }
-
+  logout(): void {
+    console.log('Logging out...');
+    // Add your logout logic here, such as clearing tokens or redirecting
+  }
+  
   ngOnInit(): void {
   }
 

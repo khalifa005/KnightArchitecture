@@ -5,6 +5,39 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
+
+  .app-header {
+    position: relative;
+    height: 64px;
+    padding: 0 16px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  
+    .profile-image {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  
+    .user-name {
+      font-size: 14px;
+      color: #000;
+      margin-left: 8px;
+    }
+  }
+  
+
+
   .menu-sidebar {
     position: relative;
     z-index: 10;
@@ -13,7 +46,7 @@
   }
   
   .header-trigger {
-    height: 64px;
+    /* height: 64px; */
     padding: 20px 24px;
     font-size: 20px;
     cursor: pointer;

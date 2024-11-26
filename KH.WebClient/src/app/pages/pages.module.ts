@@ -12,6 +12,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { NzIconModule } from "ng-zorro-antd/icon";
 import { PagesRoutingModule } from "./pages-routing.module";
 import { CoreModule } from "../core/core.module";
+import { NzSelectModule } from "ng-zorro-antd/select";
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,15 @@ import { CoreModule } from "../core/core.module";
   imports: [
     CommonModule,
     PagesRoutingModule,
-    // CoreModule,
+    CoreModule,
     
     NzLayoutModule,
     NzMenuModule,
+    NzSelectModule,
+    NzDropDownModule,
+    NzDropDownModule,
+    NzMenuModule,
+    NzIconModule,
 
     FormsModule,
     NzLayoutModule,
