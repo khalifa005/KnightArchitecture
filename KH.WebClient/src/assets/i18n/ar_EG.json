@@ -1,0 +1,11 @@
+{
+  "APP_NAME": "WFM",
+  "welcome": "اهلا وسهلا",
+  "notifications": {
+    "fileUploadedTitle": "نجاح",
+    "empty-data": "لا يوجد بيانات لعرضها",
+    "fileUploadedBody": "تم رفع الملف بنجاح"
+  }
+  
+  
+}

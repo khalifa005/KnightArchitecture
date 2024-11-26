@@ -35,10 +35,20 @@
       <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
         <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
       </span>
+
+      <!-- app.component.html -->
+
+
+
     </div>
   </nz-header>
   <nz-content>
     <div class="inner-content">
+      <div>
+        <button (click)="switchLanguage('en_US')">English</button>
+        <button (click)="switchLanguage('ar_EG')">Arabic</button>
+      </div>
+
       <router-outlet></router-outlet>
     </div>
   </nz-content>

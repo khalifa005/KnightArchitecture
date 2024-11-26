@@ -1,0 +1,10 @@
+{
+  "APP_NAME": "Khalifa template",
+  "welcome": "Welcome",
+
+  "notifications": {
+    "fileUploadedTitle": "Success",
+    "empty-data": "Empty data",
+    "fileUploadedBody": "File uploaded successfully"
+  }
+}
