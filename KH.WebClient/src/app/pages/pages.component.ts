@@ -42,6 +42,7 @@ export class PagesComponent implements OnInit, OnDestroy {
      // Update global layout direction
     this.dir.change.emit(direction);
      document.body.dir = direction;
+     document.dir = direction;
 
   }
 

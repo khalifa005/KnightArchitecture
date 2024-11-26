@@ -79,13 +79,11 @@
     height: 100%;
   }
   
-  /* src/styles.css or styles.scss */
-body[dir='rtl'] {
-  direction: rtl;
-  text-align: right;
-}
-
-body[dir='ltr'] {
-  direction: ltr;
-  text-align: left;
-}
+  :host ::ng-deep [dir="rtl"] .ant-menu-inline.ant-menu-root .ant-menu-item,
+  :host ::ng-deep [dir="rtl"] .ant-menu-inline.ant-menu-root .ant-menu-submenu-title {
+    display: flex !important;
+    justify-content: flex-end !important;
+    text-align: right !important;
+    direction: rtl !important;
+  }
+  
