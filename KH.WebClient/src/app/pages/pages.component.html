@@ -31,11 +31,13 @@
 </nz-sider>
 <nz-layout>
   <nz-header>
+
     <div class="app-header">
       <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
         <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
       </span>
 
+      <!-- <div class="logo"></div> -->
       <!-- app.component.html -->
 
 
@@ -49,6 +51,8 @@
         <button (click)="switchLanguage('ar_EG')">Arabic</button>
       </div>
 
+      <!-- <app-language-switcher></app-language-switcher> -->
+      
       <router-outlet></router-outlet>
     </div>
   </nz-content>

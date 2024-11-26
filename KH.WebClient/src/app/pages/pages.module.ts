@@ -11,6 +11,7 @@ import { PagesComponent } from "./pages.component";
 import { RouterModule, Routes } from "@angular/router";
 import { NzIconModule } from "ng-zorro-antd/icon";
 import { PagesRoutingModule } from "./pages-routing.module";
+import { CoreModule } from "../core/core.module";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { PagesRoutingModule } from "./pages-routing.module";
   imports: [
     CommonModule,
     PagesRoutingModule,
+    // CoreModule,
     
     NzLayoutModule,
     NzMenuModule,

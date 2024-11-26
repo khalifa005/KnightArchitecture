@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { en_US, NzI18nService } from "ng-zorro-antd/i18n";
+import { ar_EG, en_US, NzI18nService } from "ng-zorro-antd/i18n";
 import { Directionality } from '@angular/cdk/bidi';
 import { NzConfigService } from "ng-zorro-antd/core/config";
 
@@ -27,16 +27,18 @@ export class PagesComponent implements OnInit, OnDestroy {
   }
 
   switchLanguage(lang: string) {
-    this.i18n.setLocale(en_US);
+    this.i18n.setLocale(lang === 'ar_EG' ? ar_EG : en_US);
     this.translate.use(lang);
-
+    localStorage.setItem('language', lang);
+    
     // Change layout direction dynamically
     const direction = lang === 'ar_EG' ? 'rtl' : 'ltr';
 
      // Update NG-ZORRO configuration
      this.nzConfigService.set('message', { nzDirection: direction });
      this.nzConfigService.set('notification', { nzDirection: direction });
-     
+    //  this.nzConfigService.set('rtl', true);
+
      // Update global layout direction
     this.dir.change.emit(direction);
      document.body.dir = direction;
