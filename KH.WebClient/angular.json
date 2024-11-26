@@ -30,9 +30,9 @@
               }
             ],
             "styles": [
+               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.rtl.min.css",
               "src/theme.less",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []

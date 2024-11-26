@@ -5,10 +5,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
-  .app-layout {
-    height: 100vh;
-  }
-  
   .menu-sidebar {
     position: relative;
     z-index: 10;
@@ -31,13 +27,18 @@
   .sidebar-logo {
     position: relative;
     height: 64px;
-    padding-left: 24px;
+    padding-left: 24px; /* Default for LTR */
+    padding-right: 0; /* Ensures no padding in RTL by default */
     overflow: hidden;
     line-height: 64px;
     background: #001529;
-    transition: all .3s;
+    transition: all 0.3s ease;
   }
   
+  [dir="rtl"] .sidebar-logo {
+    padding-left: 0; /* Removes LTR padding */
+    padding-right: 24px; /* Adds padding to the right for RTL layouts */
+  }
   .sidebar-logo img {
     display: inline-block;
     height: 32px;
@@ -78,12 +79,3 @@
     background: #fff;
     height: 100%;
   }
-  
-  :host ::ng-deep [dir="rtl"] .ant-menu-inline.ant-menu-root .ant-menu-item,
-  :host ::ng-deep [dir="rtl"] .ant-menu-inline.ant-menu-root .ant-menu-submenu-title {
-    display: flex !important;
-    justify-content: flex-end !important;
-    text-align: right !important;
-    direction: rtl !important;
-  }
-  
