@@ -118,6 +118,14 @@ The `KnightHedgeArchitecture` template is built with simplicity and readability 
 ### 10. PDF Exporting
 - **DinkToPdf Integration**: Provides PDF generation capabilities.
 - **Automated Export**: Supports transactional documents and custom reports.
+- **Dynamic PDF Generation**: Create PDFs using predefined HTML templates and dynamic placeholders.
+- **Invoice Generation**: Generate invoices with multi-language support and localized content.
+- **PDF Merging**: Combine multiple PDFs into a single document.
+- **Flexible Libraries**: Supports multiple tools like QuestPDF, PDFsharp, and NReco for diverse use cases.
+- **QuestPDF**: For building complex layouts with precise control over content styling.
+- **PDFsharp**: For merging and manipulating PDF documents.
+- **NReco.PdfGenerator**: For converting raw HTML into PDF files.
+
 [![View Documentation](https://img.shields.io/badge/View%20Documentation-008CBA?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khalifa005/KnightArchitecture/blob/master/Documentation/Pdf_README.md)
 
 ### 11. Excel Export and Import
