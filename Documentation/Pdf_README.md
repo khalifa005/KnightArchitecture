@@ -17,8 +17,8 @@ The PDF Service uses the following libraries:
 1. **[QuestPDF](https://www.questpdf.com/)**: For building complex layouts with precise control over content styling.
 2. **[PDFsharp](https://pdfsharp.net/)**: For merging and manipulating PDF documents.
 3. **[NReco.PdfGenerator](https://www.nrecosite.com/pdf_generator.aspx)**: For converting raw HTML into PDF files.
-4. **[Microsoft.AspNetCore.Http](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http)**: For handling file uploads and requests.
-5. **[Logging (ILogger)](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.ilogger)**: For tracking service execution and error handling.
+4. **[DinkToPDF](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http)**: For handling file uploads and requests.
+
 
 ---
 
@@ -128,3 +128,4 @@ All HTML templates are stored in the `Templates/PDF` directory. Example template
   dotnet add package QuestPDF
   dotnet add package PDFsharp
   dotnet add package NReco.PdfGenerator
+  dotnet add package DinkToPDF
