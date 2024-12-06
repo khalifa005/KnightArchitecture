@@ -17,7 +17,7 @@ The PDF Service uses the following libraries:
 1. **[QuestPDF](https://www.questpdf.com/)**: For building complex layouts with precise control over content styling.
 2. **[PDFsharp](https://pdfsharp.net/)**: For merging and manipulating PDF documents.
 3. **[NReco.PdfGenerator](https://www.nrecosite.com/pdf_generator.aspx)**: For converting raw HTML into PDF files.
-4. **[DinkToPDF](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http)**: For handling file uploads and requests.
+4. **[DinkToPDF](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http)**: For handling HTML into PDF files.
 
 
 ---
