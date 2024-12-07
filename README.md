@@ -285,6 +285,10 @@ The upcoming version, **Ultimate Knight Hedge**, introduces new, trending .NET l
 - **GitHub Actions**: Built-in CI/CD support using GitHub Actions for automated testing, deployment, and monitoring. Version 2 will provide pre-configured GitHub Action workflows, making continuous integration and deployment simpler and faster.
   
 - **Rate Limiting**: Improved rate-limiting controls to manage API consumption, preventing abuse and ensuring fair resource usage. This will provide better control over API traffic and reduce the risk of service overload.
+
+- **Health check**: Improved monitoring for app status.
+- **Advanced looging**: Improved monitoring for app performance and sending emails to it department  is slow performance detected.
+
 - **Auto Escalation**: Automatically escalate tasks or incidents based on predefined rules and timelines, ensuring timely responses and efficient workflow management.
 
 - **Enhanced Modular Architecture**: With additional extensions, such as better support for microservices and domain-driven design (DDD) patterns, Ultimate Knight Hedge will allow for more fine-grained customization and scalability across services.
