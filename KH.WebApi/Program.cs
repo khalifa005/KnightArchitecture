@@ -76,6 +76,8 @@ void ConfigureMiddlewares(WebApplication app)
   var env = app.Environment;
   var configuration = app.Configuration;
 
+  //app.UseMiddleware<ResponseTimeLoggingMiddleware>();
+
   // Status Code Pages
   app.UseStatusCodePagesWithReExecute("/errors/{0}");
   app.UseHangfireMiddleware(configuration);

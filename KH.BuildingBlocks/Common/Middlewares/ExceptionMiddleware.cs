@@ -1,4 +1,3 @@
-
 namespace KH.BuildingBlocks.Apis.Middlewares;
 
 public class ExceptionMiddleware
@@ -23,6 +22,8 @@ public class ExceptionMiddleware
     }
     catch (Exception exception)
     {
+      //send emails to it 
+
       _logger.LogError(exception, exception.Message);
 
       httpContext.Response.ContentType = "application/json";
@@ -64,4 +65,3 @@ public class ExceptionMiddleware
     }
   }
 }
-
