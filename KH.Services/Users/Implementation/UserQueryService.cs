@@ -1,4 +1,5 @@
 using KH.Services.Auth.Contracts;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace KH.Services.Users.Implementation;
 
@@ -61,6 +62,13 @@ public class UserQueryService : IUserQueryService
            .ThenInclude(d => d.Department),
     splitQuery: true);
 
+    if (detailsUserFromDB is null)
+    {
+      res.StatusCode = StatusCodes.Status400BadRequest;
+      res.ErrorMessage = "invalid user";
+      return res;
+    }
+
     if (false)
     {
       //crazy query example that needs splitting or it will cause performance issues
@@ -110,6 +118,7 @@ public class UserQueryService : IUserQueryService
     {
       res.StatusCode = (int)HttpStatusCode.BadRequest;
       res.ErrorMessage = "invalid user";
+      return res;
     }
 
     UserDetailsResponse entityResponse = new UserDetailsResponse(entityFromDB);

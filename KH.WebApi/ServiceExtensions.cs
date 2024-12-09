@@ -5,13 +5,26 @@ public static class ServiceExtensions
   /// <summary>
   /// Adds CORS policy to the service collection.
   /// </summary>
-  public static IServiceCollection AddCustomCors(this IServiceCollection services)
+  public static IServiceCollection AddCustomCors(this IServiceCollection services, IConfiguration configuration)
   {
+
+
+    //services.AddCors(opt =>
+    //{
+    //  opt.AddPolicy("CorsPolicy", policy =>
+    //  {
+    //    policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+    //  });
+    //});
+
+
     services.AddCors(opt =>
     {
       opt.AddPolicy("CorsPolicy", policy =>
       {
-        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+        var issuer = configuration["TokenSettings:Issuer"];
+        if (issuer != null)
+          policy.AllowAnyHeader().AllowAnyMethod().WithOrigins(issuer);
       });
     });
 

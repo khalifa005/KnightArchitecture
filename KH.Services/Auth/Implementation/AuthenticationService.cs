@@ -111,7 +111,17 @@ public class AuthenticationService : IAuthenticationService
 
 
       if (entityFromDB == null || request.Password.IsNullOrEmpty() || entityFromDB.IsDeleted)
-        throw new Exception("Invalid User");
+      {
+        //throw new Exception("Invalid User");
+
+        var ex = new Exception("User not found.");
+        ex.Data["StatusCode"] = HttpStatusCode.NotFound; // Set custom status code
+        throw ex;
+
+        //res.StatusCode = HttpStatusCode.NotFound;
+        //res.ErrorMessage = "User not found";
+      }
+
 
       //Check Is OTP Verified at First Login
 

@@ -59,7 +59,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
   });
 
   // Add CORS policy
-  services.AddCustomCors();
+  services.AddCustomCors(configuration);
 
   // Add application-specific services
   services.AddBuildingBlocksServices(configuration);
@@ -75,6 +75,15 @@ void ConfigureMiddlewares(WebApplication app)
 {
   var env = app.Environment;
   var configuration = app.Configuration;
+
+  // Enable CORS and Authentication
+  //app.UseCors(policy =>
+  //    policy.WithOrigins("http://localhost:4200") // Replace with your Angular app's URL
+  //          .AllowAnyHeader()
+  //          .AllowAnyMethod());
+
+  app.UseCors("CorsPolicy");
+  app.UseHttpsRedirection();
 
   //app.UseMiddleware<ResponseTimeLoggingMiddleware>();
 
@@ -95,9 +104,9 @@ void ConfigureMiddlewares(WebApplication app)
     app.UseHsts();
   }
 
-  // Enable CORS and Authentication
-  app.UseCors("CorsPolicy");
-  app.UseHttpsRedirection();
+
+
+
   app.UseRouting();
   app.UseAuthentication();
   app.UseMiddleware<PermissionsMiddleware>();

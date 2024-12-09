@@ -33,7 +33,7 @@ public class TokenService : ITokenService
                new Claim(ClaimTypes.Name,$"{user.FirstName}"),
                new Claim(ClaimTypes.Surname,$"{user.LastName}"),
                new Claim(ClaimTypes.Email,$"{user.Email}"),
-               new Claim(ClaimTypes.GivenName,$"{user.MobileNumber}")
+               new Claim(ClaimTypes.MobilePhone,$"{user.MobileNumber}")
             };
 
     claims.AddRange(userRoles.Select(roleId => new Claim(ClaimTypes.Role, roleId)));

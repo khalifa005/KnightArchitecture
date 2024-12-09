@@ -15,15 +15,29 @@ public static class ExceptionExtensions
     // Log the exception details for both environments with additional context
     logger.LogError(ex, $"Exception occurred in {context}: {ex.Message}");
     logger.LogError($"StackTrace in {context}: {ex.StackTrace}");
+
     if (ex.InnerException != null)
     {
         
     }
 
-    // Set the default status code and error messages
-    res.StatusCode = (int)HttpStatusCode.InternalServerError;
-    res.ErrorMessage = ex.Message;
-    res.ErrorCode = "ERO_005"; // Internal Server Error Code
+    // Check if the exception contains a custom status code
+    if (ex.Data.Contains("StatusCode"))
+    {
+      //sometimes i want to send some specific codes
+      res.StatusCode = (int)ex.Data["StatusCode"];
+      res.ErrorMessage = ex.Message;
+      return res;
+    }
+    else
+    {
+      // Set the default status code and error messages
+      res.StatusCode = (int)HttpStatusCode.InternalServerError;
+      res.ErrorMessage = ex.Message;
+      res.ErrorCode = "ERO_005"; // Internal Server Error Code
+    }
+
+   
 
     // Include detailed error information in development environment only
     if (env.IsDevelopment())
