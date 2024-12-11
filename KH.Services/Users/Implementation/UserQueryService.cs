@@ -216,10 +216,26 @@ public class UserQueryService : IUserQueryService
 
     var repository = _unitOfWork.Repository<Permission>();
 
+
+    // Check if the user has the Super Admin role
+    var hasSuperAdminRole = RoleChecker.HasSuperAdminRole(userRoles);
+
     // Build the filter expression
-    Expression<Func<Permission, bool>> filter = x =>
-        (x.IsDeleted == false) &&
-        (!userRoles.Any() || x.RolePermissions.Any(rp => userRoles.Contains(rp.RoleId.ToString())));
+    Expression<Func<Permission, bool>> filter;
+    if (hasSuperAdminRole)
+    {
+      // Super Admin: Get all active permissions
+      filter = x => x.IsDeleted == false;
+    }
+    else
+    {
+      // Regular user: Filter based on their roles
+      filter = x =>
+          x.IsDeleted == false &&
+          x.RolePermissions.Any(rp => userRoles.Contains(rp.RoleId.ToString()));
+    }
+
+    // Apply the filter directly in the repository call
 
 
     // Apply the filter directly in the repository call

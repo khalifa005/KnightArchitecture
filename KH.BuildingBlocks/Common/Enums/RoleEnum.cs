@@ -13,3 +13,19 @@ public enum RoleEnum
   CustomerServiceSupervisor = 9,
   Agentuser = 10,
 }
+
+
+public static class RoleChecker
+{
+  public static bool HasSuperAdminRole(List<string> userRoles)
+  {
+    // Check if the list is null or empty
+    if (userRoles == null || userRoles.Count == 0)
+    {
+      return false;
+    }
+
+    // Check if the list contains the SuperAdmin role ID
+    return userRoles.Contains(((int)RoleEnum.SuperAdmin).ToString());
+  }
+}
