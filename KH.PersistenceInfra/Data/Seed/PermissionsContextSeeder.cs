@@ -24,6 +24,7 @@ public class PermissionsContextSeeder
       AddMediaPermissions(entities);
       AddPdfPermissions(entities);
       AddPermissionManagementPermissions(entities);
+      AddClientAppPagePermissions(entities);
 
       builder.Entity<Permission>().HasData(entities);
     }
@@ -112,6 +113,24 @@ public class PermissionsContextSeeder
             new RolePermissions { Id = 47, RoleId = 2, PermissionId = 155 }, // Delete Permission
         });
 
+      // Assign client app permissions to CEO (RoleId = 2)
+      rolePermissions.AddRange(new[]
+      {
+    new RolePermissions { Id = 700, RoleId = 2, PermissionId = 200 }, // View Permissions Page
+    new RolePermissions { Id = 701, RoleId = 2, PermissionId = 201 }, // View Dynamic Table Page
+    new RolePermissions { Id = 702, RoleId = 2, PermissionId = 202 }, // View Cards Examples Page
+    new RolePermissions { Id = 703, RoleId = 2, PermissionId = 203 }, // View Bootstrap Examples Page
+    new RolePermissions { Id = 704, RoleId = 2, PermissionId = 204 }, // View Icons Examples Page
+    new RolePermissions { Id = 705, RoleId = 2, PermissionId = 205 }, // Manage Inputs Examples Page
+    new RolePermissions { Id = 706, RoleId = 2, PermissionId = 206 }, // View Form Examples Page
+    new RolePermissions { Id = 707, RoleId = 2, PermissionId = 207 }, // Access Authentication Page
+    new RolePermissions { Id = 709, RoleId = 2, PermissionId = 209 }, // Manage User Management Page
+    new RolePermissions { Id = 710, RoleId = 2, PermissionId = 210 }, // Manage Permissions Page
+    new RolePermissions { Id = 711, RoleId = 2, PermissionId = 211 }  // Manage Users Page
+});
+
+
+
       // Seed the role permissions
       builder.Entity<RolePermissions>().HasData(rolePermissions);
     }
@@ -125,6 +144,9 @@ public class PermissionsContextSeeder
 
   // Define a fixed date for the seed data to avoid changes in migration
   private static readonly DateTime SeedDate = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+
+
 
   private static void AddLookupPermissions(List<Permission> entities)
   {
@@ -255,4 +277,21 @@ public class PermissionsContextSeeder
     });
   }
 
+  private static void AddClientAppPagePermissions(List<Permission> entities)
+  {
+    entities.AddRange(new[]
+    {
+        new Permission { Id = 200, Key = PermissionKeysConstant.ClientApp.VIEW_PERMISSIONS, NameEn = "View Permissions Page", NameAr = "صفحة عرض الأذونات", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+        new Permission { Id = 201, Key = PermissionKeysConstant.ClientApp.VIEW_DYNAMIC_TABLE, NameEn = "View Dynamic Table Page", NameAr = "صفحة عرض الجدول الديناميكي", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+        new Permission { Id = 202, Key = PermissionKeysConstant.ClientApp.VIEW_CARDS_EXAMPLES, NameEn = "View Cards Examples Page", NameAr = "صفحة عرض أمثلة البطاقات", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+        new Permission { Id = 203, Key = PermissionKeysConstant.ClientApp.VIEW_BOOTSTRAP_EXAMPLES, NameEn = "View Bootstrap Examples Page", NameAr = "صفحة عرض أمثلة Bootstrap", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+        new Permission { Id = 204, Key = PermissionKeysConstant.ClientApp.VIEW_ICONS_EXAMPLES, NameEn = "View Icons Examples Page", NameAr = "صفحة عرض أمثلة الرموز", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+        new Permission { Id = 205, Key = PermissionKeysConstant.ClientApp.MANAGE_INPUTS_EXAMPLES, NameEn = "Manage Inputs Examples Page", NameAr = "صفحة إدارة أمثلة الإدخال", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+        new Permission { Id = 206, Key = PermissionKeysConstant.ClientApp.VIEW_FORM_EXAMPLES, NameEn = "View Form Examples Page", NameAr = "صفحة عرض أمثلة النماذج", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+        new Permission { Id = 207, Key = PermissionKeysConstant.ClientApp.ACCESS_AUTH, NameEn = "Access Authentication Page", NameAr = "صفحة الوصول إلى المصادقة", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+        new Permission { Id = 209, Key = PermissionKeysConstant.ClientApp.MANAGE_USER_MANAGEMENT, NameEn = "Manage User Management Page", NameAr = "صفحة إدارة إدارة المستخدمين", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+        new Permission { Id = 210, Key = PermissionKeysConstant.ClientApp.MANAGE_PERMISSIONS, NameEn = "Manage Permissions Page", NameAr = "صفحة إدارة الأذونات", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+        new Permission { Id = 211, Key = PermissionKeysConstant.ClientApp.MANAGE_USERS, NameEn = "Manage Users Page", NameAr = "صفحة إدارة المستخدمين", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate }
+    });
+  }
 }

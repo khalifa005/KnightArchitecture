@@ -4,6 +4,7 @@ using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KH.PersistenceInfra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241211073322_seedpages")]
+    partial class seedpages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1835,94 +1838,6 @@ namespace KH.PersistenceInfra.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             PermissionId = 155L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 700L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 200L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 701L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 201L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 702L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 202L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 703L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 203L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 704L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 204L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 705L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 205L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 706L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 206L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 707L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 207L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 709L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 209L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 710L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 210L,
-                            RoleId = 2L
-                        },
-                        new
-                        {
-                            Id = 711L,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            PermissionId = 211L,
                             RoleId = 2L
                         });
                 });

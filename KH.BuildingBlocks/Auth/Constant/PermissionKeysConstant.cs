@@ -4,6 +4,22 @@ public static class PermissionKeysConstant
 {
   public const string SUPER_ADMIN_PERMISSION = "super-admin";
   public const string CUSTOMER_SYSTEM_PERMISSION = "customer";
+
+  public static class ClientApp
+  {
+    public const string VIEW_PERMISSIONS = "view-permissions";
+    public const string VIEW_DYNAMIC_TABLE = "view-dynamic-table";
+    public const string VIEW_CARDS_EXAMPLES = "view-cards-examples";
+    public const string VIEW_BOOTSTRAP_EXAMPLES = "view-bootstrap-examples";
+    public const string VIEW_ICONS_EXAMPLES = "view-icons-examples";
+    public const string MANAGE_INPUTS_EXAMPLES = "manage-inputs-examples";
+    public const string VIEW_FORM_EXAMPLES = "view-form-examples";
+    public const string ACCESS_AUTH = "access-auth";
+    public const string MANAGE_USER_MANAGEMENT = "manage-user-management";
+    public const string MANAGE_PERMISSIONS = "manage-permissions";
+    public const string MANAGE_USERS = "manage-users";
+  }
+
   public static class Lookups
   {
     public const string LOOKUPS = "lookups";
