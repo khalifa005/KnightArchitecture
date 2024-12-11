@@ -22,11 +22,11 @@ public class PermissionsController : BaseApiController
     return AsActionResult(res);
   }
 
-  [HttpGet("ListAll")]
+  [HttpPost("ListAll")]
   [PermissionAuthorize(PermissionKeysConstant.PermissionManagement.LIST_PERMISSIONS)]
-  public async Task<ActionResult<ApiResponse<List<PermissionResponse>>>> ListAll(CancellationToken cancellationToken)
+  public async Task<ActionResult<ApiResponse<PagedList<PermissionResponse>>>> ListAll([FromBody] PermissionFilterRequest filterRequest, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.GetListAsync(cancellationToken);
+    var res = await _lookupService.GetListAsync(filterRequest, cancellationToken);
     return AsActionResult(res);
   }
 

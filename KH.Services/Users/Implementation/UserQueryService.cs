@@ -1,3 +1,4 @@
+using KH.Dto.Lookups.PermissionsDto.Response;
 using KH.Services.Auth.Contracts;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -207,4 +208,40 @@ public class UserQueryService : IUserQueryService
 
     return apiResponse;
   }
+
+
+  public async Task<ApiResponse<List<PermissionResponse>>> GetUserPermissionsListAsync(CancellationToken cancellationToken)
+  {
+    var userRoles = _currentUserService.RolesIds;
+
+    var repository = _unitOfWork.Repository<Permission>();
+
+    // Build the filter expression
+    Expression<Func<Permission, bool>> filter = x =>
+        (x.IsDeleted == false) &&
+        (!userRoles.Any() || x.RolePermissions.Any(rp => userRoles.Contains(rp.RoleId.ToString())));
+
+
+    // Apply the filter directly in the repository call
+    var listResult = await repository.GetAllAsync(
+        filter: filter, // Filter directly in the repository
+        include: null,
+        useCache: false,
+        cancellationToken: cancellationToken);
+
+    // Map the results
+    var mappedListResult = listResult
+        .Select(x => new PermissionResponse(x))
+        .ToList();
+
+    // Prepare API response
+    var apiResponse = new ApiResponse<List<PermissionResponse>>((int)HttpStatusCode.OK)
+    {
+      Data = mappedListResult
+    };
+
+    return apiResponse;
+  }
+
+
 }

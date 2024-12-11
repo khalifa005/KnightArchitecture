@@ -130,24 +130,67 @@ public class PermissionService : IPermissionService
       return ex.HandleException(res, _env, _logger);
     }
   }
+
   public async Task<ApiResponse<List<PermissionResponse>>> GetListAsync(CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<Permission>();
 
+    // Apply the filter directly in the repository call
     var listResult = await repository.GetAllAsync(
-    include: null,
-    useCache: true,
-    cancellationToken: cancellationToken);
+        filter: x => !x.IsDeleted, // Filter directly in the repository
+        include: null,
+        useCache: true,
+        cancellationToken: cancellationToken);
 
+    // Map the results
     var mappedListResult = listResult
-      .Where(x => x.IsDeleted == false)
-      .Select(x => new PermissionResponse(x)).ToList();
+        .Select(x => new PermissionResponse(x))
+        .ToList();
 
-    var apiResponse = new ApiResponse<List<PermissionResponse>>((int)HttpStatusCode.OK);
-    apiResponse.Data = mappedListResult;
+    // Prepare API response
+    var apiResponse = new ApiResponse<List<PermissionResponse>>((int)HttpStatusCode.OK)
+    {
+      Data = mappedListResult
+    };
 
     return apiResponse;
   }
+
+
+  public async Task<ApiResponse<PagedList<PermissionResponse>>> GetListAsync(
+    PermissionFilterRequest filterRequest,
+    CancellationToken cancellationToken)
+  {
+    var repository = _unitOfWork.Repository<Permission>();
+
+    // Build the filter expression
+    Expression<Func<Permission, bool>> filter = x =>
+        (!filterRequest.IsDeleted.HasValue || x.IsDeleted == filterRequest.IsDeleted.Value) &&
+        (!filterRequest.RoleIds.Any() || x.RolePermissions.Any(rp => filterRequest.RoleIds.Contains(rp.RoleId)));
+
+    // Define the projection expression
+    Expression<Func<Permission, PermissionResponse>> projection = x => new PermissionResponse(x);
+
+    // Fetch the paged data with projection
+    var pagedResult = await repository.GetPagedWithProjectionAsync(
+        pageNumber: filterRequest.PageIndex,
+        pageSize: filterRequest.PageSize,
+        filterExpression: filter,
+        projectionExpression: projection,
+        include: null,
+        orderBy: null,
+        tracking: false,
+        cancellationToken: cancellationToken);
+
+    // Prepare the API response
+    var apiResponse = new ApiResponse<PagedList<PermissionResponse>>((int)HttpStatusCode.OK)
+    {
+      Data = pagedResult
+    };
+
+    return apiResponse;
+  }
+
 
 }
 

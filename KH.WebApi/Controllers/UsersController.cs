@@ -1,3 +1,4 @@
+using KH.Dto.Lookups.PermissionsDto.Response;
 using KH.Services.Auth.Contracts;
 
 namespace KH.WebApi.Controllers;
@@ -16,6 +17,8 @@ public class UsersController(
     var res = await userQueryService.GetAsync(id, cancellationToken);
     return AsActionResult(res);
   }
+
+
 
   [HttpPost("GetUserByFilter")]
   public async Task<ActionResult<ApiResponse<UserDetailsResponse>>> GetUserByFilter(UserFilterRequest request, CancellationToken cancellationToken)
@@ -65,4 +68,14 @@ public class UsersController(
     var res = await userManagementService.ResetDepartmentsAsync(id, cancellationToken);
     return AsActionResult(res);
   }
+
+
+
+  [HttpGet("GetUserPermissions")]
+  public async Task<ActionResult<ApiResponse<List<PermissionResponse>>>> GetUserPermissions(CancellationToken cancellationToken)
+  {
+    var res = await userQueryService.GetUserPermissionsListAsync(cancellationToken);
+    return AsActionResult(res);
+  }
+
 }
