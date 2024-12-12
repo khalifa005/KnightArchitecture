@@ -234,8 +234,9 @@ public class RoleService : IRoleService
       return res;
     }
   }
-  public async Task<ApiResponse<string>> UpdateRolePermissionsAsync(CreateRoleRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<string>> UpdateRolePermissionsAsync(UpdatedRolePermissionsRequest request, CancellationToken cancellationToken)
   {
+    //may need to drestroy the cache
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
     var entityAfterMapping = request.ToEntity();
@@ -247,10 +248,7 @@ public class RoleService : IRoleService
     try
     {
 
-      if (!request.Id.HasValue)
-        throw new Exception("id is required");
-
-      var entityFromDb = await repository.GetAsync(request.Id.Value,
+      var entityFromDb = await repository.GetAsync(request.Id,
         include: x => x.Include(x => x.RolePermissions),
         tracking: true,
         cancellationToken: cancellationToken);

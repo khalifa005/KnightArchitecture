@@ -281,6 +281,7 @@ public class PermissionsContextSeeder
   {
     entities.AddRange(new[]
     {
+      //add them under parent 
         new Permission { Id = 200, Key = PermissionKeysConstant.ClientApp.VIEW_PERMISSIONS, NameEn = "View Permissions Page", NameAr = "صفحة عرض الأذونات", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
         new Permission { Id = 201, Key = PermissionKeysConstant.ClientApp.VIEW_DYNAMIC_TABLE, NameEn = "View Dynamic Table Page", NameAr = "صفحة عرض الجدول الديناميكي", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
         new Permission { Id = 202, Key = PermissionKeysConstant.ClientApp.VIEW_CARDS_EXAMPLES, NameEn = "View Cards Examples Page", NameAr = "صفحة عرض أمثلة البطاقات", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },

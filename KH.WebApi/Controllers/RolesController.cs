@@ -58,6 +58,17 @@ public class RolesController : BaseApiController
     var res = await _lookupService.UpdateBothRoleWithRelatedPermissionsAsync(request, cancellationToken);
     return AsActionResult(res);
   }
+
+
+  [HttpPut("UpdateRolePermissions")]
+  [PermissionAuthorize(PermissionKeysConstant.Roles.EDIT_ROLE)]
+  public async Task<ActionResult<ApiResponse<string>>> UpdateRolePermissionsAsync([FromBody] UpdatedRolePermissionsRequest request, CancellationToken cancellationToken)
+  {
+    var res = await _lookupService.UpdateRolePermissionsAsync(request, cancellationToken);
+    return AsActionResult(res);
+  }
+
+
   [HttpDelete("{id}")]
   public async Task<ActionResult<ApiResponse<string>>> Delete(int id, CancellationToken cancellationToken)
   {
