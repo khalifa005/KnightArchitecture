@@ -2,7 +2,7 @@ namespace KH.Dto.common;
 
 public class PagingRequestHelper
 {
-  public const int MaxPageSize = 50;
+  public const int MaxPageSize = 500;
   public int PageIndex { get; set; } = 1;
   private int _pageSize = 10;
   public int PageSize

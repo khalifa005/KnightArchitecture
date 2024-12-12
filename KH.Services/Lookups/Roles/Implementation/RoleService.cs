@@ -46,7 +46,7 @@ public class RoleService : IRoleService
     res.Data = entityDetailsResponse;
     return res;
   }
-  public async Task<ApiResponse<List<RoleListResponse>>> GetListAsync(RoleFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<List<RoleResponse>>> GetListAsync(RoleFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<Role>();
 
@@ -55,14 +55,14 @@ public class RoleService : IRoleService
                            .Include(r => r.RolePermissions)
                            .ThenInclude(p=>p.Permission),
     tracking: false,
-    useCache: true,
+    useCache: false,
     cancellationToken: cancellationToken);
-
+    //filter after the query because we use cache 
     var mappedRolesListResult = rolesListResult
       .Where(x=> x.IsDeleted == request.IsDeleted)
-      .Select(x => new RoleListResponse(x)).ToList();
+      .Select(x => new RoleResponse(x)).ToList();
 
-    var apiResponse = new ApiResponse<List<RoleListResponse>>((int)HttpStatusCode.OK);
+    var apiResponse = new ApiResponse<List<RoleResponse>>((int)HttpStatusCode.OK);
     apiResponse.Data = mappedRolesListResult;
 
     return apiResponse;

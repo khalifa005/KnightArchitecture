@@ -2,6 +2,7 @@ using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.PermissionsDto.Request;
 using KH.Dto.Lookups.PermissionsDto.Response;
 using KH.Dto.Lookups.RoleDto.Request;
+using KH.Dto.Models.UserDto.Response;
 using KH.Services.Lookups.Permissions.Contracts;
 
 public class PermissionService : IPermissionService
@@ -157,7 +158,7 @@ public class PermissionService : IPermissionService
   }
 
 
-  public async Task<ApiResponse<PagedList<PermissionResponse>>> GetListAsync(
+  public async Task<ApiResponse<PagedResponse<PermissionResponse>>> GetPagedListAsync(
     PermissionFilterRequest filterRequest,
     CancellationToken cancellationToken)
   {
@@ -182,13 +183,23 @@ public class PermissionService : IPermissionService
         tracking: false,
         cancellationToken: cancellationToken);
 
+    var permissionsListResponses = pagedResult.Select(x => x).ToList();
+    var pagedResponse = new PagedResponse<PermissionResponse>(
+     permissionsListResponses,
+      pagedResult.CurrentPage,
+      pagedResult.TotalPages,
+      pagedResult.PageSize,
+      pagedResult.TotalCount);
+
+
     // Prepare the API response
-    var apiResponse = new ApiResponse<PagedList<PermissionResponse>>((int)HttpStatusCode.OK)
+    var apiResponse = new ApiResponse<PagedResponse<PermissionResponse>>((int)HttpStatusCode.OK)
     {
-      Data = pagedResult
+      Data = pagedResponse
     };
 
     return apiResponse;
+
   }
 
 

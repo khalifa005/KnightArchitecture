@@ -23,7 +23,7 @@ public class RolesController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.Roles.LIST_ROLE)]
 
   [HttpPost("ListAll")]
-  public async Task<ActionResult<ApiResponse<List<RoleListResponse>>>> ListAll(RoleFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ActionResult<ApiResponse<List<RoleResponse>>>> ListAll(RoleFilterRequest request, CancellationToken cancellationToken)
   {
     var res = await _lookupService.GetListAsync(request, cancellationToken);
     return AsActionResult(res);
