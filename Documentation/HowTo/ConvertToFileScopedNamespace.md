@@ -19,6 +19,9 @@ https://blog.joaograssi.com/series/authorization-in-asp.net-core/
 ## Running sql server on docker
 Ensure SQL Server Container is Running:
 
+https://debthedba.wordpress.com/2020/09/30/docker-sql-server-and-ports/
+https://forums.docker.com/t/port-conflict-between-the-local-application-and-the-container/135788 
+
 Use docker ps to ensure your sqlserver container is up and running.
 Find the IP Address or Hostname:
 
