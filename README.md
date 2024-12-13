@@ -1,5 +1,7 @@
+<h2 class="mb-3" align="center"> { وَقُلْ رَبِّ زِدْنِي عِلْمًا } </h2>
 
-<h2 align="center">⭐⭐ When imagination meets innovation, dreams become reality. ⭐⭐</h2>
+<p align="center">⭐⭐ When imagination meets innovation, dreams become reality. ⭐⭐</p>
+
 <table>
   <tr>
     <td align="center" style="width: 100%; max-width: 300px; padding: 10px;">
@@ -16,7 +18,6 @@
     </td>
   </tr>
 </table>
-
 
 ## Table of Contents
 1. [Knight Template Overview](#knight-template-overview)
