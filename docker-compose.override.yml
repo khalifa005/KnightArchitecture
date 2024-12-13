@@ -1,3 +1,4 @@
+# docker-compose.override.yml
 version: '3.4'
 
 services:
@@ -5,19 +6,16 @@ services:
     volumes:
       - ./KH.WebClient:/app
       - ./KH.WebClient/node_modules:/app/node_modules
-
     command: ["npm", "start", "--", "--host", "0.0.0.0"]
     ports:
       - "4201:4200"
+
   kh.webapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=YourDatabaseName;User Id=sa;Password=StrongP@ssw0rd1;Encrypt=True;TrustServerCertificate=True;
-
-
-
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=YourDatabaseName;User Id=sa;Password=StrongP@ssw0rd1;Encrypt=True;TrustServerCertificate=True
     ports:
       - "6000:8080"
       - "6060:8081"
@@ -28,4 +26,4 @@ services:
 
   sqlserver:
     ports:
-      - "1434:1433" 
+      - "1434:1433"

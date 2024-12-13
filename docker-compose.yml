@@ -8,33 +8,22 @@ services:
       dockerfile: KH.WebApi/Dockerfile
     depends_on:
       - sqlserver
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=YourDatabaseName;User Id=sa;Password=StrongP@ssw0rd1;Encrypt=True;TrustServerCertificate=True;
-
-    ports:
-      - "6000:8080"
-      - "6060:8081"
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver
-    ports:
-      - "1434:1433" 
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=StrongP@ssw0rd1
     volumes:
       - sqlserverdata:/var/opt/mssql
+
   angular-app:
     build:
       context: ./KH.WebClient
       dockerfile: Dockerfile
-    ports:
-      - "4200:80"
     depends_on:
       - kh.webapi
+
 volumes:
   sqlserverdata:
