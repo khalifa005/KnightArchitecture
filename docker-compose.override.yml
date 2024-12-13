@@ -1,6 +1,14 @@
 version: '3.4'
 
 services:
+  angular-app:
+    volumes:
+      - ./KH.WebClient:/app
+      - ./KH.WebClient/node_modules:/app/node_modules
+
+    command: ["npm", "start", "--", "--host", "0.0.0.0"]
+    ports:
+      - "4201:4200"
   kh.webapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development

@@ -28,6 +28,13 @@ services:
       - SA_PASSWORD=StrongP@ssw0rd1
     volumes:
       - sqlserverdata:/var/opt/mssql
-
+  angular-app:
+    build:
+      context: ./KH.WebClient
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - kh.webapi
 volumes:
   sqlserverdata:
