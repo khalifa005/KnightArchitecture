@@ -210,6 +210,9 @@ Example Auditing data generated automatically by ef core.
 ### Angular client app
 ![image](https://github.com/user-attachments/assets/cd0a3a2e-64cb-40c8-9c1f-369e8c846031)
 
+### Docker support
+![docker-angular-core-banner](https://github.com/user-attachments/assets/03921328-0a03-42b7-aa04-a8acae23a5ff)
+
 
 ## Used Packages
 
