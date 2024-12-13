@@ -6,9 +6,18 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=YourDatabaseName;User Id=sa;Password=StrongP@ssw0rd1;Encrypt=True;TrustServerCertificate=True;
+
+
+
     ports:
       - "6000:8080"
       - "6060:8081"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ./KH.WebApi:/app
+
+  sqlserver:
+    ports:
+      - "1434:1433" 
