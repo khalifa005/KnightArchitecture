@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HowTo", "HowTo", "{709E7E1B
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "KH.WebClient", "KH.WebClient\KH.WebClient.esproj", "{E58DDD85-2C11-4E60-A633-598B05C804F3}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C33235E5-9A21-41E7-9924-FD4701006790}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{E58DDD85-2C11-4E60-A633-598B05C804F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E58DDD85-2C11-4E60-A633-598B05C804F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E58DDD85-2C11-4E60-A633-598B05C804F3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C33235E5-9A21-41E7-9924-FD4701006790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C33235E5-9A21-41E7-9924-FD4701006790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C33235E5-9A21-41E7-9924-FD4701006790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C33235E5-9A21-41E7-9924-FD4701006790}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
