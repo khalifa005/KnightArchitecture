@@ -25,6 +25,7 @@ public class PermissionsContextSeeder
       AddPdfPermissions(entities);
       AddPermissionManagementPermissions(entities);
       AddClientAppPagePermissions(entities);
+      AddSuperAdminPermissions(entities);
 
       builder.Entity<Permission>().HasData(entities);
     }
@@ -130,6 +131,29 @@ public class PermissionsContextSeeder
 });
 
 
+
+      // Seed the role permissions
+      builder.Entity<RolePermissions>().HasData(rolePermissions);
+    }
+    catch (Exception ex)
+    {
+      var logger = loggerFactory.CreateLogger<LookupContextSeeder>();
+      logger.LogError($"Error occurred while seeding CEO role permissions: {ex.Message}", ex);
+    }
+  }
+
+  public static void SeedSuperAdminPermissions(ModelBuilder builder, ILoggerFactory loggerFactory)
+  {
+    try
+    {
+      List<RolePermissions> rolePermissions = new List<RolePermissions>();
+
+      rolePermissions.AddRange(new[]
+      {
+            new RolePermissions { Id = 2000, RoleId = 1, PermissionId = 700 }, 
+        });
+
+      
 
       // Seed the role permissions
       builder.Entity<RolePermissions>().HasData(rolePermissions);
@@ -293,6 +317,16 @@ public class PermissionsContextSeeder
         new Permission { Id = 209, Key = PermissionKeysConstant.ClientApp.MANAGE_USER_MANAGEMENT, NameEn = "Manage User Management Page", NameAr = "صفحة إدارة إدارة المستخدمين", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
         new Permission { Id = 210, Key = PermissionKeysConstant.ClientApp.MANAGE_PERMISSIONS, NameEn = "Manage Permissions Page", NameAr = "صفحة إدارة الأذونات", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
         new Permission { Id = 211, Key = PermissionKeysConstant.ClientApp.MANAGE_USERS, NameEn = "Manage Users Page", NameAr = "صفحة إدارة المستخدمين", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate }
+    });
+  }
+
+  private static void AddSuperAdminPermissions(List<Permission> entities)
+  {
+    entities.AddRange(new[]
+    {
+      //add them under parent 
+        new Permission { Id = 700, Key = PermissionKeysConstant.SUPER_ADMIN_PERMISSION, NameEn = "Super admin", NameAr = "المدير للنظام ", SortKey = DefaultSortKey, CreatedDate = SeedDate, UpdatedDate = SeedDate },
+       
     });
   }
 }

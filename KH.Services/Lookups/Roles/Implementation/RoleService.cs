@@ -1,6 +1,7 @@
 using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.RoleDto.Request;
 using KH.Services.Lookups.Roles.Contracts;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 public class RoleService : IRoleService
 {
@@ -129,9 +130,24 @@ public class RoleService : IRoleService
 
     try
     {
-      var entity = request.ToEntity();
 
       var repository = _unitOfWork.Repository<Role>();
+
+      // Use a query to lock the table and get the last ID
+      var lastRole = await repository.GetQueryable()
+          .OrderByDescending(r => r.Id)
+          .AsTracking()
+          .FirstOrDefaultAsync(cancellationToken);
+
+      // If no roles exist, start with 1, otherwise increment the last ID
+      var newId = (lastRole?.Id ?? 0) + 1;
+
+    //  var lastRole = await repository.ExecuteSqlRawAsync(
+    //"SELECT TOP 1 * FROM Roles WITH (ROWLOCK, UPDLOCK) ORDER BY Id DESC", cancellationToken);
+
+
+      var entity = request.ToEntity();
+      entity.Id = newId;
 
       await repository.AddAsync(entity, cancellationToken: cancellationToken);
       await _unitOfWork.CommitAsync(cancellationToken);

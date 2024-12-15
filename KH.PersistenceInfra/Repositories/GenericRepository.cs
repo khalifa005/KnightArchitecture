@@ -107,9 +107,15 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     return await query.Where(expression).FirstOrDefaultAsync(cancellationToken);
   }
 
-  public async Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object?>?>? include = null, bool tracking = false, bool splitQuery = false, CancellationToken cancellationToken = default)
+  public async Task<T> GetAsync(long id, Func<IQueryable<T>, IIncludableQueryable<T, object?>?>? include = null, bool tracking = false, bool splitQuery = false, Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+ CancellationToken cancellationToken = default)
   {
     var query = ApplyIncludes(include, tracking: tracking);
+
+    if (orderBy != null)
+    {
+      query = orderBy(query);
+    }
 
     // Enable query splitting if specified
     if (splitQuery)
@@ -212,5 +218,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     var query = _dbContext.Set<T>().Where(filterExpression);
     return await query.ExecuteDeleteAsync(cancellationToken);
   }
+  public async Task<T> ExecuteSqlRawAsync(string sql, CancellationToken cancellationToken = default)
+  {
+    return await _dbContext.Set<T>().FromSqlRaw(sql).FirstOrDefaultAsync(cancellationToken);
+  }
+
 
 }
