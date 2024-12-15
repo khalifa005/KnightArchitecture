@@ -71,6 +71,16 @@ public class RoleService : IRoleService
   {
     var repository = _unitOfWork.Repository<Role>();
 
+    // Dynamic sorting logic for complex operationwe can use this approach and same for the filters
+    //Func<IQueryable<Role>, IOrderedQueryable<Role>> orderBy = request.Sort switch
+    //{
+    //  "NameArAsc" => query => query.OrderBy(u => u.NameAr),
+    //  "NameArDesc" => query => query.OrderByDescending(u => u.NameAr),
+    //  "NameEnAsc" => query => query.OrderBy(u => u.NameEn),
+    //  "NameEnDesc" => query => query.OrderByDescending(u => u.NameEn),
+    //  _ => query => query.OrderByDescending(u => u.Id) // Default sorting
+    //};
+
     var pagedEntities = await repository.GetPagedWithProjectionAsync<RoleListResponse>(
     pageNumber: request.PageIndex,
     pageSize: request.PageSize,
@@ -80,7 +90,18 @@ public class RoleService : IRoleService
     && (string.IsNullOrEmpty(request.NameAr) || u.NameAr.Contains(request.NameAr)),
     projectionExpression: u => new RoleListResponse(u),
     include: null,
-    orderBy: query => query.OrderBy(u => u.Id),
+    orderBy: query => request.Sort switch
+    {
+      "IdAsc" => query.OrderBy(u => u.Id),
+      "IdDesc" => query.OrderByDescending(u => u.Id),
+
+      "NameArAsc" => query.OrderBy(u => u.NameAr),
+      "NameArDesc" => query.OrderByDescending(u => u.NameAr),
+
+      "NameEnAsc" => query.OrderBy(u => u.NameEn),
+      "NameEnDesc" => query.OrderByDescending(u => u.NameEn),
+      _ => query.OrderByDescending(u => u.Id) // Default sorting
+    },
     tracking: false,
     cancellationToken: cancellationToken
 );
