@@ -17,6 +17,7 @@ public class RoleListResponse : BasicEntityDto
     NameAr = e.NameAr;
     NameEn = e.NameEn;
     Description = e.Description;
+    IsDeleted = e.IsDeleted;
   }
 
 }

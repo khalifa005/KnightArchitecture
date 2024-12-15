@@ -51,6 +51,15 @@ public class RolesController : BaseApiController
     return AsActionResult(res);
   }
 
+  [HttpPut("ReActivate/{id}")]
+
+  [PermissionAuthorize(PermissionKeysConstant.Roles.EDIT_ROLE)]
+  public async Task<ActionResult<ApiResponse<string>>> ReActivate([FromRoute] long id, CancellationToken cancellationToken)
+  {
+    var res = await _lookupService.ReActivateAsync(id, cancellationToken);
+    return AsActionResult(res);
+  }
+
   [HttpPut("UpdateBothRoleWithRelatedPermissions")]
   [PermissionAuthorize(PermissionKeysConstant.Roles.EDIT_ROLE)]
   public async Task<ActionResult<ApiResponse<string>>> UpdateBothRoleWithRelatedPermissions([FromBody] CreateRoleRequest request, CancellationToken cancellationToken)

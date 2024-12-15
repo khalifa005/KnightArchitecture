@@ -53,13 +53,13 @@ public class RoleService : IRoleService
     var rolesListResult = await repository.GetAllAsync(
     include: query => query.Include(r => r.SubRoles)
                            .Include(r => r.RolePermissions)
-                           .ThenInclude(p=>p.Permission),
+                           .ThenInclude(p => p.Permission),
     tracking: false,
     useCache: false,
     cancellationToken: cancellationToken);
     //filter after the query because we use cache 
     var mappedRolesListResult = rolesListResult
-      .Where(x=> x.IsDeleted == request.IsDeleted)
+      .Where(x => x.IsDeleted == request.IsDeleted)
       .Select(x => new RoleResponse(x)).ToList();
 
     var apiResponse = new ApiResponse<List<RoleResponse>>((int)HttpStatusCode.OK);
@@ -72,9 +72,12 @@ public class RoleService : IRoleService
     var repository = _unitOfWork.Repository<Role>();
 
     var pagedEntities = await repository.GetPagedWithProjectionAsync<RoleListResponse>(
-    pageNumber: 1,
-    pageSize: 10,
-    filterExpression: u => u.IsDeleted == request.IsDeleted,
+    pageNumber: request.PageIndex,
+    pageSize: request.PageSize,
+    filterExpression: u => (u.IsDeleted == request.IsDeleted)
+    && (string.IsNullOrEmpty(request.Description) || u.NameEn.Contains(request.Description))
+    && (string.IsNullOrEmpty(request.NameEn) || u.NameEn.Contains(request.NameEn))
+    && (string.IsNullOrEmpty(request.NameAr) || u.NameAr.Contains(request.NameAr)),
     projectionExpression: u => new RoleListResponse(u),
     include: null,
     orderBy: query => query.OrderBy(u => u.Id),
@@ -109,7 +112,7 @@ public class RoleService : IRoleService
 
       var repository = _unitOfWork.Repository<Role>();
 
-      await repository.AddAsync(entity,cancellationToken: cancellationToken);
+      await repository.AddAsync(entity, cancellationToken: cancellationToken);
       await _unitOfWork.CommitAsync(cancellationToken);
 
       await _unitOfWork.CommitTransactionAsync(cancellationToken);
@@ -318,6 +321,39 @@ public class RoleService : IRoleService
       return res;
     }
   }
+
+  public async Task<ApiResponse<string>> ReActivateAsync(long id, CancellationToken cancellationToken)
+  {
+    ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    try
+    {
+      var repository = _unitOfWork.Repository<Role>();
+
+      var entityFromDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
+      if (entityFromDB == null)
+        throw new Exception("invalid-role");
+
+      if (entityFromDB.IsDeleted == false)
+        throw new Exception("already-activated");
+
+      entityFromDB.IsDeleted = false;
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
+      repository.RemoveCache();
+
+      res.Data = entityFromDB.Id.ToString();
+      return res;
+    }
+    catch (Exception ex)
+    {
+
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.Data = ex.Message;
+      res.ErrorMessage = ex.Message;
+      return res;
+    }
+  }
+
 
 }
 
