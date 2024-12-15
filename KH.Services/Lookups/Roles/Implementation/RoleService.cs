@@ -330,7 +330,7 @@ public class RoleService : IRoleService
     {
       var repository = _unitOfWork.Repository<Role>();
 
-      var entityFromDB = await repository.GetAsync(id, cancellationToken: cancellationToken);
+      var entityFromDB = await repository.GetAsync(id, tracking: true, cancellationToken: cancellationToken);
       if (entityFromDB == null)
         throw new Exception("invalid-role");
 
@@ -338,6 +338,8 @@ public class RoleService : IRoleService
         throw new Exception("already-activated");
 
       entityFromDB.IsDeleted = false;
+      entityFromDB.DeletedDate = null;
+      entityFromDB.DeletedById = null;
       await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
       repository.RemoveCache();
 

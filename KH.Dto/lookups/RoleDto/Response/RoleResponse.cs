@@ -24,6 +24,7 @@ public class RoleResponse : LookupEntityWithTrackingDto
     CreatedDate = e.CreatedDate;
     UpdatedDate = e.UpdatedDate;
     CreatedById = e.CreatedById;
+    IsDeleted = e.IsDeleted;
     Permissions = e.RolePermissions.Select(x => new PermissionResponse(x.Permission)).ToList();
   }
 
