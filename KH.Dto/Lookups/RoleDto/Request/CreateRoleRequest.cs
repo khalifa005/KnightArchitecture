@@ -27,7 +27,7 @@ public class CreateRoleRequest : LookupEntityWithTrackingDto
       NameAr = NameAr,
       NameEn = NameEn,
       Description = Description,
-      RolePermissions = RolePermissionsIds?.Select(x => new RolePermissions() { PermissionId = x }).ToList() ?? new List<RolePermissions>()
+      //RolePermissions = RolePermissionsIds?.Select(x => new RolePermissions() { PermissionId = x }).ToList() ?? new List<RolePermissions>()
     };
 
     if (Id.HasValue)

@@ -179,7 +179,6 @@ public class RoleService : IRoleService
         throw new Exception("id is required");
 
       var entityFromDb = await repository.GetAsync(request.Id.Value,
-        include: x => x.Include(x => x.RolePermissions),
         tracking: true,
         cancellationToken: cancellationToken);
 
