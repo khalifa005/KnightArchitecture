@@ -141,6 +141,78 @@ all seem working
 ![image](https://github.com/user-attachments/assets/4cede6f2-0d3c-4ccb-bfd2-eadd71a522a7)
 
 
+### flow example
+## Handling Concurrency with SQL Locks
+
+This project demonstrates how to handle concurrency when multiple users attempt to perform simultaneous operations that require unique sequential IDs. Below is an example scenario using SQL locking hints (`UPDLOCK, ROWLOCK`) to ensure data consistency during role creation.
+
+### Code Overview
+
+The `AddAsync` method ensures sequential ID generation by:
+1. Using SQL locking hints to prevent race conditions.
+2. Wrapping the operations in a transaction for atomicity.
+
+Example code snippet:
+```csharp
+var lastRoleId = await repository.ExecuteSqlSingleAsync<long>(
+    "SELECT TOP 1 Id FROM Roles WITH (UPDLOCK, ROWLOCK) ORDER BY Id DESC",
+    cancellationToken
+);
+
+var newId = lastRoleId + 1;
+```
+
+#### Scenario: Two Users Adding Roles at the Same Time
+1. **User 1**:
+   - Starts a transaction.
+   - Locks the row with the highest `Id` using `UPDLOCK` and `ROWLOCK`.
+   - Reads the `lastRoleId` and calculates a new ID.
+   - Inserts the new role and commits the transaction.
+   - Releases the lock.
+
+2. **User 2**:
+   - Starts a transaction but is **blocked** because User 1 holds the lock.
+   - Once User 1's transaction is committed, User 2 proceeds.
+   - Reads the updated `lastRoleId` and calculates a unique new ID.
+   - Inserts the new role and commits the transaction.
+
+#### Outcome
+- User 1 receives `newId = lastRoleId + 1`.
+- User 2 receives `newId = (User 1's newId) + 1`.
+
+This ensures:
+- **Sequential IDs**: No duplicate or skipped IDs.
+- **Data Consistency**: Transactions are isolated, preventing conflicts.
+
+### Challenges with High Concurrency
+While this approach guarantees consistency, high concurrency can lead to:
+- Increased contention for the locked row.
+- Delays as transactions queue up, waiting for the lock to be released.
+
+### Optimizing for Scalability
+To improve performance in high-concurrency environments, consider the following alternatives:
+
+1. **Database Sequence**:
+   - Use a database sequence to generate unique IDs without locking rows.
+   ```sql
+   CREATE SEQUENCE RoleIdSequence START WITH 1 INCREMENT BY 1;
+   ```
+   - Fetch the next value using `NEXT VALUE FOR RoleIdSequence`.
+
+2. **IDENTITY Column**:
+   - Let the database handle ID generation with an auto-increment column.
+
+3. **Reduce Lock Scope**:
+   - Minimize the transaction duration to reduce contention.
+
+4-. If the application allows for retries, use optimistic concurrency control and retry on conflicts rather than locking rows.
+By switching to these approaches, you can eliminate the need for row-level locks and improve scalability in high-concurrency scenarios.
+
+
+### Potential Issues
+Concurrency Bottleneck:
+While UPDLOCK and ROWLOCK reduce contention, they still serialize access to the locked rows. If many transactions are trying to add roles simultaneously, this could lead to contention and reduced performance.
+
 
 
 ---
