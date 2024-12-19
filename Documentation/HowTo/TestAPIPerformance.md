@@ -1,4 +1,4 @@
-#### Test API’s performance by simulating real-world traffic with Postman
+![image](https://github.com/user-attachments/assets/b1a9fd07-bfa7-4f90-a756-e1acd91010ff)#### Test API’s performance by simulating real-world traffic with Postman
 
 
 When it comes to API testing, you may have wondered some or all of these questions:
@@ -53,6 +53,14 @@ When your performance tests indicate elevated error rates and you would like to 
 <img src="https://voyager.postman.com/gif/june-2023-error-breakdown-postman.gif" >
 <img src="https://voyager.postman.com/gif/june-2023-errors-tab-in-postman.gif" >
 
-<img src="" >
 
-<img src="" >
+when i used it to test the role listing it pass but when i used it to test adding new role by 20 user at the same time 
+keep in mind role table doesn't support auto incemental id so it fail with this error 
+Inner Exception: Violation of PRIMARY KEY constraint 'PK_Roles'. Cannot insert duplicate key in object 'dbo.Roles'. The duplicate key value 
+![image](https://github.com/user-attachments/assets/855eefd5-61ec-4022-89c2-fb738bd9ba1d)
+
+
+notes 
+postman allow 100 user limit for free plain 
+all user will used the same machine ip 
+and u can used dataset in oher plain to make the test simulate realword examples
