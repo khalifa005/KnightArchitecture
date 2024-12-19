@@ -136,12 +136,6 @@ all seem working
 ![image](https://github.com/user-attachments/assets/2eff48e7-c6b0-4ddc-a6af-f25a7b3459ee)
 
 
- Lock Table/Row When Calculating IDs
-
-![image](https://github.com/user-attachments/assets/4cede6f2-0d3c-4ccb-bfd2-eadd71a522a7)
-
-
-### flow example
 ## Handling Concurrency with SQL Locks
 
 This project demonstrates how to handle concurrency when multiple users attempt to perform simultaneous operations that require unique sequential IDs. Below is an example scenario using SQL locking hints (`UPDLOCK, ROWLOCK`) to ensure data consistency during role creation.
