@@ -205,16 +205,6 @@ To improve performance in high-concurrency environments, consider the following 
 3. **Reduce Lock Scope**:
    - Minimize the transaction duration to reduce contention.
 
-4-. If the application allows for retries, use optimistic concurrency control and retry on conflicts rather than locking rows.
-By switching to these approaches, you can eliminate the need for row-level locks and improve scalability in high-concurrency scenarios.
-
-
-### Potential Issues
-Concurrency Bottleneck:
-While UPDLOCK and ROWLOCK reduce contention, they still serialize access to the locked rows. If many transactions are trying to add roles simultaneously, this could lead to contention and reduced performance.
-
-
-
 ---
 
 ## Best Practices for Concurrency Control
