@@ -1,194 +1,169 @@
+# API Performance Testing with Postman
 
+## Common Questions in API Performance Testing
+When it comes to API testing, you may have wondered:
 
-When it comes to API testing, you may have wondered some or all of these questions:
+1. How will my APIs perform in real-world situations?
+2. How will response times change when multiple users send requests simultaneously?
+3. Will users experience acceptable response times under load, or will they see errors?
+4. How can performance bottlenecks that may become major production issues be identified?
 
-How will my APIs perform in real-world situations?
+---
 
-How will the response times change when multiple users are sending requests at the same time?
+## How to Use Postman for API Performance Testing
+You can use Postman’s Collection Runner to set up a performance test by following these steps:
 
-Will my users see acceptable response times when my system is under load, or will they see errors?
+### Step 1: Select a Collection and Run
+1. Choose a collection.
+2. Optionally, select an environment.
+3. Click **Run**.
 
-How can I identify performance bottlenecks that may become major production issues?
+![Step 1](https://voyager.postman.com/gif/june-2023-step-1-how-to-setup-a-run-in-postman.gif)
 
-How to use Postman for API performance testing
-You can use Postman’s Collection Runner to set up a performance test in Postman by following these steps:
+### Step 2: Configure Performance Settings
+1. Navigate to the **Performance** tab in the Runner.
+2. Specify load settings such as virtual users, duration, and load profile.
+3. Click **Run**.
 
-Step 1: Select a collection, select an environment (optional), and click Run:
-<img src="https://voyager.postman.com/gif/june-2023-step-1-how-to-setup-a-run-in-postman.gif" >
+![Step 2](https://voyager.postman.com/gif/june-2023-step-2-how-to-setup-a-run-in-postman.gif)
 
-from our template and case study we will observe
-![image](https://github.com/user-attachments/assets/5d297b6a-cebd-4eb2-bc2e-3acb97f54ec3)
+### Step 3: Observe Metrics in Real-Time
+Postman provides real-time metrics during performance tests:
+- **Average Response Time**
+- **Requests Per Second**
+- **Error Rate**
 
+![Step 3](https://voyager.postman.com/gif/june-2023-step-3-how-to-setup-a-run-in-postman.gif)
 
-Step 2: Select the Performance tab under Runner, specify the load settings, and click Run:
-<img src="https://voyager.postman.com/gif/june-2023-step-2-how-to-setup-a-run-in-postman.gif" >
+---
 
-Step 3: Observe the response times and error rate in real time:
+## Load Configuration for Real-World Traffic Simulation
+To simulate real-world traffic, you can specify the following inputs:
 
-<img src="https://voyager.postman.com/gif/june-2023-step-3-how-to-setup-a-run-in-postman.gif" >
+- **Virtual Users (VUs):** Maximum number of parallel users.
+- **Test Duration:** Duration of the test in minutes.
+- **Load Profile:** Intensity of the load during the test. Postman supports steady and step-up load profiles.
 
-How to configure the load to simulate real-world traffic
-You can now use the Collection Runner to simulate real-world traffic. You will be able to specify the following inputs to simulate the load condition:
+![Real-World Traffic Simulation](https://github.com/user-attachments/assets/5d297b6a-cebd-4eb2-bc2e-3acb97f54ec3)
 
-Virtual users (VUs): The maximum number of parallel users you want to simulate.
+---
 
-Test duration: The amount of time (in minutes) for which you want to run the test.
+## Visualizing Metrics of a Performance Test
+Postman provides real-time visualization of the following:
 
-Load profile: The intensity of the load during the test’s duration. We currently support two load profiles:
+- **Average Response Time:** Mean response time for requests.
+- **Requests Per Second (Throughput):** Number of requests served per second.
+- **Error Rate:** Percentage of requests that return non-2XX responses or fail.
 
-Visualizing the metrics of a performance test
-As soon as the performance test starts, you will be able to visualize and observe the performance of your APIs. Postman will show the following metrics in real time:
+These metrics are aggregated and visualized over time, helping you identify performance trends and issues.
 
-Average response time: This is the average of the response times received for the multiple parallel virtual users across the various requests.
+---
 
-Requests per second: The requests per second (throughput) metric helps you observe how many requests can be served by your API per second. Each virtual user is continuously hitting your endpoints, and depending on the response times, each virtual user can send multiple requests in a second. For example, setting up 10 virtual users to test a GET request that you expect to respond in ~200ms might produce 50 requests per second at best. However, the realistic number of request hits per second will depend on your API’s response time and other various factors, such as the use of pre-request or test scripts.
+## Troubleshooting Errors
+When performance tests indicate elevated error rates:
+- Hover over error points to inspect the cause of errors.
+- Use Postman’s error breakdown tab to analyze error details.
 
-Error rate: This metric indicates the fraction of the requests that get a non-2XX response or face non-HTTP errors while sending the request.
+![Error Breakdown](https://voyager.postman.com/gif/june-2023-error-breakdown-postman.gif)
 
-Note that all of the above metrics are commutative across all your selected requests. Postman aggregates your metrics in short-term intervals. Subsequent metrics from consecutive time intervals are placed together, helping you visualize the changes to these metrics over time.
+---
 
-Troubleshooting errors in your performance test runs
-When your performance tests indicate elevated error rates and you would like to know more, you can simply hover over the point of interest and see what’s causing the spike. This helps you identify the cause of the error and troubleshoot the problem further, as shown below:
-<img src="https://voyager.postman.com/gif/june-2023-error-breakdown-postman.gif" >
-<img src="https://voyager.postman.com/gif/june-2023-errors-tab-in-postman.gif" >
+## Case Study: Testing Role Management API
+### Observations
+- **Role Listing Test:** Passed successfully.
+- **Adding a New Role with 20 Users Simultaneously:** Failed due to primary key violations.
 
+### Error Details
+- **Inner Exception:** `Violation of PRIMARY KEY constraint 'PK_Roles'. Cannot insert duplicate key in object 'dbo.Roles'. The duplicate key value ...`
 
-when i used it to test the role listing it pass but when i used it to test adding new role by 20 user at the same time 
-keep in mind role table doesn't support auto incemental id so it fail with this error 
-Inner Exception: Violation of PRIMARY KEY constraint 'PK_Roles'. Cannot insert duplicate key in object 'dbo.Roles'. The duplicate key value 
-![image](https://github.com/user-attachments/assets/855eefd5-61ec-4022-89c2-fb738bd9ba1d)
+![Primary Key Violation](https://github.com/user-attachments/assets/855eefd5-61ec-4022-89c2-fb738bd9ba1d)
 
-The simplest and most reliable solution is to use an auto-increment primary key or GUIDs.
-but we won't this solution maybe our case needs it to perform like we add th sequesnse id +1 or we format our own sequest like date + id (2025-20-01-OrderNum) 
+### Possible Solutions
+1. **Use Auto-Increment Keys or GUIDs:** Simplest and most reliable solution.
+2. **Custom ID Generation:** Create a custom ID format such as `YYYY-DD-OrderNum`.
+3. **Add Concurrency Control:** Implement locks to prevent simultaneous requests from generating duplicate IDs.
 
-solutions
- Add Concurrency Control at the Application Level
-Use an async lock or a distributed lock mechanism (e.g., Redis or a database-based lock) to prevent simultaneous AddAsync requests from calculating the same Id.
-implement concurrency control at the application level in a .NET 8 API to ensure only one user can access an endpoint at a time, you can use a synchronization mechanism such as a SemaphoreSlim or lock. Below is a step-by-step guide to achieve this:
+---
 
-notes 
-postman allow 100 user limit for free plain 
-all user will used the same machine ip 
-and u can used dataset in oher plain to make the test simulate realword examples
-and also there is away to generate api documentation - api test and more will post about them later on
-visualize data in charts
+## Concurrency Control Solutions
+### Application-Level Concurrency Control
+#### Using SemaphoreSlim
+A `SemaphoreSlim` can restrict access to an endpoint, ensuring only one user can process it at a time.
 
-we can also use it for monotring and if shcdule montioring fail it will send emails
-![image](https://github.com/user-attachments/assets/834a44c7-5285-4266-a9f9-0cdac2bbce2a)
+```csharp
+private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
-
-
-//code with concurency issues 
- public async Task<ApiResponse<string>> AddAsync(CreateRoleRequest request, CancellationToken cancellationToken)
- {
-   ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
-
-   await _unitOfWork.BeginTransactionAsync(cancellationToken);
-
-   try
-   {
-
-     var repository = _unitOfWork.Repository<Role>();
-
-     // Use a query to lock the table and get the last ID
-     var lastRole = await repository.GetQueryable()
-         .OrderByDescending(r => r.Id)
-         .AsTracking()
-         .FirstOrDefaultAsync(cancellationToken);
-
-     // If no roles exist, start with 1, otherwise increment the last ID
-     var newId = (lastRole?.Id ?? 0) + 1;
-
-   //  var lastRole = await repository.ExecuteSqlRawAsync(
-   //"SELECT TOP 1 * FROM Roles WITH (ROWLOCK, UPDLOCK) ORDER BY Id DESC", cancellationToken);
-
-
-     var entity = request.ToEntity();
-     entity.Id = newId;
-
-     await repository.AddAsync(entity, cancellationToken: cancellationToken);
-     await _unitOfWork.CommitAsync(cancellationToken);
-
-     await _unitOfWork.CommitTransactionAsync(cancellationToken);
-     repository.RemoveCache();
-
-     res.Data = entity.Id.ToString();
-     return res;
-   }
-   catch (Exception ex)
-   {
-     await _unitOfWork.RollBackTransactionAsync(cancellationToken);
-     return ex.HandleException(res, _env, _logger);
-   }
- }
-
-
-//usig SemaphoreSlim
-Scalability:
-
-this solutions work for a single application instance. If your API is deployed in a distributed environment (e.g., multiple instances), you need a distributed lock mechanism like Redis, SQL-based locks, or Azure Storage Leases.
- private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
-
-    [HttpPost("restricted-endpoint")]
-    public async Task<IActionResult> RestrictedEndpoint([FromBody] string data)
+[HttpPost("restricted-endpoint")]
+public async Task<IActionResult> RestrictedEndpoint([FromBody] string data)
+{
+    if (!_semaphore.Wait(0)) // Check if the semaphore is available
     {
-        if (!_semaphore.Wait(0)) // Immediately check if the semaphore is available
-        {
-            return StatusCode(StatusCodes.Status429TooManyRequests, "This endpoint is currently in use. Please try again later.");
-        }
-
-        try
-        {
-            // Simulate endpoint processing
-            await Task.Delay(5000); // Replace with your actual processing logic
-            return Ok("Request processed successfully.");
-        }
-        finally
-        {
-            _semaphore.Release();
-        }
-
-          [HttpPost("exclusive-access")]
-    public async Task<IActionResult> ExclusiveAccess([FromBody] string data)
-    {
-        await _semaphore.WaitAsync(); // Wait until the semaphore is available
-
-        try
-        {
-            // Simulate endpoint processing
-            await Task.Delay(5000); // Replace with your actual processing logic
-            return Ok($"Request processed successfully with data: {data}");
-        }
-        finally
-        {
-            _semaphore.Release(); // Release the semaphore for the next request
-        }
+        return StatusCode(StatusCodes.Status429TooManyRequests, "Endpoint is in use. Try later.");
     }
 
+    try
+    {
+        await Task.Delay(5000); // Simulate processing logic
+        return Ok("Request processed successfully.");
+    }
+    finally
+    {
+        _semaphore.Release();
+    }
+}
+```
 
-role aafter adinf app lock
-![image](https://github.com/user-attachments/assets/028878ab-aa64-4759-99f0-56a13b7d218c)
+![SemaphoreSlim Solution](https://github.com/user-attachments/assets/f7cec675-397d-44f4-9b9a-09b48cf94235)
 
-as u can see it worked without anu issues 
-![image](https://github.com/user-attachments/assets/f7cec675-397d-44f4-9b9a-09b48cf94235)
+#### Scalability Considerations
+For distributed environments, use distributed locks like:
+- **Redis Distributed Lock**
+- **SQL-Based Locks**
+- **Azure Storage Leases**
+
+---
+
+## Database-Level Concurrency Control
+1. **Lock IDs in a Separate Table:** Move ID generation to a separate table with row-level locking.
+2. **Use SQL Locks:** Execute queries with explicit locks (`ROWLOCK`, `UPDLOCK`).
 
 
-other app lock solution
-Redis Distributed Lock
-Background Service	//to set the request in the queue and process it once its time comes up
+![All Working](https://github.com/user-attachments/assets/2eff48e7-c6b0-4ddc-a6af-f25a7b3459ee)
 
-db solution 
-move the table max id to a seperate table and lock it so it doesn't affect orignal table with data 
 
- Best Practices
-Use the Right Lock Scope: Prefer row-level locks unless table-level locks are strictly necessary.
-Minimize Lock Duration: Keep the locked section as short as possible. Only perform operations that require locking within the transaction.
-Monitor Deadlocks: Ensure that no circular dependencies occur between transactions to avoid deadlocks.
+all seem working 
+
+![image](https://github.com/user-attachments/assets/2eff48e7-c6b0-4ddc-a6af-f25a7b3459ee)
+
 
  Lock Table/Row When Calculating IDs
 
 ![image](https://github.com/user-attachments/assets/4cede6f2-0d3c-4ccb-bfd2-eadd71a522a7)
 
-all seem working 
 
-![image](https://github.com/user-attachments/assets/2eff48e7-c6b0-4ddc-a6af-f25a7b3459ee)
+
+
+---
+
+## Best Practices for Concurrency Control
+1. **Right Lock Scope:** Prefer row-level locks over table-level locks.
+2. **Minimize Lock Duration:** Keep locked sections as short as possible.
+3. **Monitor Deadlocks:** Avoid circular dependencies between transactions.
+
+---
+
+## Notes
+- **Postman Free Plan:** Limited to 100 virtual users per test.
+- **Realistic Traffic Simulation:** Use datasets for simulating diverse requests.
+- **Documentation and Automation:** Postman supports generating API documentation and test automation.
+
+
+
+## Monitoring with Postman
+Postman allows monitoring of APIs with scheduling features. If monitoring fails, Postman can send email alerts. These capabilities enable:
+- **Continuous Monitoring:** Detect issues before they escalate.
+- **Visualization:** Use charts to track metrics.
+
+![Monitoring Example](https://github.com/user-attachments/assets/834a44c7-5285-4266-a9f9-0cdac2bbce2a)
+
+---
