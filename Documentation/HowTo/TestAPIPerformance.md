@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/b1a9fd07-bfa7-4f90-a756-e1acd91010ff)#### Test API’s performance by simulating real-world traffic with Postman
 
 
 When it comes to API testing, you may have wondered some or all of these questions:
@@ -59,8 +58,117 @@ keep in mind role table doesn't support auto incemental id so it fail with this 
 Inner Exception: Violation of PRIMARY KEY constraint 'PK_Roles'. Cannot insert duplicate key in object 'dbo.Roles'. The duplicate key value 
 ![image](https://github.com/user-attachments/assets/855eefd5-61ec-4022-89c2-fb738bd9ba1d)
 
+The simplest and most reliable solution is to use an auto-increment primary key or GUIDs.
+but we won't this solution maybe our case needs it to perform like we add th sequesnse id +1 or we format our own sequest like date + id (2025-20-01-OrderNum) 
+
+solutions
+ Add Concurrency Control at the Application Level
+Use an async lock or a distributed lock mechanism (e.g., Redis or a database-based lock) to prevent simultaneous AddAsync requests from calculating the same Id.
+implement concurrency control at the application level in a .NET 8 API to ensure only one user can access an endpoint at a time, you can use a synchronization mechanism such as a SemaphoreSlim or lock. Below is a step-by-step guide to achieve this:
 
 notes 
 postman allow 100 user limit for free plain 
 all user will used the same machine ip 
 and u can used dataset in oher plain to make the test simulate realword examples
+and also there is away to generate api documentation - api test and more will post about them later on
+visualize data in charts
+
+we can also use it for monotring and if shcdule montioring fail it will send emails
+![image](https://github.com/user-attachments/assets/834a44c7-5285-4266-a9f9-0cdac2bbce2a)
+
+
+
+//code with concurency issues 
+ public async Task<ApiResponse<string>> AddAsync(CreateRoleRequest request, CancellationToken cancellationToken)
+ {
+   ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+   await _unitOfWork.BeginTransactionAsync(cancellationToken);
+
+   try
+   {
+
+     var repository = _unitOfWork.Repository<Role>();
+
+     // Use a query to lock the table and get the last ID
+     var lastRole = await repository.GetQueryable()
+         .OrderByDescending(r => r.Id)
+         .AsTracking()
+         .FirstOrDefaultAsync(cancellationToken);
+
+     // If no roles exist, start with 1, otherwise increment the last ID
+     var newId = (lastRole?.Id ?? 0) + 1;
+
+   //  var lastRole = await repository.ExecuteSqlRawAsync(
+   //"SELECT TOP 1 * FROM Roles WITH (ROWLOCK, UPDLOCK) ORDER BY Id DESC", cancellationToken);
+
+
+     var entity = request.ToEntity();
+     entity.Id = newId;
+
+     await repository.AddAsync(entity, cancellationToken: cancellationToken);
+     await _unitOfWork.CommitAsync(cancellationToken);
+
+     await _unitOfWork.CommitTransactionAsync(cancellationToken);
+     repository.RemoveCache();
+
+     res.Data = entity.Id.ToString();
+     return res;
+   }
+   catch (Exception ex)
+   {
+     await _unitOfWork.RollBackTransactionAsync(cancellationToken);
+     return ex.HandleException(res, _env, _logger);
+   }
+ }
+
+
+//usig SemaphoreSlim
+Scalability:
+
+this solutions work for a single application instance. If your API is deployed in a distributed environment (e.g., multiple instances), you need a distributed lock mechanism like Redis, SQL-based locks, or Azure Storage Leases.
+ private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+
+    [HttpPost("restricted-endpoint")]
+    public async Task<IActionResult> RestrictedEndpoint([FromBody] string data)
+    {
+        if (!_semaphore.Wait(0)) // Immediately check if the semaphore is available
+        {
+            return StatusCode(StatusCodes.Status429TooManyRequests, "This endpoint is currently in use. Please try again later.");
+        }
+
+        try
+        {
+            // Simulate endpoint processing
+            await Task.Delay(5000); // Replace with your actual processing logic
+            return Ok("Request processed successfully.");
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
+
+          [HttpPost("exclusive-access")]
+    public async Task<IActionResult> ExclusiveAccess([FromBody] string data)
+    {
+        await _semaphore.WaitAsync(); // Wait until the semaphore is available
+
+        try
+        {
+            // Simulate endpoint processing
+            await Task.Delay(5000); // Replace with your actual processing logic
+            return Ok($"Request processed successfully with data: {data}");
+        }
+        finally
+        {
+            _semaphore.Release(); // Release the semaphore for the next request
+        }
+    }
+
+
+role aafter adinf app lock
+![image](https://github.com/user-attachments/assets/028878ab-aa64-4759-99f0-56a13b7d218c)
+
+as u can see it worked without anu issues 
+![image](https://github.com/user-attachments/assets/f7cec675-397d-44f4-9b9a-09b48cf94235)
+
