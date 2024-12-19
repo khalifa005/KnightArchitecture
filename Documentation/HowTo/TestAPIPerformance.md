@@ -1,41 +1,20 @@
-#### VS 2022 - Convert to file-scoped namespace in all files
-
-   After you have configured the .editorconfig, you can configure a 'Code Cleanup' setting to automatically convert all files to use file-scoped namespace. Go to Tools -> Options -> Text Editor -> Code Cleanup -> Configure Code Cleanup. Then add the 'Apply namespace preferences'. Then go to Analyze -> Code Cleanup (or just search for 'Code cleanup') and run the Code Cleanup to automatically change the namespaces to file-scoped.
+#### Test API’s performance by simulating real-world traffic with Postman
 
 
-   Best answer in my opinion is here: https://www.ilkayilknur.com/how-to-convert-block-scoped-namespacees-to-file-scoped-namespaces
+When it comes to API testing, you may have wondered some or all of these questions:
 
-It says that you can change the code-style preference (and enable the display of the option to apply this preference in a document / project / solution) by going to Tools => Options => Text Editor => C#=> Code Style and then changing the related preference.
+How will my APIs perform in real-world situations?
 
-![image](https://github.com/user-attachments/assets/fd3e99bd-facc-4e49-87d5-cd83f3ce5a0c)
+How will the response times change when multiple users are sending requests at the same time?
 
+Will my users see acceptable response times when my system is under load, or will they see errors?
 
-https://blog.joaograssi.com/series/authorization-in-asp.net-core/ 
+How can I identify performance bottlenecks that may become major production issues?
 
+How to use Postman for API performance testing
+You can use Postman’s Collection Runner to set up a performance test in Postman by following these steps:
 
+Step 1: Select a collection, select an environment (optional), and click Run:
 
+[![image](https://github.com/user-attachments/assets/60d4a860-f3e8-4086-b9ee-698605556b6f)](https://voyager.postman.com/gif/june-2023-step-1-how-to-setup-a-run-in-postman.gif)
 
----
-## Running sql server on docker
-Ensure SQL Server Container is Running:
-
-https://debthedba.wordpress.com/2020/09/30/docker-sql-server-and-ports/
-https://forums.docker.com/t/port-conflict-between-the-local-application-and-the-container/135788 
-
-Use docker ps to ensure your sqlserver container is up and running.
-Find the IP Address or Hostname:
-
-Use the hostname localhost or the machine's IP address if accessing from the same system.
-The SQL Server is mapped to port 1434 on your host machine as per the ports section in your Docker Compose file.
-
-Connect to the SQL Server:
-
-Server Type: Select Database Engine.
-Server Name: Enter localhost,1434. The 1434 is the port your container is exposing. //we can use container name-ip
-Authentication: Choose SQL Server Authentication.
-Login: Enter sa (the default SQL Server system administrator).
-Password: Enter the password StrongP@ssw0rd1. //example password
-
-![image](https://github.com/user-attachments/assets/3bb526b1-d402-42ac-9ac6-4c8ca0d59f56)
-
-https://chatgpt.com/c/675c1f14-670c-800a-9ed7-11d1ef90a203
