@@ -172,3 +172,23 @@ role aafter adinf app lock
 as u can see it worked without anu issues 
 ![image](https://github.com/user-attachments/assets/f7cec675-397d-44f4-9b9a-09b48cf94235)
 
+
+other app lock solution
+Redis Distributed Lock
+Background Service	//to set the request in the queue and process it once its time comes up
+
+db solution 
+move the table max id to a seperate table and lock it so it doesn't affect orignal table with data 
+
+ Best Practices
+Use the Right Lock Scope: Prefer row-level locks unless table-level locks are strictly necessary.
+Minimize Lock Duration: Keep the locked section as short as possible. Only perform operations that require locking within the transaction.
+Monitor Deadlocks: Ensure that no circular dependencies occur between transactions to avoid deadlocks.
+
+ Lock Table/Row When Calculating IDs
+
+![image](https://github.com/user-attachments/assets/4cede6f2-0d3c-4ccb-bfd2-eadd71a522a7)
+
+all seem working 
+
+![image](https://github.com/user-attachments/assets/2eff48e7-c6b0-4ddc-a6af-f25a7b3459ee)
