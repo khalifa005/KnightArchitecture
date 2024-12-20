@@ -9,6 +9,8 @@ namespace KH.WebApi.Controllers;
 public class RolesController : BaseApiController
 {
   public readonly IRoleService _lookupService;
+  private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+
   public RolesController(IRoleService lookupService)
   {
     _lookupService = lookupService;
@@ -40,9 +42,19 @@ public class RolesController : BaseApiController
   [HttpPost]
   public async Task<ActionResult<ApiResponse<string>>> Post([FromBody] CreateRoleRequest request, CancellationToken cancellationToken)
   {
-    var res = await _lookupService.AddAsync(request, cancellationToken);
-    return AsActionResult(res);
+    //await _semaphore.WaitAsync(); // Wait until the semaphore is available
+
+    try
+    {
+      var res = await _lookupService.AddAsync(request, cancellationToken);
+      return AsActionResult(res);
+    }
+    finally
+    {
+      //_semaphore.Release(); // Release the semaphore for the next request
+    }
   }
+
   [HttpPut]
   [PermissionAuthorize(PermissionKeysConstant.Roles.EDIT_ROLE)]
   public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreateRoleRequest request, CancellationToken cancellationToken)

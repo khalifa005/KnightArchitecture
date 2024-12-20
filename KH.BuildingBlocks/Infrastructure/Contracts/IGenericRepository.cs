@@ -1,5 +1,7 @@
 using KH.BuildingBlocks.Apis.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore.Storage;
 using StackExchange.Redis;
 using System.Linq.Expressions;
 
@@ -40,6 +42,6 @@ public interface IGenericRepository<T> where T : BaseEntity
   Task<int> BatchUpdateAsync(Expression<Func<T, bool>> filterExpression, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> updateExpression, CancellationToken cancellationToken = default);
   Task<int> BatchDeleteAsync(Expression<Func<T, bool>> filterExpression, CancellationToken cancellationToken = default);
   void RemoveCache();
-  Task<T> ExecuteSqlRawAsync(string sql, CancellationToken cancellationToken = default);
+  Task<T> ExecuteSqlSingleAsync<T>(string sql, CancellationToken cancellationToken = default);
 
 }

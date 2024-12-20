@@ -133,17 +133,14 @@ public class RoleService : IRoleService
 
       var repository = _unitOfWork.Repository<Role>();
 
-      // Use a query to lock the table and get the last ID
-      var lastRole = await repository.GetQueryable()
-          .OrderByDescending(r => r.Id)
-          .AsTracking()
-          .FirstOrDefaultAsync(cancellationToken);
+      // Locks the row with the highest Id for updates.
+      // Other transactions must wait if they try to lock the same row.
+      var lastRoleId = await repository.ExecuteSqlSingleAsync<long>(
+                "SELECT TOP 1 Id FROM Roles WITH (UPDLOCK, ROWLOCK) ORDER BY Id DESC",
+                cancellationToken
+            );
 
-      // If no roles exist, start with 1, otherwise increment the last ID
-      var newId = (lastRole?.Id ?? 0) + 1;
-
-    //  var lastRole = await repository.ExecuteSqlRawAsync(
-    //"SELECT TOP 1 * FROM Roles WITH (ROWLOCK, UPDLOCK) ORDER BY Id DESC", cancellationToken);
+      var newId = lastRoleId + 1;
 
 
       var entity = request.ToEntity();

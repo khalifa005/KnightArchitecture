@@ -4,6 +4,7 @@ using KH.BuildingBlocks.Cache.Enums;
 using KH.BuildingBlocks.Cache.Interfaces;
 using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace KH.PersistenceInfra.Repositories;
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
@@ -218,10 +219,40 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     var query = _dbContext.Set<T>().Where(filterExpression);
     return await query.ExecuteDeleteAsync(cancellationToken);
   }
-  public async Task<T> ExecuteSqlRawAsync(string sql, CancellationToken cancellationToken = default)
+  public async Task<T> ExecuteSqlSingleAsync<T>(string sql, CancellationToken cancellationToken = default)
   {
-    return await _dbContext.Set<T>().FromSqlRaw(sql).FirstOrDefaultAsync(cancellationToken);
-  }
+    if (string.IsNullOrWhiteSpace(sql))
+    {
+      throw new ArgumentException("SQL query cannot be null or empty.", nameof(sql));
+    }
 
+    if (_dbContext.Database.CurrentTransaction == null)
+    {
+      throw new InvalidOperationException("No active transaction found. Ensure a transaction is started before executing this query.");
+    }
+
+    var connection = _dbContext.Database.GetDbConnection();
+
+    await using var command = connection.CreateCommand();
+    command.CommandText = sql;
+    command.CommandType = System.Data.CommandType.Text;
+
+    // Use the current active transaction
+    command.Transaction = _dbContext.Database.CurrentTransaction.GetDbTransaction();
+
+    if (connection.State != System.Data.ConnectionState.Open)
+    {
+      await connection.OpenAsync(cancellationToken);
+    }
+
+    await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+
+    if (await reader.ReadAsync(cancellationToken))
+    {
+      return reader.GetFieldValue<T>(0);
+    }
+
+    return default; // Handle case where no rows are returned
+  }
 
 }
