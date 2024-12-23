@@ -30,75 +30,61 @@ The main goal of this project is to:
 ### `LockingService`
 The `LockingService` class demonstrates the use of different isolation levels and locking mechanisms in database operations.
 
-#### Methods
+#### Methods and Expected Behaviors
 
 ##### 1. `TestSerializableIsolationLevelAsync`
-Demonstrates the **Serializable** isolation level, ensuring that no other transaction can modify or insert conflicting data until the transaction is committed.
-
-```csharp
-public async Task<string> TestSerializableIsolationLevelAsync(long role, CancellationToken cancellationToken)
-{
-    await _unitOfWork.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken: cancellationToken);
-
-    var repository = _unitOfWork.Repository<Domain.Entities.Role>();
-    var roleEntity = await repository.ExecuteSqlSingleAsync<Domain.Entities.Role>(
-        "SELECT * FROM Roles WITH (UPDLOCK) WHERE Id = @Id",
-        new { Id = role },
-        cancellationToken
-    );
-
-    if (roleEntity != null)
-    {
-        roleEntity.Description = "internal test";
-        await _unitOfWork.CommitAsync(cancellationToken);
-    }
-
-    await _unitOfWork.CommitTransactionAsync(cancellationToken);
-    return string.Empty;
-}
-```
+- **Behavior**: Ensures no other transaction can modify or insert conflicting data until the transaction is committed.
+- **Expected Behavior**:
+  - Prevents dirty reads, non-repeatable reads, and phantom reads.
+  - `SELECT` queries without explicit locks are allowed.
+- **Unexpected Behavior**:
+  - If no `UPDLOCK` is applied, other transactions can read the same row.
 
 ##### 2. `TestRowLockAsync`
-Demonstrates row-level locking using `UPDLOCK` and `ROWLOCK` hints.
-
-```csharp
-public async Task<string> TestRowLockAsync(long role, CancellationToken cancellationToken)
-{
-    await _unitOfWork.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken: cancellationToken);
-
-    var repository = _unitOfWork.Repository<Domain.Entities.Role>();
-
-    var lastRoleId = await repository.ExecuteSqlSingleAsync<long>(
-        "SELECT TOP 1 Id FROM Roles WITH (UPDLOCK, ROWLOCK) ORDER BY Id DESC",
-        cancellationToken
-    );
-
-    await _unitOfWork.CommitTransactionAsync(cancellationToken);
-    return string.Empty;
-}
-```
+- **Behavior**: Locks the row with the highest ID for updates and prevents other transactions from reading or modifying it.
+- **Expected Behavior**:
+  - Other transactions attempting to read or update the row will wait until the transaction is committed.
+  - Prevents inserting new rows into the same locked range.
 
 ##### 3. `TestReadCommittedIsolationLevelAsync`
-Demonstrates the **Read Committed** isolation level to prevent dirty reads.
+- **Behavior**: Prevents dirty reads but allows non-repeatable reads and phantom reads.
+- **Expected Behavior**:
+  - Transactions cannot read uncommitted changes from other transactions.
+  - Repeated reads may return different data.
 
-```csharp
-public async Task<string> TestReadCommittedIsolationLevelAsync(long role, CancellationToken cancellationToken)
-{
-    await _unitOfWork.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken: cancellationToken);
+##### 4. `TestRepeatableReadIsolationLevelAsync`
+- **Behavior**: Prevents dirty and non-repeatable reads but allows phantom reads.
+- **Expected Behavior**:
+  - Repeated reads of the same data return consistent results within the transaction.
+  - New rows matching the query can still be inserted by other transactions.
 
-    var repository = _unitOfWork.Repository<Domain.Entities.Role>();
-    var roleEntity = await repository.GetQueryable().FirstOrDefaultAsync(x => x.Id == role);
+##### 5. `TestReadUncommittedIsolationLevelAsync`
+- **Behavior**: Allows dirty reads, non-repeatable reads, and phantom reads.
+- **Expected Behavior**:
+  - Reads uncommitted changes made by other transactions.
+  - May read incomplete or invalid data.
 
-    if (roleEntity != null)
-    {
-        roleEntity.Description = "ReadCommitted Test";
-        await _unitOfWork.CommitAsync(cancellationToken);
-    }
+##### 6. `TestPhantomReadPreventionAsync`
+- **Behavior**: Prevents phantom reads by locking the range of rows that match the query.
+- **Expected Behavior**:
+  - No new rows matching the query condition can be inserted or updated by other transactions.
 
-    await _unitOfWork.CommitTransactionAsync(cancellationToken);
-    return string.Empty;
-}
-```
+##### 7. `TestRangeLockingAsync`
+- **Behavior**: Demonstrates range locking to prevent inserts or modifications within a specific range.
+- **Expected Behavior**:
+  - Other transactions attempting to modify or insert rows within the locked range will be blocked.
+
+##### 8. `TestPessimisticLockAsync`
+- **Behavior**: Applies pessimistic locking using `UPDLOCK` to prevent other transactions from modifying the same row.
+- **Expected Behavior**:
+  - Other transactions attempting to modify the row will wait until the lock is released.
+
+##### 9. `TestOptimisticConcurrencyAsync`
+- **Behavior**: Demonstrates optimistic concurrency control using version or timestamp fields.
+- **Expected Behavior**:
+  - Updates succeed only if the row has not been modified by another transaction.
+- **Unexpected Behavior**:
+  - If another transaction modifies the row before committing, a concurrency exception is thrown.
 
 ---
 
@@ -134,7 +120,6 @@ public async Task<string> TestReadCommittedIsolationLevelAsync(long role, Cancel
 ### Testing Scenarios
 
 #### 1. **Serializable Isolation Level**
-- **Behavior**: Prevents other transactions from modifying or inserting conflicting rows.
 - **Steps**:
   1. Run `TestSerializableIsolationLevelAsync` in your code.
   2. Pause the debugger before committing the transaction.
@@ -151,7 +136,6 @@ public async Task<string> TestReadCommittedIsolationLevelAsync(long role, Cancel
        _Expected_: Query hangs until the transaction commits or rolls back.
 
 #### 2. **Row Locking with UPDLOCK**
-- **Behavior**: Prevents other transactions from reading or modifying the locked row.
 - **Steps**:
   1. Run `TestRowLockAsync` in your code.
   2. Pause the debugger before committing the transaction.
@@ -163,7 +147,6 @@ public async Task<string> TestReadCommittedIsolationLevelAsync(long role, Cancel
        _Expected_: Query hangs.
 
 #### 3. **Read Committed Isolation Level**
-- **Behavior**: Prevents dirty reads.
 - **Steps**:
   1. Run `TestReadCommittedIsolationLevelAsync` in your code.
   2. Pause the debugger before committing the transaction.
@@ -176,6 +159,28 @@ public async Task<string> TestReadCommittedIsolationLevelAsync(long role, Cancel
      - Update the same row:
        ```sql
        UPDATE Roles SET Description = 'Conflict Test' WHERE Id = 1;
+       ```
+       _Expected_: Query hangs until the transaction commits or rolls back.
+
+#### 4. **Repeatable Read Isolation Level**
+- **Steps**:
+  1. Run `TestRepeatableReadIsolationLevelAsync` in your code.
+  2. Pause the debugger after the first read.
+  3. In SSMS, attempt to:
+     - Insert a new row matching the query condition:
+       ```sql
+       INSERT INTO Roles (Id, Description, Version) VALUES (4, 'New Role', 1);
+       ```
+       _Expected_: Query succeeds.
+
+#### 5. **Phantom Reads Prevention**
+- **Steps**:
+  1. Run `TestPhantomReadPreventionAsync` in your code.
+  2. Pause the debugger before committing the transaction.
+  3. In SSMS, attempt to:
+     - Insert a row matching the query condition:
+       ```sql
+       INSERT INTO Roles (Id, Description, Version) VALUES (5, 'Phantom Role', 1);
        ```
        _Expected_: Query hangs until the transaction commits or rolls back.
 
