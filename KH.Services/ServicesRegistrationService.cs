@@ -2,6 +2,7 @@
 using KH.Services.Auth.Contracts;
 using KH.Services.Auth.Extensions;
 using KH.Services.Auth.Implementation;
+using KH.Services.Locking;
 using KH.Services.Pdf.Implementation;
 
 namespace KH.Services;
@@ -12,6 +13,7 @@ public static class ServicesRegistrationService
   {
     services.AddIdentityService(configuration);
 
+    services.AddScoped<LockingService>();
     services.AddScoped<IMediaService, MediaService>();
     services.AddScoped<IPdfService, PdfService>();
     services.AddScoped<IEmailService, EmailService>();
