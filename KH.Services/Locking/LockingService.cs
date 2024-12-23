@@ -1,5 +1,6 @@
 using AngleSharp.Css.Values;
 using KH.BuildingBlocks.Apis.Entities;
+using KH.PersistenceInfra.Data;
 using StackExchange.Redis;
 using System.Collections.Generic;
 using System.Data;
@@ -16,11 +17,13 @@ public class LockingService
   //Copy code
 
   //SELECT* FROM sys.dm_tran_locks;
-
+  private readonly AppDbContext _dbContext;
   private readonly IUnitOfWork _unitOfWork;
   public LockingService(
+    AppDbContext dbContext,
       IUnitOfWork unitOfWork)
   {
+    _dbContext = dbContext;
     _unitOfWork = unitOfWork;
   }
 
@@ -169,15 +172,24 @@ public class LockingService
     var repository = _unitOfWork.Repository<Domain.Entities.Role>();
 
     // Lock the range of rows to prevent phantom reads.
+    //no add or update to any of matched range
     var roles = await repository.ExecuteSqlSingleAsync<List<Domain.Entities.Role>>(
         "SELECT * FROM Roles WITH (HOLDLOCK, UPDLOCK)",
         cancellationToken: cancellationToken
     );
 
+
+    // Access DbSet directly for FromSqlRaw
+     var rolesxx = await _dbContext.Roles
+                               .FromSqlRaw("SELECT * FROM Roles WITH (HOLDLOCK, UPDLOCK)")
+                               .ToListAsync(cancellationToken);
+
     // Process roles (e.g., update descriptions)
     foreach (var role in roles)
     {
       role.Description = "Phantom Prevention Test";
+
+      _re
     }
 
     await _unitOfWork.CommitTransactionAsync(cancellationToken);

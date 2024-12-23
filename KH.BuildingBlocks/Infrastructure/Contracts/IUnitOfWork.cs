@@ -1,4 +1,5 @@
 using KH.BuildingBlocks.Apis.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 namespace KH.BuildingBlocks.Infrastructure.Contracts;
@@ -12,4 +13,5 @@ public interface IUnitOfWork : IDisposable
   Task RollBackTransactionAsync(CancellationToken cancellationToken = default);
   Task CommitTransactionAsync(CancellationToken cancellationToken = default);
   bool HasActiveTransaction { get; }
+
 }
