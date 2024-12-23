@@ -220,7 +220,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     var query = _dbContext.Set<T>().Where(filterExpression);
     return await query.ExecuteDeleteAsync(cancellationToken);
   }
-  public async Task<T> ExecuteSqlSingleAsync<T>(string sql, CancellationToken cancellationToken = default)
+  public async Task<T> ExecuteSqlSingleAsyncDeprecated<T>(string sql, CancellationToken cancellationToken = default)
   {
     if (string.IsNullOrWhiteSpace(sql))
     {

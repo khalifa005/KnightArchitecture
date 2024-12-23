@@ -70,7 +70,7 @@ public class LockingService
     //prevent adding a new row data 
     var lastRoleId = await repository.ExecuteSqlSingleAsync<long>(
         "SELECT TOP 1 Id FROM Roles WITH (UPDLOCK, ROWLOCK) ORDER BY Id DESC",
-        cancellationToken
+        cancellationToken: cancellationToken
     );
 
     await _unitOfWork.CommitTransactionAsync(cancellationToken);
@@ -83,6 +83,7 @@ public class LockingService
   /// <summary>
   /// Tests the Read Committed Isolation Level.
   /// Prevents dirty reads but allows non-repeatable reads and phantom reads.
+  /// it cannot read uncommitted changes from other transactions.
   /// </summary>
   public async Task<string> TestReadCommittedIsolationLevelAsync(long role, CancellationToken cancellationToken)
   {
@@ -170,7 +171,7 @@ public class LockingService
     // Lock the range of rows to prevent phantom reads.
     var roles = await repository.ExecuteSqlSingleAsync<List<Domain.Entities.Role>>(
         "SELECT * FROM Roles WITH (HOLDLOCK, UPDLOCK)",
-        cancellationToken
+        cancellationToken: cancellationToken
     );
 
     // Process roles (e.g., update descriptions)
@@ -198,7 +199,7 @@ public class LockingService
     var rolesInRange = await repository.ExecuteSqlSingleAsync<List<Domain.Entities.Role>>(
         "SELECT * FROM Roles WITH (HOLDLOCK, UPDLOCK) WHERE Id BETWEEN @StartId AND @EndId",
         new { StartId = startId, EndId = endId },
-        cancellationToken
+        cancellationToken: cancellationToken
     );
 
     foreach (var role in rolesInRange)
@@ -224,7 +225,7 @@ public class LockingService
     var lockedRole = await repository.ExecuteSqlSingleAsync<Domain.Entities.Role>(
         "SELECT * FROM Roles WITH (UPDLOCK) WHERE Id = @Id",
         new { Id = role },
-        cancellationToken
+        cancellationToken: cancellationToken
     );
 
     if (lockedRole != null)
