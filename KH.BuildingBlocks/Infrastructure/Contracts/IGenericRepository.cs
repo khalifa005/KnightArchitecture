@@ -43,5 +43,6 @@ public interface IGenericRepository<T> where T : BaseEntity
   Task<int> BatchDeleteAsync(Expression<Func<T, bool>> filterExpression, CancellationToken cancellationToken = default);
   void RemoveCache();
   Task<T> ExecuteSqlSingleAsync<T>(string sql, CancellationToken cancellationToken = default);
+  Task<T> ExecuteSqlSingleAsync<T>(string sql, object parameters = null, CancellationToken cancellationToken = default);
 
 }

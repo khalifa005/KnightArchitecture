@@ -8,6 +8,9 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
     //additional configuration for product table
     builder.Property(p => p.Id).ValueGeneratedNever();
 
+    builder.Property(u => u.RowVersion)
+      .IsRowVersion();
+
 
     builder.Property(p => p.NameAr).IsRequired().HasMaxLength(300);
     builder.Property(p => p.ReportToRoleId).IsRequired(false).HasMaxLength(300).HasColumnOrder(5);

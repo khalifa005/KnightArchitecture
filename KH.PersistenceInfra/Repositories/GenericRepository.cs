@@ -255,4 +255,61 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     return default; // Handle case where no rows are returned
   }
 
+
+  public async Task<T> ExecuteSqlSingleAsync<T>(string sql, object parameters = null, CancellationToken cancellationToken = default)
+  {
+    if (string.IsNullOrWhiteSpace(sql))
+    {
+      throw new ArgumentException("SQL query cannot be null or empty.", nameof(sql));
+    }
+
+    if (_dbContext.Database.CurrentTransaction == null)
+    {
+      throw new InvalidOperationException("No active transaction found. Ensure a transaction is started before executing this query.");
+    }
+
+    var connection = _dbContext.Database.GetDbConnection();
+
+    if (connection.State != System.Data.ConnectionState.Open)
+    {
+      await connection.OpenAsync(cancellationToken);
+    }
+
+    var command = connection.CreateCommand();
+    command.CommandText = sql;
+    command.CommandType = System.Data.CommandType.Text;
+    command.Transaction = _dbContext.Database.CurrentTransaction.GetDbTransaction();
+
+    // Add parameters dynamically if provided
+    if (parameters != null)
+    {
+      foreach (var property in parameters.GetType().GetProperties())
+      {
+        var value = property.GetValue(parameters);
+        var parameter = command.CreateParameter();
+        parameter.ParameterName = $"@{property.Name}";
+        parameter.Value = value ?? DBNull.Value;
+        command.Parameters.Add(parameter);
+      }
+    }
+
+    try
+    {
+      await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+
+      if (await reader.ReadAsync(cancellationToken))
+      {
+        return reader.GetFieldValue<T>(0);
+      }
+
+      return default; // Handle case where no rows are returned
+    }
+    catch (Exception ex)
+    {
+      // Add logging here if needed
+      throw new InvalidOperationException("Error executing SQL query.", ex);
+    }
+  }
+
+
 }
