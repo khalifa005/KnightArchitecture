@@ -6,6 +6,7 @@ using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage;
 using KH.BuildingBlocks.Infrastructure;
+using System.Collections;
 
 namespace KH.PersistenceInfra.Repositories;
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
@@ -298,9 +299,30 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
       await using var reader = await command.ExecuteReaderAsync(cancellationToken);
 
-      if (await reader.ReadAsync(cancellationToken))
+      if (typeof(T).IsGenericType && typeof(T).GetGenericTypeDefinition() == typeof(List<>))
       {
-        // If T is a class, map properties manually
+        // Handle List<T>
+        var listType = typeof(T).GetGenericArguments()[0]; // Get the type argument of List<>
+        var listInstance = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(listType)); // Create a List<T> instance
+
+        while (await reader.ReadAsync(cancellationToken))
+        {
+          var instance = Activator.CreateInstance(listType); // Create an instance of the item type
+          foreach (var property in listType.GetProperties())
+          {
+            if (!reader.HasColumn(property.Name)) continue;
+
+            var value = reader[property.Name];
+            property.SetValue(instance, value == DBNull.Value ? null : value);
+          }
+          listInstance.Add(instance); // Add the mapped object to the list
+        }
+
+        return (T)listInstance; // Cast the list to the generic type T and return
+      }
+      else if (await reader.ReadAsync(cancellationToken))
+      {
+        // Handle Single Object
         if (typeof(T).IsClass && typeof(T) != typeof(string))
         {
           var instance = Activator.CreateInstance<T>();
@@ -315,7 +337,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
           return instance;
         }
 
-        // If T is a primitive type, return the value directly
+        // Handle Primitive Type
         return (T)reader.GetFieldValue<object>(0);
       }
 
