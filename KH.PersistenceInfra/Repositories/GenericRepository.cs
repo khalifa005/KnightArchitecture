@@ -5,6 +5,7 @@ using KH.BuildingBlocks.Cache.Interfaces;
 using KH.PersistenceInfra.Data;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage;
+using KH.BuildingBlocks.Infrastructure;
 
 namespace KH.PersistenceInfra.Repositories;
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
@@ -299,7 +300,23 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 
       if (await reader.ReadAsync(cancellationToken))
       {
-        return reader.GetFieldValue<T>(0);
+        // If T is a class, map properties manually
+        if (typeof(T).IsClass && typeof(T) != typeof(string))
+        {
+          var instance = Activator.CreateInstance<T>();
+          foreach (var property in typeof(T).GetProperties())
+          {
+            if (!reader.HasColumn(property.Name)) continue;
+
+            var value = reader[property.Name];
+            property.SetValue(instance, value == DBNull.Value ? null : value);
+          }
+
+          return instance;
+        }
+
+        // If T is a primitive type, return the value directly
+        return (T)reader.GetFieldValue<object>(0);
       }
 
       return default; // Handle case where no rows are returned

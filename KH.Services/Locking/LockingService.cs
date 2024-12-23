@@ -230,6 +230,7 @@ public class LockingService
     if (lockedRole != null)
     {
       lockedRole.Description = "Pessimistic Lock Test";
+      repository.UpdateDetachedEntity(lockedRole);
       await _unitOfWork.CommitAsync(cancellationToken);
     }
 
