@@ -180,17 +180,19 @@ public class LockingService
 
 
     // Access DbSet directly for FromSqlRaw
-     var rolesxx = await _dbContext.Roles
+     var trackedRoles = await _dbContext.Roles
                                .FromSqlRaw("SELECT * FROM Roles WITH (HOLDLOCK, UPDLOCK)")
                                .ToListAsync(cancellationToken);
 
     // Process roles (e.g., update descriptions)
-    foreach (var role in roles)
+    foreach (var role in trackedRoles)
     {
       role.Description = "Phantom Prevention Test";
-
-      _re
     }
+
+    //repository.UpdateRange(roles);
+    await _unitOfWork.CommitAsync(cancellationToken);
+
 
     await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
