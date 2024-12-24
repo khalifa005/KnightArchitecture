@@ -1,210 +1,227 @@
-# Locking and Isolation Levels in Entity Framework
+# Using MediatR for Command and Notification Handling in .NET
+
+This repository demonstrates how to use **MediatR** to implement the **CQRS pattern** for handling commands and notifications in a .NET application. The example shows how to create a user and send notifications (SMS and email) after the user is successfully created.
+
+## Features
+- Implements **CQRS** using MediatR.
+- Decouples business logic from notification logic.
+- Demonstrates the use of domain events and event handlers.
+
+---
+
+## Table of Contents
+- [Overview](#overview)
+- [Technologies Used](#technologies-used)
+- [Setup and Installation](#setup-and-installation)
+- [Implementation Details](#implementation-details)
+  - [Command: CreateUserCommand](#1-command-createusercommand)
+  - [Command Handler](#2-command-handler)
+  - [Domain Event: UserCreatedEvent](#3-domain-event-usercreatedevent)
+  - [Event Handlers](#4-event-handlers)
+- [How to Run](#how-to-run)
+- [Extending the Example](#extending-the-example)
+- [License](#license)
+
+---
 
 ## Overview
-This repository provides a detailed implementation and explanation of locking and isolation levels in a database context using Entity Framework and SQL Server. The implementation focuses on managing concurrent transactions effectively by leveraging different isolation levels and locking mechanisms.
 
-The main goal of this project is to:
-- Prevent concurrency issues such as **dirty reads**, **non-repeatable reads**, and **phantom reads**.
-- Demonstrate how to enforce locking to ensure data consistency.
-- Test and validate different behaviors of isolation levels and locking using both code and SQL Server Management Studio (SSMS).
-
----
-
-## Key Concepts
-
-### Isolation Levels
-1. **Read Uncommitted**: Allows dirty reads, non-repeatable reads, and phantom reads.
-2. **Read Committed**: Prevents dirty reads but allows non-repeatable reads and phantom reads.
-3. **Repeatable Read**: Prevents dirty reads and non-repeatable reads but allows phantom reads.
-4. **Serializable**: Prevents dirty reads, non-repeatable reads, and phantom reads.
-
-### Locking Mechanisms
-- **Shared Lock (`S`)**: Allows reading but prevents writes until the lock is released.
-- **Update Lock (`U`)**: Prevents other transactions from acquiring locks that would conflict with an update.
-- **Exclusive Lock (`X`)**: Prevents all other access (read/write) to the locked resource.
-- **Key-Range Locks**: Prevents phantom reads by locking ranges of keys.
+The project demonstrates how to:
+1. Use **MediatR** for in-process messaging.
+2. Handle commands (e.g., `CreateUserCommand`) to perform actions such as creating a user.
+3. Use notifications (e.g., `UserCreatedEvent`) to notify other parts of the system (e.g., send SMS and email).
 
 ---
 
-## Implementation
-### `LockingService`
-The `LockingService` class demonstrates the use of different isolation levels and locking mechanisms in database operations.
+## Technologies Used
 
-#### Methods and Expected Behaviors
-
-##### 1. `TestSerializableIsolationLevelAsync`
-- **Behavior**: Ensures no other transaction can modify or insert conflicting data until the transaction is committed.
-- **Expected Behavior**:
-  - Prevents dirty reads, non-repeatable reads, and phantom reads.
-  - `SELECT` queries without explicit locks are allowed.
-- **Unexpected Behavior**:
-  - If no `UPDLOCK` is applied, other transactions can read the same row.
-
-##### 2. `TestRowLockAsync`
-- **Behavior**: Locks the row with the highest ID for updates and prevents other transactions from reading or modifying it.
-- **Expected Behavior**:
-  - Other transactions attempting to read or update the row will wait until the transaction is committed.
-  - Prevents inserting new rows into the same locked range.
-
-##### 3. `TestReadCommittedIsolationLevelAsync`
-- **Behavior**: Prevents dirty reads but allows non-repeatable reads and phantom reads.
-- **Expected Behavior**:
-  - Transactions cannot read uncommitted changes from other transactions.
-  - Repeated reads may return different data.
-
-##### 4. `TestRepeatableReadIsolationLevelAsync`
-- **Behavior**: Prevents dirty and non-repeatable reads but allows phantom reads.
-- **Expected Behavior**:
-  - Repeated reads of the same data return consistent results within the transaction.
-  - New rows matching the query can still be inserted by other transactions.
-
-##### 5. `TestReadUncommittedIsolationLevelAsync`
-- **Behavior**: Allows dirty reads, non-repeatable reads, and phantom reads.
-- **Expected Behavior**:
-  - Reads uncommitted changes made by other transactions.
-  - May read incomplete or invalid data.
-
-##### 6. `TestPhantomReadPreventionAsync`
-- **Behavior**: Prevents phantom reads by locking the range of rows that match the query.
-- **Expected Behavior**:
-  - No new rows matching the query condition can be inserted or updated by other transactions.
-
-##### 7. `TestRangeLockingAsync`
-- **Behavior**: Demonstrates range locking to prevent inserts or modifications within a specific range.
-- **Expected Behavior**:
-  - Other transactions attempting to modify or insert rows within the locked range will be blocked.
-
-##### 8. `TestPessimisticLockAsync`
-- **Behavior**: Applies pessimistic locking using `UPDLOCK` to prevent other transactions from modifying the same row.
-- **Expected Behavior**:
-  - Other transactions attempting to modify the row will wait until the lock is released.
-
-##### 9. `TestOptimisticConcurrencyAsync`
-- **Behavior**: Demonstrates optimistic concurrency control using version or timestamp fields.
-- **Expected Behavior**:
-  - Updates succeed only if the row has not been modified by another transaction.
-- **Unexpected Behavior**:
-  - If another transaction modifies the row before committing, a concurrency exception is thrown.
+- .NET 8
+- MediatR
+- Dependency Injection
+- Clean Architecture Principles
 
 ---
 
-## Testing
+## Setup and Installation
 
-### Prerequisites
-1. **Database Setup**:
-   - Create a `Roles` table:
-     ```sql
-     CREATE TABLE Roles (
-         Id BIGINT PRIMARY KEY,
-         Description NVARCHAR(255),
-         Version INT
-     );
-     ```
-   - Populate with sample data:
-     ```sql
-     INSERT INTO Roles (Id, Description, Version)
-     VALUES (1, 'Role 1', 1), (2, 'Role 2', 1), (3, 'Role 3', 1);
-     ```
-
-2. **Tooling**:
-   - Use Visual Studio to debug the code.
-   - Use SQL Server Management Studio (SSMS) to monitor transactions and locks.
-
-3. **Monitoring Tools**:
-   - Use `sys.dm_tran_locks` to view active locks:
-     ```sql
-     SELECT * FROM sys.dm_tran_locks;
-     ```
-   - Use Activity Monitor in SSMS to observe session activity.
-
-### Testing Scenarios
-
-#### 1. **Serializable Isolation Level**
-- **Steps**:
-  1. Run `TestSerializableIsolationLevelAsync` in your code.
-  2. Pause the debugger before committing the transaction.
-  3. In SSMS, attempt to:
-     - Read the same row:
-       ```sql
-       SELECT * FROM Roles WHERE Id = 1;
-       ```
-       _Expected_: Query succeeds (Serializable does not block reads).
-     - Update the same row:
-       ```sql
-       UPDATE Roles SET Description = 'Conflict Test' WHERE Id = 1;
-       ```
-       _Expected_: Query hangs until the transaction commits or rolls back.
-
-#### 2. **Row Locking with UPDLOCK**
-- **Steps**:
-  1. Run `TestRowLockAsync` in your code.
-  2. Pause the debugger before committing the transaction.
-  3. In SSMS, attempt to:
-     - Read the locked row:
-       ```sql
-       SELECT * FROM Roles WHERE Id = 1;
-       ```
-       _Expected_: Query hangs.
-
-#### 3. **Read Committed Isolation Level**
-- **Steps**:
-  1. Run `TestReadCommittedIsolationLevelAsync` in your code.
-  2. Pause the debugger before committing the transaction.
-  3. In SSMS, attempt to:
-     - Read the same row:
-       ```sql
-       SELECT * FROM Roles WHERE Id = 1;
-       ```
-       _Expected_: Query succeeds.
-     - Update the same row:
-       ```sql
-       UPDATE Roles SET Description = 'Conflict Test' WHERE Id = 1;
-       ```
-       _Expected_: Query hangs until the transaction commits or rolls back.
-
-#### 4. **Repeatable Read Isolation Level**
-- **Steps**:
-  1. Run `TestRepeatableReadIsolationLevelAsync` in your code.
-  2. Pause the debugger after the first read.
-  3. In SSMS, attempt to:
-     - Insert a new row matching the query condition:
-       ```sql
-       INSERT INTO Roles (Id, Description, Version) VALUES (4, 'New Role', 1);
-       ```
-       _Expected_: Query succeeds.
-
-#### 5. **Phantom Reads Prevention**
-- **Steps**:
-  1. Run `TestPhantomReadPreventionAsync` in your code.
-  2. Pause the debugger before committing the transaction.
-  3. In SSMS, attempt to:
-     - Insert a row matching the query condition:
-       ```sql
-       INSERT INTO Roles (Id, Description, Version) VALUES (5, 'Phantom Role', 1);
-       ```
-       _Expected_: Query hangs until the transaction commits or rolls back.
-
----
-
-## Observing Locks
-To monitor locks in real-time:
-
-1. **View Active Transactions**:
-   ```sql
-   DBCC OPENTRAN;
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/mediatr-cqrs-example.git
+   cd mediatr-cqrs-example
    ```
 
-2. **View Locks for a Specific Session**:
-   ```sql
-   SELECT * FROM sys.dm_tran_locks WHERE request_session_id = <SessionID>;
+2. Install dependencies:
+   ```bash
+   dotnet restore
    ```
 
-3. **Activity Monitor**:
-   - Open Activity Monitor in SSMS to view blocking sessions and lock details.
+3. Run the application:
+   ```bash
+   dotnet run
+   ```
 
 ---
 
-## Conclusion
-This repository demonstrates how to handle locking and isolation levels in a transactional context effectively. By leveraging the provided examples and testing scenarios, you can ensure data consistency and integrity in your application.
+## Implementation Details
 
-Feel free to contribute or raise issues for enhancements!
+### 1. Command: `CreateUserCommand`
+
+The `CreateUserCommand` encapsulates the data required to create a user.
+
+```csharp
+public class CreateUserCommand : IRequest<Guid> // Returns the created user's ID
+{
+    public string Username { get; set; }
+    public string Email { get; set; }
+    public string PhoneNumber { get; set; }
+}
+```
+
+---
+
+### 2. Command Handler
+
+The `CreateUserCommandHandler` is responsible for processing the command. It creates a user and publishes a domain event (`UserCreatedEvent`) after the user is created.
+
+```csharp
+public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
+{
+    private readonly IUserRepository _userRepository; // For saving user to DB
+    private readonly IMediator _mediator; // To publish events
+
+    public CreateUserCommandHandler(IUserRepository userRepository, IMediator mediator)
+    {
+        _userRepository = userRepository;
+        _mediator = mediator;
+    }
+
+    public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    {
+        // Create the user and save to DB
+        var userId = Guid.NewGuid();
+        var user = new User
+        {
+            Id = userId,
+            Username = request.Username,
+            Email = request.Email,
+            PhoneNumber = request.PhoneNumber
+        };
+        
+        await _userRepository.AddAsync(user);
+
+        // Publish a domain event after the user is created
+        var userCreatedEvent = new UserCreatedEvent(user.Id, user.Email, user.PhoneNumber);
+        await _mediator.Publish(userCreatedEvent);
+
+        return userId;
+    }
+}
+```
+
+---
+
+### 3. Domain Event: `UserCreatedEvent`
+
+The `UserCreatedEvent` is a notification that is published when a user is created.
+
+```csharp
+public class UserCreatedEvent : INotification
+{
+    public Guid UserId { get; }
+    public string Email { get; }
+    public string PhoneNumber { get; }
+
+    public UserCreatedEvent(Guid userId, string email, string phoneNumber)
+    {
+        UserId = userId;
+        Email = email;
+        PhoneNumber = phoneNumber;
+    }
+}
+```
+
+---
+
+### 4. Event Handlers
+
+**Handler for Sending Email:**
+```csharp
+public class SendEmailHandler : INotificationHandler<UserCreatedEvent>
+{
+    private readonly IEmailService _emailService;
+
+    public SendEmailHandler(IEmailService emailService)
+    {
+        _emailService = emailService;
+    }
+
+    public async Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
+    {
+        var subject = "Welcome to the platform!";
+        var body = $"Hello, your account has been created. Your user ID is {notification.UserId}.";
+        await _emailService.SendEmailAsync(notification.Email, subject, body);
+    }
+}
+```
+
+**Handler for Sending SMS:**
+```csharp
+public class SendSmsHandler : INotificationHandler<UserCreatedEvent>
+{
+    private readonly ISmsService _smsService;
+
+    public SendSmsHandler(ISmsService smsService)
+    {
+        _smsService = smsService;
+    }
+
+    public async Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
+    {
+        var message = $"Welcome! Your account has been created. Your user ID is {notification.UserId}.";
+        await _smsService.SendSmsAsync(notification.PhoneNumber, message);
+    }
+}
+```
+
+---
+
+## How to Run
+
+1. Trigger the `CreateUserCommand` in your application:
+   ```csharp
+   var command = new CreateUserCommand
+   {
+       Username = "JohnDoe",
+       Email = "johndoe@example.com",
+       PhoneNumber = "1234567890"
+   };
+
+   var userId = await _mediator.Send(command);
+   ```
+
+2. Observe that:
+   - The user is created and saved to the database.
+   - An email notification is sent.
+   - An SMS notification is sent.
+
+---
+
+## Extending the Example
+
+1. **Add Push Notifications:**
+   - Create a new handler for `UserCreatedEvent` to send push notifications.
+
+2. **Background Processing:**
+   - Offload email/SMS sending to a background worker using tools like **Hangfire** or **Azure Functions**.
+
+3. **Error Handling:**
+   - Implement retries or a failure-handling mechanism for notifications.
+
+4. **Advanced CQRS:**
+   - Separate the write and read models for more complex scenarios.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
