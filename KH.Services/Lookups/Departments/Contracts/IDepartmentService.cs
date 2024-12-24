@@ -8,7 +8,7 @@ namespace KH.Services.Lookups.Departments.Contracts;
 public interface IDepartmentService
 {
   Task<ApiResponse<DepartmentResponse>> GetAsync(long id, CancellationToken cancellationToken);
-  Task<ApiResponse<PagedResponse<DepartmentListResponse>>> GetPagedListAsync(DepartmentFilterRequest request, CancellationToken cancellationToken);
+  Task<ApiResponse<PagedList<DepartmentListResponse>>> GetPagedListAsync(DepartmentFilterRequest request, CancellationToken cancellationToken);
   Task<ApiResponse<List<DepartmentListResponse>>> GetListAsync(DepartmentFilterRequest request, CancellationToken cancellationToken);
   Task<ApiResponse<string>> AddAsync(CreateDepartmentRequest request, CancellationToken cancellationToken);
   Task<ApiResponse<string>> UpdateAsync(CreateDepartmentRequest request, CancellationToken cancellationToken);

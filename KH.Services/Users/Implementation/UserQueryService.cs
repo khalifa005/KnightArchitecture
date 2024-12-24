@@ -1,3 +1,4 @@
+using KH.BuildingBlocks.Auth.Contracts;
 using KH.Dto.Lookups.PermissionsDto.Response;
 using KH.Services.Auth.Contracts;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -127,7 +128,7 @@ public class UserQueryService : IUserQueryService
     res.Data = entityResponse;
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingIQueryableAsync(UserFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<PagedList<UserListResponse>>> GetListUsingIQueryableAsync(UserFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<User>();
     IQueryable<User> query = repository.GetQueryable();
@@ -156,21 +157,18 @@ public class UserQueryService : IUserQueryService
 
     var usersFromDB = await repository.GetPagedUsingQueryAsync(request.PageIndex, request.PageSize, query);
 
-    var userListResponses = usersFromDB.Select(x => new UserListResponse(x)).ToList();
+    var userListResponses = usersFromDB.Items.Select(x => new UserListResponse(x)).ToList();
+    ApiResponse<PagedList<UserListResponse>> apiResponse = new ApiResponse<PagedList<UserListResponse>>((int)HttpStatusCode.OK);
 
-    var pagedResponse = new PagedResponse<UserListResponse>(
+    apiResponse.Data = new PagedList<UserListResponse>(
       userListResponses,
-       usersFromDB.CurrentPage,
-       usersFromDB.TotalPages,
-       usersFromDB.PageSize,
-       usersFromDB.TotalCount);
-
-    ApiResponse<PagedResponse<UserListResponse>> apiResponse = new ApiResponse<PagedResponse<UserListResponse>>((int)HttpStatusCode.OK);
-    apiResponse.Data = pagedResponse;
+      count: usersFromDB.TotalCount,
+      pageNumer: usersFromDB.CurrentPage,
+      pageSize: usersFromDB.PageSize);
 
     return apiResponse;
   }
-  public async Task<ApiResponse<PagedResponse<UserListResponse>>> GetListUsingProjectionAsync(UserFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<PagedList<UserListResponse>>> GetListUsingProjectionAsync(UserFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<User>();
 
@@ -194,17 +192,8 @@ public class UserQueryService : IUserQueryService
 );
 
 
-    var userListResponses = pagedUsers.Select(x => x).ToList();
-
-    var pagedResponse = new PagedResponse<UserListResponse>(
-      userListResponses,
-       pagedUsers.CurrentPage,
-       pagedUsers.TotalPages,
-       pagedUsers.PageSize,
-       pagedUsers.TotalCount);
-
-    ApiResponse<PagedResponse<UserListResponse>> apiResponse = new ApiResponse<PagedResponse<UserListResponse>>((int)HttpStatusCode.OK);
-    apiResponse.Data = pagedResponse;
+    ApiResponse<PagedList<UserListResponse>> apiResponse = new ApiResponse<PagedList<UserListResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = pagedUsers;
 
     return apiResponse;
   }

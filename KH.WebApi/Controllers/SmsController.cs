@@ -22,7 +22,7 @@ public class SmsController : BaseApiController
   }
 
   [HttpPost("list")]
-  public async Task<ActionResult<ApiResponse<PagedResponse<SmsTrackerResponse>>>> GetList(SmsTrackerFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ActionResult<ApiResponse<PagedList<SmsTrackerResponse>>>> GetList(SmsTrackerFilterRequest request, CancellationToken cancellationToken)
   {
     var res = await _service.GetSmsTrackerListAsync(request, cancellationToken);
     return AsActionResult(res);

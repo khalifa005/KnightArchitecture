@@ -3,7 +3,7 @@ using KH.BuildingBlocks.Apis.Constant;
 
 namespace KH.BuildingBlocks.Auth.User;
 
-public static class UserExtensions
+public static class CurrentUserClaimsExtensions
 {
   public static int? GetDepartmentId(this ClaimsPrincipal? identity)
   {

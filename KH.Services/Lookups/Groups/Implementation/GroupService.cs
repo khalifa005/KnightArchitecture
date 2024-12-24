@@ -61,7 +61,7 @@ public class GroupService : IGroupService
 
     return apiResponse;
   }
-  public async Task<ApiResponse<PagedResponse<GroupListResponse>>> GetPagedListAsync(GroupFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<PagedList<GroupListResponse>>> GetPagedListAsync(GroupFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<KH.Domain.Entities.lookups.Group>();
 
@@ -76,17 +76,10 @@ public class GroupService : IGroupService
   );
 
 
-    var entityListResponses = pagedEntities.Select(x => x).ToList();
 
-    var pagedResponse = new PagedResponse<GroupListResponse>(
-      entityListResponses,
-       pagedEntities.CurrentPage,
-       pagedEntities.TotalPages,
-       pagedEntities.PageSize,
-       pagedEntities.TotalCount);
 
-    var apiResponse = new ApiResponse<PagedResponse<GroupListResponse>>((int)HttpStatusCode.OK);
-    apiResponse.Data = pagedResponse;
+    var apiResponse = new ApiResponse<PagedList<GroupListResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = pagedEntities;
 
     return apiResponse;
   }

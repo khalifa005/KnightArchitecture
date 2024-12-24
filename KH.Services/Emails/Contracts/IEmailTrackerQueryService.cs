@@ -6,6 +6,6 @@ namespace KH.Services.Emails.Contracts;
 public interface IEmailTrackerQueryService
 {
   Task<ApiResponse<EmailTrackerResponse>> GetAsync(long id, CancellationToken cancellationToken);
-  Task<ApiResponse<PagedResponse<EmailTrackerResponse>>> GetListAsync(MailRequest request, CancellationToken cancellationToken);
+  Task<ApiResponse<PagedList<EmailTrackerResponse>>> GetListAsync(MailRequest request, CancellationToken cancellationToken);
 
 }

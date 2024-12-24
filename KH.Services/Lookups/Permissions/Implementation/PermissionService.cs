@@ -158,7 +158,7 @@ public class PermissionService : IPermissionService
   }
 
 
-  public async Task<ApiResponse<PagedResponse<PermissionResponse>>> GetPagedListAsync(
+  public async Task<ApiResponse<PagedList<PermissionResponse>>> GetPagedListAsync(
     PermissionFilterRequest filterRequest,
     CancellationToken cancellationToken)
   {
@@ -183,19 +183,11 @@ public class PermissionService : IPermissionService
         tracking: false,
         cancellationToken: cancellationToken);
 
-    var permissionsListResponses = pagedResult.Select(x => x).ToList();
-    var pagedResponse = new PagedResponse<PermissionResponse>(
-     permissionsListResponses,
-      pagedResult.CurrentPage,
-      pagedResult.TotalPages,
-      pagedResult.PageSize,
-      pagedResult.TotalCount);
-
 
     // Prepare the API response
-    var apiResponse = new ApiResponse<PagedResponse<PermissionResponse>>((int)HttpStatusCode.OK)
+    var apiResponse = new ApiResponse<PagedList<PermissionResponse>>((int)HttpStatusCode.OK)
     {
-      Data = pagedResponse
+      Data = pagedResult
     };
 
     return apiResponse;

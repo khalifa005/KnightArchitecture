@@ -1,5 +1,6 @@
 
 using System.Security.Claims;
+using KH.BuildingBlocks.Auth.Contracts;
 using KH.Services.Auth.Contracts;
 
 namespace KH.Services.Auth.Implementation;

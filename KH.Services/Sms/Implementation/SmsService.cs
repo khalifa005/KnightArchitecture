@@ -156,9 +156,9 @@ public class SmsService : ISmsService
     res.Data = new SmsTrackerResponse(entityFromDB);
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<SmsTrackerResponse>>> GetSmsTrackerListAsync(SmsTrackerFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<PagedList<SmsTrackerResponse>>> GetSmsTrackerListAsync(SmsTrackerFilterRequest request, CancellationToken cancellationToken)
   {
-    var apiResponse = new ApiResponse<PagedResponse<SmsTrackerResponse>>((int)HttpStatusCode.OK);
+    var apiResponse = new ApiResponse<PagedList<SmsTrackerResponse>>((int)HttpStatusCode.OK);
 
     var repository = _unitOfWork.Repository<SmsTracker>();
 
@@ -186,16 +186,9 @@ public class SmsService : ISmsService
     tracking: false  // Disable tracking for read-only queries
 );
 
-    var entitiesResponses = pagedEntities.Select(x => x).ToList();
 
-    var pagedResponse = new PagedResponse<SmsTrackerResponse>(
-      entitiesResponses,
-       pagedEntities.CurrentPage,
-       pagedEntities.TotalPages,
-       pagedEntities.PageSize,
-       pagedEntities.TotalCount);
 
-    apiResponse.Data = pagedResponse;
+    apiResponse.Data = pagedEntities;
 
     return apiResponse;
   }

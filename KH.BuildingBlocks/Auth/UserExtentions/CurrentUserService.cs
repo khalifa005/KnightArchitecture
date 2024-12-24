@@ -1,15 +1,4 @@
-
 namespace KH.BuildingBlocks.Auth.User;
-public interface ICurrentUserService
-{
-  string UserId { get; }
-  string FirstName { get; }
-  string LastName { get; }
-  string Email { get; }
-  string MobileNumber { get; }
-  List<string> RolesIds { get; }
-  List<KeyValuePair<string, string>> Claims { get; }
-}
 
 public class CurrentUserService : ICurrentUserService
 {

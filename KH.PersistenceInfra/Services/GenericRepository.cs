@@ -165,7 +165,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
       Func<IQueryable<T>, IIncludableQueryable<T, object?>>? include = null,
       Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
       bool tracking = false,
-      CancellationToken cancellationToken = default)
+      CancellationToken cancellationToken = default) where TProjection : class
   {
     IQueryable<T> query = _dbContext.Set<T>();
 

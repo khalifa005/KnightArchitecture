@@ -35,7 +35,7 @@ public interface IGenericRepository<T> where T : BaseEntity
        Func<IQueryable<T>, IIncludableQueryable<T, object?>>? include = null,
        Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
        bool tracking = false,
-       CancellationToken cancellationToken = default);
+       CancellationToken cancellationToken = default) where TProjection : class;
   Task<int> BatchUpdateAsync(Expression<Func<T, bool>> filterExpression, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> updateExpression, CancellationToken cancellationToken = default);
   Task<int> BatchDeleteAsync(Expression<Func<T, bool>> filterExpression, CancellationToken cancellationToken = default);
   void RemoveCache();

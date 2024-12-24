@@ -22,7 +22,7 @@ public class MediaController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.Media.LIST_MEDIA)]
 
   [HttpPost("list")]
-  public async Task<ActionResult<ApiResponse<PagedResponse<MediaResponse>>>> GetList(MediaRequest request, CancellationToken cancellationToken)
+  public async Task<ActionResult<ApiResponse<PagedList<MediaResponse>>>> GetList(MediaRequest request, CancellationToken cancellationToken)
   {
     var res = await _mediaService.GetListAsync(request, cancellationToken);
     return AsActionResult(res);

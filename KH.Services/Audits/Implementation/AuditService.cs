@@ -46,7 +46,7 @@ public class AuditService : IAuditService
     orderBy: query => query.OrderByDescending(u => u.Id),
     tracking: false
 );
-    var mappedLogs = pagedAuditListResult.Select(x => x).ToList();
+    var mappedLogs = pagedAuditListResult.Items.Select(x => x).ToList();
 
     // Reformat the serialized values in each log
     foreach (var log in mappedLogs)

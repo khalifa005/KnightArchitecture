@@ -32,9 +32,16 @@ public class RolesController : BaseApiController
   }
 
   [HttpPost("PagedList")]
-  public async Task<ActionResult<ApiResponse<PagedResponse<RoleListResponse>>>> GetPagedList(RoleFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ActionResult<ApiResponse<PagedList<RoleListResponse>>>> GetPagedList(RoleFilterRequest request, CancellationToken cancellationToken)
   {
     var res = await _lookupService.GetPagedListAsync(request, cancellationToken);
+    return AsActionResult(res);
+  }
+
+  [HttpPost("PagedListx")]
+  public async Task<ActionResult<ApiResponse<PagedList<RoleListResponse>>>> GetPagedListx(RoleFilterRequest request, CancellationToken cancellationToken)
+  {
+    var res = await _lookupService.GetPagedListAsyncx(request, cancellationToken);
     return AsActionResult(res);
   }
   [PermissionAuthorize(PermissionKeysConstant.Roles.ADD_ROLE)]

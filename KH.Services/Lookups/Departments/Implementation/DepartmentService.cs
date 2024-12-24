@@ -63,7 +63,7 @@ public class DepartmentService : IDepartmentService
 
     return apiResponse;
   }
-  public async Task<ApiResponse<PagedResponse<DepartmentListResponse>>> GetPagedListAsync(DepartmentFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<PagedList<DepartmentListResponse>>> GetPagedListAsync(DepartmentFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<Department>();
 
@@ -77,18 +77,8 @@ public class DepartmentService : IDepartmentService
     tracking: false
 );
 
-
-    var entityListResponses = pagedEntities.Select(x => x).ToList();
-
-    var pagedResponse = new PagedResponse<DepartmentListResponse>(
-      entityListResponses,
-       pagedEntities.CurrentPage,
-       pagedEntities.TotalPages,
-       pagedEntities.PageSize,
-       pagedEntities.TotalCount);
-
-    var apiResponse = new ApiResponse<PagedResponse<DepartmentListResponse>>((int)HttpStatusCode.OK);
-    apiResponse.Data = pagedResponse;
+    var apiResponse = new ApiResponse<PagedList<DepartmentListResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = pagedEntities;
 
     return apiResponse;
   }

@@ -26,7 +26,7 @@ public class GroupsController(IGroupService lookupService) : BaseApiController
   }
 
   [HttpPost("PagedList")]
-  public async Task<ActionResult<ApiResponse<PagedResponse<GroupListResponse>>>> GetPagedList(GroupFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ActionResult<ApiResponse<PagedList<GroupListResponse>>>> GetPagedList(GroupFilterRequest request, CancellationToken cancellationToken)
   {
     var res = await lookupService.GetPagedListAsync(request, cancellationToken);
     return AsActionResult(res);

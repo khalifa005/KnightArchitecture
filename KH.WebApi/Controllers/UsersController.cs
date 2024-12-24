@@ -28,7 +28,7 @@ public class UsersController(
   }
 
   [HttpPost("list")]
-  public async Task<ActionResult<ApiResponse<PagedResponse<UserListResponse>>>> GetList(UserFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ActionResult<ApiResponse<PagedList<UserListResponse>>>> GetList(UserFilterRequest request, CancellationToken cancellationToken)
   {
     var res = await userQueryService.GetListUsingProjectionAsync(request, cancellationToken);
     return AsActionResult(res);

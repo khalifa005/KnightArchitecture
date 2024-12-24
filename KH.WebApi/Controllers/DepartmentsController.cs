@@ -35,7 +35,7 @@ public class DepartmentsController : BaseApiController
   [HttpPost("PagedList")]
   [PermissionAuthorize(PermissionKeysConstant.Departments.LIST_DEPARTMENTS)]
 
-  public async Task<ActionResult<ApiResponse<PagedResponse<DepartmentListResponse>>>> GetPagedList(DepartmentFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ActionResult<ApiResponse<PagedList<DepartmentListResponse>>>> GetPagedList(DepartmentFilterRequest request, CancellationToken cancellationToken)
   {
     var res = await _lookupService.GetPagedListAsync(request, cancellationToken);
     return AsActionResult(res);

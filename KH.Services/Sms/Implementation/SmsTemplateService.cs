@@ -44,9 +44,9 @@ public class SmsTemplateService : ISmsTemplateService
     res.Data = new SmsTemplateResponse(entityFromDB);
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<SmsTemplateResponse>>> GetSmsTemplateListAsync(SmsTrackerFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<PagedList<SmsTemplateResponse>>> GetSmsTemplateListAsync(SmsTrackerFilterRequest request, CancellationToken cancellationToken)
   {
-    var apiResponse = new ApiResponse<PagedResponse<SmsTemplateResponse>>((int)HttpStatusCode.OK);
+    var apiResponse = new ApiResponse<PagedList<SmsTemplateResponse>>((int)HttpStatusCode.OK);
 
     var repository = _unitOfWork.Repository<SmsTemplate>();
 
@@ -61,16 +61,7 @@ public class SmsTemplateService : ISmsTemplateService
     tracking: false  // Disable tracking for read-only queries
 );
 
-    var entitiesResponses = pagedEntities.Select(x => x).ToList();
-
-    var pagedResponse = new PagedResponse<SmsTemplateResponse>(
-      entitiesResponses,
-       pagedEntities.CurrentPage,
-       pagedEntities.TotalPages,
-       pagedEntities.PageSize,
-       pagedEntities.TotalCount);
-
-    apiResponse.Data = pagedResponse;
+    apiResponse.Data = pagedEntities;
 
     return apiResponse;
   }

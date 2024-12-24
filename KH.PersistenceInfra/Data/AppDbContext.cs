@@ -1,6 +1,7 @@
 using KH.BuildingBlocks.Apis.Constant;
 using KH.BuildingBlocks.Apis.Entities;
 using KH.BuildingBlocks.Apis.Enums;
+using KH.BuildingBlocks.Auth.Contracts;
 using KH.BuildingBlocks.Auth.User;
 using KH.BuildingBlocks.Common.Attributes;
 using KH.PersistenceInfra.Data.Seed;

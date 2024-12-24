@@ -1,7 +1,6 @@
+using KH.BuildingBlocks.Apis.Responses;
 using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.RoleDto.Request;
-using KH.Services.Lookups.Roles.Contracts;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 public class RoleService : IRoleService
 {
@@ -68,7 +67,7 @@ public class RoleService : IRoleService
 
     return apiResponse;
   }
-  public async Task<ApiResponse<PagedResponse<RoleListResponse>>> GetPagedListAsync(RoleFilterRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<PagedList<RoleListResponse>>> GetPagedListAsync(RoleFilterRequest request, CancellationToken cancellationToken)
   {
     var repository = _unitOfWork.Repository<Role>();
 
@@ -107,21 +106,50 @@ public class RoleService : IRoleService
     cancellationToken: cancellationToken
 );
 
-
-    var entityListResponses = pagedEntities.Select(x => x).ToList();
-
-    var pagedResponse = new PagedResponse<RoleListResponse>(
-      entityListResponses,
-       pagedEntities.CurrentPage,
-       pagedEntities.TotalPages,
-       pagedEntities.PageSize,
-       pagedEntities.TotalCount);
-
-    var apiResponse = new ApiResponse<PagedResponse<RoleListResponse>>((int)HttpStatusCode.OK);
-    apiResponse.Data = pagedResponse;
+    var apiResponse = new ApiResponse<PagedList<RoleListResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = pagedEntities;
 
     return apiResponse;
   }
+
+
+  public async Task<ApiResponse<PagedList<RoleListResponse>>> GetPagedListAsyncx(RoleFilterRequest request, CancellationToken cancellationToken)
+  {
+    var repository = _unitOfWork.Repository<Role>();
+
+    var pagedEntities = await repository.GetPagedWithProjectionAsync<RoleListResponse>(
+    pageNumber: request.PageIndex,
+    pageSize: request.PageSize,
+    filterExpression: u => (u.IsDeleted == request.IsDeleted)
+    && (string.IsNullOrEmpty(request.Description) || u.NameEn.Contains(request.Description))
+    && (string.IsNullOrEmpty(request.NameEn) || u.NameEn.Contains(request.NameEn))
+    && (string.IsNullOrEmpty(request.NameAr) || u.NameAr.Contains(request.NameAr)),
+    projectionExpression: u => new RoleListResponse(u),
+    include: null,
+    orderBy: query => request.Sort switch
+    {
+      "IdAsc" => query.OrderBy(u => u.Id),
+      "IdDesc" => query.OrderByDescending(u => u.Id),
+
+      "NameArAsc" => query.OrderBy(u => u.NameAr),
+      "NameArDesc" => query.OrderByDescending(u => u.NameAr),
+
+      "NameEnAsc" => query.OrderBy(u => u.NameEn),
+      "NameEnDesc" => query.OrderByDescending(u => u.NameEn),
+      _ => query.OrderByDescending(u => u.Id) // Default sorting
+    },
+    tracking: false,
+    cancellationToken: cancellationToken
+);
+    //PagedList
+
+    
+    var apiResponse = new ApiResponse<PagedList<RoleListResponse>>((int)HttpStatusCode.OK);
+    apiResponse.Data = pagedEntities;
+
+    return apiResponse;
+  }
+
   public async Task<ApiResponse<string>> AddAsync(CreateRoleRequest request, CancellationToken cancellationToken)
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);

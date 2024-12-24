@@ -1,3 +1,4 @@
+using KH.BuildingBlocks.Auth.Contracts;
 using KH.Services.Auth.Contracts;
 
 namespace KH.Services.Users.Implementation;

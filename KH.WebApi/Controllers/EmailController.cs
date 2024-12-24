@@ -24,7 +24,7 @@ public class EmailController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.Emails.LIST_EMAILS)]
 
   [HttpPost("list")]
-  public async Task<ActionResult<ApiResponse<PagedResponse<EmailTrackerResponse>>>> GetList([FromBody] MailRequest request, CancellationToken cancellationToken)
+  public async Task<ActionResult<ApiResponse<PagedList<EmailTrackerResponse>>>> GetList([FromBody] MailRequest request, CancellationToken cancellationToken)
   {
     var res = await _emailTrackerQueryService.GetListAsync(request, cancellationToken);
     return AsActionResult(res);

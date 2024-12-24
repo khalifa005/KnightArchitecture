@@ -43,9 +43,9 @@ public class MediaService : IMediaService
     return res;
   }
 
-  public async Task<ApiResponse<PagedResponse<MediaResponse>>> GetListAsync(MediaRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<PagedList<MediaResponse>>> GetListAsync(MediaRequest request, CancellationToken cancellationToken)
   {
-    ApiResponse<PagedResponse<MediaResponse>> apiResponse = new ApiResponse<PagedResponse<MediaResponse>>((int)HttpStatusCode.OK);
+    ApiResponse<PagedList<MediaResponse>> apiResponse = new ApiResponse<PagedList<MediaResponse>>((int)HttpStatusCode.OK);
 
     var repository = _unitOfWork.Repository<Media>();
 
@@ -63,16 +63,9 @@ public class MediaService : IMediaService
     cancellationToken: cancellationToken
 );
 
-    var entitiesResponses = pagedEntities.Select(x => x).ToList();
 
-    var pagedResponse = new PagedResponse<MediaResponse>(
-      entitiesResponses,
-       pagedEntities.CurrentPage,
-       pagedEntities.TotalPages,
-       pagedEntities.PageSize,
-       pagedEntities.TotalCount);
 
-    apiResponse.Data = pagedResponse;
+    apiResponse.Data = pagedEntities;
 
     return apiResponse;
   }

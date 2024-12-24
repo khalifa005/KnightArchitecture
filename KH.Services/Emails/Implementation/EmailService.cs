@@ -195,14 +195,14 @@ public class EmailService : IEmailService
             cancellationToken: cancellationToken
         );
 
-        if (!missedEmails.Any())
+        if (!missedEmails.Items.Any())
         {
           hasMoreEmails = false;
           break;
         }
 
         // Send emails in parallel (we limit concurrency to avoid overloading the system)
-        var emailTasks = missedEmails.Select(email => Task.Run(async () =>
+        var emailTasks = missedEmails.Items.Select(email => Task.Run(async () =>
         {
           try
           {

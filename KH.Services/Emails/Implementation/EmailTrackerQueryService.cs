@@ -1,4 +1,4 @@
-﻿using FluentEmail.Core;
+using FluentEmail.Core;
 using KH.Dto.Models.EmailDto.Request;
 using KH.Dto.Models.EmailDto.Response;
 using Microsoft.Extensions.Options;
@@ -52,9 +52,9 @@ public class EmailTrackerQueryService : IEmailTrackerQueryService
     res.Data = entityResponse;
     return res;
   }
-  public async Task<ApiResponse<PagedResponse<EmailTrackerResponse>>> GetListAsync(MailRequest request, CancellationToken cancellationToken)
+  public async Task<ApiResponse<PagedList<EmailTrackerResponse>>> GetListAsync(MailRequest request, CancellationToken cancellationToken)
   {
-    ApiResponse<PagedResponse<EmailTrackerResponse>> apiResponse = new ApiResponse<PagedResponse<EmailTrackerResponse>>((int)HttpStatusCode.OK);
+    ApiResponse<PagedList<EmailTrackerResponse>> apiResponse = new ApiResponse<PagedList<EmailTrackerResponse>>((int)HttpStatusCode.OK);
 
     var repository = _unitOfWork.Repository<EmailTracker>();
 
@@ -72,16 +72,7 @@ public class EmailTrackerQueryService : IEmailTrackerQueryService
     cancellationToken: cancellationToken
 );
 
-    var entitiesResponses = pagedEntities.Select(x => x).ToList();
-
-    var pagedResponse = new PagedResponse<EmailTrackerResponse>(
-      entitiesResponses,
-       pagedEntities.CurrentPage,
-       pagedEntities.TotalPages,
-       pagedEntities.PageSize,
-       pagedEntities.TotalCount);
-
-    apiResponse.Data = pagedResponse;
+    apiResponse.Data = pagedEntities;
 
     return apiResponse;
   }
