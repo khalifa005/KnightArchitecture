@@ -1,6 +1,5 @@
 using KH.PersistenceInfra.Data;
 using KH.PersistenceInfra.Middlewares;
-using KH.PersistenceInfra.Repositories;
 using KH.PersistenceInfra.Services;
 
 namespace KH.PersistenceInfra;

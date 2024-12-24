@@ -9,7 +9,6 @@ global using KH.BuildingBlocks.Auth.User;
 global using KH.BuildingBlocks.Excel.Contracts;
 global using KH.BuildingBlocks.Excel.Services;
 global using KH.BuildingBlocks.Infrastructure.Contracts;
-global using KH.BuildingBlocks.Localizatoin.Enum;
 global using KH.BuildingBlocks.Settings;
 global using KH.Domain.Entities;
 global using KH.Dto.Models.AuthenticationDto.Request;

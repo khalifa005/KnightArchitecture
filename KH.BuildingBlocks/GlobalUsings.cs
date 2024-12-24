@@ -29,8 +29,6 @@ global using KH.BuildingBlocks.Auth.Attributes;
 global using Microsoft.Extensions.Options;
 global using KH.BuildingBlocks.Apis.Extentions;
 global using KH.BuildingBlocks.Files.Services;
-global using KH.BuildingBlocks.Localizatoin.Constants;
-global using KH.BuildingBlocks.Localizatoin.Services;
 global using KH.BuildingBlocks.Settings;
 global using Microsoft.AspNetCore.Mvc.Infrastructure;
 global using Microsoft.Extensions.DependencyInjection.Extensions;

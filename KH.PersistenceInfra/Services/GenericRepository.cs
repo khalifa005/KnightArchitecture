@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using KH.BuildingBlocks.Infrastructure;
 using System.Collections;
 
-namespace KH.PersistenceInfra.Repositories;
+namespace KH.PersistenceInfra.Services;
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
   private readonly AppDbContext _dbContext;
@@ -237,12 +237,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 
     await using var command = connection.CreateCommand();
     command.CommandText = sql;
-    command.CommandType = System.Data.CommandType.Text;
+    command.CommandType = CommandType.Text;
 
     // Use the current active transaction
     command.Transaction = _dbContext.Database.CurrentTransaction.GetDbTransaction();
 
-    if (connection.State != System.Data.ConnectionState.Open)
+    if (connection.State != ConnectionState.Open)
     {
       await connection.OpenAsync(cancellationToken);
     }
@@ -272,14 +272,14 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 
     var connection = _dbContext.Database.GetDbConnection();
 
-    if (connection.State != System.Data.ConnectionState.Open)
+    if (connection.State != ConnectionState.Open)
     {
       await connection.OpenAsync(cancellationToken);
     }
 
     var command = connection.CreateCommand();
     command.CommandText = sql;
-    command.CommandType = System.Data.CommandType.Text;
+    command.CommandType = CommandType.Text;
     command.Transaction = _dbContext.Database.CurrentTransaction.GetDbTransaction();
 
     // Add parameters dynamically if provided

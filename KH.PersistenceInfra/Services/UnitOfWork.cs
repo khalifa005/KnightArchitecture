@@ -2,7 +2,6 @@ using KH.BuildingBlocks.Apis.Entities;
 using KH.BuildingBlocks.Cache.Enums;
 using KH.BuildingBlocks.Cache.Interfaces;
 using KH.PersistenceInfra.Data;
-using KH.PersistenceInfra.Repositories;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Concurrent;
 

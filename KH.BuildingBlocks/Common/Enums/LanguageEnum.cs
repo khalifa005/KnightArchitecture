@@ -1,4 +1,4 @@
-namespace KH.BuildingBlocks.Localizatoin.Enum;
+namespace KH.BuildingBlocks.Common.Enums;
 
 public enum LanguageEnum
 {

@@ -1,7 +1,7 @@
 using KH.BuildingBlocks.Apis.Services;
+using KH.BuildingBlocks.Common.Enums;
 using KH.Dto.Models.SMSDto.Request;
 using KH.Dto.Models.SMSDto.Response;
-using KH.Services.Sms.Contracts;
 using Microsoft.Extensions.Options;
 
 public class SmsTemplateService : ISmsTemplateService

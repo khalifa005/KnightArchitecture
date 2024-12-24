@@ -1,4 +1,3 @@
-using KH.BuildingBlocks.Apis.Extentions;
 using KH.BuildingBlocks.Auth.Constant;
 using KH.BuildingBlocks.Auth.Enum;
 using KH.Services.Audits.Contracts;

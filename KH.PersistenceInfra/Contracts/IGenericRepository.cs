@@ -1,9 +1,6 @@
 using KH.BuildingBlocks.Apis.Entities;
-using Microsoft.EntityFrameworkCore;
+using KH.BuildingBlocks.Apis.Responses;
 using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.EntityFrameworkCore.Storage;
-using StackExchange.Redis;
-using System.Linq.Expressions;
 
 namespace KH.BuildingBlocks.Infrastructure.Contracts;
 public interface IGenericRepository<T> where T : BaseEntity

@@ -49,7 +49,8 @@ public class AppDbContext : DbContext
   public DbSet<RolePermissions> RolePermissions { get; set; }
   public DbSet<Calendar> Calendar { get; set; }
   public DbSet<EmailTracker> EmailTracker { get; set; }
-
+  public DbSet<Event> Events { get; set; }
+  public DbSet<Subscription> Subscriptions { get; set; }
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
