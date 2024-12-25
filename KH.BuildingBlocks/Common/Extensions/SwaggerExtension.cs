@@ -98,17 +98,30 @@ public static class SwaggerExtension
 
     app.UseSwaggerUI(options =>
     {
-      var isLocal = bool.TryParse(configuration["GlobalSettings:IsLocal"], out bool local) && local;
+      // Get the hosting environment
+      // Get the hosting environment
+      var isDevelopment = app.ApplicationServices
+          .GetRequiredService<IHostEnvironment>()
+          .IsDevelopment(); // Check if the app is running in the Development environment
+
+
+      // Get IIS API name from configuration
       var iisApiName = configuration["GlobalSettings:IISApiName"];
-      var swagV1 = isLocal ? "/swagger/v1/swagger.json" : $"/{iisApiName}/swagger/v1/swagger.json";
 
-      // Set Swagger endpoint based on environment
-      options.SwaggerEndpoint(swagV1, isLocal ? "My API" : "Clean Architecture Web API V1");
+      // Construct the Swagger endpoint based on the environment
+      var swaggerEndpoint = isDevelopment
+          ? "/swagger/v1/swagger.json"
+          : $"/{iisApiName}/swagger/v1/swagger.json";
 
-      // Set route and additional UI options
-      options.RoutePrefix = "swagger";
-      options.DisplayRequestDuration();
-      options.DefaultModelsExpandDepth(-1);  // Collapse models by default
+      // Set the Swagger UI endpoint and title
+      options.SwaggerEndpoint(swaggerEndpoint, isDevelopment
+          ? "My API"
+          : "Clean Architecture Web API V1");
+
+      // Configure Swagger UI options
+      options.RoutePrefix = "swagger";         // Set the route prefix for the Swagger UI
+      options.DisplayRequestDuration();        // Display request duration in the UI
+      options.DefaultModelsExpandDepth(-1);    // Collapse models by default
     });
 
     return app;

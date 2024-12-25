@@ -19,6 +19,9 @@ public class RolesController : BaseApiController
   [HttpGet("{id}")]
   public async Task<ActionResult<ApiResponse<RoleResponse>>> Get(int id, CancellationToken cancellationToken)
   {
+    // Use the GetCurrentVersion method to retrieve the version
+    var version = AssemblyExtensions.GetCurrentVersion();
+
     var res = await _lookupService.GetAsync(id, cancellationToken);
     return AsActionResult(res);
   }

@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KH.BuildingBlocks.Infrastructure;
-public static class SQLQueryHelper
+public static class SQLQueryExtentions
 {
   // Helper extension to check if the reader has a specific column
   public static bool HasColumn(this System.Data.IDataRecord reader, string columnName)

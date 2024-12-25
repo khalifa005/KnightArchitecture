@@ -1,3 +1,5 @@
+using Asp.Versioning;
+
 namespace KH.Services;
 
 public static class ServiceExtensions
@@ -74,7 +76,16 @@ public static class ServiceExtensions
       options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
     });
 
-   
+
+    // Add API Versioning
+    services.AddApiVersioning(options =>
+    {
+      options.AssumeDefaultVersionWhenUnspecified = true;
+      options.DefaultApiVersion = new ApiVersion(1, 0); // Default version is 1.0
+      options.ReportApiVersions = true; // Include version information in responses
+    });
+
+
     return services;
   }
 
