@@ -1,3 +1,4 @@
+using Asp.Versioning.ApiExplorer;
 using Microsoft.OpenApi.Models;
 
 namespace KH.BuildingBlocks.Apis.Extentions;
@@ -23,17 +24,23 @@ public static class SwaggerExtension
         }
       }
 
-      c.SwaggerDoc("v1", new OpenApiInfo
+      // Retrieve supported API versions dynamically from ApiExplorer
+      var apiVersionDescriptions = services.BuildServiceProvider()
+          .GetRequiredService<IApiVersionDescriptionProvider>()
+          .ApiVersionDescriptions;
+
+      // Register Swagger documentation for each version
+      foreach (var description in apiVersionDescriptions)
       {
-        Version = "v1",
-        Title = "CleanArchitecture",
-        License = new OpenApiLicense
+        c.SwaggerDoc(description.GroupName, new OpenApiInfo
         {
-          Name = "MIT License",
-          Url = new Uri("https://opensource.org/licenses/MIT")
-        }
-      });
-      c.SwaggerDoc("v2", new OpenApiInfo { Title = "My API - V2", Version = "v2.0" });
+          Title = $"CleanArchitecture API {description.ApiVersion}",
+          Version = description.ApiVersion.ToString(),
+          Description = description.IsDeprecated
+                ? "This API version has been deprecated."
+                : "Current API version."
+        });
+      }
 
 
       // JWT Bearer Authentication
@@ -111,15 +118,19 @@ public static class SwaggerExtension
       // Get IIS API name from configuration
       var iisApiName = configuration["GlobalSettings:IISApiName"];
 
-      // Construct the Swagger endpoint based on the environment
-      var swaggerEndpoint = isDevelopment
-          ? "/swagger/v1/swagger.json"
-          : $"/{iisApiName}/swagger/v1/swagger.json";
+      // Dynamically add Swagger endpoints for all API versions
+      var provider = app.ApplicationServices
+          .GetRequiredService<IApiVersionDescriptionProvider>();
 
-      // Set the Swagger UI endpoint and title
-      options.SwaggerEndpoint(swaggerEndpoint, isDevelopment
-          ? "My API"
-          : "Clean Architecture Web API V1");
+      foreach (var description in provider.ApiVersionDescriptions)
+      {
+        var swaggerEndpoint = isDevelopment
+            ? $"/swagger/{description.GroupName}/swagger.json"
+            : $"/{iisApiName}/swagger/{description.GroupName}/swagger.json";
+
+        options.SwaggerEndpoint(swaggerEndpoint, $"Clean Architecture API {description.ApiVersion}");
+      }
+
 
       // Configure Swagger UI options
       options.RoutePrefix = "swagger";         // Set the route prefix for the Swagger UI
