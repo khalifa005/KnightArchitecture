@@ -33,6 +33,8 @@ public static class SwaggerExtension
           Url = new Uri("https://opensource.org/licenses/MIT")
         }
       });
+      c.SwaggerDoc("v2", new OpenApiInfo { Title = "My API - V2", Version = "v2.0" });
+
 
       // JWT Bearer Authentication
       c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -98,6 +100,7 @@ public static class SwaggerExtension
 
     app.UseSwaggerUI(options =>
     {
+
       // Get the hosting environment
       // Get the hosting environment
       var isDevelopment = app.ApplicationServices

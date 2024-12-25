@@ -80,9 +80,17 @@ public static class ServiceExtensions
     // Add API Versioning
     services.AddApiVersioning(options =>
     {
+      options.DefaultApiVersion = new ApiVersion(1, 0);
       options.AssumeDefaultVersionWhenUnspecified = true;
-      options.DefaultApiVersion = new ApiVersion(1, 0); // Default version is 1.0
-      options.ReportApiVersions = true; // Include version information in responses
+      options.ReportApiVersions = true;
+      options.ApiVersionReader = ApiVersionReader.Combine(
+          new UrlSegmentApiVersionReader(),
+          new HeaderApiVersionReader("X-Api-Version")
+      );
+    }).AddApiExplorer(options =>
+    {
+      options.GroupNameFormat = "'v'VVV";
+      options.SubstituteApiVersionInUrl = true;
     });
 
 
