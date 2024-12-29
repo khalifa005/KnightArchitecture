@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace KH.Services;
 
@@ -77,22 +78,24 @@ public static class ServiceExtensions
     });
 
 
-    // Add API Versioning
-    services.AddApiVersioning(options =>
+    // Add API Version
+    var apiVersioningBuilder = services.AddApiVersioning(o =>
     {
-      options.DefaultApiVersion = new ApiVersion(1, 0);
-      options.AssumeDefaultVersionWhenUnspecified = true;
-      options.ReportApiVersions = true;
-      options.ApiVersionReader = ApiVersionReader.Combine(
-          new UrlSegmentApiVersionReader(),
-          new HeaderApiVersionReader("X-Api-Version")
-      );
-    }).AddApiExplorer(options =>
+      o.AssumeDefaultVersionWhenUnspecified = true;
+      o.DefaultApiVersion = new ApiVersion(1, 0);
+      o.ReportApiVersions = true;
+      o.ApiVersionReader = ApiVersionReader.Combine(
+          new QueryStringApiVersionReader("api-version"),
+          new HeaderApiVersionReader("X-Version"),
+          new MediaTypeApiVersionReader("ver"));
+    });
+
+    apiVersioningBuilder.AddApiExplorer(
+    options =>
     {
       options.GroupNameFormat = "'v'VVV";
       options.SubstituteApiVersionInUrl = true;
     });
-
 
     return services;
   }

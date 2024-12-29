@@ -3,12 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KH.BuildingBlocks.Apis.Extentions;
 
-//[ApiVersion("1.0")]
-[ApiVersion("2.0")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiversion}/[controller]")]
 //[ApiVersion("1.0", Deprecated = true)]
-
-//[Route("api/v{v:apiversion}/[controller]")]
-[Route("api/v{version:apiVersion}/[controller]")]
 //[Route("api/[controller]")]
 [ApiController]
 [Authorize]
