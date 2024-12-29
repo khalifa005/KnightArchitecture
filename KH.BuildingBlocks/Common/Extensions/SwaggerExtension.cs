@@ -9,38 +9,23 @@ public static class SwaggerExtension
   {
     services.AddSwaggerGen(c =>
     {
-      // Include all project's XML comments
-      var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-      foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-      {
-        if (!assembly.IsDynamic)
-        {
-          var xmlFile = $"{assembly.GetName().Name}.xml";
-          var xmlPath = Path.Combine(baseDirectory, xmlFile);
-          if (File.Exists(xmlPath))
-          {
-            c.IncludeXmlComments(xmlPath);
-          }
-        }
-      }
+      c.SwaggerDoc("v1", new OpenApiInfo { Title = "Clean Architecture Web API V1", Version = "version 1" });
+      c.SwaggerDoc("v2", new OpenApiInfo { Title = "Clean Architecture Web API V2", Version = "version 2" });
 
-      // Retrieve supported API versions dynamically from ApiExplorer
-      var apiVersionDescriptions = services.BuildServiceProvider()
-          .GetRequiredService<IApiVersionDescriptionProvider>()
-          .ApiVersionDescriptions;
-
-      // Register Swagger documentation for each version
-      foreach (var description in apiVersionDescriptions)
-      {
-        c.SwaggerDoc(description.GroupName, new OpenApiInfo
-        {
-          Title = $"CleanArchitecture API {description.ApiVersion}",
-          Version = description.ApiVersion.ToString(),
-          Description = description.IsDeprecated
-                ? "This API version has been deprecated."
-                : "Current API version."
-        });
-      }
+      //// Include all project's XML comments
+      //var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+      //foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+      //{
+      //  if (!assembly.IsDynamic)
+      //  {
+      //    var xmlFile = $"{assembly.GetName().Name}.xml";
+      //    var xmlPath = Path.Combine(baseDirectory, xmlFile);
+      //    if (File.Exists(xmlPath))
+      //    {
+      //      c.IncludeXmlComments(xmlPath);
+      //    }
+      //  }
+      //}
 
 
       // JWT Bearer Authentication
@@ -109,28 +94,23 @@ public static class SwaggerExtension
     {
 
       // Get the hosting environment
-      // Get the hosting environment
       var isDevelopment = app.ApplicationServices
           .GetRequiredService<IHostEnvironment>()
           .IsDevelopment(); // Check if the app is running in the Development environment
+      //var isLocal = Convert.ToBoolean(configuration["GlobalSettings:IsLocal"]);
 
 
       // Get IIS API name from configuration
       var iisApiName = configuration["GlobalSettings:IISApiName"];
 
-      // Dynamically add Swagger endpoints for all API versions
-      var provider = app.ApplicationServices
-          .GetRequiredService<IApiVersionDescriptionProvider>();
+      string swagV1 = "/swagger/v1/swagger.json";
+      string swagV2 = "/swagger/v2/swagger.json";
 
-      foreach (var description in provider.ApiVersionDescriptions)
+      if (isDevelopment == false && !string.IsNullOrEmpty(iisApiName))
       {
-        var swaggerEndpoint = isDevelopment
-            ? $"/swagger/{description.GroupName}/swagger.json"
-            : $"/{iisApiName}/swagger/{description.GroupName}/swagger.json";
-
-        options.SwaggerEndpoint(swaggerEndpoint, $"Clean Architecture API {description.ApiVersion}");
+        swagV1 = "/" + iisApiName + swagV1;
+        swagV2 = "/" + iisApiName + swagV2;
       }
-
 
       // Configure Swagger UI options
       options.RoutePrefix = "swagger";         // Set the route prefix for the Swagger UI
