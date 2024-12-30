@@ -31,180 +31,102 @@ The main goal of this project is to:
 The `LockingService` class demonstrates the use of different isolation levels and locking mechanisms in database operations.
 
 #### Methods and Expected Behaviors
+//////////////////////////////////////////
 
-##### 1. `TestSerializableIsolationLevelAsync`
-- **Behavior**: Ensures no other transaction can modify or insert conflicting data until the transaction is committed.
-- **Expected Behavior**:
-  - Prevents dirty reads, non-repeatable reads, and phantom reads.
-  - `SELECT` queries without explicit locks are allowed.
-- **Unexpected Behavior**:
-  - If no `UPDLOCK` is applied, other transactions can read the same row.
 
-##### 2. `TestRowLockAsync`
-- **Behavior**: Locks the row with the highest ID for updates and prevents other transactions from reading or modifying it.
-- **Expected Behavior**:
-  - Other transactions attempting to read or update the row will wait until the transaction is committed.
-  - Prevents inserting new rows into the same locked range.
 
-##### 3. `TestReadCommittedIsolationLevelAsync`
-- **Behavior**: Prevents dirty reads but allows non-repeatable reads and phantom reads.
-- **Expected Behavior**:
-  - Transactions cannot read uncommitted changes from other transactions.
-  - Repeated reads may return different data.
+# Optimistic Concurrency Control Example
 
-##### 4. `TestRepeatableReadIsolationLevelAsync`
-- **Behavior**: Prevents dirty and non-repeatable reads but allows phantom reads.
-- **Expected Behavior**:
-  - Repeated reads of the same data return consistent results within the transaction.
-  - New rows matching the query can still be inserted by other transactions.
+This section demonstrates optimistic concurrency control using version or timestamp fields. This approach ensures that multiple users can update the same data independently, and any conflicts are checked at the time of saving the data.
 
-##### 5. `TestReadUncommittedIsolationLevelAsync`
-- **Behavior**: Allows dirty reads, non-repeatable reads, and phantom reads.
-- **Expected Behavior**:
-  - Reads uncommitted changes made by other transactions.
-  - May read incomplete or invalid data.
+## Description
 
-##### 6. `TestPhantomReadPreventionAsync`
-- **Behavior**: Prevents phantom reads by locking the range of rows that match the query.
-- **Expected Behavior**:
-  - No new rows matching the query condition can be inserted or updated by other transactions.
+The following example illustrates how to handle concurrency conflicts in EF Core. The method `OptimisticConcurrencyAsync` demonstrates how changes to the same record are handled when another process modifies the record during an active transaction.
 
-##### 7. `TestRangeLockingAsync`
-- **Behavior**: Demonstrates range locking to prevent inserts or modifications within a specific range.
-- **Expected Behavior**:
-  - Other transactions attempting to modify or insert rows within the locked range will be blocked.
+#### Current Record:
 
-##### 8. `TestPessimisticLockAsync`
-- **Behavior**: Applies pessimistic locking using `UPDLOCK` to prevent other transactions from modifying the same row.
-- **Expected Behavior**:
-  - Other transactions attempting to modify the row will wait until the lock is released.
+| Id  | NameAr       | NameEn       | Description               | RowVersion           |
+|-----|--------------|--------------|---------------------------|----------------------|
+| 10  | وكيل عمل     | Agent user   | empty   | 0x00000000000167EE   |
 
-##### 9. `TestOptimisticConcurrencyAsync`
-- **Behavior**: Demonstrates optimistic concurrency control using version or timestamp fields.
-- **Expected Behavior**:
-  - Updates succeed only if the row has not been modified by another transaction.
-- **Unexpected Behavior**:
-  - If another transaction modifies the row before committing, a concurrency exception is thrown.
 
----
+### How to Test
 
-## Testing
+1. Execute the `OptimisticConcurrencyAsync` method in your application and set break point after the role selection.
 
-### Prerequisites
-1. **Database Setup**:
-   - Create a `Roles` table:
-     ```sql
-     CREATE TABLE Roles (
-         Id BIGINT PRIMARY KEY,
-         Description NVARCHAR(255),
-         Version INT
-     );
-     ```
-   - Populate with sample data:
-     ```sql
-     INSERT INTO Roles (Id, Description, Version)
-     VALUES (1, 'Role 1', 1), (2, 'Role 2', 1), (3, 'Role 3', 1);
-     ```
+### Code Implementation
 
-2. **Tooling**:
-   - Use Visual Studio to debug the code.
-   - Use SQL Server Management Studio (SSMS) to monitor transactions and locks.
+```csharp
+/// <summary>
+/// Multiple users can update the same data independently, and conflicts are checked at the time of saving the data.
+/// Demonstrates optimistic concurrency control using version or timestamp fields.
+/// </summary>
+public async Task<string> OptimisticConcurrencyAsync(long roleId, CancellationToken cancellationToken)
+{
+    // Begin a transaction
+    await using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
 
-3. **Monitoring Tools**:
-   - Use `sys.dm_tran_locks` to view active locks:
-     ```sql
-     SELECT * FROM sys.dm_tran_locks;
-     ```
-   - Use Activity Monitor in SSMS to observe session activity.
+    var existingEntity = await _dbContext.Roles.FirstOrDefaultAsync(r => r.Id == 10, cancellationToken: cancellationToken);
+    if (existingEntity == null)
+    {
+        return $"Role with id:{roleId} does not exist.";
+    }
 
-### Testing Scenarios
+    try
+    {
+        existingEntity.Description = "Test Optimistic Concurrency from code";
+        // EF Core automatically checks for concurrency conflicts and updates the RowVersion.
+        // By comparing the RowVersion or Timestamp field in the database with the one initially read.
 
-#### 1. **Serializable Isolation Level**
-- **Steps**:
-  1. Run `TestSerializableIsolationLevelAsync` in your code.
-  2. Pause the debugger before committing the transaction.
-  3. In SSMS, attempt to:
-     - Read the same row:
-       ```sql
-       SELECT * FROM Roles WHERE Id = 1;
-       ```
-       _Expected_: Query succeeds (Serializable does not block reads).
-     - Update the same row:
-       ```sql
-       UPDATE Roles SET Description = 'Conflict Test' WHERE Id = 1;
-       ```
-       _Expected_: Query hangs until the transaction commits or rolls back.
+        await _dbContext.SaveChangesAsync();
 
-#### 2. **Row Locking with UPDLOCK**
-- **Steps**:
-  1. Run `TestRowLockAsync` in your code.
-  2. Pause the debugger before committing the transaction.
-  3. In SSMS, attempt to:
-     - Read the locked row:
-       ```sql
-       SELECT * FROM Roles WHERE Id = 1;
-       ```
-       _Expected_: Query hangs.
+        // Commit the transaction
+        await transaction.CommitAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        // If a concurrency conflict is detected, the transaction is rolled back and an exception is thrown.
+        await transaction.RollbackAsync();
+        throw new InvalidOperationException("Concurrency conflict detected. Another user may have updated this record.");
+    }
+    catch (Exception ex)
+    {
+        await transaction.RollbackAsync();
+        throw new Exception("An error occurred during the transaction.", ex);
+    }
 
-#### 3. **Read Committed Isolation Level**
-- **Steps**:
-  1. Run `TestReadCommittedIsolationLevelAsync` in your code.
-  2. Pause the debugger before committing the transaction.
-  3. In SSMS, attempt to:
-     - Read the same row:
-       ```sql
-       SELECT * FROM Roles WHERE Id = 1;
-       ```
-       _Expected_: Query succeeds.
-     - Update the same row:
-       ```sql
-       UPDATE Roles SET Description = 'Conflict Test' WHERE Id = 1;
-       ```
-       _Expected_: Query hangs until the transaction commits or rolls back.
+    return $"Role with id:{existingEntity.Id} has been updated inside transaction with Optimistic Concurrency";
+}
+```
 
-#### 4. **Repeatable Read Isolation Level**
-- **Steps**:
-  1. Run `TestRepeatableReadIsolationLevelAsync` in your code.
-  2. Pause the debugger after the first read.
-  3. In SSMS, attempt to:
-     - Insert a new row matching the query condition:
-       ```sql
-       INSERT INTO Roles (Id, Description, Version) VALUES (4, 'New Role', 1);
-       ```
-       _Expected_: Query succeeds.
+2. Open SQL Server Management Studio (SSMS).
+3. Execute the following query to simulate another process modifying the record but after :
 
-#### 5. **Phantom Reads Prevention**
-- **Steps**:
-  1. Run `TestPhantomReadPreventionAsync` in your code.
-  2. Pause the debugger before committing the transaction.
-  3. In SSMS, attempt to:
-     - Insert a row matching the query condition:
-       ```sql
-       INSERT INTO Roles (Id, Description, Version) VALUES (5, 'Phantom Role', 1);
-       ```
-       _Expected_: Query hangs until the transaction commits or rolls back.
+```sql
+USE [KnightTemplateDb]
+GO
 
----
+UPDATE Roles
+SET Description = 'Updated from SQL Server'
+WHERE Id = 10;
+GO
+```
 
-## Observing Locks
-To monitor locks in real-time:
+#### Current Record after db modification will be:
 
-1. **View Active Transactions**:
-   ```sql
-   DBCC OPENTRAN;
-   ```
+### Generated SQL Query once we continue to reach (on SaveChangesAsync)
+- **Simulated Conflict:** If another process updates the record during the transaction, a `DbUpdateConcurrencyException` will be thrown.
+- **After Update:** The `Description` field will be updated, and the `RowVersion` field will be incremented.
 
-2. **View Locks for a Specific Session**:
-   ```sql
-   SELECT * FROM sys.dm_tran_locks WHERE request_session_id = <SessionID>;
-   ```
+```sql
+UPDATE Roles
+SET
+    Description = 'Test Optimistic Concurrency from code',
+    RowVersion = @newRowVersion
+WHERE
+    Id = 10 AND RowVersion = @currentRowVersion;
 
-3. **Activity Monitor**:
-   - Open Activity Monitor in SSMS to view blocking sessions and lock details.
+```
 
----
 
-## Conclusion
-This repository demonstrates how to handle locking and isolation levels in a transactional context effectively. By leveraging the provided examples and testing scenarios, you can ensure data consistency and integrity in your application.
 
-Feel free to contribute or raise issues for enhancements!
