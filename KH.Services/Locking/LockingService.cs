@@ -17,13 +17,12 @@ public class LockingService
   //Copy code
 
   //SELECT* FROM sys.dm_tran_locks;
-  private readonly AppDbContext _dbContext;
   private readonly IUnitOfWork _unitOfWork;
   public LockingService(
-    AppDbContext dbContext,
+    
       IUnitOfWork unitOfWork)
   {
-    _dbContext = dbContext;
+
     _unitOfWork = unitOfWork;
   }
 
@@ -37,14 +36,20 @@ public class LockingService
     await _unitOfWork.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken: cancellationToken);
 
     var repository = _unitOfWork.Repository<Domain.Entities.Role>();
-    var query = repository.GetQueryable();
+    //var query = repository.GetQueryable();
     //Serializable isolation level enforces that no other transaction can read or modify the same data until the transaction completes
 
     // Retrieve the entity to be updated (tracked by default).
-    var roleEntity = await query.FirstOrDefaultAsync(x => x.Id == role);
+    //var roleEntity = await repository.GetQueryable().FirstOrDefaultAsync(x => x.Id == role);
+
+
+    var roler = await repository.ExecuteSqlSingleAsync<int>(
+    "UPDATE Roles SET Description = 'jox2' WHERE Id = 5007",
+    cancellationToken: cancellationToken
+);
 
     // Update the entity description.
-    roleEntity.Description = "internal test";
+    //roleEntity.Description = "ddddd";
     await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
     // Behavior Notes:
@@ -63,18 +68,38 @@ public class LockingService
   /// </summary>
   public async Task<string> TestRowLockAsync(long role, CancellationToken cancellationToken)
   {
-    await _unitOfWork.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken: cancellationToken);
+    //await _unitOfWork.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken: cancellationToken);
+    await _unitOfWork.BeginTransactionAsync(IsolationLevel.ReadUncommitted, cancellationToken: cancellationToken);
 
     var repository = _unitOfWork.Repository<Domain.Entities.Role>();
 
     // Locks the row with the highest ID for updates.
     // Other transactions must wait if they try to lock the same row.
     //prevent reading the same row data 
-    //prevent adding a new row data 
+    //prevent adding a new row data
+
     var lastRoleId = await repository.ExecuteSqlSingleAsync<long>(
         "SELECT TOP 1 Id FROM Roles WITH (UPDLOCK, ROWLOCK) ORDER BY Id DESC",
         cancellationToken: cancellationToken
     );
+
+
+
+    //    var roler = await repository.ExecuteSqlSingleAsync<int>(
+    //    "UPDATE Roles SET Description = 'jo' WHERE Id = 5007",
+    //    cancellationToken: cancellationToken
+    //);
+
+
+    //// First read
+    var roleEntity = await repository.GetQueryable().FirstOrDefaultAsync(x => x.Id == lastRoleId);
+    if (roleEntity != null)
+    {
+
+      roleEntity.Description = "yousef";
+      await _unitOfWork.CommitAsync(cancellationToken);
+    }
+
 
     await _unitOfWork.CommitTransactionAsync(cancellationToken);
 
@@ -179,17 +204,6 @@ public class LockingService
     );
 
 
-    // Access DbSet directly for FromSqlRaw
-     var trackedRoles = await _dbContext.Roles
-                               .FromSqlRaw("SELECT * FROM Roles WITH (HOLDLOCK, UPDLOCK)")
-                               .ToListAsync(cancellationToken);
-
-    // Process roles (e.g., update descriptions)
-    foreach (var role in trackedRoles)
-    {
-      role.Description = "Phantom Prevention Test";
-    }
-
     //repository.UpdateRange(roles);
     await _unitOfWork.CommitAsync(cancellationToken);
 
@@ -290,4 +304,3 @@ public class LockingService
 
 
 }
-

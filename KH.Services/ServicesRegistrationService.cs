@@ -14,6 +14,7 @@ public static class ServicesRegistrationService
     services.AddIdentityService(configuration);
 
     services.AddScoped<LockingService>();
+    services.AddScoped<IsolationLevelsService>();
     services.AddScoped<IMediaService, MediaService>();
     services.AddScoped<IPdfService, PdfService>();
     services.AddScoped<IEmailService, EmailService>();
