@@ -118,4 +118,115 @@ WHERE
 ``` 
 
 
+# Read Uncommitted Isolation Level Example
+
+This section demonstrates how to use the `ReadUncommitted` isolation level to allow dirty reads, non-repeatable reads, and phantom reads. This approach ensures that data can be read and updated without requiring a commit, enabling maximum concurrency at the expense of potential inconsistencies.
+
+## Description
+
+The following example illustrates how the `ReadUncommitted` isolation level works in EF Core. The method `ReadUncommittedIsolationLevelAsync` demonstrates how one transaction can read uncommitted changes made by another transaction, which can lead to dirty reads.
+
+#### Current Record:
+
+| Id  | NameAr       | NameEn       | Description               | RowVersion           |
+|-----|--------------|--------------|---------------------------|----------------------|
+| 10  | وكيل عمل     | Agent user   | empty                    | 0x00000000000167EE   |
+
+### How to Test
+
+1. Execute the `ReadUncommittedIsolationLevelAsync` method in your application and set a breakpoint before the `SaveChangesAsync` call.
+
+### Code Implementation
+
+```csharp
+/// <summary>
+/// Allows dirty reads, non-repeatable reads, and phantom reads.
+/// Demonstrates the Read Uncommitted isolation level in EF Core.
+/// </summary>
+public async Task<string> ReadUncommittedIsolationLevelAsync(CancellationToken cancellationToken)
+{
+    // Begin a transaction
+    await using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
+
+    var existingEntity = await _dbContext.Roles.FirstOrDefaultAsync(r => r.Id == 10, cancellationToken: cancellationToken);
+
+    try
+    {
+        if (existingEntity != null)
+        {
+            existingEntity.Description = "Dirty Read - Read Uncommitted level from code";
+            await _dbContext.SaveChangesAsync();
+            // Another transaction with ReadUncommitted isolation level can read this entity with the updated value
+            // even if the current transaction is not yet committed.
+        }
+
+        // Commit the transaction
+        await transaction.CommitAsync();
+    }
+    catch (Exception ex)
+    {
+        // Rollback the transaction in case of an exception
+        await transaction.RollbackAsync();
+
+        // Handle the exception (log, rethrow, etc.)
+        throw new Exception("An error occurred during the transaction.", ex);
+    }
+
+    return $"Role with id:{existingEntity.Id} has been updated inside transaction with Read Uncommitted Isolation Level";
+}
+```
+
+2. Open SQL Server Management Studio (SSMS).
+3. Before the current transaction commits, execute the following query in a new transaction to simulate a dirty read:
+
+```sql
+USE [KnightTemplateDb]
+GO
+
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+GO
+
+SELECT * FROM Roles WHERE Id = 10;
+GO
+```
+
+#### Current Record after executing the `SaveChangesAsync` but before committing the transaction:
+
+| Id  | NameAr       | NameEn       | Description                                   | RowVersion           |
+|-----|--------------|--------------|-----------------------------------------------|----------------------|
+| 10  | وكيل عمل     | Agent user   | Dirty Read - Read Uncommitted level from code | 0x00000000000167EE   |
+
+- **Dirty Read Observation:** The updated value for `Description` will be visible to other transactions with the `ReadUncommitted` isolation level, even though the current transaction hasn't been committed yet.
+
+#### SQL Output After Committing
+
+4. Commit the transaction by allowing the `transaction.CommitAsync` to execute in the code. Run the following query to verify the changes:
+
+```sql
+USE [KnightTemplateDb]
+GO
+
+SELECT * FROM Roles WHERE Id = 10;
+GO
+```
+
+- **Result:** The updated value for `Description` is now visible to all isolation levels.
+
+#### Generated SQL Query:
+
+```sql
+UPDATE Roles
+SET
+    Description = 'Dirty Read - Read Uncommitted level from code'
+WHERE
+    Id = 10;
+```
+
+### Notes
+
+- If another process or transaction with a higher isolation level (e.g., `ReadCommitted`) tries to access the record before the commit, it won't see the uncommitted changes.
+- Transactions using the `ReadUncommitted` isolation level can result in inconsistent or incomplete data, making it suitable for scenarios where performance is prioritized over data accuracy.
+
+By following these steps, you can observe how the `ReadUncommitted` isolation level allows other transactions to read uncommitted changes and how the database state reflects these changes post-commit.
+
 
