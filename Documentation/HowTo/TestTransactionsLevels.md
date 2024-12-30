@@ -3,11 +3,6 @@
 ## Overview
 This repository provides a detailed implementation and explanation of locking and isolation levels in a database context using Entity Framework and SQL Server. The implementation focuses on managing concurrent transactions effectively by leveraging different isolation levels and locking mechanisms.
 
-The main goal of this project is to:
-- Prevent concurrency issues such as **dirty reads**, **non-repeatable reads**, and **phantom reads**.
-- Demonstrate how to enforce locking to ensure data consistency.
-- Test and validate different behaviors of isolation levels and locking using both code and SQL Server Management Studio (SSMS).
-
 ---
 
 ## Key Concepts
@@ -25,15 +20,6 @@ The main goal of this project is to:
 - **Key-Range Locks**: Prevents phantom reads by locking ranges of keys.
 
 ---
-
-## Implementation
-### `LockingService`
-The `LockingService` class demonstrates the use of different isolation levels and locking mechanisms in database operations.
-
-#### Methods and Expected Behaviors
-//////////////////////////////////////////
-
-
 
 # Optimistic Concurrency Control Example
 
@@ -113,11 +99,14 @@ GO
 ```
 
 #### Current Record after db modification will be:
+![image](https://github.com/user-attachments/assets/1b4efe05-2723-4b7c-b7d6-a9f5c7d19b65)
+- **now continue the code flow SaveChangesAsync:** a `DbUpdateConcurrencyException` will be thrown "errorMessage": "Concurrency conflict detected. Another user may have updated this record the version is diffrent".
+![image](https://github.com/user-attachments/assets/e9360f65-a097-49f6-8ac4-1aa089f3f22e)
+- **now run the code again without making direct db update:** u will get a response (Role with id:10 has been updated inside transaction with Optimistic Concurrency).
+  
+![image](https://github.com/user-attachments/assets/34f5e827-de1e-4392-9827-acdeb92ecd7a)
 
-### Generated SQL Query once we continue to reach (on SaveChangesAsync)
-- **Simulated Conflict:** If another process updates the record during the transaction, a `DbUpdateConcurrencyException` will be thrown.
-- **After Update:** The `Description` field will be updated, and the `RowVersion` field will be incremented.
-
+- **Generated SQL Query once we continue to (on SaveChangesAsync):** 
 ```sql
 UPDATE Roles
 SET
@@ -126,7 +115,7 @@ SET
 WHERE
     Id = 10 AND RowVersion = @currentRowVersion;
 
-```
+``` 
 
 
 
