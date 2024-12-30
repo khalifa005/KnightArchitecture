@@ -1,3 +1,15 @@
+# Table of Contents
+
+1. [Locking and Isolation Levels in Entity Framework](#locking-and-isolation-levels-in-entity-framework)
+2. [Key Concepts](#key-concepts)
+3. [Optimistic Concurrency Control Example](#optimistic-concurrency-control-example)
+4. [Read Uncommitted Isolation Level Example](#read-uncommitted-isolation-level-example)
+5. [Read Committed Isolation Level Example](#read-committed-isolation-level-example)
+6. [Repeatable Read Isolation Level Example](#repeatable-read-isolation-level-example)
+7. [Handling Deadlocks with IsolationLevel.Serializable and Explicit Lock Hints in EF Core](#handling-deadlocks-with-isolationlevel-serializable-and-explicit-lock-hints-in-ef-core)
+
+
+////////
 # Locking and Isolation Levels in Entity Framework
 
 ## Overview
