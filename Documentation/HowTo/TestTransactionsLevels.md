@@ -8,7 +8,7 @@
 4. [Read Uncommitted Isolation Level Example](#read-uncommitted-isolation-level-example)
 5. [Read Committed Isolation Level Example](#read-committed-isolation-level-example)
 6. [Repeatable Read Isolation Level Example](#repeatable-read-isolation-level-example)
-7. [Handling Deadlocks with IsolationLevel.Serializable and Explicit Lock Hints in EF Core](#Handling Deadlocks with IsolationLevel.Serializable and Explicit Lock Hints in EF Core)
+7. [Handling Deadlocks with IsolationLevel.Serializable and Explicit Lock Hints in EF Core](#Serializable IsolationLevel)
 
 ---
 # Locking and Isolation Levels in Entity Framework
@@ -471,13 +471,14 @@ WHERE
 By following these steps, you can observe how the `RepeatableRead` isolation level maintains consistency for multiple reads within a transaction and how the database state reflects these changes post-commit.
 
 
-# Handling Deadlocks with IsolationLevel.Serializable and Explicit Lock Hints in EF Core
+# Serializable IsolationLevel 
 
 ## Overview
 
 When using **IsolationLevel.Serializable** in EF Core, it ensures the highest level of isolation and consistency but can lead to **deadlocks** in high-concurrency scenarios. This document describes the behavior of Serializable isolation, the issues that may arise, and solutions to avoid deadlocks using **explicit lock hints**.
 
 ---
+# Handling Deadlocks with IsolationLevel Serializable and Explicit Lock Hints in EF Core
 
 ## Problem Description
 
