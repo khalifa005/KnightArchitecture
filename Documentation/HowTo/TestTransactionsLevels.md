@@ -1,3 +1,5 @@
+
+
 # Table of Contents
 
 1. [Locking and Isolation Levels in Entity Framework](#locking-and-isolation-levels-in-entity-framework)
@@ -6,16 +8,13 @@
 4. [Read Uncommitted Isolation Level Example](#read-uncommitted-isolation-level-example)
 5. [Read Committed Isolation Level Example](#read-committed-isolation-level-example)
 6. [Repeatable Read Isolation Level Example](#repeatable-read-isolation-level-example)
-7. [Handling Deadlocks with IsolationLevel.Serializable and Explicit Lock Hints in EF Core](#handling-deadlocks-with-isolationlevel-serializable-and-explicit-lock-hints-in-ef-core)
+7. [Handling Deadlocks with IsolationLevel.Serializable and Explicit Lock Hints in EF Core](#Handling Deadlocks with IsolationLevel.Serializable and Explicit Lock Hints in EF Core)
 
-
-////////
+---
 # Locking and Isolation Levels in Entity Framework
 
 ## Overview
 This repository provides a detailed implementation and explanation of locking and isolation levels in a database context using Entity Framework and SQL Server. The implementation focuses on managing concurrent transactions effectively by leveraging different isolation levels and locking mechanisms.
-
----
 
 ## Key Concepts
 
