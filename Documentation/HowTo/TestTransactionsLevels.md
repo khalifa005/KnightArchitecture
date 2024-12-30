@@ -339,4 +339,124 @@ WHERE
 
 By following these steps, you can observe how the `ReadCommitted` isolation level ensures isolation of data changes until a transaction is committed and how the database state reflects these changes post-commit.
 
+# Repeatable Read Isolation Level Example
+
+This section demonstrates how to use the `RepeatableRead` isolation level to prevent dirty and non-repeatable reads while allowing phantom reads. This ensures that data read during a transaction cannot be modified by other transactions until the transaction is complete, as it locks the data being read.
+
+## Description
+
+The following example illustrates how the `RepeatableRead` isolation level works in EF Core. The method `RepeatableReadIsolationLevelAsync` demonstrates how consistency is maintained for multiple reads of the same data during a transaction.
+
+#### Current Record:
+
+| Id  | NameAr       | NameEn       | Description               | RowVersion           |
+|-----|--------------|--------------|---------------------------|----------------------|
+| 10  | وكيل عمل     | Agent user   | empty                    | 0x00000000000167EE   |
+
+### How to Test
+
+1. Execute the `RepeatableReadIsolationLevelAsync` method in your application and set a breakpoint before the `SaveChangesAsync` call.
+
+### Code Implementation
+
+```csharp
+/// <summary>
+/// Prevents dirty and non-repeatable reads but allows phantom reads.
+/// Demonstrates the Repeatable Read isolation level in EF Core.
+/// </summary>
+public async Task<string> RepeatableReadIsolationLevelAsync(long role, CancellationToken cancellationToken)
+{
+    // Begin a transaction
+    await using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.RepeatableRead);
+
+    // First read
+    var existingEntity = await _dbContext.Roles.FirstOrDefaultAsync(r => r.Id == role, cancellationToken: cancellationToken);
+
+    if (existingEntity == null)
+    {
+        return $"Role with id:{role} does not exist or could not be found.";
+    }
+
+    try
+    {
+        // Simulate additional read to ensure no data has changed.
+        var sameRoleEntity = await _dbContext.Roles.FirstOrDefaultAsync(r => r.Id == role, cancellationToken: cancellationToken);
+
+        if (existingEntity.Description != sameRoleEntity?.Description)
+        {
+            throw new InvalidOperationException("Non-repeatable read detected.");
+        }
+
+        existingEntity.Description = "RepeatableRead Test";
+        await _dbContext.SaveChangesAsync();
+
+        // Commit the transaction
+        await transaction.CommitAsync();
+    }
+    catch (Exception ex)
+    {
+        // Rollback the transaction in case of an exception
+        await transaction.RollbackAsync();
+
+        // Handle the exception (log, rethrow, etc.)
+        throw new Exception("An error occurred during the transaction.", ex);
+    }
+
+    return $"Role with id:{existingEntity.Id} has been updated inside transaction with RepeatableRead Isolation Level";
+}
+```
+
+2. Open SQL Server Management Studio (SSMS).
+3. While the transaction is active, execute the following query in a new transaction to observe isolation:
+
+```sql
+USE [KnightTemplateDb]
+GO
+
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+GO
+
+SELECT * FROM Roles WHERE Id = 10;
+GO
+```
+
+#### Current Record after executing the first read and before committing:
+
+| Id  | NameAr       | NameEn       | Description                                   | RowVersion           |
+|-----|--------------|--------------|-----------------------------------------------|----------------------|
+| 10  | وكيل عمل     | Agent user   | empty                                      | 0x00000000000167EE   |
+
+- **Observation:** The same data is guaranteed to be read in subsequent reads within the same transaction. If another transaction attempts to modify the data while the current transaction is active, the update process will be locked until the current transaction completes.
+
+#### SQL Output After Committing
+
+4. Commit the transaction by allowing the `transaction.CommitAsync` to execute in the code. Run the following query to verify the changes:
+
+```sql
+USE [KnightTemplateDb]
+GO
+
+SELECT * FROM Roles WHERE Id = 10;
+GO
+```
+
+- **Result:** The updated value for `Description` is now visible to all transactions.
+
+#### Generated SQL Query:
+
+```sql
+UPDATE Roles
+SET
+    Description = 'RepeatableRead Test'
+WHERE
+    Id = 10;
+```
+
+### Notes
+
+- Transactions using the `RepeatableRead` isolation level ensure that the same data read multiple times during the transaction remains consistent and that no other transaction can modify the data until the current transaction completes.
+- This isolation level is suitable for scenarios requiring consistent reads but where phantom reads are acceptable.
+
+By following these steps, you can observe how the `RepeatableRead` isolation level maintains consistency for multiple reads within a transaction and how the database state reflects these changes post-commit.
+
 
