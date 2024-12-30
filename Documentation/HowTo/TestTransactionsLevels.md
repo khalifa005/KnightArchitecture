@@ -460,3 +460,142 @@ WHERE
 By following these steps, you can observe how the `RepeatableRead` isolation level maintains consistency for multiple reads within a transaction and how the database state reflects these changes post-commit.
 
 
+# Handling Deadlocks with IsolationLevel.Serializable and Explicit Lock Hints in EF Core
+
+## Overview
+
+When using **IsolationLevel.Serializable** in EF Core, it ensures the highest level of isolation and consistency but can lead to **deadlocks** in high-concurrency scenarios. This document describes the behavior of Serializable isolation, the issues that may arise, and solutions to avoid deadlocks using **explicit lock hints**.
+
+---
+
+## Problem Description
+
+**Serializable Isolation Level** ensures:
+- No other transaction can modify the rows being read until the transaction commits.
+- It places strict locks on rows and even range locks to prevent phantom reads.
+
+However, these strict locking rules can cause **deadlocks** in concurrent transactions. Here's an example scenario:
+
+### Scenario
+1. **C# Code:** Starts a transaction with `IsolationLevel.Serializable`.
+2. Reads a row from the `Roles` table (`SELECT` query).
+3. Updates the same row (`UPDATE` query).
+
+```csharp
+await using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.Serializable);
+
+var existingEntity = await _dbContext.Roles.FirstOrDefaultAsync(r => r.Id == 10);
+if (existingEntity != null)
+{
+    existingEntity.Description = "Test Serializable level";
+    await _dbContext.SaveChangesAsync();
+}
+await transaction.CommitAsync();
+```
+
+4. **SQL Script:** Concurrently executes an `UPDATE` statement on the same row.
+
+```sql
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+BEGIN TRANSACTION;
+
+UPDATE [dbo].[Roles]
+SET Description = 'Updated safely with SERIALIZABLE'
+WHERE Id = 10;
+
+COMMIT TRANSACTION;
+```
+
+### Deadlock Cause
+- The **C# code** acquires a shared lock (**S-lock**) when reading the row.
+- The **SQL script** tries to acquire an exclusive lock (**X-lock**) for the `UPDATE` statement but is blocked by the C# transaction.
+- The **C# transaction** tries to upgrade its lock to an exclusive lock (**X-lock**) during `SaveChangesAsync` but is blocked by the SQL transaction.
+
+This circular dependency causes a **deadlock**.
+
+---
+
+## Solution: Explicit Lock Hints
+
+### Why Use Lock Hints?
+Explicit lock hints help control how SQL Server locks rows, minimizing the risk of deadlocks by acquiring the correct type of lock upfront.
+
+### Applying Lock Hints in EF Core
+
+#### 1. **Using `FromSqlRaw` for Reading with Lock Hints**
+
+Use the `WITH (UPDLOCK, ROWLOCK)` lock hints to acquire an update lock immediately:
+
+```csharp
+var query = @"
+    SELECT * FROM [Roles] WITH (UPDLOCK, ROWLOCK)
+    WHERE Id = @roleId";
+
+var existingEntity = await _dbContext.Roles
+    .FromSqlRaw(query, new SqlParameter("@roleId", roleId))
+    .FirstOrDefaultAsync(cancellationToken);
+
+if (existingEntity != null)
+{
+    existingEntity.Description = "Test Serializable level with lock hints";
+    await _dbContext.SaveChangesAsync();
+}
+```
+
+#### 2. **Using `ExecuteSqlRaw` for Updates with Lock Hints**
+
+Apply the `WITH (UPDLOCK, ROWLOCK)` hint during the `UPDATE` operation:
+
+```csharp
+var sql = @"
+    UPDATE [Roles] WITH (UPDLOCK, ROWLOCK)
+    SET Description = @description
+    WHERE Id = @roleId";
+
+var parameters = new[]
+{
+    new SqlParameter("@description", "Updated safely with explicit lock hints"),
+    new SqlParameter("@roleId", roleId)
+};
+
+await _dbContext.Database.ExecuteSqlRawAsync(sql, parameters);
+```
+
+### How This Solves the Problem
+- **`UPDLOCK`**: Acquires an update lock immediately, preventing other transactions from acquiring conflicting locks.
+- **`ROWLOCK`**: Minimizes the scope of the lock to a single row, reducing contention.
+
+---
+
+## Alternatives
+
+### 1. **Lower the Isolation Level**
+Use a less restrictive isolation level, such as **Read Committed**:
+
+```sql
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+BEGIN TRANSACTION;
+
+UPDATE [Roles]
+SET Description = 'Updated safely'
+WHERE Id = 10;
+
+COMMIT TRANSACTION;
+```
+
+### 2. **Sequence the Transactions**
+Ensure one transaction commits or rolls back before starting the other to avoid contention.
+
+### 3. **Retry Logic**
+Implement retry mechanisms to handle deadlocks gracefully.
+
+---
+
+## Key Takeaways
+- **Serializable Isolation Level** provides strict consistency but is prone to deadlocks.
+- Using explicit lock hints (`UPDLOCK`, `ROWLOCK`) in EF Core helps control locking behavior and reduces deadlock risk.
+- Always balance isolation level and locking strategy based on application requirements.
+
+---
+
+
