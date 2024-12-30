@@ -230,3 +230,113 @@ WHERE
 By following these steps, you can observe how the `ReadUncommitted` isolation level allows other transactions to read uncommitted changes and how the database state reflects these changes post-commit.
 
 
+# Read Committed Isolation Level Example
+
+This section demonstrates how to use the `ReadCommitted` isolation level to prevent dirty reads while allowing non-repeatable reads and phantom reads. This ensures that data modifications within a transaction are not visible to other transactions until the transaction is committed.
+
+## Description
+
+The following example illustrates how the `ReadCommitted` isolation level works in EF Core. The method `ReadCommittedIsolationLevelAsync` demonstrates how changes to a record are isolated from other transactions until the current transaction is committed.
+
+#### Current Record:
+
+| Id  | NameAr       | NameEn       | Description               | RowVersion           |
+|-----|--------------|--------------|---------------------------|----------------------|
+| 10  | وكيل عمل     | Agent user   | empty                    | 0x00000000000167EE   |
+
+### How to Test
+
+1. Execute the `ReadCommittedIsolationLevelAsync` method in your application and set a breakpoint before the `transaction.CommitAsync` call.
+
+### Code Implementation
+
+```csharp
+/// <summary>
+/// Prevents dirty reads but allows non-repeatable reads and phantom reads.
+/// Demonstrates the Read Committed isolation level in EF Core.
+/// </summary>
+public async Task<string> ReadCommittedIsolationLevelAsync(long role, CancellationToken cancellationToken)
+{
+    // Begin a transaction
+    await using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
+
+    var existingEntity = await _dbContext.Roles.FirstOrDefaultAsync(r => r.Id == 10, cancellationToken: cancellationToken);
+
+    try
+    {
+        if (existingEntity != null)
+        {
+            existingEntity.Description = "Test ReadCommitted level from code";
+            await _dbContext.SaveChangesAsync();
+        }
+
+        // Commit the transaction
+        await transaction.CommitAsync();
+    }
+    catch (Exception ex)
+    {
+        // Rollback the transaction in case of an exception
+        await transaction.RollbackAsync();
+
+        // Handle the exception (log, rethrow, etc.)
+        throw new Exception("An error occurred during the transaction.", ex);
+    }
+
+    return $"Role with id:{existingEntity.Id} has been updated inside transaction with ReadCommitted Isolation Level";
+}
+```
+
+2. Open SQL Server Management Studio (SSMS).
+3. Before the current transaction commits, execute the following query in a new transaction to check for isolation:
+
+```sql
+USE [KnightTemplateDb]
+GO
+
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+GO
+
+SELECT * FROM Roles WHERE Id = 10;
+GO
+```
+
+#### Current Record after executing the `SaveChangesAsync` and after committing the transaction:
+
+| Id  | NameAr       | NameEn       | Description                                   | RowVersion           |
+|-----|--------------|--------------|-----------------------------------------------|----------------------|
+| 10  | وكيل عمل     | Agent user   | Test ReadCommitted level from code            | 0x00000000000167EE   |
+
+- **Observation:** Other transactions cannot see the updated value for `Description` until the current transaction is committed except the  READ UNCOMMITTED LEVEL will be able to see the value even before commiting transaction.
+
+#### SQL Output After Committing
+
+4. Commit the transaction by allowing the `transaction.CommitAsync` to execute in the code. Run the following query to verify the changes:
+
+```sql
+USE [KnightTemplateDb]
+GO
+
+SELECT * FROM Roles WHERE Id = 10;
+GO
+```
+
+- **Result:** The updated value for `Description` is now visible to all transactions.
+
+#### Generated SQL Query:
+
+```sql
+UPDATE Roles
+SET
+    Description = 'Test ReadCommitted level from code'
+WHERE
+    Id = 10;
+```
+
+### Notes
+
+- Transactions using the `ReadCommitted` isolation level prevent dirty reads but still allow for non-repeatable reads and phantom reads. This level is the default isolation level in most relational databases.
+- Using this isolation level is suitable for scenarios requiring a balance between consistency and concurrency.
+
+By following these steps, you can observe how the `ReadCommitted` isolation level ensures isolation of data changes until a transaction is committed and how the database state reflects these changes post-commit.
+
+
