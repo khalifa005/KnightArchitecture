@@ -477,6 +477,26 @@ By following these steps, you can observe how the `RepeatableRead` isolation lev
 
 When using **IsolationLevel.Serializable** in EF Core, it ensures the highest level of isolation and consistency but can lead to **deadlocks** in high-concurrency scenarios. This document describes the behavior of Serializable isolation, the issues that may arise, and solutions to avoid deadlocks using **explicit lock hints**.
 
+Key Characteristics of Serializable IsolationLevel:
+Prevents Dirty Reads:
+
+A transaction cannot read data that has been modified but not yet committed by another transaction.
+Prevents Non-Repeatable Reads:
+
+If a transaction reads a row, no other transaction can modify or delete that row until the first transaction completes.
+Prevents Phantom Reads:
+
+If a transaction queries a set of rows based on a condition, no other transaction can insert new rows that would satisfy that condition until the first transaction completes.
+Locking:
+
+The database locks the data being read or modified for the duration of the transaction, ensuring no other transactions can read or modify it.
+Ensures Full Isolation:
+
+Serializable isolation provides the same results as if all transactions were executed serially (one at a time), even though they may actually execute concurrently.
+Performance Impact:
+
+Due to the high level of locking, it can cause contention, deadlocks, and reduced concurrency, making it less suitable for high-throughput systems.
+
 ---
 # Handling Deadlocks with IsolationLevel Serializable and Explicit Lock Hints in EF Core
 
