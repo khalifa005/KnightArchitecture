@@ -54,6 +54,20 @@ The following example illustrates how to handle concurrency conflicts in EF Core
 ### Code Implementation
 
 ```csharp
+
+public class Role
+{
+  [Timestamp]
+  public byte[]? RowVersion { get; set; }
+  public int Id { get; set; }
+  public string NameEn { get; set; }
+  public string? Description { get; set; }
+}
+
+In ef configuration
+builder.Property(u => u.RowVersion)
+  .IsRowVersion();
+
 /// <summary>
 /// Multiple users can update the same data independently, and conflicts are checked at the time of saving the data.
 /// Demonstrates optimistic concurrency control using version or timestamp fields.
