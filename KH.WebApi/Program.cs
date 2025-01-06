@@ -1,3 +1,4 @@
+using KH.Services.Chat.ChatHub;
 using KH.Services.Lookups.Roles.RoleHub;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.RateLimiting;
@@ -50,6 +51,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
   services.AddCustomControllers();
   // Add SignalR service
   services.AddSignalR();
+  //services.AddSignalR().AddMessagePackProtocol();
 
   services.AddRateLimiter(options => {
 
@@ -196,6 +198,7 @@ void ConfigureMiddlewares(WebApplication app)
 
   app.UseAuthorization();
   app.MapHub<RolesHub>("/signalrhub");
+  app.MapHub<ChatHub>("/signalrChatHub");
 
   // Serve static files and map controllers
   app.UseStaticFiles();

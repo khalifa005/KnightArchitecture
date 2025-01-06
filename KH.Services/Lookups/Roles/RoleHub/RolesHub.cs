@@ -19,13 +19,13 @@ public class RolesHub : Hub
 
   public override async Task OnConnectedAsync()
   {
-    Console.WriteLine(Context.ConnectionId);
+    //Console.WriteLine(Context.ConnectionId);
     await base.OnConnectedAsync();
   }
 
   public override async Task OnDisconnectedAsync(Exception ex)
   {
-    Console.WriteLine(Context.ConnectionId);
+    //Console.WriteLine(Context.ConnectionId);
     await base.OnDisconnectedAsync(ex);
   }
 }

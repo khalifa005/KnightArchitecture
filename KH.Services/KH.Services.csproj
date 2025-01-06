@@ -10,4 +10,10 @@
     <ProjectReference Include="..\KH.PersistenceInfra\KH.PersistenceInfra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Chat\Contracts\" />
+    <Folder Include="Chat\Implementation\" />
+    <Folder Include="Users\UserHub\" />
+  </ItemGroup>
+
 </Project>
