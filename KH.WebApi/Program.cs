@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.RateLimiting;
 using QuestPDF.Fluent;
 using Serilog;
@@ -51,6 +52,18 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
   services.AddRateLimiter(options => {
 
+    //f your application is running behind a reverse proxy, you need to make sure not to rate limit the proxy IP address.Reverse proxies usually
+    //forward the original IP address with the X - Forwarded - For header.So you can use it as the partition key:
+    //httpContext.Request.Headers["X-Forwarded-For"].ToString(),
+    options.AddPolicy("fixed-by-ip", httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+              PermitLimit = 10,
+              Window = TimeSpan.FromMinutes(1)
+            }));
+
     options.AddPolicy("LoginRateLimit", context =>
     {
       // Limit to 5 requests per minute per IP
@@ -65,12 +78,6 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
             QueueLimit = 0 // No queuing of additional requests
           });
     });
-
-    //options.OnRejected = async (context, cancellationToken) =>
-    //{
-    //  context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
-    //  await context.HttpContext.Response.WriteAsync($"Too many requests. {context.HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown"} Please try again after 1 minute.", cancellationToken);
-    //};
 
     options.OnRejected = async (context, cancellationToken) =>
     {
