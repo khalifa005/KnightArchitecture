@@ -81,6 +81,7 @@ public static class IdentityServiceExtension
           var path = context.HttpContext.Request.Path;
           if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/signalrhub"))
           {
+            // Read the token out of the query string
             context.Token = accessToken;
           }
           return Task.CompletedTask;

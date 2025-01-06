@@ -165,6 +165,7 @@ public class RoleService : IRoleService
       // Other transactions must wait if they try to lock the same row.
       var lastRoleId = await repository.ExecuteSqlSingleAsync<long>(
                 "SELECT TOP 1 Id FROM Roles WITH (UPDLOCK, ROWLOCK) ORDER BY Id DESC",
+                null, // No parameters are needed here
                 cancellationToken
             );
 

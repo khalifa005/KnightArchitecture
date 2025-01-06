@@ -1,3 +1,4 @@
+using KH.Services.Lookups.Roles.RoleHub;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.RateLimiting;
 using QuestPDF.Fluent;
@@ -47,7 +48,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
   // Add Controllers
   services.AddCustomControllers();
-
+  // Add SignalR service
   services.AddSignalR();
 
   services.AddRateLimiter(options => {
@@ -162,6 +163,7 @@ void ConfigureMiddlewares(WebApplication app)
     app.UseHsts();
   }
 
+
   app.UseRouting();
   app.UseAuthentication();
 
@@ -193,6 +195,8 @@ void ConfigureMiddlewares(WebApplication app)
   app.UseRateLimiter(); // This must be here
 
   app.UseAuthorization();
+  app.MapHub<RolesHub>("/signalrhub");
+
   // Serve static files and map controllers
   app.UseStaticFiles();
 
