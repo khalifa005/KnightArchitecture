@@ -3,6 +3,7 @@ using KH.BuildingBlocks.Auth.Constant;
 using KH.Dto.lookups.RoleDto.Response;
 using KH.Dto.Lookups.RoleDto.Request;
 using KH.Services.Lookups.Roles.Contracts;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace KH.WebApi.Controllers;
 
@@ -28,6 +29,8 @@ public class RolesController : BaseApiController
   [PermissionAuthorize(PermissionKeysConstant.Roles.LIST_ROLE)]
 
   [HttpPost("ListAll")]
+  [EnableRateLimiting("Fixed")] // Apply the "Fixed" rate-limiting policy
+
   public async Task<ActionResult<ApiResponse<List<RoleResponse>>>> ListAll(RoleFilterRequest request, CancellationToken cancellationToken)
   {
     var res = await _lookupService.GetListAsync(request, cancellationToken);
@@ -35,6 +38,7 @@ public class RolesController : BaseApiController
   }
 
   [HttpPost("PagedList")]
+  [EnableRateLimiting("Fixed")] // Apply the "Fixed" rate-limiting policy
   public async Task<ActionResult<ApiResponse<PagedList<RoleListResponse>>>> GetPagedList(RoleFilterRequest request, CancellationToken cancellationToken)
   {
     var res = await _lookupService.GetPagedListAsync(request, cancellationToken);

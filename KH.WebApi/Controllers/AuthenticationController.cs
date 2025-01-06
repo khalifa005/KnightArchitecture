@@ -1,4 +1,5 @@
 using KH.Services.Auth.Contracts;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace KH.WebApi.Controllers;
 
@@ -13,6 +14,8 @@ public class AuthenticationController : BaseApiController
 
   [AllowAnonymous]
   [HttpPost("Login")]
+  [EnableRateLimiting("LoginRateLimit")]
+
   public async Task<ActionResult<ApiResponse<AuthenticationResponse>>> Login(LoginRequest request, CancellationToken cancellationToken)
   {
     //var res = await _userService.LoginAsync(request);

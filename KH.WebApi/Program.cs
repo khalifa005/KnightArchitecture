@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.RateLimiting;
 using QuestPDF.Fluent;
 using Serilog;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,7 +46,53 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
   // Add Controllers
   services.AddCustomControllers();
+
   services.AddSignalR();
+
+  services.AddRateLimiter(options => {
+
+    options.AddPolicy("LoginRateLimit", context =>
+    {
+      // Limit to 5 requests per minute per IP
+      return RateLimitPartition.GetTokenBucketLimiter(
+          partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+          factory: partition => new TokenBucketRateLimiterOptions
+          {
+            TokenLimit = 3, // Number of requests allowed
+            ReplenishmentPeriod = TimeSpan.FromMinutes(1), // Time interval for replenishment
+            TokensPerPeriod = 5, // Number of tokens replenished
+            QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+            QueueLimit = 0 // No queuing of additional requests
+          });
+    });
+
+    //options.OnRejected = async (context, cancellationToken) =>
+    //{
+    //  context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+    //  await context.HttpContext.Response.WriteAsync($"Too many requests. {context.HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown"} Please try again after 1 minute.", cancellationToken);
+    //};
+
+    options.OnRejected = async (context, cancellationToken) =>
+    {
+      var customErrorResponse = new ApiResponse<object>(StatusCodes.Status429TooManyRequests)
+      {
+        ErrorMessage = $"Too many requests. {context.HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown"}. Please try again after 1 minute.",
+      };
+
+      context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+      context.HttpContext.Response.ContentType = "application/json";
+
+      var jsonResponse = System.Text.Json.JsonSerializer.Serialize(customErrorResponse);
+
+      await context.HttpContext.Response.WriteAsync(jsonResponse, cancellationToken);
+    };
+
+    options.RejectionStatusCode = 429;
+
+  });
+
+
+
 
   // Add Memory Cache
   services.AddMemoryCache();
@@ -73,6 +121,8 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 /// </summary>
 void ConfigureMiddlewares(WebApplication app)
 {
+  System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12;
+
   var env = app.Environment;
   var configuration = app.Configuration;
 
@@ -86,6 +136,7 @@ void ConfigureMiddlewares(WebApplication app)
   app.UseHttpsRedirection();
 
   //app.UseMiddleware<ResponseTimeLoggingMiddleware>();
+
 
   // Status Code Pages
   app.UseStatusCodePagesWithReExecute("/errors/{0}");
@@ -104,16 +155,41 @@ void ConfigureMiddlewares(WebApplication app)
     app.UseHsts();
   }
 
-
-
-
   app.UseRouting();
   app.UseAuthentication();
-  app.UseMiddleware<PermissionsMiddleware>();
-  app.UseAuthorization();
 
+  //app.UseRateLimiter(new RateLimiterOptions
+  //{
+  //  GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+  //  {
+  //    var ipAddress = context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+  //    return RateLimitPartition.GetFixedWindowLimiter(
+  //        partitionKey: ipAddress, // Partition by IP address
+  //        factory: _ => new FixedWindowRateLimiterOptions
+  //        {
+  //          PermitLimit = 3, // Max 3 requests
+  //          Window = TimeSpan.FromSeconds(20), // Per 20 seconds
+  //          QueueLimit = 2, // Allow up to 2 requests to queue
+  //          QueueProcessingOrder = QueueProcessingOrder.OldestFirst
+  //        });
+  //  }),
+  //  RejectionStatusCode = 429, // Status code for rate-limiting rejection
+  //  OnRejected = async (context, cancellationToken) =>
+  //  {
+  //    context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+  //    await context.HttpContext.Response.WriteAsync("Too many requests globally. Please try again later.", cancellationToken);
+  //  }
+  //});
+
+  app.UseMiddleware<PermissionsMiddleware>();
+  app.UseRateLimiter(); // This must be here
+
+  app.UseAuthorization();
   // Serve static files and map controllers
   app.UseStaticFiles();
+
+
   app.MapControllers();
   app.UseSerilogRequestLogging(); // Enable Serilog request logging
 }
