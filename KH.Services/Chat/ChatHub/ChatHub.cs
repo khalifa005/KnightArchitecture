@@ -32,3 +32,5 @@ public class ChatMessage
   public DateTime DateTime { get; set; }
 }
 
+
+

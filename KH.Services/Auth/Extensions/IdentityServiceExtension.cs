@@ -83,6 +83,7 @@ public static class IdentityServiceExtension
           && (
           path.StartsWithSegments("/signalrhub")
           || path.StartsWithSegments("/signalrChatHub")
+          || path.StartsWithSegments("/CChatHub")
           ))
           {
             // Read the token out of the query string

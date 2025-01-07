@@ -199,6 +199,7 @@ void ConfigureMiddlewares(WebApplication app)
   app.UseAuthorization();
   app.MapHub<RolesHub>("/signalrhub");
   app.MapHub<ChatHub>("/signalrChatHub");
+  app.MapHub<CChatHub>("/CChatHub");
 
   // Serve static files and map controllers
   app.UseStaticFiles();
