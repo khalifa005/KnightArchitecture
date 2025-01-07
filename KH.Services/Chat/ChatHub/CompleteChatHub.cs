@@ -12,59 +12,92 @@ using System.Collections.Concurrent;
 
 public class CChatHub : Hub
 {
+  // In-memory storage for groups and their messages
+  private static readonly ConcurrentDictionary<string, List<ChatMessagess>> GroupMessages = new();
   private static readonly ConcurrentDictionary<string, ChatUser> Users = new();
 
-  public async Task SendMessage(string message, string group, string name)
+  public async Task SendMessage(string message, string group, string userName)
   {
-    if (string.IsNullOrEmpty(group))
-      group = "DefaultGroup";
+    if (string.IsNullOrEmpty(group)) return;
 
-    if (!Users.TryGetValue(Context.ConnectionId, out ChatUser user))
+    var chatMessage = new ChatMessagess
     {
-      user = JoinGroup(name, group);
+      User = new ChatUser { Name = userName, Group = group },
+      Message = message,
+      Time = DateTime.UtcNow
+    };
+
+    // Save message in the group
+    if (!GroupMessages.ContainsKey(group))
+    {
+      GroupMessages[group] = new List<ChatMessagess>();
+    }
+    GroupMessages[group].Add(chatMessage);
+
+    // Send message to all clients in the group
+    await Clients.Group(group).SendAsync("OnReceiveMessage", chatMessage);
+  }
+
+  public async Task JoinGroup(string userName, string group)
+  {
+    if (string.IsNullOrEmpty(group)) return;
+
+    // Add user to the group
+    await Groups.AddToGroupAsync(Context.ConnectionId, group);
+
+    if (!Users.ContainsKey(Context.ConnectionId))
+    {
+      Users[Context.ConnectionId] = new ChatUser { Name = userName, Group = group };
     }
 
-    user.LastOn = DateTime.UtcNow;
+    // Notify others in the group
+    var joinMessage = new ChatMessagess
+    {
+      User = new ChatUser { Name = "System", Group = group },
+      Message = $"{userName} has joined the group.",
+      Time = DateTime.UtcNow
+    };
 
-    var msg = new ChatMessagess { Message = message, User = user, IsCurrentUser = true, Time = DateTime.UtcNow, };
-
-    await Clients.Group(group).SendAsync("OnReceiveMessage", msg);
-
+    await Clients.Group(group).SendAsync("OnReceiveMessage", joinMessage);
   }
 
-  public ChatUser JoinGroup(string name, string groupName)
+  public async Task ExitGroup(string group)
   {
-    Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-    var user = new ChatUser { Name = name, Group = groupName, Id = Context.ConnectionId };
-    Users[Context.ConnectionId] = user;
-    return user;
-  }
+    if (string.IsNullOrEmpty(group)) return;
 
+    // Remove user from the group
+    await Groups.RemoveFromGroupAsync(Context.ConnectionId, group);
 
-
-  public async Task ExitGroup(string groupName)
-  {
-    if (string.IsNullOrEmpty(groupName))
-      return;
-
-    await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
     if (Users.ContainsKey(Context.ConnectionId))
     {
-      Users.Remove(Context.ConnectionId, out _);
+      var user = Users[Context.ConnectionId];
+      if (user.Group == group)
+      {
+        Users.Remove(Context.ConnectionId, out _);
+      }
     }
 
-    await Clients.Group(groupName).SendAsync("OnReceiveMessage", new ChatMessagess
+    // Notify others in the group
+    var exitMessage = new ChatMessagess
     {
+      User = new ChatUser { Name = "System", Group = group },
       Message = $"{Context.ConnectionId} has left the group.",
-      User = new ChatUser { Name = "System", Group = groupName },
-      Time = DateTime.UtcNow,
-      IsCurrentUser = false
-    });
+      Time = DateTime.UtcNow
+    };
 
-    Console.WriteLine($"{Context.ConnectionId} exited group {groupName}");
+    await Clients.Group(group).SendAsync("OnReceiveMessage", exitMessage);
   }
 
+  public async Task<List<ChatMessagess>> GetGroupMessages(string group)
+  {
+    // Return all messages for the group
+    if (GroupMessages.ContainsKey(group))
+    {
+      return GroupMessages[group];
+    }
 
+    return new List<ChatMessagess>();
+  }
   public override Task OnDisconnectedAsync(Exception? exception)
   {
     Users.TryRemove(Context.ConnectionId, out _);
