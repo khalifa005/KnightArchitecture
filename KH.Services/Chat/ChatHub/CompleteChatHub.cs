@@ -10,42 +10,59 @@ namespace KH.Services.Chat.ChatHub;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 
-  public class CChatHub : Hub
+public class CChatHub : Hub
+{
+  private static readonly ConcurrentDictionary<string, ChatUser> Users = new();
+
+  public async Task SendMessage(string message, string group, string name)
   {
-    private static readonly ConcurrentDictionary<string, ChatUser> Users = new();
+    if (string.IsNullOrEmpty(group))
+      group = "DefaultGroup";
 
-    public async Task SendMessage(string message, string group, string name)
+    if (!Users.TryGetValue(Context.ConnectionId, out ChatUser user))
     {
-      if (string.IsNullOrEmpty(group))
-        group = "DefaultGroup";
+      user = JoinGroup(name, group);
+    }
 
-      if (!Users.TryGetValue(Context.ConnectionId, out ChatUser user))
-      {
-        user = JoinGroup(name, group);
-      }
+    user.LastOn = DateTime.UtcNow;
 
-      user.LastOn = DateTime.UtcNow;
+    var msg = new ChatMessagess { Message = message, User = user, IsCurrentUser = true, Time = DateTime.UtcNow, };
 
-      var msg = new ChatMessagess { Message = message, User = user, IsCurrentUser = true, Time = DateTime.UtcNow, };
-      await Clients.Group(group).SendAsync("OnReceiveMessage", msg);
+    await Clients.Group(group).SendAsync("OnReceiveMessage", msg);
 
   }
 
-    public ChatUser JoinGroup(string name, string groupName)
+  public ChatUser JoinGroup(string name, string groupName)
+  {
+    Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+    var user = new ChatUser { Name = name, Group = groupName, Id = Context.ConnectionId };
+    Users[Context.ConnectionId] = user;
+    return user;
+  }
+
+
+
+  public async Task ExitGroup(string groupName)
+  {
+    if (string.IsNullOrEmpty(groupName))
+      return;
+
+    await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+    if (Users.ContainsKey(Context.ConnectionId))
     {
-      Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-      var user = new ChatUser { Name = name, Group = groupName, Id = Context.ConnectionId };
-      Users[Context.ConnectionId] = user;
-      return user;
+      Users.Remove(Context.ConnectionId, out _);
     }
 
-
-
-  public async Task LeaveGroup(string groupName)
+    await Clients.Group(groupName).SendAsync("OnReceiveMessage", new ChatMessagess
     {
-      await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
-      Users.TryRemove(Context.ConnectionId, out _);
-    }
+      Message = $"{Context.ConnectionId} has left the group.",
+      User = new ChatUser { Name = "System", Group = groupName },
+      Time = DateTime.UtcNow,
+      IsCurrentUser = false
+    });
+
+    Console.WriteLine($"{Context.ConnectionId} exited group {groupName}");
+  }
 
 
   public override Task OnDisconnectedAsync(Exception? exception)
@@ -56,18 +73,18 @@ using System.Collections.Concurrent;
 
 }
 
-  public class ChatUser
-  {
-    public string Id { get; set; }
-    public string Name { get; set; }
-    public string Group { get; set; }
-    public DateTime LastOn { get; set; }
-  }
+public class ChatUser
+{
+  public string Id { get; set; }
+  public string Name { get; set; }
+  public string Group { get; set; }
+  public DateTime LastOn { get; set; }
+}
 
-  public class ChatMessagess
-  {
-    public ChatUser User { get; set; }
-    public string Message { get; set; }
-    public DateTime Time { get; set; }
-    public bool IsCurrentUser { get; set; }
-  }
+public class ChatMessagess
+{
+  public ChatUser User { get; set; }
+  public string Message { get; set; }
+  public DateTime Time { get; set; }
+  public bool IsCurrentUser { get; set; }
+}
