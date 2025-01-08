@@ -29,7 +29,7 @@ public class ChatController : BaseApiController
 
 
   [HttpPost]
-  public async Task SendMessage(ChatMessage message)
+  public async Task SendMessage(ChatMessages message)
   {
     //additional business logic 
 
