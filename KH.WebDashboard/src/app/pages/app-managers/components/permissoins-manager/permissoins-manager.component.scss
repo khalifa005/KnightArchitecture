@@ -1,0 +1,302 @@
+
+  
+  .rounded {
+    border-radius: 8px;
+  }
+  
+  .m-2 {
+    margin: 0.5rem;
+  }
+  
+  .p-2 {
+    padding: 0.5rem;
+  }
+  
+  .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .px-3 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .f-gap-1 {
+    gap: 0.25rem;
+  }
+  
+  .f-gap-2 {
+    gap: 0.5rem;
+  }
+  
+  .f-gap-3 {
+    gap: 1rem;
+  }
+  
+  .sperator {
+    height: 1px;
+    width: 100%;
+    margin: 1rem 0; /* Adds space above and below */
+    background-color: #ccc;
+}
+
+.bg-cus {
+    background-color: var(--card-background-color);
+    padding: 1rem;
+    margin: 1rem 0; /* Adjust margin to reduce spacing between sections */
+    border-radius: 8px;
+}
+
+  .fs-h6 {
+    font-size: 1rem;
+  }
+  
+  .fs-p {
+    font-size: 0.85rem;
+  }
+  
+  /* Alignment and spacing adjustments */
+  .d-flex {
+    display: flex;
+  }
+  
+  .justify-content-between {
+    justify-content: space-between;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  .justify-content-start {
+    justify-content: flex-start;
+  }
+  
+  .justify-content-end {
+    justify-content: flex-end;
+  }
+  
+  .ml-2 {
+    margin-left: 0.5rem;
+  }
+  
+  .mx-2 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  .mb-1 {
+    margin-bottom: 0.25rem;
+  }
+  
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .my-3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .m-auto {
+    margin: auto;
+  }
+  
+  .col-6, .col-12 {
+    width: 50%;
+  }
+  
+  @media (min-width: 768px) {
+    .col-6 {
+      width: 50%;
+    }
+  
+    .col-12 {
+      width: 100%;
+    }
+  }
+  
+
+
+  .mt-n-1{
+    margin-top: -1rem;
+  }
+  
+  .form-control.ng-invalid.ng-touched {
+    border: 2px solid red !important;
+  }
+  
+  .rounded{
+    border-radius: 10px !important;
+  }
+  .rounded_sm{
+    border-radius: 5px !important;
+  }
+  
+  .fs-h{
+    font-size: 1.2rem;
+    font-weight: bolder;
+  }
+  .fs-h3{
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .fs-h6{
+    font-size:0.8rem;
+    font-weight: 400;
+  
+  }
+  .fs-p{
+    font-size: 0.7rem;
+    font-weight: 500;
+    line-height: 16px;
+  }
+  .lh-2{
+    line-height:2;
+  }
+  label{
+    padding-inline: 1rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    line-height: 16px;
+  
+  }
+  
+  .f-gap-1{
+    gap:1rem;
+  }
+  
+  .f-gap-2{
+    gap:2rem;
+  }
+  .f-gap-3{
+    gap:3rem;
+  }
+  .sperator{
+    width: 80%;
+      height: 1px;
+      border: 1px solid #eee;
+      background: #eee;
+  }
+  .line-height-25{
+    line-height: 25px;
+  }
+  
+  .bg-container{
+    background-color: var(--card-background-color);
+  }
+  .bg-table-head{
+    background-color: var(--card-divider-color);
+  }
+  
+  nb-select.appearance-outline.status-basic .select-button{
+   // background-color: var(--card-background-color) !important;
+  }
+  
+  .panel_default{
+    color: var(--card-text-color) !important;
+  }
+  nb-select.appearance-outline.status-basic .select-button,
+  nb-select.appearance-outline .select-button{
+    background: transparent !important;
+    border-radius: 15px !important;
+  }
+  [nbInput].status-basic{
+    background:transparent !important;
+  }
+  ngx-drag-filer-uploader {
+    & .container{
+      border-radius: 15px !important;
+      width:100% !important;
+    }
+  
+    & label{
+      line-height: 25px;
+    }
+  }
+  
+  th,td{
+    color:var(--card-header-text-color) !important;
+  }
+  textarea,input {
+    background: transparent !important;
+    color:var(--card-text-color) !important;
+  }
+  nb-select button{
+    color:var(--card-text-color) !important;
+  }
+  .nb-theme-dark{
+    .ngx-table__table--striped > tbody tr:nth-of-type(odd){
+      background: transparent !important;
+    }
+    .ngx-table__table--hoverable > tbody tr:hover{
+      background: transparent !important;
+    }
+  }
+  ngx-drag-filer-uploader{
+    h3{
+      color:var(--card-text-color) !important;
+    }
+  }
+  .color-text{
+    color:var(--card-text-color) !important;
+  }
+  .bg-cus{
+    background-color: var(--card-background-color);
+    color:var(--card-text-color);
+  }
+  
+  /* General styling for checkboxes */
+.checkbox-container {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e0e0e0; /* Adds a light separator for better visibility */
+}
+
+.checkbox-parent {
+  background-color: #f9f9f9; /* Subtle background for parent checkboxes */
+  border: 1px solid #ddd; /* Define boundaries for parent checkboxes */
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox-input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color); /* Customize checkbox color */
+  margin-right: 0.5rem;
+}
+
+.checkbox-text {
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+.child-container {
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #ccc; /* Visual cue for children nodes */
+}
+
+/* Styling for parent titles */
+.parent-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+  color: var(--primary-color-dark);
+}
+
+/* Adjust for spacing consistency */
+.checkbox-container + .checkbox-container,
+.checkbox-parent + .checkbox-parent {
+  margin-top: 1rem; /* Space between consecutive checkbox groups */
+}

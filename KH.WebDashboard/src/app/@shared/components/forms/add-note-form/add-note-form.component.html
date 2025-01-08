@@ -1,0 +1,49 @@
+<form [formGroup]="form" *ngIf="form">
+    <nb-card class="text-center">
+      <nb-card-header translate><h3>{{title}}</h3></nb-card-header>
+      <nb-card-body>
+        <div class="row">
+         
+
+          <!-- <div class="col-md-12 mt-4">
+
+            <app-custom-textarea
+            [isRequired]="true"
+            [disabled]="false"
+            [readonly]="false"
+            [lable]=" 'comments' "
+            [placeHolder]=" 'comments' "
+            [formcontrol]="form.Notes">
+            </app-custom-textarea>    
+            </div> 
+           -->
+           </div>
+  
+      </nb-card-body>
+
+    <nb-card-footer class="text-center">
+  
+  
+         <button class="m-2"
+  *ngIf="!isRemoveAllocationForm"
+  type="submit"
+  [nbSpinner]="loadingSpinner"
+  nbButton
+  (click)="save()"
+  [disabled]="!form.valid"
+  [status]=" !form.valid ? 'danger' : 'success' "
+  translate><nb-icon [options]="{ animation: { type: 'flip in Y' } }" icon="file-add-outline"></nb-icon>
+  submit</button>
+  
+  
+  <button nbButton status="danger" (click)="cancel(0)" translate>
+    <nb-icon [options]="{ animation: { type: 'flip in Y' } }" icon="close-square"></nb-icon>
+    cancel</button>
+  
+      </nb-card-footer>
+  </nb-card>
+  
+  </form>
+  
+  
+  

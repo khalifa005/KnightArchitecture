@@ -1,0 +1,27 @@
+<!-- 
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [formControl]="formControl"
+      [formlyAttributes]="field"
+      [placeholder]="to.placeholder"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker> -->
+
+    <!-- <input nbInput placeholder="Pick Date" [nbDatepicker]="formcontrolx" [formControl]="formControl">
+    <nb-datepicker #formcontrolx></nb-datepicker> -->
+
+      <div class="datepicker-wrapper">
+        <input
+        class="custom-formly-date"
+          fullWidth 
+          nbInput
+          [nbDatepicker]="formcontrolx"
+          [formControl]="formControl">
+        <nb-datepicker #formcontrolx   ></nb-datepicker>
+        <!-- <nb-datepicker #formcontrolx  format="dd\MM\yyyy" ></nb-datepicker> -->
+        <!-- <nb-datepicker #formcontrolx  format="dd-MM-yyyy" ></nb-datepicker> -->
+        <nb-icon icon="calendar-outline" pack="eva" class="datepicker-icon"></nb-icon>
+      </div>
+      

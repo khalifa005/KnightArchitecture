@@ -1,0 +1,19 @@
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+    direction: inherit; /* Inherits direction from the parent HTML or main tag */
+  }
+  
+  .input-with-icon input {
+    flex: 1;
+    padding-inline-end: 2.5rem; /* Logical property for RTL/LTR support */
+  }
+  
+  .input-with-icon nb-icon {
+    position: absolute;
+    inset-inline-end: 0.75rem; /* Logical property for icon positioning */
+    pointer-events: none; /* Avoid blocking input interactions */
+    color: var(--text-color, #6c757d); /* Match theme colors */
+  }
+  

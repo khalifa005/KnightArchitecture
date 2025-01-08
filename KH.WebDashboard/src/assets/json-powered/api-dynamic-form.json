@@ -1,0 +1,842 @@
+[
+    {
+        "key": "customdatepicker",
+        "type": "customdatepicker",
+        "props": {
+          "label": "date",
+          "appearance": "outline",
+          "required": true
+        }
+      },
+    {
+    "fieldGroupClassName": "d-flex",
+    "fieldGroup": [
+        {
+        "key": "firstName",
+        "type": "input",
+        "className": "flex-fill flex-grow-2 pe-2 mt-0 mb-0 pb-0 pt-0 ", 
+        "props": {
+            "appearance": "outline",
+            "label": "First Name",
+            "maxLength": 10,
+            "minLength": 5
+        }
+        },
+        {
+        "key": "lastName",
+        "type": "input",
+        "className": "flex-fill flex-grow-1 px-2",
+        "props": {
+        "appearance": "outline",
+            "label": "Last Name",
+            "required": true
+        }
+
+        }
+    ]
+    },
+    {
+        "fieldGroupClassName": "d-flex",
+        "fieldGroup": [
+            {
+                "id": 500004,
+                "key": "MAINXXXCLASSFICATION",
+                "type": "autocompleteem",
+                "className": "flex-fill flex-grow-2 pe-2", 
+                "props": {
+                    "id": 0,
+                    
+                    "label": "تصنيف رئيسي",
+                    "appearance": "outline",
+                    "prefixIcon": "search",
+                    "floatLabel": "always",
+                    "prefixText": "+966",
+                    "className": "flex-fill flex-grow-2 pe-2", 
+                    "required": true,
+                    "placeholder": "-",
+                    "pattern": "",
+                    "options": [
+                        {
+                            "id": 6100,
+                            "name": "يوجد مشكلة تخص القسم"
+                        },
+                        {
+                            "id": 6101,
+                            "name": "المشكلة تابعة لقسم آخر في شركة المياه الوطنية"
+                        },
+                        {
+                            "id": 6102,
+                            "name": "المشكلة غير تابع لشركة المياه الوطنية"
+                        },
+                        {
+                            "id": 6103,
+                            "name": "بلاغ مكرر متلاصق مع بلاغ اخر يتم التعامل معه"
+                        },
+                        {
+                            "id": 6104,
+                            "name": "خلل داخلي في عقار العميل"
+                        },
+                        {
+                            "id": 6105,
+                            "name": "تصنيف خاطئ"
+                        },
+                        {
+                            "id": 6106,
+                            "name": "لا يمكن التعامل مع البلاغ مطلقاً"
+                        },
+                        {
+                            "id": 6107,
+                            "name": "لا يمكن التعامل مع البلاغ حاليا ، يحتاج الى اعادة جدولة"
+                        },
+                        {
+                            "id": 6108,
+                            "name": "لا يوجد مشكلة في الموقع"
+                        }
+                    ],
+                    "valueProp": "id",
+                    "labelProp": "name",
+                    "parentId": "-1",
+                    "disabled": false,
+                    "splkp": null,
+                    "lookupTable": null,
+                    "lookupCodeFieldName": null,
+                    "lookupArabicField": null,
+                    "lookupLatinField": null,
+                    "whereClause": null,
+                    "showTime": false,
+                    "uploadUrl": null
+                },
+                "expressions": {
+                    "model.MAINCLASSFICATION": "field.props.options.find(o=>o.id===model.MAINCLASSFICATION) ? model.MAINCLASSFICATION : null"
+                },
+                "validators": {
+                    "validation": [
+                        {
+                            "name": "autocomplete-validation"
+                        }
+                    ]
+                },
+                "fieldArray": null,
+                "hide": null
+            },
+            {
+                "id": 500104,
+                "key": "SUBCAasaTEGORY",
+                "type": "autocompleteem",
+                "className": "flex-fill flex-grow-1 pe-1", 
+                "props": {
+                    "id": 0,
+                    "label": "تصنيف فرعي",
+                    "required": true,
+                    "placeholder": "-",
+                    "pattern": "",
+                    "appearance": "outline",
+                    "options": [
+                        {
+                            "id": 6109,
+                            "name": "طفح في شبكة صرف صحي"
+                        },
+                        {
+                            "id": 6110,
+                            "name": "هبوط على شبكة صرف صحي نظامية"
+                        },
+                        {
+                            "id": 6111,
+                            "name": "هبوط على توصيلة صرف صحي غير نظامية"
+                        },
+                        {
+                            "id": 6112,
+                            "name": "العميل يشتكي من روائح"
+                        },
+                        {
+                            "id": 6113,
+                            "name": "لا يوجد غطاء منهل"
+                        },
+                        {
+                            "id": 6114,
+                            "name": "مشكلة في الغطاء"
+                        },
+                        {
+                            "id": 6115,
+                            "name": "عطل في المضخة"
+                        },
+                        {
+                            "id": 6116,
+                            "name": "بلاغ تابع للمياه"
+                        },
+                        {
+                            "id": 6117,
+                            "name": "تعدي على الشبكة"
+                        },
+                        {
+                            "id": 6118,
+                            "name": "تابع للاصول (تحت الانشاء ، غير مكتملة)"
+                        },
+                        {
+                            "id": 6119,
+                            "name": "الغطاء يخص مرافق خدمية اخرى"
+                        },
+                        {
+                            "id": 6120,
+                            "name": "تسرب مياه غسيل"
+                        },
+                        {
+                            "id": 6121,
+                            "name": "التسرب يختص بجهات خدمية أخرى (شبكة سيول / شبكة ري/ مياه جوفية/ مياه امطار )"
+                        },
+                        {
+                            "id": 6122,
+                            "name": "بلاغ مكرر متلاصق"
+                        },
+                        {
+                            "id": 6123,
+                            "name": "سدد داخلي تابع للعميل"
+                        },
+                        {
+                            "id": 6124,
+                            "name": "طفح بيارة"
+                        },
+                        {
+                            "id": 6125,
+                            "name": "الفاتورة مرتفعة"
+                        },
+                        {
+                            "id": 6126,
+                            "name": "العداد مغلق"
+                        },
+                        {
+                            "id": 6127,
+                            "name": "اخرى"
+                        },
+                        {
+                            "id": 6128,
+                            "name": "لا يوجد بيانات دقيقه للموقع, صعوبة التواصل مع العميل"
+                        },
+                        {
+                            "id": 6129,
+                            "name": "لايوجد أي معلومات عن الموقع"
+                        },
+                        {
+                            "id": 6130,
+                            "name": "بلاغ خارج النطاق الجغرافي للمدينة"
+                        },
+                        {
+                            "id": 6131,
+                            "name": "مواقع أمنية تحتاج تصريح"
+                        },
+                        {
+                            "id": 6132,
+                            "name": "الحركة المرورية \\ وقت الحظر"
+                        },
+                        {
+                            "id": 6133,
+                            "name": "لا يوجد مشكلة"
+                        },
+                        {
+                            "id": 6162,
+                            "name": "تحول الى الوردية اللاحقة "
+                        }
+                    ],
+                    "valueProp": "id",
+                    "labelProp": "name",
+                    "parentId": "500004",
+                    "disabled": false,
+                    "splkp": null,
+                    "lookupTable": null,
+                    "lookupCodeFieldName": null,
+                    "lookupArabicField": null,
+                    "lookupLatinField": null,
+                    "whereClause": null,
+                    "showTime": false,
+                    "uploadUrl": null
+                },
+                "expressions": {
+                    "model.SUBCATEGORY": "field.props.options.find(o=>o.id===model.SUBCATEGORY) ? model.SUBCATEGORY : null"
+                },
+                "validators": {
+                    "validation": [
+                        {
+                            "name": "autocomplete-validation"
+                        }
+                    ]
+                },
+                "fieldArray": null,
+                "hide": null
+            }
+        ]
+    },
+  {
+      "id": 500004,
+      "key": "MAINCLASSFICATION",
+      "type": "autocompleteem",
+      "className": "col-md-6", 
+      "props": {
+          "id": 0,
+          "label": "تصنيف رئيسي",
+          "appearance": "outline",
+          "prefixIcon": "search",
+          "floatLabel": "always",
+          "prefixText": "+966",
+          "customClass": "my-custom-class",
+          "required": true,
+          "placeholder": "-",
+          "pattern": "",
+          "options": [
+              {
+                  "id": 6100,
+                  "name": "يوجد مشكلة تخص القسم"
+              },
+              {
+                  "id": 6101,
+                  "name": "المشكلة تابعة لقسم آخر في شركة المياه الوطنية"
+              },
+              {
+                  "id": 6102,
+                  "name": "المشكلة غير تابع لشركة المياه الوطنية"
+              },
+              {
+                  "id": 6103,
+                  "name": "بلاغ مكرر متلاصق مع بلاغ اخر يتم التعامل معه"
+              },
+              {
+                  "id": 6104,
+                  "name": "خلل داخلي في عقار العميل"
+              },
+              {
+                  "id": 6105,
+                  "name": "تصنيف خاطئ"
+              },
+              {
+                  "id": 6106,
+                  "name": "لا يمكن التعامل مع البلاغ مطلقاً"
+              },
+              {
+                  "id": 6107,
+                  "name": "لا يمكن التعامل مع البلاغ حاليا ، يحتاج الى اعادة جدولة"
+              },
+              {
+                  "id": 6108,
+                  "name": "لا يوجد مشكلة في الموقع"
+              }
+          ],
+          "valueProp": "id",
+          "labelProp": "name",
+          "parentId": "-1",
+          "disabled": false,
+          "splkp": null,
+          "lookupTable": null,
+          "lookupCodeFieldName": null,
+          "lookupArabicField": null,
+          "lookupLatinField": null,
+          "whereClause": null,
+          "showTime": false,
+          "uploadUrl": null
+      },
+      "expressions": {
+          "model.MAINCLASSFICATION": "field.props.options.find(o=>o.id===model.MAINCLASSFICATION) ? model.MAINCLASSFICATION : null"
+      },
+      "validators": {
+          "validation": [
+              {
+                  "name": "autocomplete-validation"
+              }
+          ]
+      },
+      "fieldArray": null,
+      "hide": null
+  },
+  {
+      "id": 500104,
+      "key": "SUBCATEGORY",
+      "type": "autocompleteem",
+      "props": {
+          "id": 0,
+          "label": "تصنيف فرعي",
+          "required": true,
+          "placeholder": "-",
+          "pattern": "",
+          "appearance": "outline",
+          "options": [
+              {
+                  "id": 6109,
+                  "name": "طفح في شبكة صرف صحي"
+              },
+              {
+                  "id": 6110,
+                  "name": "هبوط على شبكة صرف صحي نظامية"
+              },
+              {
+                  "id": 6111,
+                  "name": "هبوط على توصيلة صرف صحي غير نظامية"
+              },
+              {
+                  "id": 6112,
+                  "name": "العميل يشتكي من روائح"
+              },
+              {
+                  "id": 6113,
+                  "name": "لا يوجد غطاء منهل"
+              },
+              {
+                  "id": 6114,
+                  "name": "مشكلة في الغطاء"
+              },
+              {
+                  "id": 6115,
+                  "name": "عطل في المضخة"
+              },
+              {
+                  "id": 6116,
+                  "name": "بلاغ تابع للمياه"
+              },
+              {
+                  "id": 6117,
+                  "name": "تعدي على الشبكة"
+              },
+              {
+                  "id": 6118,
+                  "name": "تابع للاصول (تحت الانشاء ، غير مكتملة)"
+              },
+              {
+                  "id": 6119,
+                  "name": "الغطاء يخص مرافق خدمية اخرى"
+              },
+              {
+                  "id": 6120,
+                  "name": "تسرب مياه غسيل"
+              },
+              {
+                  "id": 6121,
+                  "name": "التسرب يختص بجهات خدمية أخرى (شبكة سيول / شبكة ري/ مياه جوفية/ مياه امطار )"
+              },
+              {
+                  "id": 6122,
+                  "name": "بلاغ مكرر متلاصق"
+              },
+              {
+                  "id": 6123,
+                  "name": "سدد داخلي تابع للعميل"
+              },
+              {
+                  "id": 6124,
+                  "name": "طفح بيارة"
+              },
+              {
+                  "id": 6125,
+                  "name": "الفاتورة مرتفعة"
+              },
+              {
+                  "id": 6126,
+                  "name": "العداد مغلق"
+              },
+              {
+                  "id": 6127,
+                  "name": "اخرى"
+              },
+              {
+                  "id": 6128,
+                  "name": "لا يوجد بيانات دقيقه للموقع, صعوبة التواصل مع العميل"
+              },
+              {
+                  "id": 6129,
+                  "name": "لايوجد أي معلومات عن الموقع"
+              },
+              {
+                  "id": 6130,
+                  "name": "بلاغ خارج النطاق الجغرافي للمدينة"
+              },
+              {
+                  "id": 6131,
+                  "name": "مواقع أمنية تحتاج تصريح"
+              },
+              {
+                  "id": 6132,
+                  "name": "الحركة المرورية \\ وقت الحظر"
+              },
+              {
+                  "id": 6133,
+                  "name": "لا يوجد مشكلة"
+              },
+              {
+                  "id": 6162,
+                  "name": "تحول الى الوردية اللاحقة "
+              }
+          ],
+          "valueProp": "id",
+          "labelProp": "name",
+          "parentId": "500004",
+          "disabled": false,
+          "splkp": null,
+          "lookupTable": null,
+          "lookupCodeFieldName": null,
+          "lookupArabicField": null,
+          "lookupLatinField": null,
+          "whereClause": null,
+          "showTime": false,
+          "uploadUrl": null
+      },
+      "expressions": {
+          "model.SUBCATEGORY": "field.props.options.find(o=>o.id===model.SUBCATEGORY) ? model.SUBCATEGORY : null"
+      },
+      "validators": {
+          "validation": [
+              {
+                  "name": "autocomplete-validation"
+              }
+          ]
+      },
+      "fieldArray": null,
+      "hide": null
+  },
+  {
+      "id": 500404,
+      "key": "ACTIONTAKEN",
+      "type": "select",
+      "props": {
+          "id": 0,
+          "label": "نتيجة النشاط",
+          "required": true,
+          "appearance": "outline",
+
+          "placeholder": "-",
+          "pattern": "",
+          "options": [
+              {
+                  "id": 6134,
+                  "name": "تم معالجة الطفح"
+              },
+              {
+                  "id": 6135,
+                  "name": "عالق في الخط يحول الى قسم الكميرا"
+              },
+              {
+                  "id": 6136,
+                  "name": "تحويل الى قسم الاصلاحات"
+              },
+              {
+                  "id": 6137,
+                  "name": "تحويل الى قسم الاصلاحات"
+              },
+              {
+                  "id": 6138,
+                  "name": "تحوبل الى قسم المخالفات"
+              },
+              {
+                  "id": 6139,
+                  "name": "تحويل صيانة الشبكات الصرف الصحي"
+              },
+              {
+                  "id": 6140,
+                  "name": " تم تركيب غطاء"
+              },
+              {
+                  "id": 6141,
+                  "name": "تحويل الى قسم الاصلاحات"
+              },
+              {
+                  "id": 6142,
+                  "name": "تحويل الى قسم المضخات"
+              },
+              {
+                  "id": 6143,
+                  "name": "تحويل الى قسم الطوارئ المياه"
+              },
+              {
+                  "id": 6144,
+                  "name": "تحويل للجنة المخالفات"
+              },
+              {
+                  "id": 6145,
+                  "name": "تحويل الى ادارة المشاريع"
+              },
+              {
+                  "id": 6146,
+                  "name": "إقفال البلاغ"
+              },
+              {
+                  "id": 6147,
+                  "name": "تحويل الى قسم التعديات"
+              },
+              {
+                  "id": 6148,
+                  "name": "إقفال البلاغ"
+              },
+              {
+                  "id": 6149,
+                  "name": "إقفال البلاغ"
+              },
+              {
+                  "id": 6150,
+                  "name": "يحول الى قسم التعديات"
+              },
+              {
+                  "id": 6151,
+                  "name": "اقفال البلاغ"
+              },
+              {
+                  "id": 6152,
+                  "name": "يحول الى قسم التعديات"
+              },
+              {
+                  "id": 6153,
+                  "name": "إقفال البلاغ"
+              },
+              {
+                  "id": 6154,
+                  "name": "إقفال البلاغ"
+              },
+              {
+                  "id": 6155,
+                  "name": "إقفال البلاغ"
+              },
+              {
+                  "id": 6156,
+                  "name": "إقفال البلاغ"
+              },
+              {
+                  "id": 6157,
+                  "name": "إقفال البلاغ"
+              },
+              {
+                  "id": 6158,
+                  "name": "إقفال البلاغ"
+              },
+              {
+                  "id": 6159,
+                  "name": "اعادة جدولة"
+              },
+              {
+                  "id": 6160,
+                  "name": "اعادة جدولة"
+              },
+              {
+                  "id": 6161,
+                  "name": "إقفال البلاغ"
+              },
+              {
+                  "id": 6163,
+                  "name": "اعادة جدولة"
+              }
+          ],
+          "valueProp": "id",
+          "labelProp": "name",
+          "parentId": "500104",
+          "multiple": true,
+          "disabled": false,
+          "splkp": null,
+          "lookupTable": null,
+          "lookupCodeFieldName": null,
+          "lookupArabicField": null,
+          "lookupLatinField": null,
+          "whereClause": null,
+          "showTime": false,
+          "uploadUrl": null
+      },
+      "expressions": {
+          "props.description": "field.props.options.find(o=>o.id==model.ACTIONTAKEN) ? field.props.options.find(o=>o.id==model.ACTIONTAKEN).name : null"
+      },
+      "validators": {
+          "validation": [
+              {
+                  "name": "autocomplete-validation"
+              }
+          ]
+      },
+      "fieldArray": null,
+      "hide": null
+  },
+  {
+      "id": 6001,
+      "key": "LOCATIONRELATEDASSET",
+      "type": "input",
+      "className": "col-md-6",
+      "props": {
+          "id": 0,
+          "label": "الموقع والأصل الفعلي على GIS",
+          "required": false,
+          "placeholder": "-",
+          "pattern": "",
+          "options": [],
+          "max": 2500,
+          "disabled": false,
+          "splkp": null,
+          "lookupTable": null,
+          "lookupCodeFieldName": null,
+          "lookupArabicField": null,
+          "lookupLatinField": null,
+          "whereClause": null,
+          "showTime": false,
+          "uploadUrl": null
+      },
+      "expressions": {},
+      "validators": {
+          "validation": []
+      },
+      "fieldArray": null,
+      "hide": null
+  },
+  {
+      "id": 5012,
+      "key": "HOUSECONNECTIONNUMBER",
+      "type": "integer",
+      "props": {
+          "id": 0,
+          "label": "رقم التوصيلة المنزلية",
+          "required": false,
+          "placeholder": " ",
+          "pattern": "",
+          "options": [],
+          "min": 0,
+          "max": 250,
+          "disabled": false,
+          "splkp": null,
+          "lookupTable": null,
+          "lookupCodeFieldName": null,
+          "lookupArabicField": null,
+          "lookupLatinField": null,
+          "whereClause": null,
+          "showTime": false,
+          "uploadUrl": null
+      },
+      "expressions": {},
+      "validators": {
+          "validation": []
+      },
+      "fieldArray": null,
+      "hide": null
+  },
+  {
+      "id": 100809,
+      "key": "ATTACHMENT",
+      "type": "file",
+      "props": {
+          "id": 0,
+          "label": "مرفقات",
+          "required": false,
+          "placeholder": "-",
+          "pattern": "",
+          "options": [],
+          "disabled": false,
+          "splkp": null,
+          "lookupTable": null,
+          "lookupCodeFieldName": null,
+          "lookupArabicField": null,
+          "lookupLatinField": null,
+          "whereClause": null,
+          "showTime": false,
+          "uploadUrl": "https://localhost:7014/api/demo/SubmitFormlyFormFileStream"
+      },
+      "expressions": {},
+      "validators": {
+          "validation": []
+      },
+      "fieldArray": {
+          "validators": {
+              "validation": [
+                  {
+                      "name": "allowed-file-extensions",
+                      "options": {
+                          "allowedFileExtensions": [],
+                          "forbiddenCharacters": null,
+                          "maxFilenameLength": null
+                      }
+                  }
+              ]
+          }
+      },
+      "hide": null
+  },
+  {
+      "id": 5005,
+      "key": "REMARKS",
+      "type": "textarea",
+      "props": {
+          "id": 0,
+          "label": "ملاحظة",
+          "required": false,
+          "placeholder": "-",
+          "pattern": "",
+          "options": [],
+          "max": 2500,
+          "disabled": false,
+          "rows": 5,
+          "splkp": null,
+          "lookupTable": null,
+          "lookupCodeFieldName": null,
+          "lookupArabicField": null,
+          "lookupLatinField": null,
+          "whereClause": null,
+          "showTime": false,
+          "uploadUrl": null
+      },
+      "expressions": {},
+      "validators": {
+          "validation": []
+      },
+      "fieldArray": null,
+      "hide": null
+  },
+  {
+      "id": 5004000,
+      "key": "FBFId",
+      "type": null,
+      "props": {
+          "id": 0,
+          "label": "FBFId",
+          "required": false,
+          "disabled": true,
+          "splkp": null,
+          "lookupTable": null,
+          "lookupCodeFieldName": null,
+          "lookupArabicField": null,
+          "lookupLatinField": null,
+          "whereClause": null,
+          "showTime": false,
+          "uploadUrl": null
+      },
+      "defaultValue": "5004",
+      "fieldArray": null
+  },
+  {
+      "id": 5004111,
+      "key": "PK",
+      "type": null,
+      "props": {
+          "id": 0,
+          "label": "PK",
+          "required": false,
+          "disabled": true,
+          "splkp": null,
+          "lookupTable": null,
+          "lookupCodeFieldName": null,
+          "lookupArabicField": null,
+          "lookupLatinField": null,
+          "whereClause": null,
+          "showTime": false,
+          "uploadUrl": null
+      },
+      "defaultValue": "!!!SPNWCALLDP-1722350383!!!",
+      "fieldArray": null
+  },
+  {
+      "id": 5004222,
+      "key": "TaskCode",
+      "type": null,
+      "props": {
+          "id": 0,
+          "label": "TaskCode",
+          "required": false,
+          "disabled": true,
+          "splkp": null,
+          "lookupTable": null,
+          "lookupCodeFieldName": null,
+          "lookupArabicField": null,
+          "lookupLatinField": null,
+          "whereClause": null,
+          "showTime": false,
+          "uploadUrl": null
+      },
+      "defaultValue": "#TASKCODE#",
+      "fieldArray": null
+  }
+]

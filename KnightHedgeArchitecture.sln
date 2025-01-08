@@ -39,6 +39,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "KH.WebClient", "KH.WebClien
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C33235E5-9A21-41E7-9924-FD4701006790}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "KH.WebDashboard", "KH.WebDashboard\KH.WebDashboard.esproj", "{9A032661-543D-438E-AB72-FD0C30D8724E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,12 @@ Global
 		{C33235E5-9A21-41E7-9924-FD4701006790}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C33235E5-9A21-41E7-9924-FD4701006790}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C33235E5-9A21-41E7-9924-FD4701006790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A032661-543D-438E-AB72-FD0C30D8724E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A032661-543D-438E-AB72-FD0C30D8724E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A032661-543D-438E-AB72-FD0C30D8724E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9A032661-543D-438E-AB72-FD0C30D8724E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A032661-543D-438E-AB72-FD0C30D8724E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A032661-543D-438E-AB72-FD0C30D8724E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

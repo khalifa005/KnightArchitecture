@@ -1,0 +1,339 @@
+{
+	"ar": "عربي",
+	"en": "انجليزي",
+	"loading": "جاري التحميل ",
+	"sideMenu": {
+    "home": "الصفحة الرئيسية",
+	"roles": "الادوار في النظام",
+    "dynamicForm": "النموذج الديناميكي",
+    "dynamicTable": "الجدول الديناميكي",
+    "cardsExamples": "أمثلة البطاقات",
+    "bootstrapExamples": "أمثلة بوتستراب",
+    "iconsExamples": "أمثلة الأيقونات",
+    "inputsExamples": "أمثلة الإدخال",
+    "formExamples": "أمثلة النماذج",
+    "auth": "المصادقة",
+    "notFound": "غير موجود",
+    "userManagement": "إدارة المستخدمين",
+    "permissions": "الأذونات",
+    "users": "المستخدمون"
+  },
+  "TABLE": {
+    "ID": "الرقم التعريفي",
+    "NAME_EN": "الاسم الانجليزي",
+    "NAME_AR": "الاسم العربي",
+    "DESCRIPTION": "التفاصيل",
+    "IS_DELETED": "هل تم مسحه",
+	"TOTAL_ITEMS": "المجموع الكلي",
+
+    "OPTIONS": "خيارات"
+  },
+  "role": {
+	"management": "إدارة الادوار",
+	"description": "الوصف",
+    "createdDate": "تاريخ الإنشاء",
+    "updatedDate": "تاريخ آخر تحديث",
+    "permissions": "الأذونات",
+    "key": "المفتاح",
+    "nameEn": "الاسم (بالإنجليزية)",
+    "nameAr": "الاسم (بالعربية)",
+    "parentPermission": "الإذن الرئيسي",
+	"home": "Home"
+  },
+  "app-manager": {
+    "permissions-manager": "إدارة الصلاحيات",
+    "selectRole": "اختر الدور",
+    "selectParentPermission": "اختر الصلاحية الرئيسية"
+  },
+	"form": {
+		"inputs": "مدخلات النموذج",
+		"section": {
+			"inputs": "قسم المدخلات",
+			"textareas": "قسم النصوص",
+			"file_uploads": "File Upload Section",
+
+			"dates": "قسم التواريخ",
+			"time": "قسم القوائم المنسدلة للوقت",
+			"multi_selects": "قسم القوائم المتعددة الاختيار",
+			"dropdowns": "قسم القوائم المنسدلة"
+
+		},
+		"file_uploader": {
+			"form_control": "رافع الملفات (نموذج تفاعلي)",
+			"standalone": "رافع الملفات (مستقل)",
+			"label_form_control": "تحميل الملفات",
+			"label_standalone": "تحميل المستندات",
+			"placeholder": "اسحب الملفات وأفلتها أو انقر للتصفح"
+		  },
+		"input": {
+			"form_control": "استخدام FormControl",
+			"standalone": "مدخل مستقل",
+			"auto_complete": "التكملة التلقائية",
+			"label_form_control": "مدخل معتمد على Form-Control",
+			"label_standalone": "مدخل مستقل",
+			"placeholder": "أدخل قيمة"
+		},
+		"time": {
+			"hours_form_control": "قائمة الساعات (نموذج تفاعلي)",
+			"minutes_form_control": "قائمة الدقائق (نموذج تفاعلي)",
+			"hours_standalone": "قائمة الساعات (مستقل)",
+			"minutes_standalone": "قائمة الدقائق (مستقل)",
+			"label_hours_form_control": "اختر الساعة",
+			"label_minutes_form_control": "اختر الدقيقة",
+			"label_hours_standalone": "اختيار الساعة",
+			"label_minutes_standalone": "اختيار الدقيقة",
+			"placeholder_hours": "اختر ساعة...",
+			"placeholder_minutes": "اختر دقيقة..."
+		  },
+		"auto_complete": {
+			"label": "اختر من القائمة",
+			"placeholder": "ابدا الكتابة للبحث...",
+			"product_category": "اختر فئة المنتج",
+			"sub_category": "اختر الفئة الفرعية",
+			"select_category": "اختر فئة...",
+			"select_sub_category": "اختر فئة فرعية..."
+		  },
+		  "dropdown": {
+      "form_control": "قائمة منسدلة مع التحكم في النموذج",
+      "standalone": "قائمة منسدلة مستقلة",
+      "label_form_control": "اختر الفئة (نموذج تفاعلي)",
+      "label_standalone": "اختر الفئة (مستقل)",
+      "placeholder": "اختر خيارًا"
+    },
+	"multi_select": {
+		"form_control": "قائمة متعددة الاختيار مع التحكم في النموذج",
+		"standalone": "قائمة متعددة الاختيار مستقلة",
+		"label_form_control": "اختر الفئات (نموذج تفاعلي)",
+		"label_standalone": "اختر الفئات (مستقل)"
+	  },
+		"textarea": {
+			"form_control": "استخدام FormControl",
+			"standalone": "حقل نص مستقل",
+			"label_form_control": "حقل نص معتمد على Form-Control",
+			"label_standalone": "حقل نص مستقل",
+			"placeholder": "أدخل التفاصيل"
+		},
+		"date": {
+			"form_control": "استخدام FormControl",
+			"standalone": "منتقي تاريخ مستقل",
+			"label_form_control": "منتقي تاريخ معتمد على Form-Control",
+			"label_standalone": "منتقي تاريخ مستقل",
+			"placeholder": "اختر تاريخ"
+		}
+	},
+	"validations": {
+		"please-provide-value": "الرجاء ادخال قيمة",
+		"field-required": "هذاالحقل مطلوب",
+		"invalid-field-value": "الرجاء إدخال قيمة صحيحة.",
+		 "tooEarly": "التاريخ مبكر جدًا. أقل تاريخ مسموح به هو {{ min }}.",
+    "tooLate": "التاريخ متأخر جدًا. أقصى تاريخ مسموح به هو {{ max }}.",
+	 "minlength": "يجب أن تكون البيانات على الأقل {{ requiredLength }} أحرف.",
+    "maxlength": "يجب ألا تتجاوز البيانات {{ requiredLength }} أحرف.",
+
+	"invalid-file-extensions": "الملفات التالية تحتوي على امتدادات غير صالحة:",
+    "invalid-file-size": "الملفات التالية تتجاوز الحد المسموح به للحجم:",
+    "max-files-error": "يمكنك تحميل ما يصل إلى {{maxAllowed}} ملفًا فقط. حاليًا، لقد اخترت {{actual}} ملفًا.",
+    "file-details": {
+      "name": "{{name}}",
+      "size": "{{size}}"
+    },
+	"allowed-file-extensions": "الامتدادات المسموح بها للملفات",
+    "max-file-size": "الحجم الأقصى للملف",
+    "max-files": "يمكنك تحميل ما يصل إلى {{max}} ملفًا."
+	
+	},
+	"@form": {
+		"TITLE": "Hello Angular with ngx-translate!",
+		"LANG": "Change language",
+		"FNAME": "First Name",
+		"dropzoneText": "اسحب الملفات وأفلتها هنا أو",
+		"browseFilesButtonText": "تصفح الملفات",
+		"removeFileTooltip": "إزالة الملف",
+		"previouslyUploaded": "تم رفعة من قبل",
+		"validation": {
+			"required": "هذا الحقل اجباري"
+		}
+	},
+	"@home": {
+		"welcome": "مرحبًا بك في لوحة التحكم"
+	},
+	"@product": {
+		"name": "اسم المنتج",
+		"price": "السعر",
+		"quantity": "الكمية"
+	},
+	"@progress": {
+		"basic": "أساسي",
+		"primary": "رئيسي",
+		"info": "معلومات",
+		"success": "ناجح",
+		"warning": "تحذير",
+		"danger": "خطر",
+		"control": "تحكم"
+	},
+	"@select": {
+		"header": "مكون الاختيار",
+		"placeholder": "اختر خيارًا",
+		"option1": "الخيار 1",
+		"option2": "الخيار 2",
+		"option3": "الخيار 3"
+	},
+	"@buttons": {
+		"search": "بحث",
+		"submit": "حفظ",
+		"edit": "تعديل",
+		"login": "تسجيل الدخول",
+		"reset": "اعادة ضبط",
+		"delete": "حذف",
+		"header": "أمثلة على الأزرار",
+		"defaultHeader": "الأزرار الافتراضية",
+		"outlineHeader": "الأزرار ذات الحدود",
+		"typeHeader": "أنواع الأزرار",
+		"heroHeader": "أزرار البطل",
+		"sizeHeader": "أحجام الأزرار",
+		"default": "افتراضي",
+		"primary": "رئيسي",
+		"success": "ناجح",
+		"warning": "تحذير",
+		"danger": "خطر",
+		"rectangleHero": "بطل مستطيل",
+		"semiRound": "شبه مستدير",
+		"roundSmall": "صغير مستدير",
+		"tiny": "صغير جدًا",
+		"small": "صغير",
+		"regular": "عادي",
+		"large": "كبير",
+		"giant": "عملاق",
+		"info": "معلومات"
+	},
+	"@pipes": {
+		"header": "أمثلة على استخدام الأنابيب",
+		"arrayToString": "أنبوب المصفوفة إلى النص",
+		"capitalize": "أنبوب الحروف الكبيرة",
+		"numberToString": "أنبوب الرقم إلى النص",
+		"numberWithCommas": "أنبوب الرقم بالفواصل",
+		"plural": "أنبوب الجمع",
+		"round": "أنبوب التقريب",
+		"sanitizeHtml": "أنبوب تنظيف HTML",
+		"split": "أنبوب التجزئة"
+	},
+	"@cardSizes": {
+		"header": "أحجام البطاقات",
+		"tiny": "صغير جدًا",
+		"spinner": "Spinner",
+		"icons": "Icons",
+		"tinyBody": "هذه بطاقة صغيرة جدًا.",
+		"small": "صغير",
+		"smallBody": "هذه بطاقة صغيرة.",
+		"regular": "عادي",
+		"regularBody": "هذه بطاقة عادية.",
+		"large": "كبير",
+		"largeBody": "هذه بطاقة كبيرة.",
+		"giant": "عملاق",
+		"giantBody": "هذه بطاقة عملاقة."
+	},
+	"@tabs": {
+		"users": "المستخدمون",
+		"usersContent": "قائمة المستخدمين.",
+		"orders": "الطلبات",
+		"ordersContent": "قائمة الطلبات.",
+		"transactions": "المعاملات",
+		"transactionsContent": "قائمة المعاملات.",
+		"notifications": "الإشعارات",
+		"notificationsContent": "قائمة الإشعارات."
+	},
+	"@accordion": {
+		"advancedFilters": "التصفية",
+		"productDetails": "تفاصيل المنتج",
+		"productDetailsContent": "السديم عبارة عن سحابة بين نجمية من الغبار والهيدروجين والهيليوم والغازات المتأينة الأخرى.",
+		"reviews": "المراجعات",
+		"reviewsContent": "السديم عبارة عن سحابة بين نجمية من الغبار والهيدروجين والهيليوم والغازات المتأينة الأخرى.",
+		"edit": "تعديل",
+		"editContent": "السديم عبارة عن سحابة بين نجمية من الغبار والهيدروجين والهيليوم والغازات المتأينة الأخرى."
+	},
+	"indicators": {
+		"total-tasks": "إجمالي المهام",
+		"total-teams": "إجمالي الفرق",
+		"field-activity": "النشاط الميداني",
+		"tasks-target": "الهدف من المهام",
+		"new-posts": "المهام الجديدة",
+		"new-comments": "الفرق الجديدة",
+		"bounce-rate": "معدل الحل",
+		"total-visits": "إجمالي الحلول",
+		"task-status": "حالة المهام",
+		"tasks-zones": "مناطق المهام",
+		"tree-representation-task-zones": "تمثيل شجري لمناطق المهام",
+		"tree-representation-work-order": "تمثيل شجري انواع الطلبات"
+	},
+	"live-monitoring": {
+		"action-controls": "عناصر التحكم ",
+		"toggle-tasks": " المهام",
+		"toggle-teams": " الفرق",
+		"eam": "إدارة الأصول",
+		"since": "منذ",
+		"teams": "الفرق",
+		"department": "الادارة",
+		"active-tasks": "المهام النشطه",
+		"closed-tasks": "المهام المغلقة",
+		"time": "الوقت",
+		"sequence": "التسلسل",
+		"task-code": "رقم المهمة",
+		"operation": "العملية",
+		"dec": "التفاصيل",
+		"client-name": "اسم العميل",
+		"client-num": "رقم العميل",
+		"task-zone": "المنطقة",
+		"street": "اسم الشارع",
+		"hcn": "اتش سي ان",
+		"meter-num": "رقم العداد",
+		"checkno": "رقم الطلب",
+		"asset-num": "رقم الاصل",
+		"id": "الرقم التعريفي",
+		"name": "الاسم",
+		"iqama": "رقم الاقامة",
+		"type": "النوع",
+		"specialization": "التخصص",
+		"battary": "البطارية",
+		"tracked": "التتبع",
+		"connected": "الاتصال بالشبكة",
+		"speed": "السرعة",
+		"tracking": "التتبع",
+		"connection": "حالة الشبكة",
+		"sla": "اس ال ايه",
+		"tasks": "المهام",
+		"unassigned": "غير معين",
+		"delayed": "متأخر",
+		"work-closed": "عمل/مغلق",
+		"from-to": "من/إلى",
+		"kpi": "مؤشر الأداء الرئيسي",
+		"allocation": "توزيع",
+		"field-team": "الفريق الميداني",
+		"alert": "تنبيه",
+		"work-free": "عمل/فارغ",
+		"maps": "خرائط",
+		"submit": "إرسال",
+		"cancel": "إلغاء",
+		"options": "خيارات",
+		"select-options": "كل الخيارات"
+	},
+	"auth": {
+		"login": "تسجيل الدخول",
+		"username": "اسم المستخدم",
+		"password": "كلمة المرور",
+		"required_username": "اسم المستخدم مطلوب.",
+		"required_password": "كلمة المرور مطلوبة.",
+		"remember": "تذكرني"
+	  },
+		"VALIDATION": {
+		  "REQUIRED": "هذا الحقل مطلوب.",
+		  "MIN_LENGTH": "الحد الأدنى {{length}} أحرف.",
+		  "MAX_LENGTH": "الحد الأقصى {{length}} أحرف.",
+		  "USERNAME": {
+			"INVALID": "يسمح فقط بالأحرف والأرقام."
+		  },
+		  "PASSWORD": {
+			"INVALID": "يمكن أن تحتوي كلمة المرور على أحرف وأرقام ورموز خاصة (!@#$%^&* وما إلى ذلك)."
+		  }
+		}
+	  
+}

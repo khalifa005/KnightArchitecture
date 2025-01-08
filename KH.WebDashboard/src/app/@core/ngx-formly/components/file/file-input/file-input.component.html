@@ -1,0 +1,18 @@
+<input #fileInput multiple (change)="onChange($event)" type="file">
+<div #dropzone class="dropzone">
+  <mat-icon svgIcon="fileType:fileDrop"></mat-icon>
+  <div class="dropzone-text">
+    {{'@form.dropzoneText' | translate}}
+
+  </div>
+<button 
+  type="button" 
+  mat-raised-button 
+  color="secondary" 
+  class="small-button" 
+  (click)="onBrowseFiles()">
+  {{'@form.browseFilesButtonText' | translate}}
+</button>
+
+  
+</div>

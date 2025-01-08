@@ -1,0 +1,300 @@
+
+// themes - our custom or/and out of the box themes
+@use './themes.scss' as *;
+
+// framework component themes (styles tied to theme variables)
+@use '@nebular/theme/styles/globals' as *;
+//@use '/node_modules/@nebular/auth/styles/all' as *;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/grid';
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
+
+// @import 'bootstrap/scss/bootstrap-rtl';
+@import "bootstrap/dist/css/bootstrap.rtl.min.css";
+
+// @import "ngx-bootstrap/datepicker/bs-datepicker";
+// @import "../../../../node_modules/ngx-bootstrap/datepicker/bs-datepicker.scss";
+
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+
+// loading progress bar theme
+@import './pace.theme';
+
+@import './layout';
+@import './overrides';
+
+// install the framework and custom global styles
+@include nb-install() {
+  // framework global styles
+  @include nb-theme-global();
+ // @include nb-auth-global();
+  @include ngx-layout();
+  // loading progress bar
+  @include ngx-pace-theme();
+  @include nb-overrides();
+};
+
+
+
+nb-menu .menu-item a {
+  display: flex !important; 
+  align-items: center !important;
+}
+
+/* LTR layout (default) */
+nb-menu .menu-item a nb-icon {
+  margin-right: 10px !important; /* Space between icon and text */
+}
+
+/* RTL layout */
+[dir="rtl"] nb-menu .menu-item a nb-icon {
+  margin-right: 0 !important; /* Reset the margin-right */
+  margin-left: 10px !important; /* Add space to the left for RTL */
+}
+
+/* You can add global styles to this file, and also import other style files */
+.nb-theme-default nb-layout-header nav {
+  height: 2.90rem !important; /* Reduced height */
+  padding: 0.75rem !important; /* Adjust padding to fit the smaller height */
+}
+
+.nb-theme-default nb-layout-header.fixed~.layout-container {
+  padding-top: 1.75rem !important; /* Matches the header height */
+}
+
+.nb-theme-default nb-layout .layout .layout-container nb-sidebar.fixed,
+.nb-theme-default nb-layout .layout .layout-container nb-sidebar .main-container-fixed {
+  top: 1.75rem !important; /* Matches the header height */
+}
+
+.nb-theme-default nb-layout .layout .layout-container .content .columns nb-layout-column {
+  // padding: 0 !important; 
+  padding: 1.5rem 0.3rem 0.3rem 0.3rem !important;
+}
+
+.window-limited-height {
+  width: 40%;
+}
+
+.window-limited-height > nb-card{
+  margin: auto;
+  max-height: 90vh;
+}
+
+.window-limited-height > nb-card > nb-card-header{
+  padding: 0.5rem 0.5rem !important;
+}
+
+.window-limited-height > nb-card > nb-card-body{
+  padding: 0.5rem 1.0rem !important;
+}
+
+.window-limited-height-large {
+  width: 50%;
+}
+
+.window-limited-height-large > nb-card{
+  margin: auto;
+  max-height: 90vh;
+}
+
+.window-limited-height-large > nb-card > nb-card-header{
+  padding: 0.5rem 0.5rem !important;
+}
+
+.window-limited-height-large > nb-card > nb-card-body{
+  padding: 0.5rem 1.0rem !important;
+}
+
+.window-limited-height-very-large {
+  width: 85%;
+  max-height: 98vh;
+}
+
+.window-limited-height-very-large > nb-card{
+  margin: auto;
+  max-height: 98vh;
+}
+
+.window-limited-height-very-large > nb-card > nb-card-header{
+  padding: 0.5rem 0.5rem !important;
+}
+
+.window-limited-height-very-large > nb-card > nb-card-body{
+  padding: 0.5rem 1.0rem !important;
+}
+
+.window-with-min-height-very-large {
+  width: 85%;
+  max-height: 85vh;
+  min-height: 85vh;
+
+}
+
+.window-with-min-height-very-large > nb-card{
+  margin: auto;
+  max-height: 85vh;
+  min-height: 85vh;
+}
+
+.window-with-min-height-very-large > nb-card > nb-card-header{
+  padding: 0.5rem 0.5rem !important;
+}
+
+.window-with-min-height-very-large > nb-card > nb-card-body{
+  padding: 0.5rem 1.0rem !important;
+}
+
+.window-full-screen {
+  width: 97%;
+}
+
+.window-full-screen > nb-card{
+  margin: auto;
+  max-height: 97vh;
+}
+
+.window-full-screen > nb-card > nb-card-header{
+  padding: 0.5rem 0.5rem !important;
+}
+
+.window-full-screen > nb-card > nb-card-body{
+  padding: 0.5rem 1.0rem !important;
+}
+
+
+angular2-smart-table-tags-list {
+  display: none;
+}
+
+.form-group{
+  @extend .form-group;
+  margin-bottom: 0.25rem;
+}
+
+
+.main-container { top: 0px !important; }
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: 'Cairo', sans-serif;
+}
+
+.small-icon {
+  width: 30px; /* Adjust the size as needed */
+  height: 30px; /* Adjust the size as needed */
+}
+
+.tiny-icon {
+  width: 20px; /* Adjust the size as needed */
+  height: 20px; /* Adjust the size as needed */
+}
+
+mat-icon{
+  font-family: 'Material Icons' !important;
+}
+
+.ngx{
+  [dir=rtl] &-table   {
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: table;
+    font-family: Montserrat, Verdana, serif;
+    // font-size: 14px;
+    // font-size: clamp(12px, 1.0vw, 16px);
+
+    text-align: start;
+    width: 100%;
+  }
+  font-size: clamp(12px, 1.0vw, 16px);
+
+}
+
+
+[dir=rtl] .ngx-pagination-range {
+  float: left;
+}
+
+/* Striped Rows in ngx-table */
+.ngx-table__table--striped > tbody tr:nth-of-type(odd) {
+  background: rgba(206, 229, 243, 0.4) !important;
+  /* background-color: rgba(206, 229, 243, 0.4) !important; */
+}
+
+.ngx-table__table--tiny > tbody > tr > td, 
+.ngx-table__table--tiny > thead > tr > th {
+  border-bottom: 1px solid #d1d1d1 !important; /* Lighter border color */
+  padding: 0px 4px !important; /* Increased padding for better spacing */
+}
+
+/* Table Header Styling */
+.ngx-table__header {
+  background: rgba(63, 134, 202, 0.4) !important; /* Customize the color and opacity */
+  color: #ffffff; /* Optionally, adjust the text color for contrast */
+  /* padding: 2px 3px !important; */
+}
+
+/* Header Cells Styling */
+.ngx-table__header th {
+  background: rgba(63, 134, 202, 0.4) !important; /* Ensures each header cell has the same color */
+  color: #ffffff; /* Ensures text color contrast */
+  /* padding: 2px 3px !important; */
+  /* border-bottom: 2px solid #141515 !important; Customize the border color if needed */
+}
+
+/* Tiny Table Header Cell Styling */
+.ngx-table__table--tiny > thead > tr > th {
+  border-bottom: 1px solid #e7e9ed !important;
+  padding: 5px 6px !important;
+  font-size: smaller !important;
+  line-height: normal !important;
+}
+
+
+// custom section 
+.custom-button-blue {
+  background-color: #529ac4 !important;
+  border-color: #529ac4 !important;
+}
+
+.custom-button-light-blue {
+  background-color: #7ac6d3 !important;
+  border-color: #7ac6d3 !important;
+}
+
+.card-custom-header-blue {
+  background-color: #136ea8 !important;
+  border-color: #136ea8 !important;
+
+}
+
+.card-custom-header-light-blue {
+  background-color: #7ac6d3 !important;
+  border-color: #7ac6d3 !important;
+}
+
+/* Global styles for Angular Material form fields */
+//carfully reviewed
+.mat-mdc-form-field-hint-wrapper, .mat-mdc-form-field-error-wrapper{
+  top:-6px !important;
+  font-size: smaller !important;
+}
+
+mat-form-field {
+  --mat-form-field-container-height: 40px;
+  --mat-form-field-container-vertical-padding: 8px;
+}
+/* Importing Bootstrap SCSS file. */
+
+
+@import 'bootstrap/scss/bootstrap';
+
+

@@ -1,0 +1,33 @@
+.media-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Make the container take full height */
+}
+
+.media-preview {
+    max-width: 100%;
+    max-height: 70vh; /* Limit height to viewport height */
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Ensures image scales without distortion */
+}
+
+/* Ensure the container has a maximum height */
+.image-container {
+    max-height: 70vh; /* Limit height to viewport height */
+
+    overflow: hidden; /* to prevent scrollbars */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Set image properties */
+  .image-container img {
+    max-height: 70%; /* or a specific height, like 300px */
+
+    max-width: 100%;
+    object-fit: cover; /* keeps the aspect ratio and fills the container */
+  }
+  

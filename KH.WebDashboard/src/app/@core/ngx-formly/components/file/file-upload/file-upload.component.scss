@@ -1,0 +1,30 @@
+.file {
+  display: flex;
+  // justify-content: space-between;
+  // align-items: center;
+}
+
+.fileinfo {
+  overflow: hidden;
+}
+
+.filename {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12.5px !important;
+
+}
+
+.filesize {
+  margin-bottom: 0.3em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12.5px !important;
+}
+
+mat-error {
+  font-size: 10.5px !important;
+}

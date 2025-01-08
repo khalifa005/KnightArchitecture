@@ -1,0 +1,135 @@
+@import './themes';
+$nb-card-header-padding: 0.5rem 0.9rem;
+$nb-card-body-padding: 0.5rem 0.9rem;
+
+@mixin nb-overrides() {
+  nb-card-header {
+    padding: $nb-card-header-padding !important;
+  }
+
+  nb-card-body {
+    padding: $nb-card-body-padding !important;
+  }
+  
+  nb-select button {
+    padding: 0.4375rem 2.2rem 0.4375rem 1.125rem !important;
+
+    nb-icon {
+      right: 0.41rem !important;
+    }
+  }
+
+
+//formly custom date
+.custom-formly-date {
+  background-color: white !important; /* New background color */
+  border-color: white !important; /* New border color */
+  color: rgb(26, 1, 1) !important; /* Uncomment and define if needed */
+  padding: 0rem 1.2rem 0.0rem 0.125rem !important;
+
+
+}
+
+  .tabset .tab {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+  
+  .tabset .tab .tab-link {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
+    text-transform: capitalize !important; 
+  }
+
+  nb-accordion-item-body .item-body{
+    padding: 0.50rem !important;
+  }
+
+  .collapsed > nb-accordion-item-header,
+  .expanded > nb-accordion-item-header {
+    color: white !important;
+    background-color: rgb(150, 190, 204) !important;
+    font-size: .9000rem;
+    font-weight: 750;
+    text-align: center !important;
+    line-height: 1.0rem;
+    padding: 0.30rem !important;
+  }
+  
+/* Styles for nb-accordion-item-header when it is inside both .collapsed and .disabled containers */
+.collapsed.disabled > nb-accordion-item-header {
+  color: white !important;
+  background-color:rgb(218 213 213 / 68%) !important;
+  font-size: .9375rem;
+  font-weight: 750;
+  line-height: 1.5rem;
+  padding: 0.25rem !important;
+}
+  
+.nb-theme-default [nbButton],
+.nb-theme-default [nbButtonToggle] 
+.nb-theme-default [nb-tab] 
+.nb-theme-default [tabset] 
+{
+    text-transform: capitalize !important; 
+}
+
+  /* Override Bootstrap table striped and hover styles */
+table.table-striped {
+  --bs-table-striped-bg: rgb(235, 245, 250) !important; /* Light blue striped rows */
+  --bs-table-striped-color: inherit; /* Ensure text color remains consistent */
+}
+
+/* Optionally override hover color */
+table.table-hover {
+  --bs-table-hover-bg: rgb(220, 240, 250) !important; /* Slightly darker blue for hover */
+  --bs-table-hover-color: inherit; /* Keep the text color consistent */
+}
+
+}
+
+$nb-font-family-primary: 'Cairo', sans-serif;
+
+//worked - overrride theme var
+$nb-themes: nb-register-theme(
+  (
+    color-primary-100: #faf7ff,
+    color-primary-200: #ece3ff,
+    color-primary-300: #d5bfff,
+    color-primary-400: #b18aff,
+    color-primary-500: #a16eff,
+    color-primary-600: #7b51db,
+    color-primary-700: #5a37b8,
+    color-primary-800: #3e2494,
+    color-primary-900: #29157a,
+
+       // Fonts
+      font-family-primary: $nb-font-family-primary, // Use Cairo font for this theme
+
+      //  font-family-primary: 'Cairo', 
+       font-family-secondary: 'Cairo', 
+       text-heading-1-font-family: 'Cairo', 
+       text-heading-2-font-family: 'Cairo', 
+       text-heading-3-font-family: 'Cairo', 
+       text-heading-4-font-family: 'Cairo', 
+       text-heading-5-font-family: 'Cairo', 
+       text-heading-6-font-family: 'Cairo', 
+       text-subtitle-font-family: 'Cairo', 
+       text-subtitle-2-font-family: 'Cairo', 
+       text-paragraph-font-family: 'Cairo', 
+       text-paragraph-2-font-family: 'Cairo', 
+       text-label-font-family: 'Cairo', 
+       text-caption-font-family: 'Cairo', 
+       text-caption-2-font-family: 'Cairo', 
+       text-button-font-family: 'Cairo',
+       global-font-family: 'Cairo',
+    text-basic-color: color-basic-800,
+    text-disabled-color: color-basic-600
+  ),
+  default,
+  default
+);

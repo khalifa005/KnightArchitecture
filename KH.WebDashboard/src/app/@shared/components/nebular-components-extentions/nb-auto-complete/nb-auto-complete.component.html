@@ -1,0 +1,37 @@
+<div class="form-group">
+  <label for="groupId" class="label d-block" translate>
+    {{ label | translate }}
+    <span *ngIf="isRequired">*</span>
+  </label>
+
+  <div class="input-with-icon">
+    <input
+      #inputRef
+      id="groupId"
+      fieldSize="small"
+      fullWidth
+      [formControl]="formcontrol"
+      nbInput
+      type="text"
+      placeholder="{{ placeHolder | translate }}"
+      [status]="(formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)) ? 'danger' : 'basic' "
+      [nbAutocomplete]="auto" />
+
+    <!-- Icon at the end -->
+    <nb-icon [icon]="'search'" pack="eva" class="input-icon"></nb-icon>
+  </div>
+
+  <!-- Validation message -->
+  <div
+    translate
+    class="text-danger"
+    *ngIf="formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)">
+    validations.please-provide-value
+  </div>
+</div>
+
+<nb-autocomplete #auto [handleDisplayFn]="displayFn">
+  <nb-option *ngFor="let option of filteredSelectOptions" [value]="option.id">
+    {{ option.nameEn | translator : option.nameAr }}
+  </nb-option>
+</nb-autocomplete>

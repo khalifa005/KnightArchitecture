@@ -1,0 +1,15 @@
+<nb-card size="gaint" class="h-100">
+    <nb-card-header>
+        <!-- {{ '@home.welcome' | translate }} -->
+    </nb-card-header>
+
+    <nb-card-body>
+        <app-dy-table [tabId]="1" [apiCustomColumns]="apiCustomColumns" [apiData]="apiData" [paginationParam]="paginationParam"
+        (filterChanged)="whenPagingAndFilterChange($event)"
+        (paginationChanged)="whenPagingAndFilterChange($event)"
+        (sortingChanged)="whenPagingAndFilterChange($event)">
+        </app-dy-table>
+
+    </nb-card-body>
+
+</nb-card>

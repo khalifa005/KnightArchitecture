@@ -1,0 +1,19 @@
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    direction: inherit; /* Inherit from parent or HTML tag */
+  }
+  
+  .input-with-icon input {
+    flex: 1;
+    padding-inline-end: 2.5rem; /* Space for the icon on the end */
+  }
+  
+  .input-with-icon .input-icon {
+    position: absolute;
+    inset-inline-end: 0.75rem; /* Logical property for end alignment */
+    pointer-events: none; /* Ensure the icon doesn't block input interactions */
+    color: var(--text-color, #6c757d); /* Customize icon color */
+  }
+  

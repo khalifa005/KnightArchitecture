@@ -1,0 +1,25 @@
+.table {
+    font-size: 0.75rem; /* Smaller font size */
+    line-height: 1rem; /* Reduced line height */
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.25rem !important; /* Minimized padding */
+    text-align: center; /* Center-align text for compactness */
+  }
+  
+  .table-responsive {
+    max-width: 100%; /* Ensure responsiveness */
+    overflow-x: auto; /* Horizontal scroll for small screens */
+  }
+  .table-light-blue thead {
+    background-color: #cce5ff; /* Light blue background */
+    color: #004085; /* Dark blue text for contrast */
+  }
+  
+  .table-light-blue th {
+    padding: 0.25rem !important; /* Compact header cells */
+    text-align: center; /* Center-align text */
+  }
+  

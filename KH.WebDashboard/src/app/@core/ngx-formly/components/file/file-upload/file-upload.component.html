@@ -1,0 +1,53 @@
+<mat-list-item class="h-100">
+  <div mat-line>
+    <div class="d-flex align-items-center justify-content-between">
+      <!-- File Icon -->
+      <div>
+        <mat-icon mat-list-icon [svgIcon]="fileIcon"></mat-icon>
+      </div>
+  
+      <!-- File Information -->
+      <div class="flex-grow-1 ms-2 overflow-hidden">
+        <div class="fw-bold text-truncate small">{{ file.name }}</div>
+        <div *ngIf="!editMode" class="text-muted text-truncate small">{{ file.size | fileSize }}</div>
+        <div *ngIf="editMode" class="text-muted text-truncate small">
+          <!-- <span class="badge bg-primary ms-1">NEW</span> -->
+          <span class="badge bg-info ms-1 small">
+          {{ '@form.previouslyUploaded' | translate }}
+          </span>
+          <!-- <span class="badge bg-warning ms-1 small">NEW</span> -->
+
+        </div>
+      </div>
+  
+      <!-- Delete Button -->
+      <div>
+        <button 
+          mat-icon-button 
+          class="ms-2" 
+          [matTooltip]=" 'remove file' " 
+          (click)="removeFile()">
+          <mat-icon svgIcon="fileType:fileRemove"></mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+
+  <nb-progress-bar
+  class="mb-2"
+  *ngIf="showProgressBar && !editMode"
+  size="tiny" 
+  [value]="fakeProgress" 
+  [status]="status" 
+  [displayValue]="true" ></nb-progress-bar>
+
+  <!-- <mat-progress-bar *ngIf="showProgressBar && !editMode" matLine mode="determinate" [value]="progress"></mat-progress-bar> -->
+  <!-- <mat-progress-bar  matLine mode="determinate" [value]="progress"></mat-progress-bar> -->
+  <!-- <p>uploading without condition</p> -->
+  <!-- <p *ngIf="showProgressBar">uploading condition</p> -->
+  <mat-error *ngIf="!editMode" matLine class="mat-error" role="alert">
+    <formly-validation-message [field]="field"></formly-validation-message>
+  </mat-error>
+</mat-list-item>
+<hr class="my-0">

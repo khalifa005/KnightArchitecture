@@ -1,0 +1,19 @@
+{
+    "/api": {
+      "target": "http://api-test",
+      "secure": false
+    },
+    "/foodhub": {
+    "target": "http://localhost:5054",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "ws": true
+  },
+  "/apis":{
+    "target": "http://localhost:5054",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+  }

@@ -1,0 +1,66 @@
+<article class="rounded m-2 py-2 px-3 bg-cus">
+    <div class="row text-center">
+        <h3 class="d-inline" translate>
+            {{ 'app-manager.permissions-manager' | translate }}
+        </h3>
+    </div>
+
+    <div class="col-12 bg-white pt-2 pb-3 d-flex flex-column justify-content-center">
+        <app-custom-single-select-dropdown [(selectedItem)]="currentRoleId" [selectOptions]="rolesAsLookups"
+            label="{{ 'app-manager.selectRole' | translate }}"
+            (selectedItemChanged)="onSelectedRoleChanged($event)">
+        </app-custom-single-select-dropdown>
+
+        <!-- New Select Dropdown for Filtering Parent Permissions -->
+        <app-custom-single-select-dropdown
+            [(selectedItem)]="selectedParentPermissionId"
+            [selectOptions]="parentPermissionsAsLookups"
+            label="{{ 'app-manager.selectParentPermission' | translate }}"
+            (selectedItemChanged)="filterParentPermissions($event)">
+        </app-custom-single-select-dropdown>
+
+        <div>
+            <button nbButton fullwidth status="info" size="small" *ngIf="showSubmitButton" class="mt-2"
+                (click)="savePermission()" translate>
+                submit
+            </button>
+        </div>
+    </div>
+    <div class="sperator"></div>
+</article>
+
+<article class="d-flex flex-wrap rounded m-2" *ngIf="items.length">
+    <div class="flex-grow-1 bg-cus m-2 rounded" *ngFor="let item of filteredItems">
+        <ng-template [ngTemplateOutlet]="nodeTemplateRef" [ngTemplateOutletContext]="{ $implicit: item, isParen: true }">
+        </ng-template>
+    </div>
+    <div class="sperator"></div>
+</article>
+
+<ng-template #nodeTemplateRef let-node let-isParen="isParen" let-subChildren="subChildren">
+    <!-- For non-parent checkboxes -->
+    <div *ngIf="!isParen" class="checkbox-container d-flex justify-content-start align-items-center gap-1 mb-1">
+        <label class="checkbox-label d-flex align-items-center">
+            <input type="checkbox" class="checkbox-input" [(ngModel)]="node.internalChecked" (change)="onSelectedTreeChange(node)">
+            <p class="checkbox-text p-0 m-0 mx-2">{{ node.text }}</p>
+        </label>
+    </div>
+
+    <!-- For parent checkboxes -->
+    <div *ngIf="isParen" class="checkbox-parent d-flex justify-content-between align-items-center p-2 mb-2">
+        <h4 class="parent-title">{{ node.text }}</h4>
+        <label class="checkbox-label d-flex align-items-center">
+            <input type="checkbox" class="checkbox-input" [(ngModel)]="node.internalChecked" (change)="onSelectedTreeChange(node)">
+            <p class="checkbox-text p-0 m-0 mx-2">{{ node.text }}</p>
+        </label>
+    </div>
+
+    <!-- For children nodes -->
+    <div *ngIf="node.internalChildren?.length" class="child-container ml-3">
+        <ng-template ngFor let-child [ngForOf]="node.internalChildren">
+            <ng-template [ngTemplateOutlet]="nodeTemplateRef"
+                         [ngTemplateOutletContext]="{ $implicit: child, isParen: child?.internalChildren?.length > 0, subChildren: child?.internalChildren?.length > 0 }">
+            </ng-template>
+        </ng-template>
+    </div>
+</ng-template>

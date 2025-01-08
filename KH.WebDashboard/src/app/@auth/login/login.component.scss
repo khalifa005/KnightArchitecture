@@ -1,0 +1,156 @@
+
+img {
+    display: block;
+    max-width: 35%;
+    max-height: 35%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-image {
+    flex: 1;
+    // background: url('/assets/images/awesoke 2.PNG') no-repeat center center;
+    background-size: cover;
+  }
+
+
+  .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  
+  .login-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+
+/* Wrapper for the entire select container */
+.custom-select-wrapper {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 8px 15px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Hover effect for the wrapper */
+.custom-select-wrapper:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  border-color: #3b82f6;
+}
+
+/* Styling for the global icon */
+.custom-global-icon {
+  font-size: 2rem;
+  color: #3b82f6;
+  margin-right: 15px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for the global icon */
+.custom-select-wrapper:hover .custom-global-icon {
+  transform: scale(1.1);
+  color: #2563eb;
+}
+
+/* Container for the select and its prefix icon */
+.select-container {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Styling for the smaller icon next to the select */
+.custom-icon {
+  font-size: 1.2rem;
+  color: #6b7280;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for the smaller icon */
+.custom-select-wrapper:hover .custom-icon {
+  color: #3b82f6;
+}
+
+/* Styling for the select box */
+.custom-select {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+  background: transparent;
+  width: 100%;
+}
+
+/* Flags styling for a modern look */
+.flag-icon {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus state for the select */
+.custom-select:focus {
+  box-shadow: none;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .custom-select-wrapper {
+    padding: 6px 10px;
+  }
+
+  .custom-global-icon {
+    font-size: 1.5rem;
+  }
+
+  .custom-icon {
+    font-size: 1rem;
+  }
+}
+
+
+
+
+.custom-toggle-wrapper {
+  gap: 10px;
+}
+
+.language-toggle .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: 14px;
+}
+
+.language-toggle .btn.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border-color: #007bff;
+}
+
+.flag-icon {
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+.custom-global-icon {
+  font-size: 1.5rem; /* Adjust as needed for desired size */
+  margin-right: 5px; /* Add spacing between the icon and the toggle buttons */
+}

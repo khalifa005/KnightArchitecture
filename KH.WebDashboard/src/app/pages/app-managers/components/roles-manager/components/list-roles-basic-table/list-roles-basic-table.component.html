@@ -1,0 +1,142 @@
+<nb-card class="rounded" size="large">
+    <nb-card-header class="text-center">
+        {{ 'role.management' | translate }}
+
+        <button nbButton class="mx-1 text-center" size="small" status="success" (click)="onAddClicked()"
+        *ngxPermissionsOnly="['add-role','super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+            <nb-icon [options]="{ animation: { type: 'shake' } }" icon="file-add-outline"></nb-icon>
+        </button>
+
+    </nb-card-header>
+
+    <nb-card-body *ngIf="data">
+
+        <div class="columns" 
+        *ngxPermissionsOnly="['view-role','super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+            <div class="column col-12">
+                <ngx-table [id]="'1x'"  [summaryTemplate]="summaryTemplateRef" [filtersTemplate]="filtersTemplate" [configuration]="configuration"
+                    [loadingTemplate]="loadingTemplate" [data]="data" [columns]="columns" [pagination]="pagination"
+                    (event)="eventEmitted($event)">
+
+                    <ng-template let-row let-index="index">
+                        <td ngxStopPropgation>
+                            <h5 class="fs-6">#{{ row.id }}</h5>
+                        </td>
+                        <td ngxStopPropgation>
+                            <p class="fs-p">
+                                {{row.nameEn }}
+                            </p>
+                        </td>
+                        <td ngxStopPropgation>
+                            <p class='fs-p'>
+                                {{row.nameAr}}
+                            </p>
+                        </td>
+                        <td ngxStopPropgation>
+                            <div>
+                                <p class="fs-p">
+                                    {{row.description}}
+                                </p>
+                            </div>
+                        </td>
+                        <td ngxStopPropgation>
+                            <p class="fs-p" [ngClass]="row.isDeleted ? 'badge bg-danger' : 'badge bg-info' ">
+                                {{row.isDeleted | yesNo }}
+                            </p>
+                        </td>
+                        <td ngxStopPropgation>
+                            <div class="d-flex f-gap-1">
+
+                                <button nbButton class="mx-1" size="tiny" status="info" id="expandButton-{{ index }}"
+                                (click)="onDetailsClicked(row.id)"
+                            *ngxPermissionsOnly="['super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+                                <nb-icon [options]="{ animation: { type: 'shake' } }" icon="eye-outline"></nb-icon>
+                            </button>
+
+
+                                <button nbButton class="mx-1" size="tiny" status="info" id="expandButton-{{ index }}"
+                                    (click)="onEditClicked(row.id)"
+                                *ngxPermissionsOnly="['edit-role','super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+                                    <nb-icon [options]="{ animation: { type: 'shake' } }" icon="edit-outline"></nb-icon>
+                                </button>
+
+                                <ng-container *ngIf="!row.isDeleted">
+                                    <button nbButton size="tiny" status="danger" id="expandButton-{{ index }}"
+                                        (click)="onDeletedClicked(row.id)"
+                                        *ngxPermissionsOnly="['delete-role','super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+                                        <nb-icon [options]="{ animation: { type: 'flip in Y' } }"
+                                            icon="trash-2-outline"></nb-icon>
+                                    </button>
+                                </ng-container>
+
+
+                                <ng-container *ngIf="row.isDeleted">
+                                    <button nbButton size="tiny" status="warning" id="expandButton-{{ index }}"
+                                        (click)="onReactivateClicked(row.id)"
+                                        *ngxPermissionsOnly="['edit-role','super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+                                        <nb-icon [options]="{ animation: { type: 'zoom' } }"
+                                            icon="refresh-outline"></nb-icon>
+                                    </button>
+
+
+
+                                </ng-container>
+                            </div>
+                        </td>
+                    </ng-template>
+                </ngx-table>
+                <ng-template #summaryTemplateRef let-total="total" let-limit="limit" let-page="page">
+                    <th colspan="10">
+                        <span class="mb-0">{{ 'TABLE.TOTAL_ITEMS' | translate }}</span>
+                        <span class="mb-1">: {{ pagination.count }} </span>
+                    </th>
+                </ng-template>
+            </div>
+        </div>
+
+        <ng-template #loadingTemplate>
+            <td [attr.colspan]="columns.length">
+                <app-loading-spinner size="4rem"> </app-loading-spinner>
+            </td>
+        </ng-template>
+
+        <ng-template #filtersTemplate>
+            <th>
+                <ngx-custom-input [(selectedItem)]="roleFilterRequest.id" placeHolder="{{ 'TABLE.ID' | translate }}"
+                    [icon]="'search-outline'" [disabled]="false" (keyup.enter)="onIdFilterChnaged($event)">
+                </ngx-custom-input>
+            </th>
+            <th>
+                <ngx-custom-input [(selectedItem)]="roleFilterRequest.nameEn"
+                    placeHolder="{{ 'TABLE.NAME_EN' | translate }}" [icon]="'search-outline'" [disabled]="false"
+                    (keyup.enter)="onNameEnFilterChnaged($event)" [regexPattern]="standAloneInputRegExp">
+                </ngx-custom-input>
+
+            </th>
+            <th>
+                <ngx-custom-input [(selectedItem)]="roleFilterRequest.nameAr"
+                    placeHolder="{{ 'TABLE.NAME_AR' | translate }}" [icon]="'search-outline'" [disabled]="false"
+                    (keyup.enter)="onNameArFilterChnaged($event)" [regexPattern]="standAloneInputRegExp">
+                </ngx-custom-input>
+            </th>
+            <th>
+
+                <ngx-custom-input [(selectedItem)]="roleFilterRequest.description"
+                    placeHolder="{{ 'TABLE.DESCRIPTION' | translate }}" [icon]="'search-outline'" [disabled]="false"
+                    (keyup.enter)="onDescriptionFilterChnaged($event)">
+                </ngx-custom-input>
+            </th>
+            <th>
+                <app-custom-yes-no-select [(selectedItem)]="roleFilterRequest.isDeleted"
+                    placeHolder="{{ 'form.dropdown.placeholder' | translate }}"
+                    (selectedItemChanged)="onDeletedFilterChnaged($event)">
+                </app-custom-yes-no-select>
+            </th>
+
+            <th>
+                <!-- for the actions -->
+            </th>
+        </ng-template>
+
+    </nb-card-body>
+</nb-card>

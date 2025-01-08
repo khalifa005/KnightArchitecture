@@ -1,0 +1,28 @@
+input {
+  display: none;
+}
+
+.dropzone {
+  border: 2px dashed grey;
+  border-radius: 4px;
+  text-align: center;
+  padding: 10px;
+}
+
+.is-dragover {
+  background-color: ghostwhite;
+}
+
+.dropzone-text {
+  margin: 1em;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px;
+}
+
+
+.small-button {
+  font-size: 12px !important; /* Smaller font size */
+  padding: 4px 8px !important; /* Compact padding */
+  height: 30px !important; /* Reduce button height */
+  min-width: auto !important; /* Allow button width to shrink */
+}

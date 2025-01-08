@@ -1,0 +1,44 @@
+<form [formGroup]="myForm" >
+    <div class="row">
+
+        <div class="col-12 mt-3">
+            <div class="row">
+                
+                <div class="col-6">
+                    <ngx-custom-input [formcontrol]="myForm.nameEnControl" [isRequired]="true"
+                        label="{{ 'TABLE.NAME_EN' | translate }}"
+                        placeHolder="{{ 'TABLE.NAME_EN' | translate }}" [icon]="'edit-outline'"
+                        regexPattern="^[a-zA-Z0-9]+$" [readonly]="false">
+                    </ngx-custom-input>
+                </div>
+
+                <div class="col-6">
+                    <ngx-custom-input [formcontrol]="myForm.nameArControl" [isRequired]="true"
+                        label="{{ 'TABLE.NAME_AR' | translate }}"
+                        placeHolder="{{ 'TABLE.NAME_AR' | translate }}" [icon]="'edit-outline'"
+                        regexPattern="^[a-zA-Z0-9]+$" [readonly]="false">
+                    </ngx-custom-input>
+                </div>
+
+                <div class="col-12 mt-3">
+                    <div class="h-100 d-flex flex-column">
+                        <app-custom-textarea class="flex-grow-1"
+                            [formcontrol]="myForm.descriptionControl"
+                            label="{{ 'TABLE.DESCRIPTION' | translate }}"
+                            placeHolder="{{ 'TABLE.DESCRIPTION' | translate }}">
+                        </app-custom-textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+     
+        <!-- Submit Button -->
+        <div class="col-12 mt-4">
+            <button fullWidth [size]="'small'" nbButton status="primary" [disabled]="myForm.invalid" (click)="onSubmit()">
+                {{ '@buttons.submit' | translate }}
+            </button>
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,21 @@
+.label {
+  font-size: 75%;
+  margin: 0.5em 0;
+}
+
+.label-valid {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+mat-list {
+  padding: 0;
+}
+
+mat-error {
+  font-size: 12.5px !important;
+  margin: 0.5em 0;
+}
+
+:host {
+  display: block;
+}

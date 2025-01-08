@@ -1,0 +1,678 @@
+<ng-template #section1 let-data>
+    <div class="solu_title">
+        <p class="fs-5">{{'indicators.total-tasks' | translate }}</p>
+    </div>
+    <div class="solu_description">
+        <!-- <p class="fs-6 "></p> -->
+        <app-number-counter [startValue]="0" [endValue]="405" [customClass]=" 'text-center' "
+            [duration]="3000"></app-number-counter>
+
+        <!-- <nb-progress-bar [value]="30"   size="tiny" status="primary"></nb-progress-bar> -->
+        <!-- <button nbButton hero status="info">Info</button> -->
+    </div>
+</ng-template>
+
+<ng-template #section2 let-data>
+    <div class="solu_title">
+        <p class="fs-5">{{'indicators.total-teams' | translate }}</p>
+    </div>
+    <div class="solu_description">
+        <!-- <p class="fs-6 text-center">5000</p> -->
+        <app-number-counter [startValue]="0" [endValue]="5000" [customClass]=" 'text-center' "
+            [duration]="3000"></app-number-counter>
+    </div>
+</ng-template>
+
+<ng-template #section3 let-data>
+    <div class="solu_title">
+        <p class="fs-5">{{'indicators.field-activity' | translate }}</p>
+    </div>
+    <div class="solu_description">
+        <!-- <p class="fs-6 text-center">430</p> -->
+        <app-number-counter [startValue]="0" [endValue]="550" [customClass]=" 'text-center' "
+            [duration]="3000"></app-number-counter>
+    </div>
+</ng-template>
+
+<ng-template #section4 let-data>
+    <div class="solu_title">
+        <p class="fs-5">{{'indicators.tasks-target' | translate }}</p>
+    </div>
+    <div class="solu_description">
+        <!-- <p class="fs-6 text-center">800</p> -->
+        <app-number-counter [startValue]="0" [endValue]="405" [customClass]=" 'text-center' "
+            [duration]="3000"></app-number-counter>
+    </div>
+</ng-template>
+
+
+
+<div class="container-flud overflow-hidden">
+    <div class="row ">
+
+        <div class="col-md-3">
+            <app-custom-card [imageUrl]="'assets/svgs/tasklist.svg'" [section1Template]="section1">
+            </app-custom-card>
+        </div>
+        <div class="col-md-3">
+            <app-custom-card [imageUrl]="'assets/icons/worker.svg'" [section1Template]="section2">
+            </app-custom-card>
+        </div>
+        <div class="col-md-3">
+            <app-custom-card [imageUrl]="'assets/icons/maintenance-icon-18900.png'" [section1Template]="section3">
+            </app-custom-card>
+        </div>
+        <div class="col-md-3">
+            <app-custom-card [imageUrl]="'assets/svgs/targetIcon.svg'" [section1Template]="section4">
+            </app-custom-card>
+        </div>
+
+    </div>
+
+    <div class="row mb-0">
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <!-- <h3 class="primary">278</h3> -->
+                                <app-number-counter [startValue]="0" [endValue]="205" [customClass]=" '' "
+                                    [duration]="3000"></app-number-counter>
+
+                                <span>{{'indicators.new-posts' | translate }}</span>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="icon-book-open primary font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
+                                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <app-number-counter [startValue]="0" [endValue]="105" [customClass]=" '' "
+                                    [duration]="3000"></app-number-counter>
+                                <span>{{'indicators.new-comments' | translate }}</span>
+                            </div>
+                            <div class="align-self-center">
+                            </div>
+                        </div>
+                        <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 35%"
+                                aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <!-- <h3 class="success">64.89 %</h3> -->
+                                <app-number-counter [startValue]="0" [endValue]="60" [customClass]=" '' "
+                                    [duration]="3000"></app-number-counter>
+
+                                <span>{{'indicators.bounce-rate' | translate }}</span>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="icon-cup success font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%"
+                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <!-- <h3 class="danger">423</h3> -->
+                                <app-number-counter [startValue]="0" [endValue]="444" [customClass]=" '' "
+                                    [duration]="3000"></app-number-counter>
+
+                                <span>{{'indicators.total-visits' | translate }}</span>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="icon-direction danger font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-0 ">
+        <div class="col-6">
+            <nb-card>
+                <nb-card-header class="text-center mt-0 mb-0 pt-0 pb-0 lh-small">{{'indicators.task-status' | translate
+                    }}</nb-card-header>
+                <nb-card-body class="mt-0 mb-0 pt-0 pb-0">
+                    <ngx-echarts-pie [passedColumns]="statusColumns" [apiData]="apiDataForStatus"></ngx-echarts-pie>
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+        <div class="col-6">
+            <nb-card>
+                <nb-card-header class="text-center mt-0 mb-0 pt-0 pb-0 lh-small">{{'indicators.tasks-zones' | translate
+                    }}</nb-card-header>
+                <nb-card-body class="mt-0 mb-0 pt-0 pb-0">
+                    <ngx-echarts-pie [passedColumns]="zonesColumns" [apiData]="apiDataForZones"></ngx-echarts-pie>
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+<nb-card class="m-0 p-0 mb-3 fs-4">
+    <nb-card-header class="text-center">Cards Commponents</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+
+            <div class="col-md-6">
+                <h5 class="card-title">Nebular</h5>
+
+                <div class="row d-flex mb-2">
+
+                    <div class="col-sm-12 d-flex flex-wrap mx-0 px-1">
+
+
+                        <div class="col-md-2 d-flex flex-grow-1 mx-1">
+                            <nb-card class="mb-1 h-100 w-100" status="primary">
+                                <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
+                                    translate>
+                                    live-monitoring.eam
+                                </nb-card-header>
+                                <nb-card-body class="px-2 pb-0 pt-1 mb-0">
+                                    <div class="d-flex align-items-center">
+                                        <img src="assets/svgs/avatar.svg" class="img-prop me-1" alt="Offline Icon"
+                                            style="width: 33px; height: 50px;" />
+
+                                        <div>
+                                            <p class="small mb-1">
+                                                <strong class="small">{{ 'live-monitoring.since' | translate
+                                                    }}:</strong>
+                                                <span class="small">0 static</span>
+                                            </p>
+                                            <p class="small mb-1">
+                                                <strong class="small">{{ 'live-monitoring.tasks' | translate
+                                                    }}:</strong>
+                                                <span class="small">10 tasks</span>
+                                            </p>
+                                            <p class="small mb-1">
+                                                <strong class="small">{{ 'live-monitoring.tasks' | translate
+                                                    }}:</strong>
+                                                <span class="small">10 tasks</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+
+                        <div class="col-md-2 d-flex flex-grow-1 mx-1">
+                            <nb-card class="mb-1 h-100 w-100" status="primary">
+                                <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
+                                    translate>
+                                    live-monitoring.eam
+                                </nb-card-header>
+                                <nb-card-body class="px-2 pb-0 pt-1 mb-0">
+                                    <div class="d-flex align-items-center">
+                                        <img src="assets/svgs/avatar.svg" class="img-prop me-1" alt="Offline Icon"
+                                            style="width: 33px; height: 50px;" />
+
+                                        <div>
+                                            <p class="small mb-1">
+                                                <strong class="small">{{ 'live-monitoring.since' | translate
+                                                    }}:</strong>
+                                                <span class="small">0 static</span>
+                                            </p>
+                                            <p class="small mb-1">
+                                                <strong class="small">{{ 'live-monitoring.tasks' | translate
+                                                    }}:</strong>
+                                                <span class="small">10 tasks</span>
+                                            </p>
+                                            <p class="small mb-1">
+                                                <strong class="small">{{ 'live-monitoring.tasks' | translate
+                                                    }}:</strong>
+                                                <span class="small">10 tasks</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row d-flex mb-2">
+
+                    <div class="col-sm-12 d-flex flex-wrap mx-0 px-1">
+
+                        <div class="col-md-2 d-flex flex-grow-1 mx-1">
+                            <nb-card class="mb-1 h-100 w-100" status="primary" accent="info">
+                                <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
+                                    translate>
+                                    live-monitoring.id
+                                </nb-card-header>
+                                <nb-card-body class="px-2 pb-0 pt-1 mb-0">
+                                    <div class="d-flex align-items-center">
+                                        <img src="assets/svgs/avatar.svg" class="img-prop me-1" alt="Offline Icon"
+                                            style="width: 33px; height: 50px;" />
+
+                                        <div>
+                                            <p class="small  mb-1">
+                                                <strong class="small">{{ 'live-monitoring.id' | translate }}:</strong>
+                                                <span class="small ms-1">1053</span>
+                                            </p>
+                                            <p class="small  mb-1">
+                                                <strong class="small">{{ 'live-monitoring.name' | translate }}:</strong>
+                                                <span class="small ms-1">Riyadh_Mubark</span>
+                                            </p>
+                                            <p class="small  mb-1">
+                                                <strong class="small">{{ 'live-monitoring.iqama' | translate
+                                                    }}:</strong>
+                                                <span class="small ms-1">558888250</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+
+                        <div class="col-md-2 d-flex flex-grow-1 mx-1">
+                            <nb-card class="mb-1 h-100 w-100" status="primary" accent="info">
+                                <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
+                                    translate>
+                                    live-monitoring.id
+                                </nb-card-header>
+                                <nb-card-body class="px-2 pb-0 pt-1 mb-0">
+                                    <div class="d-flex align-items-center">
+                                        <img src="assets/svgs/avatar.svg" class="img-prop me-1" alt="Offline Icon"
+                                            style="width: 33px; height: 50px;" />
+
+                                        <div>
+                                            <p class="small d-flex align-items-center mb-1">
+                                                <img src="assets/svgs/over-speed.svg" alt="Type Icon"
+                                                    style="width: 20px; height: 20px;" class="me-2" />
+                                                <strong class="small">{{ 'live-monitoring.type' | translate }}:</strong>
+                                                <span class="small ms-1">Leakage Section</span>
+                                            </p>
+                                            <p class="small d-flex align-items-center mb-1">
+                                                <img src="assets/svgs/over-speed.svg" alt="Time Icon"
+                                                    style="width: 20px; height: 20px;" class="me-2" />
+                                                <strong class="small">{{ 'live-monitoring.from-to' | translate
+                                                    }}:</strong>
+                                                <span class="small ms-1">20:45</span>
+                                            </p>
+                                            <p class="small d-flex align-items-center mb-1">
+                                                <img src="assets/svgs/over-speed.svg" alt="Specialization Icon"
+                                                    style="width: 20px; height: 20px;" class="me-2" />
+                                                <strong class="small">{{ 'live-monitoring.specialization' | translate
+                                                    }}:</strong>
+                                                <span class="small ms-1">A1</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="row d-flex mb-2">
+
+                    <div class="col-sm-12 d-flex flex-wrap mx-0 px-1">
+
+                        <div class="col-md-2 d-flex flex-grow-1 mx-1">
+                            <nb-card class="mb-1 h-100 w-100" status="primary" accent="info">
+                                <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
+                                    translate>
+                                    live-monitoring.battery
+                                </nb-card-header>
+                                <nb-card-body class="px-2 pb-0 pt-1 mb-0">
+                                    <div>
+                                        <p class="small d-flex align-items-center mb-1">
+                                            <img src="assets/svgs/teams-listXX.svg" alt="Battery Icon"
+                                                style="width: 20px; height: 20px;" class="me-2" />
+                                            <strong class="small">{{ 'live-monitoring.battary' | translate }}:</strong>
+                                            <span class="small ms-1">100%</span>
+                                        </p>
+                                        <p class="small d-flex align-items-center mb-1">
+                                            <img src="assets/svgs/location1.svg" alt="Tracked Icon"
+                                                style="width: 20px; height: 20px;" class="me-2" />
+                                            <strong class="small">{{ 'live-monitoring.tracked' | translate }}:</strong>
+                                            <span class="small ms-1">10 min ago</span>
+                                        </p>
+                                        <p class="small d-flex align-items-center mb-1">
+                                            <img src="assets/svgs/teams-list653.svg" alt="Connection Icon"
+                                                style="width: 20px; height: 20px;" class="me-2" />
+                                            <strong class="small">{{ 'live-monitoring.connected' | translate
+                                                }}:</strong>
+                                            <span class="small ms-1">25 min ago</span>
+                                        </p>
+                                    </div>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+
+                        <div class="col-md-2 d-flex flex-grow-1 mx-1">
+                            <nb-card class="mb-1 h-100 w-100" status="primary" accent="info">
+                                <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
+                                    translate>
+                                    live-monitoring.notifications
+                                </nb-card-header>
+                                <nb-card-body class="px-2 pb-0 pt-1 mb-0">
+                                    <div>
+                                        <p class="small d-flex align-items-center mb-1">
+                                            <img src="assets/svgs/over-speed.svg" alt="Speed Icon"
+                                                style="width: 20px; height: 20px;" class="me-2" />
+                                            <strong class="small">{{ 'live-monitoring.speed' | translate }}:</strong>
+                                            <span class="small ms-1">Increased</span>
+                                        </p>
+                                        <p class="small d-flex align-items-center mb-1">
+                                            <img src="assets/svgs/lost-tracking.svg" alt="Tracking Lost Icon"
+                                                style="width: 20px; height: 20px;" class="me-2" />
+                                            <strong class="small">{{ 'live-monitoring.tracking' | translate }}:</strong>
+                                            <span class="small ms-1">Lost</span>
+                                        </p>
+                                        <p class="small d-flex align-items-center mb-1">
+                                            <img src="assets/svgs/disconnected.svg" alt="Connection Lost Icon"
+                                                style="width: 20px; height: 20px;" class="me-2" />
+                                            <strong class="small">{{ 'live-monitoring.connection' | translate
+                                                }}:</strong>
+                                            <span class="small ms-1">Lost</span>
+                                        </p>
+                                    </div>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <nb-card class="mb-3 card-custom">
+                    <nb-card-body>
+                        <div class="row">
+                            <div
+                                class="col-md-2 p-0 m-0 d-flex align-items-center justify-content-center position-relative">
+                                <img src="https://via.placeholder.com/150" alt="Card Image"
+                                    class="img-fluid card-img-custom" />
+                            </div>
+
+                            <div class="col-md-10 d-flex flex-column">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="mb-1 ">
+                                            <strong>
+                                                #125452545
+                                            </strong>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+
+                <!-- if we add the h-100 the auto scroll for card will be gone -->
+                <!-- card-custom class -- rounded-card class -->
+
+                <p>takes most of the space</p>
+
+                <nb-card class="mb-1 w-100">
+                    <nb-card-body class="px-2 pb-1 pt-1 mb-0">
+                        <div class="d-flex">
+                            <!-- Image Section -->
+                            <div class="d-flex flex-column align-items-center justify-content-center me-3"
+                                style="flex-shrink: 0; min-width: 40px;">
+                                <svg viewBox="0 0 35 40"
+                                    style="width: 100%; max-width: 30px; height: auto; fill: #ff5722;">
+                                    <!-- Example path data -->
+                                    <path d="M10 20 L25 10 L40 20 L25 30 Z"></path>
+                                </svg>
+                                <p class="text-center mb-0" style="font-size: 0.6rem; line-height: 0.9rem;">
+                                    <strong>Sequence</strong><br> 001
+                                </p>
+                            </div>
+                            <!-- Content Section -->
+                            <div class="flex-grow-1">
+                                <div class="row">
+                                    <!-- Column 1 -->
+                                    <div class="col-6">
+                                        <p class="mb-0" style="font-size: 0.6rem; line-height: 0.9rem;">
+                                            <strong>Task Code:</strong> TC12345<br>
+                                            <strong>Check No:</strong> 6789<br>
+                                            <strong>Operation:</strong> OP001<br>
+                                            <strong>Description:</strong> Example Description<br>
+                                            <strong>Client Name:</strong> John Doe<br>
+                                            <strong>Client Number:</strong> +1234567890<br>
+                                            <strong>Task Zone:</strong> Zone A<br>
+                                            <strong>Street:</strong> Example Street<br>
+                                            <strong>HCN:</strong> HCN123
+                                        </p>
+                                    </div>
+                                    <!-- Column 2 -->
+                                    <div class="col-6">
+                                        <p class="mb-0" style="font-size: 0.6rem; line-height: 0.9rem;">
+                                            <strong>Meter Number:</strong> MTR6789<br>
+                                            <strong>Asset Number:</strong> AST12345<br>
+                                            <strong>REGS:</strong> 2023-11-21 08:00<br>
+                                            <strong>SLA:</strong> 2 Hours<br>
+                                            <strong>RDDT:</strong> 2023-11-21 10:00<br>
+                                            <strong>ASGN:</strong> 2023-11-21 08:30<br>
+                                            <strong>DELV:</strong> 2023-11-21 09:50<br>
+                                            <strong>OETA:</strong> 2023-11-21 10:15<br>
+                                            <strong>UETA:</strong> 2023-11-21 10:10
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+
+                <nb-card class="mb-3 card-custom">
+                    <nb-card-body class="d-flex h-100 p-0">
+                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center">
+                            <img src="https://via.placeholder.com/150" alt="Card Image"
+                                class="img-fluid card-img-custom h-100" />
+                        </div>
+                        <div class="flex-grow-1 ms-3 d-flex flex-column h-100">
+                            <div class="d-flex flex-row justify-content-between h-100 align-items-center">
+                                <div class="flex-fill card-content-custom">
+                                    <h5 class="card-title">NB Card title</h5>
+                                    <p class="card-text">
+                                        This is a wider card with supporting text below as a natural lead-in to
+                                        additional content. This
+                                        content
+                                        is a little bit longer.
+                                    </p>
+                                </div>
+                                <div class="flex-fill card-content-custom ms-3">
+                                    <h5 class="card-title">Additional Content</h5>
+                                    <p class="card-text">
+                                        Here is some more content that goes into the second column. You can add more
+                                        details or information
+                                        here.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+
+            </div>
+
+            <div class="col-md-6">
+                <h5 class="card-title">Bootstrap</h5>
+
+                <div class="card mb-3 card-custom">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center">
+                            <img src="https://via.placeholder.com/150" alt="Card Image"
+                                class="img-fluid card-img-custom" />
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="d-flex">
+                                <div class="flex-fill card-body card-content-custom">
+                                    <h5 class="card-title">Flex Card title</h5>
+                                    <p class="card-text">
+                                        This is a wider card with supporting text below as a natural lead-in to
+                                        additional content. This
+                                        content
+                                        is a little bit longer.
+                                    </p>
+                                </div>
+                                <div class="flex-fill card-body card-content-custom">
+                                    <h5 class="card-title">Additional Content</h5>
+                                    <p class="card-text">
+                                        Here is some more content that goes into the second column. You can add more
+                                        details or information
+                                        here.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p>Handles many props content</p>
+                <div class="card mb-3 card-custom">
+                    <div class="container-fluid">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0 d-flex align-items-center justify-content-center">
+                                <img src="https://via.placeholder.com/150" alt="Card Image"
+                                    class="img-fluid card-img-custom" />
+                            </div>
+                            <!-- Content Section -->
+                            <div class="flex-grow-1 ms-3">
+                                <div class="d-flex flex-column flex-md-row">
+                                    <div class="flex-fill card-body card-content-custom">
+                                        <p>
+                                            <strong>CCB:</strong> 16793076 <br>
+                                            <strong>Phone Number:</strong> 9782649698\11 <br>
+                                            <strong>Location:</strong> تحول إلى الوردية للأحقة <br>
+                                            <strong>Water Friend:</strong> NwC Riyadh Water Friend <br>
+                                            <strong>Contact:</strong> 0546976308 <br>
+                                        </p>
+                                    </div>
+
+                                    <div class="flex-fill card-body card-content-custom">
+                                        <p class="">
+                                            <strong>Time Remaining:</strong> 05:10
+                                            <strong>Status:</strong> SLA <br>
+                                            <strong>Estimated Completion:</strong> 26-09, 05:10 <br>
+                                            <strong>Assigned Date:</strong> 01-09, 12:19 <br>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <h5 class="card-title">Dynamic ng-template</h5>
+
+                <app-custom-card [imageUrl]="'https://via.placeholder.com/150'" [section1Template]="section1">
+                </app-custom-card>
+
+                <app-custom-card [imageUrl]="'https://via.placeholder.com/150'" [section1Template]="section1"
+                    [section2Template]="section2">
+                </app-custom-card>
+
+            </div>
+
+        </div>
+    </nb-card-body>
+</nb-card>
+
+
+<!-- Card Sizes -->
+<nb-card>
+    <nb-card-header>{{ '@cardSizes.header' | translate }}</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-6 mb-3">
+                <nb-card size="tiny">
+                    <nb-card-header>{{ '@cardSizes.tiny' | translate }}</nb-card-header>
+                    <nb-card-body>{{ '@cardSizes.tinyBody' | translate }}</nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-6 mb-3">
+                <nb-card size="small">
+                    <nb-card-header>{{ '@cardSizes.small' | translate }}</nb-card-header>
+                    <nb-card-body>{{ '@cardSizes.smallBody' | translate }}</nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-6 mb-3">
+                <nb-card>
+                    <nb-card-header>{{ '@cardSizes.regular' | translate }}</nb-card-header>
+                    <nb-card-body>{{ '@cardSizes.regularBody' | translate }}</nb-card-body>
+
+                </nb-card>
+            </div>
+            <div class="col-6 mb-3">
+                <nb-card size="large">
+                    <nb-card-header>{{ '@cardSizes.large' | translate }}</nb-card-header>
+                    <nb-card-body>{{ '@cardSizes.largeBody' | translate }}</nb-card-body>
+
+                    <div class="pt-0 pb-0  d-flex justify-content-center align-items-center">
+                        <app-loading-spinner size="4rem"> </app-loading-spinner>
+                    </div>
+                </nb-card>
+            </div>
+            <div class="col-6 mb-3">
+                <nb-card size="giant">
+                    <nb-card-header>{{ '@cardSizes.giant' | translate }}</nb-card-header>
+                    <nb-card-body>{{ '@cardSizes.giantBody' | translate }}</nb-card-body>
+
+                    <div class="pt-0 pb-0  d-flex justify-content-center align-items-center">
+                        <app-loading-spinner size="4rem"> </app-loading-spinner>
+                    </div>
+                </nb-card>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

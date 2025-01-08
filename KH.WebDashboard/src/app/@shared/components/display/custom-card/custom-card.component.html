@@ -1,0 +1,23 @@
+<div class="solution_cards_box sol_card_top_3" >
+  <div class="solution_card d-flex flex-row align-items-center" [ngClass]="{'no-image': !imageUrl}">
+    <div class="hover_color_bubble"></div>
+
+    <!-- Image Section -->
+    <div class="image_section d-flex align-items-center justify-content-center" *ngIf="imageUrl">
+      <img [src]="imageUrl" alt="Example Image">
+    </div>
+
+    <!-- Text Content Section -->
+    <div class="content_section text-center flex-grow-1">
+      <!-- First Content Section -->
+      <div class="m-1" *ngIf="section1Template">
+        <ng-container *ngTemplateOutlet="section1Template"></ng-container>
+      </div>
+
+      <!-- Second Content Section -->
+      <div class="card_section" *ngIf="section2Template">
+        <ng-container *ngTemplateOutlet="section2Template"></ng-container>
+      </div>
+    </div>
+  </div>
+</div>

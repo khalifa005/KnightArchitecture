@@ -1,0 +1,23 @@
+<div class="media-container text-center">
+
+  <nb-card *ngIf="loadingSpinner" [nbSpinner]="loadingSpinner" nbSpinnerStatus="info">
+    <nb-card-body>
+      <!-- <p class="text-center">Loading snapshots...</p> -->
+    </nb-card-body>
+  </nb-card>
+
+  <nb-card >
+    <img 
+      *ngIf="fileData && (passedMediaExtention == 'png' || passedMediaExtention == 'jpg')" 
+      [src]="fileData" 
+      alt="Image Preview" 
+      class="media-preview"
+    >
+  </nb-card>
+  
+    <video controls *ngIf="fileData && (passedMediaExtention == 'mp4') " >
+        <source [src]="fileData" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+</div>

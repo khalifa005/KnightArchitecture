@@ -1,0 +1,31 @@
+<div
+  [ngClass]="{'label': true, 'label-valid': !field.formControl.touched || field.formControl.valid, 'mat-error': field.formControl.touched && !field.formControl.valid, 'mt-3' : true}">
+  {{props.label}}
+  <ng-container *ngIf="props.required">*</ng-container>
+</div>
+
+<ngz-formly-material-file-input (selectFiles)="onSelectFiles($event)"></ngz-formly-material-file-input>
+
+<div *ngIf="!field.formControl.touched || field.formControl.valid" class="label label-valid">{{field.props.description}}
+</div>
+
+<ng-container *ngIf="field.formControl.touched">
+  <mat-error class="mat-error" role="alert">
+    <!-- <formly-validation-message [field]="field"></formly-validation-message> -->
+    <app-custom-error-message [control]="formControl"></app-custom-error-message>
+
+  </mat-error>
+</ng-container>
+
+<mat-list class="mb-3 d-flex flex-column-reverse">
+  <ng-container *ngFor="let subfield of field.fieldGroup; index as i">
+    <ngz-formly-material-file-upload 
+    [passedForm]="form" 
+    [field]="subfield" 
+    [mainField]="field" 
+    [uploadUrl]="field.props.uploadUrl"
+    [paramName]="field.props.paramName" 
+    [index]="i" 
+    (deleteFile)="onDeleteFile(i)"></ngz-formly-material-file-upload>
+  </ng-container>
+</mat-list>

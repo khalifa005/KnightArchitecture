@@ -1,0 +1,174 @@
+<div class="container">
+    <button  class="btn btn-outline-success rounded"
+    *ngxPermissionsOnly="['add-caused-by-reason','super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'"
+     translate><nb-icon icon="file-add-outline" class="mx-2"></nb-icon>if user has any add-caused-by-reason  - super-admin - can view this button </button>
+
+    <div class="row">
+        <!-- Example 1: Single Permission -->
+        <div class="col-6">
+            <div *ngxPermissionsOnly="['view-dynamic-table']; else noAccessDynamicTable" class="card">
+                <div class="card-body">
+                    <h3>Dynamic Table</h3>
+                    <p>You have permission to view dynamic tables.</p>
+                    <p><i>This content is displayed because your permissions include 'view-dynamic-table'.</i></p>
+                </div>
+            </div>
+            <ng-template #noAccessDynamicTable>
+                <div class="alert alert-warning">
+                    <p><i>You do not have permission to view dynamic tables.</i></p>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Example 2: Multiple Permissions -->
+        <div class="col-6">
+            <div *ngxPermissionsOnly="['view-dynamic-table', 'manage-users']; else noAccessAdminDashboard" class="card">
+                <div class="card-body">
+                    <h3>Admin Dashboard</h3>
+                    <p>You have both 'view-dynamic-table' and 'manage-users' permissions.</p>
+                    <p><i>This content is displayed because you satisfy both permissions.</i></p>
+                </div>
+            </div>
+            <ng-template #noAccessAdminDashboard>
+                <div class="alert alert-warning">
+                    <p><i>You do not have the required permissions to view the Admin Dashboard.</i></p>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Example 3: Remove from DOM -->
+        <div class="col-6">
+            <div *ngxPermissionsOnly="['view-home']; else noAccessHome" class="card">
+                <div class="card-body">
+                    <h3>Home Section</h3>
+                    <p>You can view the home section because you have the 'view-home' permission.</p>
+                </div>
+            </div>
+            <ng-template #noAccessHome>
+                <div class="alert alert-warning">
+                    <p><i>The home section is not accessible because you lack the 'view-home' permission.</i></p>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Example 3: Remove from DOM -->
+        <div class="col-6">
+            <div *ngxPermissionsOnly="['view-home']; else noAccessHome" class="card">
+                <div class="card-body">
+                    <h3>Home Section</h3>
+                    <p>You can view the home section because you have the 'view-home' permission.</p>
+                </div>
+            </div>
+            <ng-template #noAccessHome>
+                <div class="alert alert-warning">
+                    <p><i>The home section is removed from the DOM as you lack the 'view-home' permission.</i></p>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Example 4: Keep in DOM but Hidden -->
+        <div class="col-6">
+            <div *ngxPermissionsExcept="['manage-permissions']; else restrictedAccess" class="card">
+                <div class="card-body">
+                    <h3>Restricted Content</h3>
+                    <p>This content is visible because you lack the 'manage-permissions' permission.</p>
+                </div>
+            </div>
+            <ng-template #restrictedAccess>
+                <div class="alert alert-warning">
+                    <p><i>You cannot view this content due to restricted access.</i></p>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Example 5: Hidden but in DOM -->
+        <div class="col-6">
+            <div *ngxPermissionsOnly="['view-reports']; else noAccessReports" class="card">
+                <div class="card-body">
+                    <h3>Reports Section</h3>
+                    <p>This content is hidden but still present in the DOM. Inspect the DOM to verify.</p>
+                </div>
+            </div>
+            <ng-template #noAccessReports>
+                <div class="alert alert-warning">
+                    <p><i>You do not have permission to view reports.</i></p>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Example 6: Permissions for User Management -->
+        <div class="col-6">
+            <div *ngxPermissionsOnly="['manage-users']; else noAccessUserManagement" class="card">
+                <div class="card-body">
+                    <h3>User Management</h3>
+                    <p>You can manage users because you have the 'manage-users' permission.</p>
+                </div>
+            </div>
+            <ng-template #noAccessUserManagement>
+                <div class="alert alert-warning">
+                    <p><i>You do not have permission to manage users.</i></p>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Example 7: Dynamic Table Access -->
+        <div class="col-6">
+            <div *ngxPermissionsOnly="['view-dynamic-table']; else noAccessDynamicTable2" class="card">
+                <div class="card-body">
+                    <h3>Dynamic Table</h3>
+                    <p>You have access to view dynamic tables.</p>
+                </div>
+            </div>
+            <ng-template #noAccessDynamicTable2>
+                <div class="alert alert-warning">
+                    <p><i>You do not have access to view dynamic tables.</i></p>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Example 8: Permissions for Forms -->
+        <div class="col-6">
+            <div *ngxPermissionsOnly="['manage-dynamic-form']; else noAccessDynamicForm" class="card">
+                <div class="card-body">
+                    <h3>Dynamic Form</h3>
+                    <p>You can manage dynamic forms because you have the 'manage-dynamic-form' permission.</p>
+                </div>
+            </div>
+            <ng-template #noAccessDynamicForm>
+                <div class="alert alert-warning">
+                    <p><i>You do not have permission to manage dynamic forms.</i></p>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Example 9: Permissions for Bootstrap Examples -->
+        <div class="col-6">
+            <div *ngxPermissionsOnly="['view-bootstrap-examples']; else noAccessBootstrapExamples" class="card">
+                <div class="card-body">
+                    <h3>Bootstrap Examples</h3>
+                    <p>You can view Bootstrap examples because you have the 'view-bootstrap-examples' permission.</p>
+                </div>
+            </div>
+            <ng-template #noAccessBootstrapExamples>
+                <div class="alert alert-warning">
+                    <p><i>You do not have permission to view Bootstrap examples.</i></p>
+                </div>
+            </ng-template>
+        </div>
+
+        <!-- Example 10: Conditional Permissions -->
+        <div class="col-6">
+            <div *ngxPermissionsOnly="['access-auth']; else noAuthAccess" class="card">
+                <div class="card-body">
+                    <h3>Authentication</h3>
+                    <p>You can access authentication features because you have the 'access-auth' permission.</p>
+                </div>
+            </div>
+            <ng-template #noAuthAccess>
+                <div class="alert alert-warning">
+                    <p><i>Authentication section is not accessible due to missing 'access-auth' permission.</i></p>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

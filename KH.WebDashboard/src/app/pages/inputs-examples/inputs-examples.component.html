@@ -1,0 +1,257 @@
+
+<nb-card >
+    <nb-card-header>{{ 'form.inputs' | translate }}</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+
+            <!-- Inputs Section -->
+            <div class="col-12 mb-3">
+                <h5 class="section-title">{{ 'form.section.inputs' | translate }}</h5>
+            </div>
+            <div class="col-6">
+                <h6 class="subsection-title">{{ 'form.input.form_control' | translate }}</h6>
+                <ngx-custom-input [formcontrol]="myForm.get('inputControl')" [isRequired]="true"
+                    label="{{ 'form.input.label_form_control' | translate }}"
+                    placeHolder="{{ 'form.input.placeholder' | translate }}" [icon]="'edit-outline'"
+                    regexPattern="^[a-zA-Z0-9]+$" [readonly]="false">
+                </ngx-custom-input>
+            </div>
+
+            <div class="col-6">
+                <h6 class="subsection-title">{{ 'form.input.standalone' | translate }}</h6>
+                <ngx-custom-input [(selectedItem)]="selectedValue"
+                    label="{{ 'form.input.label_standalone' | translate }}"
+                    placeHolder="{{ 'form.input.placeholder' | translate }}" [isRequired]="true"
+                    [icon]="'search-outline'" [disabled]="false" (selectedItemChange)="onInputChange($event)"
+                    [regexPattern]="standAloneInputRegExp">
+                </ngx-custom-input>
+            </div>
+
+            <!-- Date Section -->
+            <div class="col-12 mt-4 mb-3">
+                <h5 class="section-title">{{ 'form.section.dates' | translate }}</h5>
+            </div>
+            <div class="col-6">
+                <h6 class="subsection-title">{{ 'form.date.form_control' | translate }}</h6>
+                <ngx-date-picker [formcontrol]="myForm.get('dateControl')" [isRequired]="true"
+                    label="{{ 'form.date.label_form_control' | translate }}"
+                    placeHolder="{{ 'form.date.placeholder' | translate }}" [min]="minDate" [max]="maxDate">
+                </ngx-date-picker>
+            </div>
+            <div class="col-6">
+                <h6 class="subsection-title">{{ 'form.date.standalone' | translate }}</h6>
+                <ngx-date-picker [(selectedItem)]="dateValue" label="{{ 'form.date.label_standalone' | translate }}"
+                    placeHolder="{{ 'form.date.placeholder' | translate }}" [min]="minDate" [max]="maxDate"
+                    (selectedItemChange)="onDateChange($event)">
+                </ngx-date-picker>
+            </div>
+
+            <!-- Auto-complete Section -->
+            <div class="col-12 mt-3">
+
+                <h5 class="section-title">{{ 'form.section.inputs' | translate }}</h5>
+            </div>
+            <div class="col-6">
+                <h6 class="subsection-title">{{ 'form.input.auto_complete' | translate }}</h6>
+                <!-- Parent Category -->
+
+                <app-nb-auto-complete [formcontrol]="myForm.get('productCategoryControl')"
+                    [selectOptions]="productCategories" label="{{ 'form.auto_complete.product_category' | translate }}"
+                    placeHolder="{{ 'form.auto_complete.select_category' | translate }}" [isRequired]="true">
+                </app-nb-auto-complete>
+
+            </div>
+
+            <div class="col-6">
+                <h6 class="subsection-title">{{ 'form.input.auto_complete' | translate }}</h6>
+
+                <!-- Subcategory -->
+                <app-nb-auto-complete [formcontrol]="myForm.get('subCategoryControl')" [selectOptions]="subCategories"
+                    label="{{ 'form.auto_complete.sub_category' | translate }}"
+                    placeHolder="{{ 'form.auto_complete.select_sub_category' | translate }}" [isRequired]="true">
+                </app-nb-auto-complete>
+            </div>
+
+             <!-- Dropdown Section -->
+      <div class="col-12 mt-4 mb-3">
+        <h5 class="section-title">{{ 'form.section.dropdowns' | translate }}</h5>
+      </div>
+
+      <!-- Reactive Form Dropdown -->
+      <div class="col-6">
+        <h6 class="subsection-title">{{ 'form.dropdown.form_control' | translate }}</h6>
+        <app-custom-single-select-dropdown 
+          [formcontrol]="myForm.get('dropdownControl')" 
+          [selectOptions]="productCategories" 
+          label="{{ 'form.dropdown.label_form_control' | translate }}" 
+          placeHolder="{{ 'form.dropdown.placeholder' | translate }}" 
+          [isRequired]="true">
+        </app-custom-single-select-dropdown>
+      </div>
+
+      <!-- Standalone Dropdown -->
+      <div class="col-6">
+        <h6 class="subsection-title">{{ 'form.dropdown.standalone' | translate }}</h6>
+
+        <app-custom-single-select-dropdown 
+          [(selectedItem)]="selectedDropdownValue" 
+          [selectOptions]="productCategories" 
+          label="{{ 'form.dropdown.label_standalone' | translate }}" 
+          placeHolder="{{ 'form.dropdown.placeholder' | translate }}" 
+          [isRequired]="true" 
+          (selectedItemChanged)="onDropdownItemChange($event)">
+        </app-custom-single-select-dropdown>
+      </div>
+
+      <!-- Multi-Select Dropdown Section -->
+      <div class="col-12 mt-4 mb-3">
+        <h5 class="section-title">{{ 'form.section.multi_selects' | translate }}</h5>
+      </div>
+
+      <!-- Reactive Form Multi-Select -->
+      <div class="col-6">
+        <h6 class="subsection-title">{{ 'form.multi_select.form_control' | translate }}</h6>
+        <app-custom-multi-select-dropdown 
+          [formcontrol]="myForm.get('multiSelectControl')" 
+          [selectOptions]="productCategories" 
+          [isMultiple]="true"
+          label="{{ 'form.multi_select.label_form_control' | translate }}" 
+          [isRequired]="true">
+        </app-custom-multi-select-dropdown>
+      </div>
+
+      <!-- Standalone Multi-Select -->
+      <div class="col-6">
+        <h6 class="subsection-title">{{ 'form.multi_select.standalone' | translate }}</h6>
+        <app-custom-multi-select-dropdown 
+          [(selectedItems)]="selectedMultiSelectItems" 
+          [selectOptions]="productCategories" 
+          [isMultiple]="true"
+          label="{{ 'form.multi_select.label_standalone' | translate }}" 
+          [isRequired]="true" 
+          (selectedItemChanged)="onMultiSelectChange($event)">
+        </app-custom-multi-select-dropdown>
+      </div>
+
+       <!-- Time Dropdown Section -->
+       <div class="col-12 mt-4 mb-3">
+        <h5 class="section-title">{{ 'form.section.time' | translate }}</h5>
+      </div>
+
+      <!-- Reactive Form Hours Dropdown -->
+      <div class="col-6">
+        <h6 class="subsection-title">{{ 'form.time.hours_form_control' | translate }}</h6>
+        <app-time-dropdown 
+          [formcontrol]="myForm.get('hoursControl')" 
+          fromRange="0" 
+          toRange="23" 
+          label="{{ 'form.time.label_hours_form_control' | translate }}" 
+          placeHolder="{{ 'form.time.placeholder_hours' | translate }}" 
+          [isRequired]="true">
+        </app-time-dropdown>
+      </div>
+
+      <!-- Reactive Form Minutes Dropdown -->
+      <div class="col-6">
+        <h6 class="subsection-title">{{ 'form.time.minutes_form_control' | translate }}</h6>
+        <app-time-dropdown 
+          [formcontrol]="myForm.get('minutesControl')" 
+          fromRange="0" 
+          toRange="59" 
+          label="{{ 'form.time.label_minutes_form_control' | translate }}" 
+          placeHolder="{{ 'form.time.placeholder_minutes' | translate }}" 
+          [isRequired]="true">
+        </app-time-dropdown>
+      </div>
+
+      <!-- Standalone Time Dropdown -->
+      <div class="col-6">
+        <h6 class="subsection-title">{{ 'form.time.hours_standalone' | translate }}</h6>
+        <app-time-dropdown 
+          [(selectedHours)]="selectedHours" 
+          fromRange="0" 
+          toRange="23" 
+          label="{{ 'form.time.label_hours_standalone' | translate }}" 
+          placeHolder="{{ 'form.time.placeholder_hours' | translate }}" 
+          (selectedItemChanged)="onHoursChange($event)">
+        </app-time-dropdown>
+      </div>
+
+      <div class="col-6">
+        <h6 class="subsection-title">{{ 'form.time.minutes_standalone' | translate }}</h6>
+        <app-time-dropdown 
+          [(selectedMinutes)]="selectedMinutes" 
+          fromRange="0" 
+          toRange="59" 
+          label="{{ 'form.time.label_minutes_standalone' | translate }}" 
+          placeHolder="{{ 'form.time.placeholder_minutes' | translate }}" 
+          (selectedItemChanged)="onMinutesChange($event)">
+        </app-time-dropdown>
+      </div>
+
+      <!-- File Uploader Section -->
+      <div class="col-12 mt-4 mb-3">
+        <h5 class="section-title">{{ 'form.section.file_uploads' | translate }}</h5>
+      </div>
+
+      <!-- Reactive Form File Uploader -->
+      <div class="col-6">
+        <h6 class="subsection-title">{{ 'form.file_uploader.form_control' | translate }}</h6>
+        <!-- requiredFileType="image/*"  -->
+
+        <!-- label="{{ 'form.file_uploader.label_form_control' | translate }}" -->
+
+        <app-file-uploader 
+        label="{{ 'form.file_uploader.label_form_control' | translate }}"
+          [formcontrol]="myForm.get('fileControl')" 
+          requiredFileType=".png, .jpg, .pdf, .mp4"
+          maxFiles="2"
+          maxFileSizeInMB="5 mb"
+          [isRequired]="true"
+          [preUploadedFiles]="preUploadedFiles"
+          (PreUploadedFileDroppedEmitter)="onOldFileDrop($event)"
+          [multiple]="true">
+        </app-file-uploader>
+      </div>
+
+      <!-- Standalone File Uploader -->
+      <div class="col-6">
+        <h6 class="subsection-title">{{ 'form.file_uploader.standalone' | translate }}</h6>
+
+          <!-- [(files)]="standaloneFiles"  -->
+
+        <app-file-uploader 
+        label="{{ 'form.file_uploader.label_form_control' | translate }}"
+          requiredFileType="application/pdf" 
+          maxFiles="2"
+          maxFileSizeInMB="5 mb"
+          [multiple]="true" 
+          [preUploadedFiles]="preUploadedFiles"
+          (PreUploadedFileDroppedEmitter)="onOldFileDrop($event)"
+          (fileDroppedEmitter)="onFileDrop($event)">
+        </app-file-uploader>
+
+      </div>
+
+            <!-- Textarea Section -->
+            <div class="col-12 mt-4 mb-3">
+                <h5 class="section-title">{{ 'form.section.textareas' | translate }}</h5>
+            </div>
+            <div class="col-6">
+                <h6 class="subsection-title">{{ 'form.textarea.form_control' | translate }}</h6>
+                <app-custom-textarea [isRequired]="true" [formcontrol]="myForm.get('textareaControl')"
+                    label="{{ 'form.textarea.label_form_control' | translate }}"
+                    placeHolder="{{ 'form.textarea.placeholder' | translate }}" [readonly]="false">
+                </app-custom-textarea>
+            </div>
+            <div class="col-6">
+                <h6 class="subsection-title">{{ 'form.textarea.standalone' | translate }}</h6>
+                <app-custom-textarea [(selectedItem)]="textareaValue"
+                    label="{{ 'form.textarea.label_standalone' | translate }}"
+                    placeHolder="{{ 'form.textarea.placeholder' | translate }}" [isRequired]="true" [disabled]="false"
+                    (selectedItemChange)="onTextareaChange($event)">
+                </app-custom-textarea>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

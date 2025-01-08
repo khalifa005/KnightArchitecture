@@ -1,0 +1,78 @@
+<div class="form-group" *ngIf="formcontrol !== undefined">
+
+  
+  <!-- <label for="groupId" class="label d-block" translate>{{label | translate}}
+    <span *ngIf="isRequired">*</span>
+</label> -->
+
+  <label for="TypeId" class="label" translate>{{ label }}
+    <span *ngIf="isRequired">*</span>
+  </label>
+
+
+  <!-- Wrapper for input and icon -->
+  <div class="input-with-icon">
+    <input
+      type="text"
+      nbInput
+      fullWidth
+      fieldSize="small"
+      id="TypeId"
+      [readonly]="readonly"
+      [ngxPattern]="regexPattern"
+      placeholder="{{ placeHolder | translate }}"
+      [status]="(formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)) ? 'danger' : null"
+      [formControl]="formcontrol"
+    />
+    <!-- Add your icon here -->
+    <!-- <nb-icon icon="search-outline"></nb-icon> -->
+    <nb-icon [icon]="icon"></nb-icon>
+
+  </div>
+
+  <div *ngIf="formcontrol.errors && (formcontrol.dirty || formcontrol.touched)" class="text-danger">
+    <div *ngIf="formcontrol.errors?.['required']" translate="validations.please-provide-value"></div>
+    <div
+      *ngIf="formcontrol.errors?.['minlength']"
+      translate="validations.minlength"
+      [translateParams]="{ requiredLength: formcontrol.errors?.['minlength']?.requiredLength }">
+    </div>
+    <div
+      *ngIf="formcontrol.errors?.['maxlength']"
+      translate="validations.maxlength"
+      [translateParams]="{ requiredLength: formcontrol.errors?.['maxlength']?.requiredLength }">
+    </div>
+    <div
+    *ngIf="formcontrol.errors?.['regex']"
+    translate="validations.regex"
+    [translateParams]="{ pattern: formcontrol.errors?.['regex']?.requiredPattern }">
+  </div>
+  </div>
+  
+
+</div>
+
+<div *ngIf="formcontrol === undefined">
+  <label *ngIf="label" for="TypeId" class="label" translate>{{ label }}</label>
+  <!-- (ngModelChange)="onItemChanged($event)"  -->
+
+  <div class="input-with-icon">
+    <input
+      type="text"
+      nbInput
+      fullWidth
+      fieldSize="small"
+      class="d-inline"
+      id="TypeId"
+      name="TypeId"
+      [ngxPattern]="regexPattern"
+      [disabled]="disabled"
+      placeholder="{{ placeHolder | translate }}"
+      [required]="isRequired"
+      [(ngModel)]="selectedItem"
+      (ngModelChange)="validateInput($event)"
+      (keypress)="preventInvalidInput($event)" />
+    <!-- <nb-icon icon="search-outline"></nb-icon> -->
+    <nb-icon [icon]="icon"></nb-icon>
+  </div>
+</div>

@@ -1,0 +1,169 @@
+import { NbMenuItem } from '@nebular/theme';
+
+export const MENU_ITEMS: NbMenuItem[] = [
+  {
+    title: 'sideMenu.home',
+    icon: 'home-outline',
+    link: '/pages/home',
+    home: true,
+    data: {
+      translationKey: 'sideMenu.home',
+      permissionKey: 'view-home',
+    },
+  },
+  {
+    title: 'sideMenu.dynamicForm',
+    icon: 'edit-2-outline',
+    link: '/pages/dynamic-form',
+    data: {
+      translationKey: 'sideMenu.dynamicForm',
+      permissionKey: 'manage-dynamic-form',
+    },
+  },
+  {
+    title: 'sideMenu.chat',
+    icon: 'user-outline',
+    link: '/pages/chat',
+    data: {
+      translationKey: 'sideMenu.chat',
+      permissionKey: '',
+    },
+  },
+  {
+    title: 'sideMenu.cchat',
+    icon: 'user-outline',
+    link: '/pages/cchat',
+    data: {
+      translationKey: 'sideMenu.cchat',
+      permissionKey: '',
+    },
+  },
+  {
+    title: 'sideMenu.permissions',
+    icon: 'eye-outline',
+    link: '/pages/permissions',
+    data: {
+      translationKey: 'sideMenu.permissions',
+      permissionKey: 'view-permissions',
+    },
+  },
+  {
+    title: 'sideMenu.dynamicTable',
+    icon: 'grid-outline',
+    link: '/pages/dynamic-table',
+    data: {
+      translationKey: 'sideMenu.dynamicTable',
+      permissionKey: 'view-dynamic-table',
+    },
+  },
+  {
+    title: 'sideMenu.cardsExamples',
+    icon: 'browser-outline',
+    link: '/pages/cards-examples',
+    data: {
+      translationKey: 'sideMenu.cardsExamples',
+      permissionKey: 'view-cards-examples',
+    },
+  },
+  {
+    title: 'sideMenu.bootstrapExamples',
+    icon: 'layers-outline',
+    link: '/pages/bootstrap-examples',
+    data: {
+      translationKey: 'sideMenu.bootstrapExamples',
+      permissionKey: 'view-bootstrap-examples',
+    },
+  },
+  {
+    title: 'sideMenu.iconsExamples',
+    icon: 'star-outline',
+    link: '/pages/icons-examples',
+    data: {
+      translationKey: 'sideMenu.iconsExamples',
+      permissionKey: 'view-icons-examples',
+    },
+  },
+  {
+    title: 'sideMenu.inputsExamples',
+    icon: 'edit-outline',
+    link: '/pages/inputs-examples',
+    data: {
+      translationKey: 'sideMenu.inputsExamples',
+      permissionKey: 'manage-inputs-examples',
+    },
+  },
+  {
+    title: 'sideMenu.formExamples',
+    icon: 'file-text-outline',
+    link: '/pages/form-examples',
+    data: {
+      translationKey: 'sideMenu.formExamples',
+      permissionKey: 'view-form-examples',
+    },
+  },
+  {
+    title: 'sideMenu.auth',
+    icon: 'lock-outline',
+    link: '/auth',
+    data: {
+      translationKey: 'sideMenu.auth',
+      permissionKey: 'access-auth',
+    },
+  },
+  {
+    title: 'sideMenu.notFound',
+    icon: 'close-circle-outline',
+    link: '/pages/whatever',
+    data: {
+      translationKey: 'sideMenu.notFound',
+      permissionKey: 'view-not-found',
+    },
+  },
+  {
+    title: 'sideMenu.userManagement',
+    icon: 'keypad-outline',
+    data: {
+      translationKey: 'sideMenu.userManagement',
+      permissionKey: 'manage-user-management',
+    },
+    children: [
+
+      {
+        title: 'sideMenu.permissions',
+        icon: 'eye-outline',
+        link: '/pages/manage/permissions',
+        data: {
+          translationKey: 'sideMenu.permissions',
+          permissionKey: 'manage-permissions',
+        },
+      },
+      {
+        title: 'sideMenu.roles',
+        icon: 'eye-outline',
+        link: '/pages/manage/roles',
+        data: {
+          translationKey: 'sideMenu.roles',
+          permissionKey: 'manage-permissions',//updated in backend
+        },
+      },
+      {
+        title: 'sideMenu.departments',
+        icon: 'eye-outline',
+        link: '/pages/manage/departments',
+        data: {
+          translationKey: 'sideMenu.departments',
+          permissionKey: 'manage-departments',//updated in backend
+        },
+      },
+      {
+        title: 'sideMenu.users',
+        icon: 'people-outline',
+        link: '/pages/admin/user-profiles-list',
+        data: {
+          translationKey: 'sideMenu.users',
+          permissionKey: 'manage-users',
+        },
+      },
+    ],
+  },
+];

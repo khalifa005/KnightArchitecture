@@ -1,0 +1,75 @@
+.loader {
+  /* The size is now relative to a custom variable */
+  --custom-size: 10rem; /* Default size */
+
+  width: var(--custom-size);
+  height: var(--custom-size);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .section {
+    /* Width and height are now relative to the loader's size */
+    width: calc(var(--custom-size) * 0.05); /* 5% of loader size */
+    height: calc(var(--custom-size) * 0.1); /* 10% of loader size */
+    background-color: rgba(255, 255, 255, 0.075);
+    border-radius: 2px;
+    position: absolute;
+    animation: rotate 2.5s ease infinite forwards;
+
+    @for $i from 0 through 60 {
+      &:nth-child(#{$i}) {
+        transform: rotate(#{8 * $i}deg)
+          translate(0, calc(-1 * var(--custom-size) * 0.45));
+        animation-delay: $i * 0.055s;
+      }
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      background-color: rgb(18, 111, 169);
+    }
+    to {
+      background-color: rgba(255, 255, 255, 0.075);
+    }
+  }
+
+  .loading-text {
+    color: #000;
+    position: absolute;
+    font-size: calc(var(--custom-size) * 0.1); /* Text size scales with loader */
+  }
+
+  .holder {
+    height: calc(var(--custom-size) * 0.75); /* Scales dynamically */
+    width: 0;
+    position: absolute;
+    animation: rotatet 8s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      color: #000;
+      position: absolute;
+      font-family: 'Bebas Neue';
+      font-size: calc(var(--custom-size) * 0.24); /* Text scales dynamically */
+
+      @for $j from 1 through 7 {
+        &.p#{$j} {
+          transform: rotate(calc(-360deg / 7 * #{$j}))
+            translate(0, calc(-1 * var(--custom-size) * 0.65));
+        }
+      }
+    }
+
+    @keyframes rotatet {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

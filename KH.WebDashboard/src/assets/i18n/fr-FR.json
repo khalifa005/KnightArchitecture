@@ -1,0 +1,15 @@
+{
+	"@auth": {
+		"login": "Connectez-vous pour utiliser le tableau de bord !",
+		"password": "Tapez votre mot de passe",
+		"remember": "Souviens-toi de moi",
+		"required_password": "Le mot de passe est obligatoire",
+		"required_username": "L'e-mail est requis",
+		"username": "Insérez votre email",
+		"welcome": "Bienvenue sur le tableau de bord !"
+	},
+	"@home": {
+		"body": "Merci à l&#39;équipe Akveo d&#39;avoir créé ce thème incroyable !",
+		"welcome": "Bienvenue sur le tableau de bord"
+	}
+}

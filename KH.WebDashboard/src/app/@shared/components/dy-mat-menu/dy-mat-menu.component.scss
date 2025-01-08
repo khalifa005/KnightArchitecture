@@ -1,0 +1,58 @@
+
+
+
+.advanced-menu {
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.advanced-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 15px;
+  font-size: 12px;
+  font-weight: 450;
+  color: #333;
+  background-color: #fff;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  // width: 200px; /* Set a fixed width for all menu items */
+  width: 165px; /* Set a fixed width for all menu items */
+}
+
+.advanced-menu-item:hover {
+  background-color: #e0e7ff;
+  // transform: translateY(-2px);
+}
+
+.menu-icon {
+  font-size: 12px;
+  margin-left: 8px; /* For LTR */
+  color: #007bff;
+}
+
+.example-menu-item:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #007bff;
+}
+
+.advanced-menu-item:active {
+  background-color: #d0d7ff;
+}
+
+/* RTL support */
+:host-context([dir='rtl']) .advanced-menu-item {
+  justify-content: space-between;
+  text-align: right;
+  flex-direction: row-reverse;
+}
+
+:host-context([dir='rtl']) .menu-icon {
+  margin-right: 8px; /* For RTL */
+  margin-left: 0;
+}

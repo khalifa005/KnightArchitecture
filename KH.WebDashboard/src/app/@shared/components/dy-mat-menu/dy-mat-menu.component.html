@@ -1,0 +1,29 @@
+
+<ng-template #childMenu cdkMenuBar>
+    <div class="example-menu advanced-menu" cdkMenu>
+      <ng-container *ngFor="let child of items">
+        <ng-container *ngIf="child.children && child.children.length; else noChildren">
+          <button class="example-menu-item advanced-menu-item" cdkMenuItem
+            color="primary" [cdkMenuTriggerFor]="menu.childMenu">
+            <!-- <mat-icon>{{ child.iconName }}</mat-icon> -->
+            {{ child.displayName }}
+            <span class="menu-icon">&#10148;</span>
+          </button>
+          <app-dy-mat-menu #menu 
+          [items]="child.children" 
+          [myDataObject]="myDataObject" 
+          [selectedItemsIds]="selectedItemsIds" 
+          cdkMenu></app-dy-mat-menu>
+        </ng-container>
+        <ng-template #noChildren>
+          <button class="example-menu-item advanced-menu-item" cdkMenuItem (click)="openMenu($event, child)">
+            <ng-container *ngIf="child.iconName">
+                <mat-icon>{{ child.iconName }}</mat-icon>
+              </ng-container>
+            {{ child.displayName }}
+          </button>
+        </ng-template>
+      </ng-container>
+    </div>
+  </ng-template>
+  

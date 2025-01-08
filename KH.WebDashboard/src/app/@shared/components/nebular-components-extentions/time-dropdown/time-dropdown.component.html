@@ -1,0 +1,34 @@
+<div class="form-group" *ngIf="formcontrol !== undefined && show">
+
+  <label for="timer" class="label">{{label | translate}}
+    <span *ngIf="isRequired">*</span>
+  </label>
+
+  <nb-select 
+  size="tiny"
+  placeholder="{{ placeHolder | translate }}"
+  fullWidth
+  [status]="(formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)) ? 'danger' : 'basic' "
+  class="d-inline-block"
+  id="timer"
+   
+  [formControl]="formcontrol">
+
+  <nb-option [value]="dropDownAllOption.id" >
+    {{dropDownAllOption.nameEn | translator : dropDownAllOption.nameAr}}
+  </nb-option>
+
+  <nb-option *ngFor="let x of Hours" [value]="x" >
+      {{x}}
+  </nb-option>
+
+</nb-select>
+
+  <div
+    translate
+    class="text-danger"
+    *ngIf="formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)">
+    validations.please-provide-value
+  </div>
+  </div>
+

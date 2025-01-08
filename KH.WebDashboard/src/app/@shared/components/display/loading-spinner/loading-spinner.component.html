@@ -1,0 +1,10 @@
+<div class="loader" [style.--custom-size]="size">
+  <div *ngFor="let index of sections" class="section"></div>
+  <div class="holder">
+    <!-- <p *ngFor="let letter of letters; let idx = index" [ngClass]="'p' + (idx + 1)">
+      {{ letter }}
+    </p> -->
+  </div>
+  <p class="text-center mt-2 loading-text">{{ 'loading' | translate }}</p>
+
+</div>

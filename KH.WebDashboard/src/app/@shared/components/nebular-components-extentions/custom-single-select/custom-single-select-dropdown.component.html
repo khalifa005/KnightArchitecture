@@ -1,0 +1,93 @@
+<div class="form-group" *ngIf="formcontrol !== undefined ">
+
+    <label for="groupId" class="label" translate>{{ label }}
+      <span *ngIf="isRequired">*</span>
+    </label>
+  
+  
+    <nb-select
+      class="d-inline"
+      id="groupId"
+      size="tiny"
+      placeholder="{{ placeHolder | translate }}"
+      [status]="(formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)) ? 'danger' : 'basic' "
+      status="primary"
+      [formControl]="formcontrol">
+  
+      <nb-option [value]="dropDownAllOption.id" >
+        {{dropDownAllOption.nameEn | translator : dropDownAllOption.nameAr}}
+      </nb-option>
+      <nb-option *ngFor="let x of selectOptions" [value]="x.id" >
+          {{x.nameEn | translator : x.nameAr}}
+      </nb-option>
+    </nb-select>
+
+    
+    <div
+      translate
+      class="text-danger"
+      *ngIf="formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)">
+      validations.please-provide-value
+    </div>
+    </div>
+  
+  
+    <div *ngIf="formcontrol === undefined">
+
+        <label
+        *ngIf="label"
+        for="TypeId" class="label" translate>{{label}}</label>
+    
+        <nb-select
+        *ngIf="selectOptions && selectOptions.length > 0"
+        placeholder="Select option"
+      size="tiny"
+        fullWidth
+        class="d-inline"
+        id="TypeId"
+        name="TypeId"
+        [disabled]="disabled"
+        [required]="isRequired"
+        [(selected)]="selectedItem"
+        (selectedChange)="onItemChanged($event)" >
+<!--       
+        <ng-container >
+       
+        </ng-container> -->
+        <nb-option [value]="dropDownAllOption.id" >
+          {{dropDownAllOption.nameEn | translator : dropDownAllOption.nameAr}}
+        </nb-option>
+
+      
+        <!-- <ng-container *ngIf="selectOptions && selectOptions.length > 0"> -->
+          <nb-option *ngFor="let x of selectOptions; trackBy: trackById" [value]="x.id" >
+            {{x.nameEn | translator : x.nameAr}}
+        </nb-option>
+
+        <!-- </ng-container> -->
+
+
+        
+          
+        </nb-select>
+
+        <nb-select
+        *ngIf="!selectOptions"
+        placeholder="Select option"
+        fullWidth
+         size="tiny"
+
+        class="d-inline"
+        id="TypeId"
+        name="TypeId"
+        [disabled]="disabled"
+        [required]="isRequired"
+        [(selected)]="selectedItem"
+        (selectedChange)="onItemChanged($event)" >
+
+        <nb-option [value]="dropDownAllOption.id" >
+          {{dropDownAllOption.nameEn | translator : dropDownAllOption.nameAr}}
+        </nb-option>
+
+        </nb-select>
+      </div>

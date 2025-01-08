@@ -1,0 +1,36 @@
+<div class="card mt-1">
+  <div class="card-header text-center">
+    <h5>{{ 'role.management' | translate }} </h5>
+  </div>
+  <div class="card-body">
+    <app-dy-table [customactionTemplateInput]="customactionTemplate" [configuration]="configuration"
+      [apiCustomColumns]="tableColumns" [apiData]="data" [paginationParam]="pagination"
+      (editUser)="editUserHandler($event)" (deleteUser)="deleteUserHandler($event)"
+      (filterChanged)="onFilterChanged($event)" 
+      (paginationChanged)="onPaginationChanged($event)"
+      (sortingChanged)="onSortingChanged($event)"
+      ></app-dy-table>
+
+  </div>
+</div>
+
+<!-- Define Template for Action Buttons -->
+<ng-template #customactionTemplate let-rowKey="rowKey" let-columnKey="columnKey">
+
+  <!-- if u need using text button use theses -->
+  <!-- <button nbButton status="info" size="tiny" (click)="editUser(rowKey.id)">
+    {{ '@buttons.edit' | translate }}
+  </button>
+  <button nbButton status="danger" size="tiny" class="ms-2" (click)="deleteUser(rowKey.id)">
+    {{ '@buttons.delete' | translate }}
+  </button> -->
+
+  <button  fullw nbButton size="tiny" status="info">
+    <nb-icon [options]="{ animation: { type: 'shake' } }" icon="edit-outline" (click)="editUser(rowKey.id)"></nb-icon>
+  </button>
+
+  <button class="mx-2" nbButton size="tiny" status="danger" (click)="onDeletedClicked(rowKey.id)">
+    <nb-icon icon="trash-outline"></nb-icon>
+  </button>
+</ng-template>
+<!-- *ngxPermissionsOnly="['edit-role','SuperAdmin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'" -->

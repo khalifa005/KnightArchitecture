@@ -1,0 +1,95 @@
+<div class="row p-0 m-0 overflow-hidden h-100 w-80">
+  <!-- Login Form -->
+  <div class="col-md-6 bg-white p-5 d-flex flex-column justify-content-center">
+
+    <!-- <img src="./assets/images/khalifa3.png" class="figure-img img-fluid rounded"> -->
+
+    <h2 class="text-center mb-4">{{ 'auth.login' | translate }}</h2>
+
+    <!-- <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
+      <p class="alert-title"><b>Oh snap!</b></p>
+      <ul class="alert-message-list">
+        <li *ngFor="let error of errors" class="alert-message">{{ error | translate }}</li>
+      </ul>
+    </nb-alert> -->
+
+    <form [formGroup]="loginForm">
+      <div class="mb-3 position-relative">
+        <label for="input-username" class="form-label">{{ 'auth.username' | translate }}:</label>
+
+        <div class="input-group">
+          <input type="text" fullWidth id="input-username" class="form-control" nbInput formControlName="username"
+            placeholder="User" [class.is-invalid]="loginForm.usernameControl?.invalid && loginForm.usernameControl?.touched"
+            [class.is-valid]="loginForm.usernameControl?.dirty && !loginForm.usernameControl?.invalid" />
+          <button nbButton hero>
+            <nb-icon [icon]="'person-outline'"></nb-icon>
+          </button>
+        </div>
+
+        <div class="text-danger" *ngIf="loginForm.getErrorMessage('username')  && loginForm.usernameControl?.touched">
+          {{ loginForm.getErrorMessage('username') }}
+        </div>
+      </div>
+
+
+      <div class="mb-3 position-relative">
+        <label for="input-password" class="form-label">{{ 'auth.password' | translate }}:</label>
+        <div class="input-group">
+          <input placeholder="{{ 'auth.password' | translate }}"
+            [class.is-invalid]="loginForm.passwordControl?.invalid && loginForm.passwordControl?.touched"
+            [class.is-valid]="loginForm.passwordControl?.dirty && !loginForm.passwordControl?.invalid" class="form-control" formControlName="password"
+            fullWidth [type]="getInputType()" nbInput>
+
+          <button nbButton hero (click)="togglePasswordVisibility()" aria-label="Toggle Password Visibility">
+            <nb-icon [icon]="!showPassword ? 'eye-off-outline' : 'eye-outline'"></nb-icon>
+          </button>
+        </div>
+
+        <div  class="text-danger" *ngIf="loginForm.getErrorMessage('password')  && loginForm.passwordControl?.touched">
+          {{ loginForm.getErrorMessage('password') }}
+        </div>
+      </div>
+
+      <!-- <div class="d-flex justify-content-between align-items-center mb-4">
+        <nb-checkbox formControlName="rememberMe" *ngIf="loginForm.get('rememberMe')">
+          {{ 'auth.remember' | translate }}
+        </nb-checkbox>
+        <a class="text-decoration-none text-primary" routerLink="../request-password">Forgot Password?</a>
+      </div> -->
+
+      <div class="custom-toggle-wrapper d-flex align-items-center justify-content-center mb-3">
+        <div class="toggle-container ms-2">
+          <div class="language-toggle btn-group" role="group" aria-label="Language Toggle">
+            <button
+              type="button"
+              class="btn btn-outline-primary mx-2"
+              [class.active]="selectedLanguage === 'ar-SA'"
+              (click)="onLanguageChange('ar-SA')">
+              <!-- <img src="assets/images/flags/ksa-flag.png" alt="Arabic" class="flag-icon me-1" width="20" height="15" /> -->
+              العربية
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              [class.active]="selectedLanguage === 'en-US'"
+              (click)="onLanguageChange('en-US')">
+              <!-- <img src="assets/images/flags/usa-flag.jpg" alt="English" class="flag-icon me-1" width="20" height="15" /> -->
+              English
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success w-100" [disabled]="submitted || loginForm.invalid" (click)="login()">
+        {{'@buttons.login' | translate}}
+      </button>
+    </form>
+  </div>
+
+  <!-- Side Image -->
+  <div class="col-md-6  login-image">
+
+  </div>
+
+</div>

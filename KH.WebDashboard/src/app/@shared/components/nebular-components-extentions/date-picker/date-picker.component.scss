@@ -1,0 +1,38 @@
+
+
+  .datepicker-wrapper {
+    position: relative;
+    width: 100%; /* Ensure the wrapper spans the full width */
+  }
+  
+  .datepicker-wrapper input {
+    width: 100%; /* Make the input span the full width */
+    padding-inline-end: 40px; /* Space for the icon on the end side */
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+  }
+  
+  .datepicker-icon {
+    position: absolute;
+    inset-inline-end: 10px; /* Align icon to the logical 'end' side */
+    top: 70%; /* Center the icon vertically */
+    transform: translateY(-50%);
+    color: #8f9bb3; /* Match Nebular theme (adjust transparency below) */
+    opacity: 0.5; /* Make the icon partially transparent */
+    font-size: 1.2rem; /* Adjust size if needed */
+    pointer-events: none; /* Prevent interaction with the icon */
+  }
+  
+  .datepicker-wrapper:hover .datepicker-icon {
+    opacity: 1; /* Fully visible on hover */
+  }
+  
+  :host([dir="rtl"]) .datepicker-wrapper input {
+    padding-inline-start: 40px; /* Reverse padding for RTL */
+    padding-inline-end: unset; /* Remove unnecessary 'end' padding */
+  }
+  
+  :host([dir="rtl"]) .datepicker-icon {
+    inset-inline-start: 10px; /* Align icon to the start side for RTL */
+    inset-inline-end: unset; /* Remove the 'end' alignment */
+  }
+  

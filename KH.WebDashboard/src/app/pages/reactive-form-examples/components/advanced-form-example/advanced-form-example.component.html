@@ -1,0 +1,201 @@
+<nb-card>
+    <nb-card-header>{{ 'form.advanced' | translate }}</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+
+                <!-- Inputs and Dates Section -->
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <ngx-custom-input [formcontrol]="myForm.inputControl" [isRequired]="true"
+                                label="{{ 'form.input.label_form_control' | translate }}"
+                                placeHolder="{{ 'form.input.placeholder' | translate }}" [icon]="'edit-outline'"
+                                regexPattern="^[a-zA-Z0-9]+$" [readonly]="false">
+                            </ngx-custom-input>
+                        </div>
+
+                        <div class="col-6">
+                            <ngx-date-picker [formcontrol]="myForm.dateControl" [isRequired]="true"
+                                label="{{ 'form.date.label_form_control' | translate }}"
+                                placeHolder="{{ 'form.date.placeholder' | translate }}" [min]="minDate" [max]="maxDate">
+                            </ngx-date-picker>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Auto-Complete Section -->
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <app-nb-auto-complete [formcontrol]="myForm.productCategoryControl"
+                                [selectOptions]="productCategories"
+                                label="{{ 'form.auto_complete.product_category' | translate }}"
+                                placeHolder="{{ 'form.auto_complete.select_category' | translate }}"
+                                [isRequired]="true">
+                            </app-nb-auto-complete>
+                        </div>
+
+                        <div class="col-6">
+                            <app-nb-auto-complete [formcontrol]="myForm.subCategoryControl"
+                                [selectOptions]="subCategories"
+                                label="{{ 'form.auto_complete.sub_category' | translate }}"
+                                placeHolder="{{ 'form.auto_complete.select_sub_category' | translate }}"
+                                [isRequired]="true">
+                            </app-nb-auto-complete>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dropdown and Multi-Select Dropdown Section -->
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <app-custom-single-select-dropdown [formcontrol]="myForm.dropdownControl"
+                                [selectOptions]="productCategories"
+                                label="{{ 'form.dropdown.label_form_control' | translate }}"
+                                placeHolder="{{ 'form.dropdown.placeholder' | translate }}" [isRequired]="true">
+                            </app-custom-single-select-dropdown>
+                        </div>
+
+                        <div class="col-6">
+                            <app-custom-multi-select-dropdown [formcontrol]="myForm.multiSelectControl"
+                                [selectOptions]="productCategories" [isMultiple]="true"
+                                label="{{ 'form.multi_select.label_form_control' | translate }}" [isRequired]="true">
+                            </app-custom-multi-select-dropdown>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Dropdown Section -->
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <app-time-dropdown [formcontrol]="myForm.hoursControl" fromRange="0" toRange="23"
+                                label="{{ 'form.time.label_hours_form_control' | translate }}"
+                                placeHolder="{{ 'form.time.placeholder_hours' | translate }}" [isRequired]="true">
+                            </app-time-dropdown>
+                        </div>
+                        <div class="col-6">
+                            <app-time-dropdown [formcontrol]="myForm.minutesControl" fromRange="0" toRange="59"
+                                label="{{ 'form.time.label_minutes_form_control' | translate }}"
+                                placeHolder="{{ 'form.time.placeholder_minutes' | translate }}" [isRequired]="true">
+                            </app-time-dropdown>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Upload and Textareas Section -->
+                <div class="col-12 mt-3">
+                    <div class="row d-flex align-items-stretch">
+                        <div class="col-12">
+                            <div class="h-100 d-flex flex-column">
+                                <app-file-uploader class="flex-grow-1" [formcontrol]="myForm.fileControl"
+                                    requiredFileType=".png, .jpg, .pdf, .mp4" maxFiles="2" maxFileSizeInMB="5"
+                                    [isRequired]="true" [multiple]="true">
+                                </app-file-uploader>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <div class="h-100 d-flex flex-column">
+                                <app-custom-textarea class="flex-grow-1" [isRequired]="true"
+                                    [formcontrol]="myForm.textareaControl"
+                                    label="{{ 'form.textarea.label_form_control' | translate }}"
+                                    placeHolder="{{ 'form.textarea.placeholder' | translate }}" [readonly]="false">
+                                </app-custom-textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- working days form array -->
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <button fullWidth [size]="'small'" nbButton status="success" (click)="onAddWorkingDay()">Add
+                                Working Day</button>
+                        </div>
+
+                        <!-- <div formArrayName="workingDays" class="col-12 mt-3">
+                <div *ngFor="let group of myForm.workingDaysArray.controls; let i = index" [formGroupName]="i" class="row align-items-center">
+                  <div class="col-4">
+                    <ngx-date-picker
+                    [formcontrol]="group.get('workingDate')"
+                      [isRequired]="true"
+                      label="Working Date"
+                      placeHolder="Select a date">
+                    </ngx-date-picker>
+                  </div>
+                  <div class="col-3">
+                    <app-time-dropdown
+                    [formcontrol]="group.get('fromWorkingHour')"
+                      fromRange="0"
+                      toRange="23"
+                      label="From hour"
+                      placeHolder="HH"
+                      [isRequired]="true">
+                    </app-time-dropdown>
+                  </div>
+                  <div class="col-3">
+                    <app-time-dropdown
+                    [formcontrol]="group.get('toWorkingHour')"
+                      fromRange="0"
+                      toRange="23"
+                      label="To Hour"
+                      placeHolder="HH"
+                      [isRequired]="true">
+                    </app-time-dropdown>
+                  </div>
+     
+                  <div class="col-2">
+                    <button nbButton ghost status="danger" class="btn btn-light btn-sm p-0 border-0" (click)="onRemoveWorkingDay(i)">
+                        <nb-icon icon="trash-outline" status="danger"></nb-icon>
+                      </button>
+                  </div>
+                  <hr class="mt-2"/>
+                </div>
+              </div> -->
+
+                        <div formArrayName="workingDays" class="col-12 mt-3">
+                            <!-- class="row align-items-center" -->
+                            <div *ngFor="let group of myForm.workingDaysArray.controls; let i = index"
+                                [formGroupName]="i">
+                                <!-- Render child component for each working day -->
+                                <app-working-days-form [workingDayGroup]="group" (remove)="onRemoveWorkingDay(i)">
+                                </app-working-days-form>
+                            </div>
+                        </div>
+
+                        <!-- Totals Section -->
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <p>Total Working Days: {{ totalWorkingDaysCount }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p>Total From Hours: {{ totalFromWorkingHours }}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div *ngIf="myForm.workingDaysArray.errors?.['atLeastOne']">
+                                    <p class="text-danger">At least one working day is required.</p>
+                                  </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="col-12 mt-4">
+                    <button fullWidth [size]="'small'" nbButton status="primary" [disabled]="myForm.invalid">
+                        {{ '@buttons.submit' | translate }}
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

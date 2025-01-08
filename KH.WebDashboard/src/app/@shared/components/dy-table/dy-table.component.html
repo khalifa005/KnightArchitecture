@@ -1,0 +1,209 @@
+<nb-accordion class="mt-0 mb-1">
+  <nb-accordion-item>
+    <nb-accordion-item-header class="custom-header ">
+      {{ '@accordion.advancedFilters' | translate }}
+    </nb-accordion-item-header>
+    <nb-accordion-item-body>
+      <div class="row mt-0">
+        <div class="col-md-6 col-12 mb-0 mt-0" *ngFor="let column of apiCustomColumns">
+
+          <ng-container>
+            <div [ngSwitch]="column.filterType">
+              <ng-container *ngSwitchCase="'dropdown'">
+                <label [for]="column.id" class="d-block">{{ column.title }}</label>
+                <ng-container *ngIf="!column.filterOptions">
+                  <input type="text" nbInput fullWidth fieldSize="small" disabled class="form-control mt-1 mb-1"
+                    [id]="column.id" [name]="column.key">
+                </ng-container>
+                <ng-container *ngIf="column.filterOptions">
+                  <nb-select [(ngModel)]="filterValues[column.key]" [size]="'small'" fullWidth [placeholder]=" 'select options' "
+                    class="form-control p-0 mt-1 mb-1" [id]="column.id" [name]="column.key"
+                    (selectedChange)="onFilterChange(column.key, $event)">
+                    <nb-option value="">
+                      {{ 'select options' }}
+                    </nb-option>
+                    <nb-option *ngFor="let x of column.filterOptions" [value]="x.name">
+                      {{ x.name }}
+                    </nb-option>
+                  </nb-select>
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'input'">
+
+                <ng-container *ngIf="column.relatedFields?.length">
+                  <div *ngFor="let field of column.relatedFields">
+                    <label [for]="field.fieldKey">{{ field.label }}</label>
+                    <input  [(ngModel)]="filterValues[field.fieldKey]" type="text" nbInput fullWidth fieldSize="small" class="form-control mt-1 mb-1"
+                      [id]="field.fieldKey" (input)="onFilterChange(field.fieldKey, $event.target.value)">
+                  </div>
+                </ng-container>
+
+                <ng-container *ngIf="!column.relatedFields || column.relatedFields?.length == 0 ">
+                  <label [for]="column.id">{{ column.title }}</label>
+                  <input  [(ngModel)]="filterValues[column.key]" type="text" nbInput fullWidth fieldSize="small" class="form-control mt-1 mb-1"
+                    [id]="column.id" [name]="column.key" [placeholder]="column.placeholder"
+                    (input)="onFilterChange(column.key, $event.target.value)">
+                </ng-container>
+
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'date'">
+                <label [for]="column.id">{{ column.title }}</label>
+                
+                <!-- <input  [(ngModel)]="filterValues[column.key]" nbInput fullWidth fieldSize="small" placeholder="{{ column.placeholder }}"
+                  [nbDatepicker]="datePicker" class="form-control mt-1 mb-1" [id]="column.id"
+                  [name]="column.key" (dateInput)="onFilterChange(column.key, $event.target.value)">
+                <nb-datepicker #datePicker></nb-datepicker>
+               -->
+              </ng-container>
+
+              <ng-container *ngSwitchDefault>
+                <label [for]="column.id">{{ column.title }}</label>
+                <input  [(ngModel)]="filterValues[column.key]" type="text" nbInput fullWidth fieldSize="small" disabled class="form-control mt-1 mb-1"
+                  [id]="column.id" [name]="column.key">
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Dynamic Checkbox List -->
+      <div class="form-group mt-3 mb-3">
+        <label *ngFor="let column of apiCustomColumns" class="form-checkbox form-inline me-3">
+          <input type="checkbox" [checked]="checked.has(column.key)"
+            (change)="toggleVisibilityOfColumns(column.key)" />
+          <em class="form-icon"></em> {{ column.title }}
+        </label>
+      </div>
+
+      <!-- Reset and Search Buttons -->
+      <div class="d-flex justify-content-center mt-3 mb-3">
+        <button nbButton size="small" hero status="info" class="mx-1" (click)="filterClicked()">          
+          {{ '@buttons.search' | translate }}
+        </button>
+        <button nbButton size="small" hero status="warning" (click)="resetFilters()">
+          {{ '@buttons.reset' | translate }}
+        </button>
+      </div>
+
+    </nb-accordion-item-body>
+  </nb-accordion-item>
+</nb-accordion>
+
+<ngx-table #table [id]="tabId" [configuration]="configuration" [summaryTemplate]="summaryTemplateRef"
+  [selectAllTemplate]="selectAllTemplate"  [data]="apiData" [columns]="columns"
+  [pagination]="paginationParam" (event)="handleTableRowClick($event)">
+
+  <ng-template let-row let-index="index">
+    <td class="new-table-cell">
+      <label class="ngx-form-checkbox">
+        <input type="checkbox" [checked]="row.id | idChecker:selectedRowsIds"
+          (click)="rowSelected(row)" />
+        <i class="ngx-form-icon custom-checkbox-color"></i>
+      </label>
+    </td>
+
+    <ng-container *ngFor="let col of columns">
+
+      <td ngxStopPropgation class="new-table-cell" (contextmenu)="onRightClick($event, row)" [cdkContextMenuTriggerFor]="panel.childMenu"
+        [cdkContextMenuTriggerData]="{myDataObject: row}">
+
+        <!-- <ng-container *ngTemplateOutlet="selectColumnTemplateRefBasedOnTemplate(col.cellTemplate); -->
+        <ng-container *ngTemplateOutlet="col.cellTemplate
+             context: {$implicit: row[col.key], row: row, columnKey:col.key , rowKey:row}">
+        </ng-container>
+
+      </td>
+    </ng-container>
+  </ng-template>
+
+</ngx-table>
+
+
+
+<ng-template #selectAllTemplate let-changeEvent>
+  <label class="ngx-form-checkbox">
+    <input type="checkbox" (input)="changeEvent()" />
+    <i class="ngx-form-icon custom-checkbox-color" id="selectAllCheckbox"></i>
+  </label>
+</ng-template>
+
+<ng-template #summaryTemplateRef let-total="total" let-limit="limit" let-page="page">
+  <th colspan="13">
+    <span class="mb-2">Total items</span>
+    <!-- <span class="mb-2">: {{ paginationParam.count }} </span> -->
+  </th>
+</ng-template>
+
+<app-dy-mat-menu #panel [selectedItemsIds]="selectedRowsIds" [myDataObject]="selectedContextItem"
+  [items]="snapshotContextMenuItemsParam" (contextItemClickedEvent)="handleContextMenuCustomEvent($event)">
+</app-dy-mat-menu>
+
+
+<!-- Text Cell Template -->
+<ng-template ngxStopPropgation #textCellTemplate let-value let-row  let-columnKey="columnKey">
+  <ng-container>
+    <p *ngIf="value" class="small">
+      {{ value }}
+    </p>
+  </ng-container>
+</ng-template>
+
+<!-- HTML Cell Template -->
+<ng-template #htmlCellTemplate let-value let-row let-columnKey="columnKey">
+  <div>
+    <p ngxStopPropgation *ngIf="value && value !== ' '" [innerHtml]="value | sanitizeHtml"></p>
+  </div>
+</ng-template>
+
+<!-- Date Cell Template -->
+<ng-template #dateCellTemplate let-value let-row  let-columnKey="columnKey">
+  <p ngxStopPropgation class="small">
+    <span class="badge" style="background-color: #c4d7fa; color: #000;">
+      <i class="far fa-clock"></i> {{ value | date: 'dd-MM-yyyy HH:mm' }}
+    </span>
+  </p>
+</ng-template>
+
+<!-- Status Cell Template -->
+<ng-template #statusCellTemplate let-value let-row  let-columnKey="columnKey">
+  <p ngxStopPropgation>
+    {{ value }}
+  </p>
+</ng-template>
+
+<!-- Multi Info Cell Template -->
+<ng-template #multiInfoCellTemplate let-value let-columnKey="columnKey" let-rowKey="rowKey">
+  <ng-container *ngFor="let item of columnKey | nestedFields: apiCustomColumns">
+    <p ngxStopPropgation *ngIf="item" class="mt-1 mb-0 small d-flex justify-content-between">
+      {{ item.label }}
+      <span class="badge mx-1" style="background-color: #ffffff; color: #000;">
+        {{ rowKey[item.fieldKey] }}
+      </span>
+    </p>
+  </ng-container>
+</ng-template>
+
+
+<!-- Action Cell Template -->
+<ng-template #actionCellTemplate let-rowKey="rowKey" let-columnKey="columnKey">
+  <!-- <button nbButton status="info" size="small" (click)="onEdit(rowKey.id)">
+    Edit
+  </button> -->
+  <button nbButton status="danger" size="small" class="ms-2" (click)="onDelete(rowKey.id)">
+    {{ '@buttons.delete' | translate }}
+  </button>
+</ng-template>
+
+<!-- custom Action Cell Template -->
+<ng-template #customactionTemplate let-rowKey="rowKey" let-columnKey="columnKey">
+  <!-- <ng-container *ngIf="customactionTemplateInput" [ngTemplateOutlet]="customactionTemplateInput"></ng-container> -->
+
+  <ng-container
+  *ngIf="customactionTemplateInput"
+  [ngTemplateOutlet]="customactionTemplateInput"
+  [ngTemplateOutletContext]="{ rowKey: rowKey, columnKey: columnKey }">
+</ng-container>
+
+</ng-template>

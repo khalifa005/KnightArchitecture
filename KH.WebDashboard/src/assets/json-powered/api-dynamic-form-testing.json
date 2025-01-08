@@ -1,0 +1,796 @@
+[    {
+    "key": "customdatepicker",
+    "type": "customdatepicker",
+    "props": {
+      "label": "date",
+      "appearance": "outline",
+      "required": true
+    }
+  },
+    {
+        "fieldGroupClassName": "d-flex",
+        "fieldGroup": [
+            {
+                "key": "firstName",
+                "type": "input",
+                "className": "flex-fill flex-grow-2 pe-2", 
+                "props": {
+                    "appearance": "outline",
+                    "label": "First Name",
+                    "maxLength": 10,
+                    "minLength": 5
+                }
+            },
+            {
+                "key": "lastName",
+                "type": "input",
+                "className": "flex-fill flex-grow-1 px-2",
+                "props": {
+                    "appearance": "outline",
+                    "label": "Last Name",
+                    "required": true
+                }
+            }
+        ]
+    },
+    {
+        "key": "family",
+        "type": "input",
+        "props": {
+            "appearance": "outline",
+          "description": "Hidden till firstname is filled",
+          "label": "Family name",
+          "placeholder": "khalifa"
+                },
+        "validation": {
+
+        },
+        "expressions": {
+            "hide": "!model.firstName"
+        }
+      },
+    {
+        "fieldGroupClassName": "d-flex",
+        "fieldGroup": [
+            {
+                "id": 500004,
+                "key": "MAINCLASSIFICATION",
+                "type": "autocompleteem",
+                "className": "flex-fill flex-grow-2 pe-2", 
+                "props": {
+                    "id": 0,
+                    "label": "Product Category",
+                    "appearance": "outline",
+                    "prefixIcon": "search",
+                    "floatLabel": "always",
+                    "prefixText": "+966",
+                    "className": "flex-fill flex-grow-2 pe-2", 
+                    "required": true,
+                    "placeholder": "-",
+                    "pattern": "",
+                    "options": [
+                        {
+                            "id": 6100,
+                            "name": "Electronics"
+                        },
+                        {
+                            "id": 6101,
+                            "name": "Fashion"
+                        },
+                        {
+                            "id": 6102,
+                            "name": "Home Appliances"
+                        },
+                        {
+                            "id": 6103,
+                            "name": "Books"
+                        },
+                        {
+                            "id": 6104,
+                            "name": "Beauty Products"
+                        },
+                        {
+                            "id": 6105,
+                            "name": "Sports Equipment"
+                        },
+                        {
+                            "id": 6106,
+                            "name": "Toys & Games"
+                        },
+                        {
+                            "id": 6107,
+                            "name": "Automotive"
+                        },
+                        {
+                            "id": 6108,
+                            "name": "Groceries"
+                        }
+                    ],
+                    "valueProp": "id",
+                    "labelProp": "name",
+                    "parentId": "-1",
+                    "disabled": false,
+                    "splkp": null,
+                    "lookupTable": null,
+                    "lookupCodeFieldName": null,
+                    "lookupArabicField": null,
+                    "lookupLatinField": null,
+                    "whereClause": null,
+                    "showTime": false,
+                    "uploadUrl": null
+                },
+                "expressions": {
+                    "model.MAINCLASSFICATION": "field.props.options.find(o=>o.id===model.MAINCLASSFICATION) ? model.MAINCLASSFICATION : null"
+                },
+                "validators": {
+                    "validation": [
+                        {
+                            "name": "autocomplete-validation"
+                        }
+                    ]
+                },
+                "fieldArray": null,
+                "hide": null
+            },
+            {
+                "id": 500104,
+                "key": "SUBCATEGORY",
+                "type": "autocompleteem",
+                "className": "flex-fill flex-grow-1 pe-1", 
+                "props": {
+                    "id": 0,
+                    "label": "Subcategory",
+                    "required": true,
+                    "placeholder": "-",
+                    "pattern": "",
+                    "appearance": "outline",
+                    "options": [
+                        {
+                            "id": 6109,
+                            "name": "Smartphones"
+                        },
+                        {
+                            "id": 6110,
+                            "name": "Laptops"
+                        },
+                        {
+                            "id": 6111,
+                            "name": "Men's Clothing"
+                        },
+                        {
+                            "id": 6112,
+                            "name": "Women's Clothing"
+                        },
+                        {
+                            "id": 6113,
+                            "name": "Kitchen Appliances"
+                        },
+                        {
+                            "id": 6114,
+                            "name": "Furniture"
+                        },
+                        {
+                            "id": 6115,
+                            "name": "Cosmetics"
+                        },
+                        {
+                            "id": 6116,
+                            "name": "Skincare"
+                        },
+                        {
+                            "id": 6117,
+                            "name": "Fitness Equipment"
+                        },
+                        {
+                            "id": 6118,
+                            "name": "Outdoor Gear"
+                        },
+                        {
+                            "id": 6119,
+                            "name": "Board Games"
+                        },
+                        {
+                            "id": 6120,
+                            "name": "Action Figures"
+                        },
+                        {
+                            "id": 6121,
+                            "name": "Car Accessories"
+                        },
+                        {
+                            "id": 6122,
+                            "name": "Motorcycle Gear"
+                        },
+                        {
+                            "id": 6123,
+                            "name": "Fresh Produce"
+                        },
+                        {
+                            "id": 6124,
+                            "name": "Beverages"
+                        },
+                        {
+                            "id": 6125,
+                            "name": "Bakery"
+                        },
+                        {
+                            "id": 6126,
+                            "name": "Snacks"
+                        },
+                        {
+                            "id": 6127,
+                            "name": "Dairy"
+                        },
+                        {
+                            "id": 6128,
+                            "name": "Meat & Poultry"
+                        },
+                        {
+                            "id": 6129,
+                            "name": "Seafood"
+                        },
+                        {
+                            "id": 6130,
+                            "name": "Frozen Foods"
+                        },
+                        {
+                            "id": 6131,
+                            "name": "Canned Goods"
+                        },
+                        {
+                            "id": 6132,
+                            "name": "Organic Products"
+                        },
+                        {
+                            "id": 6133,
+                            "name": "Specialty Items"
+                        },
+                        {
+                            "id": 6162,
+                            "name": "Gift Cards"
+                        }
+                    ],
+                    "valueProp": "id",
+                    "labelProp": "name",
+                    "parentId": "500004",
+                    "disabled": false,
+                    "splkp": null,
+                    "lookupTable": null,
+                    "lookupCodeFieldName": null,
+                    "lookupArabicField": null,
+                    "lookupLatinField": null,
+                    "whereClause": null,
+                    "showTime": false,
+                    "uploadUrl": null
+                },
+                "expressions": {
+                    "model.SUBCATEGORY": "field.props.options.find(o=>o.id===model.SUBCATEGORY) ? model.SUBCATEGORY : null"
+                },
+                "validators": {
+                    "validation": [
+                        {
+                            "name": "autocomplete-validation"
+                        }
+                    ]
+                },
+                "fieldArray": null,
+                "hide": null
+            }
+        ]
+    },
+    {
+        "id": 500404,
+        "key": "ACTIONTAKEN",
+        "type": "select",
+        "props": {
+            "id": 0,
+            "label": "Order Status",
+            "required": true,
+            "appearance": "outline",
+            "placeholder": "-",
+            "pattern": "",
+            "options": [
+                {
+                    "id": 6134,
+                    "name": "Processing"
+                },
+                {
+                    "id": 6135,
+                    "name": "Shipped"
+                },
+                {
+                    "id": 6136,
+                    "name": "Delivered"
+                },
+                {
+                    "id": 6137,
+                    "name": "Returned"
+                },
+                {
+                    "id": 6138,
+                    "name": "Cancelled"
+                },
+                {
+                    "id": 6139,
+                    "name": "Refunded"
+                },
+                {
+                    "id": 6140,
+                    "name": "Out for Delivery"
+                },
+                {
+                    "id": 6141,
+                    "name": "Payment Pending"
+                },
+                {
+                    "id": 6142,
+                    "name": "Payment Confirmed"
+                },
+                {
+                    "id": 6143,
+                    "name": "Awaiting Shipment"
+                },
+                {
+                    "id": 6144,
+                    "name": "Order Confirmed"
+                },
+                {
+                    "id": 6145,
+                    "name": "Order Completed"
+                },
+                {
+                    "id": 6146,
+                    "name": "Order Closed"
+                },
+                {
+                    "id": 6147,
+                    "name": "Partial Shipment"
+                },
+                {
+                    "id": 6148,
+                    "name": "Awaiting Pickup"
+                },
+                {
+                    "id": 6149,
+                    "name": "Pickup Completed"
+                },
+                {
+                    "id": 6150,
+                    "name": "Order Pending"
+                },
+                {
+                    "id": 6151,
+                    "name": "Awaiting Restock"
+                },
+                {
+                    "id": 6152,
+                    "name": "Backordered"
+                },
+                {
+                    "id": 6153,
+                    "name": "Awaiting Payment"
+                },
+                {
+                    "id": 6154,
+                    "name": "Payment Failed"
+                },
+                {
+                    "id": 6155,
+                    "name": "Order Held"
+                },
+                {
+                    "id": 6156,
+                    "name": "Awaiting Customer Action"
+                },
+                {
+                    "id": 6157,
+                    "name": "Order Rescheduled"
+                },
+                {
+                    "id": 6158,
+                    "name": "Order Under Review"
+                },
+                {
+                    "id": 6159,
+                    "name": "Order Dispatched"
+                },
+                {
+                    "id": 6160,
+                    "name": "Order Deferred"
+                },
+                {
+                    "id": 6161,
+                    "name": "Order Archived"
+                },
+                {
+                    "id": 6163,
+                    "name": "Order Rescheduled"
+                }
+            ],
+            "valueProp": "id",
+            "labelProp": "name",
+            "parentId": "500104",
+            "multiple": true,
+            "disabled": false,
+            "splkp": null,
+            "lookupTable": null,
+            "lookupCodeFieldName": null,
+            "lookupArabicField": null,
+            "lookupLatinField": null,
+            "whereClause": null,
+            "showTime": false,
+            "uploadUrl": null
+        },
+        "expressions": {
+            "props.description": "field.props.options.find(o=>o.id==model.ACTIONTAKEN) ? field.props.options.find(o=>o.id==model.ACTIONTAKEN).name : null"
+        },
+        "validators": {
+            "validation": [
+                {
+                    "name": "autocomplete-validation"
+                }
+            ]
+        },
+        "fieldArray": null,
+        "hide": null
+    },
+    {
+        "id": 6001,
+        "key": "LOCATIONRELATEDASSET",
+        "type": "input",
+        "className": "col-md-6",
+        "props": {
+            "id": 0,
+            "label": "Location and Asset",
+            "required": false,
+            "appearance": "outline",
+            "placeholder": "-",
+            "pattern": "",
+            "options": [],
+            "max": 2500,
+            "disabled": false,
+            "splkp": null,
+            "lookupTable": null,
+            "lookupCodeFieldName": null,
+            "lookupArabicField": null,
+            "lookupLatinField": null,
+            "whereClause": null,
+            "showTime": false,
+            "uploadUrl": null
+        },
+        "expressions": {},
+        "validators": {
+            "validation": []
+        },
+        "fieldArray": null,
+        "hide": null
+    },
+    {
+        "id": 5012,
+        "key": "HOUSECONNECTIONNUMBER",
+        "type": "integer",
+        "props": {
+            "id": 0,
+            "label": "Customer ID",
+            "required": false,
+            "appearance": "outline",
+            "placeholder": " ",
+            "pattern": "",
+            "options": [],
+            "min": 0,
+            "max": 250,
+            "disabled": false,
+            "splkp": null,
+            "lookupTable": null,
+            "lookupCodeFieldName": null,
+            "lookupArabicField": null,
+            "lookupLatinField": null,
+            "whereClause": null,
+            "showTime": false,
+            "uploadUrl": null
+        },
+        "expressions": {},
+        "validators": {
+            "validation": []
+        },
+        "fieldArray": null,
+        "hide": null
+    },
+    {
+        "id": 100809,
+        "key": "ATTACHMENT",
+        "type": "file",
+        "props": {
+            "id": 0,
+            "label": "Attachments",
+            "required": false,
+            "appearance": "outline",
+            "placeholder": "-",
+            "pattern": "",
+            "options": [],
+            "disabled": false,
+            "splkp": null,
+            "lookupTable": null,
+            "lookupCodeFieldName": null,
+            "lookupArabicField": null,
+            "lookupLatinField": null,
+            "whereClause": null,
+            "showTime": false,
+            "uploadUrl": "https://localhost:7014/api/demo/SubmitFormlyFormFileStream"
+        },
+        "expressions": {},
+        "validators": {
+            "validation": []
+        },
+        "fieldArray": {
+            "validators": {
+                "validation": [
+                    {
+                        "name": "allowed-file-extensions",
+                        "options": {
+                            "allowedFileExtensions": [],
+                            "forbiddenCharacters": null,
+                            "maxFilenameLength": null
+                        }
+                    }
+                ]
+            }
+        },
+        "hide": null
+    },
+    {
+        "id": 5005,
+        "key": "REMARKS",
+        "type": "textarea",
+        "props": {
+            "id": 0,
+            "label": "Remarks",
+            "required": false,
+            "appearance": "outline",
+            "placeholder": "-",
+            "pattern": "",
+            "options": [],
+            "max": 2500,
+            "disabled": false,
+            "rows": 5,
+            "splkp": null,
+            "lookupTable": null,
+            "lookupCodeFieldName": null,
+            "lookupArabicField": null,
+            "lookupLatinField": null,
+            "whereClause": null,
+            "showTime": false,
+            "uploadUrl": null
+        },
+        "expressions": {},
+        "validators": {
+            "validation": []
+        },
+        "fieldArray": null,
+        "hide": null
+    },
+    {
+        "id": 5004000,
+        "key": "FBFId",
+        "type": null,
+        "props": {
+            "id": 0,
+            "label": "FBFId",
+            "required": false,
+            "appearance": "outline",
+            "disabled": true,
+            "splkp": null,
+            "lookupTable": null,
+            "lookupCodeFieldName": null,
+            "lookupArabicField": null,
+            "lookupLatinField": null,
+            "whereClause": null,
+            "showTime": false,
+            "uploadUrl": null
+        },
+        "defaultValue": "5004",
+        "fieldArray": null
+    },
+    {
+        "id": 5004111,
+        "key": "PK",
+        "type": null,
+        "props": {
+            "id": 0,
+            "label": "PK",
+            "required": false,
+            "appearance": "outline",
+            "disabled": true,
+            "splkp": null,
+            "lookupTable": null,
+            "lookupCodeFieldName": null,
+            "lookupArabicField": null,
+            "lookupLatinField": null,
+            "whereClause": null,
+            "showTime": false,
+            "uploadUrl": null
+        },
+        "defaultValue": "!!!SPNWCALLDP-1722350383!!!",
+        "fieldArray": null
+    },
+    {
+        "id": 5004222,
+        "key": "TaskCode",
+        "type": null,
+        "props": {
+            "id": 0,
+            "label": "TaskCode",
+            "required": false,
+            "appearance": "outline",
+            "disabled": true,
+            "splkp": null,
+            "lookupTable": null,
+            "lookupCodeFieldName": null,
+            "lookupArabicField": null,
+            "lookupLatinField": null,
+            "whereClause": null,
+            "showTime": false,
+            "uploadUrl": null
+        },
+        "defaultValue": "#TASKCODE#",
+        "fieldArray": null
+    },
+    {
+        "key": "sportId",
+        "type": "autocompleteem",
+        "props": {
+            "label": "Sport Autocomplete",
+            "appearance": "outline",
+            "customInput": "test case",
+            "optionsKey": "sports",
+            "options": [
+                { "id": "1", "name": "Soccer" },
+                { "id": "2", "name": "Basketball" },
+                { "id": "3", "name": "Sport 3" },
+                { "id": "4", "name": "Sport 4" }
+            ],
+            "valueProp": "id",
+            "labelProp": "name"
+        },
+        "expressions": {
+            "props.options": "formState.selectOptionsData.sports",
+            "props.description": "field.props.options.find(o => o.id == model.sportId) ? field.props.options.find(o => o.id == model.sportId).name : null"
+        },
+        "validators": {
+            "validation": [{ "name": "autocomplete-validation" }]
+        }
+    },
+    {
+        "key": "teamId",
+        "type": "autocompleteem",
+        "props": {
+            "label": "Team",
+            "appearance": "outline",
+            "parentId": "sportId",
+            "optionsKey": "teams",
+            "options": [
+                { "id": "1", "name": "Bayern Munich", "parentId": "1" },
+                { "id": "2", "name": "Real Madrid", "parentId": "1" },
+                { "id": "3", "name": "Cleveland", "parentId": "2" },
+                { "id": "4", "name": "Miami", "parentId": "2" }
+            ],
+            "valueProp": "id",
+            "labelProp": "name"
+        },
+        "expressions": {
+            "props.description": "field.props.options.find(o => o.id == model.teamId) ? field.props.options.find(o => o.id == model.teamId).name : null"
+        },
+        "validators": {
+            "validation": [{ "name": "autocomplete-validation" }]
+        }
+    },
+    {
+        "key": "playerId",
+        "type": "autocompleteem",
+        "props": {
+            "label": "Player",
+            "appearance": "outline",
+            "parentId": "teamId",
+            
+            "optionsKey": "players",
+            "options": [
+                { "id": "1", "name": "Bayern Munich (Player 1)", "parentId": "1" },
+                { "id": "2", "name": "Bayern Munich (Player 2)", "parentId": "1" },
+                { "id": "3", "name": "Real Madrid (Player 1)", "parentId": "2" },
+                { "id": "4", "name": "Real Madrid (Player 2)", "parentId": "2" },
+                { "id": "5", "name": "Cleveland (Player 1)", "parentId": "3" },
+                { "id": "6", "name": "Cleveland (Player 2)", "parentId": "3" },
+                { "id": "7", "name": "Miami (Player 1)", "parentId": "4" },
+                { "id": "8", "name": "Miami (Player 2)", "parentId": "4" }
+            ],
+            "valueProp": "id",
+            "labelProp": "name"
+        },
+        "expressions": {
+            "model.playerId": "field.props.options.find(o => o.id === model.playerId) ? model.playerId : null",
+            "props.description": "field.props.options.find(o => o.id == model.playerId) ? field.props.options.find(o => o.id == model.playerId).name : null"
+        }
+    },
+    {
+        "key": "date",
+        "type": "datepicker",
+        "props": {
+          "label": "date",
+          "appearance": "outline",
+          "required": true
+        },
+         "validators": {
+          "validation": [{ "name": "date-future", "options": { "minFromDayFromToday": 5, "maxToDayFromToday": 5 } } ]
+        }
+      },
+    {
+        "key": "customdatepicker",
+        "type": "customdatepicker",
+        "props": {
+          "label": "date",
+          "appearance": "outline",
+          "required": true
+        }
+      },
+      {
+        "key": "itemPrice",
+        "type": "integer",
+        "props": {
+            "appearance": "outline",
+          "label": "item price",
+          "min": 18
+        },
+        "validation": {
+          "messages": {
+            "min": "price should be greater than 18"
+          }
+        }
+      },
+      {
+        "key": "total",
+        "type": "integer",
+        "props": {
+            "appearance": "outline",
+          "label": "total items",
+          "min": 1
+        },
+        "validation": {
+          "messages": {
+            "min": "total items should be greater than 0"
+          }
+        }
+      },
+      {
+        "key": "totalPrice",
+        "type": "integer",
+        "props": {
+            "appearance": "outline",
+          "description": "Computed based on 2 fields",
+          "label": "total Price",
+          "disabled": true
+        },
+        "expressions": {
+          "props.disabled": "model.total || !model.total",
+          "model.totalPrice": " (model.total && model.itemPrice) ? (model.total * model.itemPrice):null"
+        }
+      },
+      {
+        "key": "mac",
+        "type": "input",
+        "props": {
+            "appearance": "outline",
+          "description": "Fill first name to enable the MAC",
+          "label": "Mac Address",
+          "placeholder": "192.168.0.1",
+          "pattern": "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$"
+        },
+        "validation": {
+          "messages": {
+            "pattern": "Invalid MAC address"
+          }
+        },
+        "expressions": {
+          "props.disabled": "!model.firstName"
+        }
+      }
+]

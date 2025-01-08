@@ -1,0 +1,63 @@
+<div class="form-group" *ngIf="formcontrol !== undefined">
+
+
+  <label for="description" class="label" translate>{{ label }}
+    <span *ngIf="isRequired">*</span>
+  </label>
+
+  <textarea
+  rows="5"
+  nbInput fullWidth shape="round"
+  id="description"
+  placeholder="{{ placeHolder | translate }}"
+
+  [readonly]="readonly"
+  [status]="(formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)) ? 'danger' : null"
+  [formControl]="formcontrol"
+  >
+  </textarea>
+
+
+  <div *ngIf="formcontrol.errors && (formcontrol.dirty || formcontrol.touched)" class="text-danger">
+    <div *ngIf="formcontrol.errors?.['required']" translate="validations.please-provide-value"></div>
+    <div
+      *ngIf="formcontrol.errors?.['minlength']"
+      translate="validations.minlength"
+      [translateParams]="{ requiredLength: formcontrol.errors?.['minlength']?.requiredLength }">
+    </div>
+    <div
+      *ngIf="formcontrol.errors?.['maxlength']"
+      translate="validations.maxlength"
+      [translateParams]="{ requiredLength: formcontrol.errors?.['maxlength']?.requiredLength }">
+    </div>
+    <div
+    *ngIf="formcontrol.errors?.['regex']"
+    translate="validations.regex"
+    [translateParams]="{ pattern: formcontrol.errors?.['regex']?.requiredPattern }">
+  </div>
+  </div>
+
+</div>
+
+
+<div *ngIf="formcontrol === undefined">
+
+  <label
+  *ngIf="label"
+  for="TypeId" class="label" translate>{{label}}</label>
+
+
+  <textarea
+  rows="5"
+  nbInput fullWidth 
+  
+  shape="round"
+  id="description"
+  placeholder="{{ placeHolder | translate }}"
+  [disabled]="disabled"
+  [readonly]="readonly"
+  [(ngModel)]="selectedItem"
+  (ngModelChange)="onItemChanged($event)"
+  >
+  </textarea>
+</div>

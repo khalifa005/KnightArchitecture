@@ -1,0 +1,333 @@
+{
+	"ar": "Arabic",
+	"en": "English",
+	"loading": "Loading",
+	"sideMenu": {
+		"home": "Home",
+		"roles": "Roles",
+		"dynamicForm": "Dynamic Form",
+		"dynamicTable": "Dynamic Table",
+		"cardsExamples": "Cards Examples",
+		"bootstrapExamples": "Bootstrap Examples",
+		"iconsExamples": "Icons Examples",
+		"inputsExamples": "Inputs Examples",
+		"formExamples": "Form Examples",
+		"auth": "Authentication",
+		"notFound": "Not Found",
+		"userManagement": "User Management",
+		"permissions": "Permissions",
+		"users": "Users"
+	},
+	"TABLE": {
+		"ID": "Id",
+		"NAME_EN": "Name (English)",
+		"NAME_AR": "Name (Arabic)",
+		"DESCRIPTION": "Description",
+		"TOTAL_ITEMS": "Total items",
+		"IS_DELETED": "Is deleted",
+		"OPTIONS": "Options"
+	},
+	"role": {
+		"description": "Description",
+		"createdDate": "Created Date",
+		"updatedDate": "Last Updated",
+		"permissions": "Permissions",
+		"key": "Key",
+		"nameEn": "Name (English)",
+		"nameAr": "Name (Arabic)",
+		"parentPermission": "Parent Permission",
+		"management": "Role management",
+		"home": "Home"
+	},
+	"app-manager": {
+		"permissions-manager": "Permissions Manager",
+		"selectRole": "Select Role",
+		"selectParentPermission": "Filter by Parent Permission"
+	},
+	"form": {
+		"inputs": "Form Inputs",
+		"section": {
+			"inputs": "Inputs Section",
+			"textareas": "Textareas Section",
+			"dates": "Dates Section",
+			"file_uploads": "File Upload Section",
+			"time": "Time Dropdown Section",
+			"multi_selects": "Multi-Select Dropdown Section",
+			"dropdowns": "Dropdown Section"
+		},
+		"file_uploader": {
+			"form_control": "File Uploader (Reactive Form)",
+			"standalone": "File Uploader (Standalone)",
+			"label_form_control": "Upload Files",
+			"label_standalone": "Upload Documents",
+			"placeholder": "Drag and drop files or click to browse"
+		},
+		"input": {
+			"form_control": "Using FormControl",
+			"auto_complete": "AutoComplete Input",
+			"standalone": "Standalone Input",
+			"label_form_control": "Form-Control Based Input",
+			"label_standalone": "Standalone Input",
+			"placeholder": "Enter a value"
+		},
+		"time": {
+			"hours_form_control": "Hours Dropdown (Reactive Form)",
+			"minutes_form_control": "Minutes Dropdown (Reactive Form)",
+			"hours_standalone": "Hours Dropdown (Standalone)",
+			"minutes_standalone": "Minutes Dropdown (Standalone)",
+			"label_hours_form_control": "Select Hour",
+			"label_minutes_form_control": "Select Minute",
+			"label_hours_standalone": "Hour Selection",
+			"label_minutes_standalone": "Minute Selection",
+			"placeholder_hours": "Choose an hour...",
+			"placeholder_minutes": "Choose a minute..."
+		},
+		"auto_complete": {
+			"label": "Select an Option",
+			"placeholder": "Start typing to search...",
+			"product_category": "Select Product Category",
+			"sub_category": "Select Sub Category",
+			"select_category": "Choose a category...",
+			"select_sub_category": "Choose a subcategory..."
+		},
+		"dropdown": {
+			"form_control": "Form Control Dropdown",
+			"standalone": "Standalone Dropdown",
+			"label_form_control": "Select Category (Reactive Form)",
+			"label_standalone": "Select Category (Standalone)",
+			"placeholder": "Choose an option"
+		},
+		"multi_select": {
+			"form_control": "Form Control Multi-Select",
+			"standalone": "Standalone Multi-Select",
+			"label_form_control": "Select Categories (Reactive Form)",
+			"label_standalone": "Select Categories (Standalone)"
+		},
+		"textarea": {
+			"form_control": "Using FormControl",
+			"standalone": "Standalone Textarea",
+			"label_form_control": "Form-Control Based Textarea",
+			"label_standalone": "Standalone Textarea",
+			"placeholder": "Enter details"
+		},
+		"date": {
+			"form_control": "Using FormControl",
+			"standalone": "Standalone DatePicker",
+			"label_form_control": "Form-Control Based DatePicker",
+			"label_standalone": "Standalone DatePicker",
+			"placeholder": "Select a date"
+		}
+	},
+	"VALIDATION": {
+		"REQUIRED": "This field is required.",
+		"MIN_LENGTH": "Minimum {{length}} characters required.",
+		"MAX_LENGTH": "Maximum {{length}} characters allowed.",
+		"USERNAME": {
+			"INVALID": "Only alphanumeric characters are allowed."
+		},
+		"PASSWORD": {
+			"INVALID": "Password can include letters, digits, and special characters (!@#$%^&* etc.)."
+		}
+	},
+	"validations": {
+		"please-provide-value": "please fill the required field",
+		"field-required": "This field is required.",
+		"invalid-field-value": "please enter valid value.",
+		"tooEarly": "Date is too early. Minimum allowed date is {{ min }}.",
+		"tooLate": "Date is too late. Maximum allowed date is {{ max }}.",
+		"minlength": "Data must be at least {{ requiredLength }} characters long.",
+		"maxlength": "Data must not exceed {{ requiredLength }} characters.",
+		"invalid-file-extensions": "The following files have invalid extensions:",
+		"invalid-file-size": "The following files exceed the allowed size limit:",
+		"max-files-error": "You can upload a maximum of {{maxAllowed}} files. Currently, you have selected {{actual}} files.",
+		"file-details": {
+			"name": "{{name}}",
+			"size": "{{size}}"
+		},
+		"allowed-file-extensions": "Allowed file extensions",
+		"max-file-size": "Maximum file size",
+		"max-files": "You can upload a maximum of {{max}} files."
+	},
+	"@form": {
+		"TITLE": "Hello Angular with ngx-translate!",
+		"LANG": "Change language",
+		"FNAME": "First Name",
+		"dropzoneText": "drag and drop files here or",
+		"browseFilesButtonText": "browse files",
+		"removeFileTooltip": "remove file",
+		"previouslyUploaded": "previously uploaded",
+		"validation": {
+			"required": "This field is required c"
+		}
+	},
+	"@home": {
+		"welcome": "Welcome to the Dashboard"
+	},
+	"@product": {
+		"name": "Product Name",
+		"price": "Price",
+		"quantity": "Quantity"
+	},
+	"@progress": {
+		"basic": "Basic",
+		"primary": "Primary",
+		"info": "Info",
+		"success": "Success",
+		"warning": "Warning",
+		"danger": "Danger",
+		"control": "Control"
+	},
+	"@select": {
+		"header": "Select Component",
+		"placeholder": "Choose an option",
+		"option1": "Option 1",
+		"option2": "Option 2",
+		"option3": "Option 3"
+	},
+	"@buttons": {
+		"login": "login",
+		"submit": "submit",
+		"edit": "Edit",
+		"search": "Search",
+		"reset": "Reset",
+		"delete": "Delete",
+		"header": "Button Examples",
+		"defaultHeader": "Default Buttons",
+		"outlineHeader": "Outline Buttons",
+		"typeHeader": "Button Types",
+		"heroHeader": "Hero Buttons",
+		"sizeHeader": "Button Sizes",
+		"default": "Default",
+		"primary": "Primary",
+		"success": "Success",
+		"warning": "Warning",
+		"danger": "Danger",
+		"rectangleHero": "Rectangle Hero",
+		"semiRound": "Semi-round Outline",
+		"roundSmall": "Round Small",
+		"tiny": "Tiny",
+		"small": "Small",
+		"regular": "Regular",
+		"large": "Large",
+		"giant": "Giant",
+		"info": "Info"
+	},
+	"@pipes": {
+		"header": "Pipe Usage Examples",
+		"arrayToString": "Array to String Pipe",
+		"capitalize": "Capitalize Pipe",
+		"numberToString": "Number to String Pipe",
+		"numberWithCommas": "Number with Commas Pipe",
+		"plural": "Plural Pipe",
+		"round": "Round Pipe",
+		"sanitizeHtml": "Sanitize HTML Pipe",
+		"split": "Split Pipe"
+	},
+	"@cardSizes": {
+		"header": "Card Sizes",
+		"tiny": "Tiny",
+		"spinner": "Spinner",
+		"tinyBody": "This is a tiny card.",
+		"small": "Small",
+		"smallBody": "This is a small card.",
+		"regular": "Regular",
+		"regularBody": "This is a regular-sized card.",
+		"large": "Large",
+		"largeBody": "This is a large card.",
+		"giant": "Giant",
+		"giantBody": "This is a giant card."
+	},
+	"@tabs": {
+		"users": "Users",
+		"usersContent": "List of users.",
+		"orders": "Orders",
+		"ordersContent": "List of orders.",
+		"transactions": "Transactions",
+		"transactionsContent": "List of transactions.",
+		"notifications": "Notifications",
+		"notificationsContent": "List of notifications."
+	},
+	"@accordion": {
+		"advancedFilters": "Advanced filters",
+		"productDetails": "Product Details",
+		"productDetailsContent": "A nebula is an interstellar cloud of dust, hydrogen, helium, and other ionized gases.",
+		"reviews": "Reviews",
+		"reviewsContent": "A nebula is an interstellar cloud of dust, hydrogen, helium, and other ionized gases.",
+		"edit": "Edit",
+		"editContent": "A nebula is an interstellar cloud of dust, hydrogen, helium, and other ionized gases."
+	},
+	"indicators": {
+		"total-tasks": "Total Tasks",
+		"total-teams": "Total Teams",
+		"field-activity": "Field Activity",
+		"tasks-target": "Tasks Target",
+		"new-posts": "New Task",
+		"new-comments": "New Teams",
+		"bounce-rate": "Fixing rate",
+		"total-visits": "Total fixed",
+		"task-status": "Task Status",
+		"tasks-zones": "Tasks Zones",
+		"tree-representation-task-zones": "Tree Representation of Task Zones",
+		"tree-representation-work-order": "Tree Representation of Work Orders"
+	},
+	"live-monitoring": {
+		"action-controls": "Action Controls",
+		"toggle-tasks": "Toggle Tasks",
+		"toggle-teams": "Toggle Teams",
+		"eam": "EAM",
+		"sla": "SLA",
+		"tasks": "Tasks",
+		"department": "Department",
+		"unassigned": "Unassigned",
+		"delayed": "Delayed",
+		"work-closed": "Work/Closed",
+		"from-to": "From/To",
+		"kpi": "KPI",
+		"allocation": "Allocation",
+		"since": "Since",
+		"select-options": "All options",
+		"active-tasks": "Active tasks",
+		"closed-tasks": "Closed tasks",
+		"time": "Time",
+		"sequence": "Sequence",
+		"task-code": "Task code",
+		"operation": "Operation",
+		"dec": "Description",
+		"client-name": "Client name",
+		"client-num": "Client number",
+		"task-zone": "Zone",
+		"Street": "Street",
+		"hcn": "HCN",
+		"id": "Id",
+		"name": "Name",
+		"iqama": "Iqama",
+		"type": "Type",
+		"specialization": "Specialization",
+		"battary": "Battary",
+		"tracked": "Tracked",
+		"tracking": "Tracking",
+		"connected": "Connected",
+		"connection": "Connection",
+		"speed": "Speed",
+		"meter-num": "Meter number",
+		"checkno": "Order num",
+		"asset-num": "Asset num",
+		"field-team": "Field Team",
+		"alert": "Alert",
+		"teams": "Teams",
+		"work-free": "Work/Free",
+		"maps": "Maps",
+		"submit": "Submit",
+		"cancel": "Cancel",
+		"filteration-options": "Filteration Options",
+		"options": "Options"
+	},
+	"auth": {
+		"login": "Welcome to the dashboard",
+		"username": "Username",
+		"password": "Password",
+		"required_username": "Username is required.",
+		"required_password": "Password is required.",
+		"remember": "Remember Me"
+	}
+}

@@ -1,0 +1,44 @@
+@import '../../../../@theme/styles/themes.scss';
+
+:host {
+  display: block;
+
+  .title-placeholder {
+    height: 1.8rem;
+    margin-bottom: 0.5rem;
+    width: 80%;
+    border-radius: 4px;
+  }
+
+  .text-placeholder {
+    height: 4rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .link-placeholder {
+    height: 1.25rem;
+    width: 5rem;
+    border-radius: 4px;
+  }
+
+  [class$='placeholder'] {
+    background: nb-theme(background-basic-color-2);
+    animation: pulse 1.5s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+@include nb-install-component();

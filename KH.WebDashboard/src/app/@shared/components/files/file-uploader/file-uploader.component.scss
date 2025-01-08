@@ -1,0 +1,41 @@
+.dropzone {
+  border: 2px dashed #d3d3d3;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: relative;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
+
+  .dropzone-text {
+    margin: 10px 0;
+    color: #555;
+  }
+
+  nb-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  button[nbButton] {
+    margin-top: 10px;
+  }
+}
+
+.nb-list-item {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+
+  nb-icon {
+    cursor: pointer;
+  }
+
+  .size {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+  }
+}

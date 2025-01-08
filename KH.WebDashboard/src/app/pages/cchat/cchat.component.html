@@ -1,0 +1,183 @@
+<!-- Main Card -->
+<nb-card class="w-100" style="max-width: 1200px; margin: auto;">
+    <!-- Header -->
+    <nb-card-header>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="text-primary mb-0">SignalR Chat</h2>
+            <span class="">
+                Status: {{ chatService.signalrConnectionStatus }}
+            </span>
+            <span *ngIf="chatService.user.group" class="">
+                Current Group: {{ chatService.user.group }}
+            </span>
+
+        </div>
+    </nb-card-header>
+
+    <!-- Body -->
+    <nb-card-body class="row">
+        <!-- Messages Section -->
+        <div class="col-lg-8 col-md-7 mb-3">
+            <div class="messages-container p-3 border rounded bg-white">
+                  <!-- <ng-container *ngIf="groups$ | async as groups"> -->
+                    <h4 *ngIf="chatService.user.group && chatService.currentGroup != '' " class="text-secondary">{{ chatService.user.group }} - Messages</h4>
+
+                <div class="scrollable-container" *ngIf="chatService.user.group && chatService.currentGroup != '' ; else noGroup">                      
+                    <div *ngFor="let msg of (messages$ | async)" class="message-item p-2 my-2 border-bottom"
+                        [ngClass]="{'current-user': msg.isCurrentUser, 'other-user': !msg.isCurrentUser}">
+                        <div>
+                            <b [class.text-primary]="!msg.isCurrentUser">{{ msg.user.name }}</b>:
+                            {{ msg.message }}
+                        </div>
+                        <div class="text-muted small">
+                            {{ msg.time | date:'short' }}
+                        </div>
+                    </div>
+                </div>
+            <!-- </ng-container> -->
+
+
+                <ng-template #noGroup>
+                    <nb-alert status="warning" outline>
+                        Select a group to start chatting.
+                    </nb-alert>
+                </ng-template>
+            </div>
+        </div>
+
+        <!-- Side Panel -->
+        <div class="col-lg-4 col-md-5">
+            <!-- Active Users -->
+            <div class="active-users p-3 border rounded bg-white mb-4">
+                <h5 class="text-secondary">Active Users</h5>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex align-items-center"
+                        *ngFor="let user of (chatService.activeUsers$ | async)">
+                        <span class="status-indicator me-2"></span> <!-- Green circle -->
+                        {{ user.name }}
+                    </li>
+                </ul>
+            </div>
+
+            
+            <!-- Joined Groups -->
+            <div class="joined-groups p-3 border rounded bg-white mb-4">
+                <h5 class="text-secondary">Joined Groups</h5>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center"
+                        *ngFor="let group of groups$ | async">
+                        <div>
+                            <span class="cursor-pointer"
+                                [ngClass]="{'text-success fw-bold': chatService.user.group === group}"
+                                (click)="switchGroup(group)">
+                                {{ group }}
+                            </span>
+
+
+                            <small *ngIf="(unseenMessages$ | async)[group]" class="badge bg-warning text-dark ms-2">
+                                {{ (unseenMessages$ | async)[group] }} new messages
+                            </small>
+                        </div>
+                        <button nbButton status="danger" size="tiny" (click)="exitGroup(group)">
+                            Exit
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- User Settings -->
+            <div class="user-settings p-3 border rounded bg-white">
+                <h5 class="text-secondary">User Settings</h5>
+                <div class="mb-3">
+                    <nb-form-field fullWidth>
+                        <nb-icon nbPrefix icon="person-outline"></nb-icon>
+                        <input nbInput placeholder="Enter your name" [(ngModel)]="chatService.user.name" />
+                    </nb-form-field>
+                </div>
+                <div class="mb-3">
+                    <nb-form-field fullWidth>
+                        <nb-icon nbPrefix icon="people-outline"></nb-icon>
+                        <input nbInput placeholder="Enter group name" [(ngModel)]="group" />
+                    </nb-form-field>
+                </div>
+                <button nbButton status="primary" size="small" (click)="joinGroup()">
+                    Join Group
+                </button>
+            </div>
+        </div>
+    </nb-card-body>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <nb-card-footer class="bg-light p-3">
+        <div class="d-flex align-items-center">
+            <nb-form-field class="flex-grow-1 me-3 custom-text-input">
+                <textarea fullWidth nbInput placeholder="Type a message" rows="2" [(ngModel)]="message"></textarea>
+            </nb-form-field>
+
+            <button nbButton status="success" class="send-button d-flex align-items-center justify-content-center"
+                (click)="sendMessage()">
+                <nb-icon icon="paper-plane-outline"></nb-icon>
+            </button>
+        </div>
+    </nb-card-footer>
+
+
+</nb-card>
+
+
+<!-- old chat style -->
+
+<!-- <div class="chat-container">
+        <div class="header">
+          <h2>SignalR Chat</h2>
+          <p>Status: {{ chatService.signalrConnectionStatus }}</p>
+          <p *ngIf="chatService.user.group">Current Group: <b>{{ chatService.user.group }}</b></p>
+        </div>
+      
+        <div class="user-settings">
+          <label>Username:</label>
+          <input [(ngModel)]="chatService.user.name" placeholder="Enter your name" />
+      
+          <label>Group:</label>
+          <input [(ngModel)]="group" placeholder="Enter group name" />
+          <button (click)="joinGroup()">Join Group</button>
+        </div>
+      
+        <div class="joined-groups">
+          <h3>Joined Groups</h3>
+          <ul>
+            <li *ngFor="let group of groups$ | async">
+              <span
+                (click)="switchGroup(group)"
+                [class.active]="chatService.user.group === group"
+              >
+                {{ group }}
+              </span>
+              <span class="unseen-label" *ngIf="(unseenMessages$ | async)[group]">
+                ({{ (unseenMessages$ | async)[group] }} unseen messages)
+              </span>
+              <button (click)="exitGroup(group)">Exit</button>
+            </li>
+          </ul>
+        </div>
+      
+        <div class="message-container" *ngIf="(groups$ | async)?.length > 0; else noGroup">
+          <div *ngFor="let msg of messages$ | async" class="message-item">
+            <b>{{ msg.user.name }}:</b> {{ msg.message }}
+          </div>
+        </div>
+      
+    
+    
+        <ng-template #noGroup>
+          <p>You are not currently viewing any group. Select a group to start chatting.</p>
+        </ng-template>
+      
+        <div class="message-input" *ngIf="chatService.user.group">
+          <textarea [(ngModel)]="message" placeholder="Type a message"></textarea>
+          <button (click)="sendMessage()">Send</button>
+          <button (click)="clearMessages()">Clear Messages</button>
+        </div>
+      </div>
+       -->

@@ -1,0 +1,51 @@
+<ng-container *ngIf="formcontrol !== undefined">
+<div class="datepicker-wrapper">
+
+    <label  class="label" translate>{{ label }}
+      <span *ngIf="isRequired">*</span>
+    </label>
+
+    <input fieldSize="small" fullWidth nbInput
+      [status]="(formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)) ? 'danger' : null"
+      [nbDatepicker]="formcontrolDate" [formControl]="formcontrol">
+    <nb-datepicker #formcontrolDate [min]="min" [max]="max" ></nb-datepicker>
+    <nb-icon icon="calendar-outline" pack="eva" class="datepicker-icon"></nb-icon>
+</div>
+<!-- <div translate class="text-danger" *ngIf="formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)">
+  validations.please-provide-value
+</div> -->
+
+<!-- <div *ngIf="formcontrol.errors && (formcontrol.dirty || formcontrol.touched)" class="text-danger">
+  <div *ngIf="formcontrol.errors?.['tooEarly']">
+    Date is too early. Minimum allowed date is {{ min | date:'mediumDate' }}.
+  </div>
+  <div *ngIf="formcontrol.errors?.['tooLate']">
+    Date is too late. Maximum allowed date is {{ max | date:'mediumDate' }}.
+  </div>
+  <div *ngIf="formcontrol.errors?.['required']" translate>
+    validations.please-provide-value
+  </div>
+</div> -->
+
+<div *ngIf="formcontrol.errors && (formcontrol.dirty || formcontrol.touched)" class="text-danger">
+  <div *ngIf="formcontrol.errors?.['tooEarly']" translate="validations.tooEarly" [translateParams]="{ min: min | date:'mediumDate' }"></div>
+  <div *ngIf="formcontrol.errors?.['tooLate']" translate="validations.tooLate" [translateParams]="{ max: max | date:'mediumDate' }"></div>
+  <div *ngIf="formcontrol.errors?.['required']" translate="validations.please-provide-value"></div>
+</div>
+
+
+</ng-container>
+
+<ng-container *ngIf="formcontrol === undefined">
+  <div class="datepicker-wrapper">
+    <label class="label" translate>{{ label }}</label>
+        <input nbInput fieldSize="small" placeholder="{{ placeHolder | translate }}" 
+        [nbDatepicker]="formcontrolDate"
+        fullWidth class="popover-area" [class]="className" [(ngModel)]="selectedItem"
+        (ngModelChange)="onItemChanged($event)" />
+    
+        <nb-datepicker #formcontrolDate [min]="min" [max]="max" ></nb-datepicker>
+      <nb-icon icon="calendar-outline" pack="eva" class="datepicker-icon"></nb-icon>
+  </div>
+  </ng-container>
+  

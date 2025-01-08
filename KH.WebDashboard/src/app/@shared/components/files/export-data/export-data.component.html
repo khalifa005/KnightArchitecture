@@ -1,0 +1,75 @@
+<nb-card class="rounded">
+    <nb-card-header >
+      {{ 'common.export' | translate }}
+    </nb-card-header>
+  
+
+    
+  <nb-card-body class="text-center" >
+
+    <div class="text-center row">
+
+      <div class="col-md-12">
+        <nb-card>
+          <nb-card-body>
+            <div class="row">
+            
+              <div *ngIf="fromDate" class="col-md-6">
+              <ngx-date-picker
+                [lable]=" 'common.from-date' | translate "
+                [placeHolder]=" 'common.from-date' | translate "
+                [formcontrol]="fromDate">
+                </ngx-date-picker>
+            </div>
+
+            <div *ngIf="toDate" class="col-md-6">
+            <ngx-date-picker
+            [lable]=" 'common.to-date' | translate "
+            [placeHolder]=" 'common.to-date' | translate "
+            [formcontrol]="toDate">
+            </ngx-date-picker>
+            </div>
+
+            </div>
+
+            <div class="row mt-3">
+            
+              <div class="col-md-12">
+
+                <app-generic-dropdown
+                [isRequired]="true"
+                [disabled]="false"
+                [lable]=" 'common.select-items' | translate "
+                [isMultiple]="true"
+                [readonly]="false"
+                [selectOptions]="selectOptions"
+                (selectedItemChanged)="whenOptionsChnaged($event)">
+               </app-generic-dropdown>
+              </div>
+
+            </div>
+          </nb-card-body>
+
+          <nb-card-footer class="text-center">
+            <button 
+            class="ml-1 mr-1 rounded" 
+            nbButton hero 
+            status="info"
+            [disabled]="exportLoadingSpinner" 
+            [nbSpinner]="exportLoadingSpinner" 
+            nbSpinnerStatus="success"
+            (click)="exportData()"
+            >
+              <nb-icon [options]="{ animation: { type: 'shake' } }" icon="download-outline"></nb-icon>
+              {{ 'common.export' | translate }}
+            </button>
+         </nb-card-footer>
+        </nb-card>
+      </div>
+
+      </div>
+
+  </nb-card-body>
+
+  </nb-card>
+  

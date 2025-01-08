@@ -1,0 +1,56 @@
+<div class="container my-4">
+    <!-- Role Details Section -->
+    <nb-card>
+        <nb-card-header>
+            <h3>{{ roleDetails.nameEn }} ({{ roleDetails.nameAr }})</h3>
+        </nb-card-header>
+        <nb-card-body>
+            <p>
+                <strong>{{ 'role.description' | translate }}:</strong>
+                {{ roleDetails.description }}
+            </p>
+            <p>
+                <strong>{{ 'role.createdDate' | translate }}:</strong>
+                {{ roleDetails.createdDate | date }}
+            </p>
+            <p>
+                <strong>{{ 'role.updatedDate' | translate }}:</strong>
+                {{ roleDetails.updatedDate | date }}
+            </p>
+        </nb-card-body>
+    </nb-card>
+
+    <!-- Permissions Section -->
+    <nb-card class="mt-3">
+        <nb-card-header>
+            <h4>Permissions</h4>
+        </nb-card-header>
+        <nb-card-body>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-sm table-light-blue">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>{{ 'role.key' | translate }}</th>
+                            <th>{{ 'role.nameEn' | translate }}</th>
+                            <th>{{ 'role.nameAr' | translate }}</th>
+                            <th>{{ 'role.parentPermission' | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let permission of roleDetails.permissions; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ permission.key }}</td>
+                            <td>{{ permission.nameEn }}</td>
+                            <td>{{ permission.nameAr }}</td>
+                            <td>
+                                {{ findParentPermission(permission.parentId)?.nameEn || 'None' }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-card-body>
+    </nb-card>
+</div>

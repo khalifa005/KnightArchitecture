@@ -1,0 +1,22 @@
+<div [formGroup]="workingDayGroup" class="row align-items-center mt-3">
+    <div class="col-4">
+        <ngx-date-picker [formcontrol]="workingDayGroup.get('workingDate')" label="Working Date"
+            placeHolder="Select a date">
+        </ngx-date-picker>
+    </div>
+    <div class="col-3">
+        <app-time-dropdown [formcontrol]="workingDayGroup.get('fromWorkingHour')" label="From Hour" placeHolder="HH"
+            fromRange="0" toRange="23" [isRequired]="true">
+        </app-time-dropdown>
+    </div>
+    <div class="col-3">
+        <app-time-dropdown [formcontrol]="workingDayGroup.get('toWorkingHour')" label="To Hour" placeHolder="HH"  
+        fromRange="0" toRange="23" [isRequired]="true">
+        </app-time-dropdown>
+    </div>
+    <div class="col-2">
+        <button nbButton ghost status="danger" (click)="onRemoveWorkingDay()">
+            <nb-icon icon="trash-outline" status="danger"></nb-icon>
+        </button>
+    </div>
+</div>

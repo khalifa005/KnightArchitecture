@@ -1,0 +1,43 @@
+::ng-deep .mat-form-field {
+    // width: 100%;
+  }
+  
+  // .required-asterisk {
+  //   color: red;
+  //   margin-left: 4px;
+  // }
+  
+  ::ng-deep .formly-test {
+    background-color: aqua;
+  }
+  
+  ::ng-deep .mat-form-field-appearance-fill .mat-form-field-infix {
+    // border: 1px solid #ccc;
+    // border-radius: 4px;
+  }
+  
+//   ::ng-deep .mat-autocomplete-panel {
+//     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+//     border: 1px solid #ccc;
+//     border-radius: 4px;
+//   }
+  
+  ::ng-deep .mat-option:hover {
+    // background-color: #f5f5f5;
+  }
+  
+
+  .input-container {
+    display: flex;
+    align-items: center;
+  
+    input {
+      flex: 1;
+    }
+  
+    mat-icon {
+      margin-left: 8px;
+      cursor: pointer;
+    }
+  }
+  

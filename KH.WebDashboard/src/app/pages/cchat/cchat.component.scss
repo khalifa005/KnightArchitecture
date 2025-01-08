@@ -1,0 +1,138 @@
+.scrollable-container {
+    max-height: 300px; /* Set the height you want for the scrollable area */
+    overflow-y: auto;
+  }
+
+  
+  .message-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &.current-user {
+        align-items: flex-end;
+        text-align: right;
+        background-color: #e6f7ff;
+        border-radius: 8px;
+    }
+
+    &.other-user {
+        align-items: flex-start;
+        text-align: left;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+    }
+
+    .text-muted {
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+}
+
+
+.chat-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .user-settings {
+    margin-bottom: 10px;
+  }
+  
+  .user-settings label {
+    margin-right: 5px;
+  }
+  
+  .message-container {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .message-item {
+    margin-bottom: 5px;
+  }
+  
+  .message-input textarea {
+    width: calc(100% - 100px);
+    height: 50px;
+    margin-right: 5px;
+  }
+  
+  .message-input button {
+    height: 50px;
+  }
+  
+
+
+
+  .send-button {
+    border-radius: 50%; /* Makes the button circular */
+    width: 50px;       /* Width of the button */
+    height: 50px;      /* Height of the button */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s, box-shadow 0.2s; /* Animation on hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    nb-icon {
+        font-size: 24px; /* Increase icon size */
+        color: white;    /* Ensure icon color matches button */
+    }
+
+    &:hover {
+        transform: scale(1.1); /* Slight zoom effect on hover */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+    }
+
+    &:active {
+        transform: scale(0.95); /* Subtle click effect */
+    }
+}
+
+
+
+.custom-text-input {
+    textarea {
+        border-radius: 8px; /* Rounded corners */
+        padding: 12px; /* Comfortable padding inside the textarea */
+        border: 1px solid #ced4da; /* Light border for a clean look */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        transition: border-color 0.2s, box-shadow 0.2s; /* Smooth transitions */
+        font-size: 16px; /* Increase font size for better readability */
+        resize: none; /* Prevent manual resizing */
+
+        &:hover {
+            border-color: #80bdff; /* Border color on hover */
+        }
+
+        &:focus {
+            outline: none; /* Remove default outline */
+            border-color: #5c9ded; /* Border color on focus */
+            box-shadow: 0 0 6px rgba(92, 157, 237, 0.5); /* Glow effect on focus */
+        }
+    }
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+    display: inline-block;
+
+    /* Adjust margins for LTR and RTL */
+    margin-inline-end: 8px;
+    margin-inline-start: 0;
+}
