@@ -38,12 +38,22 @@ public class ChatHub : Hub
   {
     if (string.IsNullOrEmpty(group)) return;
 
+    /// Check if the user is already in the group
+    if (Users.ContainsKey(Context.ConnectionId) && Users[Context.ConnectionId].Group == group)
+    {
+      return; // User is already in the group
+    }
+
     // Add user to the group
     await Groups.AddToGroupAsync(Context.ConnectionId, group);
 
     if (!Users.ContainsKey(Context.ConnectionId))
     {
       Users[Context.ConnectionId] = new ChatUser { Name = userName, Group = group };
+    }
+    else
+    {
+      Users[Context.ConnectionId].Group = group; // Update user's group
     }
 
     // Notify others in the group
@@ -54,7 +64,7 @@ public class ChatHub : Hub
       Time = DateTime.UtcNow
     };
 
-    await Clients.Group(group).SendAsync("OnReceiveMessage", joinMessage);
+    await Clients.Group(group).SendAsync("OnNewUserJoined", joinMessage);
   }
 
   public async Task ExitGroup(string group)
