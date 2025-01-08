@@ -6,6 +6,8 @@ using System.Collections.Concurrent;
 
 public class ChatHub : Hub
 {
+  //private readonly IDictionary<string, UserGroupConnection> _connection;
+
   // In-memory storage for groups and their messages
   private static readonly ConcurrentDictionary<string, List<ChatMessages>> GroupMessages = new();
   private static readonly ConcurrentDictionary<string, ChatUser> Users = new();
@@ -92,6 +94,21 @@ public class ChatHub : Hub
 
     return new List<ChatMessages>();
   }
+
+
+  public async Task<List<ChatUser>> GetActiveUsers(string group)
+  {
+    if (string.IsNullOrEmpty(group)) return new List<ChatUser>();
+
+    // Filter users by the selected group
+    var activeUsers = Users.Values
+        .Where(user => user.Group == group)
+        .ToList();
+
+    return activeUsers;
+  }
+
+
   public override Task OnDisconnectedAsync(Exception? exception)
   {
     Users.TryRemove(Context.ConnectionId, out _);
