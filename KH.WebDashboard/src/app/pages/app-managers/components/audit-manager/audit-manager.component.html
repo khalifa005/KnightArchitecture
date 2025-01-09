@@ -1,1 +1,38 @@
-<p>audit-manager works!</p>
+<div class="container">
+    <h1>Audits Management</h1>
+  
+    <!-- User Audits -->
+    <div *ngIf="userAudits">
+      <h2>User Audits</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Action</th>
+            <th>Old Value</th>
+            <th>New Value</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let audit of userAudits.data">
+            <td>{{ audit.id }}</td>
+            <td>{{ audit.action }}</td>
+            <td>{{ audit.oldValue }}</td>
+            <td>{{ audit.newValue }}</td>
+            <td>{{ audit.date | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Export Audits -->
+    <div>
+      <h2>Export Audits</h2>
+      <button (click)="exportUserAudits('1', '', true, true)">Export</button>
+      <div *ngIf="exportStatus">
+        <p>Status: {{ exportStatus.message }}</p>
+      </div>
+    </div>
+  </div>
+  

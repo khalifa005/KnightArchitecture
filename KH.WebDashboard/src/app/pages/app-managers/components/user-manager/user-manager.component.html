@@ -1,1 +1,31 @@
-<p>user-manager works!</p>
+<div class="container">
+    <h1>Users</h1>
+  
+    <!-- Display paged users -->
+    <div *ngIf="pagedUserList?.data">
+      <h2>Paged User List</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>username</th>
+            <th>Is Deleted</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of pagedUserList.data.items">
+            <td>{{ user.id }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.isDeleted ? 'Yes' : 'No' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <strong>Page:</strong> {{ pagedUserList.data.currentPage }} /
+        <strong>Total Pages:</strong> {{ pagedUserList.data.totalPages }}
+      </p>
+    </div>
+  </div>
+  
