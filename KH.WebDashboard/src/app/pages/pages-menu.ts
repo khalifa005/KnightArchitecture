@@ -158,10 +158,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'sideMenu.users',
         icon: 'people-outline',
-        link: '/pages/admin/user-profiles-list',
+        link: '/pages/manage/users',
         data: {
           translationKey: 'sideMenu.users',
           permissionKey: 'manage-users',
+        },
+      },
+      {
+        title: 'sideMenu.audit',
+        icon: 'people-outline',
+        link: '/pages/manage/audit',
+        data: {
+          translationKey: 'sideMenu.audit',
+          permissionKey: '',
         },
       },
     ],

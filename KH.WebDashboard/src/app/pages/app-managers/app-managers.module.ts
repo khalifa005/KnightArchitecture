@@ -18,6 +18,8 @@ import { AddDepartmentComponent } from './components/department-manager/componen
 import { DetailsDepartmentComponent } from './components/department-manager/components/details-department/details-department.component';
 import { ListDepartmentComponent } from './components/department-manager/components/list-department/list-department.component';
 import { TreeviewModule } from '@app/@external-lib-override/treeview/treeview.module';
+import { UserManagerComponent } from './components/user-manager/user-manager.component';
+import { AuditManagerComponent } from './components/audit-manager/audit-manager.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { TreeviewModule } from '@app/@external-lib-override/treeview/treeview.mo
     AddDepartmentComponent,
     DetailsDepartmentComponent,
     ListDepartmentComponent,
+    UserManagerComponent,
+    AuditManagerComponent,
   ],
   imports: [
     CommonModule,

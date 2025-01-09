@@ -5,6 +5,8 @@ import { PermissoinsManagerComponent } from './components/permissoins-manager/pe
 import { PermissionsGuard } from '../permission-guard.service';
 import { RolesManagerComponent } from './components/roles-manager/roles-manager.component';
 import { DepartmentManagerComponent } from './components/department-manager/department-manager.component';
+import { AuditManagerComponent } from './components/audit-manager/audit-manager.component';
+import { UserManagerComponent } from './components/user-manager/user-manager.component';
 
 
 const routes: Routes = [{
@@ -32,6 +34,18 @@ const routes: Routes = [{
     {
       path: 'departments',
       component: DepartmentManagerComponent,
+      canActivate: [PermissionsGuard],
+      data: { permissions: ['manage-permissions'] },
+    },
+    {
+      path: 'audit',
+      component: AuditManagerComponent,
+      canActivate: [PermissionsGuard],
+      data: { permissions: ['manage-permissions'] },
+    },
+    {
+      path: 'users',
+      component: UserManagerComponent,
       canActivate: [PermissionsGuard],
       data: { permissions: ['manage-permissions'] },
     },
