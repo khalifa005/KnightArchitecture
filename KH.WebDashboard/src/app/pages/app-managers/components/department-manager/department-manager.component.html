@@ -1,1 +1,40 @@
-<p>department-manager works!</p>
+<div class="container">
+    <h1>Departments</h1>
+  
+    <!-- Display a single department -->
+    <div *ngIf="departmentDetails?.data">
+      <h2>Department Details</h2>
+      <p><strong>ID:</strong> {{ departmentDetails.data.id }}</p>
+      <p><strong>Name (English):</strong> {{ departmentDetails.data.nameEn }}</p>
+      <p><strong>Name (Arabic):</strong> {{ departmentDetails.data.nameAr }}</p>
+      <p><strong>Description:</strong> {{ departmentDetails.data.description }}</p>
+    </div>
+  
+    <!-- Display paged departments -->
+    <div *ngIf="pagedDepartmentList?.data">
+      <h2>Paged Department List</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name (English)</th>
+            <th>Name (Arabic)</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let department of pagedDepartmentList.data.items">
+            <td>{{ department.id }}</td>
+            <td>{{ department.nameEn }}</td>
+            <td>{{ department.nameAr }}</td>
+            <td>{{ department.description }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <strong>Page:</strong> {{ pagedDepartmentList.data.currentPage }} /
+        <strong>Total Pages:</strong> {{ pagedDepartmentList.data.totalPages }}
+      </p>
+    </div>
+  </div>
+  

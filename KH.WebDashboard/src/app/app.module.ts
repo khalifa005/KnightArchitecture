@@ -47,7 +47,7 @@ import { StorageService } from './@core/utils.ts';
 import { CustomJwtInterceptor } from './@interceptors/jwt.interceptor';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { TreeviewModule } from './@external-lib-override/treeview/treeview.module';
-import { ApiModule, Configuration, ConfigurationParameters } from 'src/open-api';
+import { Configuration, ConfigurationParameters, ApiModule } from 'src/open-api';
 // import { TreeviewModule } from '@samotics/ngx-treeview';
 
 export function createTranslateLoader(http: HttpClient) {

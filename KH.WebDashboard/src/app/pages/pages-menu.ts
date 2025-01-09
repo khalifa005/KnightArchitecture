@@ -152,7 +152,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/manage/departments',
         data: {
           translationKey: 'sideMenu.departments',
-          permissionKey: 'manage-departments',//updated in backend
+          permissionKey: '',//updated in backend
         },
       },
       {
