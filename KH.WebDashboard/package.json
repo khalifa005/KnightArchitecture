@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "generate-client-sdk": "openapi-generator-cli generate -i http://localhost:5000/swagger/v1/swagger.json --additional-properties=useSingleRequestParameter=true,providedInRoot=true -g typescript-angular -o src/open-api",
-    "generate:api": "openapi-generator-cli generate -i http://localhost:5000/swagger/v1/swagger.json -p removeOperationIdPrefix=true -g typescript-angular -o src/open-api/api-client-2",
+    "generate-client-sdk-useSingleRequestParameter": "openapi-generator-cli generate -i http://localhost:5000/swagger/v1/swagger.json --additional-properties=useSingleRequestParameter=true,providedInRoot=true -g typescript-angular -o src/open-api",
+    "generate-client-sdk": "openapi-generator-cli generate -i http://localhost:5000/swagger/v1/swagger.json --additional-properties=modelPropertyNaming=camelCase,providedInRoot=true -g typescript-angular -o src/open-api",
 
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
