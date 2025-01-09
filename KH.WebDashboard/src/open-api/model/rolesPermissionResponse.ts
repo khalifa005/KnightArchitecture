@@ -10,7 +10,7 @@
 
 
 export interface RolesPermissionResponse { 
-    RoleId?: number;
-    RoleFunctionIds?: Array<number> | null;
+    roleId?: number;
+    roleFunctionIds?: Array<number> | null;
 }
 

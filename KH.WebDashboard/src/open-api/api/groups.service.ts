@@ -34,30 +34,6 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface ApiV1GroupsIdDeleteRequestParams {
-    id: number;
-}
-
-export interface ApiV1GroupsIdGetRequestParams {
-    id: number;
-}
-
-export interface ApiV1GroupsListAllPostRequestParams {
-    groupFilterRequest?: GroupFilterRequest;
-}
-
-export interface ApiV1GroupsPagedListPostRequestParams {
-    groupFilterRequest?: GroupFilterRequest;
-}
-
-export interface ApiV1GroupsPostRequestParams {
-    createGroupRequest?: CreateGroupRequest;
-}
-
-export interface ApiV1GroupsPutRequestParams {
-    createGroupRequest?: CreateGroupRequest;
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -125,15 +101,14 @@ export class GroupsService {
     }
 
     /**
-     * @param requestParameters
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1GroupsIdDelete(requestParameters: ApiV1GroupsIdDeleteRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1GroupsIdDelete(requestParameters: ApiV1GroupsIdDeleteRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1GroupsIdDelete(requestParameters: ApiV1GroupsIdDeleteRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1GroupsIdDelete(requestParameters: ApiV1GroupsIdDeleteRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const id = requestParameters?.id;
+    public apiV1GroupsIdDelete(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1GroupsIdDelete(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1GroupsIdDelete(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1GroupsIdDelete(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiV1GroupsIdDelete.');
         }
@@ -204,15 +179,14 @@ export class GroupsService {
     }
 
     /**
-     * @param requestParameters
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1GroupsIdGet(requestParameters: ApiV1GroupsIdGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<GroupResponseApiResponse>;
-    public apiV1GroupsIdGet(requestParameters: ApiV1GroupsIdGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GroupResponseApiResponse>>;
-    public apiV1GroupsIdGet(requestParameters: ApiV1GroupsIdGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GroupResponseApiResponse>>;
-    public apiV1GroupsIdGet(requestParameters: ApiV1GroupsIdGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const id = requestParameters?.id;
+    public apiV1GroupsIdGet(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<GroupResponseApiResponse>;
+    public apiV1GroupsIdGet(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GroupResponseApiResponse>>;
+    public apiV1GroupsIdGet(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GroupResponseApiResponse>>;
+    public apiV1GroupsIdGet(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiV1GroupsIdGet.');
         }
@@ -283,15 +257,14 @@ export class GroupsService {
     }
 
     /**
-     * @param requestParameters
+     * @param groupFilterRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1GroupsListAllPost(requestParameters?: ApiV1GroupsListAllPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<GroupListResponseListApiResponse>;
-    public apiV1GroupsListAllPost(requestParameters?: ApiV1GroupsListAllPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GroupListResponseListApiResponse>>;
-    public apiV1GroupsListAllPost(requestParameters?: ApiV1GroupsListAllPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GroupListResponseListApiResponse>>;
-    public apiV1GroupsListAllPost(requestParameters?: ApiV1GroupsListAllPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const groupFilterRequest = requestParameters?.groupFilterRequest;
+    public apiV1GroupsListAllPost(groupFilterRequest?: GroupFilterRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<GroupListResponseListApiResponse>;
+    public apiV1GroupsListAllPost(groupFilterRequest?: GroupFilterRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GroupListResponseListApiResponse>>;
+    public apiV1GroupsListAllPost(groupFilterRequest?: GroupFilterRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GroupListResponseListApiResponse>>;
+    public apiV1GroupsListAllPost(groupFilterRequest?: GroupFilterRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -372,15 +345,14 @@ export class GroupsService {
     }
 
     /**
-     * @param requestParameters
+     * @param groupFilterRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1GroupsPagedListPost(requestParameters?: ApiV1GroupsPagedListPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<GroupListResponsePagedListApiResponse>;
-    public apiV1GroupsPagedListPost(requestParameters?: ApiV1GroupsPagedListPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GroupListResponsePagedListApiResponse>>;
-    public apiV1GroupsPagedListPost(requestParameters?: ApiV1GroupsPagedListPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GroupListResponsePagedListApiResponse>>;
-    public apiV1GroupsPagedListPost(requestParameters?: ApiV1GroupsPagedListPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const groupFilterRequest = requestParameters?.groupFilterRequest;
+    public apiV1GroupsPagedListPost(groupFilterRequest?: GroupFilterRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<GroupListResponsePagedListApiResponse>;
+    public apiV1GroupsPagedListPost(groupFilterRequest?: GroupFilterRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<GroupListResponsePagedListApiResponse>>;
+    public apiV1GroupsPagedListPost(groupFilterRequest?: GroupFilterRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<GroupListResponsePagedListApiResponse>>;
+    public apiV1GroupsPagedListPost(groupFilterRequest?: GroupFilterRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -461,15 +433,14 @@ export class GroupsService {
     }
 
     /**
-     * @param requestParameters
+     * @param createGroupRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1GroupsPost(requestParameters?: ApiV1GroupsPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1GroupsPost(requestParameters?: ApiV1GroupsPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1GroupsPost(requestParameters?: ApiV1GroupsPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1GroupsPost(requestParameters?: ApiV1GroupsPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const createGroupRequest = requestParameters?.createGroupRequest;
+    public apiV1GroupsPost(createGroupRequest?: CreateGroupRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1GroupsPost(createGroupRequest?: CreateGroupRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1GroupsPost(createGroupRequest?: CreateGroupRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1GroupsPost(createGroupRequest?: CreateGroupRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -550,15 +521,14 @@ export class GroupsService {
     }
 
     /**
-     * @param requestParameters
+     * @param createGroupRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1GroupsPut(requestParameters?: ApiV1GroupsPutRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1GroupsPut(requestParameters?: ApiV1GroupsPutRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1GroupsPut(requestParameters?: ApiV1GroupsPutRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1GroupsPut(requestParameters?: ApiV1GroupsPutRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const createGroupRequest = requestParameters?.createGroupRequest;
+    public apiV1GroupsPut(createGroupRequest?: CreateGroupRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1GroupsPut(createGroupRequest?: CreateGroupRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1GroupsPut(createGroupRequest?: CreateGroupRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1GroupsPut(createGroupRequest?: CreateGroupRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 

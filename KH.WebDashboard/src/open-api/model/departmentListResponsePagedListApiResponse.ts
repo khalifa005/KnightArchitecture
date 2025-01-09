@@ -11,11 +11,11 @@ import { DepartmentListResponsePagedList } from './departmentListResponsePagedLi
 
 
 export interface DepartmentListResponsePagedListApiResponse { 
-    Data?: DepartmentListResponsePagedList;
-    StatusCode?: number;
-    Errors?: Array<string> | null;
-    ErrorMessage?: string | null;
-    ErrorCode?: string | null;
-    ErrorMessageAr?: string | null;
+    data?: DepartmentListResponsePagedList;
+    statusCode?: number;
+    errors?: Array<string> | null;
+    errorMessage?: string | null;
+    errorCode?: string | null;
+    errorMessageAr?: string | null;
 }
 

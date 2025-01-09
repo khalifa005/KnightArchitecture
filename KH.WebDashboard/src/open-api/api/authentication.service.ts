@@ -28,14 +28,6 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface ApiV1AuthenticationLoginPostRequestParams {
-    loginRequest?: LoginRequest;
-}
-
-export interface ApiV1AuthenticationRefreshUserTokenPostRequestParams {
-    refreshTokenRequest?: RefreshTokenRequest;
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -103,15 +95,14 @@ export class AuthenticationService {
     }
 
     /**
-     * @param requestParameters
+     * @param loginRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1AuthenticationLoginPost(requestParameters?: ApiV1AuthenticationLoginPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<AuthenticationResponseApiResponse>;
-    public apiV1AuthenticationLoginPost(requestParameters?: ApiV1AuthenticationLoginPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<AuthenticationResponseApiResponse>>;
-    public apiV1AuthenticationLoginPost(requestParameters?: ApiV1AuthenticationLoginPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<AuthenticationResponseApiResponse>>;
-    public apiV1AuthenticationLoginPost(requestParameters?: ApiV1AuthenticationLoginPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const loginRequest = requestParameters?.loginRequest;
+    public apiV1AuthenticationLoginPost(loginRequest?: LoginRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<AuthenticationResponseApiResponse>;
+    public apiV1AuthenticationLoginPost(loginRequest?: LoginRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<AuthenticationResponseApiResponse>>;
+    public apiV1AuthenticationLoginPost(loginRequest?: LoginRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<AuthenticationResponseApiResponse>>;
+    public apiV1AuthenticationLoginPost(loginRequest?: LoginRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -192,15 +183,14 @@ export class AuthenticationService {
     }
 
     /**
-     * @param requestParameters
+     * @param refreshTokenRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1AuthenticationRefreshUserTokenPost(requestParameters?: ApiV1AuthenticationRefreshUserTokenPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<AuthenticationResponseApiResponse>;
-    public apiV1AuthenticationRefreshUserTokenPost(requestParameters?: ApiV1AuthenticationRefreshUserTokenPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<AuthenticationResponseApiResponse>>;
-    public apiV1AuthenticationRefreshUserTokenPost(requestParameters?: ApiV1AuthenticationRefreshUserTokenPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<AuthenticationResponseApiResponse>>;
-    public apiV1AuthenticationRefreshUserTokenPost(requestParameters?: ApiV1AuthenticationRefreshUserTokenPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const refreshTokenRequest = requestParameters?.refreshTokenRequest;
+    public apiV1AuthenticationRefreshUserTokenPost(refreshTokenRequest?: RefreshTokenRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<AuthenticationResponseApiResponse>;
+    public apiV1AuthenticationRefreshUserTokenPost(refreshTokenRequest?: RefreshTokenRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<AuthenticationResponseApiResponse>>;
+    public apiV1AuthenticationRefreshUserTokenPost(refreshTokenRequest?: RefreshTokenRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<AuthenticationResponseApiResponse>>;
+    public apiV1AuthenticationRefreshUserTokenPost(refreshTokenRequest?: RefreshTokenRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 

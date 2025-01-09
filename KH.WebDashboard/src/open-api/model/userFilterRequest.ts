@@ -10,17 +10,17 @@
 
 
 export interface UserFilterRequest { 
-    PageIndex?: number;
-    PageSize?: number;
-    Sort?: string | null;
-    Search?: string | null;
-    Id?: number | null;
-    Email?: string | null;
-    UserName?: string | null;
-    Language?: string | null;
-    GroupId?: number | null;
-    DepartmentId?: number | null;
-    RoleId?: number | null;
-    IsDeleted?: boolean | null;
+    pageIndex?: number;
+    pageSize?: number;
+    sort?: string | null;
+    search?: string | null;
+    id?: number | null;
+    email?: string | null;
+    userName?: string | null;
+    language?: string | null;
+    groupId?: number | null;
+    departmentId?: number | null;
+    roleId?: number | null;
+    isDeleted?: boolean | null;
 }
 

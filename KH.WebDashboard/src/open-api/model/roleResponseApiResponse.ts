@@ -11,11 +11,11 @@ import { RoleResponse } from './roleResponse';
 
 
 export interface RoleResponseApiResponse { 
-    Data?: RoleResponse;
-    StatusCode?: number;
-    Errors?: Array<string> | null;
-    ErrorMessage?: string | null;
-    ErrorCode?: string | null;
-    ErrorMessageAr?: string | null;
+    data?: RoleResponse;
+    statusCode?: number;
+    errors?: Array<string> | null;
+    errorMessage?: string | null;
+    errorCode?: string | null;
+    errorMessageAr?: string | null;
 }
 

@@ -11,10 +11,10 @@ import { SmsTrackerResponse } from './smsTrackerResponse';
 
 
 export interface SmsTrackerResponsePagedList { 
-    CurrentPage?: number;
-    TotalPages?: number;
-    PageSize?: number;
-    TotalCount?: number;
-    Items?: Array<SmsTrackerResponse> | null;
+    currentPage?: number;
+    totalPages?: number;
+    pageSize?: number;
+    totalCount?: number;
+    items?: Array<SmsTrackerResponse> | null;
 }
 

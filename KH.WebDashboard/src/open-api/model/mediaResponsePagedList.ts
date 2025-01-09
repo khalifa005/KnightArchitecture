@@ -11,10 +11,10 @@ import { MediaResponse } from './mediaResponse';
 
 
 export interface MediaResponsePagedList { 
-    CurrentPage?: number;
-    TotalPages?: number;
-    PageSize?: number;
-    TotalCount?: number;
-    Items?: Array<MediaResponse> | null;
+    currentPage?: number;
+    totalPages?: number;
+    pageSize?: number;
+    totalCount?: number;
+    items?: Array<MediaResponse> | null;
 }
 

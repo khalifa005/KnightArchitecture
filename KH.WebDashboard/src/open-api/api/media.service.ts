@@ -32,42 +32,6 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface ApiV1MediaAddRangePostRequestParams {
-    model?: string;
-    modelId?: number;
-    file?: Blob;
-    files?: Array<Blob>;
-    formData?: Array<StringStringValuesKeyValuePair>;
-}
-
-export interface ApiV1MediaDownloadIdGetRequestParams {
-    id: number;
-}
-
-export interface ApiV1MediaIdDeleteRequestParams {
-    id: number;
-}
-
-export interface ApiV1MediaIdGetRequestParams {
-    id: number;
-}
-
-export interface ApiV1MediaListPostRequestParams {
-    mediaRequest?: MediaRequest;
-}
-
-export interface ApiV1MediaPostRequestParams {
-    model?: string;
-    modelId?: number;
-    file?: Blob;
-    files?: Array<Blob>;
-    formData?: Array<StringStringValuesKeyValuePair>;
-}
-
-export interface ApiV1MediaSubmitFormlyFormFileStreamPostRequestParams {
-    form?: Array<StringStringValuesKeyValuePair>;
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -148,19 +112,18 @@ export class MediaService {
     }
 
     /**
-     * @param requestParameters
+     * @param model 
+     * @param modelId 
+     * @param file 
+     * @param files 
+     * @param formData 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1MediaAddRangePost(requestParameters?: ApiV1MediaAddRangePostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1MediaAddRangePost(requestParameters?: ApiV1MediaAddRangePostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1MediaAddRangePost(requestParameters?: ApiV1MediaAddRangePostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1MediaAddRangePost(requestParameters?: ApiV1MediaAddRangePostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const model = requestParameters?.model;
-        const modelId = requestParameters?.modelId;
-        const file = requestParameters?.file;
-        const files = requestParameters?.files;
-        const formData = requestParameters?.formData;
+    public apiV1MediaAddRangePost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1MediaAddRangePost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1MediaAddRangePost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1MediaAddRangePost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -270,15 +233,14 @@ export class MediaService {
     }
 
     /**
-     * @param requestParameters
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1MediaDownloadIdGet(requestParameters: ApiV1MediaDownloadIdGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1MediaDownloadIdGet(requestParameters: ApiV1MediaDownloadIdGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1MediaDownloadIdGet(requestParameters: ApiV1MediaDownloadIdGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1MediaDownloadIdGet(requestParameters: ApiV1MediaDownloadIdGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const id = requestParameters?.id;
+    public apiV1MediaDownloadIdGet(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1MediaDownloadIdGet(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1MediaDownloadIdGet(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1MediaDownloadIdGet(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiV1MediaDownloadIdGet.');
         }
@@ -346,15 +308,14 @@ export class MediaService {
     }
 
     /**
-     * @param requestParameters
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1MediaIdDelete(requestParameters: ApiV1MediaIdDeleteRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1MediaIdDelete(requestParameters: ApiV1MediaIdDeleteRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1MediaIdDelete(requestParameters: ApiV1MediaIdDeleteRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1MediaIdDelete(requestParameters: ApiV1MediaIdDeleteRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const id = requestParameters?.id;
+    public apiV1MediaIdDelete(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1MediaIdDelete(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1MediaIdDelete(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1MediaIdDelete(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiV1MediaIdDelete.');
         }
@@ -425,15 +386,14 @@ export class MediaService {
     }
 
     /**
-     * @param requestParameters
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1MediaIdGet(requestParameters: ApiV1MediaIdGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<MediaResponseApiResponse>;
-    public apiV1MediaIdGet(requestParameters: ApiV1MediaIdGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<MediaResponseApiResponse>>;
-    public apiV1MediaIdGet(requestParameters: ApiV1MediaIdGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<MediaResponseApiResponse>>;
-    public apiV1MediaIdGet(requestParameters: ApiV1MediaIdGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const id = requestParameters?.id;
+    public apiV1MediaIdGet(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<MediaResponseApiResponse>;
+    public apiV1MediaIdGet(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<MediaResponseApiResponse>>;
+    public apiV1MediaIdGet(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<MediaResponseApiResponse>>;
+    public apiV1MediaIdGet(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiV1MediaIdGet.');
         }
@@ -504,15 +464,14 @@ export class MediaService {
     }
 
     /**
-     * @param requestParameters
+     * @param mediaRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1MediaListPost(requestParameters?: ApiV1MediaListPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<MediaResponsePagedListApiResponse>;
-    public apiV1MediaListPost(requestParameters?: ApiV1MediaListPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<MediaResponsePagedListApiResponse>>;
-    public apiV1MediaListPost(requestParameters?: ApiV1MediaListPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<MediaResponsePagedListApiResponse>>;
-    public apiV1MediaListPost(requestParameters?: ApiV1MediaListPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const mediaRequest = requestParameters?.mediaRequest;
+    public apiV1MediaListPost(mediaRequest?: MediaRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<MediaResponsePagedListApiResponse>;
+    public apiV1MediaListPost(mediaRequest?: MediaRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<MediaResponsePagedListApiResponse>>;
+    public apiV1MediaListPost(mediaRequest?: MediaRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<MediaResponsePagedListApiResponse>>;
+    public apiV1MediaListPost(mediaRequest?: MediaRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -593,19 +552,18 @@ export class MediaService {
     }
 
     /**
-     * @param requestParameters
+     * @param model 
+     * @param modelId 
+     * @param file 
+     * @param files 
+     * @param formData 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1MediaPost(requestParameters?: ApiV1MediaPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1MediaPost(requestParameters?: ApiV1MediaPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1MediaPost(requestParameters?: ApiV1MediaPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1MediaPost(requestParameters?: ApiV1MediaPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const model = requestParameters?.model;
-        const modelId = requestParameters?.modelId;
-        const file = requestParameters?.file;
-        const files = requestParameters?.files;
-        const formData = requestParameters?.formData;
+    public apiV1MediaPost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1MediaPost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1MediaPost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1MediaPost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -715,15 +673,14 @@ export class MediaService {
     }
 
     /**
-     * @param requestParameters
+     * @param form 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1MediaSubmitFormlyFormFileStreamPost(requestParameters?: ApiV1MediaSubmitFormlyFormFileStreamPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1MediaSubmitFormlyFormFileStreamPost(requestParameters?: ApiV1MediaSubmitFormlyFormFileStreamPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1MediaSubmitFormlyFormFileStreamPost(requestParameters?: ApiV1MediaSubmitFormlyFormFileStreamPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1MediaSubmitFormlyFormFileStreamPost(requestParameters?: ApiV1MediaSubmitFormlyFormFileStreamPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const form = requestParameters?.form;
+    public apiV1MediaSubmitFormlyFormFileStreamPost(form?: Array<StringStringValuesKeyValuePair>, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1MediaSubmitFormlyFormFileStreamPost(form?: Array<StringStringValuesKeyValuePair>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1MediaSubmitFormlyFormFileStreamPost(form?: Array<StringStringValuesKeyValuePair>, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1MediaSubmitFormlyFormFileStreamPost(form?: Array<StringStringValuesKeyValuePair>, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 

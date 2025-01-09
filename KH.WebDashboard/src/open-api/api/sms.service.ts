@@ -34,22 +34,6 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface ApiV1SmsIdGetRequestParams {
-    id: number;
-}
-
-export interface ApiV1SmsListPostRequestParams {
-    smsTrackerFilterRequest?: SmsTrackerFilterRequest;
-}
-
-export interface ApiV1SmsPostRequestParams {
-    createSmsTrackerRequest?: CreateSmsTrackerRequest;
-}
-
-export interface ApiV1SmsPutRequestParams {
-    smsTracker?: SmsTracker;
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -117,15 +101,14 @@ export class SmsService {
     }
 
     /**
-     * @param requestParameters
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1SmsIdGet(requestParameters: ApiV1SmsIdGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<SmsTrackerResponseApiResponse>;
-    public apiV1SmsIdGet(requestParameters: ApiV1SmsIdGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<SmsTrackerResponseApiResponse>>;
-    public apiV1SmsIdGet(requestParameters: ApiV1SmsIdGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<SmsTrackerResponseApiResponse>>;
-    public apiV1SmsIdGet(requestParameters: ApiV1SmsIdGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const id = requestParameters?.id;
+    public apiV1SmsIdGet(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<SmsTrackerResponseApiResponse>;
+    public apiV1SmsIdGet(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<SmsTrackerResponseApiResponse>>;
+    public apiV1SmsIdGet(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<SmsTrackerResponseApiResponse>>;
+    public apiV1SmsIdGet(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiV1SmsIdGet.');
         }
@@ -196,15 +179,14 @@ export class SmsService {
     }
 
     /**
-     * @param requestParameters
+     * @param smsTrackerFilterRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1SmsListPost(requestParameters?: ApiV1SmsListPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<SmsTrackerResponsePagedListApiResponse>;
-    public apiV1SmsListPost(requestParameters?: ApiV1SmsListPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<SmsTrackerResponsePagedListApiResponse>>;
-    public apiV1SmsListPost(requestParameters?: ApiV1SmsListPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<SmsTrackerResponsePagedListApiResponse>>;
-    public apiV1SmsListPost(requestParameters?: ApiV1SmsListPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const smsTrackerFilterRequest = requestParameters?.smsTrackerFilterRequest;
+    public apiV1SmsListPost(smsTrackerFilterRequest?: SmsTrackerFilterRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<SmsTrackerResponsePagedListApiResponse>;
+    public apiV1SmsListPost(smsTrackerFilterRequest?: SmsTrackerFilterRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<SmsTrackerResponsePagedListApiResponse>>;
+    public apiV1SmsListPost(smsTrackerFilterRequest?: SmsTrackerFilterRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<SmsTrackerResponsePagedListApiResponse>>;
+    public apiV1SmsListPost(smsTrackerFilterRequest?: SmsTrackerFilterRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -285,15 +267,14 @@ export class SmsService {
     }
 
     /**
-     * @param requestParameters
+     * @param createSmsTrackerRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1SmsPost(requestParameters?: ApiV1SmsPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1SmsPost(requestParameters?: ApiV1SmsPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1SmsPost(requestParameters?: ApiV1SmsPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1SmsPost(requestParameters?: ApiV1SmsPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const createSmsTrackerRequest = requestParameters?.createSmsTrackerRequest;
+    public apiV1SmsPost(createSmsTrackerRequest?: CreateSmsTrackerRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1SmsPost(createSmsTrackerRequest?: CreateSmsTrackerRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1SmsPost(createSmsTrackerRequest?: CreateSmsTrackerRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1SmsPost(createSmsTrackerRequest?: CreateSmsTrackerRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -374,15 +355,14 @@ export class SmsService {
     }
 
     /**
-     * @param requestParameters
+     * @param smsTracker 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1SmsPut(requestParameters?: ApiV1SmsPutRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1SmsPut(requestParameters?: ApiV1SmsPutRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1SmsPut(requestParameters?: ApiV1SmsPutRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1SmsPut(requestParameters?: ApiV1SmsPutRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const smsTracker = requestParameters?.smsTracker;
+    public apiV1SmsPut(smsTracker?: SmsTracker, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1SmsPut(smsTracker?: SmsTracker, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1SmsPut(smsTracker?: SmsTracker, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1SmsPut(smsTracker?: SmsTracker, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 

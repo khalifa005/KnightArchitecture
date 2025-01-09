@@ -11,9 +11,9 @@ import { ChatUser } from './chatUser';
 
 
 export interface ChatMessages { 
-    User?: ChatUser;
-    Message?: string | null;
-    Time?: string;
-    IsCurrentUser?: boolean;
+    user?: ChatUser;
+    message?: string | null;
+    time?: string;
+    isCurrentUser?: boolean;
 }
 

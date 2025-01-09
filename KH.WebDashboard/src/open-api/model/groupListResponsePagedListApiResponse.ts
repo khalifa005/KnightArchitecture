@@ -11,11 +11,11 @@ import { GroupListResponsePagedList } from './groupListResponsePagedList';
 
 
 export interface GroupListResponsePagedListApiResponse { 
-    Data?: GroupListResponsePagedList;
-    StatusCode?: number;
-    Errors?: Array<string> | null;
-    ErrorMessage?: string | null;
-    ErrorCode?: string | null;
-    ErrorMessageAr?: string | null;
+    data?: GroupListResponsePagedList;
+    statusCode?: number;
+    errors?: Array<string> | null;
+    errorMessage?: string | null;
+    errorCode?: string | null;
+    errorMessageAr?: string | null;
 }
 

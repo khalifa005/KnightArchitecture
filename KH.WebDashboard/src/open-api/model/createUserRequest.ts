@@ -10,21 +10,21 @@
 
 
 export interface CreateUserRequest { 
-    Id?: number | null;
-    IsUpdateMode?: boolean | null;
-    SensitiveData?: string | null;
-    FirstName?: string | null;
-    MiddleName?: string | null;
-    LastName?: string | null;
-    Email?: string | null;
-    Username?: string | null;
-    BirthDate?: string | null;
-    MobileNumber?: string | null;
-    OtpCode?: string | null;
-    IsOtpVerified?: boolean;
-    Password?: string | null;
-    GroupId?: number | null;
-    DepartmentId?: number | null;
-    RoleIds?: Array<number> | null;
+    id?: number | null;
+    isUpdateMode?: boolean | null;
+    sensitiveData?: string | null;
+    firstName?: string | null;
+    middleName?: string | null;
+    lastName?: string | null;
+    email?: string | null;
+    username?: string | null;
+    birthDate?: string | null;
+    mobileNumber?: string | null;
+    otpCode?: string | null;
+    isOtpVerified?: boolean;
+    password?: string | null;
+    groupId?: number | null;
+    departmentId?: number | null;
+    roleIds?: Array<number> | null;
 }
 

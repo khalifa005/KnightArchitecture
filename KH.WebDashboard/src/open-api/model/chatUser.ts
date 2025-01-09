@@ -10,9 +10,9 @@
 
 
 export interface ChatUser { 
-    Id?: string | null;
-    Name?: string | null;
-    Group?: string | null;
-    LastOn?: string;
+    id?: string | null;
+    name?: string | null;
+    group?: string | null;
+    lastOn?: string;
 }
 

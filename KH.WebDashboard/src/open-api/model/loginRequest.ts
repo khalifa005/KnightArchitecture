@@ -10,7 +10,7 @@
 
 
 export interface LoginRequest { 
-    Username?: string | null;
-    Password?: string | null;
+    username?: string | null;
+    password?: string | null;
 }
 

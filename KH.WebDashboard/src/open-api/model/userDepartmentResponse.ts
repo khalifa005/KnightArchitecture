@@ -11,8 +11,8 @@ import { DepartmentResponse } from './departmentResponse';
 
 
 export interface UserDepartmentResponse { 
-    UserId?: number;
-    DepartmentId?: number;
-    Department?: DepartmentResponse;
+    userId?: number;
+    departmentId?: number;
+    department?: DepartmentResponse;
 }
 

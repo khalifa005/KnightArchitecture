@@ -10,14 +10,14 @@
 
 
 export interface MediaRequest { 
-    PageIndex?: number;
-    PageSize?: number;
-    Sort?: string | null;
-    Search?: string | null;
-    FileName?: string | null;
-    OrignalName?: string | null;
-    Path?: string | null;
-    Model?: string | null;
-    ModelId?: number | null;
+    pageIndex?: number;
+    pageSize?: number;
+    sort?: string | null;
+    search?: string | null;
+    fileName?: string | null;
+    orignalName?: string | null;
+    path?: string | null;
+    model?: string | null;
+    modelId?: number | null;
 }
 

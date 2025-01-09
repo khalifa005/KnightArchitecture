@@ -11,11 +11,11 @@ import { EmailTrackerResponsePagedList } from './emailTrackerResponsePagedList';
 
 
 export interface EmailTrackerResponsePagedListApiResponse { 
-    Data?: EmailTrackerResponsePagedList;
-    StatusCode?: number;
-    Errors?: Array<string> | null;
-    ErrorMessage?: string | null;
-    ErrorCode?: string | null;
-    ErrorMessageAr?: string | null;
+    data?: EmailTrackerResponsePagedList;
+    statusCode?: number;
+    errors?: Array<string> | null;
+    errorMessage?: string | null;
+    errorCode?: string | null;
+    errorMessageAr?: string | null;
 }
 

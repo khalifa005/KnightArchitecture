@@ -10,10 +10,10 @@
 
 
 export interface RoleListResponse { 
-    Id?: number | null;
-    NameAr?: string | null;
-    NameEn?: string | null;
-    Description?: string | null;
-    IsDeleted?: boolean;
+    id?: number | null;
+    nameAr?: string | null;
+    nameEn?: string | null;
+    description?: string | null;
+    isDeleted?: boolean;
 }
 

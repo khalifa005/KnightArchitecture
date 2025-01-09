@@ -34,30 +34,6 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface ApiV1DepartmentsIdDeleteRequestParams {
-    id: number;
-}
-
-export interface ApiV1DepartmentsIdGetRequestParams {
-    id: number;
-}
-
-export interface ApiV1DepartmentsListAllPostRequestParams {
-    departmentFilterRequest?: DepartmentFilterRequest;
-}
-
-export interface ApiV1DepartmentsPagedListPostRequestParams {
-    departmentFilterRequest?: DepartmentFilterRequest;
-}
-
-export interface ApiV1DepartmentsPostRequestParams {
-    createDepartmentRequest?: CreateDepartmentRequest;
-}
-
-export interface ApiV1DepartmentsPutRequestParams {
-    createDepartmentRequest?: CreateDepartmentRequest;
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -125,15 +101,14 @@ export class DepartmentsService {
     }
 
     /**
-     * @param requestParameters
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1DepartmentsIdDelete(requestParameters: ApiV1DepartmentsIdDeleteRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1DepartmentsIdDelete(requestParameters: ApiV1DepartmentsIdDeleteRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1DepartmentsIdDelete(requestParameters: ApiV1DepartmentsIdDeleteRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1DepartmentsIdDelete(requestParameters: ApiV1DepartmentsIdDeleteRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const id = requestParameters?.id;
+    public apiV1DepartmentsIdDelete(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1DepartmentsIdDelete(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1DepartmentsIdDelete(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1DepartmentsIdDelete(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiV1DepartmentsIdDelete.');
         }
@@ -204,15 +179,14 @@ export class DepartmentsService {
     }
 
     /**
-     * @param requestParameters
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1DepartmentsIdGet(requestParameters: ApiV1DepartmentsIdGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<DepartmentResponseApiResponse>;
-    public apiV1DepartmentsIdGet(requestParameters: ApiV1DepartmentsIdGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<DepartmentResponseApiResponse>>;
-    public apiV1DepartmentsIdGet(requestParameters: ApiV1DepartmentsIdGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<DepartmentResponseApiResponse>>;
-    public apiV1DepartmentsIdGet(requestParameters: ApiV1DepartmentsIdGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const id = requestParameters?.id;
+    public apiV1DepartmentsIdGet(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<DepartmentResponseApiResponse>;
+    public apiV1DepartmentsIdGet(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<DepartmentResponseApiResponse>>;
+    public apiV1DepartmentsIdGet(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<DepartmentResponseApiResponse>>;
+    public apiV1DepartmentsIdGet(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiV1DepartmentsIdGet.');
         }
@@ -283,15 +257,14 @@ export class DepartmentsService {
     }
 
     /**
-     * @param requestParameters
+     * @param departmentFilterRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1DepartmentsListAllPost(requestParameters?: ApiV1DepartmentsListAllPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<DepartmentListResponseListApiResponse>;
-    public apiV1DepartmentsListAllPost(requestParameters?: ApiV1DepartmentsListAllPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<DepartmentListResponseListApiResponse>>;
-    public apiV1DepartmentsListAllPost(requestParameters?: ApiV1DepartmentsListAllPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<DepartmentListResponseListApiResponse>>;
-    public apiV1DepartmentsListAllPost(requestParameters?: ApiV1DepartmentsListAllPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const departmentFilterRequest = requestParameters?.departmentFilterRequest;
+    public apiV1DepartmentsListAllPost(departmentFilterRequest?: DepartmentFilterRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<DepartmentListResponseListApiResponse>;
+    public apiV1DepartmentsListAllPost(departmentFilterRequest?: DepartmentFilterRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<DepartmentListResponseListApiResponse>>;
+    public apiV1DepartmentsListAllPost(departmentFilterRequest?: DepartmentFilterRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<DepartmentListResponseListApiResponse>>;
+    public apiV1DepartmentsListAllPost(departmentFilterRequest?: DepartmentFilterRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -372,15 +345,14 @@ export class DepartmentsService {
     }
 
     /**
-     * @param requestParameters
+     * @param departmentFilterRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1DepartmentsPagedListPost(requestParameters?: ApiV1DepartmentsPagedListPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<DepartmentListResponsePagedListApiResponse>;
-    public apiV1DepartmentsPagedListPost(requestParameters?: ApiV1DepartmentsPagedListPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<DepartmentListResponsePagedListApiResponse>>;
-    public apiV1DepartmentsPagedListPost(requestParameters?: ApiV1DepartmentsPagedListPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<DepartmentListResponsePagedListApiResponse>>;
-    public apiV1DepartmentsPagedListPost(requestParameters?: ApiV1DepartmentsPagedListPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const departmentFilterRequest = requestParameters?.departmentFilterRequest;
+    public apiV1DepartmentsPagedListPost(departmentFilterRequest?: DepartmentFilterRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<DepartmentListResponsePagedListApiResponse>;
+    public apiV1DepartmentsPagedListPost(departmentFilterRequest?: DepartmentFilterRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<DepartmentListResponsePagedListApiResponse>>;
+    public apiV1DepartmentsPagedListPost(departmentFilterRequest?: DepartmentFilterRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<DepartmentListResponsePagedListApiResponse>>;
+    public apiV1DepartmentsPagedListPost(departmentFilterRequest?: DepartmentFilterRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -461,15 +433,14 @@ export class DepartmentsService {
     }
 
     /**
-     * @param requestParameters
+     * @param createDepartmentRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1DepartmentsPost(requestParameters?: ApiV1DepartmentsPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1DepartmentsPost(requestParameters?: ApiV1DepartmentsPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1DepartmentsPost(requestParameters?: ApiV1DepartmentsPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1DepartmentsPost(requestParameters?: ApiV1DepartmentsPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const createDepartmentRequest = requestParameters?.createDepartmentRequest;
+    public apiV1DepartmentsPost(createDepartmentRequest?: CreateDepartmentRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1DepartmentsPost(createDepartmentRequest?: CreateDepartmentRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1DepartmentsPost(createDepartmentRequest?: CreateDepartmentRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1DepartmentsPost(createDepartmentRequest?: CreateDepartmentRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -550,15 +521,14 @@ export class DepartmentsService {
     }
 
     /**
-     * @param requestParameters
+     * @param createDepartmentRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1DepartmentsPut(requestParameters?: ApiV1DepartmentsPutRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1DepartmentsPut(requestParameters?: ApiV1DepartmentsPutRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1DepartmentsPut(requestParameters?: ApiV1DepartmentsPutRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1DepartmentsPut(requestParameters?: ApiV1DepartmentsPutRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const createDepartmentRequest = requestParameters?.createDepartmentRequest;
+    public apiV1DepartmentsPut(createDepartmentRequest?: CreateDepartmentRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1DepartmentsPut(createDepartmentRequest?: CreateDepartmentRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1DepartmentsPut(createDepartmentRequest?: CreateDepartmentRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1DepartmentsPut(createDepartmentRequest?: CreateDepartmentRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 

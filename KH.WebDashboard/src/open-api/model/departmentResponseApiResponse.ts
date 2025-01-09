@@ -11,11 +11,11 @@ import { DepartmentResponse } from './departmentResponse';
 
 
 export interface DepartmentResponseApiResponse { 
-    Data?: DepartmentResponse;
-    StatusCode?: number;
-    Errors?: Array<string> | null;
-    ErrorMessage?: string | null;
-    ErrorCode?: string | null;
-    ErrorMessageAr?: string | null;
+    data?: DepartmentResponse;
+    statusCode?: number;
+    errors?: Array<string> | null;
+    errorMessage?: string | null;
+    errorCode?: string | null;
+    errorMessageAr?: string | null;
 }
 

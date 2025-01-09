@@ -22,30 +22,6 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface ApiV1LockingOptimisticConcurrencyRoleIdPostRequestParams {
-    roleId: number;
-}
-
-export interface ApiV1LockingReadCommittedRoleIdPostRequestParams {
-    roleId: number;
-}
-
-export interface ApiV1LockingReadUncommittedRoleIdPostRequestParams {
-    roleId: number;
-}
-
-export interface ApiV1LockingRepeatableReadRoleIdPostRequestParams {
-    roleId: number;
-}
-
-export interface ApiV1LockingRowLockRoleIdGetRequestParams {
-    roleId: number;
-}
-
-export interface ApiV1LockingSerializationRoleIdPostRequestParams {
-    roleId: number;
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -113,15 +89,14 @@ export class LockingService {
     }
 
     /**
-     * @param requestParameters
+     * @param roleId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1LockingOptimisticConcurrencyRoleIdPost(requestParameters: ApiV1LockingOptimisticConcurrencyRoleIdPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1LockingOptimisticConcurrencyRoleIdPost(requestParameters: ApiV1LockingOptimisticConcurrencyRoleIdPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1LockingOptimisticConcurrencyRoleIdPost(requestParameters: ApiV1LockingOptimisticConcurrencyRoleIdPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1LockingOptimisticConcurrencyRoleIdPost(requestParameters: ApiV1LockingOptimisticConcurrencyRoleIdPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const roleId = requestParameters?.roleId;
+    public apiV1LockingOptimisticConcurrencyRoleIdPost(roleId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1LockingOptimisticConcurrencyRoleIdPost(roleId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1LockingOptimisticConcurrencyRoleIdPost(roleId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1LockingOptimisticConcurrencyRoleIdPost(roleId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (roleId === null || roleId === undefined) {
             throw new Error('Required parameter roleId was null or undefined when calling apiV1LockingOptimisticConcurrencyRoleIdPost.');
         }
@@ -189,15 +164,14 @@ export class LockingService {
     }
 
     /**
-     * @param requestParameters
+     * @param roleId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1LockingReadCommittedRoleIdPost(requestParameters: ApiV1LockingReadCommittedRoleIdPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1LockingReadCommittedRoleIdPost(requestParameters: ApiV1LockingReadCommittedRoleIdPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1LockingReadCommittedRoleIdPost(requestParameters: ApiV1LockingReadCommittedRoleIdPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1LockingReadCommittedRoleIdPost(requestParameters: ApiV1LockingReadCommittedRoleIdPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const roleId = requestParameters?.roleId;
+    public apiV1LockingReadCommittedRoleIdPost(roleId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1LockingReadCommittedRoleIdPost(roleId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1LockingReadCommittedRoleIdPost(roleId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1LockingReadCommittedRoleIdPost(roleId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (roleId === null || roleId === undefined) {
             throw new Error('Required parameter roleId was null or undefined when calling apiV1LockingReadCommittedRoleIdPost.');
         }
@@ -265,15 +239,14 @@ export class LockingService {
     }
 
     /**
-     * @param requestParameters
+     * @param roleId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1LockingReadUncommittedRoleIdPost(requestParameters: ApiV1LockingReadUncommittedRoleIdPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1LockingReadUncommittedRoleIdPost(requestParameters: ApiV1LockingReadUncommittedRoleIdPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1LockingReadUncommittedRoleIdPost(requestParameters: ApiV1LockingReadUncommittedRoleIdPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1LockingReadUncommittedRoleIdPost(requestParameters: ApiV1LockingReadUncommittedRoleIdPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const roleId = requestParameters?.roleId;
+    public apiV1LockingReadUncommittedRoleIdPost(roleId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1LockingReadUncommittedRoleIdPost(roleId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1LockingReadUncommittedRoleIdPost(roleId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1LockingReadUncommittedRoleIdPost(roleId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (roleId === null || roleId === undefined) {
             throw new Error('Required parameter roleId was null or undefined when calling apiV1LockingReadUncommittedRoleIdPost.');
         }
@@ -341,15 +314,14 @@ export class LockingService {
     }
 
     /**
-     * @param requestParameters
+     * @param roleId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1LockingRepeatableReadRoleIdPost(requestParameters: ApiV1LockingRepeatableReadRoleIdPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1LockingRepeatableReadRoleIdPost(requestParameters: ApiV1LockingRepeatableReadRoleIdPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1LockingRepeatableReadRoleIdPost(requestParameters: ApiV1LockingRepeatableReadRoleIdPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1LockingRepeatableReadRoleIdPost(requestParameters: ApiV1LockingRepeatableReadRoleIdPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const roleId = requestParameters?.roleId;
+    public apiV1LockingRepeatableReadRoleIdPost(roleId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1LockingRepeatableReadRoleIdPost(roleId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1LockingRepeatableReadRoleIdPost(roleId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1LockingRepeatableReadRoleIdPost(roleId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (roleId === null || roleId === undefined) {
             throw new Error('Required parameter roleId was null or undefined when calling apiV1LockingRepeatableReadRoleIdPost.');
         }
@@ -417,15 +389,14 @@ export class LockingService {
     }
 
     /**
-     * @param requestParameters
+     * @param roleId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1LockingRowLockRoleIdGet(requestParameters: ApiV1LockingRowLockRoleIdGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1LockingRowLockRoleIdGet(requestParameters: ApiV1LockingRowLockRoleIdGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1LockingRowLockRoleIdGet(requestParameters: ApiV1LockingRowLockRoleIdGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1LockingRowLockRoleIdGet(requestParameters: ApiV1LockingRowLockRoleIdGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const roleId = requestParameters?.roleId;
+    public apiV1LockingRowLockRoleIdGet(roleId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1LockingRowLockRoleIdGet(roleId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1LockingRowLockRoleIdGet(roleId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1LockingRowLockRoleIdGet(roleId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (roleId === null || roleId === undefined) {
             throw new Error('Required parameter roleId was null or undefined when calling apiV1LockingRowLockRoleIdGet.');
         }
@@ -493,15 +464,14 @@ export class LockingService {
     }
 
     /**
-     * @param requestParameters
+     * @param roleId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1LockingSerializationRoleIdPost(requestParameters: ApiV1LockingSerializationRoleIdPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1LockingSerializationRoleIdPost(requestParameters: ApiV1LockingSerializationRoleIdPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1LockingSerializationRoleIdPost(requestParameters: ApiV1LockingSerializationRoleIdPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1LockingSerializationRoleIdPost(requestParameters: ApiV1LockingSerializationRoleIdPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const roleId = requestParameters?.roleId;
+    public apiV1LockingSerializationRoleIdPost(roleId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1LockingSerializationRoleIdPost(roleId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1LockingSerializationRoleIdPost(roleId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1LockingSerializationRoleIdPost(roleId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (roleId === null || roleId === undefined) {
             throw new Error('Required parameter roleId was null or undefined when calling apiV1LockingSerializationRoleIdPost.');
         }

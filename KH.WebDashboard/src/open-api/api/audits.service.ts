@@ -28,25 +28,6 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface ApiV1AuditsExportUserAuditsUserIdGetRequestParams {
-    userId: string;
-    searchString?: string;
-    searchInOldValues?: boolean;
-    searchInNewValues?: boolean;
-}
-
-export interface ApiV1AuditsGetUserAuditsUserIdGetRequestParams {
-    userId: string;
-}
-
-export interface ApiV1AuditsImportExternalAuditPostRequestParams {
-    model?: string;
-    modelId?: number;
-    file?: Blob;
-    files?: Array<Blob>;
-    formData?: Array<StringStringValuesKeyValuePair>;
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -127,21 +108,20 @@ export class AuditsService {
     }
 
     /**
-     * @param requestParameters
+     * @param userId 
+     * @param searchString 
+     * @param searchInOldValues 
+     * @param searchInNewValues 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1AuditsExportUserAuditsUserIdGet(requestParameters: ApiV1AuditsExportUserAuditsUserIdGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1AuditsExportUserAuditsUserIdGet(requestParameters: ApiV1AuditsExportUserAuditsUserIdGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1AuditsExportUserAuditsUserIdGet(requestParameters: ApiV1AuditsExportUserAuditsUserIdGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1AuditsExportUserAuditsUserIdGet(requestParameters: ApiV1AuditsExportUserAuditsUserIdGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const userId = requestParameters?.userId;
+    public apiV1AuditsExportUserAuditsUserIdGet(userId: string, searchString?: string, searchInOldValues?: boolean, searchInNewValues?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1AuditsExportUserAuditsUserIdGet(userId: string, searchString?: string, searchInOldValues?: boolean, searchInNewValues?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1AuditsExportUserAuditsUserIdGet(userId: string, searchString?: string, searchInOldValues?: boolean, searchInNewValues?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1AuditsExportUserAuditsUserIdGet(userId: string, searchString?: string, searchInOldValues?: boolean, searchInNewValues?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (userId === null || userId === undefined) {
             throw new Error('Required parameter userId was null or undefined when calling apiV1AuditsExportUserAuditsUserIdGet.');
         }
-        const searchString = requestParameters?.searchString;
-        const searchInOldValues = requestParameters?.searchInOldValues;
-        const searchInNewValues = requestParameters?.searchInNewValues;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (searchString !== undefined && searchString !== null) {
@@ -221,15 +201,14 @@ export class AuditsService {
     }
 
     /**
-     * @param requestParameters
+     * @param userId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1AuditsGetUserAuditsUserIdGet(requestParameters: ApiV1AuditsGetUserAuditsUserIdGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<AuditResponseListApiResponse>;
-    public apiV1AuditsGetUserAuditsUserIdGet(requestParameters: ApiV1AuditsGetUserAuditsUserIdGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<AuditResponseListApiResponse>>;
-    public apiV1AuditsGetUserAuditsUserIdGet(requestParameters: ApiV1AuditsGetUserAuditsUserIdGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<AuditResponseListApiResponse>>;
-    public apiV1AuditsGetUserAuditsUserIdGet(requestParameters: ApiV1AuditsGetUserAuditsUserIdGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const userId = requestParameters?.userId;
+    public apiV1AuditsGetUserAuditsUserIdGet(userId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<AuditResponseListApiResponse>;
+    public apiV1AuditsGetUserAuditsUserIdGet(userId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<AuditResponseListApiResponse>>;
+    public apiV1AuditsGetUserAuditsUserIdGet(userId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<AuditResponseListApiResponse>>;
+    public apiV1AuditsGetUserAuditsUserIdGet(userId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (userId === null || userId === undefined) {
             throw new Error('Required parameter userId was null or undefined when calling apiV1AuditsGetUserAuditsUserIdGet.');
         }
@@ -300,19 +279,18 @@ export class AuditsService {
     }
 
     /**
-     * @param requestParameters
+     * @param model 
+     * @param modelId 
+     * @param file 
+     * @param files 
+     * @param formData 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1AuditsImportExternalAuditPost(requestParameters?: ApiV1AuditsImportExternalAuditPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1AuditsImportExternalAuditPost(requestParameters?: ApiV1AuditsImportExternalAuditPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1AuditsImportExternalAuditPost(requestParameters?: ApiV1AuditsImportExternalAuditPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1AuditsImportExternalAuditPost(requestParameters?: ApiV1AuditsImportExternalAuditPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const model = requestParameters?.model;
-        const modelId = requestParameters?.modelId;
-        const file = requestParameters?.file;
-        const files = requestParameters?.files;
-        const formData = requestParameters?.formData;
+    public apiV1AuditsImportExternalAuditPost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1AuditsImportExternalAuditPost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1AuditsImportExternalAuditPost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1AuditsImportExternalAuditPost(model?: string, modelId?: number, file?: Blob, files?: Array<Blob>, formData?: Array<StringStringValuesKeyValuePair>, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 

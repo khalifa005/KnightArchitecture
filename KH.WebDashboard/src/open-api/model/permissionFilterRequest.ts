@@ -10,11 +10,11 @@
 
 
 export interface PermissionFilterRequest { 
-    PageIndex?: number;
-    PageSize?: number;
-    Sort?: string | null;
-    Search?: string | null;
-    RoleIds?: Array<number> | null;
-    IsDeleted?: boolean | null;
+    pageIndex?: number;
+    pageSize?: number;
+    sort?: string | null;
+    search?: string | null;
+    roleIds?: Array<number> | null;
+    isDeleted?: boolean | null;
 }
 

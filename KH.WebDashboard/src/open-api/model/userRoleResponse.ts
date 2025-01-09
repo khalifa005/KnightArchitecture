@@ -12,9 +12,9 @@ import { RoleResponse } from './roleResponse';
 
 
 export interface UserRoleResponse { 
-    UserId?: number;
-    RoleId?: number;
-    Role?: RoleResponse;
-    RoleFunctions?: Array<RolesPermissionResponse> | null;
+    userId?: number;
+    roleId?: number;
+    role?: RoleResponse;
+    roleFunctions?: Array<RolesPermissionResponse> | null;
 }
 

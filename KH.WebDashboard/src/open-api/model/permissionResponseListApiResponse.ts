@@ -11,11 +11,11 @@ import { PermissionResponse } from './permissionResponse';
 
 
 export interface PermissionResponseListApiResponse { 
-    Data?: Array<PermissionResponse> | null;
-    StatusCode?: number;
-    Errors?: Array<string> | null;
-    ErrorMessage?: string | null;
-    ErrorCode?: string | null;
-    ErrorMessageAr?: string | null;
+    data?: Array<PermissionResponse> | null;
+    statusCode?: number;
+    errors?: Array<string> | null;
+    errorMessage?: string | null;
+    errorCode?: string | null;
+    errorMessageAr?: string | null;
 }
 

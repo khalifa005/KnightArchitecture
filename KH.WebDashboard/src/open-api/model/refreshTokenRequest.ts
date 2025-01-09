@@ -10,6 +10,6 @@
 
 
 export interface RefreshTokenRequest { 
-    RefreshToken?: string | null;
+    refreshToken?: string | null;
 }
 

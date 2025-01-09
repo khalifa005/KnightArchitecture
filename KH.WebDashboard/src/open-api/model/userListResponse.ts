@@ -11,21 +11,21 @@ import { UserRoleResponse } from './userRoleResponse';
 
 
 export interface UserListResponse { 
-    Id?: number | null;
-    CreatedDate?: string;
-    CreatedById?: number | null;
-    UpdatedDate?: string | null;
-    UpdatedById?: number | null;
-    IsDeleted?: boolean;
-    DeletedDate?: string | null;
-    DeletedById?: number | null;
-    FirstName?: string | null;
-    LastName?: string | null;
-    Email?: string | null;
-    Username?: string | null;
-    BirthDate?: string | null;
-    MobileNumber?: string | null;
-    DepartmentNames?: Array<string> | null;
-    UserRoles?: Array<UserRoleResponse> | null;
+    id?: number | null;
+    createdDate?: string;
+    createdById?: number | null;
+    updatedDate?: string | null;
+    updatedById?: number | null;
+    isDeleted?: boolean;
+    deletedDate?: string | null;
+    deletedById?: number | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    email?: string | null;
+    username?: string | null;
+    birthDate?: string | null;
+    mobileNumber?: string | null;
+    departmentNames?: Array<string> | null;
+    userRoles?: Array<UserRoleResponse> | null;
 }
 

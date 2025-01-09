@@ -10,19 +10,19 @@
 
 
 export interface GroupFilterRequest { 
-    PageIndex?: number;
-    PageSize?: number;
-    Sort?: string | null;
-    Search?: string | null;
-    Id?: number | null;
-    NameEn?: string | null;
-    NameAr?: string | null;
-    Description?: string | null;
-    Model?: string | null;
-    ModelId?: number | null;
-    IsDeleted?: boolean | null;
-    IsSent?: boolean;
-    RequestFromCustomerPortal?: boolean | null;
-    TicketCategoryId?: number | null;
+    pageIndex?: number;
+    pageSize?: number;
+    sort?: string | null;
+    search?: string | null;
+    id?: number | null;
+    nameEn?: string | null;
+    nameAr?: string | null;
+    description?: string | null;
+    model?: string | null;
+    modelId?: number | null;
+    isDeleted?: boolean | null;
+    isSent?: boolean;
+    requestFromCustomerPortal?: boolean | null;
+    ticketCategoryId?: number | null;
 }
 

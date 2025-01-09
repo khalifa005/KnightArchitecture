@@ -10,7 +10,7 @@
 
 
 export interface UpdatedRolePermissionsRequest { 
-    Id?: number;
-    RolePermissionsIds?: Array<number> | null;
+    id?: number;
+    rolePermissionsIds?: Array<number> | null;
 }
 

@@ -10,15 +10,15 @@
 
 
 export interface EmailTrackerResponse { 
-    Id?: number | null;
-    Model?: string | null;
-    ModelId?: number;
-    ToEmail?: string | null;
-    ToCCEmail?: string | null;
-    Subject?: string | null;
-    Body?: string | null;
-    MailType?: string | null;
-    IsSent?: boolean;
-    FailReasons?: string | null;
+    id?: number | null;
+    model?: string | null;
+    modelId?: number;
+    toEmail?: string | null;
+    toCCEmail?: string | null;
+    subject?: string | null;
+    body?: string | null;
+    mailType?: string | null;
+    isSent?: boolean;
+    failReasons?: string | null;
 }
 

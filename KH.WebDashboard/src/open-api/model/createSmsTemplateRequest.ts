@@ -10,9 +10,9 @@
 
 
 export interface CreateSmsTemplateRequest { 
-    Id?: number | null;
-    SmsType?: string | null;
-    TextEn?: string | null;
-    TextAr?: string | null;
+    id?: number | null;
+    smsType?: string | null;
+    textEn?: string | null;
+    textAr?: string | null;
 }
 

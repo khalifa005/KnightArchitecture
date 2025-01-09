@@ -11,11 +11,11 @@ import { UserListResponsePagedList } from './userListResponsePagedList';
 
 
 export interface UserListResponsePagedListApiResponse { 
-    Data?: UserListResponsePagedList;
-    StatusCode?: number;
-    Errors?: Array<string> | null;
-    ErrorMessage?: string | null;
-    ErrorCode?: string | null;
-    ErrorMessageAr?: string | null;
+    data?: UserListResponsePagedList;
+    statusCode?: number;
+    errors?: Array<string> | null;
+    errorMessage?: string | null;
+    errorCode?: string | null;
+    errorMessageAr?: string | null;
 }
 

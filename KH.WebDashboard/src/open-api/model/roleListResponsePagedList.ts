@@ -11,10 +11,10 @@ import { RoleListResponse } from './roleListResponse';
 
 
 export interface RoleListResponsePagedList { 
-    CurrentPage?: number;
-    TotalPages?: number;
-    PageSize?: number;
-    TotalCount?: number;
-    Items?: Array<RoleListResponse> | null;
+    currentPage?: number;
+    totalPages?: number;
+    pageSize?: number;
+    totalCount?: number;
+    items?: Array<RoleListResponse> | null;
 }
 

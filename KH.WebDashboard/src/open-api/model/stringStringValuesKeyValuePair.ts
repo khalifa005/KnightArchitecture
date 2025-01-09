@@ -10,7 +10,7 @@
 
 
 export interface StringStringValuesKeyValuePair { 
-    Key?: string | null;
-    Value?: Array<string>;
+    key?: string | null;
+    value?: Array<string>;
 }
 

@@ -10,14 +10,14 @@
 
 
 export interface PermissionResponse { 
-    Id?: number;
-    Key?: string | null;
-    NameEn?: string | null;
-    NameAr?: string | null;
-    Disabled?: boolean;
-    Checked?: boolean;
-    Childrens?: Array<PermissionResponse> | null;
-    SortKey?: number;
-    ParentId?: number | null;
+    id?: number;
+    key?: string | null;
+    nameEn?: string | null;
+    nameAr?: string | null;
+    disabled?: boolean;
+    checked?: boolean;
+    childrens?: Array<PermissionResponse> | null;
+    sortKey?: number;
+    parentId?: number | null;
 }
 

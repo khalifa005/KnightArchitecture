@@ -32,31 +32,6 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface ApiV1EmailIdGetRequestParams {
-    id: number;
-}
-
-export interface ApiV1EmailListPostRequestParams {
-    mailRequest?: MailRequest;
-}
-
-export interface ApiV1EmailSendPostRequestParams {
-    toEmail?: Array<string>;
-    toCCEmail?: Array<string>;
-    subject?: string;
-    body?: string;
-    attachments?: Array<Blob>;
-    mailType?: MailTypeEnum;
-    modelId?: number;
-    model?: string;
-    prefaredLanguageKey?: string;
-    isSent?: boolean;
-    pageIndex?: number;
-    pageSize?: number;
-    sort?: string;
-    search?: string;
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -137,15 +112,14 @@ export class EmailService {
     }
 
     /**
-     * @param requestParameters
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1EmailIdGet(requestParameters: ApiV1EmailIdGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<EmailTrackerResponseApiResponse>;
-    public apiV1EmailIdGet(requestParameters: ApiV1EmailIdGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<EmailTrackerResponseApiResponse>>;
-    public apiV1EmailIdGet(requestParameters: ApiV1EmailIdGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<EmailTrackerResponseApiResponse>>;
-    public apiV1EmailIdGet(requestParameters: ApiV1EmailIdGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const id = requestParameters?.id;
+    public apiV1EmailIdGet(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<EmailTrackerResponseApiResponse>;
+    public apiV1EmailIdGet(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<EmailTrackerResponseApiResponse>>;
+    public apiV1EmailIdGet(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<EmailTrackerResponseApiResponse>>;
+    public apiV1EmailIdGet(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling apiV1EmailIdGet.');
         }
@@ -216,15 +190,14 @@ export class EmailService {
     }
 
     /**
-     * @param requestParameters
+     * @param mailRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1EmailListPost(requestParameters?: ApiV1EmailListPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<EmailTrackerResponsePagedListApiResponse>;
-    public apiV1EmailListPost(requestParameters?: ApiV1EmailListPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<EmailTrackerResponsePagedListApiResponse>>;
-    public apiV1EmailListPost(requestParameters?: ApiV1EmailListPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<EmailTrackerResponsePagedListApiResponse>>;
-    public apiV1EmailListPost(requestParameters?: ApiV1EmailListPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const mailRequest = requestParameters?.mailRequest;
+    public apiV1EmailListPost(mailRequest?: MailRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<EmailTrackerResponsePagedListApiResponse>;
+    public apiV1EmailListPost(mailRequest?: MailRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<EmailTrackerResponsePagedListApiResponse>>;
+    public apiV1EmailListPost(mailRequest?: MailRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<EmailTrackerResponsePagedListApiResponse>>;
+    public apiV1EmailListPost(mailRequest?: MailRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -305,28 +278,27 @@ export class EmailService {
     }
 
     /**
-     * @param requestParameters
+     * @param toEmail 
+     * @param toCCEmail 
+     * @param subject 
+     * @param body 
+     * @param attachments 
+     * @param mailType 
+     * @param modelId 
+     * @param model 
+     * @param prefaredLanguageKey 
+     * @param isSent 
+     * @param pageIndex 
+     * @param pageSize 
+     * @param sort 
+     * @param search 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1EmailSendPost(requestParameters?: ApiV1EmailSendPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
-    public apiV1EmailSendPost(requestParameters?: ApiV1EmailSendPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
-    public apiV1EmailSendPost(requestParameters?: ApiV1EmailSendPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
-    public apiV1EmailSendPost(requestParameters?: ApiV1EmailSendPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const toEmail = requestParameters?.toEmail;
-        const toCCEmail = requestParameters?.toCCEmail;
-        const subject = requestParameters?.subject;
-        const body = requestParameters?.body;
-        const attachments = requestParameters?.attachments;
-        const mailType = requestParameters?.mailType;
-        const modelId = requestParameters?.modelId;
-        const model = requestParameters?.model;
-        const prefaredLanguageKey = requestParameters?.prefaredLanguageKey;
-        const isSent = requestParameters?.isSent;
-        const pageIndex = requestParameters?.pageIndex;
-        const pageSize = requestParameters?.pageSize;
-        const sort = requestParameters?.sort;
-        const search = requestParameters?.search;
+    public apiV1EmailSendPost(toEmail?: Array<string>, toCCEmail?: Array<string>, subject?: string, body?: string, attachments?: Array<Blob>, mailType?: MailTypeEnum, modelId?: number, model?: string, prefaredLanguageKey?: string, isSent?: boolean, pageIndex?: number, pageSize?: number, sort?: string, search?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<StringApiResponse>;
+    public apiV1EmailSendPost(toEmail?: Array<string>, toCCEmail?: Array<string>, subject?: string, body?: string, attachments?: Array<Blob>, mailType?: MailTypeEnum, modelId?: number, model?: string, prefaredLanguageKey?: string, isSent?: boolean, pageIndex?: number, pageSize?: number, sort?: string, search?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<StringApiResponse>>;
+    public apiV1EmailSendPost(toEmail?: Array<string>, toCCEmail?: Array<string>, subject?: string, body?: string, attachments?: Array<Blob>, mailType?: MailTypeEnum, modelId?: number, model?: string, prefaredLanguageKey?: string, isSent?: boolean, pageIndex?: number, pageSize?: number, sort?: string, search?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<StringApiResponse>>;
+    public apiV1EmailSendPost(toEmail?: Array<string>, toCCEmail?: Array<string>, subject?: string, body?: string, attachments?: Array<Blob>, mailType?: MailTypeEnum, modelId?: number, model?: string, prefaredLanguageKey?: string, isSent?: boolean, pageIndex?: number, pageSize?: number, sort?: string, search?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 

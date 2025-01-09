@@ -11,8 +11,8 @@ import { GroupResponse } from './groupResponse';
 
 
 export interface UserGroupResponse { 
-    UserId?: number;
-    GroupId?: number;
-    Group?: GroupResponse;
+    userId?: number;
+    groupId?: number;
+    group?: GroupResponse;
 }
 

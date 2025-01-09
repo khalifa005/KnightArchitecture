@@ -11,10 +11,10 @@ import { EmailTrackerResponse } from './emailTrackerResponse';
 
 
 export interface EmailTrackerResponsePagedList { 
-    CurrentPage?: number;
-    TotalPages?: number;
-    PageSize?: number;
-    TotalCount?: number;
-    Items?: Array<EmailTrackerResponse> | null;
+    currentPage?: number;
+    totalPages?: number;
+    pageSize?: number;
+    totalCount?: number;
+    items?: Array<EmailTrackerResponse> | null;
 }
 

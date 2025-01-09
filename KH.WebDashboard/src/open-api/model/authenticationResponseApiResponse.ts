@@ -11,11 +11,11 @@ import { AuthenticationResponse } from './authenticationResponse';
 
 
 export interface AuthenticationResponseApiResponse { 
-    Data?: AuthenticationResponse;
-    StatusCode?: number;
-    Errors?: Array<string> | null;
-    ErrorMessage?: string | null;
-    ErrorCode?: string | null;
-    ErrorMessageAr?: string | null;
+    data?: AuthenticationResponse;
+    statusCode?: number;
+    errors?: Array<string> | null;
+    errorMessage?: string | null;
+    errorCode?: string | null;
+    errorMessageAr?: string | null;
 }
 

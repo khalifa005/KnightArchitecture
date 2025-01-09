@@ -11,11 +11,11 @@ import { UserDetailsResponse } from './userDetailsResponse';
 
 
 export interface UserDetailsResponseApiResponse { 
-    Data?: UserDetailsResponse;
-    StatusCode?: number;
-    Errors?: Array<string> | null;
-    ErrorMessage?: string | null;
-    ErrorCode?: string | null;
-    ErrorMessageAr?: string | null;
+    data?: UserDetailsResponse;
+    statusCode?: number;
+    errors?: Array<string> | null;
+    errorMessage?: string | null;
+    errorCode?: string | null;
+    errorMessageAr?: string | null;
 }
 

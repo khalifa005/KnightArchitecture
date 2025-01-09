@@ -10,17 +10,17 @@
 
 
 export interface GroupResponse { 
-    Id?: number | null;
-    CreatedDate?: string;
-    CreatedById?: number | null;
-    UpdatedDate?: string | null;
-    UpdatedById?: number | null;
-    IsDeleted?: boolean;
-    DeletedDate?: string | null;
-    DeletedById?: number | null;
-    NameAr?: string | null;
-    NameEn?: string | null;
-    Description?: string | null;
-    TicketCategoryId?: number | null;
+    id?: number | null;
+    createdDate?: string;
+    createdById?: number | null;
+    updatedDate?: string | null;
+    updatedById?: number | null;
+    isDeleted?: boolean;
+    deletedDate?: string | null;
+    deletedById?: number | null;
+    nameAr?: string | null;
+    nameEn?: string | null;
+    description?: string | null;
+    ticketCategoryId?: number | null;
 }
 

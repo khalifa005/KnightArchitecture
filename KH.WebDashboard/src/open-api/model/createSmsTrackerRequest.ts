@@ -10,14 +10,14 @@
 
 
 export interface CreateSmsTrackerRequest { 
-    Id?: number | null;
-    MobileNumber?: string | null;
-    Message?: string | null;
-    IsSent?: boolean | null;
-    IsPending?: boolean;
-    FailureReasons?: string | null;
-    Status?: string | null;
-    Model?: string | null;
-    ModelId?: number;
+    id?: number | null;
+    mobileNumber?: string | null;
+    message?: string | null;
+    isSent?: boolean | null;
+    isPending?: boolean;
+    failureReasons?: string | null;
+    status?: string | null;
+    model?: string | null;
+    modelId?: number;
 }
 

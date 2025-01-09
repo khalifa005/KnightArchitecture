@@ -24,22 +24,6 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface ApiV1PdfInvoicePDFTemplateFromHTMLPostRequestParams {
-    userFilterRequest?: UserFilterRequest;
-}
-
-export interface ApiV1PdfInvoicePDFTemplateWithQuestPostRequestParams {
-    userFilterRequest?: UserFilterRequest;
-}
-
-export interface ApiV1PdfMergeMultiplePdfsWithSharpPostRequestParams {
-    files?: Array<Blob>;
-}
-
-export interface ApiV1PdfWelcomePDFTemplateFromHTMLPostRequestParams {
-    userFilterRequest?: UserFilterRequest;
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -191,15 +175,14 @@ export class PdfService {
     }
 
     /**
-     * @param requestParameters
+     * @param userFilterRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1PdfInvoicePDFTemplateFromHTMLPost(requestParameters?: ApiV1PdfInvoicePDFTemplateFromHTMLPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1PdfInvoicePDFTemplateFromHTMLPost(requestParameters?: ApiV1PdfInvoicePDFTemplateFromHTMLPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1PdfInvoicePDFTemplateFromHTMLPost(requestParameters?: ApiV1PdfInvoicePDFTemplateFromHTMLPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1PdfInvoicePDFTemplateFromHTMLPost(requestParameters?: ApiV1PdfInvoicePDFTemplateFromHTMLPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const userFilterRequest = requestParameters?.userFilterRequest;
+    public apiV1PdfInvoicePDFTemplateFromHTMLPost(userFilterRequest?: UserFilterRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1PdfInvoicePDFTemplateFromHTMLPost(userFilterRequest?: UserFilterRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1PdfInvoicePDFTemplateFromHTMLPost(userFilterRequest?: UserFilterRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1PdfInvoicePDFTemplateFromHTMLPost(userFilterRequest?: UserFilterRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -277,15 +260,14 @@ export class PdfService {
     }
 
     /**
-     * @param requestParameters
+     * @param userFilterRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1PdfInvoicePDFTemplateWithQuestPost(requestParameters?: ApiV1PdfInvoicePDFTemplateWithQuestPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1PdfInvoicePDFTemplateWithQuestPost(requestParameters?: ApiV1PdfInvoicePDFTemplateWithQuestPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1PdfInvoicePDFTemplateWithQuestPost(requestParameters?: ApiV1PdfInvoicePDFTemplateWithQuestPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1PdfInvoicePDFTemplateWithQuestPost(requestParameters?: ApiV1PdfInvoicePDFTemplateWithQuestPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const userFilterRequest = requestParameters?.userFilterRequest;
+    public apiV1PdfInvoicePDFTemplateWithQuestPost(userFilterRequest?: UserFilterRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1PdfInvoicePDFTemplateWithQuestPost(userFilterRequest?: UserFilterRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1PdfInvoicePDFTemplateWithQuestPost(userFilterRequest?: UserFilterRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1PdfInvoicePDFTemplateWithQuestPost(userFilterRequest?: UserFilterRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -363,15 +345,14 @@ export class PdfService {
     }
 
     /**
-     * @param requestParameters
+     * @param files 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1PdfMergeMultiplePdfsWithSharpPost(requestParameters?: ApiV1PdfMergeMultiplePdfsWithSharpPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1PdfMergeMultiplePdfsWithSharpPost(requestParameters?: ApiV1PdfMergeMultiplePdfsWithSharpPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1PdfMergeMultiplePdfsWithSharpPost(requestParameters?: ApiV1PdfMergeMultiplePdfsWithSharpPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1PdfMergeMultiplePdfsWithSharpPost(requestParameters?: ApiV1PdfMergeMultiplePdfsWithSharpPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const files = requestParameters?.files;
+    public apiV1PdfMergeMultiplePdfsWithSharpPost(files?: Array<Blob>, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1PdfMergeMultiplePdfsWithSharpPost(files?: Array<Blob>, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1PdfMergeMultiplePdfsWithSharpPost(files?: Array<Blob>, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1PdfMergeMultiplePdfsWithSharpPost(files?: Array<Blob>, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -461,15 +442,14 @@ export class PdfService {
     }
 
     /**
-     * @param requestParameters
+     * @param userFilterRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiV1PdfWelcomePDFTemplateFromHTMLPost(requestParameters?: ApiV1PdfWelcomePDFTemplateFromHTMLPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
-    public apiV1PdfWelcomePDFTemplateFromHTMLPost(requestParameters?: ApiV1PdfWelcomePDFTemplateFromHTMLPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
-    public apiV1PdfWelcomePDFTemplateFromHTMLPost(requestParameters?: ApiV1PdfWelcomePDFTemplateFromHTMLPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
-    public apiV1PdfWelcomePDFTemplateFromHTMLPost(requestParameters?: ApiV1PdfWelcomePDFTemplateFromHTMLPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        const userFilterRequest = requestParameters?.userFilterRequest;
+    public apiV1PdfWelcomePDFTemplateFromHTMLPost(userFilterRequest?: UserFilterRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any>;
+    public apiV1PdfWelcomePDFTemplateFromHTMLPost(userFilterRequest?: UserFilterRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<any>>;
+    public apiV1PdfWelcomePDFTemplateFromHTMLPost(userFilterRequest?: UserFilterRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<any>>;
+    public apiV1PdfWelcomePDFTemplateFromHTMLPost(userFilterRequest?: UserFilterRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 

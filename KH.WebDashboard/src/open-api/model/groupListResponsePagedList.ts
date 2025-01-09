@@ -11,10 +11,10 @@ import { GroupListResponse } from './groupListResponse';
 
 
 export interface GroupListResponsePagedList { 
-    CurrentPage?: number;
-    TotalPages?: number;
-    PageSize?: number;
-    TotalCount?: number;
-    Items?: Array<GroupListResponse> | null;
+    currentPage?: number;
+    totalPages?: number;
+    pageSize?: number;
+    totalCount?: number;
+    items?: Array<GroupListResponse> | null;
 }
 

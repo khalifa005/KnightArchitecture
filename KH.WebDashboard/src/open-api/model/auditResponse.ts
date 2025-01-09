@@ -10,14 +10,14 @@
 
 
 export interface AuditResponse { 
-    Id?: number;
-    UserId?: string | null;
-    Type?: string | null;
-    TableName?: string | null;
-    DateTime?: string | null;
-    OldValues?: string | null;
-    NewValues?: string | null;
-    AffectedColumns?: string | null;
-    PrimaryKey?: string | null;
+    id?: number;
+    userId?: string | null;
+    type?: string | null;
+    tableName?: string | null;
+    dateTime?: string | null;
+    oldValues?: string | null;
+    newValues?: string | null;
+    affectedColumns?: string | null;
+    primaryKey?: string | null;
 }
 

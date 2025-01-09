@@ -11,9 +11,9 @@ import { UserRoleResponse } from './userRoleResponse';
 
 
 export interface AuthenticationResponse { 
-    AccessToken?: string | null;
-    RefreshToken?: string | null;
-    NeedVerification?: boolean | null;
-    UserRoles?: Array<UserRoleResponse> | null;
+    accessToken?: string | null;
+    refreshToken?: string | null;
+    needVerification?: boolean | null;
+    userRoles?: Array<UserRoleResponse> | null;
 }
 

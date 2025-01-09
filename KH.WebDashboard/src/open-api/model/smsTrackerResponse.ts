@@ -10,20 +10,20 @@
 
 
 export interface SmsTrackerResponse { 
-    Id?: number | null;
-    CreatedDate?: string;
-    CreatedById?: number | null;
-    UpdatedDate?: string | null;
-    UpdatedById?: number | null;
-    IsDeleted?: boolean;
-    DeletedDate?: string | null;
-    DeletedById?: number | null;
-    MobileNumber?: string | null;
-    Message?: string | null;
-    IsSent?: boolean | null;
-    FailureReasons?: string | null;
-    Status?: string | null;
-    Model?: string | null;
-    ModelId?: number;
+    id?: number | null;
+    createdDate?: string;
+    createdById?: number | null;
+    updatedDate?: string | null;
+    updatedById?: number | null;
+    isDeleted?: boolean;
+    deletedDate?: string | null;
+    deletedById?: number | null;
+    mobileNumber?: string | null;
+    message?: string | null;
+    isSent?: boolean | null;
+    failureReasons?: string | null;
+    status?: string | null;
+    model?: string | null;
+    modelId?: number;
 }
 

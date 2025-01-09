@@ -11,10 +11,10 @@ import { PermissionResponse } from './permissionResponse';
 
 
 export interface PermissionResponsePagedList { 
-    CurrentPage?: number;
-    TotalPages?: number;
-    PageSize?: number;
-    TotalCount?: number;
-    Items?: Array<PermissionResponse> | null;
+    currentPage?: number;
+    totalPages?: number;
+    pageSize?: number;
+    totalCount?: number;
+    items?: Array<PermissionResponse> | null;
 }
 

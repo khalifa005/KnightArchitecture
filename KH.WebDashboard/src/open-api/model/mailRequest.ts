@@ -11,20 +11,20 @@ import { MailTypeEnum } from './mailTypeEnum';
 
 
 export interface MailRequest { 
-    PageIndex?: number;
-    PageSize?: number;
-    Sort?: string | null;
-    Search?: string | null;
-    ToEmail?: Array<string> | null;
-    ToCCEmail?: Array<string> | null;
-    Subject?: string | null;
-    Body?: string | null;
-    Attachments?: Array<Blob> | null;
-    MailType?: MailTypeEnum;
-    ModelId?: number;
-    Model?: string | null;
-    PrefaredLanguageKey?: string | null;
-    IsSent?: boolean;
+    pageIndex?: number;
+    pageSize?: number;
+    sort?: string | null;
+    search?: string | null;
+    toEmail?: Array<string> | null;
+    toCCEmail?: Array<string> | null;
+    subject?: string | null;
+    body?: string | null;
+    attachments?: Array<Blob> | null;
+    mailType?: MailTypeEnum;
+    modelId?: number;
+    model?: string | null;
+    prefaredLanguageKey?: string | null;
+    isSent?: boolean;
 }
 export namespace MailRequest {
 }

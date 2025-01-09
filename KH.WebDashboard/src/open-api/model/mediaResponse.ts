@@ -10,23 +10,23 @@
 
 
 export interface MediaResponse { 
-    Id?: number | null;
-    CreatedDate?: string;
-    CreatedById?: number | null;
-    UpdatedDate?: string | null;
-    UpdatedById?: number | null;
-    IsDeleted?: boolean;
-    DeletedDate?: string | null;
-    DeletedById?: number | null;
-    FileContentResult?: Blob | null;
-    IsValidToDownload?: boolean;
-    Message?: string | null;
-    FileName?: string | null;
-    OrignalName?: string | null;
-    FileExtention?: string | null;
-    ContentType?: string | null;
-    Model?: string | null;
-    ModelId?: number | null;
-    FilePath?: string | null;
+    id?: number | null;
+    createdDate?: string;
+    createdById?: number | null;
+    updatedDate?: string | null;
+    updatedById?: number | null;
+    isDeleted?: boolean;
+    deletedDate?: string | null;
+    deletedById?: number | null;
+    fileContentResult?: Blob | null;
+    isValidToDownload?: boolean;
+    message?: string | null;
+    fileName?: string | null;
+    orignalName?: string | null;
+    fileExtention?: string | null;
+    contentType?: string | null;
+    model?: string | null;
+    modelId?: number | null;
+    filePath?: string | null;
 }
 

@@ -11,11 +11,11 @@ import { SmsTemplateResponsePagedList } from './smsTemplateResponsePagedList';
 
 
 export interface SmsTemplateResponsePagedListApiResponse { 
-    Data?: SmsTemplateResponsePagedList;
-    StatusCode?: number;
-    Errors?: Array<string> | null;
-    ErrorMessage?: string | null;
-    ErrorCode?: string | null;
-    ErrorMessageAr?: string | null;
+    data?: SmsTemplateResponsePagedList;
+    statusCode?: number;
+    errors?: Array<string> | null;
+    errorMessage?: string | null;
+    errorCode?: string | null;
+    errorMessageAr?: string | null;
 }
 

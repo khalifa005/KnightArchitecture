@@ -11,10 +11,10 @@ import { UserListResponse } from './userListResponse';
 
 
 export interface UserListResponsePagedList { 
-    CurrentPage?: number;
-    TotalPages?: number;
-    PageSize?: number;
-    TotalCount?: number;
-    Items?: Array<UserListResponse> | null;
+    currentPage?: number;
+    totalPages?: number;
+    pageSize?: number;
+    totalCount?: number;
+    items?: Array<UserListResponse> | null;
 }
 

@@ -10,15 +10,15 @@
 
 
 export interface SmsTrackerFilterRequest { 
-    PageIndex?: number;
-    PageSize?: number;
-    Sort?: string | null;
-    Search?: string | null;
-    Id?: number | null;
-    Status?: string | null;
-    IsSent?: boolean;
-    IsDeleted?: boolean;
-    ModelId?: number | null;
-    Model?: string | null;
+    pageIndex?: number;
+    pageSize?: number;
+    sort?: string | null;
+    search?: string | null;
+    id?: number | null;
+    status?: string | null;
+    isSent?: boolean;
+    isDeleted?: boolean;
+    modelId?: number | null;
+    model?: string | null;
 }
 
