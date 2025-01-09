@@ -16,6 +16,10 @@
     "notFound": "غير موجود",
     "userManagement": "إدارة المستخدمين",
     "permissions": "الأذونات",
+	"departments": "Departments",
+	"chat": "Chat",
+	"cchat": "ChatBot",
+
     "users": "المستخدمون"
   },
   "TABLE": {

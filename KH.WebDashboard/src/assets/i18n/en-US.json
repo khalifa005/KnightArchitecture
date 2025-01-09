@@ -16,6 +16,9 @@
 		"notFound": "Not Found",
 		"userManagement": "User Management",
 		"permissions": "Permissions",
+		"departments": "Departments",
+		"chat": "Chat",
+		"cchat": "ChatBot",
 		"users": "Users"
 	},
 	"TABLE": {

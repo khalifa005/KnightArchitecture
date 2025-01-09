@@ -22,19 +22,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'sideMenu.chat',
-    icon: 'user-outline',
+    icon: 'message-square-outline',
     link: '/pages/chat',
     data: {
-      translationKey: 'sideMenu.chat',
+      translationKey: 'sideMenu.cchat',
       permissionKey: '',
     },
   },
   {
     title: 'sideMenu.cchat',
-    icon: 'user-outline',
+    icon: 'message-circle-outline',
     link: '/pages/cchat',
     data: {
-      translationKey: 'sideMenu.cchat',
+      translationKey: 'sideMenu.chat',
       permissionKey: '',
     },
   },
