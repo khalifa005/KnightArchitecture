@@ -100,7 +100,7 @@ public class RolesController : BaseApiController
   }
 
 
-  [HttpPut("UpdateRolePermissions")]
+  [HttpPut("UpdateRolePermissions", Name = "UpdateRolePermissions")]
   [PermissionAuthorize(PermissionKeysConstant.Roles.EDIT_ROLE)]
   public async Task<ActionResult<ApiResponse<string>>> UpdateRolePermissionsAsync([FromBody] UpdatedRolePermissionsRequest request, CancellationToken cancellationToken)
   {
@@ -108,8 +108,17 @@ public class RolesController : BaseApiController
     return AsActionResult(res);
   }
 
+  /// <summary>
+  /// Delete a role by its ID.
+  /// </summary>
+  /// <param name="id">The ID of the role.</param>
+  /// <returns>The role id.</returns>
 
-  [HttpDelete("{id}")]
+  [HttpDelete("{id}", Name = "DeleteRoleById")]
+  [Consumes("application/json")]
+  [Produces("application/json")]
+  //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ApiResponse<RoleResponse>))]
+
   public async Task<ActionResult<ApiResponse<string>>> Delete(int id, CancellationToken cancellationToken)
   {
     var res = await _lookupService.DeleteAsync(id, cancellationToken);

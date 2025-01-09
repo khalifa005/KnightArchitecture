@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ThemeModule } from './@theme/theme.module';
 import { NbChatModule, NbDatepickerModule, NbDialogModule, NbIconLibraries, NbMenuModule, NbSidebarModule, NbToastrModule, NbWindowModule } from '@nebular/theme';
-import { HTTP_INTERCEPTORS, HttpClient, HttpRequest, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpRequest, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { StoreModule } from '@ngrx/store';
@@ -58,6 +58,14 @@ function filterInterceptorRequest(req: HttpRequest<any>): boolean {
     .some(url => req.url.includes(url));
 }
 
+// export function apiConfigFactory(): Configuration {
+//   const params: ConfigurationParameters = {
+//     basePath: environment.apiBaseUrlWithoutApiVersion,
+//   };
+//   return new Configuration(params);
+// }
+
+
 // export function tokenGetter() {
 //   return localStorage.getItem('access_token');
 // }
@@ -76,9 +84,9 @@ function filterInterceptorRequest(req: HttpRequest<any>): boolean {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    // ApiModule.forRoot(apiConfigFactory),
     NgxPermissionsModule.forRoot(),
     CoreModule.forRoot(),
-    // NbChatModule.forRoot({ messageGoogleMapKey: 'MAP_KEY' }),
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),

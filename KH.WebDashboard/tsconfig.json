@@ -8,6 +8,13 @@
     "strict": true,
     "noImplicitOverride": false,
     "noImplicitAny": false,
+    "module": "ESNext", // or "NodeNext"
+    "moduleResolution": "Bundler", // or "NodeNext"
+    "noUncheckedIndexedAccess": true,
+
+    // "moduleResolution": "node",
+    // "module": "ES2022",
+
     "strictPropertyInitialization": false,
     "paths": {
       "@app/*": ["src/app/*"],
@@ -23,11 +30,10 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+
     "importHelpers": true,
     "allowJs": false,
     "target": "ES2022",
-    "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",

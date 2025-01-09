@@ -7,6 +7,7 @@
 export const environment = {
   production: false,
   apiBaseUrl: 'https://localhost:5050/api/v1',
+  apiBaseUrlWithoutApiVersion: 'https://localhost:5050',
 
   mapApiServer: {
     url: "https://localhost:7299",

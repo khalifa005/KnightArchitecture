@@ -5,6 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "generate-client-sdk": "openapi-generator-cli generate -i http://localhost:5000/swagger/v1/swagger.json --additional-properties=useSingleRequestParameter=true,providedInRoot=true -g typescript-angular -o src/open-api",
+    "generate:api": "openapi-generator-cli generate -i http://localhost:5000/swagger/v1/swagger.json -p removeOperationIdPrefix=true -g typescript-angular -o src/open-api/api-client-2",
+
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -62,6 +65,7 @@
     "@angular/compiler-cli": "^18.2.9",
     "@angular/localize": "^18.2.9",
     "@ngx-formly/schematics": "^6.3.11",
+    "@openapitools/openapi-generator-cli": "^2.15.3",
     "@schematics/angular": "^17.0.3",
     "@types/crypto-js": "^4.2.2",
     "@types/jasmine": "~5.1.0",
@@ -71,6 +75,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "openapi-typescript": "^7.5.2",
     "typescript": "~5.5.4",
     "webpack-bundle-analyzer": "^4.10.2"
   }
