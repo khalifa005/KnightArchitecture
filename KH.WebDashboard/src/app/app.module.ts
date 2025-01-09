@@ -47,6 +47,7 @@ import { StorageService } from './@core/utils.ts';
 import { CustomJwtInterceptor } from './@interceptors/jwt.interceptor';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { TreeviewModule } from './@external-lib-override/treeview/treeview.module';
+import { ApiModule, Configuration, ConfigurationParameters } from 'src/open-api';
 // import { TreeviewModule } from '@samotics/ngx-treeview';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -58,12 +59,12 @@ function filterInterceptorRequest(req: HttpRequest<any>): boolean {
     .some(url => req.url.includes(url));
 }
 
-// export function apiConfigFactory(): Configuration {
-//   const params: ConfigurationParameters = {
-//     basePath: environment.apiBaseUrlWithoutApiVersion,
-//   };
-//   return new Configuration(params);
-// }
+export function apiConfigFactory(): Configuration {
+  const params: ConfigurationParameters = {
+    basePath: environment.apiBaseUrlWithoutApiVersion,
+  };
+  return new Configuration(params);
+}
 
 
 // export function tokenGetter() {
@@ -84,7 +85,7 @@ function filterInterceptorRequest(req: HttpRequest<any>): boolean {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    // ApiModule.forRoot(apiConfigFactory),
+    ApiModule.forRoot(apiConfigFactory),
     NgxPermissionsModule.forRoot(),
     CoreModule.forRoot(),
     NbChatModule.forRoot({
