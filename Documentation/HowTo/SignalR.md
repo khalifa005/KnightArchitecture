@@ -187,7 +187,7 @@ Multiplayer games often use SignalR to:
 
 ## Resources
 - [Official Documentation](https://learn.microsoft.com/en-us/aspnet/signalr/overview)
-- [Source Code and Samples](#) *(Add link to your repository)*
+- [Source Code and Samples](#) *(check this repository and dind the complete version)*
 
 ---
 
