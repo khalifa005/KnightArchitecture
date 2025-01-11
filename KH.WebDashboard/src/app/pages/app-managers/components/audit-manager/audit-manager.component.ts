@@ -121,47 +121,47 @@ export class AuditManagerComponent implements OnInit, OnDestroy {
       });
   }
 
-  exportUserAudits(
-    userId: string,
-    searchString: string = '',
-    searchInOldValues: boolean = false,
-    searchInNewValues: boolean = false
-  ): void {
-    this.auditsService
-      .apiV1AuditsExportUserAuditsUserIdGet(
-        userId,
-        searchString,
-        searchInOldValues,
-        searchInNewValues,
-        'response', // Ensures full HTTP response is returned
-        false,
-        { httpHeaderAccept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }
-      )
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (response) => {
-          // Create a Blob from the response
-          const blob = new Blob([response.body], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-          });
+  // exportUserAudits(
+  //   userId: string,
+  //   searchString: string = '',
+  //   searchInOldValues: boolean = false,
+  //   searchInNewValues: boolean = false
+  // ): void {
+  //   this.auditsService
+  //     .apiV1AuditsExportUserAuditsUserIdGet(
+  //       userId,
+  //       searchString,
+  //       searchInOldValues,
+  //       searchInNewValues,
+  //       'response', // Ensures full HTTP response is returned
+  //       false,
+  //       { httpHeaderAccept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }
+  //     )
+  //     .pipe(takeUntil(this.ngUnsubscribe))
+  //     .subscribe({
+  //       next: (response) => {
+  //         // Create a Blob from the response
+  //         const blob = new Blob([response.body], {
+  //           type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  //         });
   
-          // Create a download link and trigger download
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'AuditTrails.xlsx';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
+  //         // Create a download link and trigger download
+  //         const url = window.URL.createObjectURL(blob);
+  //         const a = document.createElement('a');
+  //         a.href = url;
+  //         a.download = 'AuditTrails.xlsx';
+  //         document.body.appendChild(a);
+  //         a.click();
+  //         document.body.removeChild(a);
   
-          window.URL.revokeObjectURL(url);
-          this.exportStatusMessage = 'Export successful. File downloaded.';
-        },
-        error: (error) => {
-          this.exportStatusMessage = 'Export failed. Please try again.';
-          console.error('Error exporting user audits:', error);
-        }
-      });
-  }
+  //         window.URL.revokeObjectURL(url);
+  //         this.exportStatusMessage = 'Export successful. File downloaded.';
+  //       },
+  //       error: (error) => {
+  //         this.exportStatusMessage = 'Export failed. Please try again.';
+  //         console.error('Error exporting user audits:', error);
+  //       }
+  //     });
+  // }
   
 }
