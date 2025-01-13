@@ -1,1 +1,96 @@
-<p>pipes works!</p>
+
+        <!-- Pipes Usage Section -->
+        <nb-card>
+            <nb-card-header>{{ '@pipes.header' | translate }}</nb-card-header>
+            <nb-card-body>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <nb-card>
+                                <nb-card-header>{{ '@pipes.arrayToString' | translate }}</nb-card-header>
+                                <nb-card-body>
+                                    <p>{{ ['Apple', 'Banana', 'Cherry'] | arrayToString:', ' }}</p>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <nb-card>
+                                <nb-card-header>{{ '@pipes.capitalize' | translate }}</nb-card-header>
+                                <nb-card-body>
+                                    <p>{{ 'hello world' | ngxCapitalize }}</p>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <nb-card>
+                                <nb-card-header>{{ '@pipes.numberToString' | translate }}</nb-card-header>
+                                <nb-card-body>
+                                    <p>{{ 123 | numberToString }}</p>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <nb-card>
+                                <nb-card-header>{{ '@pipes.numberWithCommas' | translate }}</nb-card-header>
+                                <nb-card-body>
+                                    <p>{{ 1234567 | ngxNumberWithCommas }}</p>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <nb-card>
+                                <nb-card-header>{{ '@pipes.plural' | translate }}</nb-card-header>
+                                <nb-card-body>
+                                    <p>{{ 2 | ngxPlural:'apple':'apples' }}</p>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <nb-card>
+                                <nb-card-header>{{ '@pipes.round' | translate }}</nb-card-header>
+                                <nb-card-body>
+                                    <p>{{ 5.6 | ngxRound }}</p>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <nb-card>
+                                <nb-card-header>{{ '@pipes.sanitizeHtml' | translate }}</nb-card-header>
+                                <nb-card-body>
+                                    <div [innerHTML]="htmlContent | sanitizeHtml"></div>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+
+                        <div class="col-6 mb-3">
+                            <nb-card>
+                                <nb-card-header>{{ '@pipes.split' | translate }}</nb-card-header>
+                                <nb-card-body>
+                                    <p *ngFor="let word of 'Angular|Pipes|Demo' | split:'|'">{{ word }}</p>
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+
+                        <div class="col-6 mb-3">
+                            <nb-card>
+                                <nb-card-header>{{ '@pipes.sp' | translate }}</nb-card-header>
+                                <nb-card-body>
+                                    <iframe [src]="'https://www.example.com' | safe" width="600" height="400"></iframe>
+
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <nb-card>
+                                <nb-card-header>{{ '@pipes.safe-blob' | translate }}</nb-card-header>
+                                <nb-card-body>
+                                    <a [href]="'https://example.com/secure/file' | secure | async" download>Download File</a>
+
+                                </nb-card-body>
+                            </nb-card>
+                        </div>
+                        
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>

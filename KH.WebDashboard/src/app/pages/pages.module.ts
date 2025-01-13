@@ -38,6 +38,7 @@ import { CChatComponent } from './cchat/cchat.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { PipesComponent } from './pipes/pipes.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   imports: [
@@ -84,7 +85,8 @@ import { PipesComponent } from './pipes/pipes.component';
     CChatComponent,
     TabsComponent,
     ButtonsComponent,
-    PipesComponent
+    PipesComponent,
+    SpinnerComponent
 
   ],
 })

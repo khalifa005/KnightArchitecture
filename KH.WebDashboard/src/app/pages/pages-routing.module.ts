@@ -18,6 +18,7 @@ import { CChatComponent } from './cchat/cchat.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { PipesComponent } from './pipes/pipes.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 const routes: Routes = [{
   path: '',
@@ -101,6 +102,10 @@ const routes: Routes = [{
     {
       path: 'pipes',
       component: PipesComponent
+    },
+    {
+      path: 'spinner',
+      component: SpinnerComponent
     },
     {
       path: '**',

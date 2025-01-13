@@ -31,7 +31,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'sideMenu.roles',
-        icon: 'eye-outline',
+        icon: 'briefcase-outline', // Updated icon for roles
         link: '/pages/manage/roles',
         data: {
           translationKey: 'sideMenu.roles',
@@ -40,7 +40,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'sideMenu.departments',
-        icon: 'eye-outline',
+        icon: 'layers-outline', // Updated icon for departments
         link: '/pages/manage/departments',
         data: {
           translationKey: 'sideMenu.departments',
@@ -58,7 +58,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: 'sideMenu.audit',
-        icon: 'people-outline',
+        icon: 'file-text-outline', // Selected icon for audit
         link: '/pages/manage/audit',
         data: {
           translationKey: 'sideMenu.audit',
@@ -182,6 +182,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/pipes',
     data: {
       translationKey: 'sideMenu.pipes',
+      permissionKey: '', // Add permission if needed
+    },
+  },
+  {
+    title: 'sideMenu.spinner',
+    icon: 'loader-outline', // Select an appropriate icon
+    link: '/pages/spinner',
+    data: {
+      translationKey: 'sideMenu.spinner',
       permissionKey: '', // Add permission if needed
     },
   },

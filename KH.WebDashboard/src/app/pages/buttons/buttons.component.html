@@ -1,1 +1,51 @@
-<p>buttons works!</p>
+
+        <!-- Buttons Section -->
+        <div class="row">
+            <div class="col-12">
+                <nb-card>
+                    <nb-card-header>{{ '@buttons.header' | translate }}</nb-card-header>
+                    <nb-card-body>
+                        <button nbButton status="primary"><nb-icon icon="star"></nb-icon>{{ '@buttons.primary' |
+                            translate }}</button>
+                        <button nbButton status="success">{{ '@buttons.success' | translate }}<nb-icon
+                                icon="star"></nb-icon></button>
+                        <button nbButton status="danger"><nb-icon icon="star"></nb-icon></button>
+                        <button nbButton ghost status="danger"><nb-icon icon="star"></nb-icon></button>
+
+                        <p><strong>{{ '@buttons.defaultHeader' | translate }}</strong></p>
+                        <button nbButton>{{ '@buttons.default' | translate }}</button>
+                        <button nbButton status="primary">{{ '@buttons.primary' | translate }}</button>
+                        <button nbButton status="success">{{ '@buttons.success' | translate }}</button>
+                        <button nbButton status="warning">{{ '@buttons.warning' | translate }}</button>
+                        <button nbButton status="danger">{{ '@buttons.danger' | translate }}</button>
+
+                        <p><strong>{{ '@buttons.outlineHeader' | translate }}</strong></p>
+                        <button nbButton outline>{{ '@buttons.default' | translate }}</button>
+                        <button nbButton outline status="primary">{{ '@buttons.primary' | translate }}</button>
+                        <button nbButton outline status="success">{{ '@buttons.success' | translate }}</button>
+
+                        <p><strong>{{ '@buttons.typeHeader' | translate }}</strong></p>
+                        <button nbButton shape="rectangle" status="primary">{{ '@buttons.rectangleHero' | translate
+                            }}</button>
+                        <button nbButton shape="semi-round" status="info">{{ '@buttons.semiRound' | translate
+                            }}</button>
+                        <button nbButton shape="round" size="small" status="success">{{ '@buttons.roundSmall' |
+                            translate }}</button>
+
+                        <p><strong>{{ '@buttons.heroHeader' | translate }}</strong></p>
+                        <button nbButton hero status="primary">{{ '@buttons.primary' | translate }}</button>
+                        <button nbButton hero status="success">{{ '@buttons.success' | translate }}</button>
+                        <button nbButton hero status="info">{{ '@buttons.info' | translate }}</button>
+                        <button nbButton hero status="warning">{{ '@buttons.warning' | translate }}</button>
+                        <button nbButton hero status="danger">{{ '@buttons.danger' | translate }}</button>
+
+                        <p><strong>{{ '@buttons.sizeHeader' | translate }}</strong></p>
+                        <button nbButton size="tiny">{{ '@buttons.tiny' | translate }}</button>
+                        <button nbButton size="small">{{ '@buttons.small' | translate }}</button>
+                        <button nbButton>{{ '@buttons.regular' | translate }}</button>
+                        <button nbButton size="large">{{ '@buttons.large' | translate }}</button>
+                        <button nbButton size="giant">{{ '@buttons.giant' | translate }}</button>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>

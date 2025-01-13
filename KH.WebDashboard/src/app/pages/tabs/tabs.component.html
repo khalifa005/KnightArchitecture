@@ -1,1 +1,84 @@
-<p>tabs works!</p>
+        <!-- tabs Section -->
+        <div class="row">
+            <div class="col">
+                <nb-card>
+                    <nb-card-body>
+                        <nb-tabset>
+                            <nb-tab [tabIcon]="'person-outline'" tabTitle="{{ '@tabs.users' | translate }}">
+                                <p>{{ '@tabs.usersContent' | translate }}</p>
+                            </nb-tab>
+                            <nb-tab [tabIcon]="'bell-outline'" tabTitle="{{ '@tabs.orders' | translate }}">
+                                <p>{{ '@tabs.ordersContent' | translate }}</p>
+                            </nb-tab>
+                            <nb-tab [tabIcon]="'email-outline'" tabTitle="{{ '@tabs.transactions' | translate }}">
+                                <p>{{ '@tabs.transactionsContent' | translate }}</p>
+                            </nb-tab>
+                        </nb-tabset>
+                    </nb-card-body>
+                </nb-card>
+        
+                <nb-card>
+                    <nb-card-body>
+                        <nb-progress-bar [value]="20" status="basic">{{ '@progress.basic' | translate
+                            }}</nb-progress-bar>
+                        <nb-progress-bar [value]="30" status="primary">{{ '@progress.primary' | translate
+                            }}</nb-progress-bar>
+                        <nb-progress-bar [value]="50" status="info">{{ '@progress.info' | translate }}</nb-progress-bar>
+                        <nb-progress-bar [value]="60" status="success">{{ '@progress.success' | translate
+                            }}</nb-progress-bar>
+                        <nb-progress-bar [value]="70" status="warning">{{ '@progress.warning' | translate
+                            }}</nb-progress-bar>
+                        <nb-progress-bar [value]="80" status="danger">{{ '@progress.danger' | translate
+                            }}</nb-progress-bar>
+                        <div class="control-status-example">
+                            <nb-progress-bar [value]="90" status="control">{{ '@progress.control' | translate
+                                }}</nb-progress-bar>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        
+            <!-- Tabset with Badges -->
+            <div class="col">
+                <nb-card>
+                    <nb-card-body>
+                        <nb-tabset>
+                            <nb-tab tabTitle="{{ '@tabs.users' | translate }}" badgeText="99+" badgeStatus="danger">
+                                <p>{{ '@tabs.usersContent' | translate }}</p>
+                            </nb-tab>
+                            <nb-tab tabTitle="{{ '@tabs.orders' | translate }}" badgeText="12" badgePosition="bottom right" badgeStatus="warning">
+                                <p>{{ '@tabs.ordersContent' | translate }}</p>
+                            </nb-tab>
+                            <nb-tab tabTitle="{{ '@tabs.transactions' | translate }}" badgeText="new" badgePosition="top right" badgeStatus="success">
+                                <p>{{ '@tabs.transactionsContent' | translate }}</p>
+                            </nb-tab>
+                            <nb-tab tabTitle="{{ '@tabs.notifications' | translate }}" badgeDot badgePosition="center start" badgeStatus="danger">
+                                <p>{{ '@tabs.notificationsContent' | translate }}</p>
+                            </nb-tab>
+                        </nb-tabset>
+                    </nb-card-body>
+                </nb-card>
+        
+                <!-- Accordion Section -->
+                <nb-card>
+                    <nb-card-body>
+                        <nb-accordion>
+                            <nb-accordion-item>
+                                <nb-accordion-item-header>{{ '@accordion.productDetails' | translate }}</nb-accordion-item-header>
+                                <nb-accordion-item-body>{{ '@accordion.productDetailsContent' | translate }}</nb-accordion-item-body>
+                            </nb-accordion-item>
+        
+                            <nb-accordion-item>
+                                <nb-accordion-item-header>{{ '@accordion.reviews' | translate }}</nb-accordion-item-header>
+                                <nb-accordion-item-body>{{ '@accordion.reviewsContent' | translate }}</nb-accordion-item-body>
+                            </nb-accordion-item>
+        
+                            <nb-accordion-item disabled="true">
+                                <nb-accordion-item-header>{{ '@accordion.edit' | translate }}</nb-accordion-item-header>
+                                <nb-accordion-item-body>{{ '@accordion.editContent' | translate }}</nb-accordion-item-body>
+                            </nb-accordion-item>
+                        </nb-accordion>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>

@@ -22,11 +22,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
 
-  htmlContent: string = '<h3> test h3 html</h3>';
 
-
-  bellIconConfig: NbIconConfig = { icon: 'bell-outline', pack: 'eva' };
-  
 
 }
 
