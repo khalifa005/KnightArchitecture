@@ -35,6 +35,9 @@ import { PermissionsExampleComponent } from './permissions-example/permissions-e
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { ChatComponent } from './chat/chat.component';
 import { CChatComponent } from './cchat/cchat.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { ButtonsComponent } from './buttons/buttons.component';
+import { PipesComponent } from './pipes/pipes.component';
 
 @NgModule({
   imports: [
@@ -78,7 +81,10 @@ import { CChatComponent } from './cchat/cchat.component';
     WorkingDaysFormComponent,
     PermissionsExampleComponent,
     ChatComponent,
-    CChatComponent
+    CChatComponent,
+    TabsComponent,
+    ButtonsComponent,
+    PipesComponent
 
   ],
 })

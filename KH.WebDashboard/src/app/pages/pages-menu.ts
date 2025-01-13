@@ -12,14 +12,62 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
-    title: 'sideMenu.dynamicForm',
-    icon: 'edit-2-outline',
-    link: '/pages/dynamic-form',
+    title: 'sideMenu.userManagement',
+    icon: 'keypad-outline',
     data: {
-      translationKey: 'sideMenu.dynamicForm',
-      permissionKey: 'manage-dynamic-form',
+      translationKey: 'sideMenu.userManagement',
+      permissionKey: 'manage-user-management',
     },
+    children: [
+
+      {
+        title: 'sideMenu.permissions',
+        icon: 'eye-outline',
+        link: '/pages/manage/permissions',
+        data: {
+          translationKey: 'sideMenu.permissions',
+          permissionKey: 'manage-permissions',
+        },
+      },
+      {
+        title: 'sideMenu.roles',
+        icon: 'eye-outline',
+        link: '/pages/manage/roles',
+        data: {
+          translationKey: 'sideMenu.roles',
+          permissionKey: 'manage-permissions',//updated in backend
+        },
+      },
+      {
+        title: 'sideMenu.departments',
+        icon: 'eye-outline',
+        link: '/pages/manage/departments',
+        data: {
+          translationKey: 'sideMenu.departments',
+          permissionKey: '',//updated in backend
+        },
+      },
+      {
+        title: 'sideMenu.users',
+        icon: 'people-outline',
+        link: '/pages/manage/users',
+        data: {
+          translationKey: 'sideMenu.users',
+          permissionKey: 'manage-users',
+        },
+      },
+      {
+        title: 'sideMenu.audit',
+        icon: 'people-outline',
+        link: '/pages/manage/audit',
+        data: {
+          translationKey: 'sideMenu.audit',
+          permissionKey: '',
+        },
+      },
+    ],
   },
+
   {
     title: 'sideMenu.chat',
     icon: 'message-square-outline',
@@ -102,6 +150,42 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
+    title: 'sideMenu.dynamicForm',
+    icon: 'edit-2-outline',
+    link: '/pages/dynamic-form',
+    data: {
+      translationKey: 'sideMenu.dynamicForm',
+      permissionKey: 'manage-dynamic-form',
+    },
+  },
+  {
+    title: 'sideMenu.tabs',
+    icon: 'options-outline', // Select an appropriate icon
+    link: '/pages/tabs',
+    data: {
+      translationKey: 'sideMenu.tabs',
+      permissionKey: '', // Add permission if needed
+    },
+  },
+  {
+    title: 'sideMenu.buttons',
+    icon: 'radio-button-on-outline', // Select an appropriate icon
+    link: '/pages/buttons',
+    data: {
+      translationKey: 'sideMenu.buttons',
+      permissionKey: '', // Add permission if needed
+    },
+  },
+  {
+    title: 'sideMenu.pipes',
+    icon: 'funnel-outline', // Select an appropriate icon
+    link: '/pages/pipes',
+    data: {
+      translationKey: 'sideMenu.pipes',
+      permissionKey: '', // Add permission if needed
+    },
+  },
+  {
     title: 'sideMenu.auth',
     icon: 'lock-outline',
     link: '/auth',
@@ -119,60 +203,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
       permissionKey: 'view-not-found',
     },
   },
-  {
-    title: 'sideMenu.userManagement',
-    icon: 'keypad-outline',
-    data: {
-      translationKey: 'sideMenu.userManagement',
-      permissionKey: 'manage-user-management',
-    },
-    children: [
 
-      {
-        title: 'sideMenu.permissions',
-        icon: 'eye-outline',
-        link: '/pages/manage/permissions',
-        data: {
-          translationKey: 'sideMenu.permissions',
-          permissionKey: 'manage-permissions',
-        },
-      },
-      {
-        title: 'sideMenu.roles',
-        icon: 'eye-outline',
-        link: '/pages/manage/roles',
-        data: {
-          translationKey: 'sideMenu.roles',
-          permissionKey: 'manage-permissions',//updated in backend
-        },
-      },
-      {
-        title: 'sideMenu.departments',
-        icon: 'eye-outline',
-        link: '/pages/manage/departments',
-        data: {
-          translationKey: 'sideMenu.departments',
-          permissionKey: '',//updated in backend
-        },
-      },
-      {
-        title: 'sideMenu.users',
-        icon: 'people-outline',
-        link: '/pages/manage/users',
-        data: {
-          translationKey: 'sideMenu.users',
-          permissionKey: 'manage-users',
-        },
-      },
-      {
-        title: 'sideMenu.audit',
-        icon: 'people-outline',
-        link: '/pages/manage/audit',
-        data: {
-          translationKey: 'sideMenu.audit',
-          permissionKey: '',
-        },
-      },
-    ],
-  },
 ];

@@ -15,6 +15,9 @@ import { PermissionsGuard } from './permission-guard.service';
 import { PermissionsExampleComponent } from './permissions-example/permissions-example.component';
 import { ChatComponent } from './chat/chat.component';
 import { CChatComponent } from './cchat/cchat.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { ButtonsComponent } from './buttons/buttons.component';
+import { PipesComponent } from './pipes/pipes.component';
 
 const routes: Routes = [{
   path: '',
@@ -86,6 +89,18 @@ const routes: Routes = [{
     {
       path: 'form-examples',
       component: ReactiveFormExamplesComponent
+    },
+    {
+      path: 'tabs',
+      component:TabsComponent 
+    },
+    {
+      path: 'buttons',
+      component: ButtonsComponent
+    },
+    {
+      path: 'pipes',
+      component: PipesComponent
     },
     {
       path: '**',
