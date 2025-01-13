@@ -1,46 +1,39 @@
 <ng-template #section1 let-data>
     <div class="solu_title">
-        <p class="fs-5">{{'indicators.total-tasks' | translate }}</p>
+        <p class="fs-5">{{'indicators.total-products' | translate }}</p>
     </div>
     <div class="solu_description">
-        <!-- <p class="fs-6 "></p> -->
-        <app-number-counter [startValue]="0" [endValue]="405" [customClass]=" 'text-center' "
+        <app-number-counter [startValue]="0" [endValue]="1200" [customClass]=" 'text-center' "
             [duration]="3000"></app-number-counter>
-
-        <!-- <nb-progress-bar [value]="30"   size="tiny" status="primary"></nb-progress-bar> -->
-        <!-- <button nbButton hero status="info">Info</button> -->
     </div>
 </ng-template>
 
 <ng-template #section2 let-data>
     <div class="solu_title">
-        <p class="fs-5">{{'indicators.total-teams' | translate }}</p>
+        <p class="fs-5">{{'indicators.total-categories' | translate }}</p>
     </div>
     <div class="solu_description">
-        <!-- <p class="fs-6 text-center">5000</p> -->
-        <app-number-counter [startValue]="0" [endValue]="5000" [customClass]=" 'text-center' "
+        <app-number-counter [startValue]="0" [endValue]="35" [customClass]=" 'text-center' "
             [duration]="3000"></app-number-counter>
     </div>
 </ng-template>
 
 <ng-template #section3 let-data>
     <div class="solu_title">
-        <p class="fs-5">{{'indicators.field-activity' | translate }}</p>
+        <p class="fs-5">{{'indicators.total-sales' | translate }}</p>
     </div>
     <div class="solu_description">
-        <!-- <p class="fs-6 text-center">430</p> -->
-        <app-number-counter [startValue]="0" [endValue]="550" [customClass]=" 'text-center' "
+        <app-number-counter [startValue]="0" [endValue]="15000" [customClass]=" 'text-center' "
             [duration]="3000"></app-number-counter>
     </div>
 </ng-template>
 
 <ng-template #section4 let-data>
     <div class="solu_title">
-        <p class="fs-5">{{'indicators.tasks-target' | translate }}</p>
+        <p class="fs-5">{{'indicators.sales-target' | translate }}</p>
     </div>
     <div class="solu_description">
-        <!-- <p class="fs-6 text-center">800</p> -->
-        <app-number-counter [startValue]="0" [endValue]="405" [customClass]=" 'text-center' "
+        <app-number-counter [startValue]="0" [endValue]="20000" [customClass]=" 'text-center' "
             [duration]="3000"></app-number-counter>
     </div>
 </ng-template>
@@ -55,11 +48,11 @@
             </app-custom-card>
         </div>
         <div class="col-md-3">
-            <app-custom-card [imageUrl]="'assets/icons/worker.svg'" [section1Template]="section2">
+            <app-custom-card [imageUrl]="'assets/svgs/targetIcon.svg'" [section1Template]="section2">
             </app-custom-card>
         </div>
         <div class="col-md-3">
-            <app-custom-card [imageUrl]="'assets/icons/maintenance-icon-18900.png'" [section1Template]="section3">
+            <app-custom-card [imageUrl]="'assets/svgs/targetIcon.svg'" [section1Template]="section3">
             </app-custom-card>
         </div>
         <div class="col-md-3">
@@ -76,14 +69,12 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <!-- <h3 class="primary">278</h3> -->
-                                <app-number-counter [startValue]="0" [endValue]="205" [customClass]=" '' "
+                                <app-number-counter [startValue]="0" [endValue]="320" [customClass]=" '' "
                                     [duration]="3000"></app-number-counter>
-
-                                <span>{{'indicators.new-posts' | translate }}</span>
+                                <span>{{'indicators.new-products' | translate }}</span>
                             </div>
                             <div class="align-self-center">
-                                <i class="icon-book-open primary font-large-2 float-right"></i>
+                                <i class="icon-box primary font-large-2 float-right"></i>
                             </div>
                         </div>
                         <div class="progress mt-1 mb-0" style="height: 7px;">
@@ -94,82 +85,82 @@
                 </div>
             </div>
         </div>
+    
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <app-number-counter [startValue]="0" [endValue]="105" [customClass]=" '' "
+                                <app-number-counter [startValue]="0" [endValue]="85" [customClass]=" '' "
                                     [duration]="3000"></app-number-counter>
-                                <span>{{'indicators.new-comments' | translate }}</span>
+                                <span>{{'indicators.top-categories' | translate }}</span>
                             </div>
                             <div class="align-self-center">
+                                <i class="icon-tag warning font-large-2 float-right"></i>
                             </div>
                         </div>
                         <div class="progress mt-1 mb-0" style="height: 7px;">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 35%"
-                                aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 70%"
+                                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+    
         <div class="col-xl-3 col-sm-6 col-12">
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <!-- <h3 class="success">64.89 %</h3> -->
-                                <app-number-counter [startValue]="0" [endValue]="60" [customClass]=" '' "
+                                <app-number-counter [startValue]="0" [endValue]="45" [customClass]=" '' "
                                     [duration]="3000"></app-number-counter>
-
-                                <span>{{'indicators.bounce-rate' | translate }}</span>
+                                <span>{{'indicators.return-rate' | translate }}</span>
                             </div>
                             <div class="align-self-center">
-                                <i class="icon-cup success font-large-2 float-right"></i>
+                                <i class="icon-refresh success font-large-2 float-right"></i>
                             </div>
                         </div>
                         <div class="progress mt-1 mb-0" style="height: 7px;">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%"
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 45%"
+                                aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <app-number-counter [startValue]="0" [endValue]="1200" [customClass]=" '' "
+                                    [duration]="3000"></app-number-counter>
+                                <span>{{'indicators.total-revenue' | translate }}</span>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="icon-wallet danger font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 60%"
                                 aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card">
-                <div class="card-content">
-                    <div class="card-body">
-                        <div class="media d-flex">
-                            <div class="media-body text-left">
-                                <!-- <h3 class="danger">423</h3> -->
-                                <app-number-counter [startValue]="0" [endValue]="444" [customClass]=" '' "
-                                    [duration]="3000"></app-number-counter>
-
-                                <span>{{'indicators.total-visits' | translate }}</span>
-                            </div>
-                            <div class="align-self-center">
-                                <i class="icon-direction danger font-large-2 float-right"></i>
-                            </div>
-                        </div>
-                        <div class="progress mt-1 mb-0" style="height: 7px;">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="40"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+    
 
     <div class="row mt-0 ">
         <div class="col-6">
             <nb-card>
-                <nb-card-header class="text-center mt-0 mb-0 pt-0 pb-0 lh-small">{{'indicators.task-status' | translate
+                <nb-card-header class="text-center mt-0 mb-0 pt-0 pb-0 lh-small">{{'indicators.status' | translate
                     }}</nb-card-header>
                 <nb-card-body class="mt-0 mb-0 pt-0 pb-0">
                     <ngx-echarts-pie [passedColumns]="statusColumns" [apiData]="apiDataForStatus"></ngx-echarts-pie>
@@ -179,7 +170,7 @@
 
         <div class="col-6">
             <nb-card>
-                <nb-card-header class="text-center mt-0 mb-0 pt-0 pb-0 lh-small">{{'indicators.tasks-zones' | translate
+                <nb-card-header class="text-center mt-0 mb-0 pt-0 pb-0 lh-small">{{'indicators.zones' | translate
                     }}</nb-card-header>
                 <nb-card-body class="mt-0 mb-0 pt-0 pb-0">
                     <ngx-echarts-pie [passedColumns]="zonesColumns" [apiData]="apiDataForZones"></ngx-echarts-pie>
@@ -205,79 +196,7 @@
             <div class="col-md-6">
                 <h5 class="card-title">Nebular</h5>
 
-                <div class="row d-flex mb-2">
-
-                    <div class="col-sm-12 d-flex flex-wrap mx-0 px-1">
-
-
-                        <div class="col-md-2 d-flex flex-grow-1 mx-1">
-                            <nb-card class="mb-1 h-100 w-100" status="primary">
-                                <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
-                                    translate>
-                                    live-monitoring.eam
-                                </nb-card-header>
-                                <nb-card-body class="px-2 pb-0 pt-1 mb-0">
-                                    <div class="d-flex align-items-center">
-                                        <img src="assets/svgs/avatar.svg" class="img-prop me-1" alt="Offline Icon"
-                                            style="width: 33px; height: 50px;" />
-
-                                        <div>
-                                            <p class="small mb-1">
-                                                <strong class="small">{{ 'live-monitoring.since' | translate
-                                                    }}:</strong>
-                                                <span class="small">0 static</span>
-                                            </p>
-                                            <p class="small mb-1">
-                                                <strong class="small">{{ 'live-monitoring.tasks' | translate
-                                                    }}:</strong>
-                                                <span class="small">10 tasks</span>
-                                            </p>
-                                            <p class="small mb-1">
-                                                <strong class="small">{{ 'live-monitoring.tasks' | translate
-                                                    }}:</strong>
-                                                <span class="small">10 tasks</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </nb-card-body>
-                            </nb-card>
-                        </div>
-
-                        <div class="col-md-2 d-flex flex-grow-1 mx-1">
-                            <nb-card class="mb-1 h-100 w-100" status="primary">
-                                <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
-                                    translate>
-                                    live-monitoring.eam
-                                </nb-card-header>
-                                <nb-card-body class="px-2 pb-0 pt-1 mb-0">
-                                    <div class="d-flex align-items-center">
-                                        <img src="assets/svgs/avatar.svg" class="img-prop me-1" alt="Offline Icon"
-                                            style="width: 33px; height: 50px;" />
-
-                                        <div>
-                                            <p class="small mb-1">
-                                                <strong class="small">{{ 'live-monitoring.since' | translate
-                                                    }}:</strong>
-                                                <span class="small">0 static</span>
-                                            </p>
-                                            <p class="small mb-1">
-                                                <strong class="small">{{ 'live-monitoring.tasks' | translate
-                                                    }}:</strong>
-                                                <span class="small">10 tasks</span>
-                                            </p>
-                                            <p class="small mb-1">
-                                                <strong class="small">{{ 'live-monitoring.tasks' | translate
-                                                    }}:</strong>
-                                                <span class="small">10 tasks</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </nb-card-body>
-                            </nb-card>
-                        </div>
-
-                    </div>
-                </div>
+               
 
                 <div class="row d-flex mb-2">
 
@@ -287,7 +206,7 @@
                             <nb-card class="mb-1 h-100 w-100" status="primary" accent="info">
                                 <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
                                     translate>
-                                    live-monitoring.id
+                                    monitoring.id
                                 </nb-card-header>
                                 <nb-card-body class="px-2 pb-0 pt-1 mb-0">
                                     <div class="d-flex align-items-center">
@@ -296,17 +215,17 @@
 
                                         <div>
                                             <p class="small  mb-1">
-                                                <strong class="small">{{ 'live-monitoring.id' | translate }}:</strong>
+                                                <strong class="small">{{ 'monitoring.id' | translate }}:</strong>
                                                 <span class="small ms-1">1053</span>
                                             </p>
                                             <p class="small  mb-1">
-                                                <strong class="small">{{ 'live-monitoring.name' | translate }}:</strong>
-                                                <span class="small ms-1">Riyadh_Mubark</span>
+                                                <strong class="small">{{ 'monitoring.name' | translate }}:</strong>
+                                                <span class="small ms-1">khalifa</span>
                                             </p>
                                             <p class="small  mb-1">
-                                                <strong class="small">{{ 'live-monitoring.iqama' | translate
+                                                <strong class="small">{{ 'monitoring.iqama' | translate
                                                     }}:</strong>
-                                                <span class="small ms-1">558888250</span>
+                                                <span class="small ms-1">2555555555</span>
                                             </p>
                                         </div>
                                     </div>
@@ -318,7 +237,7 @@
                             <nb-card class="mb-1 h-100 w-100" status="primary" accent="info">
                                 <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
                                     translate>
-                                    live-monitoring.id
+                                    monitoring.id
                                 </nb-card-header>
                                 <nb-card-body class="px-2 pb-0 pt-1 mb-0">
                                     <div class="d-flex align-items-center">
@@ -329,20 +248,20 @@
                                             <p class="small d-flex align-items-center mb-1">
                                                 <img src="assets/svgs/over-speed.svg" alt="Type Icon"
                                                     style="width: 20px; height: 20px;" class="me-2" />
-                                                <strong class="small">{{ 'live-monitoring.type' | translate }}:</strong>
-                                                <span class="small ms-1">Leakage Section</span>
+                                                <strong class="small">{{ 'monitoring.type' | translate }}:</strong>
+                                                <span class="small ms-1">Sample Section</span>
                                             </p>
                                             <p class="small d-flex align-items-center mb-1">
                                                 <img src="assets/svgs/over-speed.svg" alt="Time Icon"
                                                     style="width: 20px; height: 20px;" class="me-2" />
-                                                <strong class="small">{{ 'live-monitoring.from-to' | translate
+                                                <strong class="small">{{ 'monitoring.from-to' | translate
                                                     }}:</strong>
                                                 <span class="small ms-1">20:45</span>
                                             </p>
                                             <p class="small d-flex align-items-center mb-1">
                                                 <img src="assets/svgs/over-speed.svg" alt="Specialization Icon"
                                                     style="width: 20px; height: 20px;" class="me-2" />
-                                                <strong class="small">{{ 'live-monitoring.specialization' | translate
+                                                <strong class="small">{{ 'monitoring.specialization' | translate
                                                     }}:</strong>
                                                 <span class="small ms-1">A1</span>
                                             </p>
@@ -363,26 +282,26 @@
                             <nb-card class="mb-1 h-100 w-100" status="primary" accent="info">
                                 <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
                                     translate>
-                                    live-monitoring.battery
+                                    monitoring.id
                                 </nb-card-header>
                                 <nb-card-body class="px-2 pb-0 pt-1 mb-0">
                                     <div>
                                         <p class="small d-flex align-items-center mb-1">
                                             <img src="assets/svgs/teams-listXX.svg" alt="Battery Icon"
                                                 style="width: 20px; height: 20px;" class="me-2" />
-                                            <strong class="small">{{ 'live-monitoring.battary' | translate }}:</strong>
+                                            <strong class="small">{{ 'monitoring.battary' | translate }}:</strong>
                                             <span class="small ms-1">100%</span>
                                         </p>
                                         <p class="small d-flex align-items-center mb-1">
                                             <img src="assets/svgs/location1.svg" alt="Tracked Icon"
                                                 style="width: 20px; height: 20px;" class="me-2" />
-                                            <strong class="small">{{ 'live-monitoring.tracked' | translate }}:</strong>
+                                            <strong class="small">{{ 'monitoring.tracked' | translate }}:</strong>
                                             <span class="small ms-1">10 min ago</span>
                                         </p>
                                         <p class="small d-flex align-items-center mb-1">
                                             <img src="assets/svgs/teams-list653.svg" alt="Connection Icon"
                                                 style="width: 20px; height: 20px;" class="me-2" />
-                                            <strong class="small">{{ 'live-monitoring.connected' | translate
+                                            <strong class="small">{{ 'monitoring.connected' | translate
                                                 }}:</strong>
                                             <span class="small ms-1">25 min ago</span>
                                         </p>
@@ -395,26 +314,26 @@
                             <nb-card class="mb-1 h-100 w-100" status="primary" accent="info">
                                 <nb-card-header class="text-center card-custom-header-light-blue pt-0 pb-0 mb-0 mt-0"
                                     translate>
-                                    live-monitoring.notifications
+                                    monitoring.id
                                 </nb-card-header>
                                 <nb-card-body class="px-2 pb-0 pt-1 mb-0">
                                     <div>
                                         <p class="small d-flex align-items-center mb-1">
                                             <img src="assets/svgs/over-speed.svg" alt="Speed Icon"
                                                 style="width: 20px; height: 20px;" class="me-2" />
-                                            <strong class="small">{{ 'live-monitoring.speed' | translate }}:</strong>
+                                            <strong class="small">{{ 'monitoring.speed' | translate }}:</strong>
                                             <span class="small ms-1">Increased</span>
                                         </p>
                                         <p class="small d-flex align-items-center mb-1">
                                             <img src="assets/svgs/lost-tracking.svg" alt="Tracking Lost Icon"
                                                 style="width: 20px; height: 20px;" class="me-2" />
-                                            <strong class="small">{{ 'live-monitoring.tracking' | translate }}:</strong>
+                                            <strong class="small">{{ 'monitoring.tracking' | translate }}:</strong>
                                             <span class="small ms-1">Lost</span>
                                         </p>
                                         <p class="small d-flex align-items-center mb-1">
                                             <img src="assets/svgs/disconnected.svg" alt="Connection Lost Icon"
                                                 style="width: 20px; height: 20px;" class="me-2" />
-                                            <strong class="small">{{ 'live-monitoring.connection' | translate
+                                            <strong class="small">{{ 'monitoring.connection' | translate
                                                 }}:</strong>
                                             <span class="small ms-1">Lost</span>
                                         </p>
@@ -427,31 +346,6 @@
                     </div>
                 </div>
 
-
-                <nb-card class="mb-3 card-custom">
-                    <nb-card-body>
-                        <div class="row">
-                            <div
-                                class="col-md-2 p-0 m-0 d-flex align-items-center justify-content-center position-relative">
-                                <img src="https://via.placeholder.com/150" alt="Card Image"
-                                    class="img-fluid card-img-custom" />
-                            </div>
-
-                            <div class="col-md-10 d-flex flex-column">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="mb-1 ">
-                                            <strong>
-                                                #125452545
-                                            </strong>
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </nb-card-body>
-                </nb-card>
 
                 <!-- if we add the h-100 the auto scroll for card will be gone -->
                 <!-- card-custom class -- rounded-card class -->
@@ -479,32 +373,33 @@
                                     <!-- Column 1 -->
                                     <div class="col-6">
                                         <p class="mb-0" style="font-size: 0.6rem; line-height: 0.9rem;">
-                                            <strong>Task Code:</strong> TC12345<br>
-                                            <strong>Check No:</strong> 6789<br>
-                                            <strong>Operation:</strong> OP001<br>
-                                            <strong>Description:</strong> Example Description<br>
-                                            <strong>Client Name:</strong> John Doe<br>
-                                            <strong>Client Number:</strong> +1234567890<br>
-                                            <strong>Task Zone:</strong> Zone A<br>
-                                            <strong>Street:</strong> Example Street<br>
-                                            <strong>HCN:</strong> HCN123
+                                            <strong>Product Code:</strong> PRD12345<br>
+                                            <strong>SKU:</strong> 6789<br>
+                                            <strong>Category:</strong> Electronics<br>
+                                            <strong>Description:</strong> High-performance gaming laptop<br>
+                                            <strong>Manufacturer:</strong> TechGear Inc.<br>
+                                            <strong>Customer Support:</strong> +1234567890<br>
+                                            <strong>Warehouse Zone:</strong> Zone A<br>
+                                            <strong>Location:</strong> Aisle 5, Shelf 3<br>
+                                            <strong>Batch No:</strong> BATCH123
                                         </p>
                                     </div>
                                     <!-- Column 2 -->
                                     <div class="col-6">
                                         <p class="mb-0" style="font-size: 0.6rem; line-height: 0.9rem;">
-                                            <strong>Meter Number:</strong> MTR6789<br>
-                                            <strong>Asset Number:</strong> AST12345<br>
-                                            <strong>REGS:</strong> 2023-11-21 08:00<br>
-                                            <strong>SLA:</strong> 2 Hours<br>
-                                            <strong>RDDT:</strong> 2023-11-21 10:00<br>
-                                            <strong>ASGN:</strong> 2023-11-21 08:30<br>
-                                            <strong>DELV:</strong> 2023-11-21 09:50<br>
-                                            <strong>OETA:</strong> 2023-11-21 10:15<br>
-                                            <strong>UETA:</strong> 2023-11-21 10:10
+                                            <strong>Serial Number:</strong> SN6789<br>
+                                            <strong>Asset Tag:</strong> AST12345<br>
+                                            <strong>Manufacture Date:</strong> 2023-11-21<br>
+                                            <strong>Warranty Period:</strong> 2 Years<br>
+                                            <strong>Expiry Date:</strong> 2025-11-21<br>
+                                            <strong>Added to Inventory:</strong> 2023-11-21<br>
+                                            <strong>Dispatched:</strong> 2023-11-22<br>
+                                            <strong>Expected Delivery:</strong> 2023-11-25<br>
+                                            <strong>Last Updated:</strong> 2023-11-23
                                         </p>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </nb-card-body>
@@ -585,7 +480,28 @@
                             </div>
                             <!-- Content Section -->
                             <div class="flex-grow-1 ms-3">
+                              
                                 <div class="d-flex flex-column flex-md-row">
+                                    <div class="flex-fill card-body card-content-custom">
+                                        <p>
+                                            <strong>Product Name:</strong> Premium Water Bottle <br>
+                                            <strong>SKU:</strong> 16793076 <br>
+                                            <strong>Category:</strong> Hydration Products <br>
+                                            <strong>Brand:</strong> AquaPure <br>
+                                            <strong>Price:</strong> $25.99 <br>
+                                        </p>
+                                    </div>
+                                
+                                    <div class="flex-fill card-body card-content-custom">
+                                        <p class="">
+                                            <strong>Stock Status:</strong> In Stock <br>
+                                            <strong>Discount:</strong> 10% Off <br>
+                                            <strong>Estimated Delivery:</strong> 3-5 Business Days <br>
+                                            <strong>Date Added:</strong> 01-09, 12:19 <br>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- <div class="d-flex flex-column flex-md-row">
                                     <div class="flex-fill card-body card-content-custom">
                                         <p>
                                             <strong>CCB:</strong> 16793076 <br>
@@ -604,23 +520,12 @@
                                             <strong>Assigned Date:</strong> 01-09, 12:19 <br>
                                         </p>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
 
                 </div>
-
-
-
-                <h5 class="card-title">Dynamic ng-template</h5>
-
-                <app-custom-card [imageUrl]="'https://via.placeholder.com/150'" [section1Template]="section1">
-                </app-custom-card>
-
-                <app-custom-card [imageUrl]="'https://via.placeholder.com/150'" [section1Template]="section1"
-                    [section2Template]="section2">
-                </app-custom-card>
 
             </div>
 
@@ -676,3 +581,34 @@
         </div>
     </nb-card-body>
 </nb-card>
+
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Angular matrial with Input Card</mat-card-title>
+        <mat-card-subtitle>Enter your details below</mat-card-subtitle>
+    </mat-card-header>
+
+    
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          
+        <form>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter your name</mat-label>
+                <input matInput placeholder="Your name" [(ngModel)]="name" name="name">
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+    </mat-card-actions>
+</mat-card>

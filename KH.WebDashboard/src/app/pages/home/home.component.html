@@ -3,35 +3,7 @@
         {{ '@home.welcome' | translate }}
     </nb-card-header>
     <nb-card-body>
-        <!-- Table Section -->
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">{{ '@product.name' | translate }}</th>
-                        <th scope="col">{{ '@product.price' | translate }}</th>
-                        <th scope="col">{{ '@product.quantity' | translate }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let product of products; let i = index">
-                        <th scope="row">{{ i + 1 }}</th>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.price }}</td>
-                        <td>{{ product.quantity }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
 
-        <!-- NGX Table Section -->
-
-        <app-dy-table 
-        [apiCustomColumns]="apiCustomColumns"
-        [apiData]="apiData"
-        [paginationParam]="paginationParam" >
-        </app-dy-table>
         <!-- tabs Section -->
         <div class="row">
             <div class="col">
@@ -53,17 +25,21 @@
         
                 <nb-card>
                     <nb-card-body>
-                        <nb-tabset>
-                            <nb-tab tabTitle="{{ '@tabs.users' | translate }}" tabIcon="person-outline" responsive>
-                                <p>{{ '@tabs.usersContent' | translate }}</p>
-                            </nb-tab>
-                            <nb-tab tabTitle="{{ '@tabs.orders' | translate }}" tabIcon="bell-outline" responsive>
-                                <p>{{ '@tabs.ordersContent' | translate }}</p>
-                            </nb-tab>
-                            <nb-tab tabTitle="{{ '@tabs.transactions' | translate }}" tabIcon="email-outline" responsive>
-                                <p>{{ '@tabs.transactionsContent' | translate }}</p>
-                            </nb-tab>
-                        </nb-tabset>
+                        <nb-progress-bar [value]="20" status="basic">{{ '@progress.basic' | translate
+                            }}</nb-progress-bar>
+                        <nb-progress-bar [value]="30" status="primary">{{ '@progress.primary' | translate
+                            }}</nb-progress-bar>
+                        <nb-progress-bar [value]="50" status="info">{{ '@progress.info' | translate }}</nb-progress-bar>
+                        <nb-progress-bar [value]="60" status="success">{{ '@progress.success' | translate
+                            }}</nb-progress-bar>
+                        <nb-progress-bar [value]="70" status="warning">{{ '@progress.warning' | translate
+                            }}</nb-progress-bar>
+                        <nb-progress-bar [value]="80" status="danger">{{ '@progress.danger' | translate
+                            }}</nb-progress-bar>
+                        <div class="control-status-example">
+                            <nb-progress-bar [value]="90" status="control">{{ '@progress.control' | translate
+                                }}</nb-progress-bar>
+                        </div>
                     </nb-card-body>
                 </nb-card>
             </div>
@@ -114,53 +90,6 @@
         </div>
 
 
-        <!-- Progress Bars Section -->
-        <div class="row">
-            <div class="col">
-                <nb-card>
-                    <nb-card-body>
-                        <nb-progress-bar [value]="20" status="basic">{{ '@progress.basic' | translate
-                            }}</nb-progress-bar>
-                        <nb-progress-bar [value]="30" status="primary">{{ '@progress.primary' | translate
-                            }}</nb-progress-bar>
-                        <nb-progress-bar [value]="50" status="info">{{ '@progress.info' | translate }}</nb-progress-bar>
-                        <nb-progress-bar [value]="60" status="success">{{ '@progress.success' | translate
-                            }}</nb-progress-bar>
-                        <nb-progress-bar [value]="70" status="warning">{{ '@progress.warning' | translate
-                            }}</nb-progress-bar>
-                        <nb-progress-bar [value]="80" status="danger">{{ '@progress.danger' | translate
-                            }}</nb-progress-bar>
-                        <div class="control-status-example">
-                            <nb-progress-bar [value]="90" status="control">{{ '@progress.control' | translate
-                                }}</nb-progress-bar>
-                        </div>
-                    </nb-card-body>
-                </nb-card>
-            </div>
-
-            <!-- Select Component Section -->
-            <div class="col">
-                <nb-card>
-                    <nb-card-header>{{ '@select.header' | translate }}</nb-card-header>
-                    <nb-card-body>
-                        <nb-select [placeholder]="'@select.placeholder' | translate">
-                            <nb-option value="1">{{ '@select.option1' | translate }}</nb-option>
-                            <nb-option value="2">{{ '@select.option2' | translate }}</nb-option>
-                            <nb-option value="3">{{ '@select.option3' | translate }}</nb-option>
-                            <nb-option value="1">{{ '@select.option1' | translate }}</nb-option>
-                            <nb-option value="2">{{ '@select.option2' | translate }}</nb-option>
-                            <nb-option value="3">{{ '@select.option3' | translate }}</nb-option>
-                            <nb-option value="1">{{ '@select.option1' | translate }}</nb-option>
-                            <nb-option value="2">{{ '@select.option2' | translate }}</nb-option>
-                            <nb-option value="3">{{ '@select.option3' | translate }}</nb-option>
-                            <nb-option value="1">{{ '@select.option1' | translate }}</nb-option>
-                            <nb-option value="2">{{ '@select.option2' | translate }}</nb-option>
-                            <nb-option value="3">{{ '@select.option3' | translate }}</nb-option>
-                        </nb-select>
-                    </nb-card-body>
-                </nb-card>
-            </div>
-        </div>
 
         <!-- Buttons Section -->
         <div class="row">
@@ -289,35 +218,6 @@
         </nb-card>
 
 
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Test Input Card</mat-card-title>
-                <mat-card-subtitle>Enter your details below</mat-card-subtitle>
-            </mat-card-header>
-
-            
-            <mat-card-content>
-                <mat-form-field>
-                    <mat-label>Choose a date</mat-label>
-                    <input matInput [matDatepicker]="picker">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
-
-                  
-                <form>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Enter your name</mat-label>
-                        <input matInput placeholder="Your name" [(ngModel)]="name" name="name">
-                    </mat-form-field>
-                </form>
-            </mat-card-content>
-
-            <mat-card-actions>
-                <button mat-raised-button color="primary" (click)="submit()">Submit</button>
-            </mat-card-actions>
-        </mat-card>
 
 
     </nb-card-body>

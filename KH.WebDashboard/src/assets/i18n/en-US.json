@@ -259,26 +259,40 @@
 		"edit": "Edit",
 		"editContent": "A nebula is an interstellar cloud of dust, hydrogen, helium, and other ionized gases."
 	},
-	"indicators": {
-		"total-tasks": "Total Tasks",
-		"total-teams": "Total Teams",
-		"field-activity": "Field Activity",
-		"tasks-target": "Tasks Target",
-		"new-posts": "New Task",
-		"new-comments": "New Teams",
-		"bounce-rate": "Fixing rate",
-		"total-visits": "Total fixed",
-		"task-status": "Task Status",
-		"tasks-zones": "Tasks Zones",
-		"tree-representation-task-zones": "Tree Representation of Task Zones",
-		"tree-representation-work-order": "Tree Representation of Work Orders"
+"indicators": {
+    "total-products": "Total Products",
+	"zones": "zones",
+	"status": "status",
+    "total-categories": "Total Categories",
+    "total-sales": "Total Sales",
+    "sales-target": "Sales Target",
+	"new-products": "New Products",
+	"top-categories": "Top Categories",
+    "return-rate": "Return Rate",
+    "total-revenue": "Total Revenue",
+    "product-status": "Product Status",
+    "sales-regions": "Sales Regions",
+    "tree-representation-categories": "Tree Representation of Categories",
+    "tree-representation-sales": "Tree Representation of Sales"
+},
+"columns": {
+	"status": {
+		"assigned": "Assigned",
+		"inProgress": "In progress",
+		"suspended": "Suspended"
 	},
-	"live-monitoring": {
+	"zones": {
+		"riyadh": "Riyadh",
+		"jeedah": "Jeedah",
+		"mekka": "Mekka",
+		"taif": "Taif"
+	}
+},
+	"monitoring": {
 		"action-controls": "Action Controls",
 		"toggle-tasks": "Toggle Tasks",
 		"toggle-teams": "Toggle Teams",
-		"eam": "EAM",
-		"sla": "SLA",
+		"e": "E",
 		"tasks": "Tasks",
 		"department": "Department",
 		"unassigned": "Unassigned",

@@ -6,6 +6,27 @@
     </nb-card-header>
     <nb-card-body>
 <!-- Compact Table with Light Blue Header -->
+        <!-- Table Section -->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+              <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">{{ '@product.name' | translate }}</th>
+                      <th scope="col">{{ '@product.price' | translate }}</th>
+                      <th scope="col">{{ '@product.quantity' | translate }}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let product of products; let i = index">
+                      <th scope="row">{{ i + 1 }}</th>
+                      <td>{{ product.name }}</td>
+                      <td>{{ product.price }}</td>
+                      <td>{{ product.quantity }}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
 
 
   <div class="table-responsive">
