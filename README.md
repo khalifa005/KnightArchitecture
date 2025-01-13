@@ -291,8 +291,10 @@ The upcoming version, **Ultimate Knight Hedge**, introduces new, trending .NET l
   
 - **GitHub Actions**: Built-in CI/CD support using GitHub Actions for automated testing, deployment, and monitoring. Version 2 will provide pre-configured GitHub Action workflows, making continuous integration and deployment simpler and faster.
   
-- **Rate Limiting**: Improved rate-limiting controls to manage API consumption, preventing abuse and ensuring fair resource usage. This will provide better control over API traffic and reduce the risk of service overload.
+- **Rate Limiting**: Improved rate-limiting controls to manage API consumption, preventing abuse and ensuring fair resource usage. This will provide better control over API traffic and reduce the risk of service overload. done
 
+- **SignalR chat**: realtime chat. done
+- 
 - **Health check**: Improved monitoring for app status.
 - **Advanced looging**: Improved monitoring for app performance and sending emails to it department  is slow performance detected.
 
