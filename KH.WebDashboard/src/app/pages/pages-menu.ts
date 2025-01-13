@@ -67,7 +67,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-
+  {
+    title: 'sideMenu.permissions-test',
+    icon: 'eye-outline',
+    link: '/pages/permissions',
+    data: {
+      translationKey: 'sideMenu.permissions-test',
+      permissionKey: 'view-permissions',
+    },
+  },
   {
     title: 'sideMenu.chat',
     icon: 'message-square-outline',
@@ -86,15 +94,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       permissionKey: '',
     },
   },
-  {
-    title: 'sideMenu.permissions',
-    icon: 'eye-outline',
-    link: '/pages/permissions',
-    data: {
-      translationKey: 'sideMenu.permissions',
-      permissionKey: 'view-permissions',
-    },
-  },
+
   {
     title: 'sideMenu.dynamicTable',
     icon: 'grid-outline',

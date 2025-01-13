@@ -1,14 +1,185 @@
-<nb-card>
-    <nb-card-header>
-        {{ '@home.welcome' | translate }}
-    </nb-card-header>
-    <nb-card-body>
+
+<div class="container-flud overflow-hidden">
+    <div class="row ">
+
+        <div class="col-md-3">
+            <app-custom-card [imageUrl]="'assets/svgs/tasklist.svg'" [section1Template]="section1">
+            </app-custom-card>
+        </div>
+        <div class="col-md-3">
+            <app-custom-card [imageUrl]="'assets/svgs/targetIcon.svg'" [section1Template]="section2">
+            </app-custom-card>
+        </div>
+        <div class="col-md-3">
+            <app-custom-card [imageUrl]="'assets/svgs/targetIcon.svg'" [section1Template]="section3">
+            </app-custom-card>
+        </div>
+        <div class="col-md-3">
+            <app-custom-card [imageUrl]="'assets/svgs/targetIcon.svg'" [section1Template]="section4">
+            </app-custom-card>
+        </div>
+
+    </div>
+
+    <div class="row mb-0 mt-2">
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <app-number-counter [startValue]="0" [endValue]="320" [customClass]=" '' "
+                                    [duration]="3000"></app-number-counter>
+                                <span>{{'indicators.new-products' | translate }}</span>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="icon-box primary font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
+                                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <app-number-counter [startValue]="0" [endValue]="85" [customClass]=" '' "
+                                    [duration]="3000"></app-number-counter>
+                                <span>{{'indicators.top-categories' | translate }}</span>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="icon-tag warning font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 70%"
+                                aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <app-number-counter [startValue]="0" [endValue]="45" [customClass]=" '' "
+                                    [duration]="3000"></app-number-counter>
+                                <span>{{'indicators.return-rate' | translate }}</span>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="icon-refresh success font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 45%"
+                                aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <app-number-counter [startValue]="0" [endValue]="1200" [customClass]=" '' "
+                                    [duration]="3000"></app-number-counter>
+                                <span>{{'indicators.total-revenue' | translate }}</span>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="icon-wallet danger font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 60%"
+                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="row mt-3 ">
+        <div class="col-6">
+            <nb-card>
+                <nb-card-header class="text-center mt-0 mb-0 pt-0 pb-0 lh-small">{{'indicators.status' | translate
+                    }}</nb-card-header>
+                <nb-card-body class="mt-0 mb-0 pt-0 pb-0">
+                    <ngx-echarts-pie [passedColumns]="statusColumns" [apiData]="apiDataForStatus"></ngx-echarts-pie>
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+        <div class="col-6">
+            <nb-card>
+                <nb-card-header class="text-center mt-0 mb-0 pt-0 pb-0 lh-small">{{'indicators.zones' | translate
+                    }}</nb-card-header>
+                <nb-card-body class="mt-0 mb-0 pt-0 pb-0">
+                    <ngx-echarts-pie [passedColumns]="zonesColumns" [apiData]="apiDataForZones"></ngx-echarts-pie>
+                </nb-card-body>
+            </nb-card>
+        </div>
 
 
 
 
+    </div>
 
+</div>
 
+<ng-template #section1 let-data>
+    <div class="solu_title">
+        <p class="fs-5">{{'indicators.total-products' | translate }}</p>
+    </div>
+    <div class="solu_description">
+        <app-number-counter [startValue]="0" [endValue]="1200" [customClass]=" 'text-center' "
+            [duration]="3000"></app-number-counter>
+    </div>
+</ng-template>
 
-    </nb-card-body>
-</nb-card>
+<ng-template #section2 let-data>
+    <div class="solu_title">
+        <p class="fs-5">{{'indicators.total-categories' | translate }}</p>
+    </div>
+    <div class="solu_description">
+        <app-number-counter [startValue]="0" [endValue]="35" [customClass]=" 'text-center' "
+            [duration]="3000"></app-number-counter>
+    </div>
+</ng-template>
+
+<ng-template #section3 let-data>
+    <div class="solu_title">
+        <p class="fs-5">{{'indicators.total-sales' | translate }}</p>
+    </div>
+    <div class="solu_description">
+        <app-number-counter [startValue]="0" [endValue]="15000" [customClass]=" 'text-center' "
+            [duration]="3000"></app-number-counter>
+    </div>
+</ng-template>
+
+<ng-template #section4 let-data>
+    <div class="solu_title">
+        <p class="fs-5">{{'indicators.sales-target' | translate }}</p>
+    </div>
+    <div class="solu_description">
+        <app-number-counter [startValue]="0" [endValue]="20000" [customClass]=" 'text-center' "
+            [duration]="3000"></app-number-counter>
+    </div>
+</ng-template>

@@ -16,6 +16,7 @@
     "notFound": "غير موجود",
     "userManagement": "إدارة المستخدمين",
     "permissions": "الأذونات",
+    "permissions-test": "الأذونات (اختبار)",
 	"departments": "الادارات",
 	"chat": "Chat",
 	"cchat": "ChatBot",
