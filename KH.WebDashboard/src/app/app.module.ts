@@ -48,6 +48,7 @@ import { CustomJwtInterceptor } from './@interceptors/jwt.interceptor';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { TreeviewModule } from './@external-lib-override/treeview/treeview.module';
 import { Configuration, ConfigurationParameters, ApiModule } from 'src/open-api';
+import { GoogleMapsModule } from '@angular/google-maps';
 // import { TreeviewModule } from '@samotics/ngx-treeview';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -85,6 +86,7 @@ export function apiConfigFactory(): Configuration {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    GoogleMapsModule,
     ApiModule.forRoot(apiConfigFactory),
     NgxPermissionsModule.forRoot(),
     CoreModule.forRoot(),

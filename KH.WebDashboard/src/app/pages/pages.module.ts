@@ -39,6 +39,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { PipesComponent } from './pipes/pipes.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   imports: [
@@ -49,7 +50,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     FormsModule,
     FormlyModule,
     NbFormFieldModule,
-    
+    GoogleMapsModule,
     SharedModule,
     NgxPermissionsModule.forChild(),
     MatButtonModule,

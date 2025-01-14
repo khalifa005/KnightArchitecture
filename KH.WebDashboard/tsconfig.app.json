@@ -5,7 +5,8 @@
     "allowJs": false,
     "outDir": "./dist",
     "types": [
-      "@angular/localize"
+      "@angular/localize",
+      "google.maps"
     ]
   },
   "files": [

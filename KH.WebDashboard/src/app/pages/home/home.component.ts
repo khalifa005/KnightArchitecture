@@ -6,6 +6,7 @@ import { apiDataItems } from '../../@core/fakeApiData/ApiDataItems';
 import { PieChartTotal } from '@app/@core/models/client/echart';
 import { I18nService } from '@app/@i18n/services/i18n.service';
 import { TranslateService } from '@ngx-translate/core';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,14 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+  title = 'Angular Google Maps Integration';
+  center: google.maps.LatLngLiteral = { lat: 24.7136, lng: 46.6753 }; // Coordinates for Riyadh, Saudi Arabia
+  zoom = 12;
+
+
+
+  markerPosition: google.maps.LatLngLiteral = { lat: 24.7136, lng: 46.6753 };
+  readonly position = { lat: 51.678418, lng: 7.809007 };
 
   constructor(
     private i18nService: I18nService,
@@ -23,6 +32,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // this.loadExample(this.examples[0]);
   }
   ngOnInit(): void {
+
   }
 
   ngAfterViewInit(): void {
@@ -55,7 +65,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     { Id: 3, Total: 300 },
     { Id: 4, Total: 500 }
   ];
-
 
 
 }
