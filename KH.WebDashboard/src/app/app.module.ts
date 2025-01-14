@@ -89,7 +89,8 @@ export function apiConfigFactory(): Configuration {
     NgxPermissionsModule.forRoot(),
     CoreModule.forRoot(),
     NbChatModule.forRoot({
-      messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+      messageGoogleMapKey: 'AIzaSyCpVhQiwAllg1RAFaxMWSpQruuGARy0Y1k',
+      // messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     ThemeModule.forRoot(),
     NbMenuModule.forRoot(),
