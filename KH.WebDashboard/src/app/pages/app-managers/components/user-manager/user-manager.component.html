@@ -1,31 +1,106 @@
-<div class="container">
-    <h1>Users</h1>
-  
-    <!-- Display paged users -->
-    <div *ngIf="pagedUserList?.data">
-      <h2>Paged User List</h2>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>username</th>
-            <th>Is Deleted</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of pagedUserList.data.items">
-            <td>{{ user.id }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.isDeleted ? 'Yes' : 'No' }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>
-        <strong>Page:</strong> {{ pagedUserList.data.currentPage }} /
-        <strong>Total Pages:</strong> {{ pagedUserList.data.totalPages }}
-      </p>
+<nb-card class="rounded" size="large">
+  <nb-card-header class="text-center">
+    {{ 'user.management' | translate }}
+
+    <button nbButton class="mx-1 text-center" size="small" status="success" (click)="onAddClicked()"
+      *ngxPermissionsOnly="['add-user', 'super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+      <nb-icon [options]="{ animation: { type: 'shake' } }" icon="file-add-outline"></nb-icon>
+    </button>
+  </nb-card-header>
+
+  <nb-card-body *ngIf="data">
+    <div class="columns" 
+      >
+      <div class="column col-12">
+        
+        <ngx-table [id]="'users-table'" [filtersTemplate]="filtersTemplate" [loadingTemplate]="loadingTemplate"
+          [summaryTemplate]="summaryTemplate" [configuration]="configuration" [data]="data" [columns]="columns"
+          [pagination]="pagination" (event)="eventEmitted($event)">
+          <ng-template let-row let-index="index">
+            <td>
+              <h5 class="fs-6">#{{ row.id }}</h5>
+            </td>
+            <td>
+              <p class="fs-p">{{ row.username }}</p>
+            </td>
+            <td>
+              <p class="fs-p">{{ row.email }}</p>
+            </td>
+            <td>
+              <p class="fs-p">{{ row.role }}</p>
+            </td>
+            <td>
+              <p class="fs-p" [ngClass]="row.isDeleted ? 'badge bg-danger' : 'badge bg-info'">
+                {{ row.isDeleted | yesNo }}
+              </p>
+            </td>
+            <td>
+              <div class="d-flex f-gap-1">
+                <button nbButton class="mx-1" size="tiny" status="info" (click)="onDetailsClicked(row.id)"
+                  *ngxPermissionsOnly="['super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+                  <nb-icon [options]="{ animation: { type: 'shake' } }" icon="eye-outline"></nb-icon>
+                </button>
+
+                <button nbButton class="mx-1" size="tiny" status="info" (click)="onEditClicked(row.id)"
+                  *ngxPermissionsOnly="['edit-user', 'super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+                  <nb-icon [options]="{ animation: { type: 'shake' } }" icon="edit-outline"></nb-icon>
+                </button>
+
+                <ng-container *ngIf="!row.isDeleted">
+                  <button nbButton size="tiny" status="danger" (click)="onDeactivateClicked(row.id)"
+                    *ngxPermissionsOnly="['delete-user', 'super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+                    <nb-icon [options]="{ animation: { type: 'flip in Y' } }" icon="trash-2-outline"></nb-icon>
+                  </button>
+                </ng-container>
+
+                <ng-container *ngIf="row.isDeleted">
+                  <button nbButton size="tiny" status="warning" (click)="onActivateClicked(row.id)"
+                    *ngxPermissionsOnly="['edit-user', 'super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
+                    <nb-icon [options]="{ animation: { type: 'zoom' } }" icon="refresh-outline"></nb-icon>
+                  </button>
+                </ng-container>
+              </div>
+            </td>
+          </ng-template>
+        </ngx-table>
+
+        <ng-template #summaryTemplate let-total="total" let-limit="limit" let-page="page">
+          <th colspan="10">
+            <span class="mb-0">{{ 'TABLE.TOTAL_ITEMS' | translate }}</span>
+            <span class="mb-1">: {{ pagination.count }}</span>
+          </th>
+        </ng-template>
+
+        <ng-template #loadingTemplate>
+          <td [attr.colspan]="columns.length">
+            <app-loading-spinner size="4rem"></app-loading-spinner>
+          </td>
+        </ng-template>
+
+        <ng-template #filtersTemplate>
+          <th>
+            <ngx-custom-input [(selectedItem)]="userFilterRequest.id" placeHolder="{{ 'TABLE.ID' | translate }}"
+              [icon]="'search-outline'" (keyup.enter)="onFilterChanged()"></ngx-custom-input>
+          </th>
+          <th>
+            <ngx-custom-input [(selectedItem)]="userFilterRequest.username"
+              placeHolder="{{ 'TABLE.USERNAME' | translate }}" [icon]="'search-outline'" (keyup.enter)="onFilterChanged()"></ngx-custom-input>
+          </th>
+          <th>
+            <ngx-custom-input [(selectedItem)]="userFilterRequest.email"
+              placeHolder="{{ 'TABLE.EMAIL' | translate }}" [icon]="'search-outline'" (keyup.enter)="onFilterChanged()"></ngx-custom-input>
+          </th>
+          <th>
+            <ngx-custom-input [(selectedItem)]="userFilterRequest.role"
+              placeHolder="{{ 'TABLE.ROLE' | translate }}" [icon]="'search-outline'" (keyup.enter)="onFilterChanged()"></ngx-custom-input>
+          </th>
+          <th>
+            <app-custom-yes-no-select [(selectedItem)]="userFilterRequest.isDeleted"
+              placeHolder="{{ 'form.dropdown.placeholder' | translate }}" (selectedItemChanged)="onFilterChanged()">
+            </app-custom-yes-no-select>
+          </th>
+        </ng-template>
+      </div>
     </div>
-  </div>
-  
+  </nb-card-body>
+</nb-card>
