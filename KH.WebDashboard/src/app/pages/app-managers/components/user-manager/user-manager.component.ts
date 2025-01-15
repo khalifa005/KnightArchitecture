@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { DefaultConfig, STYLE } from 'ngx-easy-table';
 import { Subject, takeUntil } from 'rxjs';
 import { UserListResponsePagedListApiResponse, UsersService, UserFilterRequest } from 'src/open-api';
@@ -12,15 +13,17 @@ export class UserManagerComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
 
   data: any[] = [];
-  columns = [
-    { key: 'id', title: 'ID' },
-    { key: 'username', title: 'Username' },
-    { key: 'email', title: 'Email' },
-    { key: 'role', title: 'Role' },
-    { key: 'isDeleted', title: 'Status' },
-    { key: 'option', title: 'Option' },
+  // columns = [
+  //   { key: 'id', title: 'ID' },
+  //   { key: 'username', title: 'Username' },
+  //   { key: 'email', title: 'Email' },
+  //   { key: 'role', title: 'Role' },
+  //   { key: 'isDeleted', title: 'Status' },
+  //   { key: 'option', title: 'Option' },
 
-  ];
+  // ];
+  columns: { key: string; title: string }[] = [];
+
   configuration: any;
   pagination = { limit: 10, offset: 0, count: -1, sort: '', order: '' };
   userFilterRequest: UserFilterRequest = {
@@ -29,11 +32,31 @@ export class UserManagerComponent implements OnInit, OnDestroy {
     isDeleted: false,
   };
 
-  constructor(private usersService: UsersService, private cdr: ChangeDetectorRef) {}
+  constructor(private usersService: UsersService, 
+    private translateService: TranslateService,
+    private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    this.loadColumnTranslations();
+
     this.initializeTableConfig();
     this.fetchUsers();
+
+      // Subscribe to language change for dynamic updates
+      this.translateService.onLangChange.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+        this.loadColumnTranslations();
+      });
+  }
+
+  loadColumnTranslations(): void {
+    this.columns = [
+      { key: 'id', title: this.translateService.instant('TABLE.ID') },
+      { key: 'username', title: this.translateService.instant('TABLE.USERNAME') },
+      { key: 'email', title: this.translateService.instant('TABLE.EMAIL') },
+      { key: 'role', title: this.translateService.instant('TABLE.ROLE') },
+      { key: 'isDeleted', title: this.translateService.instant('TABLE.IS_DELETED') },
+      { key: '', title: this.translateService.instant('TABLE.OPTIONS') },
+    ];
   }
 
   ngOnDestroy(): void {
@@ -50,7 +73,7 @@ export class UserManagerComponent implements OnInit, OnDestroy {
         this.configuration.fixedColumnWidth = false;
         this.configuration.tableLayout.hover = true;
         this.configuration.tableLayout.striped = true;
-        this.configuration.tableLayout.style = STYLE.TINY;
+        this.configuration.tableLayout.style = STYLE.NORMAL;
         this.configuration.tableLayout.borderless = false;
         // this.configuration.checkboxes = true;
         this.configuration.serverPagination = true;
