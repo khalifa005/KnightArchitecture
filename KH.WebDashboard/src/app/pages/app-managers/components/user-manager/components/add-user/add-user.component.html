@@ -1,0 +1,48 @@
+<form [formGroup]="myForm">
+    <div class="row">
+      <div class="col-6">
+        <ngx-custom-input
+          [formcontrol]="myForm.firstNameControl"
+          [isRequired]="true"
+          label="{{ 'USER.FIRST_NAME' | translate }}"
+          placeHolder="{{ 'USER.FIRST_NAME' | translate }}"
+          [icon]="'edit-outline'"
+        ></ngx-custom-input>
+      </div>
+      <div class="col-6">
+        <ngx-custom-input
+          [formcontrol]="myForm.lastNameControl"
+          [isRequired]="true"
+          label="{{ 'USER.LAST_NAME' | translate }}"
+          placeHolder="{{ 'USER.LAST_NAME' | translate }}"
+          [icon]="'edit-outline'"
+        ></ngx-custom-input>
+      </div>
+      <div class="col-6 mt-3">
+        <ngx-custom-input
+          [formcontrol]="myForm.emailControl"
+          [isRequired]="true"
+          label="{{ 'USER.EMAIL' | translate }}"
+          placeHolder="{{ 'USER.EMAIL' | translate }}"
+          [icon]="'email-outline'"
+        ></ngx-custom-input>
+      </div>
+      <div class="col-6 mt-3">
+        <ngx-custom-input
+          [formcontrol]="myForm.usernameControl"
+          [isRequired]="true"
+          label="{{ 'USER.USERNAME' | translate }}"
+          placeHolder="{{ 'USER.USERNAME' | translate }}"
+          [icon]="'person-outline'"
+        ></ngx-custom-input>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="col-12 mt-4">
+        <button nbButton fullWidth status="primary" [disabled]="myForm.invalid" (click)="onSubmit()">
+          {{ 'BUTTONS.SUBMIT' | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+  

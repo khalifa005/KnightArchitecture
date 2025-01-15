@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { NotitficationsDefaultValues } from '@app/@core/const/notitfications-default-values';
+import { ToastNotificationService } from '@app/@core/utils.ts/toast-notification.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DefaultConfig, STYLE } from 'ngx-easy-table';
 import { Subject, takeUntil } from 'rxjs';
-import { UserListResponsePagedListApiResponse, UsersService, UserFilterRequest } from 'src/open-api';
+import { UserListResponsePagedListApiResponse, UsersService, UserFilterRequest, CreateUserRequest } from 'src/open-api';
 
 @Component({
   selector: 'app-user-manager',
@@ -32,7 +34,8 @@ export class UserManagerComponent implements OnInit, OnDestroy {
     isDeleted: false,
   };
 
-  constructor(private usersService: UsersService, 
+  constructor(private usersService: UsersService,
+    private toastNotificationService: ToastNotificationService, 
     private translateService: TranslateService,
     private cdr: ChangeDetectorRef) {}
 
@@ -132,5 +135,141 @@ export class UserManagerComponent implements OnInit, OnDestroy {
 
   onActivateClicked(userId: number): void {
     // Logic to reactivate user
+  }
+
+   /**
+   * Add a new user.
+   */
+   addUser(): void {
+    const newUser: CreateUserRequest = {
+      firstName: "Mahmoud",
+      middleName: "Mohamed",
+      lastName: "Khalifa",
+      password: "KhalifaPassword",
+      email: "khalifa_CEO1@example.com",
+      mobileNumber: "05100000010",
+      username: "khalifa_CEO1",
+      sensitiveData: "AccountNumberExample",
+      birthDate: "1995-07-24",
+      groupId: 2,
+      departmentId: 5,
+      roleIds: [3],
+    };
+
+    this.usersService.apiV1UsersPost(newUser)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response) => {
+          // this.toastrService.success('User added successfully.', 'Success');
+this.toastNotificationService.showToast(
+              NotitficationsDefaultValues.Success,
+              this.translateService.instant('user.delete'),
+              this.translateService.instant('user.delete'));
+
+          this.fetchUsers();
+        },
+        error: () => {
+          // this.toastrService.danger('Failed to add user.', 'Error');
+           
+                       this.toastNotificationService.showToast(
+                        NotitficationsDefaultValues.Danger,
+                        this.translateService.instant('Failed to add user'),
+                        this.translateService.instant('Error'));
+                      
+
+                      
+
+        },
+      });
+  }
+
+  /**
+   * Edit an existing user.
+   */
+  editUser(userId: number): void {
+    const updatedUser: CreateUserRequest = {
+      id: userId,
+      middleName: "Mohamed 2",
+      lastName: "Khalifa 2",
+      email: "khalifa_CEO1@example.com",
+      mobileNumber: "05100000010",
+      username: "khalifa_CEO1",
+      sensitiveData: "AccountNumberExample",
+      birthDate: "1995-07-24",
+      groupId: 2,
+      departmentId: 5,
+      roleIds: [3],
+    };
+
+    this.usersService.apiV1UsersPut(updatedUser)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response) => {
+          // this.toastrService.success('User updated successfully.', 'Success');
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Success,
+            this.translateService.instant('user.delete'),
+            this.translateService.instant('user.delete'));
+          this.fetchUsers();
+        },
+        error: () => {
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Danger,
+            this.translateService.instant(''),
+            this.translateService.instant(''));
+        },
+      });
+  }
+
+  /**
+   * Deactivate a user.
+   */
+  deactivateUser(userId: number): void {
+    this.usersService.apiV1UsersIdDelete(userId)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response) => {
+          // this.toastrService.success('User deactivated successfully.', 'Success');
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Success,
+            this.translateService.instant('user.delete'),
+            this.translateService.instant('user.delete'));
+            
+          this.fetchUsers();
+        },
+        error: () => {
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Danger,
+            this.translateService.instant(''),
+            this.translateService.instant(''));
+        },
+      });
+  }
+
+  /**
+   * Activate a user.
+   */
+  activateUser(userId: number): void {
+    // Assuming there's a separate endpoint to activate a user
+    this.usersService.apiV1UsersResetDepartmentIdPut(userId)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response) => {
+          // this.toastrService.success('User activated successfully.', 'Success');
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Success,
+            this.translateService.instant('user.delete'),
+            this.translateService.instant('user.delete'));
+            
+          this.fetchUsers();
+        },
+        error: () => {
+          // this.toastrService.danger('Failed to activate user.', 'Error');
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Danger,
+            this.translateService.instant(''),
+            this.translateService.instant(''));
+        },
+      });
   }
 }
