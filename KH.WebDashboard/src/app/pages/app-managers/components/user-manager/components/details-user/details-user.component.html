@@ -1,1 +1,20 @@
-<p>details-user works!</p>
+<div *ngIf="isLoading" class="loading-spinner">
+    <nb-spinner></nb-spinner>
+  </div>
+  
+  <div *ngIf="!isLoading && userDetails" class="user-details-container">
+    <h3>{{ 'USER.DETAILS' | translate }}</h3>
+    <ul>
+      <li><strong>{{ 'USER.FIRST_NAME' | translate }}:</strong> {{ userDetails.firstName }}</li>
+      <li><strong>{{ 'USER.LAST_NAME' | translate }}:</strong> {{ userDetails.lastName }}</li>
+      <li><strong>{{ 'USER.EMAIL' | translate }}:</strong> {{ userDetails.email }}</li>
+      <li><strong>{{ 'USER.USERNAME' | translate }}:</strong> {{ userDetails.username }}</li>
+      <li><strong>{{ 'USER.MOBILE' | translate }}:</strong> {{ userDetails.mobileNumber }}</li>
+      <li><strong>{{ 'USER.ROLE' | translate }}:</strong> {{ userDetails.roleName }}</li>
+    </ul>
+  </div>
+  
+  <div *ngIf="!isLoading && !userDetails" class="no-data">
+    {{ 'USER.NO_DETAILS_FOUND' | translate }}
+  </div>
+  
