@@ -19,6 +19,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { PipesComponent } from './pipes/pipes.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { MapsComponent } from './maps/maps.component';
 
 const routes: Routes = [{
   path: '',
@@ -106,6 +107,10 @@ const routes: Routes = [{
     {
       path: 'spinner',
       component: SpinnerComponent
+    },
+    {
+      path: 'maps',
+      component: MapsComponent
     },
     {
       path: '**',

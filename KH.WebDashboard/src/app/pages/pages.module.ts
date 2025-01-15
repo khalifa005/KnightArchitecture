@@ -40,6 +40,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import { PipesComponent } from './pipes/pipes.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { MapsComponent } from './maps/maps.component';
 
 @NgModule({
   imports: [
@@ -87,7 +88,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     TabsComponent,
     ButtonsComponent,
     PipesComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MapsComponent
 
   ],
 })

@@ -195,6 +195,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
+    title: 'sideMenu.maps',
+    icon: 'loader-outline', // Select an appropriate icon
+    link: '/pages/maps',
+    data: {
+      translationKey: 'sideMenu.maps',
+      permissionKey: '', // Add permission if needed
+    },
+  },
+  {
     title: 'sideMenu.auth',
     icon: 'lock-outline',
     link: '/auth',

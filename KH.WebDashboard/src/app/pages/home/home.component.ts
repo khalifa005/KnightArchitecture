@@ -14,14 +14,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  title = 'Angular Google Maps Integration';
-  center: google.maps.LatLngLiteral = { lat: 24.7136, lng: 46.6753 }; // Coordinates for Riyadh, Saudi Arabia
-  zoom = 12;
-
-
-
-  markerPosition: google.maps.LatLngLiteral = { lat: 24.7136, lng: 46.6753 };
-  readonly position = { lat: 51.678418, lng: 7.809007 };
+  
 
   constructor(
     private i18nService: I18nService,
