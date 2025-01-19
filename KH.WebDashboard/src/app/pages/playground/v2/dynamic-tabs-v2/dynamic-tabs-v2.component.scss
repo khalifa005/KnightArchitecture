@@ -1,6 +1,22 @@
-.navigation-container {
-    display: flex;
+.tab-container {
     max-width: 924px;
+    margin: 0 auto;
+  }
+
+  .controls {
+    margin-bottom: 16px;
+  }
+
+  .fit-width-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font: 600 14px Nunito, sans-serif;
+    color: rgb(69, 77, 92);
+  }
+
+  .navigation-container {
+    display: flex;
     position: relative;
     align-items: center;
   }
@@ -16,6 +32,11 @@
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    width: 100%;
+  }
+
+  .navigation-wrapper.fit-width {
+    overflow-x: hidden;
   }
 
   .navigation-wrapper::-webkit-scrollbar {
@@ -61,6 +82,7 @@
     font: 600 16px Nunito, sans-serif;
     cursor: pointer;
     white-space: nowrap;
+    transition: all 0.3s ease;
   }
 
   .tab-button:focus {

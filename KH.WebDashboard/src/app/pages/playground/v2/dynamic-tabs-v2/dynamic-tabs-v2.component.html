@@ -1,30 +1,49 @@
-<nav class="navigation-container" role="navigation">
-    <button 
-      class="scroll-button left" 
-      [class.visible]="canScrollLeft$ | async"
-      (click)="scrollLeft()"
-      aria-label="Scroll tabs left">
-      <i class="bi bi-chevron-left"></i>
-    </button>
-
-    <div #tabContainer class="navigation-wrapper" (scroll)="onScroll()">
-      <button 
-        *ngFor="let tab of tabs"
-        class="tab-button" 
-        [class.tab-button-active]="tab.isActive"
-        tabindex="0" 
-        role="tab" 
-        [attr.aria-selected]="tab.isActive"
-        (click)="selectTab(tab.id)">
-        {{tab.label}}
-      </button>
+<div class="tab-container">
+    <div class="controls">
+      <label class="fit-width-control">
+        <input
+          type="checkbox"
+          [ngModel]="fitToWidth$ | async"
+          (ngModelChange)="toggleFitToWidth($event)">
+        Fit to width
+      </label>
     </div>
 
-    <button 
-      class="scroll-button right" 
-      [class.visible]="canScrollRight$ | async"
-      (click)="scrollRight()"
-      aria-label="Scroll tabs right">
-      <i class="bi bi-chevron-right"></i>
-    </button>
-  </nav>
+    <nav class="navigation-container" role="navigation">
+      <button 
+        class="scroll-button left" 
+        [class.visible]="(canScrollLeft$ | async) && !(fitToWidth$ | async)"
+        (click)="scrollLeft()"
+        aria-label="Scroll tabs left">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+
+      <div 
+        #tabContainer 
+        class="navigation-wrapper"
+        [class.fit-width]="fitToWidth$ | async"
+        (scroll)="onScroll()">
+        <button 
+          *ngFor="let tab of tabs"
+          class="tab-button" 
+          [class.tab-button-active]="tab.isActive"
+          [style.flex]="(fitToWidth$ | async) ? '1' : 'none'"
+          tabindex="0" 
+          role="tab" 
+          [attr.aria-selected]="tab.isActive"
+          (click)="selectTab(tab.id)">
+          {{tab.label}}
+        </button>
+      </div>
+
+      <button 
+        class="scroll-button right" 
+        [class.visible]="(canScrollRight$ | async) && !(fitToWidth$ | async)"
+        (click)="scrollRight()"
+        aria-label="Scroll tabs right">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </nav>
+
+    <app-dy-tab-v2 [content]="activeTabContent"></app-dy-tab-v2>
+  </div>
