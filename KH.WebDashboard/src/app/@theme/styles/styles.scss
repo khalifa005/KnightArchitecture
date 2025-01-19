@@ -68,12 +68,98 @@ nb-menu .menu-item a nb-icon {
 
 .nb-theme-default nb-layout-header.fixed~.layout-container {
   padding-top: 1.75rem !important; /* Matches the header height */
+  left: 61px ; 
+}
+
+
+// nb-layout-header.fixed {
+//   position: fixed;
+//   top: 0 !important;
+//   // left: 61px !important;
+//   left: 260px !important;
+//   right: 0 !important;
+//   z-index: 1040 !important;
+// }
+
+// [dir="rtl"] nb-layout-header.fixed {
+//   left: 0px !important;
+//   right: 260px !important;
+// }
+
+
+.custom-header-expanded {
+  left: 260px !important;
+  right: 0 !important;
+}
+
+
+[dir="rtl"] .custom-header-expanded {
+  left: 0px !important;
+  right: 260px !important;
+}
+
+
+.custom-header-compacted {
+  left: 62px !important;
+  right: 0 !important;
+}
+
+
+[dir="rtl"] .custom-header-compacted {
+  left: 0px !important;
+  right: 62px !important;
+}
+
+// [dir="rtl"] nb-sidebar.menu-sidebar.expanded + nb-layout-header.fixed {
+//   left: 0px !important;
+//   right: 260px !important;
+// }
+
+// nb-sidebar.menu-sidebar.compacted + nb-layout-header.fixed {
+//   left: 50px !important;
+//   right: 0 !important;
+// }
+
+nb-sidebar .scrollable {
+  top: -18px !important;
+}
+
+nb-sidebar .main-container {
+  height: 1000px !important;
+  background-color: white !important;
 }
 
 .nb-theme-default nb-layout .layout .layout-container nb-sidebar.fixed,
 .nb-theme-default nb-layout .layout .layout-container nb-sidebar .main-container-fixed {
   top: 1.75rem !important; /* Matches the header height */
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
 }
+
+nb-sidebar.top-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto; /* Adjust height as needed */
+  z-index: 1050; /* Ensure it's above other elements */
+  display: flex;
+  align-items: center; /* Optional: Align content */
+  background: var(--sidebar-background, #ffffff); /* Optional: Set background color */
+  border-bottom: 1px solid #e0e0e0; /* Optional: Add a bottom border */
+}
+
+nb-sidebar.top-sidebar .menu-items {
+  flex-direction: row; /* Align menu items horizontally */
+}
+
+nb-sidebar.top-sidebar .menu-item {
+  display: inline-flex;
+  margin-right: 15px; /* Optional: Adjust spacing between items */
+}
+
 
 .nb-theme-default nb-layout .layout .layout-container .content .columns nb-layout-column {
   // padding: 0 !important; 
