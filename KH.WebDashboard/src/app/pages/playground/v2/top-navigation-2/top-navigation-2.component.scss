@@ -1,0 +1,84 @@
+.header {
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px 12px 80px;
+    font-family: Nunito, sans-serif;
+
+    @media (max-width: 991px) {
+      padding: 12px 20px;
+    }
+  }
+
+  .time-display {
+    display: flex;
+    gap: 1px;
+    color: #1774b4;
+  }
+
+  .time {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .period {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: auto;
+  }
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .language-switch {
+    display: flex;
+    gap: 14px;
+    background-color: #d2d5da;
+    border-radius: 100px;
+    padding: 5px 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .active-lang {
+    background-color: #1774b4;
+    color: #fff;
+    border-radius: 100px;
+    padding: 4px;
+    width: 24px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(39, 39, 39, 0.1);
+  }
+
+  .alt-lang {
+    color: #000;
+    padding: 4px;
+  }
+
+  .notifications-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .profile-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  .profile-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1d1d1d;
+  }

@@ -46,6 +46,9 @@ import { TaskListHeaderComponent } from './playground/components/task-list-heade
 import { TaskListNavComponent } from './playground/components/task-list-nav/task-list-nav.component';
 import { TaskListComponent } from './playground/components/task-list/task-list.component';
 import { TaskListFiltersComponent } from './playground/components/task-list-filters/task-list-filters.component';
+import { TaskList2Component } from './playground/v2/task-list-2/task-list-2.component';
+import { SideNavigation2Component } from './playground/v2/side-navigation-2/side-navigation-2.component';
+import { TopNavigation2Component } from './playground/v2/top-navigation-2/top-navigation-2.component';
 
 @NgModule({
   imports: [
@@ -99,7 +102,10 @@ import { TaskListFiltersComponent } from './playground/components/task-list-filt
     TaskListHeaderComponent,
     TaskListNavComponent,
     TaskListComponent,
-    TaskListFiltersComponent
+    TaskListFiltersComponent,
+    TaskList2Component,
+    SideNavigation2Component,
+    TopNavigation2Component
 
   ],
 })

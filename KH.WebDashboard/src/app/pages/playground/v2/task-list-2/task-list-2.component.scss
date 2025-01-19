@@ -1,0 +1,23 @@
+.task-management-layout {
+    display: flex;
+    background-color: #f3f4f6;
+  }
+
+  .side-nav {
+    background-color: #fff;
+    box-shadow: 4px 0 4px rgba(0, 0, 0, 0.06);
+    min-width: 260px;
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .task-list-container {
+    padding: 24px;
+    @media (max-width: 991px) {
+      padding: 16px;
+    }
+  }
