@@ -42,24 +42,34 @@
   @include nb-overrides();
 };
 
-
+.nb-menu .menu-item .menu-icon{
+  margin: 0 0.5rem 0 0 !important;
+}
 
 nb-menu .menu-item a {
   display: flex !important; 
   align-items: center !important;
+  font-size: medium  !important;
 }
 
 /* LTR layout (default) */
 nb-menu .menu-item a nb-icon {
-  margin-right: 10px !important; /* Space between icon and text */
+  // margin-right: 10px !important; /* Space between icon and text */
+  // margin-right: 3px !important; /* Space between icon and text */
+/* Space between icon and text */
+margin-inline-end: 3px !important;
+
 }
 
-/* RTL layout */
-[dir="rtl"] nb-menu .menu-item a nb-icon {
-  margin-right: 0 !important; /* Reset the margin-right */
-  margin-left: 10px !important; /* Add space to the left for RTL */
-}
+// /* RTL layout */
+// [dir="rtl"] nb-menu .menu-item a nb-icon {
+//   margin-right: 0 !important; /* Reset the margin-right */
+//   margin-left: 10px !important; /* Add space to the left for RTL */
+// }
 
+nb-menu .menu-item a.active{
+  background-color: aliceblue !important;
+}
 /* You can add global styles to this file, and also import other style files */
 .nb-theme-default nb-layout-header nav {
   height: 2.90rem !important; /* Reduced height */
