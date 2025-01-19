@@ -3,6 +3,8 @@ $nb-card-header-padding: 0.5rem 0.9rem;
 $nb-card-body-padding: 0.5rem 0.9rem;
 
 @mixin nb-overrides() {
+
+  
   nb-card-header {
     padding: $nb-card-header-padding !important;
   }

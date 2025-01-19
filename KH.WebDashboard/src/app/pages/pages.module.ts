@@ -41,6 +41,11 @@ import { PipesComponent } from './pipes/pipes.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapsComponent } from './maps/maps.component';
+import { PlaygroundComponent } from './playground/playground.component';
+import { TaskListHeaderComponent } from './playground/components/task-list-header/task-list-header.component';
+import { TaskListNavComponent } from './playground/components/task-list-nav/task-list-nav.component';
+import { TaskListComponent } from './playground/components/task-list/task-list.component';
+import { TaskListFiltersComponent } from './playground/components/task-list-filters/task-list-filters.component';
 
 @NgModule({
   imports: [
@@ -89,7 +94,12 @@ import { MapsComponent } from './maps/maps.component';
     ButtonsComponent,
     PipesComponent,
     SpinnerComponent,
-    MapsComponent
+    MapsComponent,
+    PlaygroundComponent,
+    TaskListHeaderComponent,
+    TaskListNavComponent,
+    TaskListComponent,
+    TaskListFiltersComponent
 
   ],
 })

@@ -1,0 +1,46 @@
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .nav-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: #7d7d7d;
+    text-decoration: none;
+    font: 600 16px Nunito, sans-serif;
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .nav-item.active {
+    background-color: #d1ecff;
+    color: #1774b4;
+    border: 1px solid rgba(23, 116, 180, 0.5);
+  }
+
+  .nav-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .nav-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+  }
+
+  .nav-expand {
+    width: 24px;
+    height: 24px;
+  }

@@ -1,0 +1,41 @@
+<div class="filters-container">
+    <div class="filters-header">
+      <div class="task-icon-wrapper">
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/c4747f2fbd26bebddc9d86e8fb4d8bf0510669ab11a8051a51f33a5f3476b2c8?placeholderIfAbsent=true&apiKey=62478f35ad184ca0a5100bed332f5e18"
+          alt="Tasks"
+          class="task-icon"
+        />
+      </div>
+      <div class="tabs-container">
+        <div class="tabs-scroll">
+          <div class="tabs-wrapper">
+            <ng-container *ngFor="let tab of filterTabs">
+              <button 
+                [class]="'tab-button ' + (tab.active ? 'active' : '')"
+                (click)="selectTab(tab.id)"
+                [attr.aria-selected]="tab.active"
+                role="tab"
+              >
+                {{ tab.label }}
+              </button>
+            </ng-container>
+            <div class="scroll-fade"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="filters-actions">
+      <button class="action-button search-button">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/9a6ed185e94ae294d5546eeb651338dbbfccebb0d123610fbdd0f909968318e9?placeholderIfAbsent=true&apiKey=62478f35ad184ca0a5100bed332f5e18" alt="Search" />
+      </button>
+      <button class="action-button export-button">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7bc2c49b4b9e57792a0e45e84393d9a2b4fa615ace777b525bdb08d7aae2dd12?placeholderIfAbsent=true&apiKey=62478f35ad184ca0a5100bed332f5e18" alt="Export" />
+        <span>Export</span>
+      </button>
+      <button class="action-button allocation-button" [class.disabled]="true">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/209530f88b58038392e5b488c66558c45df8a1d8f5fc5f1d7259e542e2c03c0f?placeholderIfAbsent=true&apiKey=62478f35ad184ca0a5100bed332f5e18" alt="Multi Allocation" />
+        <span>Multi Allocation</span>
+      </button>
+    </div>
+  </div>

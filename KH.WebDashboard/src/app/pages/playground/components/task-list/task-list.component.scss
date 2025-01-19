@@ -1,0 +1,71 @@
+.task-management-layout {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+
+  .sidebar {
+    background-color: #fff;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    flex: 0 0 auto;
+    padding: 9px 0 680px 20px;
+  }
+
+  @media (max-width: 991px) {
+    .sidebar {
+      padding-bottom: 100px;
+    }
+  }
+
+  .logo-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .company-logo {
+    width: 133px;
+    height: auto;
+  }
+
+  .menu-toggle {
+    width: 20px;
+    height: auto;
+  }
+
+  .nav-divider {
+    margin-top: 11px;
+    width: 223px;
+    height: 1px;
+    background-color: #cdd0d7;
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 139px;
+  }
+
+  @media (max-width: 991px) {
+    .main-content {
+      padding-bottom: 100px;
+    }
+  }
+
+  .task-list-container {
+    margin: 24px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+  }
+
+  @media (max-width: 991px) {
+    .task-list-container {
+      margin: 24px 10px;
+    }
+  }

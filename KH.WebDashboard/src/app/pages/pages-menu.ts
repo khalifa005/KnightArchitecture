@@ -204,6 +204,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     },
   },
   {
+    title: 'Playground',
+    icon: 'loader-outline', // Select an appropriate icon
+    link: '/pages/Playground',
+    data: {
+      translationKey: 'Playground',
+      permissionKey: '', // Add permission if needed
+    },
+  },
+  {
     title: 'sideMenu.auth',
     icon: 'lock-outline',
     link: '/auth',

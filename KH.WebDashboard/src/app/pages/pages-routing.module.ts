@@ -20,6 +20,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import { PipesComponent } from './pipes/pipes.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { MapsComponent } from './maps/maps.component';
+import { PlaygroundComponent } from './playground/playground.component';
 
 const routes: Routes = [{
   path: '',
@@ -111,6 +112,10 @@ const routes: Routes = [{
     {
       path: 'maps',
       component: MapsComponent
+    },
+    {
+      path: 'Playground',
+      component: PlaygroundComponent
     },
     {
       path: '**',
