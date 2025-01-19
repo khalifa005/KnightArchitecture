@@ -68,3 +68,15 @@
     }
   }
 }
+
+.time {
+  color: #1774b4;
+  display: flex;
+  gap: 1px;
+  align-items: baseline;
+}
+
+.hours {
+  font-size: 24px;
+  font-weight: 700;
+}

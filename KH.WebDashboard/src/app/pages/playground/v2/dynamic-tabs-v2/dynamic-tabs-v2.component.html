@@ -1,0 +1,30 @@
+<nav class="navigation-container" role="navigation">
+    <button 
+      class="scroll-button left" 
+      [class.visible]="canScrollLeft$ | async"
+      (click)="scrollLeft()"
+      aria-label="Scroll tabs left">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+
+    <div #tabContainer class="navigation-wrapper" (scroll)="onScroll()">
+      <button 
+        *ngFor="let tab of tabs"
+        class="tab-button" 
+        [class.tab-button-active]="tab.isActive"
+        tabindex="0" 
+        role="tab" 
+        [attr.aria-selected]="tab.isActive"
+        (click)="selectTab(tab.id)">
+        {{tab.label}}
+      </button>
+    </div>
+
+    <button 
+      class="scroll-button right" 
+      [class.visible]="canScrollRight$ | async"
+      (click)="scrollRight()"
+      aria-label="Scroll tabs right">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </nav>

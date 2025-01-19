@@ -18,6 +18,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: any;
   userPicture: string = "./assets/images/logo.png";
 
+  currentTime: string = '';
+  currentPeriod: string = '';
+  private timerInterval!: any;
+
   themes = [
     {
       value: 'default',
@@ -62,6 +66,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.updateTime(); // Initial time update
+    this.timerInterval = setInterval(() => this.updateTime(), 1000); // Update every second
+
     this.currentTheme = this.themeService.currentTheme;
 
     const { xl } = this.breakpointService.getBreakpointsMap();
@@ -112,5 +119,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onDirectionSwitch(): void {
     // location.reload();
+  }
+
+  updateTime(): void {
+    const date = new Date();
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    this.currentPeriod = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12; // Convert to 12-hour format
+    this.currentTime = `${this.formatNumber(hours)}:${this.formatNumber(minutes)}`;
+  }
+
+  formatNumber(num: number): string {
+    return num < 10 ? `0${num}` : `${num}`;
   }
 }
