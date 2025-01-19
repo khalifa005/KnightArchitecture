@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { LayoutService } from '@app/@core/utils.ts';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 @Component({
@@ -14,8 +15,14 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
 
       <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive start>
       <div class="logo-section">
-      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a86eb78ce22023a335f5b608f9666955c1e4a0fcd44d2982b3eaa8921839e023?placeholderIfAbsent=true&apiKey=a0d33f5c0ebf4aa6a5461f186b30b21f" alt="Company logo" class="company-logo" />
-      <img src="assets/icons/col.svg" alt="Menu toggle" class="menu-toggle" />
+
+      <img *ngIf="isExpandedHeader" src="https://cdn.builder.io/api/v1/image/assets/TEMP/a86eb78ce22023a335f5b608f9666955c1e4a0fcd44d2982b3eaa8921839e023?placeholderIfAbsent=true&apiKey=a0d33f5c0ebf4aa6a5461f186b30b21f" alt="Company logo" class="company-logo" />
+      <img *ngIf="!isExpandedHeader" src="assets/icons/nwc-logo-col.svg" alt="Company logo" class="company-logo" />
+    
+      <img src="assets/icons/col.svg" alt="Menu toggle" class="menu-toggle" *ngIf="isExpandedHeader" 
+      (click)="toggleSidebar()"/>
+    
+
     </div>
     <div class="nav-divider"></div>
 
@@ -43,6 +50,8 @@ export class OneColumnLayoutComponent implements OnInit, OnDestroy {
   constructor(
     private menuService: NbMenuService,
     private sidebarService: NbSidebarService,
+        private layoutService: LayoutService,
+    
     private breakpointService: NbMediaBreakpointsService) {
 
   }
@@ -72,6 +81,13 @@ export class OneColumnLayoutComponent implements OnInit, OnDestroy {
     //   }
     // )
   }
+  toggleSidebar(): boolean {
+    this.sidebarService.toggle(true, 'menu-sidebar');
+    this.layoutService.changeLayoutSize();
+
+    return false;
+  }
+
 
   ngOnDestroy(): void {
 

@@ -45,6 +45,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     { title: 'Profile', action: 'profile' },
     { title: 'Log out', link: '/auth/logout', action: 'logout' }
   ];
+
+  headerClassCompacted = "custom-header-compacted";
+  headerClassExpanded = "custom-header-expanded";
+  isExpandedHeader = true;
+
   constructor(private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private authService: AuthService,
@@ -73,6 +78,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+
+          // Listen to sidebar toggle events
+     this.sidebarService.onToggle().subscribe({
+      next: (event) => {
+        this.isExpandedHeader = !this.isExpandedHeader;
+        console.log('Sidebar toggled:', event);
+      },
+    });
+
   }
 
   ngOnDestroy() {

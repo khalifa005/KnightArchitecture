@@ -63,7 +63,11 @@ nb-menu .menu-item a nb-icon {
 /* You can add global styles to this file, and also import other style files */
 .nb-theme-default nb-layout-header nav {
   height: 2.90rem !important; /* Reduced height */
-  padding: 0.75rem !important; /* Adjust padding to fit the smaller height */
+  // padding: 0.75rem !important; /* Adjust padding to fit the smaller height */
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  padding-inline-start: 0.1rem !important; /* Equivalent to padding-left in LTR and padding-right in RTL */
+  padding-inline-end: 0.75rem !important;   /* Equivalent to padding-right in LTR and padding-left in RTL */
 }
 
 .nb-theme-default nb-layout-header.fixed~.layout-container {
@@ -122,10 +126,15 @@ nb-menu .menu-item a nb-icon {
 
 nb-sidebar .scrollable {
   top: -18px !important;
+  padding-top: 1.2rem !important;
+  // padding-left: 1.0rem !important;
+  // padding-right: 0.1rem !important;
+  padding-inline-start: 1.0rem !important; /* Equivalent to padding-left in LTR and padding-right in RTL */
+  padding-inline-end: 0.1rem !important;   /* Equivalent to padding-right in LTR and padding-left in RTL */
 }
 
 nb-sidebar .main-container {
-  height: 1000px !important;
+  height: 800px !important;
   background-color: white !important;
 }
 

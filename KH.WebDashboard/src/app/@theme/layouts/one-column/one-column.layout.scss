@@ -5,9 +5,6 @@
 @include nb-install-component() {
   .menu-sidebar ::ng-deep .scrollable {
     padding-top: nb-theme(1.75rem); //header-height 
-    .menu-sidebar{
-      min-height: fit-content !important;
-    }
   }
 
   ::ng-deep div.layout-container > nb-sidebar {
