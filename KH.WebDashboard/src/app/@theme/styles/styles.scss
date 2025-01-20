@@ -73,7 +73,6 @@ nb-menu .menu-item a.active{
 /* You can add global styles to this file, and also import other style files */
 .nb-theme-default nb-layout-header nav {
   height: 2.90rem !important; /* Reduced height */
-  // padding: 0.75rem !important; /* Adjust padding to fit the smaller height */
   padding-top: 0.75rem !important;
   padding-bottom: 0.75rem !important;
   padding-inline-start: 0.1rem !important; /* Equivalent to padding-left in LTR and padding-right in RTL */
@@ -124,6 +123,35 @@ nb-menu .menu-item a.active{
   right: 62px !important;
 }
 
+
+.logo-section {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+  .company-logo {
+    width: 195px;
+    height: auto;
+  }
+ 
+  .company-logo-col {
+    width: 100px;
+    min-width: 33px;
+    height: auto;
+  }
+
+  .menu-toggle {
+    width: 20px;
+    height: auto;
+  }
+
+  .nav-divider {
+    margin: 11px 0;
+    height: 1px;
+    background-color: #cdd0d7;
+  }
+
 // [dir="rtl"] nb-sidebar.menu-sidebar.expanded + nb-layout-header.fixed {
 //   left: 0px !important;
 //   right: 260px !important;
@@ -135,7 +163,8 @@ nb-menu .menu-item a.active{
 // }
 
 nb-sidebar .scrollable {
-  top: -18px !important;
+  top: 33px !important;
+  // top: -18px !important;
   padding-top: 1.2rem !important;
   // padding-left: 1.0rem !important;
   // padding-right: 0.1rem !important;

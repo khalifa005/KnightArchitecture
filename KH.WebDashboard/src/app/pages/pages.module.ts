@@ -46,11 +46,6 @@ import { TaskListHeaderComponent } from './playground/components/task-list-heade
 import { TaskListNavComponent } from './playground/components/task-list-nav/task-list-nav.component';
 import { TaskListComponent } from './playground/components/task-list/task-list.component';
 import { TaskListFiltersComponent } from './playground/components/task-list-filters/task-list-filters.component';
-import { TaskList2Component } from './playground/v2/task-list-2/task-list-2.component';
-import { SideNavigation2Component } from './playground/v2/side-navigation-2/side-navigation-2.component';
-import { TopNavigation2Component } from './playground/v2/top-navigation-2/top-navigation-2.component';
-import { DynamicTabsV2Component } from './playground/v2/dynamic-tabs-v2/dynamic-tabs-v2.component';
-import { DyTabV2Component } from './playground/v2/dynamic-tabs-v2/components/dy-tab-v2/dy-tab-v2.component';
 
 @NgModule({
   imports: [
@@ -105,12 +100,6 @@ import { DyTabV2Component } from './playground/v2/dynamic-tabs-v2/components/dy-
     TaskListNavComponent,
     TaskListComponent,
     TaskListFiltersComponent,
-    TaskList2Component,
-    SideNavigation2Component,
-    TopNavigation2Component,
-    DynamicTabsV2Component,
-    DyTabV2Component
-
   ],
 })
 export class PagesModule {
