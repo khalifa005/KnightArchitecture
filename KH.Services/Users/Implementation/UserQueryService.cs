@@ -173,14 +173,20 @@ public class UserQueryService : IUserQueryService
     var repository = _unitOfWork.Repository<User>();
 
     var pagedUsers = await repository.GetPagedWithProjectionAsync<UserListResponse>(
-    pageNumber: 1,
-    pageSize: 10,
-    filterExpression: u => u.IsDeleted == request.IsDeleted, // Filter by 
+    pageNumber: request.PageIndex,
+    pageSize: request.PageSize,
+    filterExpression: u => u.IsDeleted == request.IsDeleted
+     && (string.IsNullOrEmpty(request.UserName) || u.Username.Contains(request.UserName))
+     && (string.IsNullOrEmpty(request.Email) || u.Email.Contains(request.Email))
+    && (!request.Id.HasValue || u.Id == request.Id), // Filter by 
     projectionExpression: u => new UserListResponse
     {
       Id = u.Id,
       Username = u.Username,
+      FirstName = u.FirstName,
       LastName = u.LastName,
+      IsDeleted = u.IsDeleted,
+      CreatedDate = u.CreatedDate,
       UserRoles = u.UserRoles.Select(ur => new UserRoleResponse(ur)).ToList(),
       DepartmentNames = u.UserDepartments.Select(ud => ud.Department!.NameEn).ToList()
     },

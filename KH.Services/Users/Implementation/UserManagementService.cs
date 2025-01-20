@@ -304,5 +304,39 @@ public class UserManagementService : IUserManagementService
 
     return res;
   }
-  
+
+  public async Task<ApiResponse<string>> ReActivateAsync(long id, CancellationToken cancellationToken)
+  {
+    ApiResponse<string> res = new ApiResponse<string>((int)HttpStatusCode.OK);
+
+    try
+    {
+      var repository = _unitOfWork.Repository<User>();
+
+      var entityFromDB = await repository.GetAsync(id, tracking: true, cancellationToken: cancellationToken);
+      if (entityFromDB == null)
+        throw new Exception("invalid-user");
+
+      if (entityFromDB.IsDeleted == false)
+        throw new Exception("already-activated");
+
+      entityFromDB.IsDeleted = false;
+      entityFromDB.DeletedDate = null;
+      entityFromDB.DeletedById = null;
+      await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
+
+      res.Data = entityFromDB.Id.ToString();
+      return res;
+    }
+    catch (Exception ex)
+    {
+
+      res.StatusCode = (int)HttpStatusCode.BadRequest;
+      res.Data = ex.Message;
+      res.ErrorMessage = ex.Message;
+      return res;
+    }
+  }
+
+
 }

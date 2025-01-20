@@ -25,6 +25,7 @@ public class UserListResponse : BasicTrackerEntityDto
     Email = e.Email;
     Username = e.Username;
     BirthDate = e.BirthDate;
+    IsDeleted = e.IsDeleted;
     MobileNumber = e.MobileNumber;
   }
 }
