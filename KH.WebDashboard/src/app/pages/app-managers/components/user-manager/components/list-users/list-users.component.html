@@ -169,6 +169,16 @@
                 </ngx-custom-input>
             </th>
             <th>
+                <!-- <ngx-custom-input
+                    [(selectedItem)]="filterRequest.email"
+                    placeHolder="{{ 'TABLE.EMAIL' | translate }}"
+                    [icon]="'search-outline'"
+                    [disabled]="false"
+                    (keyup.enter)="onIdFilterChnaged($event)"
+                >
+                </ngx-custom-input> -->
+            </th>
+            <th>
                 <app-custom-yes-no-select
                     [(selectedItem)]="filterRequest.isDeleted"
                     placeHolder="{{ 'form.dropdown.placeholder' | translate }}"

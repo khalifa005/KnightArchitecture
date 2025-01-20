@@ -179,17 +179,7 @@ public class UserQueryService : IUserQueryService
      && (string.IsNullOrEmpty(request.UserName) || u.Username.Contains(request.UserName))
      && (string.IsNullOrEmpty(request.Email) || u.Email.Contains(request.Email))
     && (!request.Id.HasValue || u.Id == request.Id), // Filter by 
-    projectionExpression: u => new UserListResponse
-    {
-      Id = u.Id,
-      Username = u.Username,
-      FirstName = u.FirstName,
-      LastName = u.LastName,
-      IsDeleted = u.IsDeleted,
-      CreatedDate = u.CreatedDate,
-      UserRoles = u.UserRoles.Select(ur => new UserRoleResponse(ur)).ToList(),
-      DepartmentNames = u.UserDepartments.Select(ud => ud.Department!.NameEn).ToList()
-    },
+    projectionExpression: u => new UserListResponse(u),
     include: query => query
         .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
         .Include(u => u.UserDepartments).ThenInclude(ud => ud.Department),
