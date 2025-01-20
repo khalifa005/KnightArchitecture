@@ -14,7 +14,7 @@ import { UserDetailsResponse, UserDetailsResponseApiResponse, UsersService } fro
 export class DetailsUserComponent implements OnInit, OnDestroy {
   private log = new Logger(DetailsUserComponent.name);
 
-  @Input() userId: number;
+  @Input() idInput: number;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   userDetails: UserDetailsResponse | null = null;
@@ -27,7 +27,7 @@ export class DetailsUserComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.userId) {
+    if (this.idInput) {
       this.fetchUserDetails();
     } else {
       this.log.error('No user ID provided.');
@@ -42,7 +42,7 @@ export class DetailsUserComponent implements OnInit, OnDestroy {
   private fetchUserDetails(): void {
     this.isLoading = true;
     this.usersService
-      .apiV1UsersIdGet(this.userId)
+      .apiV1UsersIdGet(this.idInput)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (response) => {

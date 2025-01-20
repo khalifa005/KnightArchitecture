@@ -10,6 +10,7 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
 import { UserListResponse, UserFilterRequest, UserListResponsePagedListApiResponse, UsersService, CreateUserRequest } from 'src/open-api';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { DetailsUserComponent } from '../details-user/details-user.component';
+import { PopUpWindowTypes } from '@app/@core/const/popup-window-types';
 
 @Component({
   selector: 'app-list-users',
@@ -168,10 +169,14 @@ export class ListUsersComponent implements OnInit, OnDestroy {
       close: true,
     };
 
-    this.windowService.open(null, {
-      title: `User Details - #${id}`,
+    this.windowService.open(DetailsUserComponent, {
+      title: `User - #${id}`,
       buttons: buttonsConfig,
-      context: { id },
+      windowClass: PopUpWindowTypes.FullScreen,
+      context: {  idInput: id, },
+    }).onClose.subscribe(response => {
+      if (response === 200) {
+      }
     });
   }
 
