@@ -17,7 +17,6 @@ export class DepartmentManagerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getDepartmentById(1); // Fetch a department by ID
-    this.listPagedDepartments(); // Fetch paginated departments
   }
 
   ngOnDestroy(): void {
@@ -42,28 +41,5 @@ export class DepartmentManagerComponent implements OnInit, OnDestroy {
       });
   }
 
-  // Fetch paginated departments
-  listPagedDepartments(): void {
-    // Create the DepartmentFilterRequest object
-    const departmentFilterRequest: DepartmentFilterRequest = {
-      pageIndex: 1, // Example: First page
-      pageSize: 10, // Example: 10 items per page
-      sort: 'nameEn', // Example: Sort by English name
-      search: '', // Example: No search term
-      isDeleted: false // Example: Filter out deleted departments
-    };
 
-    this.departmentsService
-      .apiV1DepartmentsPagedListPost(departmentFilterRequest) // Pass the filter object
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (response) => {
-          this.pagedDepartmentList = response;
-          console.log('Paged Departments List:', response);
-        },
-        error: (error) => {
-          console.error('Error fetching paged department list:', error);
-        }
-      });
-  }
 }

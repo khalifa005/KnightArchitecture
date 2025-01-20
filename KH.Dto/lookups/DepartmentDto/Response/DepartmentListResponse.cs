@@ -12,6 +12,7 @@ public class DepartmentListResponse : BasicEntityDto
 
   public DepartmentListResponse(Department e)
   {
+    Id =  e.Id;
     NameAr = e.NameAr;
     NameEn = e.NameEn;
     Description = e.Description;

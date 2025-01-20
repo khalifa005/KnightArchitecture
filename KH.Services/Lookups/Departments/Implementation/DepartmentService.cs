@@ -68,8 +68,8 @@ public class DepartmentService : IDepartmentService
     var repository = _unitOfWork.Repository<Department>();
 
     var pagedEntities = await repository.GetPagedWithProjectionAsync<DepartmentListResponse>(
-    pageNumber: 1,
-    pageSize: 10,
+    pageNumber: request.PageIndex,
+    pageSize: request.PageSize,
     filterExpression: u => u.IsDeleted == request.IsDeleted,
     projectionExpression: u => new DepartmentListResponse(u),
     include: null,
