@@ -17,18 +17,6 @@ public class UserListResponse : BasicTrackerEntityDto
   {
 
   }
-  //public UserListResponse(User e)
-  //{
-  //  Id = e.Id;
-  //  FirstName = e.FirstName;
-  //  LastName = e.LastName;
-  //  Email = e.Email;
-  //  Username = e.Username;
-  //  BirthDate = e.BirthDate;
-  //  IsDeleted = e.IsDeleted;
-  //  MobileNumber = e.MobileNumber;
-  //}
-  // Updated constructor
   public UserListResponse(User user)
   {
     Id = user.Id;

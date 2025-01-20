@@ -153,7 +153,7 @@ public class UserManagementService : IUserManagementService
   {
     ApiResponse<string>? res = new ApiResponse<string>((int)HttpStatusCode.OK);
 
-    var userEntityByAutoMapper = request.ToEntity();
+    var mappedUserEntity = request.ToEntity();
 
     var userRoleRepository = _unitOfWork.Repository<UserRole>();
     var repository = _unitOfWork.Repository<User>();
@@ -167,7 +167,8 @@ public class UserManagementService : IUserManagementService
 
       var userFromDb = await repository
         .GetAsync(request.Id.Value,
-        include: x => x.Include(x => x.UserRoles),
+        include: x =>
+        x.Include(x => x.UserRoles).Include(x=> x.UserDepartments) ,
         tracking: true,
         cancellationToken: cancellationToken);
 
@@ -175,13 +176,13 @@ public class UserManagementService : IUserManagementService
         throw new Exception("Invalid Parameter");
 
       //Add the new props here ..etc
-      userFromDb.MobileNumber = userEntityByAutoMapper.MobileNumber;
-      userFromDb.LastName = userEntityByAutoMapper.LastName;
-      userFromDb.FirstName = userEntityByAutoMapper.FirstName;
-      userFromDb.MiddleName = userEntityByAutoMapper.MiddleName;
-      userFromDb.BirthDate = userEntityByAutoMapper.BirthDate;
+      userFromDb.MobileNumber = mappedUserEntity.MobileNumber;
+      userFromDb.LastName = mappedUserEntity.LastName;
+      userFromDb.FirstName = mappedUserEntity.FirstName;
+      userFromDb.MiddleName = mappedUserEntity.MiddleName;
+      userFromDb.BirthDate = mappedUserEntity.BirthDate;
 
-      if (userEntityByAutoMapper?.UserRoles?.Count > 0)
+      if (mappedUserEntity?.UserRoles?.Count > 0)
       {
         // Ensure userFromDb and request are not null
         if (userFromDb?.UserRoles != null && request?.RoleIds != null)
@@ -192,7 +193,7 @@ public class UserManagementService : IUserManagementService
               .ToList();
 
           // Identify new roles from AutoMapper that are not already in the database or in the matched roles
-          var newUserRoles = userEntityByAutoMapper.UserRoles
+          var newUserRoles = mappedUserEntity.UserRoles
               .Where(mappedRole => !userFromDb.UserRoles.Any(dbRole => dbRole.RoleId == mappedRole.RoleId)
                                  && !existingUserRoles.Any(matchedRole => matchedRole.RoleId == mappedRole.RoleId))
               .ToList();
@@ -206,12 +207,34 @@ public class UserManagementService : IUserManagementService
         }
       }
 
+      if (mappedUserEntity?.UserDepartments?.Count > 0)
+      {
+        // Ensure userFromDb and request are not null
+        if (userFromDb?.UserDepartments != null && request?.DepartmentId != null)
+        {
+          // Get existing from the database that match the Ids in the request
+          var existingUserDepartments = userFromDb.UserDepartments
+              .Where(d => request.DepartmentId == d.DepartmentId).ToList();
+
+          // Identify new  from AutoMapper that are not already in the database or in the matched 
+          var newUserDepartments = mappedUserEntity.UserDepartments
+              .Where(mappedDepartment => !userFromDb.UserDepartments.Any(dbDepartment => dbDepartment.DepartmentId == mappedDepartment.DepartmentId)
+                                 && !existingUserDepartments.Any(matchedRole => matchedRole.DepartmentId == mappedDepartment.DepartmentId))
+              .ToList();
+
+          // Combine the existing and new 
+          var updatedUserDepartments = existingUserDepartments.Concat(newUserDepartments).ToList();
+
+          userFromDb.UserDepartments = updatedUserDepartments;
+        }
+      }
+
 
       await _unitOfWork.CommitAsync(cancellationToken: cancellationToken);
 
       await _unitOfWork.CommitTransactionAsync(cancellationToken: cancellationToken);
 
-      res.Data = userEntityByAutoMapper.Id.ToString();
+      res.Data = mappedUserEntity.Id.ToString();
       return res;
     }
     catch (Exception ex)

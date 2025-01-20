@@ -41,7 +41,7 @@ export class UserForm extends FormGroup {
 
         mobileNumber: [model?.mobileNumber, [Validators.required]],
         birthDate: [model?.birthDate, Validators.required],
-        groupId: [model?.groupId, Validators.required],
+        // groupId: [model?.groupId, Validators.required],
         departmentId: [model?.departmentId, Validators.required],
         roleIds: [model?.roleIds, Validators.required],
       }).controls

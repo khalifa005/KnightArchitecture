@@ -51,7 +51,7 @@ public class UsersController(
   [HttpPut]
   public async Task<ActionResult<ApiResponse<string>>> Put([FromBody] CreateUserRequest request, CancellationToken cancellationToken)
   {
-    var res = await userManagementService.UpdateAsync(request, cancellationToken);
+    var res = await userManagementService.  UpdateAsync(request, cancellationToken);
     return AsActionResult(res);
   }
 
