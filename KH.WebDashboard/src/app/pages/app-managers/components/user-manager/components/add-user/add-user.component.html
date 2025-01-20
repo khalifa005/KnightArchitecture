@@ -1,7 +1,7 @@
 <form [formGroup]="myForm">
   <div class="row">
     <!-- First Name -->
-    <div class="col-6">
+    <div class="col-4">
       <ngx-custom-input
         [formcontrol]="myForm.firstNameControl"
         [isRequired]="true"
@@ -11,8 +11,19 @@
       ></ngx-custom-input>
     </div>
 
+    <!-- middleNameControl Name -->
+    <div class="col-4">
+      <ngx-custom-input
+        [formcontrol]="myForm.middleNameControl"
+        [isRequired]="true"
+        label="{{ 'USER.Middle_NAME' | translate }}"
+        placeHolder="{{ 'USER.Middle_NAME' | translate }}"
+        [icon]="'edit-outline'"
+      ></ngx-custom-input>
+    </div>
+
     <!-- Last Name -->
-    <div class="col-6">
+    <div class="col-4">
       <ngx-custom-input
         [formcontrol]="myForm.lastNameControl"
         [isRequired]="true"
@@ -90,13 +101,23 @@
 
     <!-- Roles Multi-select -->
     <div class="col-12 mt-3">
-      <app-custom-multi-select-dropdown
+      <!-- <app-custom-multi-select-dropdown
         [formcontrol]="myForm.roleIdsControl"
         [selectOptions]="roles"
-        [isMultiple]="true"
         label="{{ 'USER.ROLES' | translate }}"
+        placeHolder="'USER.ROLES'"
         [isRequired]="true"
-      ></app-custom-multi-select-dropdown>
+      ></app-custom-multi-select-dropdown> -->
+
+      <app-custom-multi-select-dropdown
+      [formcontrol]="myForm.roleIdsControl"
+      [selectOptions]="roles"
+      placeholder="'USER.ROLES'"
+      [isMultiple]="true"
+      label="{{ 'form.multi_select.label_form_control' | translate }}"
+      [isRequired]="true">
+    </app-custom-multi-select-dropdown>
+
     </div>
 
     <!-- Submit Button -->

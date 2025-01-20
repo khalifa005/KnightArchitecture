@@ -3,6 +3,7 @@ import { CreateUserRequest } from 'src/open-api';
 
 export class UserForm extends FormGroup {
   readonly firstNameControl = this.get('firstName') as FormControl;
+  readonly middleNameControl = this.get('middleName') as FormControl;
   readonly lastNameControl = this.get('lastName') as FormControl;
   readonly emailControl = this.get('email') as FormControl;
   readonly usernameControl = this.get('username') as FormControl;
@@ -17,6 +18,7 @@ export class UserForm extends FormGroup {
       fb.group({
         id: [model?.id],
         firstName: [model?.firstName, [Validators.required, Validators.minLength(2)]],
+        middleName: [model?.middleName, [Validators.required, Validators.minLength(2)]],
         lastName: [model?.lastName, [Validators.required, Validators.minLength(2)]],
         email: [model?.email, [Validators.required, Validators.email]],
         username: [model?.username, [Validators.required]],

@@ -36,7 +36,7 @@ export class AdvancedFormExampleComponent implements OnInit {
   model = {
     inputControl: 'SampleInput',
     textareaControl: 'Sample textarea content',
-    dateControl: new Date('2024-12-31'),
+    dateControl: new Date('2024-12-31T00:00:00Z').toDateString(),
     subCategoryControl: 2,
     dropdownControl: 3,
     multiSelectControl: [1, 2],

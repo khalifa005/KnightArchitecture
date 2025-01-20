@@ -6,10 +6,11 @@
 
     <nb-select
       class="d-inline"
+      [placeholder]="placeholder"
       size="tiny"
       id="groupId"
       [multiple]="isMultiple"
-      [status]="(formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)) ? 'danger' : null"
+      [status]="(formcontrol.invalid && (formcontrol.dirty || formcontrol.touched)) ? 'danger' : 'primary'"
       [formControl]="formcontrol">
   
       <nb-option [value]="dropDownAllOption.id" *ngIf="!isMultiple">

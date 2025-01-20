@@ -22,12 +22,11 @@
 		"chat": "Chat",
 		"cchat": "ChatBot",
 		"tabs": "Tabs",
-		  "spinner": "Spinner",
+		"spinner": "Spinner",
 		"buttons": "Buttons",
 		"audit": "Audit Logs",
 		"pipes": "Pipes",
 		"users": "Users"
-		
 	},
 	"TABLE": {
 		"ID": "Id",
@@ -85,30 +84,6 @@
 			"label_standalone": "Standalone Input",
 			"placeholder": "Enter a value"
 		},
-		"USER": {
-			"LIST": "User Management",
-			"LIST_ERROR": "An error occurred while fetching users.",
-			"ADD": "Add User",
-			"EDIT": "Edit User",
-			"DETAILS": "User Details",
-			"DELETE": "Delete User",
-			"REACTIVATE": "Reactivate User",
-			"FIRST_NAME": "First Name",
-			"LAST_NAME": "Last Name",
-			"EMAIL": "Email",
-			"USERNAME": "Username",
-			"PASSWORD": "Password",
-			"MOBILE_NUMBER": "Mobile Number",
-			"BIRTH_DATE": "Birth Date",
-			"DEPARTMENT": "Department",
-			"DEPARTMENT_PLACEHOLDER": "Select a Department",
-			"ROLES": "Roles",
-			"ADDED_SUCCESS": "User successfully added.",
-			"ADDED_ERROR": "Failed to add the user.",
-			"UPDATED_SUCCESS": "User successfully updated.",
-			"UPDATED_ERROR": "Failed to update the user.",
-			"FETCH_ERROR": "Failed to fetch user data."
-		  },
 		"time": {
 			"hours_form_control": "Hours Dropdown (Reactive Form)",
 			"minutes_form_control": "Minutes Dropdown (Reactive Form)",
@@ -168,15 +143,6 @@
 			"INVALID": "Password can include letters, digits, and special characters (!@#$%^&* etc.)."
 		}
 	},
-	"USER": {
-		"LIST": "User Management",
-		"LIST_ERROR": "An error occurred while fetching users.",
-		"ADD": "Add User",
-		"EDIT": "Edit User",
-		"DETAILS": "User Details",
-		"DELETE": "Delete User",
-		"REACTIVATE": "Reactivate User"
-	  },
 	"validations": {
 		"please-provide-value": "please fill the required field",
 		"field-required": "This field is required.",
@@ -304,35 +270,35 @@
 		"edit": "Edit",
 		"editContent": "A nebula is an interstellar cloud of dust, hydrogen, helium, and other ionized gases."
 	},
-"indicators": {
-    "total-products": "Total Products",
-	"zones": "zones",
-	"status": "status",
-    "total-categories": "Total Categories",
-    "total-sales": "Total Sales",
-    "sales-target": "Sales Target",
-	"new-products": "New Products",
-	"top-categories": "Top Categories",
-    "return-rate": "Return Rate",
-    "total-revenue": "Total Revenue",
-    "product-status": "Product Status",
-    "sales-regions": "Sales Regions",
-    "tree-representation-categories": "Tree Representation of Categories",
-    "tree-representation-sales": "Tree Representation of Sales"
-},
-"columns": {
-	"status": {
-		"assigned": "Assigned",
-		"inProgress": "In progress",
-		"suspended": "Suspended"
+	"indicators": {
+		"total-products": "Total Products",
+		"zones": "zones",
+		"status": "status",
+		"total-categories": "Total Categories",
+		"total-sales": "Total Sales",
+		"sales-target": "Sales Target",
+		"new-products": "New Products",
+		"top-categories": "Top Categories",
+		"return-rate": "Return Rate",
+		"total-revenue": "Total Revenue",
+		"product-status": "Product Status",
+		"sales-regions": "Sales Regions",
+		"tree-representation-categories": "Tree Representation of Categories",
+		"tree-representation-sales": "Tree Representation of Sales"
 	},
-	"zones": {
-		"riyadh": "Riyadh",
-		"jeedah": "Jeedah",
-		"mekka": "Mekka",
-		"taif": "Taif"
-	}
-},
+	"columns": {
+		"status": {
+			"assigned": "Assigned",
+			"inProgress": "In progress",
+			"suspended": "Suspended"
+		},
+		"zones": {
+			"riyadh": "Riyadh",
+			"jeedah": "Jeedah",
+			"mekka": "Mekka",
+			"taif": "Taif"
+		}
+	},
 	"monitoring": {
 		"action-controls": "Action Controls",
 		"toggle-tasks": "Toggle Tasks",
@@ -387,7 +353,31 @@
 	"NOTIFICATIONS": {
 		"SUCCESS": "Action completed successfully.",
 		"ERROR": "An error occurred while performing the action."
-	  },
+	},
+	"USER": {
+		"LIST": "User Management",
+		"LIST_ERROR": "An error occurred while fetching users.",
+		"ADD": "Add User",
+		"EDIT": "Edit User",
+		"DETAILS": "User Details",
+		"DELETE": "Delete User",
+		"REACTIVATE": "Reactivate User",
+		"FIRST_NAME": "First Name",
+		"LAST_NAME": "Last Name",
+		"EMAIL": "Email",
+		"USERNAME": "Username",
+		"PASSWORD": "Password",
+		"MOBILE_NUMBER": "Mobile Number",
+		"BIRTH_DATE": "Birth Date",
+		"DEPARTMENT": "Department",
+		"DEPARTMENT_PLACEHOLDER": "Select a Department",
+		"ROLES": "Roles",
+		"ADDED_SUCCESS": "User successfully added.",
+		"ADDED_ERROR": "Failed to add the user.",
+		"UPDATED_SUCCESS": "User successfully updated.",
+		"UPDATED_ERROR": "Failed to update the user.",
+		"FETCH_ERROR": "Failed to fetch user data."
+	},
 	"auth": {
 		"login": "Welcome to the dashboard",
 		"username": "Username",
@@ -396,5 +386,4 @@
 		"required_password": "Password is required.",
 		"remember": "Remember Me"
 	}
-
 }

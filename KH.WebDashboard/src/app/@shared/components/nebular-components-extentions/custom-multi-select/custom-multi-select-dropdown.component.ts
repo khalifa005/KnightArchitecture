@@ -17,10 +17,11 @@ export class CustomMultiSelectDropdownComponent implements OnInit , OnDestroy{
   @Output() selectedItemChanged: EventEmitter<any[]> = new EventEmitter();
   @Input() selectedItems: any[] = [];
   @Input() label: string = "";
+  @Input() placeholder: string = "";
   @Input() readonly = false;
   @Input() selectOptions: LookupResponse[];
   @Input() isRequired = false;
-  @Input() isMultiple = false;
+  @Input() isMultiple = true;
   @Input() disabled = false;
   @Input() formcontrol: FormControl;
   private subs: Subscription[] = [];

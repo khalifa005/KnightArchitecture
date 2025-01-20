@@ -10,6 +10,8 @@ import { CreateUserRequest, DepartmentFilterRequest, DepartmentListResponse, Dep
 import { UserForm } from './user.form';
 import { LookupResponse } from '@app/@core/models/base/response/lookup.model';
 import { transformToLookup } from '@app/@core/utils.ts/lookup-mapper';
+import { date } from '@app/@core/utils.ts/form/validations/form.validation-helpers';
+import { formatDateFns } from '@app/@core/utils.ts/date/date-utils';
 
 @Component({
   selector: 'app-add-user',
@@ -23,7 +25,37 @@ export class AddUserComponent implements OnInit, OnDestroy {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   myForm: UserForm;
-  model: CreateUserRequest = {};
+  modelx: CreateUserRequest = {
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    password: "",
+    email: "",
+    mobileNumber: "",
+    username: "",
+    sensitiveData: "",
+    birthDate: "",
+    // groupId: ,
+    // departmentId: 5,
+    roleIds: [],
+  };
+
+  model: CreateUserRequest = {
+    firstName: "Mahmoud",
+    middleName: "Mohamed",
+    lastName: "Khalifa",
+    password: "KhalifaPassword",
+    email: "khalifa_CEO1@example.com",
+    mobileNumber: "05100000010",
+    username: "khalifa_CEO1",
+    sensitiveData: "AccountNumberExample",
+    // birthDate: formatDateFns('2023-01-20T10:30:00.000Z', 'dd-MM-yyyy'),
+    birthDate: new Date('2024-12-31').toDateString(),
+    groupId: 2,
+    departmentId: 5,
+    roleIds: [3],
+  };
+
   isLoading: boolean = false;
 
   constructor(

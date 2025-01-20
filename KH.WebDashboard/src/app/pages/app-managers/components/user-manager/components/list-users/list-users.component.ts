@@ -177,48 +177,48 @@ export class ListUsersComponent implements OnInit, OnDestroy {
 
   onDeletedClicked(id: number): void {
     this.apiService.apiV1UsersIdDelete(id)
-    .pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe({
-      next: (response) => {
-        // this.toastrService.success('User deactivated successfully.', 'Success');
-        this.toastNotificationService.showToast(
-          NotitficationsDefaultValues.Success,
-          this.translationService.instant('user.delete'),
-          this.translationService.instant('user.delete'));
-          
-        this.fetchData();
-      },
-      error: () => {
-        this.toastNotificationService.showToast(
-          NotitficationsDefaultValues.Danger,
-          this.translationService.instant(''),
-          this.translationService.instant(''));
-      },
-    });
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response) => {
+          // this.toastrService.success('User deactivated successfully.', 'Success');
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Success,
+            this.translationService.instant('user.delete'),
+            this.translationService.instant('user.delete'));
+
+          this.fetchData();
+        },
+        error: () => {
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Danger,
+            this.translationService.instant(''),
+            this.translationService.instant(''));
+        },
+      });
   }
 
   onReactivateClicked(id: number): void {
-     // Assuming there's a separate endpoint to activate a user
-     this.apiService.apiV1UsersReActivateIdPut(id)
-     .pipe(takeUntil(this.ngUnsubscribe))
-     .subscribe({
-       next: (response) => {
-         // this.toastrService.success('User activated successfully.', 'Success');
-         this.toastNotificationService.showToast(
-           NotitficationsDefaultValues.Success,
-           this.translationService.instant('user.delete'),
-           this.translationService.instant('user.delete'));
-           
-         this.fetchData();
-       },
-       error: () => {
-         // this.toastrService.danger('Failed to activate user.', 'Error');
-         this.toastNotificationService.showToast(
-           NotitficationsDefaultValues.Danger,
-           this.translationService.instant(''),
-           this.translationService.instant(''));
-       },
-     });
+    // Assuming there's a separate endpoint to activate a user
+    this.apiService.apiV1UsersReActivateIdPut(id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response) => {
+          // this.toastrService.success('User activated successfully.', 'Success');
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Success,
+            this.translationService.instant('user.delete'),
+            this.translationService.instant('user.delete'));
+
+          this.fetchData();
+        },
+        error: () => {
+          // this.toastrService.danger('Failed to activate user.', 'Error');
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Danger,
+            this.translationService.instant(''),
+            this.translationService.instant(''));
+        },
+      });
   }
 
   private openAddEditWindow(id?: number): void {
@@ -233,10 +233,14 @@ export class ListUsersComponent implements OnInit, OnDestroy {
       title: id ? `Edit User - #${id}` : 'Add New User',
       buttons: buttonsConfig,
       context: { id },
+    }).onClose.subscribe(response => {
+      if (response === 200) {
+        this.fetchData();
+      }
     });
   }
 
-  
+
   onIdFilterChnaged(valueId: any) {
     this.filterRequest.pageIndex = 1;
 
@@ -251,88 +255,84 @@ export class ListUsersComponent implements OnInit, OnDestroy {
   }
 
 
-     /**
-   * Add a new user.
+  /**
+* Add a new user.
+*/
+  addUser(): void {
+    const newUser: CreateUserRequest = {
+      firstName: "Mahmoud",
+      middleName: "Mohamed",
+      lastName: "Khalifa",
+      password: "KhalifaPassword",
+      email: "khalifa_CEO1@example.com",
+      mobileNumber: "05100000010",
+      username: "khalifa_CEO1",
+      sensitiveData: "AccountNumberExample",
+      birthDate: "1995-07-24",
+      groupId: 2,
+      departmentId: 5,
+      roleIds: [3],
+    };
+
+    this.apiService.apiV1UsersPost(newUser)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response) => {
+          // this.toastrService.success('User added successfully.', 'Success');
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Success,
+            this.translationService.instant('user.delete'),
+            this.translationService.instant('user.delete'));
+
+          this.fetchData();
+        },
+        error: () => {
+          // this.toastrService.danger('Failed to add user.', 'Error');
+
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Danger,
+            this.translationService.instant('Failed to add user'),
+            this.translationService.instant('Error'));
+        },
+      });
+  }
+
+  /**
+   * Edit an existing user.
    */
-     addUser(): void {
-      const newUser: CreateUserRequest = {
-        firstName: "Mahmoud",
-        middleName: "Mohamed",
-        lastName: "Khalifa",
-        password: "KhalifaPassword",
-        email: "khalifa_CEO1@example.com",
-        mobileNumber: "05100000010",
-        username: "khalifa_CEO1",
-        sensitiveData: "AccountNumberExample",
-        birthDate: "1995-07-24",
-        groupId: 2,
-        departmentId: 5,
-        roleIds: [3],
-      };
-  
-      this.apiService.apiV1UsersPost(newUser)
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe({
-          next: (response) => {
-            // this.toastrService.success('User added successfully.', 'Success');
-  this.toastNotificationService.showToast(
-                NotitficationsDefaultValues.Success,
-                this.translationService.instant('user.delete'),
-                this.translationService.instant('user.delete'));
-  
-            this.fetchData();
-          },
-          error: () => {
-            // this.toastrService.danger('Failed to add user.', 'Error');
-             
-                         this.toastNotificationService.showToast(
-                          NotitficationsDefaultValues.Danger,
-                          this.translationService.instant('Failed to add user'),
-                          this.translationService.instant('Error'));
-                        
-  
-                        
-  
-          },
-        });
-    }
-  
-    /**
-     * Edit an existing user.
-     */
-    editUser(userId: number): void {
-      const updatedUser: CreateUserRequest = {
-        id: userId,
-        middleName: "Mohamed 2",
-        lastName: "Khalifa 2",
-        email: "khalifa_CEO1@example.com",
-        mobileNumber: "05100000010",
-        username: "khalifa_CEO1",
-        sensitiveData: "AccountNumberExample",
-        birthDate: "1995-07-24",
-        groupId: 2,
-        departmentId: 5,
-        roleIds: [3],
-      };
-  
-      this.apiService.apiV1UsersPut(updatedUser)
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe({
-          next: (response) => {
-            // this.toastrService.success('User updated successfully.', 'Success');
-            this.toastNotificationService.showToast(
-              NotitficationsDefaultValues.Success,
-              this.translationService.instant('user.delete'),
-              this.translationService.instant('user.delete'));
-            this.fetchData();
-          },
-          error: () => {
-            this.toastNotificationService.showToast(
-              NotitficationsDefaultValues.Danger,
-              this.translationService.instant(''),
-              this.translationService.instant(''));
-          },
-        });
-    }
-  
+  editUser(userId: number): void {
+    const updatedUser: CreateUserRequest = {
+      id: userId,
+      middleName: "Mohamed 2",
+      lastName: "Khalifa 2",
+      email: "khalifa_CEO1@example.com",
+      mobileNumber: "05100000010",
+      username: "khalifa_CEO1",
+      sensitiveData: "AccountNumberExample",
+      birthDate: "1995-07-24",
+      groupId: 2,
+      departmentId: 5,
+      roleIds: [3],
+    };
+
+    this.apiService.apiV1UsersPut(updatedUser)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response) => {
+          // this.toastrService.success('User updated successfully.', 'Success');
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Success,
+            this.translationService.instant('user.delete'),
+            this.translationService.instant('user.delete'));
+          this.fetchData();
+        },
+        error: () => {
+          this.toastNotificationService.showToast(
+            NotitficationsDefaultValues.Danger,
+            this.translationService.instant(''),
+            this.translationService.instant(''));
+        },
+      });
+  }
+
 }

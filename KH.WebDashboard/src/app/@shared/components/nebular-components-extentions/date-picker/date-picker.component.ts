@@ -35,7 +35,16 @@ export class DatePickerComponent implements OnInit , OnDestroy{
   }
 
   ngOnInit() {
-
+    const test =typeof this.formcontrol.value;
+ // Convert `selectedItem` to a Date object if it's a string
+ if (typeof this.formcontrol.value === 'string') {
+  const parsedDate = new Date(this.formcontrol.value);
+  if (!isNaN(parsedDate.getTime())) {
+    this.formcontrol.setValue(parsedDate);
+  } else {
+    this.log.error(`Invalid date format: ${this.selectedItem}`);
+  }
+}
 
   }
 
