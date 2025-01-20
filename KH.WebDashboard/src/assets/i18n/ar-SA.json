@@ -66,7 +66,22 @@
     "EDIT": "تعديل مستخدم",
     "DETAILS": "تفاصيل المستخدم",
     "DELETE": "حذف المستخدم",
-    "REACTIVATE": "إعادة تفعيل المستخدم"
+    "REACTIVATE": "إعادة تفعيل المستخدم",
+	"FIRST_NAME": "الاسم الأول",
+    "LAST_NAME": "اسم العائلة",
+    "EMAIL": "البريد الإلكتروني",
+    "USERNAME": "اسم المستخدم",
+    "PASSWORD": "كلمة المرور",
+    "MOBILE_NUMBER": "رقم الجوال",
+    "BIRTH_DATE": "تاريخ الميلاد",
+    "DEPARTMENT": "القسم",
+    "DEPARTMENT_PLACEHOLDER": "اختر قسمًا",
+    "ROLES": "الأدوار",
+    "ADDED_SUCCESS": "تم إضافة المستخدم بنجاح.",
+    "ADDED_ERROR": "فشل في إضافة المستخدم.",
+    "UPDATED_SUCCESS": "تم تحديث المستخدم بنجاح.",
+    "UPDATED_ERROR": "فشل في تحديث المستخدم.",
+    "FETCH_ERROR": "فشل في جلب بيانات المستخدم."
   },
   "NOTIFICATIONS": {
     "SUCCESS": "تمت العملية بنجاح.",

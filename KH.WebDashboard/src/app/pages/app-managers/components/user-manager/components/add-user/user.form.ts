@@ -7,6 +7,11 @@ export class UserForm extends FormGroup {
   readonly emailControl = this.get('email') as FormControl;
   readonly usernameControl = this.get('username') as FormControl;
 
+  readonly mobileNumberControl = this.get('mobileNumber') as FormControl;
+  readonly birthDateControl = this.get('birthDate') as FormControl;
+  readonly passwordControl = this.get('password') as FormControl;
+  readonly departmentIdControl = this.get('departmentId') as FormControl;
+  readonly roleIdsControl = this.get('roleIds') as FormControl;
   constructor(readonly fb: FormBuilder = new FormBuilder(), readonly model: CreateUserRequest) {
     super(
       fb.group({

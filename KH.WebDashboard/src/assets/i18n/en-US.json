@@ -92,7 +92,22 @@
 			"EDIT": "Edit User",
 			"DETAILS": "User Details",
 			"DELETE": "Delete User",
-			"REACTIVATE": "Reactivate User"
+			"REACTIVATE": "Reactivate User",
+			"FIRST_NAME": "First Name",
+			"LAST_NAME": "Last Name",
+			"EMAIL": "Email",
+			"USERNAME": "Username",
+			"PASSWORD": "Password",
+			"MOBILE_NUMBER": "Mobile Number",
+			"BIRTH_DATE": "Birth Date",
+			"DEPARTMENT": "Department",
+			"DEPARTMENT_PLACEHOLDER": "Select a Department",
+			"ROLES": "Roles",
+			"ADDED_SUCCESS": "User successfully added.",
+			"ADDED_ERROR": "Failed to add the user.",
+			"UPDATED_SUCCESS": "User successfully updated.",
+			"UPDATED_ERROR": "Failed to update the user.",
+			"FETCH_ERROR": "Failed to fetch user data."
 		  },
 		"time": {
 			"hours_form_control": "Hours Dropdown (Reactive Form)",

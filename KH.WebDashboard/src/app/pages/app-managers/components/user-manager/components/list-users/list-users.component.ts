@@ -199,7 +199,7 @@ export class ListUsersComponent implements OnInit, OnDestroy {
 
   onReactivateClicked(id: number): void {
      // Assuming there's a separate endpoint to activate a user
-     this.apiService.apiV1UsersResetDepartmentIdPut(id)
+     this.apiService.apiV1UsersReActivateIdPut(id)
      .pipe(takeUntil(this.ngUnsubscribe))
      .subscribe({
        next: (response) => {

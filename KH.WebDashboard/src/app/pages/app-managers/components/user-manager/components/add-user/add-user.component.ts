@@ -144,4 +144,20 @@ export class AddUserComponent implements OnInit, OnDestroy {
   public cancel(statusCode: number) {
     this.windowRef.close(statusCode);
   }
+
+  departments = []; // Populate with API
+  roles = []; // Populate with API
+  loadDropdownData(): void {
+    // Mock data; replace with actual API calls
+    this.departments = [
+      { id: 1, name: 'HR' },
+      { id: 2, name: 'Finance' },
+    ];
+
+    this.roles = [
+      { id: 1, name: 'Admin' },
+      { id: 2, name: 'Editor' },
+    ];
+  }
+
 }
