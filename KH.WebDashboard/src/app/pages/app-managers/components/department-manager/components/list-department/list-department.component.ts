@@ -17,6 +17,7 @@ import { DepartmentFilterRequest, DepartmentListResponse, DepartmentListResponse
 import { AddRoleComponent } from '../../../roles-manager/components/add-role/add-role.component';
 import { DetailsRoleComponent } from '../../../roles-manager/components/details-role/details-role.component';
 import { AddDepartmentComponent } from '../add-department/add-department.component';
+import { DetailsDepartmentComponent } from '../details-department/details-department.component';
 
 @Component({
   selector: 'app-list-department',
@@ -240,7 +241,7 @@ export class ListDepartmentComponent implements OnInit, OnDestroy {
       });
   }
 
-  onDetailsClicked(roleId: number) {
+  onDetailsClicked(id: number) {
 
 
     const buttonsConfig: NbWindowControlButtonsConfig = {
@@ -251,16 +252,16 @@ export class ListDepartmentComponent implements OnInit, OnDestroy {
     };
 
     let test = this.windowService.open(
-      DetailsRoleComponent,
+      DetailsDepartmentComponent,
       {
-        title: ' Role ' + '#' + roleId,
+        title: '  ' + '#' + id,
         // hasBackdrop: true,
         // closeOnEsc:true,
         buttons: buttonsConfig,
         windowClass: PopUpWindowTypes.FullScreen,
         context:
         {
-          roleIdInput: roleId,
+          idInput: id,
         }
       }
     )
