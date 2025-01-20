@@ -3,102 +3,137 @@
 	"en": "انجليزي",
 	"loading": "جاري التحميل ",
 	"sideMenu": {
-    "home": "الصفحة الرئيسية",
-	"roles": "الادوار في النظام",
-	"maps": "الخرائط",
-    "dynamicForm": "النموذج الديناميكي",
-    "dynamicTable": "الجدول الديناميكي",
-    "cardsExamples": " البطاقات",
-    "bootstrapExamples": " بوتستراب",
-    "iconsExamples": " الأيقونات",
-    "inputsExamples": " الإدخال",
-    "formExamples": " النماذج",
-    "auth": "المصادقة",
-    "notFound": "غير موجود",
-    "userManagement": "إدارة المستخدمين",
-    "permissions": "الأذونات",
-    "permissions-test": "الأذونات (اختبار)",
-	"departments": "الادارات",
-	"chat": "Chat",
-	"cchat": "ChatBot",
-	"tabs": "علامات التبويب",
-	"spinner": "المؤشر الدوار",
-    "buttons": "الأزرار",
-    "pipes": "الأنابيب",
-	"audit": "سجلات التدقيق",
-
-    "users": "المستخدمون"
-  },
-  "TABLE": {
-    "ID": "الرقم التعريفي",
-    "NAME_EN": "الاسم الانجليزي",
-    "NAME_AR": "الاسم العربي",
-    "DESCRIPTION": "التفاصيل",
-    "IS_DELETED": "هل تم مسحه",
-	"TOTAL_ITEMS": "المجموع الكلي",
-	"USERNAME": "اسم المستخدم",
-    "NAME": "الاسم",
-    "EMAIL": "البريد الإلكتروني",
-    "CREATED_DATE": "تاريخ الإنشاء",
-    "OPTIONS": "خيارات"
-  },
-  "role": {
-	"management": "إدارة الادوار",
-	"description": "الوصف",
-    "createdDate": "تاريخ الإنشاء",
-    "updatedDate": "تاريخ آخر تحديث",
-    "permissions": "الأذونات",
-    "key": "المفتاح",
-    "nameEn": "الاسم (بالإنجليزية)",
-    "nameAr": "الاسم (بالعربية)",
-    "parentPermission": "الإذن الرئيسي",
-	"home": "Home"
-  },
-  "app-manager": {
-    "permissions-manager": "إدارة الصلاحيات",
-    "selectRole": "اختر الدور",
-    "selectParentPermission": "اختر الصلاحية الرئيسية"
-  },
-  "USER": {
-    "LIST": "إدارة المستخدمين",
-    "LIST_ERROR": "حدث خطأ أثناء جلب المستخدمين.",
-    "ADD": "إضافة مستخدم",
-    "EDIT": "تعديل مستخدم",
-    "DETAILS": "تفاصيل المستخدم",
-    "DELETE": "حذف المستخدم",
-    "REACTIVATE": "إعادة تفعيل المستخدم",
-	"FIRST_NAME": "الاسم الأول",
-    "LAST_NAME": "اسم العائلة",
-    "EMAIL": "البريد الإلكتروني",
-    "USERNAME": "اسم المستخدم",
-    "PASSWORD": "كلمة المرور",
-    "MOBILE_NUMBER": "رقم الجوال",
-    "BIRTH_DATE": "تاريخ الميلاد",
-    "DEPARTMENT": "القسم",
-    "DEPARTMENT_PLACEHOLDER": "اختر قسمًا",
-    "ROLES": "الأدوار",
-    "ADDED_SUCCESS": "تم إضافة المستخدم بنجاح.",
-    "ADDED_ERROR": "فشل في إضافة المستخدم.",
-    "UPDATED_SUCCESS": "تم تحديث المستخدم بنجاح.",
-    "UPDATED_ERROR": "فشل في تحديث المستخدم.",
-    "FETCH_ERROR": "فشل في جلب بيانات المستخدم."
-  },
-  "NOTIFICATIONS": {
-    "SUCCESS": "تمت العملية بنجاح.",
-    "ERROR": "حدث خطأ أثناء تنفيذ العملية."
-  },
+		"home": "الصفحة الرئيسية",
+		"roles": "الادوار في النظام",
+		"maps": "الخرائط",
+		"dynamicForm": "النموذج الديناميكي",
+		"dynamicTable": "الجدول الديناميكي",
+		"cardsExamples": " البطاقات",
+		"bootstrapExamples": " بوتستراب",
+		"iconsExamples": " الأيقونات",
+		"inputsExamples": " الإدخال",
+		"formExamples": " النماذج",
+		"auth": "المصادقة",
+		"notFound": "غير موجود",
+		"userManagement": "إدارة المستخدمين",
+		"permissions": "الأذونات",
+		"permissions-test": "الأذونات (اختبار)",
+		"departments": "الادارات",
+		"chat": "Chat",
+		"cchat": "ChatBot",
+		"tabs": "علامات التبويب",
+		"spinner": "المؤشر الدوار",
+		"buttons": "الأزرار",
+		"pipes": "الأنابيب",
+		"audit": "سجلات التدقيق",
+		"users": "المستخدمون"
+	},
+	"TABLE": {
+		"ID": "الرقم التعريفي",
+		"NAME_EN": "الاسم الانجليزي",
+		"NAME_AR": "الاسم العربي",
+		"DESCRIPTION": "التفاصيل",
+		"IS_DELETED": "هل تم مسحه",
+		"TOTAL_ITEMS": "المجموع الكلي",
+		"USERNAME": "اسم المستخدم",
+		"NAME": "الاسم",
+		"EMAIL": "البريد الإلكتروني",
+		"CREATED_DATE": "تاريخ الإنشاء",
+		"OPTIONS": "خيارات"
+	},
+	"role": {
+		"management": "إدارة الادوار",
+		"description": "الوصف",
+		"createdDate": "تاريخ الإنشاء",
+		"updatedDate": "تاريخ آخر تحديث",
+		"permissions": "الأذونات",
+		"key": "المفتاح",
+		"nameEn": "الاسم (بالإنجليزية)",
+		"nameAr": "الاسم (بالعربية)",
+		"parentPermission": "الإذن الرئيسي",
+		"home": "Home"
+	},
+	"app-manager": {
+		"permissions-manager": "إدارة الصلاحيات",
+		"selectRole": "اختر الدور",
+		"selectParentPermission": "اختر الصلاحية الرئيسية"
+	},
+	"USER": {
+		"LIST": "إدارة المستخدمين",
+		"LIST_ERROR": "حدث خطأ أثناء جلب المستخدمين.",
+		"ADD": "إضافة مستخدم",
+		"EDIT": "تعديل مستخدم",
+		"DETAILS": "تفاصيل المستخدم",
+		"DELETE": "حذف المستخدم",
+		"REACTIVATE": "إعادة تفعيل المستخدم",
+		"FIRST_NAME": "الاسم الأول",
+		"LAST_NAME": "اسم العائلة",
+		"EMAIL": "البريد الإلكتروني",
+		"USERNAME": "اسم المستخدم",
+		"PASSWORD": "كلمة المرور",
+		"MOBILE_NUMBER": "رقم الجوال",
+		"BIRTH_DATE": "تاريخ الميلاد",
+		"DEPARTMENT": "القسم",
+		"DEPARTMENT_PLACEHOLDER": "اختر قسمًا",
+		"ADDED_SUCCESS": "تم إضافة المستخدم بنجاح.",
+		"ADDED_ERROR": "فشل في إضافة المستخدم.",
+		"UPDATED_SUCCESS": "تم تحديث المستخدم بنجاح.",
+		"UPDATED_ERROR": "فشل في تحديث المستخدم.",
+		"BASIC_INFO": "المعلومات الأساسية",
+		"ROLES": "الأدوار",
+		"DEPARTMENTS": "الأقسام",
+		"GROUPS": "المجموعات",
+		"ADDITIONAL_DETAILS": "تفاصيل إضافية",
+		"PREFERRED_LANGUAGE": "اللغة المفضلة",
+		"LAST_ASSIGN_SUPERVISOR": "آخر تعيين كمشرف",
+		"LAST_ASSIGN_CASE_OWNER": "آخر تعيين كمالك الحالة",
+		"LAST_ASSIGN_TO": "آخر تعيين إلى",
+		"CREATED_DATE": "تاريخ الإنشاء",
+		"UPDATED_DATE": "تاريخ التحديث",
+		"ROLE_ID": "معرف الدور",
+		"DEPARTMENT_ID": "معرف القسم",
+		"GROUP_ID": "معرف المجموعة",
+		"DESCRIPTION": "الوصف",
+		"EMAILS": "البريد الإلكتروني",
+		"SMS": "الرسائل النصية",
+		"FILES": "الملفات",
+		"LOGS": "السجلات",
+		"PERMISSIONS": "الأذونات",
+		"NO_ROLES": "لا توجد أدوار مخصصة لهذا المستخدم.",
+		"NO_DEPARTMENTS": "لا توجد أقسام مخصصة لهذا المستخدم.",
+		"NO_GROUPS": "لا توجد مجموعات مخصصة لهذا المستخدم.",
+		"NO_EMAILS": "لم يتم العثور على رسائل بريد إلكتروني.",
+		"NO_SMS": "لم يتم العثور على رسائل نصية.",
+		"NO_FILES": "لم يتم العثور على ملفات.",
+		"NO_LOGS": "لم يتم العثور على سجلات.",
+		"RECIPIENT": "المستلم",
+		"SENT_DATE": "تاريخ الإرسال",
+		"CONTENT": "المحتوى",
+		"DOWNLOAD": "تحميل",
+		"FETCH_ERROR": "فشل في جلب بيانات المستخدم.",
+		"EMAIL_SENT_TO": "مرسل إلى",
+		"EMAIL_SENT_DATE": "تاريخ الإرسال",
+		"SMS_SENT_TO": "مرسل إلى",
+		"SMS_SENT_DATE": "تاريخ الإرسال",
+		"DOWNLOAD_FILE": "تحميل الملف",
+		"LOG_TIMESTAMP": "الوقت",
+		"SEND_EMAIL": "إرسال بريد إلكتروني",
+		"SEND_SMS": "إرسال رسالة قصيرة"
+	},
+	"NOTIFICATIONS": {
+		"SUCCESS": "تمت العملية بنجاح.",
+		"ERROR": "حدث خطأ أثناء تنفيذ العملية."
+	},
 	"form": {
 		"inputs": "مدخلات النموذج",
 		"section": {
 			"inputs": "قسم المدخلات",
 			"textareas": "قسم النصوص",
 			"file_uploads": "File Upload Section",
-
 			"dates": "قسم التواريخ",
 			"time": "قسم القوائم المنسدلة للوقت",
 			"multi_selects": "قسم القوائم المتعددة الاختيار",
 			"dropdowns": "قسم القوائم المنسدلة"
-
 		},
 		"file_uploader": {
 			"form_control": "رافع الملفات (نموذج تفاعلي)",
@@ -106,7 +141,7 @@
 			"label_form_control": "تحميل الملفات",
 			"label_standalone": "تحميل المستندات",
 			"placeholder": "اسحب الملفات وأفلتها أو انقر للتصفح"
-		  },
+		},
 		"input": {
 			"form_control": "استخدام FormControl",
 			"standalone": "مدخل مستقل",
@@ -126,7 +161,7 @@
 			"label_minutes_standalone": "اختيار الدقيقة",
 			"placeholder_hours": "اختر ساعة...",
 			"placeholder_minutes": "اختر دقيقة..."
-		  },
+		},
 		"auto_complete": {
 			"label": "اختر من القائمة",
 			"placeholder": "ابدا الكتابة للبحث...",
@@ -134,20 +169,20 @@
 			"sub_category": "اختر الفئة الفرعية",
 			"select_category": "اختر فئة...",
 			"select_sub_category": "اختر فئة فرعية..."
-		  },
-		  "dropdown": {
-      "form_control": "قائمة منسدلة مع التحكم في النموذج",
-      "standalone": "قائمة منسدلة مستقلة",
-      "label_form_control": "اختر الفئة (نموذج تفاعلي)",
-      "label_standalone": "اختر الفئة (مستقل)",
-      "placeholder": "اختر خيارًا"
-    },
-	"multi_select": {
-		"form_control": "قائمة متعددة الاختيار مع التحكم في النموذج",
-		"standalone": "قائمة متعددة الاختيار مستقلة",
-		"label_form_control": "اختر الفئات (نموذج تفاعلي)",
-		"label_standalone": "اختر الفئات (مستقل)"
-	  },
+		},
+		"dropdown": {
+			"form_control": "قائمة منسدلة مع التحكم في النموذج",
+			"standalone": "قائمة منسدلة مستقلة",
+			"label_form_control": "اختر الفئة (نموذج تفاعلي)",
+			"label_standalone": "اختر الفئة (مستقل)",
+			"placeholder": "اختر خيارًا"
+		},
+		"multi_select": {
+			"form_control": "قائمة متعددة الاختيار مع التحكم في النموذج",
+			"standalone": "قائمة متعددة الاختيار مستقلة",
+			"label_form_control": "اختر الفئات (نموذج تفاعلي)",
+			"label_standalone": "اختر الفئات (مستقل)"
+		},
 		"textarea": {
 			"form_control": "استخدام FormControl",
 			"standalone": "حقل نص مستقل",
@@ -167,22 +202,20 @@
 		"please-provide-value": "الرجاء ادخال قيمة",
 		"field-required": "هذاالحقل مطلوب",
 		"invalid-field-value": "الرجاء إدخال قيمة صحيحة.",
-		 "tooEarly": "التاريخ مبكر جدًا. أقل تاريخ مسموح به هو {{ min }}.",
-    "tooLate": "التاريخ متأخر جدًا. أقصى تاريخ مسموح به هو {{ max }}.",
-	 "minlength": "يجب أن تكون البيانات على الأقل {{ requiredLength }} أحرف.",
-    "maxlength": "يجب ألا تتجاوز البيانات {{ requiredLength }} أحرف.",
-
-	"invalid-file-extensions": "الملفات التالية تحتوي على امتدادات غير صالحة:",
-    "invalid-file-size": "الملفات التالية تتجاوز الحد المسموح به للحجم:",
-    "max-files-error": "يمكنك تحميل ما يصل إلى {{maxAllowed}} ملفًا فقط. حاليًا، لقد اخترت {{actual}} ملفًا.",
-    "file-details": {
-      "name": "{{name}}",
-      "size": "{{size}}"
-    },
-	"allowed-file-extensions": "الامتدادات المسموح بها للملفات",
-    "max-file-size": "الحجم الأقصى للملف",
-    "max-files": "يمكنك تحميل ما يصل إلى {{max}} ملفًا."
-	
+		"tooEarly": "التاريخ مبكر جدًا. أقل تاريخ مسموح به هو {{ min }}.",
+		"tooLate": "التاريخ متأخر جدًا. أقصى تاريخ مسموح به هو {{ max }}.",
+		"minlength": "يجب أن تكون البيانات على الأقل {{ requiredLength }} أحرف.",
+		"maxlength": "يجب ألا تتجاوز البيانات {{ requiredLength }} أحرف.",
+		"invalid-file-extensions": "الملفات التالية تحتوي على امتدادات غير صالحة:",
+		"invalid-file-size": "الملفات التالية تتجاوز الحد المسموح به للحجم:",
+		"max-files-error": "يمكنك تحميل ما يصل إلى {{maxAllowed}} ملفًا فقط. حاليًا، لقد اخترت {{actual}} ملفًا.",
+		"file-details": {
+			"name": "{{name}}",
+			"size": "{{size}}"
+		},
+		"allowed-file-extensions": "الامتدادات المسموح بها للملفات",
+		"max-file-size": "الحجم الأقصى للملف",
+		"max-files": "يمكنك تحميل ما يصل إلى {{max}} ملفًا."
 	},
 	"@form": {
 		"TITLE": "Hello Angular with ngx-translate!",
@@ -293,36 +326,35 @@
 		"edit": "تعديل",
 		"editContent": "السديم عبارة عن سحابة بين نجمية من الغبار والهيدروجين والهيليوم والغازات المتأينة الأخرى."
 	},
-"indicators": {
-        "zones": "zones",
-        "status": "status",
-        "total-products": "إجمالي المنتجات",
-        "total-categories": "إجمالي الفئات",
+	"indicators": {
+		"zones": "zones",
+		"status": "status",
+		"total-products": "إجمالي المنتجات",
+		"total-categories": "إجمالي الفئات",
 		"new-products": "منتجات جديدة",
-        "top-categories": "أفضل الفئات",
-        "return-rate": "معدل الإرجاع",
-        "total-revenue": "إجمالي الإيرادات",
-        "total-sales": "إجمالي المبيعات",
-        "sales-target": "هدف المبيعات",
-      
-        "product-status": "حالة المنتج",
-        "sales-regions": "مناطق المبيعات",
-        "tree-representation-categories": "تمثيل شجري للفئات",
-        "tree-representation-sales": "تمثيل شجري للمبيعات"
-    },
+		"top-categories": "أفضل الفئات",
+		"return-rate": "معدل الإرجاع",
+		"total-revenue": "إجمالي الإيرادات",
+		"total-sales": "إجمالي المبيعات",
+		"sales-target": "هدف المبيعات",
+		"product-status": "حالة المنتج",
+		"sales-regions": "مناطق المبيعات",
+		"tree-representation-categories": "تمثيل شجري للفئات",
+		"tree-representation-sales": "تمثيل شجري للمبيعات"
+	},
 	"columns": {
-        "status": {
-            "assigned": "مسجلة",
-            "inProgress": "جاري العمل عليها",
-            "suspended": "موقوفة"
-        },
-        "zones": {
-            "riyadh": "الرياض",
-            "jeed": "جدة",
-            "mekka": "مكة المكرمة",
-            "taif": "الطائف"
-        }
-    },
+		"status": {
+			"assigned": "مسجلة",
+			"inProgress": "جاري العمل عليها",
+			"suspended": "موقوفة"
+		},
+		"zones": {
+			"riyadh": "الرياض",
+			"jeed": "جدة",
+			"mekka": "مكة المكرمة",
+			"taif": "الطائف"
+		}
+	},
 	"monitoring": {
 		"action-controls": "عناصر التحكم ",
 		"toggle-tasks": " المهام",
@@ -381,17 +413,16 @@
 		"required_username": "اسم المستخدم مطلوب.",
 		"required_password": "كلمة المرور مطلوبة.",
 		"remember": "تذكرني"
-	  },
-		"VALIDATION": {
-		  "REQUIRED": "هذا الحقل مطلوب.",
-		  "MIN_LENGTH": "الحد الأدنى {{length}} أحرف.",
-		  "MAX_LENGTH": "الحد الأقصى {{length}} أحرف.",
-		  "USERNAME": {
+	},
+	"VALIDATION": {
+		"REQUIRED": "هذا الحقل مطلوب.",
+		"MIN_LENGTH": "الحد الأدنى {{length}} أحرف.",
+		"MAX_LENGTH": "الحد الأقصى {{length}} أحرف.",
+		"USERNAME": {
 			"INVALID": "يسمح فقط بالأحرف والأرقام."
-		  },
-		  "PASSWORD": {
+		},
+		"PASSWORD": {
 			"INVALID": "يمكن أن تحتوي كلمة المرور على أحرف وأرقام ورموز خاصة (!@#$%^&* وما إلى ذلك)."
-		  }
 		}
-	  
+	}
 }

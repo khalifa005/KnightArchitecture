@@ -1,20 +1,297 @@
-<div *ngIf="isLoading" class="loading-spinner">
-    <nb-spinner></nb-spinner>
-  </div>
-  
-  <div *ngIf="!isLoading && userDetails" class="user-details-container">
-    <h3>{{ 'USER.DETAILS' | translate }}</h3>
-    <ul>
-      <li><strong>{{ 'USER.FIRST_NAME' | translate }}:</strong> {{ userDetails.firstName }}</li>
-      <li><strong>{{ 'USER.LAST_NAME' | translate }}:</strong> {{ userDetails.lastName }}</li>
-      <li><strong>{{ 'USER.EMAIL' | translate }}:</strong> {{ userDetails.email }}</li>
-      <li><strong>{{ 'USER.USERNAME' | translate }}:</strong> {{ userDetails.username }}</li>
-      <li><strong>{{ 'USER.MOBILE' | translate }}:</strong> {{ userDetails.mobileNumber }}</li>
-      <li><strong>{{ 'USER.ROLE' | translate }}:</strong> {{ userDetails.roleName }}</li>
-    </ul>
-  </div>
-  
-  <div *ngIf="!isLoading && !userDetails" class="no-data">
-    {{ 'USER.NO_DETAILS_FOUND' | translate }}
-  </div>
-  
+<nb-card class="rounded" size="large">
+  <nb-card-header>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <h4>{{ 'USER.DETAILS' | translate }}</h4>
+      <div>
+        <button nbButton size="small" status="primary" (click)="sendEmail()">
+          <nb-icon icon="email-outline"></nb-icon>
+          {{ 'BUTTONS.SEND_EMAIL' | translate }}
+        </button>
+        <button nbButton size="small" status="info" (click)="sendSMS()">
+          <nb-icon icon="message-square-outline"></nb-icon>
+          {{ 'BUTTONS.SEND_SMS' | translate }}
+        </button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <!-- Nebular Tabs -->
+    <nb-tabset fullWidth>
+      <!-- Basic Info Tab -->
+      <nb-tab tabTitle="{{ 'USER.BASIC_INFO' | translate }}">
+        <nb-card>
+          <nb-card-body>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.FIRST_NAME' | translate }}:</strong> {{ userDetails?.firstName || '-' }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.LAST_NAME' | translate }}:</strong> {{ userDetails?.lastName || '-' }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.EMAIL' | translate }}:</strong> {{ userDetails?.email || '-' }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.USERNAME' | translate }}:</strong> {{ userDetails?.username || '-' }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.MOBILE_NUMBER' | translate }}:</strong> {{ userDetails?.mobileNumber || '-' }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.BIRTH_DATE' | translate }}:</strong> {{ userDetails?.birthDate || '-' }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.CREATED_DATE' | translate }}:</strong> {{ userDetails?.createdDate || '-' }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.UPDATED_DATE' | translate }}:</strong> {{ userDetails?.updatedDate || '-' }}</p>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+
+      <!-- Roles Tab -->
+      <nb-tab tabTitle="{{ 'USER.ROLES' | translate }}">
+        <nb-card>
+          <nb-card-body>
+            <div *ngIf="userDetails?.userRoles?.length > 0; else noRoles">
+              <div *ngFor="let role of userDetails?.userRoles" class="mb-3">
+                <nb-card>
+                  <nb-card-header>
+                    <strong>{{ role.role?.nameEn || '-' }}</strong> / <strong>{{ role.role?.nameAr || '-' }}</strong>
+                  </nb-card-header>
+                  <nb-card-body>
+                    <p><strong>{{ 'USER.ROLE_ID' | translate }}:</strong> {{ role.roleId }}</p>
+                    <p><strong>{{ 'USER.DESCRIPTION' | translate }}:</strong> {{ role.role?.description || '-' }}</p>
+                    <p><strong>{{ 'USER.PERMISSIONS' | translate }}:</strong></p>
+                    <ul>
+                      <li *ngFor="let permission of role.role?.permissions">
+                        <strong>{{ permission?.nameEn || '-' }}</strong> / {{ permission?.nameAr || '-' }}
+                      </li>
+                    </ul>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+            </div>
+            <ng-template #noRoles>
+              <p>{{ 'USER.NO_ROLES' | translate }}</p>
+            </ng-template>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+
+      <!-- Departments Tab -->
+      <nb-tab tabTitle="{{ 'USER.DEPARTMENTS' | translate }}">
+        <nb-card>
+          <nb-card-body>
+            <div *ngIf="userDetails?.userDepartments?.length > 0; else noDepartments">
+              <div *ngFor="let department of userDetails?.userDepartments" class="mb-3">
+                <nb-card>
+                  <nb-card-header>
+                    <strong>{{ department.department?.nameEn || '-' }}</strong> / <strong>{{
+                      department.department?.nameAr || '-' }}</strong>
+                  </nb-card-header>
+                  <nb-card-body>
+                    <p><strong>{{ 'USER.DEPARTMENT_ID' | translate }}:</strong> {{ department.departmentId }}</p>
+                    <p><strong>{{ 'USER.DESCRIPTION' | translate }}:</strong> {{ department.department?.description ||
+                      '-' }}</p>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+            </div>
+            <ng-template #noDepartments>
+              <p>{{ 'USER.NO_DEPARTMENTS' | translate }}</p>
+            </ng-template>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+
+      <!-- Groups Tab -->
+      <nb-tab tabTitle="{{ 'USER.GROUPS' | translate }}">
+        <nb-card>
+          <nb-card-body>
+            <div *ngIf="userDetails?.userGroups?.length > 0; else noGroups">
+              <div *ngFor="let group of userDetails?.userGroups" class="mb-3">
+                <nb-card>
+                  <nb-card-header>
+                    <strong>{{ group.name || '-' }}</strong>
+                  </nb-card-header>
+                  <nb-card-body>
+                    <p><strong>{{ 'USER.GROUP_ID' | translate }}:</strong> {{ group.groupId }}</p>
+                    <p><strong>{{ 'USER.DESCRIPTION' | translate }}:</strong> {{ group.description || '-' }}</p>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+            </div>
+            <ng-template #noGroups>
+              <p>{{ 'USER.NO_GROUPS' | translate }}</p>
+            </ng-template>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+
+      <!-- Additional Details Tab -->
+      <nb-tab tabTitle="{{ 'USER.ADDITIONAL_DETAILS' | translate }}">
+        <nb-card>
+          <nb-card-body>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.PREFERRED_LANGUAGE' | translate }}:</strong> {{ userDetails?.prefaredLanguageKey ||
+                  '-' }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.LAST_ASSIGN_SUPERVISOR' | translate }}:</strong> {{
+                  userDetails?.lastAssignDateAsSupervisor || '-' }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.LAST_ASSIGN_CASE_OWNER' | translate }}:</strong> {{
+                  userDetails?.lastAssignDateAsCaseOwner || '-' }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>{{ 'USER.LAST_ASSIGN_TO' | translate }}:</strong> {{ userDetails?.lastAssignDateAsAssignTo ||
+                  '-' }}</p>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+
+       <!-- Emails Tab -->
+       <nb-tab tabTitle="{{ 'USER.EMAILS' | translate }}">
+        <nb-card>
+          <nb-card-body>
+            <div *ngIf="emails?.length > 0; else noEmails">
+              <div *ngFor="let email of emails" class="mb-3">
+                <nb-card>
+                  <nb-card-header>
+                    <strong>{{ email.subject }}</strong>
+                  </nb-card-header>
+                  <nb-card-body>
+                    <p><strong>{{ 'USER.SENT_DATE' | translate }}:</strong> {{ email.sentDate }}</p>
+                    <p><strong>{{ 'USER.RECIPIENT' | translate }}:</strong> {{ email.recipient }}</p>
+                    <p><strong>{{ 'USER.CONTENT' | translate }}:</strong></p>
+                    <div [innerHTML]="email.content"></div>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let email of emails">
+                  <h5>{{ email.subject }}</h5>
+                  <p>
+                    <strong>{{ 'USER.EMAIL_SENT_TO' | translate }}:</strong> {{ email.recipient }}
+                  </p>
+                  <p>
+                    <strong>{{ 'USER.EMAIL_SENT_DATE' | translate }}:</strong> {{ email.sentDate }}
+                  </p>
+                  <p>{{ email.content }}</p>
+                </li>
+              </ul>
+
+            </div>
+            <ng-template #noEmails>
+              <p>{{ 'USER.NO_EMAILS' | translate }}</p>
+            </ng-template>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+
+      <!-- SMS Tab -->
+      <nb-tab tabTitle="{{ 'USER.SMS' | translate }}">
+        <nb-card>
+          <nb-card-body>
+            <div *ngIf="smsMessages?.length > 0; else noSMS">
+              <div *ngFor="let sms of smsMessages" class="mb-3">
+                <nb-card>
+                  <nb-card-header>
+                    <strong>{{ sms.sentDate }}</strong>
+                  </nb-card-header>
+                  <nb-card-body>
+                    <p><strong>{{ 'USER.RECIPIENT' | translate }}:</strong> {{ sms.recipient }}</p>
+                    <p><strong>{{ 'USER.CONTENT' | translate }}:</strong> {{ sms.content }}</p>
+                  </nb-card-body>
+                </nb-card>
+              </div>
+
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let sms of smsMessages">
+                  <p>
+                    <strong>{{ 'USER.SMS_SENT_TO' | translate }}:</strong> {{ sms.recipient }}
+                  </p>
+                  <p>
+                    <strong>{{ 'USER.SMS_SENT_DATE' | translate }}:</strong> {{ sms.sentDate }}
+                  </p>
+                  <p>{{ sms.content }}</p>
+                </li>
+              </ul>
+            </div>
+            <ng-template #noSMS>
+              <p>{{ 'USER.NO_SMS' | translate }}</p>
+            </ng-template>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+
+      <!-- Files Tab -->
+      <nb-tab tabTitle="{{ 'USER.FILES' | translate }}">
+        <nb-card>
+          <nb-card-body>
+            <div *ngIf="files?.length > 0; else noFiles">
+              <ul>
+                <li *ngFor="let file of files">
+                  <strong>{{ file.name }}</strong>
+                  <a [href]="file.downloadUrl" target="_blank">{{ 'USER.DOWNLOAD' | translate }}</a>
+                </li>
+              </ul>
+            </div>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let file of files">
+                <p>{{ file.name }}</p>
+                <a [href]="file.downloadUrl" download>
+                  {{ 'USER.DOWNLOAD_FILE' | translate }}
+                </a>
+              </li>
+            </ul>
+
+            <ng-template #noFiles>
+              <p>{{ 'USER.NO_FILES' | translate }}</p>
+            </ng-template>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+
+      <!-- Logs Tab -->
+      <nb-tab tabTitle="{{ 'USER.LOGS' | translate }}">
+        <nb-card>
+          <nb-card-body>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let log of logs">
+                <p>
+                  <strong>{{ 'USER.LOG_TIMESTAMP' | translate }}:</strong> {{ log.timestamp }}
+                </p>
+                <p>{{ log.message }}</p>
+              </li>
+            </ul>
+            
+            <div *ngIf="logs?.length > 0; else noLogs">
+              <ul>
+                <li *ngFor="let log of logs">
+                  <p>
+                    <strong>{{ log.timestamp }}:</strong>
+                    {{ log.message }}
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <ng-template #noLogs>
+              <p>{{ 'USER.NO_LOGS' | translate }}</p>
+            </ng-template>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
+
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>

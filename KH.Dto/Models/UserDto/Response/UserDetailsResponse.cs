@@ -46,6 +46,13 @@ public class UserDetailsResponse : BasicTrackerEntityDto
     Username = user.Username;
     BirthDate = user.BirthDate;
     MobileNumber = user.MobileNumber;
+    IsDeleted = user.IsDeleted;
+    CreatedDate = user.CreatedDate;
+    UpdatedDate = user.UpdatedDate;
+    DeletedDate = user.DeletedDate;
+    CreatedById = user.CreatedById;
+    UpdatedById = user.UpdatedById;
+    DeletedById = user.DeletedById;
     RoleIds = user.UserRoles.Select(ur => ur.RoleId).ToArray();
 
     // Map UserRoles, UserGroups, UserDepartments
