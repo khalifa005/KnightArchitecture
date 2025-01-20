@@ -1,130 +1,134 @@
-<form [formGroup]="myForm">
-  <div class="row">
-    <!-- First Name -->
-    <div class="col-4">
-      <ngx-custom-input
-        [formcontrol]="myForm.firstNameControl"
+
+<ng-container *ngIf="myForm">
+  <form [formGroup]="myForm">
+    <div class="row">
+      <!-- First Name -->
+      <div class="col-4">
+        <ngx-custom-input
+          [formcontrol]="myForm.firstNameControl"
+          [isRequired]="true"
+          label="{{ 'USER.FIRST_NAME' | translate }}"
+          placeHolder="{{ 'USER.FIRST_NAME' | translate }}"
+          [icon]="'edit-outline'"
+        ></ngx-custom-input>
+      </div>
+  
+      <!-- middleNameControl Name -->
+      <div class="col-4">
+        <ngx-custom-input
+          [formcontrol]="myForm.middleNameControl"
+          [isRequired]="true"
+          label="{{ 'USER.Middle_NAME' | translate }}"
+          placeHolder="{{ 'USER.Middle_NAME' | translate }}"
+          [icon]="'edit-outline'"
+        ></ngx-custom-input>
+      </div>
+  
+      <!-- Last Name -->
+      <div class="col-4">
+        <ngx-custom-input
+          [formcontrol]="myForm.lastNameControl"
+          [isRequired]="true"
+          label="{{ 'USER.LAST_NAME' | translate }}"
+          placeHolder="{{ 'USER.LAST_NAME' | translate }}"
+          [icon]="'edit-outline'"
+        ></ngx-custom-input>
+      </div>
+  
+      <!-- Email -->
+      <div class="col-6 mt-3">
+        <ngx-custom-input
+          [formcontrol]="myForm.emailControl"
+          [isRequired]="true"
+          label="{{ 'USER.EMAIL' | translate }}"
+          placeHolder="{{ 'USER.EMAIL' | translate }}"
+          [icon]="'email-outline'"
+        ></ngx-custom-input>
+      </div>
+  
+      <!-- Username -->
+      <div class="col-6 mt-3" *ngIf="!idInput">
+        <ngx-custom-input
+          [formcontrol]="myForm.usernameControl"
+          [isRequired]="true"
+          label="{{ 'USER.USERNAME' | translate }}"
+          placeHolder="{{ 'USER.USERNAME' | translate }}"
+          [icon]="'person-outline'"
+        ></ngx-custom-input>
+      </div>
+  
+      <!-- Mobile Number -->
+      <div class="col-6 mt-3">
+        <ngx-custom-input
+          [formcontrol]="myForm.mobileNumberControl"
+          [isRequired]="true"
+          label="{{ 'USER.MOBILE_NUMBER' | translate }}"
+          placeHolder="{{ 'USER.MOBILE_NUMBER' | translate }}"
+          [icon]="'phone-outline'"
+        ></ngx-custom-input>
+      </div>
+  
+      <!-- Birth Date -->
+      <div class="col-6 mt-3">
+        <ngx-date-picker 
+        [formcontrol]="myForm.birthDateControl" 
         [isRequired]="true"
-        label="{{ 'USER.FIRST_NAME' | translate }}"
-        placeHolder="{{ 'USER.FIRST_NAME' | translate }}"
-        [icon]="'edit-outline'"
-      ></ngx-custom-input>
-    </div>
-
-    <!-- middleNameControl Name -->
-    <div class="col-4">
-      <ngx-custom-input
-        [formcontrol]="myForm.middleNameControl"
-        [isRequired]="true"
-        label="{{ 'USER.Middle_NAME' | translate }}"
-        placeHolder="{{ 'USER.Middle_NAME' | translate }}"
-        [icon]="'edit-outline'"
-      ></ngx-custom-input>
-    </div>
-
-    <!-- Last Name -->
-    <div class="col-4">
-      <ngx-custom-input
-        [formcontrol]="myForm.lastNameControl"
-        [isRequired]="true"
-        label="{{ 'USER.LAST_NAME' | translate }}"
-        placeHolder="{{ 'USER.LAST_NAME' | translate }}"
-        [icon]="'edit-outline'"
-      ></ngx-custom-input>
-    </div>
-
-    <!-- Email -->
-    <div class="col-6 mt-3">
-      <ngx-custom-input
-        [formcontrol]="myForm.emailControl"
-        [isRequired]="true"
-        label="{{ 'USER.EMAIL' | translate }}"
-        placeHolder="{{ 'USER.EMAIL' | translate }}"
-        [icon]="'email-outline'"
-      ></ngx-custom-input>
-    </div>
-
-    <!-- Username -->
-    <div class="col-6 mt-3">
-      <ngx-custom-input
-        [formcontrol]="myForm.usernameControl"
-        [isRequired]="true"
-        label="{{ 'USER.USERNAME' | translate }}"
-        placeHolder="{{ 'USER.USERNAME' | translate }}"
-        [icon]="'person-outline'"
-      ></ngx-custom-input>
-    </div>
-
-    <!-- Mobile Number -->
-    <div class="col-6 mt-3">
-      <ngx-custom-input
-        [formcontrol]="myForm.mobileNumberControl"
-        [isRequired]="true"
-        label="{{ 'USER.MOBILE_NUMBER' | translate }}"
-        placeHolder="{{ 'USER.MOBILE_NUMBER' | translate }}"
-        [icon]="'phone-outline'"
-      ></ngx-custom-input>
-    </div>
-
-    <!-- Birth Date -->
-    <div class="col-6 mt-3">
-      <ngx-date-picker 
-      [formcontrol]="myForm.birthDateControl" 
-      [isRequired]="true"
-      label="{{ 'USER.BIRTH_DATE' | translate }}"
-      placeHolder="{{ 'USER.BIRTH_DATE' | translate }}">
-  </ngx-date-picker>
-
-    </div>
-
-    <!-- Password -->
-    <div class="col-6 mt-3">
-      <ngx-custom-input
-        [formcontrol]="myForm.passwordControl"
-        [isRequired]="true"
-        label="{{ 'USER.PASSWORD' | translate }}"
-        placeHolder="{{ 'USER.PASSWORD' | translate }}"
-        [icon]="'lock-outline'"
-      ></ngx-custom-input>
-    </div>
-
-    <!-- Department Selection -->
-    <div class="col-6 mt-3">
-      <app-custom-single-select-dropdown
-        [formcontrol]="myForm.departmentIdControl"
-        [selectOptions]="departments"
-        label="{{ 'USER.DEPARTMENT' | translate }}"
-        placeHolder="{{ 'USER.DEPARTMENT_PLACEHOLDER' | translate }}"
-        [isRequired]="true"
-      ></app-custom-single-select-dropdown>
-    </div>
-
-    <!-- Roles Multi-select -->
-    <div class="col-12 mt-3">
-      <!-- <app-custom-multi-select-dropdown
+        label="{{ 'USER.BIRTH_DATE' | translate }}"
+        placeHolder="{{ 'USER.BIRTH_DATE' | translate }}">
+    </ngx-date-picker>
+  
+      </div>
+  
+      <!-- Password -->
+      <div class="col-6 mt-3" *ngIf="!idInput">
+        <ngx-custom-input
+          [formcontrol]="myForm.passwordControl"
+          [isRequired]="true"
+          label="{{ 'USER.PASSWORD' | translate }}"
+          placeHolder="{{ 'USER.PASSWORD' | translate }}"
+          [icon]="'lock-outline'"
+        ></ngx-custom-input>
+      </div>
+  
+      <!-- Department Selection -->
+      <div class="col-6 mt-3">
+        <app-custom-single-select-dropdown
+          [formcontrol]="myForm.departmentIdControl"
+          [selectOptions]="departments"
+          label="{{ 'USER.DEPARTMENT' | translate }}"
+          placeHolder="{{ 'USER.DEPARTMENT_PLACEHOLDER' | translate }}"
+          [isRequired]="true"
+        ></app-custom-single-select-dropdown>
+      </div>
+  
+      <!-- Roles Multi-select -->
+      <div class="col-12 mt-3">
+        <!-- <app-custom-multi-select-dropdown
+          [formcontrol]="myForm.roleIdsControl"
+          [selectOptions]="roles"
+          label="{{ 'USER.ROLES' | translate }}"
+          placeHolder="'USER.ROLES'"
+          [isRequired]="true"
+        ></app-custom-multi-select-dropdown> -->
+  
+        <app-custom-multi-select-dropdown
         [formcontrol]="myForm.roleIdsControl"
         [selectOptions]="roles"
-        label="{{ 'USER.ROLES' | translate }}"
-        placeHolder="'USER.ROLES'"
-        [isRequired]="true"
-      ></app-custom-multi-select-dropdown> -->
-
-      <app-custom-multi-select-dropdown
-      [formcontrol]="myForm.roleIdsControl"
-      [selectOptions]="roles"
-      placeholder="'USER.ROLES'"
-      [isMultiple]="true"
-      label="{{ 'form.multi_select.label_form_control' | translate }}"
-      [isRequired]="true">
-    </app-custom-multi-select-dropdown>
-
+        placeholder="'USER.ROLES'"
+        [isMultiple]="true"
+        label="{{ 'form.multi_select.label_form_control' | translate }}"
+        [isRequired]="true">
+      </app-custom-multi-select-dropdown>
+  
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="col-12 mt-4">
+        <button nbButton fullWidth status="primary" [disabled]="myForm.invalid" (click)="onSubmit()">
+          {{ 'BUTTONS.SUBMIT' | translate }}
+        </button>
+      </div>
     </div>
-
-    <!-- Submit Button -->
-    <div class="col-12 mt-4">
-      <button nbButton fullWidth status="primary" [disabled]="myForm.invalid" (click)="onSubmit()">
-        {{ 'BUTTONS.SUBMIT' | translate }}
-      </button>
-    </div>
-  </div>
-</form>
+  </form>
+  
+</ng-container>

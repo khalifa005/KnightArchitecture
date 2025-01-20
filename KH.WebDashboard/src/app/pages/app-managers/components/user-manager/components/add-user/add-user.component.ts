@@ -6,7 +6,7 @@ import { ToastNotificationService } from '@app/@core/utils.ts/toast-notification
 import { NbWindowRef } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
-import { CreateUserRequest, DepartmentFilterRequest, DepartmentListResponse, DepartmentsService, RoleFilterRequest, RoleListResponse, RolesService, UsersService } from 'src/open-api';
+import { CreateUserRequest, DepartmentFilterRequest, DepartmentListResponse, DepartmentsService, RoleFilterRequest, RoleListResponse, RolesService, UserDetailsResponse, UsersService } from 'src/open-api';
 import { UserForm } from './user.form';
 import { LookupResponse } from '@app/@core/models/base/response/lookup.model';
 import { transformToLookup } from '@app/@core/utils.ts/lookup-mapper';
@@ -21,7 +21,7 @@ import { formatDateFns } from '@app/@core/utils.ts/date/date-utils';
 export class AddUserComponent implements OnInit, OnDestroy {
   private log = new Logger(AddUserComponent.name);
 
-  @Input() userIdInput: number;
+  @Input() idInput: number;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   myForm: UserForm;
@@ -39,7 +39,6 @@ export class AddUserComponent implements OnInit, OnDestroy {
     // departmentId: 5,
     roleIds: [],
   };
-
   model: CreateUserRequest = {
     firstName: "Mahmoud",
     middleName: "Mohamed",
@@ -65,19 +64,21 @@ export class AddUserComponent implements OnInit, OnDestroy {
     private toastNotificationService: ToastNotificationService,
     private departmentApiService: DepartmentsService,
     private roleApiService: RolesService,
-    
+
     public windowRef: NbWindowRef<AddUserComponent>
   ) {
-    // Initialize the form with the model
-    this.myForm = new UserForm(this.fb, this.model);
+
   }
 
   ngOnInit(): void {
 
     this.fetchDepartmentData();
     this.fetchRolesData();
-    if (this.userIdInput) {
+    if (this.idInput) {
       this.fetchUser();
+    } else {
+      // Initialize the form with the model
+      this.myForm = new UserForm(this.fb, this.model);
     }
   }
 
@@ -90,7 +91,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
     if (this.myForm.valid) {
       const formDataModel = this.myForm.value as CreateUserRequest;
 
-      if (this.userIdInput) {
+      if (this.idInput) {
         this.editUser(formDataModel);
       } else {
         this.addNewUser(formDataModel);
@@ -131,14 +132,19 @@ export class AddUserComponent implements OnInit, OnDestroy {
   private fetchUser(): void {
     this.isLoading = true;
     this.usersService
-      .apiV1UsersIdGet(this.userIdInput)
+      .apiV1UsersIdGet(this.idInput)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (response) => {
           if (response?.statusCode === 200 && response.data) {
             const userEntity = response.data;
+            const departmentsIds = userEntity.userDepartments.map(x => x.departmentId);
             this.model = { ...userEntity };
-            this.myForm = new UserForm(this.fb, this.model);
+            this.model.departmentId = departmentsIds.length > 0 ? departmentsIds[0] : null;
+            this.model.birthDate = new Date(userEntity.birthDate).toDateString();
+            this.myForm = new UserForm(this.fb, this.model, true);
+            // this.myForm = new UserForm(new FormBuilder(), this.model, true);
+
           } else {
             this.toastNotificationService.showToast(
               NotitficationsDefaultValues.Danger,
@@ -185,18 +191,16 @@ export class AddUserComponent implements OnInit, OnDestroy {
     this.windowRef.close(statusCode);
   }
 
-
-
   departmentsResponse: DepartmentListResponse[] = [];
-  departments: LookupResponse [] = [];
+  departments: LookupResponse[] = [];
 
   fetchDepartmentData(): void {
-  const filterRequest: DepartmentFilterRequest = {
-    isDeleted: false,
-    pageIndex: 1,
-    pageSize: 500,
-    search: "",
-  };
+    const filterRequest: DepartmentFilterRequest = {
+      isDeleted: false,
+      pageIndex: 1,
+      pageSize: 500,
+      search: "",
+    };
     this.departmentApiService
       .apiV1DepartmentsPagedListPost(filterRequest) // Pass the filter object
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -221,15 +225,15 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   rolesResponse: RoleListResponse[] = [];
-  roles: LookupResponse [] = [];
+  roles: LookupResponse[] = [];
 
   fetchRolesData(): void {
-  const filterRequest: RoleFilterRequest = {
-    isDeleted: false,
-    pageIndex: 1,
-    pageSize: 500,
-    search: "",
-  };
+    const filterRequest: RoleFilterRequest = {
+      isDeleted: false,
+      pageIndex: 1,
+      pageSize: 500,
+      search: "",
+    };
     this.roleApiService
       .apiV1RolesPagedListPost(filterRequest) // Pass the filter object
       .pipe(takeUntil(this.ngUnsubscribe))

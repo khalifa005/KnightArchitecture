@@ -9,7 +9,7 @@ import { ToastNotificationService } from '../../../../@core/utils.ts/toast-notif
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.scss']
 })
-export class DatePickerComponent implements OnInit , OnDestroy{
+export class DatePickerComponent implements OnInit, OnDestroy {
   private log = new Logger(DatePickerComponent.name);
 
   @Output() selectedItemChange = new EventEmitter<any>();
@@ -30,26 +30,36 @@ export class DatePickerComponent implements OnInit , OnDestroy{
 
 
   constructor(
-    private toastNotificationService:ToastNotificationService) {
+    private toastNotificationService: ToastNotificationService) {
 
   }
 
   ngOnInit() {
-    const test =typeof this.formcontrol.value;
- // Convert `selectedItem` to a Date object if it's a string
- if (typeof this.formcontrol.value === 'string') {
-  const parsedDate = new Date(this.formcontrol.value);
-  if (!isNaN(parsedDate.getTime())) {
-    this.formcontrol.setValue(parsedDate);
-  } else {
-    this.log.error(`Invalid date format: ${this.selectedItem}`);
-  }
-}
+    this.ensureValidDate(this.formcontrol.value);
 
   }
 
-  onItemChanged(value:any) {
-  this.log.info(value);
+  private ensureValidDate(value: any): void {
+    if (typeof value === 'string') {
+      const parsedDate = new Date(value);
+      if (!isNaN(parsedDate.getTime())) {
+        this.formcontrol.setValue(parsedDate, { emitEvent: false });
+      } else {
+        this.log.error(`Invalid date format: ${value}`);
+        this.toastNotificationService.showError(
+          'Invalid date format. Please select a valid date.',
+          'Date Error'
+        );
+        this.formcontrol.setValue(null, { emitEvent: false });
+      }
+    } else if (value instanceof Date && isNaN(value.getTime())) {
+      this.log.error('Invalid Date object.');
+      this.formcontrol.setValue(null, { emitEvent: false });
+    }
+  }
+  
+  onItemChanged(value: any) {
+    this.log.info(value);
 
     this.selectedItemChange.emit(this.selectedItem);
   }

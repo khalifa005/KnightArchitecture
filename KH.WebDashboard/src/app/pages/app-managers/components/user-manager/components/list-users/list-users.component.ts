@@ -232,7 +232,7 @@ export class ListUsersComponent implements OnInit, OnDestroy {
     this.windowService.open(AddUserComponent, {
       title: id ? `Edit User - #${id}` : 'Add New User',
       buttons: buttonsConfig,
-      context: { id },
+      context: {  idInput: id, },
     }).onClose.subscribe(response => {
       if (response === 200) {
         this.fetchData();
@@ -255,47 +255,6 @@ export class ListUsersComponent implements OnInit, OnDestroy {
   }
 
 
-  /**
-* Add a new user.
-*/
-  addUser(): void {
-    const newUser: CreateUserRequest = {
-      firstName: "Mahmoud",
-      middleName: "Mohamed",
-      lastName: "Khalifa",
-      password: "KhalifaPassword",
-      email: "khalifa_CEO1@example.com",
-      mobileNumber: "05100000010",
-      username: "khalifa_CEO1",
-      sensitiveData: "AccountNumberExample",
-      birthDate: "1995-07-24",
-      groupId: 2,
-      departmentId: 5,
-      roleIds: [3],
-    };
-
-    this.apiService.apiV1UsersPost(newUser)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (response) => {
-          // this.toastrService.success('User added successfully.', 'Success');
-          this.toastNotificationService.showToast(
-            NotitficationsDefaultValues.Success,
-            this.translationService.instant('user.delete'),
-            this.translationService.instant('user.delete'));
-
-          this.fetchData();
-        },
-        error: () => {
-          // this.toastrService.danger('Failed to add user.', 'Error');
-
-          this.toastNotificationService.showToast(
-            NotitficationsDefaultValues.Danger,
-            this.translationService.instant('Failed to add user'),
-            this.translationService.instant('Error'));
-        },
-      });
-  }
 
   /**
    * Edit an existing user.
