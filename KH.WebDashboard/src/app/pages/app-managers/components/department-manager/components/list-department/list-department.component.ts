@@ -16,6 +16,7 @@ import { Subscription, Subject, takeUntil } from 'rxjs';
 import { DepartmentFilterRequest, DepartmentListResponse, DepartmentListResponsePagedListApiResponse, DepartmentsService, RoleFilterRequest } from 'src/open-api';
 import { AddRoleComponent } from '../../../roles-manager/components/add-role/add-role.component';
 import { DetailsRoleComponent } from '../../../roles-manager/components/details-role/details-role.component';
+import { AddDepartmentComponent } from '../add-department/add-department.component';
 
 @Component({
   selector: 'app-list-department',
@@ -278,11 +279,11 @@ export class ListDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   onAddClicked() {
-    this.openRoleFormWindow();
+    this.openAddFormWindow();
   }
 
   onEditClicked(valueId: number) {
-    this.openRoleFormWindow(valueId);
+    this.openAddFormWindow(valueId);
   }
 
   filterRequest: DepartmentFilterRequest = {
@@ -331,7 +332,7 @@ export class ListDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
   fullScreen = true;
   close = true;
 
-  openRoleFormWindow(roleId?: number) {
+  openAddFormWindow(id?: number) {
 
     const buttonsConfig: NbWindowControlButtonsConfig = {
       minimize: this.minimize,
@@ -341,16 +342,16 @@ export class ListDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
     };
 
     let test = this.windowService.open(
-      AddRoleComponent,
+      AddDepartmentComponent,
       {
-        title: roleId ? 'Edit Role ' + '#' + roleId : 'Add Role',
+        title: id ? 'Edit  ' + '#' + id : 'Add New',
         // hasBackdrop: true,
         // closeOnEsc:true,
         buttons: buttonsConfig,
         windowClass: PopUpWindowTypes.Large,
         context:
         {
-          roleIdInput: roleId,
+          idInput: id,
         }
       }
     )

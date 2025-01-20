@@ -1,6 +1,6 @@
 <nb-card class="rounded" size="large">
     <nb-card-header class="text-center">
-        {{ 'role.management' | translate }}
+        {{ 'department.management' | translate }}
 
         <button nbButton class="mx-1 text-center" size="small" status="success" (click)="onAddClicked()"
         *ngxPermissionsOnly="['add-role','super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'">
