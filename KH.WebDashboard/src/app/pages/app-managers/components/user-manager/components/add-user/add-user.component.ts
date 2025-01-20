@@ -6,8 +6,10 @@ import { ToastNotificationService } from '@app/@core/utils.ts/toast-notification
 import { NbWindowRef } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
-import { CreateUserRequest, UsersService } from 'src/open-api';
+import { CreateUserRequest, DepartmentFilterRequest, DepartmentListResponse, DepartmentsService, RoleFilterRequest, RoleListResponse, RolesService, UsersService } from 'src/open-api';
 import { UserForm } from './user.form';
+import { LookupResponse } from '@app/@core/models/base/response/lookup.model';
+import { transformToLookup } from '@app/@core/utils.ts/lookup-mapper';
 
 @Component({
   selector: 'app-add-user',
@@ -29,6 +31,9 @@ export class AddUserComponent implements OnInit, OnDestroy {
     private usersService: UsersService,
     public translationService: TranslateService,
     private toastNotificationService: ToastNotificationService,
+    private departmentApiService: DepartmentsService,
+    private roleApiService: RolesService,
+    
     public windowRef: NbWindowRef<AddUserComponent>
   ) {
     // Initialize the form with the model
@@ -36,6 +41,9 @@ export class AddUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.fetchDepartmentData();
+    this.fetchRolesData();
     if (this.userIdInput) {
       this.fetchUser();
     }
@@ -145,19 +153,72 @@ export class AddUserComponent implements OnInit, OnDestroy {
     this.windowRef.close(statusCode);
   }
 
-  departments = []; // Populate with API
-  roles = []; // Populate with API
-  loadDropdownData(): void {
-    // Mock data; replace with actual API calls
-    this.departments = [
-      { id: 1, name: 'HR' },
-      { id: 2, name: 'Finance' },
-    ];
 
-    this.roles = [
-      { id: 1, name: 'Admin' },
-      { id: 2, name: 'Editor' },
-    ];
+
+  departmentsResponse: DepartmentListResponse[] = [];
+  departments: LookupResponse [] = [];
+
+  fetchDepartmentData(): void {
+  const filterRequest: DepartmentFilterRequest = {
+    isDeleted: false,
+    pageIndex: 1,
+    pageSize: 500,
+    search: "",
+  };
+    this.departmentApiService
+      .apiV1DepartmentsPagedListPost(filterRequest) // Pass the filter object
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response) => {
+          if (response?.statusCode === 200 && response.data) {
+            this.departmentsResponse = (response.data.items ?? []);
+            this.departments = transformToLookup(this.departmentsResponse);
+          }
+          else {
+            this.toastNotificationService.showToast(
+              NotitficationsDefaultValues.Danger,
+              this.translationService.instant('role.list'),
+              this.translationService.instant('role.lis-erorr'));
+            this.log.error('No roles data received.');
+          }
+        },
+        error: (error) => {
+          console.error('Error fetching paged department list:', error);
+        }
+      });
+  }
+
+  rolesResponse: RoleListResponse[] = [];
+  roles: LookupResponse [] = [];
+
+  fetchRolesData(): void {
+  const filterRequest: RoleFilterRequest = {
+    isDeleted: false,
+    pageIndex: 1,
+    pageSize: 500,
+    search: "",
+  };
+    this.roleApiService
+      .apiV1RolesPagedListPost(filterRequest) // Pass the filter object
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response) => {
+          if (response?.statusCode === 200 && response.data) {
+            this.rolesResponse = (response.data.items ?? []);
+            this.roles = transformToLookup(this.rolesResponse);
+          }
+          else {
+            this.toastNotificationService.showToast(
+              NotitficationsDefaultValues.Danger,
+              this.translationService.instant('role.list'),
+              this.translationService.instant('role.lis-erorr'));
+            this.log.error('No roles data received.');
+          }
+        },
+        error: (error) => {
+          console.error('Error fetching paged department list:', error);
+        }
+      });
   }
 
 }
