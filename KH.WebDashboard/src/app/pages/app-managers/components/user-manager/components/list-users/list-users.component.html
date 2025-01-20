@@ -1,1 +1,184 @@
-<p>list-users works!</p>
+<nb-card class="rounded" size="large">
+    <nb-card-header class="text-center">
+        {{ 'user.management' | translate }}
+
+        <button
+            nbButton
+            class="mx-1 text-center"
+            size="small"
+            status="success"
+            (click)="onAddClicked()"
+            *ngxPermissionsOnly="['add-user', 'super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'"
+        >
+            <nb-icon [options]="{ animation: { type: 'shake' } }" icon="file-add-outline"></nb-icon>
+        </button>
+    </nb-card-header>
+
+    <nb-card-body *ngIf="data">
+        <div
+            class="columns"
+            *ngxPermissionsOnly="['view-user', 'super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'"
+        >
+            <div class="column col-12">
+                <ngx-table
+                    [id]="'1x'"
+                    [summaryTemplate]="summaryTemplateRef"
+                    [filtersTemplate]="filtersTemplate"
+                    [configuration]="configuration"
+                    [loadingTemplate]="loadingTemplate"
+                    [data]="data"
+                    [columns]="columns"
+                    [pagination]="pagination"
+                    (event)="eventEmitted($event)"
+                >
+                    <ng-template let-row let-index="index">
+                        <td ngxStopPropgation>
+                            <h5 class="fs-6">#{{ row.id }}</h5>
+                        </td>
+                        <td ngxStopPropgation>
+                            <p class="fs-p">
+                                {{ row.username }}
+                            </p>
+                        </td>
+                        <td ngxStopPropgation>
+                            <p class="fs-p">
+                                {{ row.firstName + '-' + row.lastName }}
+                                </p>
+                        </td>
+                        <td ngxStopPropgation>
+                            <p class="fs-p">
+                                {{ row.email }}
+                            </p>
+                        </td>
+                        <td ngxStopPropgation>
+                            <p class="fs-p">
+                                {{ row.createdDate | date }}
+                            </p>
+                        </td>
+                        <td ngxStopPropgation>
+                            <p class="fs-p" [ngClass]="row.isDeleted ? 'badge bg-danger' : 'badge bg-info' ">
+                                {{ row.isDeleted | yesNo }}
+                            </p>
+                        </td>
+                        <td ngxStopPropgation>
+                            <div class="d-flex f-gap-1">
+                                <button
+                                    nbButton
+                                    class="mx-1"
+                                    size="tiny"
+                                    status="info"
+                                    (click)="onDetailsClicked(row.id)"
+                                    *ngxPermissionsOnly="['super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'"
+                                >
+                                    <nb-icon [options]="{ animation: { type: 'shake' } }" icon="eye-outline"></nb-icon>
+                                </button>
+
+                                <button
+                                    nbButton
+                                    class="mx-1"
+                                    size="tiny"
+                                    status="info"
+                                    (click)="onEditClicked(row.id)"
+                                    *ngxPermissionsOnly="['edit-user', 'super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'"
+                                >
+                                    <nb-icon [options]="{ animation: { type: 'shake' } }" icon="edit-outline"></nb-icon>
+                                </button>
+
+                                <ng-container *ngIf="!row.isDeleted">
+                                    <button
+                                        nbButton
+                                        size="tiny"
+                                        status="danger"
+                                        (click)="onDeletedClicked(row.id)"
+                                        *ngxPermissionsOnly="['delete-user', 'super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'"
+                                    >
+                                        <nb-icon [options]="{ animation: { type: 'flip in Y' } }" icon="trash-2-outline"></nb-icon>
+                                    </button>
+                                </ng-container>
+
+                                <ng-container *ngIf="row.isDeleted">
+                                    <button
+                                        nbButton
+                                        size="tiny"
+                                        status="warning"
+                                        (click)="onReactivateClicked(row.id)"
+                                        *ngxPermissionsOnly="['edit-user', 'super-admin']; authorisedStrategy: 'show'; unauthorisedStrategy: 'remove'"
+                                    >
+                                        <nb-icon [options]="{ animation: { type: 'zoom' } }" icon="refresh-outline"></nb-icon>
+                                    </button>
+                                </ng-container>
+                            </div>
+                        </td>
+                    </ng-template>
+                </ngx-table>
+
+                <ng-template #summaryTemplateRef let-total="total" let-limit="limit" let-page="page">
+                    <th colspan="10">
+                        <span class="mb-0">{{ 'TABLE.TOTAL_ITEMS' | translate }}</span>
+                        <span class="mb-1">: {{ pagination.count }} </span>
+                    </th>
+                </ng-template>
+            </div>
+        </div>
+
+        <ng-template #loadingTemplate>
+            <td [attr.colspan]="columns.length">
+                <app-loading-spinner size="4rem"> </app-loading-spinner>
+            </td>
+        </ng-template>
+
+        <ng-template #filtersTemplate>
+            <th>
+                <ngx-custom-input
+                    [(selectedItem)]="filterRequest.id"
+                    placeHolder="{{ 'TABLE.ID' | translate }}"
+                    [icon]="'search-outline'"
+                    [disabled]="false"
+                    (keyup.enter)="onIdFilterChnaged($event)"
+                >
+                </ngx-custom-input>
+            </th>
+            <th>
+                <ngx-custom-input
+                    [(selectedItem)]="filterRequest.username"
+                    placeHolder="{{ 'TABLE.USERNAME' | translate }}"
+                    [icon]="'search-outline'"
+                    [disabled]="false"
+                    (keyup.enter)="onIdFilterChnaged($event)"
+                >
+                </ngx-custom-input>
+            </th>
+            <th>
+                <ngx-custom-input
+                    [(selectedItem)]="filterRequest.name"
+                    placeHolder="{{ 'TABLE.NAME' | translate }}"
+                    [icon]="'search-outline'"
+                    [disabled]="false"
+                    (keyup.enter)="onIdFilterChnaged($event)"
+                >
+                </ngx-custom-input>
+            </th>
+            <th>
+                <ngx-custom-input
+                    [(selectedItem)]="filterRequest.email"
+                    placeHolder="{{ 'TABLE.EMAIL' | translate }}"
+                    [icon]="'search-outline'"
+                    [disabled]="false"
+                    (keyup.enter)="onIdFilterChnaged($event)"
+                >
+                </ngx-custom-input>
+            </th>
+            <th>
+                <app-custom-yes-no-select
+                    [(selectedItem)]="filterRequest.isDeleted"
+                    placeHolder="{{ 'form.dropdown.placeholder' | translate }}"
+                    (selectedItemChanged)="onDeletedFilterChnaged($event)"
+                >
+                </app-custom-yes-no-select>
+            </th>
+            <th>
+                <!-- for actions -->
+            </th>
+        </ng-template>
+    </nb-card-body>
+</nb-card>

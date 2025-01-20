@@ -36,6 +36,10 @@
 		"DESCRIPTION": "Description",
 		"TOTAL_ITEMS": "Total items",
 		"IS_DELETED": "Is deleted",
+		"USERNAME": "Username",
+		"NAME": "Name",
+		"EMAIL": "Email",
+		"CREATED_DATE": "Created Date",
 		"OPTIONS": "Options"
 	},
 	"role": {
@@ -81,6 +85,15 @@
 			"label_standalone": "Standalone Input",
 			"placeholder": "Enter a value"
 		},
+		"USER": {
+			"LIST": "User Management",
+			"LIST_ERROR": "An error occurred while fetching users.",
+			"ADD": "Add User",
+			"EDIT": "Edit User",
+			"DETAILS": "User Details",
+			"DELETE": "Delete User",
+			"REACTIVATE": "Reactivate User"
+		  },
 		"time": {
 			"hours_form_control": "Hours Dropdown (Reactive Form)",
 			"minutes_form_control": "Minutes Dropdown (Reactive Form)",
@@ -140,6 +153,15 @@
 			"INVALID": "Password can include letters, digits, and special characters (!@#$%^&* etc.)."
 		}
 	},
+	"USER": {
+		"LIST": "User Management",
+		"LIST_ERROR": "An error occurred while fetching users.",
+		"ADD": "Add User",
+		"EDIT": "Edit User",
+		"DETAILS": "User Details",
+		"DELETE": "Delete User",
+		"REACTIVATE": "Reactivate User"
+	  },
 	"validations": {
 		"please-provide-value": "please fill the required field",
 		"field-required": "This field is required.",
@@ -347,6 +369,10 @@
 		"filteration-options": "Filteration Options",
 		"options": "Options"
 	},
+	"NOTIFICATIONS": {
+		"SUCCESS": "Action completed successfully.",
+		"ERROR": "An error occurred while performing the action."
+	  },
 	"auth": {
 		"login": "Welcome to the dashboard",
 		"username": "Username",
@@ -355,4 +381,5 @@
 		"required_password": "Password is required.",
 		"remember": "Remember Me"
 	}
+
 }
