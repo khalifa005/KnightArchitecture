@@ -13,4 +13,6 @@ public interface IDepartmentService
   Task<ApiResponse<string>> AddAsync(CreateDepartmentRequest request, CancellationToken cancellationToken);
   Task<ApiResponse<string>> UpdateAsync(CreateDepartmentRequest request, CancellationToken cancellationToken);
   Task<ApiResponse<string>> DeleteAsync(long id, CancellationToken cancellationToken);
+  Task<ApiResponse<string>> ReActivateAsync(long id, CancellationToken cancellationToken);
+
 }

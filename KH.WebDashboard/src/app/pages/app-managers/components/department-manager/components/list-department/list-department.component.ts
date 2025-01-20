@@ -23,7 +23,7 @@ import { AddDepartmentComponent } from '../add-department/add-department.compone
   templateUrl: './list-department.component.html',
   styleUrl: './list-department.component.scss'
 })
-export class ListDepartmentComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ListDepartmentComponent implements OnInit, OnDestroy {
 
   private log = new Logger(ListDepartmentComponent.name);
   private subs: Subscription[] = [];
@@ -64,11 +64,9 @@ export class ListDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
   };
 
   constructor(private toastNotificationService: ToastNotificationService,
-    private apiService: RoleApiService,
     private readonly cdr: ChangeDetectorRef,
     private windowService: NbWindowService,
-    private rolesSignalRService: RolesSignalRService,
-    private departmentsService: DepartmentsService,
+    private apiService: DepartmentsService,
     private authService: AuthService,
     public translationService: TranslateService) {
     this.getTableHeaderName()
@@ -76,7 +74,6 @@ export class ListDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
 
   ngOnInit() {
     const token = this.authService.getAccessToken(); // Get the JWT token
-    this.rolesSignalRService.startConnection(token);
     this.initializeTableConfig();
     this.fetchData();
     // Subscribe to language changes
@@ -85,9 +82,6 @@ export class ListDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
       .subscribe(() => {
         this.getTableHeaderName();
       });
-  }
-
-  ngAfterViewInit(): void {
   }
 
   ngOnDestroy() {
@@ -191,7 +185,7 @@ export class ListDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
   onDeletedClicked(valueId: any): void {
 
     this.isLoading = true;
-    this.apiService.deleteRole(valueId)
+    this.apiService.apiV1DepartmentsIdDelete(valueId)
       .pipe(takeUntil(this.ngUnsubscribe)) // Unsubscribe automatically on component destroy
       .subscribe({
         next: (response) => {
@@ -220,7 +214,7 @@ export class ListDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
   onReactivateClicked(valueId: any): void {
 
     this.isLoading = true;
-    this.apiService.reActivateRole(valueId)
+    this.apiService.apiV1DepartmentsReActivateIdPut(valueId)
       .pipe(takeUntil(this.ngUnsubscribe)) // Unsubscribe automatically on component destroy
       .subscribe({
         next: (response) => {
@@ -298,7 +292,7 @@ export class ListDepartmentComponent implements OnInit, AfterViewInit, OnDestroy
   // Fetch paginated departments
   fetchData(): void {
 
-    this.departmentsService
+    this.apiService
       .apiV1DepartmentsPagedListPost(this.filterRequest) // Pass the filter object
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({

@@ -65,5 +65,13 @@ public class DepartmentsController : BaseApiController
     var res = await _lookupService.DeleteAsync(id, cancellationToken);
     return AsActionResult(res);
   }
+
+  [HttpPut("ReActivate/{id}")]
+
+  public async Task<ActionResult<ApiResponse<string>>> ReActivate([FromRoute] long id, CancellationToken cancellationToken)
+  {
+    var res = await _lookupService.ReActivateAsync(id, cancellationToken);
+    return AsActionResult(res);
+  }
 }
 

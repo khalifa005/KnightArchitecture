@@ -15,6 +15,7 @@ public class DepartmentListResponse : BasicEntityDto
     Id =  e.Id;
     NameAr = e.NameAr;
     NameEn = e.NameEn;
+    IsDeleted = e.IsDeleted;
     Description = e.Description;
   }
 
