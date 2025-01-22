@@ -18,6 +18,7 @@ import { AddRoleComponent } from '../../../roles-manager/components/add-role/add
 import { DetailsRoleComponent } from '../../../roles-manager/components/details-role/details-role.component';
 import { AddDepartmentComponent } from '../add-department/add-department.component';
 import { DetailsDepartmentComponent } from '../details-department/details-department.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list-department',
@@ -27,8 +28,6 @@ import { DetailsDepartmentComponent } from '../details-department/details-depart
 export class ListDepartmentComponent implements OnInit, OnDestroy {
 
   private log = new Logger(ListDepartmentComponent.name);
-  private subs: Subscription[] = [];
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   @ViewChild('table') table: APIDefinition;
 
@@ -79,16 +78,16 @@ export class ListDepartmentComponent implements OnInit, OnDestroy {
     this.fetchData();
     // Subscribe to language changes
     this.translationService.onLangChange
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntilDestroyed())
       .subscribe(() => {
         this.getTableHeaderName();
       });
   }
 
   ngOnDestroy() {
-    this.subs.forEach((s) => s.unsubscribe());
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    // this.subs.forEach((s) => s.unsubscribe());
+    // this.ngUnsubscribe.next();
+    // this.ngUnsubscribe.complete();
   }
 
   getTableHeaderName(): void {
@@ -187,7 +186,7 @@ export class ListDepartmentComponent implements OnInit, OnDestroy {
 
     this.isLoading = true;
     this.apiService.apiV1DepartmentsIdDelete(valueId)
-      .pipe(takeUntil(this.ngUnsubscribe)) // Unsubscribe automatically on component destroy
+      .pipe(takeUntilDestroyed()) // Unsubscribe automatically on component destroy
       .subscribe({
         next: (response) => {
           if (response?.statusCode === 200 && response.data) {
@@ -216,7 +215,7 @@ export class ListDepartmentComponent implements OnInit, OnDestroy {
 
     this.isLoading = true;
     this.apiService.apiV1DepartmentsReActivateIdPut(valueId)
-      .pipe(takeUntil(this.ngUnsubscribe)) // Unsubscribe automatically on component destroy
+      .pipe(takeUntilDestroyed()) // Unsubscribe automatically on component destroy
       .subscribe({
         next: (response) => {
           if (response?.statusCode === 200 && response.data) {
@@ -295,7 +294,7 @@ export class ListDepartmentComponent implements OnInit, OnDestroy {
 
     this.apiService
       .apiV1DepartmentsPagedListPost(this.filterRequest) // Pass the filter object
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntilDestroyed())
       .subscribe({
         next: (response) => {
           this.pagedDepartmentResponse = response;
