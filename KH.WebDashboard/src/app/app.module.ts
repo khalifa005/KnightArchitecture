@@ -164,7 +164,7 @@ export function apiConfigFactory(): Configuration {
         {
           name: 'max-files',
           validation: maxFiles,
-          options: { maxFiles: 2 },
+          options: { maxFiles: 1 },
         },
         {
           name: 'min-files',
@@ -174,7 +174,7 @@ export function apiConfigFactory(): Configuration {
         {
           name: 'total-file-size',
           validation: totalFileSize,
-          options: { maxTotalFilesize: 2 },
+          options: { maxTotalFilesize: 1 },
         },
         {
           name: 'allowed-file-extensions',

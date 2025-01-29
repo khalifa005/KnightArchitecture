@@ -57,6 +57,8 @@ import { FormlyDateComponent } from './ngx-formly/components/formly-date/formly-
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NbDatepickerModule, NbIconModule, NbInputModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { CustomErrorMessageComponent } from './ngx-formly/components/file/custom-error-message/custom-error-message.component';
+import { FileUploadErrorMessagePipe } from './ngx-formly/pipes/file-upload-error-message.pipe';
 
 export const NB_CORE_PROVIDERS = [
   { provide: NbRoleProvider, useClass: RoleProvider }, // provide the class
@@ -124,11 +126,13 @@ const COMPONENTS: any = [
   NbInputFormlyComponent,
   FormlyFieldFileComponent,
   FileSizePipe,
+  FileUploadErrorMessagePipe,
 
   FormlyDateComponent,
   FileInputComponent,
   FileUploadComponent,
   FileTypeComponent,
+  CustomErrorMessageComponent
 ];
 
 const Common_MODULES = [

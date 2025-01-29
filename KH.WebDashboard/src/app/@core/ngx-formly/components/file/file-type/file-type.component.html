@@ -4,6 +4,23 @@
   <ng-container *ngIf="props.required">*</ng-container>
 </div>
 
+<div class="file-upload-hints">
+  <!-- Allowed File Extensions Hint -->
+  <div class="text-muted">
+      {{ 'validations.allowed-file-extensions' | translate }}: {{ requiredFileType }}
+  </div>
+
+  <!-- Maximum File Size Hint -->
+  <div class="text-muted" *ngIf="maxFileSizeInMB">
+      {{ 'validations.max-file-size' | translate }}: {{ maxFileSizeInMB }}
+  </div>
+
+  <!-- Maximum Number of Files Hint -->
+  <div class="text-muted" *ngIf="maxFiles">
+      {{ 'validations.max-files' | translate: { max: maxFiles } }}
+  </div>
+</div>
+
 <ngz-formly-material-file-input (selectFiles)="onSelectFiles($event)"></ngz-formly-material-file-input>
 
 <div *ngIf="!field.formControl.touched || field.formControl.valid" class="label label-valid">{{field.props.description}}
@@ -11,7 +28,9 @@
 
 <ng-container *ngIf="field.formControl.touched">
   <mat-error class="mat-error" role="alert">
-    <!-- <formly-validation-message [field]="field"></formly-validation-message> -->
+    <!-- <formly-validation-message [field]="field"></formly-validation-message>
+    <hr/>
+    <br/> -->
     <app-custom-error-message [control]="formControl"></app-custom-error-message>
 
   </mat-error>

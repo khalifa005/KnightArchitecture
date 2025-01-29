@@ -4,10 +4,19 @@ import { SelectedFile } from '../formly-file-extentions/selected-file';
 import { TotalFilesizeError } from '../formly-file-extentions/total-filesize-error';
 import { FilenameForbiddenCharactersError } from '../formly-file-extentions/filename-forbidden-characters-error';
 import { FileExtensionError } from '../formly-file-extentions/file-extension-error';
+import { calculatedFileSizeInKB } from '@app/@core/utils.ts/file/file-utils';
 
-export function maxFiles(control: AbstractControl, options: any): ValidationErrors | null {
-    const files = control.value || [];
-    return files.length <= options.maxFiles ? null : { maxFiles: true };
+export function maxFiles( control: AbstractControl,
+    field: FormlyFieldConfig,
+    options :any): ValidationErrors | null {
+    if (!control.value ) {
+        return null; // No files uploaded yet, so no validation error
+    }
+
+    const files = control.value;
+    const maxFilesAllowed = options?.maxFiles ?? Number.MAX_SAFE_INTEGER;
+
+    return files.length <= maxFilesAllowed ? null : { maxFiles: { maxAllowed: maxFilesAllowed, actual: files.length } };
 }
 
 export function minFiles(control: AbstractControl, options: any): ValidationErrors | null {
@@ -15,13 +24,6 @@ export function minFiles(control: AbstractControl, options: any): ValidationErro
     return files.length >= options.minFiles ? null : { minFiles: true };
 }
 
-export function allowedFileExtensionsx(control: AbstractControl, options: any): ValidationErrors | null {
-    if (!control.value) return null;
-    const file = control.value.file;
-    const allowedExtensions = options.allowedFileExtensions.map(ext => ext.toUpperCase());
-    const fileExtension = file.name.split('.').pop()?.toUpperCase();
-    return allowedExtensions.includes(fileExtension) ? null : { fileExtension: true };
-}
 
 export function allowedFileExtensions(
     control: AbstractControl,
@@ -80,25 +82,33 @@ export function totalFileSize(
     field: FormlyFieldConfig,
     options: any,
 ): ValidationErrors | null {
-    const selectedFiles: SelectedFile[] = control.value;
-
-    const actualTotalFilesize = selectedFiles
-        .map(file => file.file.size)
-        .reduce((size1, size2) => size1 + size2, 0);
-
-    // Convert the maxTotalFilesize from MB to bytes
-    const maxTotalFilesizeInBytes = options.maxTotalFilesize * 1024 * 1024;
-
-    if (actualTotalFilesize > maxTotalFilesizeInBytes) {
-        const error: TotalFilesizeError = {
-            maxTotalFilesize: maxTotalFilesizeInBytes,
-            actualTotalFilesize
-        };
-        return { totalFilesize: error };
+    if (!control.value ) {
+        return null; // No files uploaded yet, so no validation error
     }
 
-    return null;
+    // Convert maxTotalFilesize from MB to bytes
+    const maxTotalFilesizeInBytes = (options?.maxTotalFilesize ?? Number.MAX_SAFE_INTEGER) * 1024 * 1024;
+
+     const file = control.value;
+        if ( file ) {
+          // const extension = file.name.split('.')[1].toLowerCase();
+    
+          let fileInKB = calculatedFileSizeInKB(options.totalFileSize)
+          if (file.size > fileInKB ) {
+            return { 
+                totalFilesize: { 
+                    maxTotalFilesize: fileInKB, 
+                    actualTotalFilesize:file.size 
+                } 
+            };
+          }
+    
+          return null;
+        }
+    
+        return null;
 }
+
 
 
 export function filenameForbiddenCharacters(
