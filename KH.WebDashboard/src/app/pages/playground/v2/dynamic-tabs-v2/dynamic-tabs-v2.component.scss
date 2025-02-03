@@ -83,7 +83,28 @@
     cursor: pointer;
     white-space: nowrap;
     transition: all 0.3s ease;
+
+    position: relative;
+    align-items: center;
+    white-space: nowrap;
+    display: flex;
+
   }
+
+/* Hover Effect */
+.tab-button:hover {
+  background-color: rgba(23, 116, 180, 0.1);  // Light blue background
+  border: 1px solid rgba(23, 116, 180, 0.3);
+  color: rgb(23, 116, 180);
+  // transform: scale(1.02); // Slightly enlarges for a smooth effect
+}
+
+/* Smooth Hover for Notification */
+.tab-notification:hover {
+  background-color: darkred;
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
 
   .tab-button:focus {
     outline: 2px solid rgb(23, 116, 180);
@@ -119,8 +140,8 @@
     position: relative;
   }
   
-  .tab-button i {
-    font-size: 18px;
+  nb-icon {
+    font-size: 20px;
   }
   
   .tab-button:focus {
