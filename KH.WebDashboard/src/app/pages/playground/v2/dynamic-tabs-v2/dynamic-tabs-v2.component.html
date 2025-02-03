@@ -13,7 +13,7 @@
     <!-- Scroll Left -->
     <button 
       class="btn btn-outline-secondary scroll-button left"
-      [class.visible]="'rtl' === 'rtl' ? canScrollRight : canScrollLeft"
+      [class.visible]="direction === 'rtl' ? canScrollRight : canScrollLeft"
       (click)="scrollLeft()"
       aria-label="Scroll tabs left">
       <i class="bi bi-chevron-left"></i>
@@ -47,7 +47,7 @@
     <!-- Scroll Right -->
     <button 
       class="btn btn-outline-secondary scroll-button right"
-      [class.visible]="'rtl' === 'rtl' ? canScrollLeft : canScrollRight"
+      [class.visible]=" direction === 'rtl' ? canScrollLeft : canScrollRight"
       (click)="scrollRight()"
       aria-label="Scroll tabs right">
       <i class="bi bi-chevron-right"></i>

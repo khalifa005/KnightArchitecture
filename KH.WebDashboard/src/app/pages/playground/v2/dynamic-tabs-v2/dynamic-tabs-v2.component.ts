@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-dynamic-tabs-v2',
@@ -7,6 +8,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class DynamicTabsV2Component implements OnInit {
   @ViewChild('tabContainer') tabContainer!: ElementRef;
+  direction: string = 'ltr'; // Default
 
   tabs = [
     { id: '1', label: 'Emergency', isActive: true, content: '<h2>Emergency Content</h2>', count: 5, icon: 'alert-triangle-outline' },
@@ -29,7 +31,10 @@ export class DynamicTabsV2Component implements OnInit {
     return this.tabs.find(tab => tab.isActive)?.content || '';
   }
 
+  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: Document) {}
+
   ngOnInit(): void {
+    this.direction = this.document.documentElement.dir || 'ltr';
     setTimeout(() => this.checkScroll(), 0);
   }
 
@@ -39,7 +44,7 @@ export class DynamicTabsV2Component implements OnInit {
 
   checkScroll(): void {
     const container = this.tabContainer.nativeElement;
-    const isRtl = document.dir === 'rtl'; // Detect RTL mode
+    const isRtl = this.direction === 'rtl'; // Detect RTL mode
     const maxScrollLeft = container.scrollWidth - container.clientWidth;
 
     if (isRtl) {
@@ -53,13 +58,13 @@ export class DynamicTabsV2Component implements OnInit {
 
   scrollLeft(): void {
     const container = this.tabContainer.nativeElement;
-    const scrollAmount = document.dir === 'rtl' ? 200 : -200;
+    const scrollAmount = this.direction === 'rtl' ? 200 : -200;
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   }
 
   scrollRight(): void {
     const container = this.tabContainer.nativeElement;
-    const scrollAmount = document.dir === 'rtl' ? -200 : 200;
+    const scrollAmount = this.direction === 'rtl' ? -200 : 200;
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   }
 
