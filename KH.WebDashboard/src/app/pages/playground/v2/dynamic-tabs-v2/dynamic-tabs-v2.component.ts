@@ -11,18 +11,19 @@ export class DynamicTabsV2Component implements OnInit {
   @ViewChild('tabContainer') tabContainer!: ElementRef;
 
   tabs: Tab[] = [
-    { id: '1', label: 'Emergency', isActive: true, content: '<h2>Emergency Content</h2><p>Emergency related information and actions.</p>' },
-    { id: '2', label: 'Closed', isActive: false, content: '<h2>Closed Content</h2><p>List of closed items and their details.</p>' },
-    { id: '3', label: 'Closed from EAM', isActive: false, content: '<h2>EAM Closures</h2><p>Items closed from the EAM system.</p>' },
-    { id: '4', label: 'Tasks unregistered meter', isActive: false, content: '<h2>Unregistered Meter Tasks</h2><p>Tasks related to unregistered meters.</p>' },
-    { id: '5', label: 'Connection-registered', isActive: false, content: '<h2>Registered Connections</h2><p>List of registered connections.</p>' },
-    { id: '6', label: 'Connection-allocated', isActive: false, content: '<h2>Allocated Connections</h2><p>Details of allocated connections.</p>' },
-    { id: '7', label: 'Maintenance', isActive: false, content: '<h2>Maintenance</h2><p>Scheduled maintenance and related tasks.</p>' },
-    { id: '8', label: 'Inspection', isActive: false, content: '<h2>Inspection</h2><p>Inspection reports and schedules.</p>' },
-    { id: '9', label: 'Reports', isActive: false, content: '<h2>Reports</h2><p>Generated reports and analytics.</p>' },
-    { id: '10', label: 'Settings', isActive: false, content: '<h2>Settings</h2><p>System configuration and preferences.</p>' }
+    { id: '1', label: 'Emergency', isActive: true, content: '<h2>Emergency Content</h2>', count: 5, icon: 'alert-triangle-outline' },
+    { id: '2', label: 'Closed', isActive: false, content: '<h2>Closed Content</h2>', count: 2, icon: 'folder-outline' },
+    { id: '3', label: 'Closed from EAM', isActive: false, content: '<h2>EAM Closures</h2>', count: 7, icon: 'lock-outline' },
+    { id: '4', label: 'Tasks unregistered meter', isActive: false, content: '<h2>Unregistered Meter Tasks</h2>', count: 3, icon: 'settings-2-outline' },
+    { id: '5', label: 'Connection-registered', isActive: false, content: '<h2>Registered Connections</h2>', icon: 'power-outline' },
+    { id: '6', label: 'Connection-allocated', isActive: false, content: '<h2>Allocated Connections</h2>', icon: 'link-outline' },
+    { id: '7', label: 'Maintenance', isActive: false, content: '<h2>Maintenance</h2>', count: 1, icon: 'tool-outline' },
+    { id: '8', label: 'Inspection', isActive: false, content: '<h2>Inspection</h2>', icon: 'search-outline' },
+    { id: '9', label: 'Reports', isActive: false, content: '<h2>Reports</h2>', count: 10, icon: 'file-text-outline' },
+    { id: '10', label: 'Settings', isActive: false, content: '<h2>Settings</h2>', icon: 'settings-outline' }
   ];
-
+  
+  
   canScrollLeft$ = this.tabScrollService.canScrollLeft$;
   canScrollRight$ = this.tabScrollService.canScrollRight$;
   fitToWidth$ = this.tabScrollService.fitToWidth$;
@@ -66,4 +67,11 @@ export class DynamicTabsV2Component implements OnInit {
      toggleFitToWidth(value: boolean): void {
      this.tabScrollService.toggleFitToWidth(value);
      }
+
+     updateTabCount(tabId: string, count: number): void {
+      this.tabs = this.tabs.map(tab => 
+        tab.id === tabId ? { ...tab, count } : tab
+      );
+    }
+    
    }

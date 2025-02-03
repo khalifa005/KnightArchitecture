@@ -32,7 +32,14 @@
           role="tab" 
           [attr.aria-selected]="tab.isActive"
           (click)="selectTab(tab.id)">
-          {{tab.label}}
+  <!-- Nebular Eva Icon -->
+  <nb-icon [icon]="tab.icon" class="me-2"></nb-icon>
+  {{ tab.label }}
+
+  <!-- Notification Badge -->
+  <span *ngIf="tab.count && tab.count > 0" class="tab-notification">
+    {{ tab.count }}
+  </span>
         </button>
       </div>
 
@@ -47,3 +54,5 @@
 
     <app-dy-tab-v2 [content]="activeTabContent"></app-dy-tab-v2>
   </div>
+
+
