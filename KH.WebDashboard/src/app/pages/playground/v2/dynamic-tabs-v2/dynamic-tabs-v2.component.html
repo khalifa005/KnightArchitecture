@@ -1,58 +1,58 @@
-<div class="tab-container">
-    <div class="controls">
-      <label class="fit-width-control">
-        <input
-          type="checkbox"
-          [ngModel]="fitToWidth$ | async"
-          (ngModelChange)="toggleFitToWidth($event)">
-        Fit to width
-      </label>
-    </div>
-
-    <nav class="navigation-container" role="navigation">
-      <button 
-        class="scroll-button left" 
-        [class.visible]="(canScrollLeft$ | async) && !(fitToWidth$ | async)"
-        (click)="scrollLeft()"
-        aria-label="Scroll tabs left">
-        <i class="bi bi-chevron-left"></i>
-      </button>
-
-      <div 
-        #tabContainer 
-        class="navigation-wrapper"
-        [class.fit-width]="fitToWidth$ | async"
-        (scroll)="onScroll()">
-        <button 
-          *ngFor="let tab of tabs"
-          class="tab-button" 
-          [class.tab-button-active]="tab.isActive"
-          [style.flex]="(fitToWidth$ | async) ? '1' : 'none'"
-          tabindex="0" 
-          role="tab" 
-          [attr.aria-selected]="tab.isActive"
-          (click)="selectTab(tab.id)">
-  <!-- Nebular Eva Icon -->
-  <nb-icon [icon]="tab.icon" class="me-2"></nb-icon>
-  {{ tab.label }}
-
-  <!-- Notification Badge -->
-  <span *ngIf="tab.count && tab.count > 0" class="tab-notification">
-    {{ tab.count }}
-  </span>
-        </button>
-      </div>
-
-      <button 
-        class="scroll-button right" 
-        [class.visible]="(canScrollRight$ | async) && !(fitToWidth$ | async)"
-        (click)="scrollRight()"
-        aria-label="Scroll tabs right">
-        <i class="bi bi-chevron-right"></i>
-      </button>
-    </nav>
-
-    <app-dy-tab-v2 [content]="activeTabContent"></app-dy-tab-v2>
+<div class="container tab-container">
+  <div class="controls">
+    <label class="fit-width-control">
+      <input
+        type="checkbox"
+        [(ngModel)]="fitToWidth"
+        (change)="toggleFitToWidth($event.target.checked)">
+      Fit to width
+    </label>
   </div>
 
+  <nav class="d-flex position-relative align-items-center navigation-container" role="navigation">
+    <!-- Scroll Left -->
+    <button 
+      class="btn btn-outline-secondary scroll-button left"
+      [class.visible]="'rtl' === 'rtl' ? canScrollRight : canScrollLeft"
+      (click)="scrollLeft()"
+      aria-label="Scroll tabs left">
+      <i class="bi bi-chevron-left"></i>
+    </button>
 
+    <div 
+      #tabContainer 
+      class="d-flex navigation-wrapper overflow-auto"
+      [class.fit-width]="fitToWidth"
+      (scroll)="onScroll()">
+      
+      <button 
+        *ngFor="let tab of tabs"
+        class="btn btn-light tab-button"
+        [class.tab-button-active]="tab.isActive"
+        [style.flex]="fitToWidth ? '1' : 'none'"
+        tabindex="0" 
+        role="tab" 
+        [attr.aria-selected]="tab.isActive"
+        (click)="selectTab(tab.id)">
+        
+        <nb-icon [icon]="tab.icon" class="me-2"></nb-icon>
+        {{ tab.label }}
+
+        <span *ngIf="tab.count && tab.count > 0" class="tab-notification">
+          {{ tab.count }}
+        </span>
+      </button>
+    </div>
+
+    <!-- Scroll Right -->
+    <button 
+      class="btn btn-outline-secondary scroll-button right"
+      [class.visible]="'rtl' === 'rtl' ? canScrollLeft : canScrollRight"
+      (click)="scrollRight()"
+      aria-label="Scroll tabs right">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </nav>
+
+  <app-dy-tab-v2 [content]="activeTabContent"></app-dy-tab-v2>
+</div>
