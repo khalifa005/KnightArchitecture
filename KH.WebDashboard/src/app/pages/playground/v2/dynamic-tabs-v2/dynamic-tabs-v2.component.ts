@@ -1,13 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-dynamic-tabs-v2',
   templateUrl: './dynamic-tabs-v2.component.html',
   styleUrls: ['./dynamic-tabs-v2.component.scss']
 })
-export class DynamicTabsV2Component implements OnInit {
-  @ViewChild('tabContainer') tabContainer!: ElementRef;
+export class DynamicTabsV2Component implements OnInit, AfterViewInit {
+  @ViewChild('tabContainer', { static: false }) tabContainer!: ElementRef;
   direction: string = 'ltr'; // Default
 
   tabs = [
@@ -31,11 +31,14 @@ export class DynamicTabsV2Component implements OnInit {
     return this.tabs.find(tab => tab.isActive)?.content || '';
   }
 
-  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: Document) {}
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {
     this.direction = this.document.documentElement.dir || 'ltr';
-    setTimeout(() => this.checkScroll(), 0);
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => this.checkScroll(), 100);
   }
 
   onScroll(): void {
@@ -48,8 +51,8 @@ export class DynamicTabsV2Component implements OnInit {
     const maxScrollLeft = container.scrollWidth - container.clientWidth;
 
     if (isRtl) {
-      this.canScrollRight = container.scrollLeft < 0;
-      this.canScrollLeft = container.scrollLeft > -maxScrollLeft;
+      this.canScrollRight = container.scrollLeft > -maxScrollLeft;
+      this.canScrollLeft = container.scrollLeft < 0;
     } else {
       this.canScrollLeft = container.scrollLeft > 0;
       this.canScrollRight = container.scrollLeft < maxScrollLeft;

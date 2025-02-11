@@ -11,9 +11,11 @@
 
   <nav class="d-flex position-relative align-items-center navigation-container" role="navigation">
     <!-- Scroll Left -->
+    <!-- [class.visible]="canScrollLeft" -->
+
     <button 
+    [class.visible]="true"
       class="btn btn-outline-secondary scroll-button left"
-      [class.visible]="direction === 'rtl' ? canScrollRight : canScrollLeft"
       (click)="scrollLeft()"
       aria-label="Scroll tabs left">
       <i class="bi bi-chevron-left"></i>
@@ -47,7 +49,7 @@
     <!-- Scroll Right -->
     <button 
       class="btn btn-outline-secondary scroll-button right"
-      [class.visible]=" direction === 'rtl' ? canScrollLeft : canScrollRight"
+      [class.visible]="true"
       (click)="scrollRight()"
       aria-label="Scroll tabs right">
       <i class="bi bi-chevron-right"></i>

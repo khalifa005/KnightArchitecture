@@ -132,3 +132,13 @@
     white-space: normal;
   }
 }
+
+[dir="rtl"] .scroll-button.left {
+  right: 0;
+  left: auto;
+}
+
+[dir="rtl"] .scroll-button.right {
+  left: 0;
+  right: auto;
+}
