@@ -11,6 +11,10 @@ const routes: Routes = [{
       loadChildren: () => import('./welcome/welcome.module').then(m => m.WelcomeModule),
     },
     {
+      path: 'voice-address',
+      loadChildren: () => import('./voice-address/voice-address.module').then(m => m.VoiceAddressModule)
+    },
+    {
       path: '',
       redirectTo: 'welcome',
       pathMatch: 'full',

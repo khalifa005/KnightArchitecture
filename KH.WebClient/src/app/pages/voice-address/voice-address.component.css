@@ -1,0 +1,8 @@
+.address-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+.address-form div {
+  margin-bottom: 8px;
+}

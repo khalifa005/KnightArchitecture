@@ -1,0 +1,20 @@
+<form [formGroup]="addressForm" class="address-form">
+  <div>
+    <label>Street:</label>
+    <input formControlName="street" />
+  </div>
+  <div>
+    <label>City:</label>
+    <input formControlName="city" />
+  </div>
+  <div>
+    <label>State:</label>
+    <input formControlName="state" />
+  </div>
+  <div>
+    <label>Zip:</label>
+    <input formControlName="zip" />
+  </div>
+</form>
+<button (click)="record()">Record Address</button>
+<audio *ngIf="audioUrl" [src]="audioUrl" controls></audio>
