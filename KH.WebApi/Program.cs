@@ -1,5 +1,6 @@
 using KH.Services.Chat.ChatHub;
 using KH.Services.Lookups.Roles.RoleHub;
+using KH.Services.Speech.SpeechHub;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.RateLimiting;
 using QuestPDF.Fluent;
@@ -199,6 +200,7 @@ void ConfigureMiddlewares(WebApplication app)
   app.UseAuthorization();
   app.MapHub<RolesHub>("/signalrhub");
   app.MapHub<ChatHub>("/signalrChatHub");
+  app.MapHub<SpeechHub>("/signalrSpeechHub");
 
   // Serve static files and map controllers
   app.UseStaticFiles();
