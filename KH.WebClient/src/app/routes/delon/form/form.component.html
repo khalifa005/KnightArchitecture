@@ -1,0 +1,6 @@
+<page-header [title]="'app.form.title' | i18n" />
+<nz-card>
+  <sf mode="search" [schema]="searchSchema" [formData]="params" (formSubmit)="st.reset($event)"
+    (formReset)="st.reset(params)" />
+  <st #st [data]="url" [columns]="columns" [req]="{ params: params }" />
+</nz-card>

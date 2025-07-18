@@ -1,0 +1,10 @@
+<div class="alain-default__content-title">
+  <h1>
+    {{ 'app.cache.title' | i18n }},
+    <a href="https://ng-alain.com/components/cache" target="_blank">{{ 'app.cache.document' | i18n }}</a>
+  </h1>
+</div>
+<nz-card nzTitle="{{ 'app.cache.service' | i18n }}">
+  <button nz-button (click)="set()">{{ 'app.cache.set' | i18n }}</button>
+  <button nz-button (click)="get()" class="ml-sm">{{ 'app.cache.get' | i18n }}</button>
+</nz-card>

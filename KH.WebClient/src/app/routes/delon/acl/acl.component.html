@@ -1,0 +1,57 @@
+<div class="alain-default__content-title">
+  <h1>
+    {{ 'app.acl.title' | i18n }}
+    <small>{{ 'app.acl.notice' | i18n }}</small>
+  </h1>
+</div>
+<div nz-row [nzGutter]="8">
+  <div nz-col [nzSpan]="24">
+    <nz-card nzTitle="{{ 'app.acl.button_granularity' | i18n }}">
+      {{ 'app.acl.raw_data' | i18n }}：{{ data | json }}
+      <button nz-button [acl]="'role-a'">{{ 'app.acl.role_a' | i18n }}</button>
+      <button nz-button [acl]="'role-b'" class="ml-sm">{{ 'app.acl.role_b' | i18n }}</button>
+    </nz-card>
+  </div>
+</div>
+<div nz-row [nzGutter]="8">
+  <div nz-col [nzSpan]="8">
+    <nz-card nzTitle="{{ 'app.acl.full' | i18n }}">
+      <button nz-button (click)="toggleFull()">
+        <span>{{ full ? ('app.acl.leave_permission' | i18n) : ('app.acl.set_permission' | i18n) }}</span>
+      </button>
+      <p class="pt-md">{{ 'app.acl.full_desc' | i18n }}</p>
+    </nz-card>
+  </div>
+  <div nz-col [nzSpan]="8">
+    <nz-card nzTitle="{{ 'app.acl.role_a_card' | i18n }}">
+      <button nz-button (click)="toggleRoleA()">
+        <span>{{ roleA.length > 0 ? ('app.acl.leave_permission' | i18n) : ('app.acl.set_permission' | i18n) }}</span>
+      </button>
+    </nz-card>
+  </div>
+  <div nz-col [nzSpan]="8">
+    <nz-card nzTitle="{{ 'app.acl.role_b_card' | i18n }}">
+      <button nz-button (click)="toggleRoleB()">
+        <span>{{ roleB.length > 0 ? ('app.acl.leave_permission' | i18n) : ('app.acl.set_permission' | i18n) }}</span>
+      </button>
+
+
+      <button [acl]="'user'"></button>
+      <button *aclIf="'user'"></button>
+
+      <button [acl]="['user', 'manage']"></button>
+      <button *aclIf="['user', 'manage']"></button>
+
+      <!-- Displayed when the button must have a user and manage role. -->
+
+      <button [acl]="{ role: ['user', 'manage'], mode: 'allOf' }"></button>
+      <button *aclIf="{ role: ['user', 'manage'], mode: 'allOf' }"></button>
+
+      <!-- Displayed when the input muse have a user role, displayed text when it's not authorized. -->
+
+      <input nz-input *aclIf="'user'; else unauthorized">
+      <ng-template #unauthorized>real user data</ng-template>
+
+    </nz-card>
+  </div>
+</div>

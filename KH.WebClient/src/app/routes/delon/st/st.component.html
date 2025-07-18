@@ -1,0 +1,53 @@
+<div class="alain-default__content-title">
+  <h1>
+    {{ 'app.st.title' | i18n }}
+    <small>
+      {{ 'app.st.desc' | i18n }}
+      <a href="//ng-alain.com/components/table" target="_blank">st</a>、
+      <a href="//ng-alain.com/components/full-content" target="_blank">full-content</a>
+      {{ 'app.st.desc2' | i18n }}
+    </small>
+  </h1>
+</div>
+<full-content (fullscreenChange)="fullChange($event)">
+  <nz-card>
+    <div nz-row class="mb-md">
+      <div nz-col nzSpan="12">
+        <form nz-form nzLayout="inline" se-container>
+          <se label="{{ 'app.st.user_id' | i18n }}" labelWidth="0">
+            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
+          </se>
+          <se>
+            <button nz-button [nzType]="'primary'" (click)="st.load()" [nzLoading]="http.loading">{{ 'app.st.search' |
+              i18n }}</button>
+            <button nz-button (click)="st.load(1, { _allow_anonymous: true })" [disabled]="http.loading">{{
+              'app.st.clear' | i18n }}</button>
+          </se>
+        </form>
+      </div>
+      <div nz-col nzSpan="12">
+        <div class="text-right">
+          <button nz-button nz-dropdown [nzDropdownMenu]="exportMenu">
+            <span>{{ 'app.st.export' | i18n }}</span>
+            <i nz-icon nzType="down"></i>
+          </button>
+          <nz-dropdown-menu #exportMenu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item>{{ 'app.st.excel' | i18n }}</li>
+              <li nz-menu-item>{{ 'app.st.json' | i18n }}</li>
+              <li nz-menu-item>{{ 'app.st.png' | i18n }}</li>
+            </ul>
+          </nz-dropdown-menu>
+          <button nz-button [nzType]="'default'" full-toggle class="ml-sm">{{ 'app.st.full' | i18n }}</button>
+        </div>
+      </div>
+    </div>
+    <st #st [data]="url" [req]="{ params: args }" [res]="{ reName: { list: 'results' } }" [total]="total" [ps]="ps"
+      [columns]="columns" [scroll]="scroll">
+      <ng-template st-row="events" let-item let-index="index">
+        <g2-mini-bar height="15" theme="mini" color="#999" borderWidth="3" [padding]="[0, 0, 0, 0]" [data]="events"
+          tooltipType="mini" />
+      </ng-template>
+    </st>
+  </nz-card>
+</full-content>

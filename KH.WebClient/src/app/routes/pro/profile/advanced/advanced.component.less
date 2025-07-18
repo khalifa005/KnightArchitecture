@@ -1,0 +1,22 @@
+@import '@delon/theme/index';
+
+:host {
+  ::ng-deep {
+    .desc {
+      position: relative;
+      left: 38px;
+      font-size: @font-size-base;
+
+      & > div {
+        margin-top: 8px;
+        margin-bottom: 4px;
+      }
+    }
+
+    @media screen and (max-width: @screen-sm) {
+      .desc {
+        left: 8px;
+      }
+    }
+  }
+}

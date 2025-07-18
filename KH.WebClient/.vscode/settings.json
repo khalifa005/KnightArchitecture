@@ -1,0 +1,39 @@
+{
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[json]": {
+    "editor.formatOnSave": false
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": false
+  },
+  "[less]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "files.watcherExclude": {
+    "**/.git/*/**": true,
+    "**/node_modules/*/**": true,
+    "**/dist/*/**": true,
+    "**/coverage/*/**": true
+  },
+  "files.associations": {
+    "*.json": "jsonc",
+    ".prettierrc": "jsonc"
+  },
+  "typescript.referencesCodeLens.enabled": true
+}
