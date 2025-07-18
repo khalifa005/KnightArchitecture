@@ -54,7 +54,7 @@ export class UserLoginComponent implements OnDestroy {
   private readonly cdr = inject(ChangeDetectorRef);
 
   form = inject(FormBuilder).nonNullable.group({
-    userName: ['khalifa_CEO', [Validators.required]],
+    userName: ['super_admin', [Validators.required]],
     password: ['KhalifaPassword', [Validators.required]],
     // userName: ['', [Validators.required, Validators.pattern(/^(admin|user)$/)]],
     // password: ['', [Validators.required, Validators.pattern(/^(ng-alain\.com)$/)]],
