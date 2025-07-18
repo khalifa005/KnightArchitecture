@@ -1,0 +1,29 @@
+<nz-list
+  [nzLoading]="listLoading"
+  [nzRenderItem]="item"
+  [nzDataSource]="list"
+  [nzGrid]="{ gutter: 24, xxl: 8, xl: 12, lg: 12, md: 12, sm: 12, xs: 24 }"
+>
+  <ng-template #item let-item>
+    <nz-list-item>
+      <nz-card nzHoverable [nzCover]="cover">
+        <ng-template #cover>
+          <img [attr.alt]="item.title" [attr.src]="item.cover" />
+        </ng-template>
+        <nz-card-meta [nzTitle]="nzTitle" [nzDescription]="item.subDescription">
+          <ng-template #nzTitle>
+            <a (click)="suc(item.id)">{{ item.title }}</a>
+          </ng-template>
+        </nz-card-meta>
+        <div class="card-item-content">
+          <span class="text-grey">{{ item.updatedAt | _date: 'fn' }}</span>
+          <nz-avatar-group>
+            @for (m of item.members; track $index) {
+              <nz-avatar [nzSrc]="m.avatar" nz-tooltip [nzTooltipTitle]="m.name" />
+            }
+          </nz-avatar-group>
+        </div>
+      </nz-card>
+    </nz-list-item>
+  </ng-template>
+</nz-list>

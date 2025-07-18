@@ -1,0 +1,29 @@
+<div class="alain-default__content-title">
+  <h1>{{ 'app.guard.title' | i18n }}</h1>
+</div>
+<nz-button-group>
+  <button nz-button [routerLink]="['/delon/guard/leave']">
+    <span>{{ 'app.guard.leave_confirm' | i18n }}</span>
+  </button>
+</nz-button-group>
+<nz-button-group class="ml-sm">
+  <button nz-button (click)="setRole(true)">
+    <span>{{ 'app.guard.set_admin' | i18n }}</span>
+  </button>
+  <button nz-button (click)="setRole('user1')">
+    <span>{{ 'app.guard.set_user1' | i18n }}</span>
+  </button>
+  <button nz-button (click)="setRole('user2')">
+    <span>{{ 'app.guard.set_user2' | i18n }}</span>
+  </button>
+</nz-button-group>
+<nz-button-group class="ml-sm">
+  <button nz-button [routerLink]="['/delon/guard/auth']">
+    <span>{{ 'app.guard.need_user1' | i18n }}</span>
+  </button>
+  <button nz-button [routerLink]="['/delon/guard/admin']">
+    <span>{{ 'app.guard.need_admin' | i18n }}</span>
+  </button>
+</nz-button-group>
+<p class="mb-lg">{{ 'app.guard.current_acl' | i18n }}：{{ data | json }}</p>
+<router-outlet />

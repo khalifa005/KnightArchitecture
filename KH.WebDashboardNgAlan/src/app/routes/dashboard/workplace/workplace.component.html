@@ -1,0 +1,129 @@
+<page-header [breadcrumb]="breadcrumb" [content]="content" [extra]="extra">
+  <ng-template #breadcrumb>
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>
+        <a [routerLink]="['/']">{{ 'app.workplace.home' | i18n }}</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>
+        <a [routerLink]="['/']">{{ 'app.workplace.dashboard' | i18n }}</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>{{ 'app.workplace.workplace' | i18n }}</nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </ng-template>
+  <ng-template #content>
+    <div class="content">
+      <div class="avatar">
+        <nz-avatar nzSrc="https://gw.alipayobjects.com/zos/rmsportal/lctvVCLfRpYCkYxAsiVQ.png" />
+      </div>
+      <div class="desc">
+        <div class="desc-title">{{ 'app.workplace.good_morning' | i18n }}</div>
+        <div>{{ 'app.workplace.fake_expert' | i18n }}</div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #extra>
+    <div class="page-extra">
+      <div>
+        <p>{{ 'app.workplace.project_count' | i18n }}</p>
+        <p>56</p>
+      </div>
+      <div>
+        <p>{{ 'app.workplace.team_ranking' | i18n }}</p>
+        <p>
+          8
+          <span> / 24</span>
+        </p>
+      </div>
+      <div>
+        <p>{{ 'app.workplace.project_visits' | i18n }}</p>
+        <p>2,223</p>
+      </div>
+    </div>
+  </ng-template>
+</page-header>
+<div nz-row [nzGutter]="24">
+  <div nz-col nzXs="24" nzSm="24" nzMd="16">
+    <nz-card nzTitle="{{ 'app.workplace.ongoing_projects' | i18n }}" [nzExtra]="ingExtra" [nzBordered]="false"
+      [nzLoading]="loading" class="ant-card__body-nopadding mb-lg project-list">
+      <ng-template #ingExtra>
+        <a (click)="msg.success('to')">{{ 'app.workplace.all_projects' | i18n }}</a>
+      </ng-template>
+      @for (item of notice; track $index) {
+      <div nz-card-grid class="project-grid">
+        <nz-card [nzBordered]="false" class="ant-card__body-nopadding mb0">
+          <nz-card-meta [nzTitle]="noticeTitle" [nzDescription]="item.description">
+            <ng-template #noticeTitle>
+              <div class="card-title">
+                <nz-avatar [nzSrc]="item.logo" [nzSize]="'small'" />
+                <a (click)="msg.info('to' + item.href)">{{ item.title }}</a>
+              </div>
+            </ng-template>
+          </nz-card-meta>
+          <div class="project-item">
+            <a (click)="msg.info('show user: ' + item.member)">{{ item.member }}</a>
+            @if (item.updatedAt) {
+            <span class="datetime" title="{{ item.updatedAt }}">
+              {{ item.updatedAt | _date: 'fn' }}
+            </span>
+            }
+          </div>
+        </nz-card>
+      </div>
+      }
+    </nz-card>
+    <nz-card nzTitle="{{ 'app.workplace.activities' | i18n }}" [nzBordered]="false" [nzLoading]="loading"
+      class="ant-card__body-nopadding mb-lg active-card">
+      <nz-list nzSize="large" class="activities">
+        @for (item of activities; track $index) {
+        <nz-list-item>
+          <nz-list-item-meta [nzAvatar]="item.user.avatar" [nzTitle]="activeTitle" [nzDescription]="activeDescription">
+            <ng-template #activeTitle>
+              <a (click)="msg.success(item.user.name)" class="username">{{ item.user.name }}</a>
+              &nbsp;
+              <span class="event" [innerHTML]="item.template"></span>
+            </ng-template>
+            <ng-template #activeDescription>
+              <span class="datetime" title="{{ item.updatedAt }}">{{ item.updatedAt | _date: 'fn' }}</span>
+            </ng-template>
+          </nz-list-item-meta>
+        </nz-list-item>
+        }
+      </nz-list>
+    </nz-card>
+  </div>
+  <div nz-col nzXs="24" nzSm="24" nzMd="8">
+    <nz-card nzTitle="{{ 'app.workplace.quick_start' | i18n }}" [nzBordered]="false"
+      class="ant-card__body-nopadding mb-lg">
+      <div class="links">
+        @for (item of links; track $index) {
+        <a (click)="msg.success(item.title)">{{ item.title }}</a>
+        }
+        <button nz-button (click)="links.push({ title: 'new titel', href: 'href' })" [nzType]="'dashed'"
+          [nzSize]="'small'">
+          <i nz-icon nzType="plus"></i>
+          <span>{{ 'app.workplace.add' | i18n }}</span>
+        </button>
+      </div>
+    </nz-card>
+    <nz-card nzTitle="{{ 'app.workplace.xx_index' | i18n }}" [nzBordered]="false" [nzLoading]="loading" class="mb-lg">
+      @if (radarData) {
+      <g2-radar [data]="radarData" [height]="343" [hasLegend]="true" />
+      }
+    </nz-card>
+    <nz-card nzTitle="{{ 'app.workplace.team' | i18n }}" [nzBordered]="false"
+      [nzBodyStyle]="{ 'padding-top.px': 12, 'padding-bottom.px': 12 }" class="mb-lg">
+      <div class="members">
+        <div nz-row [nzGutter]="48">
+          @for (i of members; track $index) {
+          <div nz-col [nzSpan]="12">
+            <a (click)="msg.success(i.title)">
+              <nz-avatar [nzSrc]="i.logo" [nzSize]="'small'" />
+              <span class="member">{{ i.title }}</span>
+            </a>
+          </div>
+          }
+        </div>
+      </div>
+    </nz-card>
+  </div>
+</div>

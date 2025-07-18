@@ -1,0 +1,13 @@
+<div class="main">
+  <div class="menu">
+    <ul nz-menu [nzMode]="mode">
+      @for (m of menus; track $index) {
+        <li nz-menu-item [nzSelected]="m.selected" (click)="to(m)">{{ m.title }}</li>
+      }
+    </ul>
+  </div>
+  <div class="content">
+    <div class="title">{{ title }}</div>
+    <router-outlet />
+  </div>
+</div>

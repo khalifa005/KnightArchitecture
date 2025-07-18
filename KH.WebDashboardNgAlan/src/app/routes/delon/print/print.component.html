@@ -1,0 +1,72 @@
+<div class="alain-default__content-title">
+  <h1>
+    {{ 'app.print.title' | i18n }}
+    <small>
+      {{ 'app.print.more_experience' | i18n }}
+      <a href="https://ng-alain.com/components/lodop" target="_blank">{{ 'app.print.ng_alain' | i18n }}</a>
+    </small>
+  </h1>
+</div>
+<nz-card>
+  @if (error) {
+  <nz-alert [nzType]="'warning'" [nzMessage]="message">
+    <ng-template #message>
+      {{ 'app.print.please_download' | i18n }}
+      <a href="http://c-lodop.com/download.html" target="_blank">{{ 'app.print.lodop_plugin' | i18n }}</a>。
+    </ng-template>
+  </nz-alert>
+  }
+  @if (!error) {
+  <form nz-form>
+    <nz-form-item nz-row>
+      <nz-form-label nz-col [nzSm]="6">{{ 'app.print.server' | i18n }}</nz-form-label>
+      <nz-form-control nz-col [nzSm]="18">
+        <nz-input-group>
+          <div nz-col [nzSpan]="16">
+            <input nz-input nzPlaceHolder="https://localhost:8443/CLodopfuncs.js" [(ngModel)]="cog.url" name="url" />
+
+          </div>
+          <div nz-col [nzSpan]="8">
+            <button nz-button (click)="reload(null)">{{ 'app.print.reload_printer' | i18n }}</button>
+          </div>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-label nz-col [nzSm]="6">{{ 'app.print.printer' | i18n }}</nz-form-label>
+      <nz-form-control nz-col [nzSm]="18">
+        <nz-select style="width: 90%" nzPlaceHolder="{{ 'app.print.select_printer' | i18n }}" nzShowSearch nzAllowClear
+          [(ngModel)]="cog.printer" name="printer" (ngModelChange)="changePinter($event)">
+          @for (name of pinters; track $index) {
+          <nz-option [nzLabel]="name" [nzValue]="name" />
+          }
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-label nz-col [nzSm]="6">{{ 'app.print.paper_type' | i18n }}</nz-form-label>
+      <nz-form-control nz-col [nzSm]="18">
+        <nz-select style="width: 90%" nzPlaceHolder="{{ 'app.print.select_paper_type' | i18n }}" nzShowSearch
+          nzAllowClear [(ngModel)]="cog.paper" name="paper">
+          @for (name of papers; track $index) {
+          <nz-option [nzLabel]="name" [nzValue]="name" />
+          }
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-label nz-col [nzSm]="6">{{ 'app.print.content' | i18n }}</nz-form-label>
+      <nz-form-control nz-col [nzSm]="18">
+        <textarea nz-input [(ngModel)]="cog.html" name="html" nzAutosize></textarea>
+        <div nz-form-extra>{{ 'app.print.html_only' | i18n }}</div>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-control nz-col [nzSm]="18" [nzOffset]="6">
+        <button nz-button (click)="print(true)" [nzLoading]="printing">{{ 'app.print.preview' | i18n }}</button>
+        <button nz-button (click)="print()" [nzLoading]="printing">{{ 'app.print.direct_print' | i18n }}</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  }
+</nz-card>
