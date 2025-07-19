@@ -27,6 +27,8 @@ import { ICONS } from '../style-icons';
 import { ICONS_AUTO } from '../style-icons-auto';
 import { routes } from './routes/routes';
 import { Configuration } from 'src/app/shared/open-api';
+import {provideStore} from '@ngrx/store'
+import { directionReducer } from './store/direction/direction.reducer';
 
 const defaultLang: AlainProvideLang = {
   abbr: 'ar',
@@ -80,6 +82,10 @@ const providers: Array<Provider | EnvironmentProviders> = [
   provideSTWidgets(...ST_WIDGETS),
   provideSFConfig({ widgets: SF_WIDGETS }),
   provideStartup(),
+  //ngrx
+  provideStore({
+    directionSwitcherxx: directionReducer, //to be able for other components to see it with thsi name directionSwitcherxx 
+  }),
   ...(environment.providers || [])
 ];
 

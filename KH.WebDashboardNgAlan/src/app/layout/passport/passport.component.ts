@@ -6,6 +6,10 @@ import { ThemeBtnComponent } from '@delon/theme/theme-btn';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { HeaderI18nComponent } from '../basic/widgets/i18n.component';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectDirection } from 'src/app/store/direction/direction.selector';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'layout-passport',
@@ -15,6 +19,7 @@ import { HeaderI18nComponent } from '../basic/widgets/i18n.component';
       <div class="wrap">
         <div class="top">
           <div class="head">
+        
             <img class="logo" src="./assets/logo-color.svg" />
             <span class="title">Knight Architecture</span>
           </div>
@@ -33,11 +38,26 @@ import { HeaderI18nComponent } from '../basic/widgets/i18n.component';
     <theme-btn />
   `,
   styleUrls: ['./passport.component.less'],
-  imports: [RouterOutlet, HeaderI18nComponent, GlobalFooterModule, NzIconModule, ThemeBtnComponent]
+  imports: [AsyncPipe, RouterOutlet, HeaderI18nComponent, GlobalFooterModule, NzIconModule, ThemeBtnComponent]
 })
 export class LayoutPassportComponent implements OnInit {
   private tokenService = inject(DA_SERVICE_TOKEN);
 
+  direction: Observable<string>;
+  // dir: string = ""
+  private storeService = inject(Store);
+  /**
+   *
+   */
+  constructor() {
+    // this.direction = this.storeService.select("directionSwitcherxx");
+    this.direction = this.storeService.select(selectDirection);
+    // direction = {{this.direction | async}}
+    // this.direction.subscribe((newValue) => {
+    //   this.dir = newValue;
+    // });
+
+  }
   links = [
     {
       title: 'Help',

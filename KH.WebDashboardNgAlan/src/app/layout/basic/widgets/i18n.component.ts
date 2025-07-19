@@ -2,10 +2,11 @@ import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, booleanAttribute, inject } from '@angular/core';
 import { I18NService } from '@core';
 import { ALAIN_I18N_TOKEN, I18nPipe, SettingsService, RTLService } from '@delon/theme';
+import { Store } from '@ngrx/store';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-
+import { switchArDirection } from 'src/app/store/direction/direction.action';
 @Component({
   selector: 'header-i18n',
   template: `
@@ -16,6 +17,9 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
         <i nz-icon nzType="down"></i>
       </div>
     } @else {
+     
+  
+
       <i nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight" nz-icon nzType="global"></i>
     }
     <nz-dropdown-menu #langMenu="nzDropdownMenu">
@@ -40,6 +44,7 @@ export class HeaderI18nComponent {
   private readonly i18n = inject<I18NService>(ALAIN_I18N_TOKEN);
   private readonly doc = inject(DOCUMENT);
   private readonly rtl = inject(RTLService);
+  private readonly store = inject(Store);
   /** Whether to display language text */
   @Input({ transform: booleanAttribute }) showLangText = true;
 
@@ -51,6 +56,12 @@ export class HeaderI18nComponent {
     return this.settings.layout.lang;
   }
 
+  changeLanguage() {
+    //for testing the state management
+    // <button class="btn btn-primary" (click)="changeLanguage()">direction switcher</button>
+    this.store.dispatch(switchArDirection())
+
+  }
   change(lang: string): void {
     const spinEl = this.doc.createElement('div');
     spinEl.setAttribute('class', `page-loading ant-spin ant-spin-lg ant-spin-spinning`);
