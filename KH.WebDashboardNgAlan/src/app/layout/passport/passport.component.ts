@@ -38,7 +38,8 @@ import { AsyncPipe } from '@angular/common';
     <theme-btn />
   `,
   styleUrls: ['./passport.component.less'],
-  imports: [AsyncPipe, RouterOutlet, HeaderI18nComponent, GlobalFooterModule, NzIconModule, ThemeBtnComponent]
+  imports: [RouterOutlet, HeaderI18nComponent, GlobalFooterModule, NzIconModule, ThemeBtnComponent]
+  // AsyncPipe,
 })
 export class LayoutPassportComponent implements OnInit {
   private tokenService = inject(DA_SERVICE_TOKEN);
