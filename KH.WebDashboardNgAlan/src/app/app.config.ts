@@ -29,6 +29,7 @@ import { routes } from './routes/routes';
 import { Configuration } from 'src/app/shared/open-api';
 import {provideStore} from '@ngrx/store'
 import { directionReducer } from './store/direction/direction.reducer';
+import { counterReducer } from './store/counter/counter.reducer';
 
 const defaultLang: AlainProvideLang = {
   abbr: 'ar',
@@ -85,7 +86,8 @@ const providers: Array<Provider | EnvironmentProviders> = [
   //ngrx
   provideStore({
     directionSwitcherxx: directionReducer, //to be able for other components to see it with thsi name directionSwitcherxx 
-  }),
+    counter: counterReducer
+   }),
   ...(environment.providers || [])
 ];
 
