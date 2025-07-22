@@ -2,7 +2,8 @@ import { createAction, createReducer, on } from "@ngrx/store";
 import { switchArDirection } from "./direction.action";
 
 
-const initialState = "ar-SA";
+// const initialState = "ar-SA";
+const initialState = localStorage.getItem("lang") ?? "ar-SA";
 export const directionReducer = createReducer(
     initialState, 
     on(switchArDirection, (state, actoin)=> {

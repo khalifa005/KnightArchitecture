@@ -27,9 +27,11 @@ import { ICONS } from '../style-icons';
 import { ICONS_AUTO } from '../style-icons-auto';
 import { routes } from './routes/routes';
 import { Configuration } from 'src/app/shared/open-api';
-import {provideStore} from '@ngrx/store'
+import { provideStore } from '@ngrx/store'
 import { directionReducer } from './store/direction/direction.reducer';
 import { counterReducer } from './store/counter/counter.reducer';
+import {provideEffects} from '@ngrx/effects'
+import { DirectionEffects } from './store/direction/direction.effects';
 
 const defaultLang: AlainProvideLang = {
   abbr: 'ar',
@@ -68,14 +70,14 @@ const providers: Array<Provider | EnvironmentProviders> = [
       basePath: environment.api.serverUrl || 'https://localhost:5050'
     })
   },
-  
+
   // provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authSimpleInterceptor, defaultInterceptor])),
   provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
   provideAnimations(),
   provideRouter(routes, ...routerFeatures),
   provideAlain({ config: alainConfig, defaultLang, i18nClass: I18NService, icons: [...ICONS_AUTO, ...ICONS] }),
   provideNzConfig(ngZorroConfig),
-  
+
   provideAuth(),
   // provideAuth(withLocalStorage()), sessionStorage / cookie 
 
@@ -87,7 +89,9 @@ const providers: Array<Provider | EnvironmentProviders> = [
   provideStore({
     directionSwitcherxx: directionReducer, //to be able for other components to see it with thsi name directionSwitcherxx 
     counter: counterReducer
-   }),
+  }),
+
+  provideEffects([DirectionEffects]),
   ...(environment.providers || [])
 ];
 
