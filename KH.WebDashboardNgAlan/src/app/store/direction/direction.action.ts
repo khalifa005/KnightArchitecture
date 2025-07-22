@@ -1,3 +1,3 @@
-import { createAction } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
 
-export const switchArDirection = createAction("switchArDirection");
+export const switchArDirection = createAction("switchArDirection", props<{lang:string}>());

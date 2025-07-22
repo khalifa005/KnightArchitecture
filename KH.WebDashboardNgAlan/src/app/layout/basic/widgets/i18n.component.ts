@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { decrement, increment } from 'src/app/store/counter/counter.actions';
 import { switchArDirection } from 'src/app/store/direction/direction.action';
 @Component({
   selector: 'header-i18n',
@@ -19,7 +20,10 @@ import { switchArDirection } from 'src/app/store/direction/direction.action';
     } @else {
      
   
-
+      <button class="btn btn-primary" (click)="changeLanguage('en')">direction switcher</button>
+      <button class="btn btn-primary" (click)="changeLanguage('ar')">direction switcher</button>
+      <button class="btn btn-primary" (click)="decraeseCounter()">Counter decrase</button>
+      <button class="btn btn-primary" (click)="increaseCounter()">Counter increase </button>
       <i nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight" nz-icon nzType="global"></i>
     }
     <nz-dropdown-menu #langMenu="nzDropdownMenu">
@@ -56,11 +60,19 @@ export class HeaderI18nComponent {
     return this.settings.layout.lang;
   }
 
-  changeLanguage() {
+  changeLanguage(lang:string) {
     //for testing the state management
     // <button class="btn btn-primary" (click)="changeLanguage()">direction switcher</button>
-    this.store.dispatch(switchArDirection())
+    this.store.dispatch(switchArDirection({lang:lang}));
+  }
 
+
+  decraeseCounter() {
+    this.store.dispatch(decrement())
+  }
+  increaseCounter() {
+    //for testing the state management
+    this.store.dispatch(increment())
   }
   change(lang: string): void {
     const spinEl = this.doc.createElement('div');

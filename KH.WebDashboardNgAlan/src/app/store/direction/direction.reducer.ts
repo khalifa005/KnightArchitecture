@@ -5,6 +5,9 @@ import { switchArDirection } from "./direction.action";
 const initialState = "ar-SA";
 export const directionReducer = createReducer(
     initialState, 
-    on(switchArDirection, (state)=> {
+    on(switchArDirection, (state, actoin)=> {
         console.log(state)
-        return state == "ar-SA" ? "en-US" : "ar-SA"} ))
+        // return state == "ar-SA" ? "en-US" : "ar-SA" without having object as params
+        return actoin.lang;
+    
+    } ))

@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectDirection } from 'src/app/store/direction/direction.selector';
 import { AsyncPipe } from '@angular/common';
+import {selectCounter} from 'src/app/store/counter/counter.selector'
 
 @Component({
   selector: 'layout-passport',
@@ -21,7 +22,10 @@ import { AsyncPipe } from '@angular/common';
           <div class="head">
         
             <img class="logo" src="./assets/logo-color.svg" />
-            <span class="title">Knight Architecture</span>
+            direction = {{this.direction | async}}
+            <!-- <span class="title">Knight Architecture</span> -->
+            <span class="title">counter: {{ (counter$ | async)?.count }}</span>
+
           </div>
           <div class="desc">By Alan updated by Khalifa</div>
         </div>
@@ -38,13 +42,14 @@ import { AsyncPipe } from '@angular/common';
     <theme-btn />
   `,
   styleUrls: ['./passport.component.less'],
-  imports: [RouterOutlet, HeaderI18nComponent, GlobalFooterModule, NzIconModule, ThemeBtnComponent]
+  imports: [AsyncPipe, RouterOutlet, HeaderI18nComponent, GlobalFooterModule, NzIconModule, ThemeBtnComponent]
   // AsyncPipe,
 })
 export class LayoutPassportComponent implements OnInit {
   private tokenService = inject(DA_SERVICE_TOKEN);
 
   direction: Observable<string>;
+  counter$: Observable<any>;
   // dir: string = ""
   private storeService = inject(Store);
   /**
@@ -58,6 +63,7 @@ export class LayoutPassportComponent implements OnInit {
     //   this.dir = newValue;
     // });
 
+    this.counter$ = this.storeService.select(selectCounter);
   }
   links = [
     {
