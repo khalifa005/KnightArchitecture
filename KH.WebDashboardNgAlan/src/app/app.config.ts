@@ -30,9 +30,9 @@ import { Configuration } from 'src/app/shared/open-api';
 import { provideStore } from '@ngrx/store'
 import { directionReducer } from './store/direction/direction.reducer';
 import { counterReducer } from './store/counter/counter.reducer';
-import {provideEffects} from '@ngrx/effects'
+import { provideEffects } from '@ngrx/effects'
 import { DirectionEffects } from './store/direction/direction.effects';
-
+import {provideStoreDevtools} from '@ngrx/store-devtools'
 const defaultLang: AlainProvideLang = {
   abbr: 'ar',
   ng: ngLang,
@@ -92,6 +92,16 @@ const providers: Array<Provider | EnvironmentProviders> = [
   }),
 
   provideEffects([DirectionEffects]),
+
+  provideStoreDevtools({
+    maxAge: 25, // Retains last 25 states
+    logOnly: true, // Restrict extension to log-only mode
+    autoPause: true, // Pauses recording actions and state changes when the extension window is not open
+    trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
+    traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
+    connectInZone: true // If set to true, the connection is established within the Angular zone
+  }),
+
   ...(environment.providers || [])
 ];
 
