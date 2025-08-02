@@ -1,23 +1,25 @@
 <page-header />
 <nz-card [nzBordered]="false">
-  <nz-result nzStatus="error" [nzTitle]="'提交失败'" nzSubTitle="请核对并修改以下信息后，再重新提交。">
+  <nz-result nzStatus="error" [nzTitle]="'result.submit_failed' | i18n"
+    [nzSubTitle]="'result.please_check_and_modify' | i18n">
     <div nz-result-extra>
-      <div class="mb-md text-lg">您提交的内容有如下错误：</div>
+      <div class="mb-md text-lg">{{ 'result.your_submitted_content_has_the_following_errors' | i18n }}</div>
       <div class="mb-md">
-        <i nz-icon nzType="close-circle" class="text-error pr-sm"></i>您的账户已被冻结
+        <i nz-icon nzType="close-circle" class="text-error pr-sm"></i>{{ 'result.your_account_has_been_frozen' | i18n }}
         <a class="ml-md">
-          立即解冻
+          {{ 'result.unfreeze_immediately' | i18n }}
           <i nz-icon nzType="right" class="pl-sm"></i>
         </a>
       </div>
       <div class="mb-lg">
-        <i nz-icon nzType="close-circle" class="text-error pr-sm"></i>您的账户还不具备申请资格
+        <i nz-icon nzType="close-circle" class="text-error pr-sm"></i>{{
+        'result.your_account_does_not_have_application_qualification' | i18n }}
         <a class="ml-md">
-          立即升级
+          {{ 'result.upgrade_immediately' | i18n }}
           <i nz-icon nzType="right" class="pl-sm"></i>
         </a>
       </div>
-      <button nz-button [nzType]="'primary'">返回修改</button>
+      <button nz-button [nzType]="'primary'">{{ 'result.return_to_modify' | i18n }}</button>
     </div>
   </nz-result>
 </nz-card>

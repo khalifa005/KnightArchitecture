@@ -63,7 +63,7 @@
             <a (click)="msg.info('show user: ' + item.member)">{{ item.member }}</a>
             @if (item.updatedAt) {
             <span class="datetime" title="{{ item.updatedAt }}">
-              {{ item.updatedAt | _date: 'fn' }}
+              {{ item.updatedAt | date:'MMM dd, yyyy HH:mm:ss' }}
             </span>
             }
           </div>
@@ -83,7 +83,8 @@
               <span class="event" [innerHTML]="item.template"></span>
             </ng-template>
             <ng-template #activeDescription>
-              <span class="datetime" title="{{ item.updatedAt }}">{{ item.updatedAt | _date: 'fn' }}</span>
+              <span class="datetime" title="{{ item.updatedAt }}">{{ item.updatedAt | date:'MMM dd, yyyy HH:mm:ss'
+                }}</span>
             </ng-template>
           </nz-list-item-meta>
         </nz-list-item>

@@ -1,12 +1,12 @@
 <div class="alain-default__content-title">
   <h1>
-    工具集
-    <small>&#64;delon/util 日常用法。</small>
+    {{ 'util.toolkit' | i18n }}
+    <small>{{ 'util.delon_util_daily_usage' | i18n }}</small>
   </h1>
 </div>
 <nz-row [nzGutter]="16">
   <nz-col [nzSpan]="12">
-    <nz-card nzTitle="字符串类">
+    <nz-card [nzTitle]="'util.string_class' | i18n">
       <nz-card nzType="inner" nzTitle="format">
         <form nz-form>
           <nz-form-item>
@@ -23,11 +23,11 @@
           </nz-form-item>
           <nz-form-item>
             <nz-form-control [nzSpan]="16" [nzOffset]="8">
-              <button (click)="onFormat()" nz-button>Run</button>
+              <button (click)="onFormat()" nz-button>{{ 'util.run' | i18n }}</button>
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
-            <nz-form-label [nzSm]="8">Result</nz-form-label>
+            <nz-form-label [nzSm]="8">{{ 'util.result' | i18n }}</nz-form-label>
             <nz-form-control [nzSm]="16">
               {{ format_res }}
             </nz-form-control>
@@ -47,8 +47,8 @@
     </nz-card>
   </nz-col>
   <nz-col [nzSpan]="12">
-    <nz-card nzTitle="其它类">
-      <button nz-button (click)="onCopy()">Copy</button>
+    <nz-card [nzTitle]="'util.other_class' | i18n">
+      <button nz-button (click)="onCopy()">{{ 'util.copy' | i18n }}</button>
     </nz-card>
   </nz-col>
 </nz-row>

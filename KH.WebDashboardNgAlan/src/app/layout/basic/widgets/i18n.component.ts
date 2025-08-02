@@ -20,10 +20,10 @@ import { switchArDirection } from 'src/app/store/direction/direction.action';
     } @else {
      
   
-      <button class="btn btn-primary" (click)="changeLanguage('en')">direction switcher</button>
+      <!-- <button class="btn btn-primary" (click)="changeLanguage('en')">direction switcher</button>
       <button class="btn btn-primary" (click)="changeLanguage('ar')">direction switcher</button>
       <button class="btn btn-primary" (click)="decraeseCounter()">Counter decrase</button>
-      <button class="btn btn-primary" (click)="increaseCounter()">Counter increase </button>
+      <button class="btn btn-primary" (click)="increaseCounter()">Counter increase </button> -->
       <i nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight" nz-icon nzType="global"></i>
     }
     <nz-dropdown-menu #langMenu="nzDropdownMenu">

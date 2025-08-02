@@ -16,25 +16,25 @@ export const routes: Routes = [
       {
         path: 'login',
         component: UserLoginComponent,
-        data: { title: '登录', titleI18n: 'app.login.login' }
+        data: { title: 'Login', titleI18n: 'app.login.login' }
       },
       {
         path: 'register',
         component: UserRegisterComponent,
-        data: { title: '注册', titleI18n: 'app.register.register' }
+        data: { title: 'Register', titleI18n: 'app.register.register' }
       },
       {
         path: 'register-result',
         component: UserRegisterResultComponent,
-        data: { title: '注册结果', titleI18n: 'app.register.register' }
+        data: { title: 'Register Result', titleI18n: 'app.register.register' }
       },
       {
         path: 'lock',
         component: UserLockComponent,
-        data: { title: '锁屏', titleI18n: 'app.lock' }
+        data: { title: 'Lock Screen', titleI18n: 'app.lock' }
       }
     ]
   },
-  // 单页不包裹Layout
+  // Single page without Layout wrapper
   { path: 'passport/callback/:type', component: CallbackComponent }
 ];

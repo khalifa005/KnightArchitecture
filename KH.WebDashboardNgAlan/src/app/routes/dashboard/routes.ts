@@ -10,7 +10,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'v1', pathMatch: 'full' },
   { path: 'v1', component: DashboardV1Component },
   { path: 'analysis', component: DashboardAnalysisComponent },
-  { path: 'monitor', component: DashboardMonitorComponent,
+  {
+    path: 'monitor', component: DashboardMonitorComponent,
     canActivate: [aclCanActivate],
     data: {
       guard: {
@@ -21,6 +22,16 @@ export const routes: Routes = [
       } as ACLGuardType,
       guard_url: '/no-permisseion'
     },
-   },
-  { path: 'workplace', component: DashboardWorkplaceComponent }
+  },
+
+  { path: 'workplace', component: DashboardWorkplaceComponent }, //eager loaded
+  // {
+  //   path: 'workplace', loadChildren: () => import('./workplace/routes').then(m => m.routes) // ✅ Lazy loaded 1 approach
+  // },
+  {
+    path: 'workplace', loadComponent: () => import('./workplace/workplace.component').then(m => m.DashboardWorkplaceComponent) // ✅ Lazy loaded 2 approach
+  }
+
+
 ];
+

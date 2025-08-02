@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { ZipService } from '@delon/abc/zip';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import type jsZipType from 'jszip';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -14,13 +15,14 @@ export class ZipComponent implements OnInit {
   private readonly zip = inject(ZipService);
   private readonly msg = inject(NzMessageService);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
 
   list: any;
   instance: jsZipType | null = null;
   data: Array<{ path?: string; url?: string }> = [
     { path: 'demo.docx', url: 'https://ng-alain.com/assets/demo.docx' },
     {
-      path: '小程序标志.zip',
+      path: this.i18nSrv.fanyi('zip.miniprogram_logo'),
       url: 'https://wximg.gtimg.com/shake_tv/mina/standard_logo.zip'
     }
   ];

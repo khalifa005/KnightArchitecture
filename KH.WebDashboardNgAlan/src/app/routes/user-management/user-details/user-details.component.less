@@ -1,0 +1,240 @@
+.user-details-container {
+  padding: 24px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+
+    .loading-spinner {
+      font-size: 18px;
+      color: #1890ff;
+      font-weight: 500;
+    }
+  }
+
+  .user-details-content {
+    .user-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 32px;
+      padding: 24px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 12px;
+      color: white;
+
+      .user-avatar-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+
+        .user-avatar {
+          border: 4px solid rgba(255, 255, 255, 0.3);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-status {
+          .status-tag {
+            font-weight: 600;
+            border: none;
+          }
+        }
+      }
+
+      .user-basic-info {
+        flex: 1;
+
+        .user-name {
+          margin: 0 0 8px 0;
+          font-size: 28px;
+          font-weight: 700;
+          color: white;
+        }
+
+        .user-name-arabic {
+          margin: 0 0 16px 0;
+          font-size: 20px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .user-role {
+          margin-bottom: 12px;
+
+          .role-tag {
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            padding: 6px 12px;
+          }
+        }
+
+        .user-id {
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.8);
+          font-weight: 500;
+        }
+      }
+    }
+
+    .details-sections {
+      margin-bottom: 32px;
+
+      .detail-card {
+        height: 100%;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+
+        &:hover {
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        ::ng-deep .ant-card-head {
+          background: #f8f9fa;
+          border-bottom: 1px solid #e8e8e8;
+          border-radius: 8px 8px 0 0;
+
+          .ant-card-head-title {
+            font-weight: 600;
+            color: #262626;
+          }
+        }
+
+        .detail-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 0;
+          border-bottom: 1px solid #f0f0f0;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .label {
+            font-weight: 600;
+            color: #595959;
+            min-width: 120px;
+          }
+
+          .value {
+            color: #262626;
+            text-align: right;
+            flex: 1;
+            margin-left: 16px;
+
+            &.status-active {
+              color: #52c41a;
+              font-weight: 600;
+            }
+
+            &.status-inactive {
+              color: #ff4d4f;
+              font-weight: 600;
+            }
+          }
+        }
+
+        .action-buttons {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+
+          .action-btn {
+            width: 100%;
+            height: 48px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+
+            &:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+      }
+    }
+
+    .footer-actions {
+      display: flex;
+      justify-content: center;
+      padding: 24px 0;
+      border-top: 1px solid #f0f0f0;
+      background: #fafafa;
+      border-radius: 8px;
+      margin-top: 24px;
+    }
+  }
+
+  .no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+
+    .no-data-content {
+      text-align: center;
+      color: #8c8c8c;
+
+      .no-data-icon {
+        font-size: 48px;
+        color: #d9d9d9;
+        margin-bottom: 16px;
+      }
+
+      p {
+        font-size: 16px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .user-details-container {
+    padding: 16px;
+
+    .user-details-content {
+      .user-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+
+        .user-basic-info {
+          .user-name {
+            font-size: 24px;
+          }
+
+          .user-name-arabic {
+            font-size: 18px;
+          }
+        }
+      }
+
+      .details-sections {
+        .detail-item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+
+          .label {
+            min-width: auto;
+          }
+
+          .value {
+            text-align: left;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+} 

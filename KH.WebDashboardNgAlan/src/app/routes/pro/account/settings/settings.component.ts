@@ -22,19 +22,19 @@ export class ProAccountSettingsComponent implements AfterViewInit {
   menus: Array<{ key: string; title: string; selected?: boolean }> = [
     {
       key: 'base',
-      title: '基本设置'
+      title: 'account.basic_settings'
     },
     {
       key: 'security',
-      title: '安全设置'
+      title: 'account.security_settings'
     },
     {
       key: 'binding',
-      title: '账号绑定'
+      title: 'account.account_binding'
     },
     {
       key: 'notification',
-      title: '新消息通知'
+      title: 'account.notification'
     }
   ];
 

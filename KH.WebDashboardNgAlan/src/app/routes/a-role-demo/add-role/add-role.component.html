@@ -1,0 +1,124 @@
+<div class="add-role-modal">
+   <div class="modal-header">
+      <h3>Add New Role</h3>
+   </div>
+
+   <form nz-form [formGroup]="roleForm" (ngSubmit)="onSubmit()" class="role-form">
+      <div nz-row [nzGutter]="[16, 16]">
+         <!-- English Name -->
+         <div nz-col nzSpan="12">
+            <nz-form-item>
+               <nz-form-label [nzSpan]="8" nzRequired>Name (English)</nz-form-label>
+               <nz-form-control [nzSpan]="16" [nzValidateStatus]="isFieldInvalid('name_en') ? 'error' : ''"
+                  [nzErrorTip]="getErrorMessage('name_en')">
+                  <input nz-input formControlName="name_en" placeholder="Enter role name in English" />
+               </nz-form-control>
+            </nz-form-item>
+         </div>
+
+         <!-- Arabic Name -->
+         <div nz-col nzSpan="12">
+            <nz-form-item>
+               <nz-form-label [nzSpan]="8" nzRequired>Name (Arabic)</nz-form-label>
+               <nz-form-control [nzSpan]="16" [nzValidateStatus]="isFieldInvalid('name_ar') ? 'error' : ''"
+                  [nzErrorTip]="getErrorMessage('name_ar')">
+                  <input nz-input formControlName="name_ar" placeholder="أدخل اسم الدور بالعربية" dir="rtl" />
+               </nz-form-control>
+            </nz-form-item>
+         </div>
+
+         <!-- English Description -->
+         <div nz-col nzSpan="12">
+            <nz-form-item>
+               <nz-form-label [nzSpan]="8">Description (English)</nz-form-label>
+               <nz-form-control [nzSpan]="16" [nzValidateStatus]="isFieldInvalid('description_en') ? 'error' : ''"
+                  [nzErrorTip]="getErrorMessage('description_en')">
+                  <textarea nz-input formControlName="description_en" [nzAutosize]="{ minRows: 3, maxRows: 5 }"
+                     placeholder="Enter role description in English"></textarea>
+               </nz-form-control>
+            </nz-form-item>
+         </div>
+
+         <!-- Arabic Description -->
+         <div nz-col nzSpan="12">
+            <nz-form-item>
+               <nz-form-label [nzSpan]="8">Description (Arabic)</nz-form-label>
+               <nz-form-control [nzSpan]="16" [nzValidateStatus]="isFieldInvalid('description_ar') ? 'error' : ''"
+                  [nzErrorTip]="getErrorMessage('description_ar')">
+                  <textarea nz-input formControlName="description_ar" [nzAutosize]="{ minRows: 3, maxRows: 5 }"
+                     placeholder="أدخل وصف الدور بالعربية" dir="rtl"></textarea>
+               </nz-form-control>
+            </nz-form-item>
+         </div>
+
+         <!-- Active Status -->
+         <div nz-col nzSpan="12">
+            <nz-form-item>
+               <nz-form-label [nzSpan]="8">Status</nz-form-label>
+               <nz-form-control [nzSpan]="16">
+                  <nz-switch formControlName="is_active" nzCheckedChildren="Active"
+                     nzUnCheckedChildren="Inactive"></nz-switch>
+               </nz-form-control>
+            </nz-form-item>
+         </div>
+
+         <!-- Permissions -->
+         <div nz-col nzSpan="24">
+            <nz-form-item>
+               <nz-form-label [nzSpan]="4">Permissions</nz-form-label>
+               <nz-form-control [nzSpan]="20">
+                  <nz-checkbox-group formControlName="permissions">
+                     <div nz-row [nzGutter]="[16, 8]">
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="users.read">Read Users</label>
+                        </div>
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="users.create">Create Users</label>
+                        </div>
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="users.update">Update Users</label>
+                        </div>
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="users.delete">Delete Users</label>
+                        </div>
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="roles.read">Read Roles</label>
+                        </div>
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="roles.create">Create Roles</label>
+                        </div>
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="roles.update">Update Roles</label>
+                        </div>
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="roles.delete">Delete Roles</label>
+                        </div>
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="dashboard.access">Dashboard Access</label>
+                        </div>
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="reports.view">View Reports</label>
+                        </div>
+                        <div nz-col nzSpan="8">
+                           <label nz-checkbox nzValue="settings.manage">Manage Settings</label>
+                        </div>
+                     </div>
+                  </nz-checkbox-group>
+               </nz-form-control>
+            </nz-form-item>
+         </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+         <nz-space>
+            <button nz-button (click)="onCancel()">
+               Cancel
+            </button>
+            <button nz-button nzType="primary" type="submit" [nzLoading]="loading">
+               Create Role
+            </button>
+         </nz-space>
+      </div>
+   </form>
+</div>

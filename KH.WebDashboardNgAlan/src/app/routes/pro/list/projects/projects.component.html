@@ -44,7 +44,7 @@
           </ng-template>
         </nz-card-meta>
         <div class="card-item-content">
-          <span class="text-grey">{{ item.updatedAt | _date: 'fn' }}</span>
+          <span class="text-grey">{{ item.updatedAt | date:'MMM dd, yyyy HH:mm:ss' }}</span>
           <nz-avatar-group>
             @for (m of item.members; track $index) {
               <nz-avatar [nzSrc]="m.avatar" nz-tooltip [nzTooltipTitle]="m.name" />

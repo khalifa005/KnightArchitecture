@@ -16,15 +16,15 @@ export class ProListLayoutComponent implements OnInit {
   tabs = [
     {
       key: 'articles',
-      tab: '文章'
+      tab: 'list.articles'
     },
     {
       key: 'applications',
-      tab: '应用'
+      tab: 'list.applications'
     },
     {
       key: 'projects',
-      tab: '项目'
+      tab: 'list.projects'
     }
   ];
 

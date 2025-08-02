@@ -253,7 +253,7 @@
     <div nz-row nzType="flex" nzAlign="middle" class="bg-success rounded-md">
       <div nz-col nzSpan="12" class="p-md text-white">
         <div class="h2 mt0">234,567K</div>
-        <div class="text-nowrap">Website Impressions</div>
+        <div class="text-nowrap">{{ 'widgets.website_impressions' | i18n }}</div>
       </div>
       <div nz-col nzSpan="12">
         <g2-mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="data" />
@@ -264,7 +264,7 @@
     <div nz-row nzType="flex" nzAlign="middle" class="bg-orange rounded-md">
       <div nz-col nzSpan="12" class="p-md text-white">
         <div class="h2 mt0">$458,778</div>
-        <div class="text-nowrap">Total Sales</div>
+        <div class="text-nowrap">{{ 'widgets.total_sales' | i18n }}</div>
       </div>
       <div nz-col nzSpan="12">
         <g2-mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="data" />
@@ -275,7 +275,7 @@
     <div nz-row nzType="flex" nzAlign="middle" class="bg-magenta rounded-md">
       <div nz-col nzSpan="12" class="p-md text-white">
         <div class="h2 mt0">456</div>
-        <div class="text-nowrap">Support Tickets</div>
+        <div class="text-nowrap">{{ 'widgets.support_tickets' | i18n }}</div>
       </div>
       <div nz-col nzSpan="12">
         <g2-mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="data" />
@@ -291,7 +291,7 @@
       </div>
       <div nz-col nzSpan="16" class="bg-white py-md">
         <h3 class="h3 mb0">10k</h3>
-        <div class="text-grey-dark">VISITORS</div>
+        <div class="text-grey-dark">{{ 'widgets.visitors' | i18n }}</div>
       </div>
     </div>
   </div>
@@ -302,7 +302,7 @@
       </div>
       <div nz-col nzSpan="16" class="bg-white py-md">
         <h3 class="h3 mb0">100%</h3>
-        <div class="text-grey-dark">VOLUME</div>
+        <div class="text-grey-dark">{{ 'widgets.volume' | i18n }}</div>
       </div>
     </div>
   </div>
@@ -313,7 +313,7 @@
       </div>
       <div nz-col nzSpan="16" class="bg-white py-md">
         <h3 class="h3 mb0">150</h3>
-        <div class="text-grey-dark">FORKS</div>
+        <div class="text-grey-dark">{{ 'widgets.forks' | i18n }}</div>
       </div>
     </div>
   </div>
@@ -324,7 +324,7 @@
       </div>
       <div nz-col nzSpan="16" class="bg-white py-md">
         <h3 class="h3 mb0">10</h3>
-        <div class="text-grey-dark">NEW MESSAGES</div>
+        <div class="text-grey-dark">{{ 'widgets.new_messages' | i18n }}</div>
       </div>
     </div>
   </div>
@@ -337,7 +337,7 @@
       </div>
       <div nz-col nzSpan="16" class="bg-green-light p-md">
         <h2 class="h2 text-white mb0">150</h2>
-        <div class="text-lg text-uppercase">New connections</div>
+        <div class="text-lg text-uppercase">{{ 'widgets.new_connections' | i18n }}</div>
       </div>
     </div>
   </div>
@@ -348,7 +348,7 @@
       </div>
       <div nz-col nzSpan="16" class="bg-red-light p-md">
         <h2 class="h2 text-white mb0">7000</h2>
-        <div class="text-lg text-uppercase">RATINGS RECEIVED</div>
+        <div class="text-lg text-uppercase">{{ 'widgets.ratings_received' | i18n }}</div>
       </div>
     </div>
   </div>
@@ -359,7 +359,7 @@
       </div>
       <div nz-col nzSpan="16" class="bg-warning-light p-md">
         <h2 class="h2 text-white mb0">15</h2>
-        <div class="text-lg text-uppercase">ACHIEVEMENTS</div>
+        <div class="text-lg text-uppercase">{{ 'widgets.achievements' | i18n }}</div>
       </div>
     </div>
   </div>
@@ -372,10 +372,10 @@
       </div>
       <div nz-col nzSpan="14" class="py-md">
         <h1 class="text-white mb0">120</h1>
-        <div>New Tasks!</div>
+        <div>{{ 'widgets.new_tasks' | i18n }}</div>
       </div>
       <a nz-col nzSpan="24" (click)="msg.info('view')" class="d-block p-sm bg-grey-darker text-white">
-        <div class="float-left">View Details</div>
+        <div class="float-left">{{ 'widgets.view_details' | i18n }}</div>
         <div class="float-right">
           <i class="fa fa-chevron-circle-right"></i>
         </div>
@@ -389,10 +389,10 @@
       </div>
       <div nz-col nzSpan="14" class="py-md">
         <h1 class="text-white mb0">36</h1>
-        <div>New Comments!</div>
+        <div>{{ 'widgets.new_comments' | i18n }}</div>
       </div>
       <a nz-col nzSpan="24" (click)="msg.info('view')" class="d-block p-sm bg-grey-darker text-white">
-        <div class="float-left">View Details</div>
+        <div class="float-left">{{ 'widgets.view_details' | i18n }}</div>
         <div class="float-right">
           <i class="fa fa-chevron-circle-right"></i>
         </div>
@@ -406,10 +406,10 @@
       </div>
       <div nz-col nzSpan="14" class="py-md">
         <h1 class="text-white mb0">110</h1>
-        <div>New Orders!</div>
+        <div>{{ 'widgets.new_orders' | i18n }}</div>
       </div>
       <a nz-col nzSpan="24" (click)="msg.info('view')" class="d-block p-sm bg-grey-darker text-white">
-        <div class="float-left">View Details</div>
+        <div class="float-left">{{ 'widgets.view_details' | i18n }}</div>
         <div class="float-right">
           <i class="fa fa-chevron-circle-right"></i>
         </div>
@@ -423,10 +423,10 @@
       </div>
       <div nz-col nzSpan="14" class="py-md">
         <h1 class="text-white mb0">19</h1>
-        <div>Support Tickets!</div>
+        <div>{{ 'widgets.support_tickets' | i18n }}</div>
       </div>
       <a nz-col nzSpan="24" (click)="msg.info('view')" class="d-block p-sm bg-grey-darker text-white">
-        <div class="float-left">View Details</div>
+        <div class="float-left">{{ 'widgets.view_details' | i18n }}</div>
         <div class="float-right">
           <i class="fa fa-chevron-circle-right"></i>
         </div>
@@ -436,14 +436,13 @@
 </div>
 <div nz-row [nzGutter]="16">
   <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-    <nz-card nzTitle="服务" [nzExtra]="extra">
+    <nz-card [nzTitle]="'app.widgets.services' | i18n" [nzExtra]="extra">
       <ng-template #extra>
-        <a (click)="msg.info('更多服务')">更多服务</a>
+        <a (click)="msg.info('app.widgets.more_services')">{{ 'app.widgets.more_services' | i18n }}</a>
       </ng-template>
       <div class="pb-md">
-        <i nz-icon nzType="check-circle" class="text-green"></i> 已开通 16 个 <i nz-icon nzType="check-circle"
-          class="pl-md"></i> 未开通 4
-        个
+        <i nz-icon nzType="check-circle" class="text-green"></i> {{ 'app.widgets.opened' | i18n }} 16 {{
+        'app.widgets.not_opened' | i18n }} 4
       </div>
       <nz-carousel style="overflow: initial">
         <div nz-carousel-content>
@@ -454,7 +453,7 @@
                   <i nz-icon nzType="laptop" class="display-2 text-blue"></i>
                 </div>
                 <div nz-col [nzSpan]="16">
-                  <h4 class="fs-md text-blue mb0">服务注册中心</h4>
+                  <h4 class="fs-md text-blue mb0">{{ 'app.widgets.service_registry' | i18n }}</h4>
                   <div class="text-grey">Register Server</div>
                 </div>
               </div>
@@ -465,7 +464,7 @@
                   <i nz-icon nzType="rocket" class="display-2 text-red"></i>
                 </div>
                 <div nz-col [nzSpan]="16">
-                  <h4 class="fs-md text-blue mb0">可靠消息</h4>
+                  <h4 class="fs-md text-blue mb0">{{ 'app.widgets.reliable_messaging' | i18n }}</h4>
                   <div class="text-grey">Msg Broker</div>
                 </div>
               </div>
@@ -478,7 +477,7 @@
                   <i nz-icon nzType="usb" class="display-2 text-purple"></i>
                 </div>
                 <div nz-col [nzSpan]="16">
-                  <h4 class="fs-md text-blue mb0">分布式资源管理</h4>
+                  <h4 class="fs-md text-blue mb0">{{ 'app.widgets.distributed_resource_management' | i18n }}</h4>
                   <div class="text-grey">DRM</div>
                 </div>
               </div>
@@ -489,7 +488,7 @@
                   <i nz-icon nzType="fork" class="display-2 text-pink"></i>
                 </div>
                 <div nz-col [nzSpan]="16">
-                  <h4 class="fs-md text-blue mb0">分布式数据管理</h4>
+                  <h4 class="fs-md text-blue mb0">{{ 'app.widgets.distributed_data_management' | i18n }}</h4>
                   <div class="text-grey">ZDC</div>
                 </div>
               </div>
@@ -504,7 +503,7 @@
                   <i nz-icon nzType="laptop" class="display-2 text-blue"></i>
                 </div>
                 <div nz-col [nzSpan]="16">
-                  <h4 class="fs-md text-blue mb0">服务注册中心</h4>
+                  <h4 class="fs-md text-blue mb0">{{ 'app.widgets.service_registry' | i18n }}</h4>
                   <div class="text-grey">Register Server</div>
                 </div>
               </div>
@@ -515,7 +514,7 @@
                   <i nz-icon nzType="rocket" class="display-2 text-red"></i>
                 </div>
                 <div nz-col [nzSpan]="16">
-                  <h4 class="fs-md text-blue mb0">可靠消息</h4>
+                  <h4 class="fs-md text-blue mb0">{{ 'app.widgets.reliable_messaging' | i18n }}</h4>
                   <div class="text-grey">Msg Broker</div>
                 </div>
               </div>
@@ -528,7 +527,7 @@
                   <i nz-icon nzType="usb" class="display-2 text-purple"></i>
                 </div>
                 <div nz-col [nzSpan]="16">
-                  <h4 class="fs-md text-blue">分布式资源管理</h4>
+                  <h4 class="fs-md text-blue">{{ 'app.widgets.distributed_resource_management' | i18n }}</h4>
                   <div class="text-grey">DRM</div>
                 </div>
               </div>
@@ -539,7 +538,7 @@
                   <i nz-icon nzType="fork" class="display-2 text-pink"></i>
                 </div>
                 <div nz-col [nzSpan]="16">
-                  <h4 class="fs-md text-blue">分布式数据管理</h4>
+                  <h4 class="fs-md text-blue">{{ 'app.widgets.distributed_data_management' | i18n }}</h4>
                   <div class="text-grey">ZDC</div>
                 </div>
               </div>
@@ -550,70 +549,71 @@
     </nz-card>
   </div>
   <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-    <nz-card nzTitle="开发服务器">
+    <nz-card [nzTitle]="'app.widgets.development_server' | i18n">
       <div nz-row [nzJustify]="'center'" [nzAlign]="'middle'">
         <div nz-col [nzSpan]="4">
           <i nz-icon nzType="database" class="display-1"></i>
         </div>
         <div nz-col [nzSpan]="15">
-          <h3 class="font-weight-bold mb0">暂无服务器</h3>
+          <h3 class="font-weight-bold mb0">{{ 'app.widgets.no_server' | i18n }}</h3>
           <div class="pt-sm text-grey-dark d-flex align-items-center">
             <nz-badge [nzStatus]="'error'" />
-            服务器申请失败
+            {{ 'app.widgets.server_application_failed' | i18n }}
           </div>
         </div>
         <div nz-col [nzSpan]="5" class="text-right">
           <button nz-button (click)="msg.info('Apply')" [nzType]="'default'">
-            <span>申请</span>
+            <span>{{ 'app.widgets.apply' | i18n }}</span>
           </button>
         </div>
       </div>
     </nz-card>
   </div>
   <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-    <nz-card nzTitle="华东 1" class="ant-card__body-nopadding" [nzExtra]="extra">
+    <nz-card [nzTitle]="'widgets.east_china_1' | i18n" class="ant-card__body-nopadding" [nzExtra]="extra">
       <ng-template #extra>
-        <i nz-tooltip nzTooltipTitle="购买实例" nz-icon nzType="shopping-cart" class="display-3"></i>
+        <i nz-tooltip [nzTooltipTitle]="'widgets.purchase_instance' | i18n" nz-icon nzType="shopping-cart"
+          class="display-3"></i>
       </ng-template>
       <div nz-row [nzJustify]="'center'" [nzAlign]="'middle'" [nzGutter]="8">
         <div nz-col [nzSpan]="12" class="text-center">
-          云服务器
+          {{ 'widgets.cloud_server' | i18n }}
           <strong class="display-1 text-blur">12</strong>
         </div>
         <div nz-col [nzSpan]="12" class="my-md pl-md border-left-1">
           <div class="pb-sm">
             <nz-badge [nzStatus]="'success'" />
-            运行中
+            {{ 'widgets.running' | i18n }}
             <strong class="text-green">2</strong>
           </div>
           <div class="pb-sm">
             <nz-badge [nzStatus]="'default'" />
-            近期创建
+            {{ 'widgets.recently_created' | i18n }}
             <strong class="text-grey">0</strong>
           </div>
           <div class="pb-sm">
             <nz-badge [nzStatus]="'error'" />
-            即将过期
+            {{ 'widgets.expiring_soon' | i18n }}
             <strong class="text-red">0</strong>
           </div>
           <div class="pb-sm">
             <nz-badge [nzStatus]="'error'" />
-            已过期
+            {{ 'widgets.expired' | i18n }}
             <strong class="text-red">1</strong>
           </div>
         </div>
       </div>
       <div nz-row class="text-center border-top-1">
         <div nz-col [nzSpan]="8" class="bg-grey-lighter-h py-sm point">
-          磁盘
+          {{ 'widgets.disk' | i18n }}
           <strong class="text-blue">18</strong>
         </div>
         <div nz-col [nzSpan]="8" class="bg-grey-lighter-h py-sm point">
-          快照
+          {{ 'widgets.snapshot' | i18n }}
           <strong>0</strong>
         </div>
         <div nz-col [nzSpan]="8" class="bg-grey-lighter-h py-sm point">
-          镜像
+          {{ 'widgets.image' | i18n }}
           <strong class="text-blue">2</strong>
         </div>
       </div>
@@ -629,40 +629,41 @@
         </span>
       </div>
       <div nz-col [nzSpan]="6">
-        <strong class="display-2">10</strong> 个
-        <div class="text-grey">运行测压任务</div>
+        <strong class="display-2">10</strong> {{ 'widgets.items' | i18n }}
+        <div class="text-grey">{{ 'widgets.load_test_tasks' | i18n }}</div>
       </div>
       <div nz-col [nzSpan]="5" class="d-flex align-items-center">
         <nz-badge [nzStatus]="'success'" />
-        已完成
+        {{ 'widgets.completed_tasks' | i18n }}
         <span class="display-3 text-grey-dark pl-sm">3</span>
       </div>
       <div nz-col [nzSpan]="5" class="d-flex align-items-center">
         <nz-badge [nzStatus]="'processing'" />
-        正在进行
+        {{ 'widgets.in_progress' | i18n }}
         <span class="display-3 text-grey-dark pl-sm">5</span>
       </div>
       <div nz-col [nzSpan]="5" class="d-flex align-items-center">
         <nz-badge [nzStatus]="'error'" />
-        已失败
+        {{ 'widgets.failed' | i18n }}
         <span class="display-3 text-grey-dark pl-sm">2</span>
       </div>
     </div>
   </div>
   <div nz-col [nzXs]="24" [nzMd]="12" class="mb-md">
     <div nz-row [nzJustify]="'center'" [nzAlign]="'middle'" class="bg-white rounded-md border p-md">
-      <div nz-col [nzSpan]="16">你觉得这篇文章如何：</div>
+      <div nz-col [nzSpan]="16">{{ 'widgets.how_do_you_like_this_article' | i18n }}</div>
       <div nz-col [nzSpan]="8" class="text-right">
         <span nz-popconfirm [nzPopconfirmVisible]="like" [nzPopconfirmPlacement]="'top'"
-          [nzPopconfirmTitle]="'喜欢就开启此内容提醒吧！'" [nzOkText]="'立即开启'" [nzCancelText]="'下次再说'"
-          (nzOnConfirm)="msg.success('开启提醒')" (nzOnCancel)="msg.error('取消提醒')"
-          style="display: inline-block; padding-top: 15px"></span>
+          [nzPopconfirmTitle]="'widgets.like_to_enable_this_content_reminder'" [nzOkText]="'widgets.enable_immediately'"
+          [nzCancelText]="'widgets.say_next_time'" (nzOnConfirm)="msg.success('widgets.enable_reminder')"
+          (nzOnCancel)="msg.error('widgets.cancel_reminder')" style="display: inline-block; padding-top: 15px"></span>
         <span class="pr-lg">
-          <i nz-icon nzType="like" class="display-3 point" [class.text-primary]="like" (click)="like = !like"></i> 赞
+          <i nz-icon nzType="like" class="display-3 point" [class.text-primary]="like" (click)="like = !like"></i> {{
+          'widgets.like' | i18n }}
         </span>
         <i nz-icon nzType="dislike" class="display-3 point" [class.text-primary]="dislike"
           (click)="dislike = !dislike"></i>
-        踩
+        {{ 'widgets.dislike' | i18n }}
       </div>
     </div>
   </div>
@@ -671,7 +672,7 @@
   <div nz-col nzXs="24" nzSm="12" nzMd="8" class="mb-md">
     <nz-card class="ant-card__body-nopadding bg-green rounded-md">
       <div class="p-md">
-        <div class="h5 pb-sm text-white">Received all time</div>
+        <div class="h5 pb-sm text-white">{{ 'widgets.received_all_time' | i18n }}</div>
         <g2-mini-area color="#fff" height="46" [data]="data" />
       </div>
       <div class="text-center bg-grey-darker text-white">
@@ -695,7 +696,7 @@
   <div nz-col nzXs="24" nzSm="12" nzMd="8" class="mb-md">
     <nz-card class="ant-card__body-nopadding bg-green rounded-md">
       <div class="p-md">
-        <div class="h5 pb-sm text-white">Monthly incomes</div>
+        <div class="h5 pb-sm text-white">{{ 'widgets.monthly_incomes' | i18n }}</div>
         <g2-mini-area color="#fff" height="46" [data]="data" />
       </div>
       <div nz-row [nzJustify]="'center'" [nzAlign]="'middle'" class="bg-grey-darker py-sm text-center">
@@ -704,17 +705,17 @@
         </div>
         <div nz-col [nzSpan]="8">
           <div class="text-white">+150</div>
-          <div class="text-grey">From last month</div>
+          <div class="text-grey">{{ 'widgets.from_last_month' | i18n }}</div>
         </div>
       </div>
       <div class="py-sm text-center bg-white text-grey">
         <div nz-row>
           <div nz-col [nzSpan]="12">
-            <div class="text-grey-dark">Gross income</div>
+            <div class="text-grey-dark">{{ 'widgets.gross_income' | i18n }}</div>
             <h4 class="h4 mb0">12000</h4>
           </div>
           <div nz-col [nzSpan]="12">
-            <div class="text-grey-dark">Net income</div>
+            <div class="text-grey-dark">{{ 'widgets.net_income' | i18n }}</div>
             <h4 class="h4 mb0">5100</h4>
           </div>
         </div>
@@ -728,7 +729,7 @@
       </div>
       <div nz-col nzSpan="8" class="text-white text-center">
         <h2 class="h1 text-white mb0">11°</h2>
-        <div class="py-sm">Cold</div>
+        <div class="py-sm">{{ 'widgets.cold' | i18n }}</div>
         <i class="fa fa-sun-o fa-2x"></i>
       </div>
     </div>
@@ -740,24 +741,26 @@
       <ng-template #coverTpl>
         <img class="img" src="//os.alipayobjects.com/rmsportal/GhjqstwSgxBXrZS.png" />
       </ng-template>
-      <h3>ANT DESIGN</h3>
-      <p class="text-grey">A UI Design Language</p>
+      <h3>{{ 'widgets.ant_design' | i18n }}</h3>
+      <p class="text-grey">{{ 'widgets.a_ui_design_language' | i18n }}</p>
       <ol class="list-styled text-lg pt-md">
-        <li>Designed by experienced team, and showcase dozens of inspiring projects.</li>
-        <li>Provide solutions for usual problems that may be encountered while developing enterprise-like complex UIs.
+        <li>{{ 'widgets.designed_by_experienced_team_and_showcase_dozens_of_inspiring_projects' | i18n }}</li>
+        <li>{{
+          'widgets.provide_solutions_for_common_problems_that_may_be_encountered_while_developing_enterprise_like_complex_uis'
+          | i18n }}</li>
+        <li>{{ 'widgets.dozens_of_flexible_and_practical_reusable_components_that_increase_your_productivity' | i18n }}
         </li>
-        <li>Dozens of flexible and practical reusable components that increase your productivity.</li>
       </ol>
       <p class="pt-md mb0">
-        <a class="text-grey" href="//ng.ant.design" target="_blank">View Site...</a>
+        <a class="text-grey" href="//ng.ant.design" target="_blank">{{ 'widgets.view_site' | i18n }}...</a>
       </p>
     </nz-card>
   </div>
   <div nz-col nzXs="24" nzMd="12">
     <nz-card [nzTitle]="nzTitle" class="ant-card__body-nopadding" [nzTitle]="nzTitle">
       <ng-template #nzTitle>
-        Recent Posts
-        <small class="text-sm font-weight-normal">Venenatis portauam Inceptos ameteiam</small>
+        {{ 'widgets.recent_posts' | i18n }}
+        <small class="text-sm font-weight-normal">{{ 'widgets.venenatis_portauam_inceptos_ameteiam' | i18n }}</small>
       </ng-template>
       @for (item of todoData; track $index) {
       <div nz-row [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm pr-md bg-grey-lighter-h point">
@@ -773,7 +776,7 @@
     </nz-card>
   </div>
   <div nz-col nzXs="24" nzMd="12">
-    <nz-card nzTitle="Todo lists" class="ant-card__body-nopadding">
+    <nz-card nzTitle="{{ 'widgets.todo_lists' | i18n }}" class="ant-card__body-nopadding">
       @for (item of todoData; track $index) {
       <div nz-row [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm bg-grey-lighter-h point">
         <div nz-col [nzSpan]="4" class="text-center">
@@ -789,11 +792,11 @@
           <nz-dropdown-menu #menuTpl="nzDropdownMenu">
             <ul nz-menu>
               @if (item.completed) {
-              <li nz-menu-item (click)="item.completed = false">Active</li>
+              <li nz-menu-item (click)="item.completed = false">{{ 'widgets.active' | i18n }}</li>
               } @else {
-              <li nz-menu-item (click)="item.completed = true">Completed</li>
+              <li nz-menu-item (click)="item.completed = true">{{ 'widgets.completed' | i18n }}</li>
               }
-              <li nz-menu-item (click)="todoData.splice(todoData.indexOf(item), 1)">Delted</li>
+              <li nz-menu-item (click)="todoData.splice(todoData.indexOf(item), 1)">{{ 'widgets.deleted' | i18n }}</li>
             </ul>
           </nz-dropdown-menu>
         </div>

@@ -24,8 +24,8 @@ export class WidgetsComponent implements OnInit {
     {
       completed: true,
       avatar: '1',
-      name: '苏先生',
-      content: `请告诉我，我应该说点什么好？`
+      name: 'Mr. Su',
+      content: `Please tell me, what should I say?`
     },
     {
       completed: false,

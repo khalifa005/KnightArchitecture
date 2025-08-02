@@ -5,6 +5,7 @@ import { G2MiniBarComponent, G2MiniBarData } from '@delon/chart/mini-bar';
 import { _HttpClient } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { I18NService } from '@core';
 
 @Component({
   selector: 'app-st',
@@ -14,6 +15,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class STDemoComponent implements OnInit {
   readonly http = inject(_HttpClient);
   private readonly message = inject(NzMessageService);
+  private readonly i18nSrv = inject(I18NService);
 
   ps = 20;
   total = 200; // mock total
@@ -39,8 +41,8 @@ export class STDemoComponent implements OnInit {
       type: 'yn',
       yn: {
         truth: 'female',
-        yes: '男',
-        no: '女',
+        yes: this.i18nSrv.fanyi('st.male'),
+        no: this.i18nSrv.fanyi('st.female'),
         mode: 'text'
       },
       width: 120

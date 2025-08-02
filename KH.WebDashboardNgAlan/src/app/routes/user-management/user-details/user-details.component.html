@@ -1,0 +1,154 @@
+<div class="user-details-container">
+   @if (loading) {
+   <div class="loading-container">
+      <div class="loading-spinner">Loading...</div>
+   </div>
+   } @else if (user) {
+   <div class="user-details-content">
+      <!-- Header Section -->
+      <div class="user-header">
+         <div class="user-avatar-section">
+            <nz-avatar [nzSrc]="user.avatar" [nzSize]="120" class="user-avatar"></nz-avatar>
+            <div class="user-status">
+               <nz-tag [nzColor]="user.is_active ? 'green' : 'red'" class="status-tag">
+                  {{ user.is_active ? 'Active' : 'Inactive' }}
+               </nz-tag>
+            </div>
+         </div>
+         <div class="user-basic-info">
+            <h1 class="user-name">{{ user.name_en }}</h1>
+            <h2 class="user-name-arabic">{{ user.name_ar }}</h2>
+            <div class="user-role">
+               <nz-tag [nzColor]="getRoleColor(user.role)" class="role-tag">{{ user.role }}</nz-tag>
+            </div>
+            <div class="user-id">User ID: {{ user.id }}</div>
+         </div>
+      </div>
+
+      <!-- Main Content -->
+      <div nz-row [nzGutter]="[24, 24]" class="details-sections">
+         <!-- Personal Information -->
+         <div nz-col [nzSpan]="12">
+            <nz-card nzTitle="Personal Information" class="detail-card">
+               <div class="detail-item">
+                  <span class="label">Full Name (English):</span>
+                  <span class="value">{{ user.name_en }}</span>
+               </div>
+               <div class="detail-item">
+                  <span class="label">Full Name (Arabic):</span>
+                  <span class="value">{{ user.name_ar }}</span>
+               </div>
+               <div class="detail-item">
+                  <span class="label">Username:</span>
+                  <span class="value">{{ user.username }}</span>
+               </div>
+               <div class="detail-item">
+                  <span class="label">Email:</span>
+                  <span class="value">{{ user.email }}</span>
+               </div>
+               <div class="detail-item">
+                  <span class="label">Phone Number:</span>
+                  <span class="value">{{ user.phone_number }}</span>
+               </div>
+               <div class="detail-item">
+                  <span class="label">National ID:</span>
+                  <span class="value">{{ user.national_id }}</span>
+               </div>
+            </nz-card>
+         </div>
+
+         <!-- Professional Information -->
+         <div nz-col [nzSpan]="12">
+            <nz-card nzTitle="Professional Information" class="detail-card">
+               <div class="detail-item">
+                  <span class="label">Role:</span>
+                  <span class="value">
+                     <nz-tag [nzColor]="getRoleColor(user.role)">{{ user.role }}</nz-tag>
+                  </span>
+               </div>
+               <div class="detail-item">
+                  <span class="label">Branch:</span>
+                  <span class="value">{{ user.branch }}</span>
+               </div>
+               <div class="detail-item">
+                  <span class="label">Status:</span>
+                  <span class="value">
+                     <nz-tag [nzColor]="user.is_active ? 'green' : 'red'">
+                        {{ user.is_active ? 'Active' : 'Inactive' }}
+                     </nz-tag>
+                  </span>
+               </div>
+               <div class="detail-item">
+                  <span class="label">User ID:</span>
+                  <span class="value">{{ user.id }}</span>
+               </div>
+            </nz-card>
+         </div>
+
+         <!-- System Information -->
+         <div nz-col [nzSpan]="12">
+            <nz-card nzTitle="System Information" class="detail-card">
+               <div class="detail-item">
+                  <span class="label">Created By:</span>
+                  <span class="value">{{ user.created_by }}</span>
+               </div>
+               <div class="detail-item">
+                  <span class="label">Created At:</span>
+                  <span class="value">{{ user.created_at | date:'MMM dd, yyyy HH:mm:ss' }}</span>
+               </div>
+               <div class="detail-item">
+                  <span class="label">Account Status:</span>
+                  <span class="value" [class]="user.is_active ? 'status-active' : 'status-inactive'">
+                     {{ user.is_active ? 'Active Account' : 'Inactive Account' }}
+                  </span>
+               </div>
+            </nz-card>
+         </div>
+
+         <!-- Quick Actions -->
+         <div nz-col [nzSpan]="12">
+            <nz-card nzTitle="Quick Actions" class="detail-card">
+               <div class="action-buttons">
+                  <button nz-button nzType="primary" nzSize="large" (click)="editUser()" class="action-btn">
+                     <span nz-icon nzType="edit"></span>
+                     Edit User
+                  </button>
+                  @if (user.is_active) {
+                  <button nz-button nzType="default" nzSize="large" (click)="deactivateUser()" class="action-btn">
+                     <span nz-icon nzType="delete"></span>
+                     Deactivate User
+                  </button>
+                  } @else {
+                  <button nz-button nzType="default" nzSize="large" (click)="activateUser()" class="action-btn">
+                     <span nz-icon nzType=""></span>
+                     Activate User
+                  </button>
+                  }
+               </div>
+            </nz-card>
+         </div>
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="footer-actions">
+         <nz-space>
+            <button nz-button nzType="default" (click)="close()">
+               <span nz-icon nzType="close"></span>
+               Close
+            </button>
+            <button nz-button nzType="primary" (click)="editUser()">
+               <span nz-icon nzType="edit"></span>
+               Edit User
+            </button>
+         </nz-space>
+      </div>
+   </div>
+   } @else {
+   <div class="no-data">
+      <div class="no-data-content">
+         <span nz-icon nzType="user" class="no-data-icon"></span>
+         <p>No user data available</p>
+      </div>
+   </div>
+   }
+</div>

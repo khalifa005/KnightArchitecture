@@ -3,7 +3,8 @@
 </div>
 <nz-card nzTitle="{{ 'app.downfile.demo' | i18n }}">
   @for (i of fileTypes; track $index) {
-  <button nz-button class="mr-sm" down-file [http-data]="data" http-url="assets/tmp/demo{{ i }}" file-name="demo中文">
+  <button nz-button class="mr-sm" down-file [http-data]="data" http-url="assets/tmp/demo{{ i }}"
+    [file-name]="'downfile.demo_filename' | i18n">
     {{ i }}
   </button>
   }

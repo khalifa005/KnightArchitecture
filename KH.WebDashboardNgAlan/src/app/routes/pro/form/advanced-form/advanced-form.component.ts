@@ -36,8 +36,8 @@ export class AdvancedFormComponent implements OnInit {
     items: new FormArray<FormGroup<UserForm>>([])
   });
   users: Array<{ value: string; label: string }> = [
-    { value: 'xiao', label: '付晓晓' },
-    { value: 'mao', label: '周毛毛' }
+    { value: 'xiao', label: 'form.fu_xiaoxiao' },
+    { value: 'mao', label: 'form.zhou_maomao' }
   ];
 
   ngOnInit(): void {

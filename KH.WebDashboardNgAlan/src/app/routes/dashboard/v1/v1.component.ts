@@ -8,7 +8,7 @@ import { QuickMenuModule } from '@delon/abc/quick-menu';
 import { G2BarModule } from '@delon/chart/bar';
 import { G2MiniBarModule } from '@delon/chart/mini-bar';
 import { G2TimelineModule } from '@delon/chart/timeline';
-import { _HttpClient } from '@delon/theme';
+import { _HttpClient, ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import { timer } from 'rxjs';
 
@@ -24,12 +24,13 @@ export class DashboardV1Component implements OnInit {
   private readonly obSrv = inject(OnboardingService);
   private readonly platform = inject(Platform);
   private readonly doc = inject(DOCUMENT);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
   todoData = [
     {
       completed: true,
       avatar: '1',
-      name: '苏先生',
-      content: `请告诉我，我应该说点什么好？`
+      name: this.i18nSrv.fanyi('dashboard.mr_su'),
+      content: this.i18nSrv.fanyi('dashboard.what_should_i_say')
     },
     {
       completed: false,

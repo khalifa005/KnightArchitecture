@@ -1,0 +1,86 @@
+<div class="user-form-container">
+   <form nz-form [formGroup]="userForm" (ngSubmit)="save()">
+      <div nz-row [nzGutter]="24">
+         <!-- Left Card -->
+         <div nz-col [nzSpan]="12">
+            <nz-card [nzBordered]="true" class="form-card">
+               <!-- Avatar Section -->
+               <div class="avatar-section">
+                  <nz-avatar [nzSrc]="avatarUrl" [nzSize]="100" class="avatar-preview"></nz-avatar>
+                  <div class="avatar-upload">
+                     <nz-upload [nzAction]="''" [nzBeforeUpload]="beforeUpload" (nzChange)="onAvatarUpload($event)"
+                        [nzShowUploadList]="false" [nzAccept]="'image/*'" [nzCustomRequest]="customUploadRequest">
+                        <button nz-button nzType="dashed" class="upload-btn">
+                           <span nz-icon nzType="upload"></span>
+                           {{ 'user.form.actions.change_avatar' | i18n }}
+                        </button>
+                     </nz-upload>
+                  </div>
+               </div>
+
+               <!-- Username -->
+               <app-custom-text-input [control]="userForm.usernameControl" label="user.form.fields.username"
+                  placeholder="user.form.fields.username" fieldName="username" [required]="true">
+               </app-custom-text-input>
+
+               <!-- Email -->
+               <app-custom-text-input [control]="userForm.emailControl" label="user.form.fields.email"
+                  placeholder="user.form.fields.email" fieldName="email" inputType="email" [required]="true">
+               </app-custom-text-input>
+
+               <!-- Phone Number -->
+               <app-custom-text-input [control]="userForm.phoneNumberControl" label="user.form.fields.phone_number"
+                  placeholder="user.form.fields.phone_number" fieldName="phone_number" [required]="true">
+               </app-custom-text-input>
+
+               <!-- National ID -->
+               <app-custom-text-input [control]="userForm.nationalIdControl" label="user.form.fields.national_id"
+                  placeholder="user.form.fields.national_id" fieldName="national_id" [required]="true">
+               </app-custom-text-input>
+            </nz-card>
+         </div>
+
+         <!-- Right Card -->
+         <div nz-col [nzSpan]="12">
+            <nz-card [nzBordered]="true" class="form-card">
+               <!-- Arabic Name -->
+               <app-custom-text-input [control]="userForm.nameArControl" label="user.form.fields.name_ar"
+                  placeholder="user.form.fields.name_ar" fieldName="name_ar" direction="rtl" [required]="true">
+               </app-custom-text-input>
+
+               <!-- English Name -->
+               <app-custom-text-input [control]="userForm.nameEnControl" label="user.form.fields.name_en"
+                  placeholder="user.form.fields.name_en" fieldName="name_en" [required]="true">
+               </app-custom-text-input>
+
+               <!-- Branch -->
+               <app-custom-select-input [control]="userForm.branchControl" label="user.form.fields.branch"
+                  placeholder="user.form.fields.branch" fieldName="branch" [options]="branchOptions"
+                  [required]="!isBranchDisabled" [disabled]="isBranchDisabled">
+               </app-custom-select-input>
+
+               <!-- Role -->
+               <app-custom-select-input [control]="userForm.roleControl" label="user.form.fields.role"
+                  placeholder="user.form.fields.role" fieldName="role" [options]="roleOptions" [required]="true">
+               </app-custom-select-input>
+
+               <!-- Active Status -->
+               <app-custom-switch-input [control]="userForm.isActiveControl" label="user.form.fields.is_active">
+               </app-custom-switch-input>
+            </nz-card>
+         </div>
+      </div>
+
+      <!-- Form Actions - Centered -->
+      <div class="form-actions">
+         <nz-space>
+            <button nz-button (click)="cancel()" class="rounded-button">
+               {{ 'user.form.actions.cancel' | i18n }}
+            </button>
+            <button nz-button nzType="primary" [disabled]="!this.userForm.valid" [nzLoading]="loading" type="submit" class="rounded-button">
+               {{ 'user.form.actions.save' | i18n }}
+            </button>
+         </nz-space>
+      </div>
+   </form>
+</div>

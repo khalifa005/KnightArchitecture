@@ -6,6 +6,7 @@ export interface AppUser {
     // Extended properties
     department?: string;
     role?: string;
+    branch?: string;
     permissions?: string[];
     lastLogin?: Date;
   }

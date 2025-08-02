@@ -26,7 +26,7 @@ for (let i = 0; i < fakeY2.length; i += 1) {
 const salesData: any[] = [];
 for (let i = 0; i < 12; i += 1) {
   salesData.push({
-    x: `${i + 1}月`,
+    x: `Month ${i + 1}`,
     y: Math.floor(Math.random() * 1000) + 200
   });
 }
@@ -34,7 +34,7 @@ const searchData: any[] = [];
 for (let i = 0; i < 50; i += 1) {
   searchData.push({
     index: i + 1,
-    keyword: `搜索关键词-${i}`,
+    keyword: `Search Keyword-${i}`,
     count: Math.floor(Math.random() * 1000),
     range: Math.floor(Math.random() * 100),
     status: Math.floor((Math.random() * 10) % 2)
@@ -42,77 +42,77 @@ for (let i = 0; i < 50; i += 1) {
 }
 const salesTypeData = [
   {
-    x: '家用电器',
+    x: 'Home Appliances',
     y: 4544
   },
   {
-    x: '食用酒水',
+    x: 'Food & Beverages',
     y: 3321
   },
   {
-    x: '个护健康',
+    x: 'Personal Care & Health',
     y: 3113
   },
   {
-    x: '服饰箱包',
+    x: 'Clothing & Bags',
     y: 2341
   },
   {
-    x: '母婴产品',
+    x: 'Baby & Mother Products',
     y: 1231
   },
   {
-    x: '其他',
+    x: 'Others',
     y: 1231
   }
 ];
 
 const salesTypeDataOnline = [
   {
-    x: '家用电器',
+    x: 'Home Appliances',
     y: 244
   },
   {
-    x: '食用酒水',
+    x: 'Food & Beverages',
     y: 321
   },
   {
-    x: '个护健康',
+    x: 'Personal Care & Health',
     y: 311
   },
   {
-    x: '服饰箱包',
+    x: 'Clothing & Bags',
     y: 41
   },
   {
-    x: '母婴产品',
+    x: 'Baby & Mother Products',
     y: 121
   },
   {
-    x: '其他',
+    x: 'Others',
     y: 111
   }
 ];
 
 const salesTypeDataOffline = [
   {
-    x: '家用电器',
+    x: 'Home Appliances',
     y: 99
   },
   {
-    x: '个护健康',
+    x: 'Personal Care & Health',
     y: 188
   },
   {
-    x: '服饰箱包',
+    x: 'Clothing & Bags',
     y: 344
   },
   {
-    x: '母婴产品',
+    x: 'Baby & Mother Products',
     y: 255
   },
   {
-    x: '其他',
+    x: 'Others',
     y: 65
   }
 ];
@@ -120,7 +120,7 @@ const salesTypeDataOffline = [
 const offlineData: any[] = [];
 for (let i = 0; i < 10; i += 1) {
   offlineData.push({
-    name: `门店${i}`,
+    name: `Store ${i}`,
     cvr: Math.ceil(Math.random() * 9) / 10
   });
 }
@@ -135,7 +135,7 @@ for (let i = 0; i < 20; i += 1) {
 
 const radarOriginData = [
   {
-    name: '个人',
+    name: 'Individual',
     ref: 10,
     koubei: 8,
     output: 4,
@@ -143,7 +143,7 @@ const radarOriginData = [
     hot: 7
   },
   {
-    name: '团队',
+    name: 'Team',
     ref: 3,
     koubei: 9,
     output: 6,
@@ -151,7 +151,7 @@ const radarOriginData = [
     hot: 1
   },
   {
-    name: '部门',
+    name: 'Department',
     ref: 4,
     koubei: 1,
     output: 6,
@@ -163,11 +163,11 @@ const radarOriginData = [
 //
 const radarData: any[] = [];
 const radarTitleMap: any = {
-  ref: '引用',
-  koubei: '口碑',
-  output: '产量',
-  contribute: '贡献',
-  hot: '热度'
+  ref: 'Reference',
+  koubei: 'Reputation',
+  output: 'Output',
+  contribute: 'Contribution',
+  hot: 'Hot'
 };
 radarOriginData.forEach((item: any) => {
   Object.keys(item).forEach(key => {

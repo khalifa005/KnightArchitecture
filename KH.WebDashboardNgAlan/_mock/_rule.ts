@@ -12,9 +12,9 @@ for (let i = 0; i < 46; i += 1) {
       'https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png'
     ][i % 2],
     no: `TradeCode ${i}`,
-    title: `一个任务名称 ${i}`,
-    owner: '曲丽丽',
-    description: '这是一段描述',
+    title: `Task Name ${i}`,
+    owner: 'Owner',
+    description: 'Description',
     callNo: Math.floor(Math.random() * 1000),
     status: Math.floor(Math.random() * 10) % 4,
     updatedAt: new Date(`2017-07-${i < 18 ? `0${Math.floor(i / 2) + 1}` : Math.floor(i / 2) + 1}`),
@@ -63,8 +63,8 @@ function saveRule(description: string): void {
       'https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png'
     ][i % 2],
     no: `TradeCode ${i}`,
-    title: `一个任务名称 ${i}`,
-    owner: '曲丽丽',
+    title: `Task Name ${i}`,
+    owner: 'Owner',
     description,
     callNo: Math.floor(Math.random() * 1000),
     status: Math.floor(Math.random() * 10) % 2,

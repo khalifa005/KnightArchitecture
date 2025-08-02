@@ -51,6 +51,10 @@ import {
   TrophyOutline,
   UsbOutline,
   UserOutline,
+  UserAddOutline,
+  UserDeleteOutline,
+  UserSwitchOutline,
+  UsergroupAddOutline,
   WeiboCircleOutline
 } from '@ant-design/icons-angular/icons';
 
@@ -102,5 +106,9 @@ export const ICONS_AUTO = [
   TrophyOutline,
   UsbOutline,
   UserOutline,
+  UserAddOutline,
+  UserDeleteOutline,
+  UserSwitchOutline,
+  UsergroupAddOutline,
   WeiboCircleOutline
 ];

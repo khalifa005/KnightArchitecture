@@ -1,7 +1,7 @@
 const basicGoods = [
   {
     id: '1234561',
-    name: '矿泉水 550ml',
+    name: 'Mineral Water 550ml',
     barcode: '12421432143214321',
     price: '2.00',
     num: '1',
@@ -9,7 +9,7 @@ const basicGoods = [
   },
   {
     id: '1234562',
-    name: '凉茶 300ml',
+    name: 'Herbal Tea 300ml',
     barcode: '12421432143214322',
     price: '3.00',
     num: '2',
@@ -17,7 +17,7 @@ const basicGoods = [
   },
   {
     id: '1234563',
-    name: '好吃的薯片',
+    name: 'Delicious Chips',
     barcode: '12421432143214323',
     price: '7.00',
     num: '4',
@@ -25,7 +25,7 @@ const basicGoods = [
   },
   {
     id: '1234564',
-    name: '特别好吃的蛋卷',
+    name: 'Especially Delicious Egg Rolls',
     barcode: '12421432143214324',
     price: '8.50',
     num: '3',
@@ -37,41 +37,41 @@ const basicProgress = [
   {
     key: '1',
     time: '2017-10-01 14:10',
-    rate: '联系客户',
+    rate: 'Contact Customer',
     status: 'processing',
-    operator: '取货员 ID1234',
+    operator: 'Pickup Staff ID1234',
     cost: '5mins'
   },
   {
     key: '2',
     time: '2017-10-01 14:05',
-    rate: '取货员出发',
+    rate: 'Pickup Staff Departure',
     status: 'success',
-    operator: '取货员 ID1234',
+    operator: 'Pickup Staff ID1234',
     cost: '1h'
   },
   {
     key: '3',
     time: '2017-10-01 13:05',
-    rate: '取货员接单',
+    rate: 'Pickup Staff Accept Order',
     status: 'success',
-    operator: '取货员 ID1234',
+    operator: 'Pickup Staff ID1234',
     cost: '5mins'
   },
   {
     key: '4',
     time: '2017-10-01 13:00',
-    rate: '申请审批通过',
+    rate: 'Application Approval Passed',
     status: 'success',
-    operator: '系统',
+    operator: 'System',
     cost: '1h'
   },
   {
     key: '5',
     time: '2017-10-01 12:00',
-    rate: '发起退货申请',
+    rate: 'Initiate Return Request',
     status: 'success',
-    operator: '用户',
+    operator: 'User',
     cost: '5mins'
   }
 ];
@@ -79,40 +79,40 @@ const basicProgress = [
 const advancedOperation1 = [
   {
     key: 'op1',
-    type: '订购关系生效',
-    name: '曲丽丽',
+    type: 'Purchase Relationship Effective',
+    name: 'Owner',
     status: 'agree',
     updatedAt: '2017-10-03  19:23:12',
     memo: '-'
   },
   {
     key: 'op2',
-    type: '财务复审',
-    name: '付小小',
+    type: 'Financial Review',
+    name: 'Finance Staff',
     status: 'reject',
     updatedAt: '2017-10-03  19:23:12',
-    memo: '不通过原因'
+    memo: 'Rejection Reason'
   },
   {
     key: 'op3',
-    type: '部门初审',
-    name: '周毛毛',
+    type: 'Department Initial Review',
+    name: 'Department Staff',
     status: 'agree',
     updatedAt: '2017-10-03  19:23:12',
     memo: '-'
   },
   {
     key: 'op4',
-    type: '提交订单',
-    name: '林东东',
+    type: 'Submit Order',
+    name: 'Order Staff',
     status: 'agree',
     updatedAt: '2017-10-03  19:23:12',
-    memo: '很棒'
+    memo: 'Great'
   },
   {
     key: 'op5',
-    type: '创建订单',
-    name: '汗牙牙',
+    type: 'Create Order',
+    name: 'Order Creator',
     status: 'agree',
     updatedAt: '2017-10-03  19:23:12',
     memo: '-'
@@ -122,8 +122,8 @@ const advancedOperation1 = [
 const advancedOperation2 = [
   {
     key: 'op1',
-    type: '订购关系生效',
-    name: '曲丽丽',
+    type: 'Purchase Relationship Effective',
+    name: 'Owner',
     status: 'agree',
     updatedAt: '2017-10-03  19:23:12',
     memo: '-'
@@ -133,8 +133,8 @@ const advancedOperation2 = [
 const advancedOperation3 = [
   {
     key: 'op1',
-    type: '创建订单',
-    name: '汗牙牙',
+    type: 'Create Order',
+    name: 'Order Creator',
     status: 'agree',
     updatedAt: '2017-10-03  19:23:12',
     memo: '-'

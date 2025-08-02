@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -15,6 +16,7 @@ export class ProAccountCenterProjectsComponent {
   private readonly http = inject(_HttpClient);
   private readonly msg = inject(NzMessageService);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
 
   listLoading = true;
   list: any[] = [];
@@ -28,6 +30,6 @@ export class ProAccountCenterProjectsComponent {
   }
 
   suc(id: number): void {
-    this.msg.success(`标题：${id}`);
+    this.msg.success(this.i18nSrv.fanyi('center.title').replace('{id}', id.toString()));
   }
 }

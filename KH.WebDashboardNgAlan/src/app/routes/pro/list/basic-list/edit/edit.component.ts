@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { SFSchema } from '@delon/form';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef } from 'ng-zorro-antd/modal';
@@ -12,24 +13,25 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 export class ProBasicListEditComponent {
   private readonly modal = inject(NzModalRef);
   private readonly msgSrv = inject(NzMessageService);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
 
   record: any = {};
   schema: SFSchema = {
     properties: {
-      title: { type: 'string', title: '任务名称', maxLength: 50 },
-      createdAt: { type: 'string', title: '开始时间', format: 'date' },
+      title: { type: 'string', title: this.i18nSrv.fanyi('list.task_name'), maxLength: 50 },
+      createdAt: { type: 'string', title: this.i18nSrv.fanyi('list.start_time'), format: 'date' },
       owner: {
         type: 'string',
-        title: '任务负责人',
+        title: this.i18nSrv.fanyi('list.task_owner'),
         enum: [
           { value: 'asdf', label: 'asdf' },
-          { value: '卡色', label: '卡色' },
+          { value: 'kase', label: 'Kase' },
           { value: 'cipchk', label: 'cipchk' }
         ]
       },
       subDescription: {
         type: 'string',
-        title: '产品描述',
+        title: this.i18nSrv.fanyi('list.product_description'),
         ui: {
           widget: 'textarea',
           autosize: { minRows: 2, maxRows: 6 }
@@ -44,7 +46,7 @@ export class ProBasicListEditComponent {
   };
 
   save(value: any): void {
-    this.msgSrv.success('保存成功');
+    this.msgSrv.success(this.i18nSrv.fanyi('list.save_success'));
     this.modal.close(value);
   }
 

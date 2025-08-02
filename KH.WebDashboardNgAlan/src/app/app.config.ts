@@ -1,5 +1,5 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { default as ngLang } from '@angular/common/locales/ar';
+import { default as ngLang } from '@angular/common/locales/en';
 import { ApplicationConfig, EnvironmentProviders, Provider } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
@@ -19,9 +19,9 @@ import { AlainProvideLang, provideAlain, en_US as delonLang } from '@delon/theme
 import { AlainAuthConfig, AlainConfig } from '@delon/util/config';
 import { environment } from '@env/environment';
 import { CELL_WIDGETS, SF_WIDGETS, ST_WIDGETS } from '@shared';
-import { ar as dateLang } from 'date-fns/locale';
+import { enUS as dateLang } from 'date-fns/locale';
 import { NzConfig, provideNzConfig } from 'ng-zorro-antd/core/config';
-import { ar_EG as zorroLang } from 'ng-zorro-antd/i18n';
+import { en_US as zorroLang } from 'ng-zorro-antd/i18n';
 
 import { ICONS } from '../style-icons';
 import { ICONS_AUTO } from '../style-icons-auto';
@@ -32,9 +32,9 @@ import { directionReducer } from './store/direction/direction.reducer';
 import { counterReducer } from './store/counter/counter.reducer';
 import { provideEffects } from '@ngrx/effects'
 import { DirectionEffects } from './store/direction/direction.effects';
-import {provideStoreDevtools} from '@ngrx/store-devtools'
+import { provideStoreDevtools } from '@ngrx/store-devtools'
 const defaultLang: AlainProvideLang = {
-  abbr: 'ar',
+  abbr: 'en-US',
   ng: ngLang,
   zorro: zorroLang,
   date: dateLang,
@@ -67,12 +67,12 @@ const providers: Array<Provider | EnvironmentProviders> = [
   {
     provide: Configuration,
     useValue: new Configuration({
-      basePath: environment.api.serverUrl || 'https://localhost:5050'
+      basePath: environment.api['serverUrl'] || 'https://localhost:5050'
     })
   },
 
-  // provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authSimpleInterceptor, defaultInterceptor])),
-  provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
+  provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authSimpleInterceptor, defaultInterceptor])),
+  // provideHttpClient(withInterceptors([...(environment.interceptorFns ?? []), authJWTInterceptor, defaultInterceptor])),
   provideAnimations(),
   provideRouter(routes, ...routerFeatures),
   provideAlain({ config: alainConfig, defaultLang, i18nClass: I18NService, icons: [...ICONS_AUTO, ...ICONS] }),

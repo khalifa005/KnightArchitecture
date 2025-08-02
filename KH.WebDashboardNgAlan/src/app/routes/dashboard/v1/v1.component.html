@@ -100,7 +100,8 @@
         <small class="text-sm font-weight-normal">{{ 'app.v1.business_expectations' | i18n }}</small>
       </ng-template>
       @if (offlineChartData) {
-      <g2-timeline [data]="offlineChartData" [height]="289" [titleMap]="{ y1: '客流量', y2: '支付笔数' }" />
+      <g2-timeline [data]="offlineChartData" [height]="289"
+        [titleMap]="{ y1: 'app.v1.traffic_flow', y2: 'app.v1.payment_count' }" />
       }
     </nz-card>
   </div>

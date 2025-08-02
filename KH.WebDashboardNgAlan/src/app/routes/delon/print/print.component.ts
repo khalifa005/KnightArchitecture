@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Lodop, LodopService } from '@delon/abc/lodop';
 import { SHARED_IMPORTS } from '@shared';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { I18NService } from '@core';
 
 @Component({
   selector: 'app-print',
@@ -11,6 +12,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class PrintComponent {
   private readonly lodopSrv = inject(LodopService);
   private readonly msg = inject(NzMessageService);
+  private readonly i18nSrv = inject(I18NService);
 
   constructor() {
     this.lodopSrv.lodop.subscribe(({ lodop, ok }) => {
@@ -19,7 +21,7 @@ export class PrintComponent {
         return;
       }
       this.error = false;
-      this.msg.success(`打印机加载成功`);
+      this.msg.success(this.i18nSrv.fanyi('print.printer_loaded'));
       this.lodop = lodop as Lodop;
       this.pinters = this.lodopSrv.printer;
     });
@@ -31,11 +33,11 @@ export class PrintComponent {
     paper: '',
     html: `
       <h1>Title</h1>
-      <p>这~！@#￥%……&*（）——sdilfjnvn</p>
-      <p>这~！@#￥%……&*（）——sdilfjnvn</p>
-      <p>这~！@#￥%……&*（）——sdilfjnvn</p>
-      <p>这~！@#￥%……&*（）——sdilfjnvn</p>
-      <p>这~！@#￥%……&*（）——sdilfjnvn</p>
+      <p>This~!@#$%^&*()——sdilfjnvn</p>
+      <p>This~!@#$%^&*()——sdilfjnvn</p>
+      <p>This~!@#$%^&*()——sdilfjnvn</p>
+      <p>This~!@#$%^&*()——sdilfjnvn</p>
+      <p>This~!@#$%^&*()——sdilfjnvn</p>
     `
   };
   error = false;
@@ -66,10 +68,10 @@ export class PrintComponent {
   }
   print(isPrivew = false): void {
     const LODOP = this.lodop as Lodop;
-    LODOP.PRINT_INITA(10, 20, 810, 610, '测试C-Lodop远程打印四步骤');
+    LODOP.PRINT_INITA(10, 20, 810, 610, 'Test C-Lodop Remote Print Four Steps');
     LODOP.SET_PRINTER_INDEXA(this.cog.printer);
     LODOP.SET_PRINT_PAGESIZE(0, 0, 0, this.cog.paper);
-    LODOP.ADD_PRINT_TEXT(1, 1, 300, 200, '下面输出的是本页源代码及其展现效果：');
+    LODOP.ADD_PRINT_TEXT(1, 1, 300, 200, 'Below is the source code of this page and its display effect:');
     LODOP.ADD_PRINT_TEXT(20, 10, '90%', '95%', this.cog.html);
     LODOP.SET_PRINT_STYLEA(0, 'ItemType', 4);
     LODOP.NEWPAGEA();

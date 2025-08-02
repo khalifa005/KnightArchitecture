@@ -1,0 +1,71 @@
+<!-- ACL Debug / Info Panel -->
+<div class="debug-section">
+
+   <!-- Current User Info -->
+   <h4>👤 Current User Info:</h4>
+   <div class="user-info-section">
+      <strong>User:</strong> {{ settings.user.name || 'Unknown' }} |
+      <strong>Role:</strong> {{ settings.user.role || 'Not set' }} |
+      <strong>Department:</strong> {{ settings.user.department || 'Not set' }} |
+      <strong>Branch:</strong> {{ settings.user.branch || 'Not set' }}
+   </div>
+
+   <!-- Active Permissions -->
+   <h4>✅ Active Permissions:</h4>
+   <div class="permissions-section">
+      <strong>Permissions:</strong>
+      <span>
+         {{ settings.user.permissions?.join(', ') || 'No permissions set' }}
+      </span>
+   </div>
+
+   <!-- Title Visibility Tests -->
+   <h4>👁️‍🗨️ Title Visibility Status:</h4>
+   <div class="visibility-tests-grid">
+
+      <div class="test-item">
+         <strong [acl]="{ role: ['super-admin'], ability: ['SNAPSHOTS_VIEW', 'USER_MANAGEMENT'], mode: 'allOf' }">
+            Admin Title:
+         </strong> {{ 'Visible' }}
+      </div>
+
+      <div [acl]="{ role: ['super-admin'], ability: ['SNAPSHOTS_VIEWxxx', 'USER_MANAGEMENT'], mode: 'allOf' }"
+         class="test-item">
+         <strong>Admin xxx:</strong> {{ 'Visible' }}
+      </div>
+
+      <div *aclIf="'BACKUP_RESTORE'; else deniedBackup" class="test-item">
+         <strong>Admin BACKUP_RESTORE:</strong> {{ 'Visible' }}
+      </div>
+
+   </div>
+
+   <!-- Action Test Buttons -->
+   <h4>🧪 ACL-Based Actions:</h4>
+
+   <!-- Visible Only if Role and Permissions Match -->
+   <div class="action-buttons">
+      <button nz-button nzType="primary"
+         [acl]="{ role: ['super-admin'], ability: ['SNAPSHOTS_VIEW', 'USER_MANAGEMENT'], mode: 'allOf' }">
+         Must be super-admin with SNAPSHOTS_VIEW + USER_MANAGEMENT
+      </button>
+   </div>
+
+   <!-- Input Field Conditionally Visible -->
+   <input nz-input *aclIf="'BACKUP_RESTORE'; else deniedBackupInput"
+      placeholder="Editable if BACKUP_RESTORE is allowed">
+
+   <!-- Access Denied Sections -->
+   <ng-template #deniedBackup>
+      <div class="access-denied">
+         🚫 <strong>Access Denied:</strong> Missing permission <code>BACKUP_RESTORE</code>.
+      </div>
+   </ng-template>
+
+   <ng-template #deniedBackupInput>
+      <div class="access-denied">
+         🚫 <strong>Access Denied:</strong> Cannot view input field — required permission: <code>BACKUP_RESTORE</code>.
+      </div>
+   </ng-template>
+
+</div>

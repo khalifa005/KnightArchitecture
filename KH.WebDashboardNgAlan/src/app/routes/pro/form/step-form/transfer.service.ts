@@ -1,40 +1,42 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 
 @Injectable()
 export class TransferService {
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
   step = 1;
 
   /**
-   * 付款账户
+   * Payment Account
    */
   pay_account = '';
 
   /**
-   * 收款账户类型
+   * Receiver Account Type
    */
   receiver_type: 'alipay' | 'bank' = 'alipay';
 
   get receiver_type_str(): string {
-    return this.receiver_type === 'alipay' ? '支付宝' : '银行';
+    return this.receiver_type === 'alipay' ? this.i18nSrv.fanyi('transfer.alipay') : this.i18nSrv.fanyi('transfer.bank');
   }
 
   /**
-   * 收款账户
+   * Receiver Account
    */
   receiver_account = '';
 
   /**
-   * 收款姓名
+   * Receiver Name
    */
   receiver_name = '';
 
   /**
-   * 金额
+   * Amount
    */
   amount = 500;
 
   /**
-   * 支付密码
+   * Payment Password
    */
   password = '123456';
 

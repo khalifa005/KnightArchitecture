@@ -26,11 +26,11 @@ export class ProProfileAdvancedComponent implements OnInit {
     advancedOperation3: []
   };
   opColumns: STColumn[] = [
-    { title: '操作类型', index: 'type' },
-    { title: '操作人', index: 'name' },
-    { title: '执行结果', index: 'status', render: 'status' },
-    { title: '操作时间', index: 'updatedAt', type: 'date' },
-    { title: '备注', index: 'memo', default: '-' }
+    { title: 'profile.operation_type', index: 'type' },
+    { title: 'profile.operator', index: 'name' },
+    { title: 'profile.execution_result', index: 'status', render: 'status' },
+    { title: 'profile.operation_time', index: 'updatedAt', type: 'date' },
+    { title: 'profile.remarks', index: 'memo', default: '-' }
   ];
 
   ngOnInit(): void {

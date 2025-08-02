@@ -27,31 +27,31 @@ export class ProProfileBaseComponent {
   );
   goodsColumns: STColumn[] = [
     {
-      title: '商品编号',
+      title: 'profile.product_number',
       index: 'id',
       type: 'link',
       click: item => this.msg.success(`show ${item.id}`)
     },
-    { title: '商品名称', index: 'name' },
-    { title: '商品条码', index: 'barcode' },
-    { title: '单价', index: 'price', type: 'currency' },
-    { title: '数量（件）', index: 'num', className: 'text-right' },
-    { title: '金额', index: 'amount', type: 'currency' }
+    { title: 'profile.product_name', index: 'name' },
+    { title: 'profile.product_barcode', index: 'barcode' },
+    { title: 'profile.unit_price', index: 'price', type: 'currency' },
+    { title: 'profile.quantity', index: 'num', className: 'text-right' },
+    { title: 'profile.amount', index: 'amount', type: 'currency' }
   ];
   progress = this.http.get('/profile/progress');
   progressColumns: STColumn[] = [
-    { title: '时间', index: 'time' },
-    { title: '当前进度', index: 'rate' },
+    { title: 'profile.time', index: 'time' },
+    { title: 'profile.current_progress', index: 'rate' },
     {
-      title: '状态',
+      title: 'profile.status',
       index: 'status',
       type: 'badge',
       badge: {
-        success: { text: '成功', color: 'success' },
-        processing: { text: '进行中', color: 'processing' }
+        success: { text: 'profile.success', color: 'success' },
+        processing: { text: 'profile.processing', color: 'processing' }
       }
     },
-    { title: '操作员ID', index: 'operator' },
-    { title: '耗时', index: 'cost' }
+    { title: 'profile.operator_id', index: 'operator' },
+    { title: 'profile.time_consumed', index: 'cost' }
   ];
 }

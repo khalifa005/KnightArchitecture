@@ -1,0 +1,114 @@
+.add-role-modal {
+  .modal-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+
+    h3 {
+      margin: 0;
+      color: #262626;
+      font-weight: 600;
+    }
+  }
+
+  .role-form {
+    .ant-form-item {
+      margin-bottom: 16px;
+    }
+
+    .ant-form-item-label {
+      font-weight: 500;
+      color: #595959;
+    }
+
+    .ant-input,
+    .ant-input-affix-wrapper {
+      border-radius: 6px;
+      
+      &:focus,
+      &:hover {
+        border-color: #1890ff;
+      }
+    }
+
+    .ant-input[dir="rtl"] {
+      text-align: right;
+    }
+
+    textarea.ant-input {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .ant-switch {
+      background-color: #d9d9d9;
+      
+      &.ant-switch-checked {
+        background-color: #1890ff;
+      }
+    }
+
+    .ant-checkbox-group {
+      .ant-row {
+        margin-bottom: 8px;
+      }
+
+      .ant-checkbox-wrapper {
+        margin-right: 0;
+        margin-bottom: 8px;
+        display: block;
+        
+        .ant-checkbox + span {
+          padding-left: 8px;
+          color: #595959;
+        }
+      }
+    }
+  }
+
+  .form-actions {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+    text-align: right;
+
+    .ant-space {
+      gap: 12px;
+    }
+
+    .ant-btn {
+      min-width: 80px;
+      height: 32px;
+      border-radius: 6px;
+      
+      &.ant-btn-primary {
+        background-color: #1890ff;
+        border-color: #1890ff;
+        
+        &:hover {
+          background-color: #40a9ff;
+          border-color: #40a9ff;
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .add-role-modal {
+    .role-form {
+      .ant-col {
+        margin-bottom: 16px;
+      }
+    }
+
+    .form-actions {
+      text-align: center;
+      
+      .ant-space {
+        justify-content: center;
+      }
+    }
+  }
+}

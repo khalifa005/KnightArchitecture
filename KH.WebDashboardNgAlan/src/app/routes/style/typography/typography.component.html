@@ -50,7 +50,7 @@
   <div nz-col [nzMd]="8">
     <nz-card nzTitle="Text Colors">
       @for (color of names; track $index) {
-        <p class="pb-0 text-{{ color }}">class="text-{{ color }} bg-{{ color }}"</p>
+      <p class="pb-0 text-{{ color }}">class="text-{{ color }} bg-{{ color }}"</p>
       }
     </nz-card>
   </div>
@@ -59,13 +59,18 @@
   <div nz-col [nzMd]="8">
     <nz-card nzTitle="Formatting">
       <h4>text-nowrap</h4>
-      <p class="pt-sm text-nowrap"> [class="text-nowrap"].Ad eiusmod eu velit veniam laborum voluptate duis aliqua esse eiusmod. </p>
+      <p class="pt-sm text-nowrap"> [class="text-nowrap"].Ad eiusmod eu velit veniam laborum voluptate duis aliqua esse
+        eiusmod. </p>
       <h4 class="pt-sm">text-truncate</h4>
       <p class="pt-sm text-truncate">
-        [class="text-truncate"].Officia nulla velit minim mollit laborum et irure ullamco nisi dolore qui. Sint aute aliqua tempor commodo
-        officia sunt non do id laborum mollit ex ea cupidatat. Amet ad non fugiat magna. Ut cupidatat labore pariatur esse reprehenderit
-        esse sint in proident elit minim sunt enim sit. Enim sint deserunt exercitation duis. Aliquip cillum irure do incididunt do eu
-        eiusmod excepteur culpa ex consectetur nulla duis sit. Ex officia excepteur officia ea ea cupidatat veniam officia officia est.
+        [class="text-truncate"].Officia nulla velit minim mollit laborum et irure ullamco nisi dolore qui. Sint aute
+        aliqua tempor commodo
+        officia sunt non do id laborum mollit ex ea cupidatat. Amet ad non fugiat magna. Ut cupidatat labore pariatur
+        esse reprehenderit
+        esse sint in proident elit minim sunt enim sit. Enim sint deserunt exercitation duis. Aliquip cillum irure do
+        incididunt do eu
+        eiusmod excepteur culpa ex consectetur nulla duis sit. Ex officia excepteur officia ea ea cupidatat veniam
+        officia officia est.
       </p>
       <h4 class="pt-sm">Transformation</h4>
       <p class="pt-sm text-lowercase">class="text-lowercase"</p>
@@ -76,24 +81,27 @@
   </div>
   <div nz-col [nzMd]="8">
     <nz-card nzTitle="Border">
-      <div class="p-sm m-sm text-center width-sm d-inline-block border border-primary"> class="border border-primary" </div>
+      <div class="p-sm m-sm text-center width-sm d-inline-block border border-primary"> class="border border-primary"
+      </div>
       <div class="p-sm m-sm text-center width-sm d-inline-block border-top-1 border-success rounded-circle">
         class="border-top-1 border-success rounded-circle"
       </div>
-      <div class="p-sm m-sm text-center width-sm d-inline-block border-bottom-1 border-error"> class="border-bottom-1 border-error" </div>
-      <div class="p-sm m-sm text-center width-md d-inline-block border-right-1 border-warning"> class="border-right-1 border-warning" </div>
+      <div class="p-sm m-sm text-center width-sm d-inline-block border-bottom-1 border-error"> class="border-bottom-1
+        border-error" </div>
+      <div class="p-sm m-sm text-center width-md d-inline-block border-right-1 border-warning"> class="border-right-1
+        border-warning" </div>
     </nz-card>
   </div>
   <div nz-col [nzMd]="8">
     <nz-card nzTitle="Padding & Margin">
-      <strong>清除间距</strong>
+      <strong>{{ 'app.typography.clear_spacing' | i18n }}</strong>
       <p>
-        <code>[<类型>p|m][<方向>t|r|b|l|x|y]?0</code>
+        <code>[&lt;type&gt;p|m][&lt;direction&gt;t|r|b|l|x|y]?0</code>
       </p>
       <p>eg: p0, pt0, mb0, mt0</p>
-      <strong>间距</strong>
+      <strong>{{ 'app.typography.spacing' | i18n }}</strong>
       <p>
-        <code>[<类型>p|m][<方向>t|r|b|l|x|y]?-[<尺寸>sm|md|lg]</code>
+        <code>[&lt;type&gt;p|m][&lt;direction&gt;t|r|b|l|x|y]?-[&lt;size&gt;sm|md|lg]</code>
       </p>
       <p>eg: p-sm, pb-sm, mt-md, mr-md</p>
     </nz-card>
@@ -109,7 +117,8 @@
   </div>
   <div nz-col [nzMd]="8">
     <nz-card nzTitle="Code">
-      <p>This is an example of an inline code element within body copy. Wrap inline code within a <code>...</code>tag.</p>
+      <p>This is an example of an inline code element within body copy. Wrap inline code within a <code>...</code>tag.
+      </p>
       <pre class="mt-sm"><code>This is an example of preformatted text.</code></pre>
     </nz-card>
   </div>

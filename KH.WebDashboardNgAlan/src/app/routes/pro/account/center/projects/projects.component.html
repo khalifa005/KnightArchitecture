@@ -1,9 +1,5 @@
-<nz-list
-  [nzLoading]="listLoading"
-  [nzRenderItem]="item"
-  [nzDataSource]="list"
-  [nzGrid]="{ gutter: 24, xxl: 8, xl: 12, lg: 12, md: 12, sm: 12, xs: 24 }"
->
+<nz-list [nzLoading]="listLoading" [nzRenderItem]="item" [nzDataSource]="list"
+  [nzGrid]="{ gutter: 24, xxl: 8, xl: 12, lg: 12, md: 12, sm: 12, xs: 24 }">
   <ng-template #item let-item>
     <nz-list-item>
       <nz-card nzHoverable [nzCover]="cover">
@@ -16,10 +12,10 @@
           </ng-template>
         </nz-card-meta>
         <div class="card-item-content">
-          <span class="text-grey">{{ item.updatedAt | _date: 'fn' }}</span>
+          <span class="text-grey">{{ item.updatedAt | date:'MMM dd, yyyy HH:mm:ss' }}</span>
           <nz-avatar-group>
             @for (m of item.members; track $index) {
-              <nz-avatar [nzSrc]="m.avatar" nz-tooltip [nzTooltipTitle]="m.name" />
+            <nz-avatar [nzSrc]="m.avatar" nz-tooltip [nzTooltipTitle]="m.name" />
             }
           </nz-avatar-group>
         </div>

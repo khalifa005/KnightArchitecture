@@ -1,74 +1,75 @@
-<page-header [title]="'查询表格'" />
+<page-header [title]="'table.query_table' | i18n" />
 <nz-card [nzBordered]="false">
   <form nz-form [nzLayout]="'inline'" (ngSubmit)="getData()" class="search__form">
     <div nz-row [nzGutter]="{ xs: 8, sm: 8, md: 8, lg: 24, xl: 48, xxl: 48 }">
       <div nz-col nzMd="8" nzSm="24">
         <nz-form-item>
-          <nz-form-label nzFor="no">规则编号</nz-form-label>
+          <nz-form-label nzFor="no">{{ 'table.rule_number' | i18n }}</nz-form-label>
           <nz-form-control>
-            <input nz-input [(ngModel)]="q.no" name="no" placeholder="请输入" id="no" />
+            <input nz-input [(ngModel)]="q.no" name="no" [placeholder]="'table.please_enter' | i18n" id="no" />
           </nz-form-control>
         </nz-form-item>
       </div>
       <div nz-col nzMd="8" nzSm="24">
         <nz-form-item>
-          <nz-form-label nzFor="status">使用状态</nz-form-label>
+          <nz-form-label nzFor="status">{{ 'table.usage_status' | i18n }}</nz-form-label>
           <nz-form-control>
-            <nz-select [(ngModel)]="q.status" name="status" id="status" [nzPlaceHolder]="'请选择'" [nzShowSearch]="true">
+            <nz-select [(ngModel)]="q.status" name="status" id="status" [nzPlaceHolder]="'table.please_select' | i18n"
+              [nzShowSearch]="true">
               @for (i of status; track $index) {
-                <nz-option [nzLabel]="i.text" [nzValue]="$index" />
+              <nz-option [nzLabel]="i.text" [nzValue]="$index" />
               }
             </nz-select>
           </nz-form-control>
         </nz-form-item>
       </div>
       @if (expandForm) {
-        <div nz-col nzMd="8" nzSm="24">
-          <nz-form-item>
-            <nz-form-label nzFor="callNo">调用次数</nz-form-label>
-            <nz-form-control>
-              <input nz-input id="callNo" />
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <div nz-col nzMd="8" nzSm="24">
-          <nz-form-item>
-            <nz-form-label nzFor="updatedAt">更新日期</nz-form-label>
-            <nz-form-control>
-              <nz-date-picker id="updatedAt" />
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <div nz-col nzMd="8" nzSm="24">
-          <nz-form-item>
-            <nz-form-label nzFor="status2">使用状态</nz-form-label>
-            <nz-form-control>
-              <nz-select [nzPlaceHolder]="'请选择'" nzId="status2" [nzShowSearch]="true">
-                @for (i of status; track $index) {
-                  <nz-option [nzLabel]="i.text" [nzValue]="$index" />
-                }
-              </nz-select>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        <div nz-col nzMd="8" nzSm="24">
-          <nz-form-item>
-            <nz-form-label nzFor="status3">使用状态</nz-form-label>
-            <nz-form-control>
-              <nz-select [nzPlaceHolder]="'请选择'" nzId="status3" [nzShowSearch]="true">
-                @for (i of status; track $index) {
-                  <nz-option [nzLabel]="i.text" [nzValue]="$index" />
-                }
-              </nz-select>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
+      <div nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label nzFor="callNo">{{ 'table.call_count' | i18n }}</nz-form-label>
+          <nz-form-control>
+            <input nz-input id="callNo" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label nzFor="updatedAt">{{ 'table.update_date' | i18n }}</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker id="updatedAt" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label nzFor="status2">{{ 'table.usage_status' | i18n }}</nz-form-label>
+          <nz-form-control>
+            <nz-select [nzPlaceHolder]="'table.please_select' | i18n" nzId="status2" [nzShowSearch]="true">
+              @for (i of status; track $index) {
+              <nz-option [nzLabel]="i.text" [nzValue]="$index" />
+              }
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzMd="8" nzSm="24">
+        <nz-form-item>
+          <nz-form-label nzFor="status3">{{ 'table.usage_status' | i18n }}</nz-form-label>
+          <nz-form-control>
+            <nz-select [nzPlaceHolder]="'table.please_select' | i18n" nzId="status3" [nzShowSearch]="true">
+              @for (i of status; track $index) {
+              <nz-option [nzLabel]="i.text" [nzValue]="$index" />
+              }
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
       }
       <div nz-col [nzSpan]="expandForm ? 24 : 8" [class.text-right]="expandForm">
-        <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="loading">查询</button>
-        <button nz-button type="reset" (click)="reset()" class="mx-sm">重置</button>
+        <button nz-button type="submit" [nzType]="'primary'" [nzLoading]="loading">{{ 'table.query' | i18n }}</button>
+        <button nz-button type="reset" (click)="reset()" class="mx-sm">{{ 'table.reset' | i18n }}</button>
         <a (click)="expandForm = !expandForm">
-          {{ expandForm ? '收起' : '展开' }}
+          {{ expandForm ? ('table.collapse' | i18n) : ('table.expand' | i18n) }}
           <i nz-icon [nzType]="expandForm ? 'up' : 'down'"></i>
         </a>
       </div>
@@ -76,28 +77,30 @@
   </form>
   <button nz-button (click)="add(modalContent)" [nzType]="'primary'">
     <i nz-icon nzType="plus"></i>
-    <span>新建</span>
+    <span>{{ 'table.new' | i18n }}</span>
   </button>
   @if (selectedRows.length > 0) {
-    <button nz-button>批量操作</button>
-    <button nz-button nz-dropdown [nzDropdownMenu]="batchMenu" nzPlacement="bottomLeft">
-      更多操作
-      <i nz-icon nzType="down"></i>
-    </button>
-    <nz-dropdown-menu #batchMenu="nzDropdownMenu">
-      <ul nz-menu>
-        <li nz-menu-item (click)="remove()">删除</li>
-        <li nz-menu-item (click)="approval()">批量审批</li>
-      </ul>
-    </nz-dropdown-menu>
+  <button nz-button>{{ 'table.batch_operations' | i18n }}</button>
+  <button nz-button nz-dropdown [nzDropdownMenu]="batchMenu" nzPlacement="bottomLeft">
+    {{ 'table.more_operations' | i18n }}
+    <i nz-icon nzType="down"></i>
+  </button>
+  <nz-dropdown-menu #batchMenu="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item (click)="remove()">{{ 'table.delete' | i18n }}</li>
+      <li nz-menu-item (click)="approval()">{{ 'table.batch_approval' | i18n }}</li>
+    </ul>
+  </nz-dropdown-menu>
   }
   <div class="my-md">
     <nz-alert [nzType]="'info'" [nzShowIcon]="true" [nzMessage]="message">
       <ng-template #message>
-        已选择
-        <strong class="text-primary">{{ selectedRows.length }}</strong> 项&nbsp;&nbsp; 服务调用总计 <strong>{{ totalCallNo }}</strong> 万
+        {{ 'table.selected' | i18n }}
+        <strong class="text-primary">{{ selectedRows.length }}</strong> {{ 'table.items' | i18n }}&nbsp;&nbsp; {{
+        'table.service_call_total' | i18n }} <strong>{{ totalCallNo
+          }}</strong> {{ 'table.ten_thousand' | i18n }}
         @if (totalCallNo > 0) {
-          <a (click)="st.clearCheck()" class="ml-lg">清空</a>
+        <a (click)="st.clearCheck()" class="ml-lg">{{ 'table.clear' | i18n }}</a>
         }
       </ng-template>
     </nz-alert>
@@ -110,9 +113,10 @@
 </nz-card>
 <ng-template #modalContent>
   <nz-form-item>
-    <nz-form-label nzFor="no">描述</nz-form-label>
+    <nz-form-label nzFor="no">{{ 'table.description' | i18n }}</nz-form-label>
     <nz-form-control>
-      <input nz-input [(ngModel)]="description" name="description" placeholder="请输入" id="no" />
+      <input nz-input [(ngModel)]="description" name="description" [placeholder]="'table.please_enter' | i18n"
+        id="no" />
     </nz-form-control>
   </nz-form-item>
 </ng-template>

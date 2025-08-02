@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { ModalHelper, _HttpClient } from '@delon/theme';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzPaginationComponent } from 'ng-zorro-antd/pagination';
@@ -18,6 +19,7 @@ export class ProBasicListComponent implements OnInit {
   private readonly msg = inject(NzMessageService);
   private readonly modal = inject(ModalHelper);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
 
   q = {
     q: '',
@@ -62,6 +64,6 @@ export class ProBasicListComponent implements OnInit {
   }
 
   remove(title: string): void {
-    this.msg.success(`删除：${title}`);
+    this.msg.success(this.i18nSrv.fanyi('list.delete_success').replace('{title}', title));
   }
 }

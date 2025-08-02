@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -9,6 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class HelpCenterComponent {
   readonly msg = inject(NzMessageService);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
   type = '';
   q = '';
 
@@ -18,6 +20,6 @@ export class HelpCenterComponent {
   }
 
   search(): void {
-    this.msg.success(`搜索：${this.q}`);
+    this.msg.success(this.i18nSrv.fanyi('helpcenter.search').replace('{query}', this.q));
   }
 }

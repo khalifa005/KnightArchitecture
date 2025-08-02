@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { STColumn } from '@delon/abc/st';
 import { XlsxService } from '@delon/abc/xlsx';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
@@ -11,6 +12,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 })
 export class XlsxComponent {
   private readonly xlsx = inject(XlsxService);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
 
   data: any;
   users: Array<{ id: number; name: string; age: number }> = Array(100)
@@ -24,9 +26,9 @@ export class XlsxComponent {
     });
 
   columns: STColumn[] = [
-    { title: '编号', index: 'id', type: 'checkbox' },
-    { title: '姓名', index: 'name' },
-    { title: '年龄', index: 'age' }
+    { title: this.i18nSrv.fanyi('xlsx.id'), index: 'id', type: 'checkbox' },
+    { title: this.i18nSrv.fanyi('xlsx.name'), index: 'name' },
+    { title: this.i18nSrv.fanyi('xlsx.age'), index: 'age' }
   ];
 
   url(): void {

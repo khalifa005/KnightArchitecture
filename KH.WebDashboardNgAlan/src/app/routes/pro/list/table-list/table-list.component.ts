@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { STChange, STColumn, STComponent, STData } from '@delon/abc/st';
 import { _HttpClient } from '@delon/theme';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -18,6 +19,7 @@ export class ProTableListComponent implements OnInit {
   private readonly msg = inject(NzMessageService);
   private readonly modalSrv = inject(NzModalService);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
 
   q: {
     pi: number;
@@ -27,44 +29,44 @@ export class ProTableListComponent implements OnInit {
     status: number | null;
     statusList: NzSafeAny[];
   } = {
-    pi: 1,
-    ps: 10,
-    no: '',
-    sorter: '',
-    status: null,
-    statusList: []
-  };
+      pi: 1,
+      ps: 10,
+      no: '',
+      sorter: '',
+      status: null,
+      statusList: []
+    };
   data: any[] = [];
   loading = false;
   status = [
-    { index: 0, text: '关闭', value: false, type: 'default', checked: false },
+    { index: 0, text: 'table.closed', value: false, type: 'default', checked: false },
     {
       index: 1,
-      text: '运行中',
+      text: 'table.running',
       value: false,
       type: 'processing',
       checked: false
     },
-    { index: 2, text: '已上线', value: false, type: 'success', checked: false },
-    { index: 3, text: '异常', value: false, type: 'error', checked: false }
+    { index: 2, text: 'table.online', value: false, type: 'success', checked: false },
+    { index: 3, text: 'table.exception', value: false, type: 'error', checked: false }
   ];
   @ViewChild('st', { static: true })
   st!: STComponent;
   columns: STColumn[] = [
     { title: '', index: 'key', type: 'checkbox' },
-    { title: '规则编号', index: 'no' },
-    { title: '描述', index: 'description' },
+    { title: 'table.rule_number', index: 'no' },
+    { title: 'table.description', index: 'description' },
     {
-      title: '服务调用次数',
+      title: 'table.service_call_count',
       index: 'callNo',
       type: 'number',
-      format: item => `${item.callNo} 万`,
+      format: item => `${item.callNo} ${this.i18nSrv.fanyi('table.ten_thousand')}`,
       sort: {
         compare: (a, b) => a.callNo - b.callNo
       }
     },
     {
-      title: '状态',
+      title: 'table.status',
       index: 'status',
       render: 'status',
       filter: {
@@ -73,7 +75,7 @@ export class ProTableListComponent implements OnInit {
       }
     },
     {
-      title: '更新时间',
+      title: 'table.update_time',
       index: 'updatedAt',
       type: 'date',
       sort: {
@@ -81,15 +83,15 @@ export class ProTableListComponent implements OnInit {
       }
     },
     {
-      title: '操作',
+      title: 'table.operation',
       buttons: [
         {
-          text: '配置',
-          click: item => this.msg.success(`配置${item.no}`)
+          text: 'table.configure',
+          click: item => this.msg.success(`${this.i18nSrv.fanyi('table.configure')}${item.no}`)
         },
         {
-          text: '订阅警报',
-          click: item => this.msg.success(`订阅警报${item.no}`)
+          text: 'table.subscribe_alert',
+          click: item => this.msg.success(`${this.i18nSrv.fanyi('table.subscribe_alert')}${item.no}`)
         }
       ]
     }
@@ -149,12 +151,12 @@ export class ProTableListComponent implements OnInit {
   }
 
   approval(): void {
-    this.msg.success(`审批了 ${this.selectedRows.length} 笔`);
+    this.msg.success(this.i18nSrv.fanyi('table.approved_count').replace('{count}', this.selectedRows.length.toString()));
   }
 
   add(tpl: TemplateRef<unknown>): void {
     this.modalSrv.create({
-      nzTitle: '新建规则',
+      nzTitle: this.i18nSrv.fanyi('table.new_rule'),
       nzContent: tpl,
       nzOnOk: () => {
         this.loading = true;

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { G2RadarModule } from '@delon/chart/radar';
 import { _HttpClient } from '@delon/theme';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -17,6 +18,7 @@ export class DashboardWorkplaceComponent implements OnInit {
   private readonly http = inject(_HttpClient);
   readonly msg = inject(NzMessageService);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
 
   notice: any[] = [];
   activities: any[] = [];
@@ -25,58 +27,58 @@ export class DashboardWorkplaceComponent implements OnInit {
 
   links = [
     {
-      title: '操作一',
+      title: this.i18nSrv.fanyi('workplace.operation_one'),
       href: ''
     },
     {
-      title: '操作二',
+      title: this.i18nSrv.fanyi('workplace.operation_two'),
       href: ''
     },
     {
-      title: '操作三',
+      title: this.i18nSrv.fanyi('workplace.operation_three'),
       href: ''
     },
     {
-      title: '操作四',
+      title: this.i18nSrv.fanyi('workplace.operation_four'),
       href: ''
     },
     {
-      title: '操作五',
+      title: this.i18nSrv.fanyi('workplace.operation_five'),
       href: ''
     },
     {
-      title: '操作六',
+      title: this.i18nSrv.fanyi('workplace.operation_six'),
       href: ''
     }
   ];
   members = [
     {
       id: 'members-1',
-      title: '科学搬砖组',
+      title: this.i18nSrv.fanyi('workplace.science_brick_group'),
       logo: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
       link: ''
     },
     {
       id: 'members-2',
-      title: '程序员日常',
+      title: this.i18nSrv.fanyi('workplace.programmer_daily'),
       logo: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png',
       link: ''
     },
     {
       id: 'members-3',
-      title: '设计天团',
+      title: this.i18nSrv.fanyi('workplace.design_team'),
       logo: 'https://gw.alipayobjects.com/zos/rmsportal/dURIMkkrRFpPgTuzkwnB.png',
       link: ''
     },
     {
       id: 'members-4',
-      title: '中二少女团',
+      title: this.i18nSrv.fanyi('workplace.secondary_girl_group'),
       logo: 'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png',
       link: ''
     },
     {
       id: 'members-5',
-      title: '骗你学计算机',
+      title: this.i18nSrv.fanyi('workplace.learn_computer'),
       logo: 'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png',
       link: ''
     }

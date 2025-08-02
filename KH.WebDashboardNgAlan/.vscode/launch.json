@@ -7,7 +7,7 @@
       "name": "Launch Chrome",
       "request": "launch",
       "type": "chrome",
-      "url": "http://localhost:4200",
+      "url": "http://localhost:4300",
       "webRoot": "${workspaceFolder}"
     },
     {
@@ -15,7 +15,7 @@
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "url": "http://localhost:4300/"
     },
     {
       "name": "ng test",

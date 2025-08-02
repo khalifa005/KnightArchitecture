@@ -22,9 +22,9 @@ import {selectCounter} from 'src/app/store/counter/counter.selector'
           <div class="head">
         
             <img class="logo" src="./assets/logo-color.svg" />
-            direction = {{this.direction | async}}
+            <!-- direction = {{this.direction | async}} -->
             <!-- <span class="title">Knight Architecture</span> -->
-            <span class="title">counter: {{ (counter$ | async)?.count }}</span>
+            <!-- <span class="title">counter: {{ (counter$ | async)?.count }}</span> -->
 
           </div>
           <div class="desc">By Alan updated by Khalifa</div>
@@ -42,7 +42,7 @@ import {selectCounter} from 'src/app/store/counter/counter.selector'
     <theme-btn />
   `,
   styleUrls: ['./passport.component.less'],
-  imports: [AsyncPipe, RouterOutlet, HeaderI18nComponent, GlobalFooterModule, NzIconModule, ThemeBtnComponent]
+  imports: [ RouterOutlet, HeaderI18nComponent, GlobalFooterModule, NzIconModule, ThemeBtnComponent]
   // AsyncPipe,
 })
 export class LayoutPassportComponent implements OnInit {

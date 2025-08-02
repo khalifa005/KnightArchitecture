@@ -7,6 +7,7 @@ import { G2PieModule } from '@delon/chart/pie';
 import { G2TagCloudModule } from '@delon/chart/tag-cloud';
 import { G2WaterWaveModule } from '@delon/chart/water-wave';
 import { _HttpClient } from '@delon/theme';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import type { CountdownConfig } from 'ngx-countdown';
 import { zip } from 'rxjs';
@@ -30,6 +31,7 @@ import { zip } from 'rxjs';
 export class DashboardMonitorComponent implements OnInit, OnDestroy {
   private readonly http = inject(_HttpClient);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
 
   data: any = {};
   tags = [];
@@ -95,13 +97,13 @@ export class DashboardMonitorComponent implements OnInit, OnDestroy {
   couponFormat(val: any): string {
     switch (parseInt(val, 10)) {
       case 20:
-        return '差';
+        return this.i18nSrv.fanyi('monitor.poor');
       case 40:
-        return '中';
+        return this.i18nSrv.fanyi('monitor.average');
       case 60:
-        return '良';
+        return this.i18nSrv.fanyi('monitor.good');
       case 80:
-        return '优';
+        return this.i18nSrv.fanyi('monitor.excellent');
       default:
         return '';
     }

@@ -19,6 +19,7 @@ import { HeaderRTLComponent } from './widgets/rtl.component';
 import { HeaderSearchComponent } from './widgets/search.component';
 import { HeaderTaskComponent } from './widgets/task.component';
 import { HeaderUserComponent } from './widgets/user.component';
+import { CustomSettingDrawerComponent } from 'src/app/shared/components/custom-setting-drawer/custom-setting-drawer.component';
 
 @Component({
   selector: 'layout-basic',
@@ -96,11 +97,13 @@ import { HeaderUserComponent } from './widgets/user.component';
     </layout-default>
     @if (showSettingDrawer) {
       <setting-drawer />
+      <!-- <custom-setting-drawer /> -->
     }
     <theme-btn />
   `,
   imports: [
     RouterOutlet,
+    // CustomSettingDrawerComponent,
     RouterLink,
     I18nPipe,
     LayoutDefaultModule,

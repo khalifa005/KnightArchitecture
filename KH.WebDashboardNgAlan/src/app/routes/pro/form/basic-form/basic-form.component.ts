@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ALAIN_I18N_TOKEN } from '@delon/theme';
 import { SHARED_IMPORTS } from '@shared';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
@@ -12,6 +13,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class BasicFormComponent {
   private readonly msg = inject(NzMessageService);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly i18nSrv = inject(ALAIN_I18N_TOKEN);
 
   form = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -30,7 +32,7 @@ export class BasicFormComponent {
     this.submitting = true;
     setTimeout(() => {
       this.submitting = false;
-      this.msg.success(`提交成功`);
+      this.msg.success(this.i18nSrv.fanyi('form.submit_success'));
       this.cdr.detectChanges();
     }, 1000);
   }

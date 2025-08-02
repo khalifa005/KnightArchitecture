@@ -1,0 +1,284 @@
+// Global Form Styles
+.form-field {
+  margin-bottom: 16px;
+  
+  .form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    
+    &.required::before {
+      content: '*';
+      color: #ff4d4f;
+      margin-right: 4px;
+    }
+  }
+  
+  // Form control styling
+  ::ng-deep .ant-form-item {
+    margin-bottom: 0;
+  }
+  
+  ::ng-deep .ant-form-item-control {
+    line-height: 1;
+  }
+  
+  // Error states
+  ::ng-deep .ant-form-item-has-error {
+    .rounded-input,
+    .rounded-select .ant-select-selector,
+    .rounded-date-picker .ant-picker {
+      border-color: #ff4d4f !important;
+      
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2) !important;
+      }
+    }
+  }
+}
+
+// Form Card Styles
+.form-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f0f0f0;
+  
+  .ant-card-body {
+    padding: 24px;
+  }
+  
+  .ant-card-head {
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #fafafa;
+    
+    .ant-card-head-title {
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
+}
+
+// Input Styles
+.rounded-input {
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  transition: all 0.3s;
+  height: 36px;
+  padding: 8px 12px;
+  
+  &:hover {
+    border-color: #40a9ff;
+  }
+  
+  &:focus {
+    border-color: #1890ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  }
+  
+  &.ant-input-affix-wrapper {
+    border-radius: 8px;
+  }
+}
+
+// Select Styles
+.rounded-select {
+  border-radius: 8px;
+  
+  .ant-select-selector {
+    border-radius: 8px !important;
+    border: 1px solid #d9d9d9;
+    transition: all 0.3s;
+    height: 36px !important;
+    padding: 4px 12px !important;
+  }
+  
+  &:hover .ant-select-selector {
+    border-color: #40a9ff;
+  }
+  
+  &.ant-select-focused .ant-select-selector {
+    border-color: #1890ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  }
+}
+
+// Date Picker Styles
+.rounded-date-picker {
+  border-radius: 8px;
+  
+  .ant-picker-input > input {
+    border-radius: 8px;
+  }
+  
+  .ant-picker {
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    transition: all 0.3s;
+    height: 36px;
+  }
+  
+  .ant-picker:hover {
+    border-color: #40a9ff;
+  }
+  
+  .ant-picker-focused {
+    border-color: #1890ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  }
+}
+
+// Button Styles
+.rounded-button {
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s;
+  
+  &.ant-btn-primary {
+    background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+    border: none;
+    
+    &:hover {
+      background: linear-gradient(135deg, #40a9ff 0%, #1890ff 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  &.ant-btn-default {
+    border: 1px solid #d9d9d9;
+    color: rgba(0, 0, 0, 0.85);
+    
+    &:hover {
+      border-color: #40a9ff;
+      color: #40a9ff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Switch Styles
+.status-switch {
+  margin-top: 4px;
+  
+  .ant-switch {
+    border-radius: 12px;
+  }
+  
+  .ant-switch-checked {
+    background-color: #52c41a;
+  }
+}
+
+// Form Container Styles
+.user-form-container {
+  padding: 24px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  
+  form {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+// Form Actions Styles
+.form-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  
+  .ant-space {
+    gap: 16px;
+  }
+}
+
+// Avatar Section Styles
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  text-align: center;
+  padding: 12px;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px dashed #d9d9d9;
+  
+  .avatar-preview {
+    margin-bottom: 16px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .avatar-upload {
+    .upload-btn {
+      border-radius: 8px;
+      border: 1px dashed #d9d9d9;
+      color: #666;
+      height: 36px;
+      padding: 0 12px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        border-color: #40a9ff;
+        color: #40a9ff;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .user-form-container {
+    padding: 16px;
+    
+    form {
+      max-width: 100%;
+    }
+  }
+  
+  .form-card {
+    .ant-card-body {
+      padding: 16px;
+    }
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 12px;
+    
+    .ant-space {
+      flex-direction: column;
+      width: 100%;
+      
+      .ant-btn {
+        width: 100%;
+      }
+    }
+  }
+} 

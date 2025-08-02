@@ -6,7 +6,7 @@ import { StartupService } from '@core';
 import { ReuseTabService } from '@delon/abc/reuse-tab';
 import { ACLService } from '@delon/acl';
 import { ALLOW_ANONYMOUS, DA_SERVICE_TOKEN, ITokenModel, SocialOpenType, SocialService } from '@delon/auth';
-import { I18nPipe, SettingsService, _HttpClient } from '@delon/theme';
+import { ALAIN_I18N_TOKEN, I18nPipe, SettingsService, _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -18,7 +18,7 @@ import { NzTabChangeEvent, NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { finalize, Subject, takeUntil } from 'rxjs';
 import { AuthenticationService, ApiV1AuthenticationLoginPostRequestParams, LoginRequest } from 'src/app/shared/open-api';
-
+// import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'passport-login',
   templateUrl: './login.component.html',
@@ -52,6 +52,9 @@ export class UserLoginComponent implements OnDestroy {
   private readonly startupSrv = inject(StartupService);
   private readonly http = inject(_HttpClient);
   private readonly cdr = inject(ChangeDetectorRef);
+
+  // private readonly test= inject(TranslateService);
+  private readonly test2 = inject(ALAIN_I18N_TOKEN);
 
   form = inject(FormBuilder).nonNullable.group({
     userName: ['super_admin', [Validators.required]],
@@ -114,7 +117,7 @@ export class UserLoginComponent implements OnDestroy {
     this.loading = true;
     this.cdr.detectChanges();
 
-    const fullApiUrl = `${environment.api.serverUrl}/api/v1/Authentication/Login`;
+    const fullApiUrl = `${environment.api['serverUrl']}/api/v1/Authentication/Login`;
 
     // Prepare payload
     const loginRequest: LoginRequest = {
@@ -122,6 +125,12 @@ export class UserLoginComponent implements OnDestroy {
       password: this.form.value.password
     };
 
+    // this.serverLogin(loginRequest);
+    this.staticLogin();
+
+  }
+
+  serverLogin(loginRequest: LoginRequest) {
     this.authenticationService
       .apiV1AuthenticationLoginPost(
         { loginRequest },
@@ -156,15 +165,6 @@ export class UserLoginComponent implements OnDestroy {
 
           this.tokenService.set(tokenModel);
 
-          // ACLSet admin permissions
-          // this.aclService.setFull(true);
-          // Set actual permissions
-          // this.aclService.setAbility(realUser.permissions);
-
-          //  <div *aclIf="'SNAPSHOTS_MANAGE'">
-          //   <button (click)="editSnapshot()">Edit</button>
-          // </div>
-
           // Store ALL user properties from API response
           this.settingsService.setUser({
             // ...res.data.user, // Include all properties from API
@@ -174,7 +174,7 @@ export class UserLoginComponent implements OnDestroy {
             // Add any custom properties
             department: "res.data.user.department",
             role: "super-admin",
-            permissions: ["SNAPSHOTS_VIEW", "USER_MANAGEMENT",10, 'USER-EDIT']
+            permissions: ["SNAPSHOTS_VIEW", "USER_MANAGEMENT", 10, 'USER-EDIT']
           });
 
           // Now you get type hints when using
@@ -186,10 +186,16 @@ export class UserLoginComponent implements OnDestroy {
           this.aclService.setAbility(this.settingsService.user.permissions);
           console.log('User permissions:', this.settingsService.user.permissions);
           console.log('ACL abilities:', this.aclService['abilities']);
-
           // Filter menu based on permissions
           // inject(StartupService).filterMenuByPermissions();
+          // ACLSet admin permissions
+          // this.aclService.setFull(true);
+          // Set actual permissions
+          // this.aclService.setAbility(realUser.permissions);
 
+          //  <div *aclIf="'SNAPSHOTS_MANAGE'">
+          //   <button (click)="editSnapshot()">Edit</button>
+          // </div>
 
           this.startupSrv.load().subscribe(() => {
             let url = this.tokenService.referrer!.url || '/';
@@ -208,10 +214,16 @@ export class UserLoginComponent implements OnDestroy {
         }
       });
 
-
   }
 
   staticLogin() {
+
+    const errorMsg = this.test2.fanyi('notifications.error');
+    console.log('errorMsg', errorMsg);
+    console.log('Starting staticLogin with credentials:', {
+      userName: this.form.value.userName,
+      password: this.form.value.password
+    });
 
     this.http
       .post(
@@ -233,6 +245,7 @@ export class UserLoginComponent implements OnDestroy {
         })
       )
       .subscribe(res => {
+        console.log('Static login response:', res);
         if (res.msg !== 'ok') {
           this.error = res.msg;
           this.cdr.detectChanges();
@@ -244,16 +257,55 @@ export class UserLoginComponent implements OnDestroy {
         // TODO: Mock expired value
         res.user.expired = +new Date() + 1000 * 60 * 5;
         this.tokenService.set(res.user);
+
+        // Store ALL user properties from API response
+        this.settingsService.setUser({
+          // ...res.data.user, // Include all properties from API
+          name: "khalifa", // Map as needed
+          avatar: "./assets/tmp/img/avatar.jpg",
+          email: "khalifa@gmail.com",
+          // Add any custom properties
+          department: "IT",
+          branch: "Cairo Main Branch",
+          role: "super-admin",
+          permissions: [
+            "SNAPSHOTS_VIEW",
+            "USER_MANAGEMENT",
+            "ADMIN_DASHBOARD",
+            "MANAGER_DASHBOARD",
+            "USER_DASHBOARD",
+            "REPORTS_VIEW",
+            "SYSTEM_SETTINGS",
+            "DATA_EXPORT",
+            "AUDIT_LOGS",
+            "BACKUP_RESTORE",
+            10,
+            'USER-EDIT'
+          ]
+        });
+
+        // Set ACL permissions - THIS WAS MISSING!
+        this.aclService.setAbility(this.settingsService.user.permissions);
+        console.log('User permissions:', this.settingsService.user.permissions);
+        console.log('ACL abilities:', this.aclService['abilities']);
+
         // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
-        this.startupSrv.load().subscribe(() => {
+        this.startupSrv.load(true, 'app-data.json').subscribe(() => {
+          console.log('Startup service loaded, navigating to dashboard');
           let url = this.tokenService.referrer!.url || '/';
           if (url.includes('/passport')) {
             url = '/';
           }
-          this.router.navigateByUrl(url);
+          console.log('Navigating to:', url);
+          this.router.navigateByUrl(url).then(() => {
+            console.log('Navigation completed successfully');
+          }).catch((error) => {
+            console.error('Navigation failed:', error);
+          });
         });
       });
   }
+
   open(type: string, openType: SocialOpenType = 'href'): void {
     let url = ``;
     let callback = ``;

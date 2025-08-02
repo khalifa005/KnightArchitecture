@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-guard-admin',
-  template: ` <p>这是一个admin页面</p> `
+  template: ` <p>This is an admin page</p> `
 })
 export class GuardAdminComponent {}

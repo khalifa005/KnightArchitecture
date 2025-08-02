@@ -2,67 +2,67 @@ import { MockRequest } from '@delon/mock';
 
 const DATA = [
   {
-    name: '上海',
+    name: 'Shanghai',
     id: '310000'
   },
   {
-    name: '市辖区',
+    name: 'Municipal District',
     id: '310100'
   },
   {
-    name: '北京',
+    name: 'Beijing',
     id: '110000'
   },
   {
-    name: '市辖区',
+    name: 'Municipal District',
     id: '110100'
   },
   {
-    name: '浙江省',
+    name: 'Zhejiang Province',
     id: '330000'
   },
   {
-    name: '杭州市',
+    name: 'Hangzhou City',
     id: '330100'
   },
   {
-    name: '宁波市',
+    name: 'Ningbo City',
     id: '330200'
   },
   {
-    name: '温州市',
+    name: 'Wenzhou City',
     id: '330300'
   },
   {
-    name: '嘉兴市',
+    name: 'Jiaxing City',
     id: '330400'
   },
   {
-    name: '湖州市',
+    name: 'Huzhou City',
     id: '330500'
   },
   {
-    name: '绍兴市',
+    name: 'Shaoxing City',
     id: '330600'
   },
   {
-    name: '金华市',
+    name: 'Jinhua City',
     id: '330700'
   },
   {
-    name: '衢州市',
+    name: 'Quzhou City',
     id: '330800'
   },
   {
-    name: '舟山市',
+    name: 'Zhoushan City',
     id: '330900'
   },
   {
-    name: '台州市',
+    name: 'Taizhou City',
     id: '331000'
   },
   {
-    name: '丽水市',
+    name: 'Lishui City',
     id: '331100'
   }
 ];

@@ -1,0 +1,651 @@
+// Global Table Styles
+// This file contains reusable table, button, and status styling for data tables across the application
+
+// ========================================
+// TABLE CONTAINER STYLES
+// ========================================
+
+.data-table-container {
+  .search-bar {
+    margin-bottom: 16px;
+  }
+
+  .table-actions {
+    margin-bottom: 16px;
+  }
+
+  // Rounded table
+  nz-table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  // Rounded card
+  nz-card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  // Table cell styling
+  td {
+    padding: 12px 8px;
+    vertical-align: middle;
+  }
+
+  th {
+    padding: 12px 8px;
+    font-weight: 600;
+    background-color: #fafafa;
+  }
+
+  .table-header {
+    background-color: #fafafa;
+    font-weight: 600;
+  }
+
+  .table-row:hover {
+    background-color: #f5f5f5;
+  }
+
+  .clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    &:active {
+      background-color: #e6f7ff;
+    }
+  }
+}
+
+// ========================================
+// SEARCH AND INPUT STYLES
+// ========================================
+
+.search-input {
+  max-width: 400px;
+}
+
+// Rounded input fields
+nz-input-group {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+// Ensure search and input styles are applied within data table container
+.data-table-container {
+  .search-input {
+    max-width: 400px;
+  }
+
+  nz-input-group {
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  // Ensure input styling is consistent
+  input[nz-input] {
+    border-radius: 6px;
+  }
+}
+
+// ========================================
+// BUTTON STYLES
+// ========================================
+
+// Base button styles
+.action-button {
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+// Primary action button (Edit, View, etc.)
+.primary-action-btn {
+  @extend .action-button;
+  background: linear-gradient(135deg, #1890ff, #096dd9);
+  
+  &:hover {
+    background: linear-gradient(135deg, #40a9ff, #1890ff);
+    box-shadow: 0 4px 8px rgba(24, 144, 255, 0.3);
+  }
+}
+
+// Success action button (Activate, Add, etc.)
+.success-action-btn {
+  @extend .action-button;
+  background: linear-gradient(135deg, #52c41a, #389e0d);
+  
+  &:hover {
+    background: linear-gradient(135deg, #73d13d, #52c41a);
+    box-shadow: 0 4px 8px rgba(82, 196, 26, 0.3);
+  }
+}
+
+// Danger action button (Deactivate, Delete, etc.)
+.danger-action-btn {
+  @extend .action-button;
+  background: linear-gradient(135deg, #ff4d4f, #cf1322);
+  
+  &:hover {
+    background: linear-gradient(135deg, #ff7875, #ff4d4f);
+    box-shadow: 0 4px 8px rgba(255, 77, 79, 0.3);
+  }
+}
+
+// Warning action button
+.warning-action-btn {
+  @extend .action-button;
+  background: linear-gradient(135deg, #faad14, #d48806);
+  
+  &:hover {
+    background: linear-gradient(135deg, #ffc53d, #faad14);
+    box-shadow: 0 4px 8px rgba(250, 173, 20, 0.3);
+  }
+}
+
+// Search button
+.search-btn {
+  @extend .primary-action-btn;
+}
+
+// Add button
+.add-btn {
+  @extend .success-action-btn;
+  margin-left: 8px;
+}
+
+// Edit button
+.edit-btn {
+  @extend .primary-action-btn;
+}
+
+// Activate button
+.activate-btn {
+  @extend .success-action-btn;
+}
+
+// Deactivate button
+.deactivate-btn {
+  @extend .danger-action-btn;
+}
+
+// Delete button
+.delete-btn {
+  @extend .danger-action-btn;
+}
+
+// View button
+.view-btn {
+  @extend .primary-action-btn;
+}
+
+// Rounded buttons
+nz-button {
+  border-radius: 6px;
+}
+
+// Ensure button styles are applied with proper specificity
+.data-table-container {
+  .search-btn,
+  .add-btn,
+  .edit-btn,
+  .activate-btn,
+  .deactivate-btn,
+  .delete-btn,
+  .view-btn {
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  .search-btn,
+  .edit-btn,
+  .view-btn {
+    background: linear-gradient(135deg, #1890ff, #096dd9);
+    
+    &:hover {
+      background: linear-gradient(135deg, #40a9ff, #1890ff);
+      box-shadow: 0 4px 8px rgba(24, 144, 255, 0.3);
+    }
+  }
+
+  .add-btn,
+  .activate-btn {
+    background: linear-gradient(135deg, #52c41a, #389e0d);
+    
+    &:hover {
+      background: linear-gradient(135deg, #73d13d, #52c41a);
+      box-shadow: 0 4px 8px rgba(82, 196, 26, 0.3);
+    }
+  }
+
+  .deactivate-btn,
+  .delete-btn {
+    background: linear-gradient(135deg, #ff4d4f, #cf1322);
+    
+    &:hover {
+      background: linear-gradient(135deg, #ff7875, #ff4d4f);
+      box-shadow: 0 4px 8px rgba(255, 77, 79, 0.3);
+    }
+  }
+}
+
+// ========================================
+// STATUS TAG STYLES
+// ========================================
+
+.status-tag {
+  min-width: 60px;
+  text-align: center;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.role-tag {
+  min-width: 80px;
+  text-align: center;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+// Ensure status and role tags are properly styled within data table container
+.data-table-container {
+  .status-tag {
+    min-width: 60px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+
+  .role-tag {
+    min-width: 80px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 500;
+  }
+}
+
+// Status text classes
+.status-active {
+  color: #52c41a;
+  font-weight: 600;
+}
+
+.status-inactive {
+  color: #ff4d4f;
+  font-weight: 600;
+}
+
+.status-pending {
+  color: #faad14;
+  font-weight: 600;
+}
+
+.status-suspended {
+  color: #722ed1;
+  font-weight: 600;
+}
+
+// ========================================
+// TABLE CELL STYLES
+// ========================================
+
+// Avatar and user info cell
+.user-avatar {
+  flex-shrink: 0;
+}
+
+.username-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Email cell
+.email-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+// Branch cell
+.branch-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+// Name cell
+.name-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+// Phone cell
+.phone-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+// ID cell
+.id-cell {
+  font-weight: 600;
+  color: #1890ff;
+}
+
+// Ensure table cell styles are applied within data table container
+.data-table-container {
+  .user-avatar {
+    flex-shrink: 0;
+  }
+
+  .username-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .email-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+
+  .branch-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+
+  .name-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+  }
+
+  .phone-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+  }
+
+  .id-cell {
+    font-weight: 600;
+    color: #1890ff;
+  }
+}
+
+// ========================================
+// PAGINATION STYLES
+// ========================================
+
+.pagination-info {
+  color: #666;
+  font-size: 14px;
+}
+
+.total-count-display {
+  font-weight: 600;
+  color: #1890ff;
+  font-size: 14px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #f0f8ff, #e6f7ff);
+  border-radius: 6px;
+  border: 1px solid #91d5ff;
+}
+
+// Ensure pagination styles are applied within data table container
+.data-table-container {
+  .pagination-info {
+    color: #666;
+    font-size: 14px;
+  }
+
+  .total-count-display {
+    font-weight: 600;
+    color: #1890ff;
+    font-size: 14px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #f0f8ff, #e6f7ff);
+    border-radius: 6px;
+    border: 1px solid #91d5ff;
+  }
+}
+
+// ========================================
+// EXPANDED CONTENT STYLES
+// ========================================
+
+.expanded-content {
+  padding: 16px;
+  background: linear-gradient(135deg, #fafafa, #f5f5f5);
+  border-radius: 8px;
+  margin: 8px 0;
+  
+  .detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    strong {
+      color: #262626;
+      font-weight: 600;
+      min-width: 120px;
+    }
+    
+    span {
+      color: #595959;
+      text-align: right;
+      word-break: break-word;
+    }
+  }
+  
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    .action-btn {
+      width: 100%;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    // Ensure expanded content buttons have proper styling
+    .action-btn.edit-btn {
+      background: linear-gradient(135deg, #1890ff, #096dd9);
+      border: none;
+      color: white;
+      
+      &:hover {
+        background: linear-gradient(135deg, #40a9ff, #1890ff);
+        box-shadow: 0 4px 8px rgba(24, 144, 255, 0.3);
+      }
+    }
+
+    .action-btn.activate-btn {
+      background: linear-gradient(135deg, #52c41a, #389e0d);
+      border: none;
+      color: white;
+      
+      &:hover {
+        background: linear-gradient(135deg, #73d13d, #52c41a);
+        box-shadow: 0 4px 8px rgba(82, 196, 26, 0.3);
+      }
+    }
+
+    .action-btn.deactivate-btn {
+      background: linear-gradient(135deg, #ff4d4f, #cf1322);
+      border: none;
+      color: white;
+      
+      &:hover {
+        background: linear-gradient(135deg, #ff7875, #ff4d4f);
+        box-shadow: 0 4px 8px rgba(255, 77, 79, 0.3);
+      }
+    }
+  }
+  
+  // Card styling for expanded content
+  nz-card {
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    ::ng-deep .ant-card-head {
+      background: linear-gradient(135deg, #fafafa, #f0f0f0);
+      border-bottom: 1px solid #e8e8e8;
+      
+      .ant-card-head-title {
+        font-weight: 600;
+        color: #262626;
+      }
+    }
+    
+    ::ng-deep .ant-card-body {
+      padding: 16px;
+    }
+  }
+}
+
+// ========================================
+// RESPONSIVE STYLES
+// ========================================
+
+@media (max-width: 768px) {
+  .data-table-container {
+    .search-bar {
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .table-actions {
+      justify-content: center;
+    }
+  }
+  
+  .expanded-content {
+    .detail-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      
+      strong {
+        min-width: auto;
+      }
+      
+      span {
+        text-align: left;
+      }
+    }
+  }
+}
+
+// ========================================
+// UTILITY CLASSES
+// ========================================
+
+.text-center {
+  text-align: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+// ========================================
+// ANIMATION CLASSES
+// ========================================
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+} 
