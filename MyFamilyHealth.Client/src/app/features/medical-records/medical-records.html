@@ -1,0 +1,181 @@
+<div class="max-w-6xl mx-auto">
+<!-- Page Header -->
+<header class="mb-12">
+<h1 class="text-4xl font-extrabold tracking-tight text-primary mb-2">Medical Records</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl">Secure access to your clinical history, laboratory results, and diagnostic imaging in one editorial sanctuary.</p>
+</header>
+<!-- Filters Area (Tonal Shift, No Borders) -->
+<section class="bg-surface-container-low rounded-xl p-6 mb-8 flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[240px]">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest rounded-full border-none focus:ring-2 focus:ring-primary/20 text-sm font-body" placeholder="Search records, doctors, or tests..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center bg-surface-container-lowest rounded-full px-4 py-2 text-sm text-on-surface-variant hover:bg-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined mr-2 text-[20px]" data-icon="calendar_month">calendar_month</span>
+                        Date Range
+                    </div>
+<div class="flex items-center bg-surface-container-lowest rounded-full px-4 py-2 text-sm text-on-surface-variant hover:bg-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined mr-2 text-[20px]" data-icon="filter_list">filter_list</span>
+                        Type: All
+                    </div>
+<div class="flex items-center bg-surface-container-lowest rounded-full px-4 py-2 text-sm text-on-surface-variant hover:bg-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined mr-2 text-[20px]" data-icon="person">person</span>
+                        Provider
+                    </div>
+</div>
+</section>
+<!-- Records Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Record Card 1 -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="bloodtype">bloodtype</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Comprehensive Metabolic Panel</h3>
+<p class="text-sm text-on-surface-variant font-medium">October 24, 2023 • LabCorp Diagnostics</p>
+</div>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                            Normal
+                        </div>
+</div>
+<div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>
+                        Dr. Helena Vance • General Practitioner
+                    </div>
+<div class="flex items-center gap-3">
+<button class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span>
+                            View Report
+                        </button>
+<button class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            AI Interpretation
+                        </button>
+</div>
+</article>
+<!-- Record Card 2 (Imaging) -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="radiology">radiology</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Lumbar Spine MRI</h3>
+<p class="text-sm text-on-surface-variant font-medium">September 12, 2023 • City Imaging Center</p>
+</div>
+</div>
+<div class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                            Pending Review
+                        </div>
+</div>
+<div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>
+                        Dr. Marcus Thorne • Orthopedic Surgeon
+                    </div>
+<div class="flex items-center gap-3">
+<button class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="image">image</span>
+                            Open DICOM Viewer
+                        </button>
+<button class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            AI Interpretation
+                        </button>
+</div>
+</article>
+<!-- Record Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="ecg">ecg</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Resting Electrocardiogram</h3>
+<p class="text-sm text-on-surface-variant font-medium">August 05, 2023 • Cardiology Associates</p>
+</div>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                            Normal
+                        </div>
+</div>
+<div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>
+                        Dr. Sarah Chen • Cardiologist
+                    </div>
+<div class="flex items-center gap-3">
+<button class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+                            PDF Report
+                        </button>
+<button class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            AI Interpretation
+                        </button>
+</div>
+</article>
+<!-- Record Card 4 (Actionable/Urgent) -->
+<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="science">science</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Vitamin D, 25-Hydroxy</h3>
+<p class="text-sm text-on-surface-variant font-medium">July 18, 2023 • LabCorp Diagnostics</p>
+</div>
+</div>
+<div class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                            Low Range
+                        </div>
+</div>
+<div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>
+                        Dr. Helena Vance • General Practitioner
+                    </div>
+<div class="flex items-center gap-3">
+<button class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span>
+                            View Details
+                        </button>
+<button class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            AI Interpretation
+                        </button>
+</div>
+</article>
+</div>
+<!-- Empty State / Load More (Editorial Minimalism) -->
+<div class="mt-16 text-center">
+<p class="text-on-surface-variant font-medium mb-6">Showing 4 of 28 medical records</p>
+<button class="px-8 py-3 rounded-full border border-outline-variant text-primary font-bold hover:bg-surface-container transition-colors active:scale-95">
+                    Load Archive History
+                </button>
+</div>
+<!-- AI Insight Preview (Floating Glassmorphism Card) -->
+<div class="mt-20 p-8 rounded-3xl bg-white/40 backdrop-blur-2xl border border-white/50 relative overflow-hidden group">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+<div class="w-20 h-20 shrink-0 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h4 class="text-2xl font-bold text-on-surface mb-2">Understand your health like never before</h4>
+<p class="text-on-surface-variant">Our Clinical AI breaks down complex medical jargon into easy-to-understand summaries. Tap 'AI Interpretation' on any record to begin.</p>
+</div>
+<button class="bg-primary text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-primary/20 hover:shadow-xl transition-all">
+                        Upgrade Insight Tier
+                    </button>
+</div>
+</div>
+</div>

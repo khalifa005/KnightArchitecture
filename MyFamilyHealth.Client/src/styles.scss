@@ -1,14 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+}
 
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--p-font-family);
-  background-color: var(--p-surface-50);
-  color: var(--p-text-color);
+  font-family: 'Inter', var(--p-font-family), sans-serif;
+  background-color: #f8f9fe;
+  color: #191c1f;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+h1, h2, h3 { font-family: 'Manrope', sans-serif; }
 
 ul {
   padding: 0;

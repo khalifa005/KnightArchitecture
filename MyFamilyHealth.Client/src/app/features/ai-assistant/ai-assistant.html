@@ -1,0 +1,109 @@
+<!-- Header Area -->
+<div class="px-10 pt-8 pb-4">
+<h1 class="font-headline text-3xl font-extrabold text-primary tracking-tight">AI Sanctuary Assistant</h1>
+<p class="text-on-surface-variant mt-1 text-sm">Your secure, clinical AI companion for health inquiries.</p>
+</div>
+<!-- Chat Container -->
+<div class="flex-1 overflow-y-auto px-10 pb-32 pt-4 no-scrollbar">
+<div class="max-w-4xl mx-auto space-y-8">
+<!-- Timestamp -->
+<div class="flex justify-center">
+<span class="text-[10px] uppercase tracking-widest font-bold text-outline-variant">Today, October 24</span>
+</div>
+<!-- AI Message: Introduction -->
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="space-y-4 max-w-[80%]">
+<div class="bg-surface-container-lowest p-6 rounded-2xl rounded-tl-none shadow-sm">
+<p class="text-on-surface leading-relaxed">Hello. I am your Clinical Assistant. I have reviewed your recent blood work from yesterday's appointment with Dr. Miller. Would you like me to summarize the results or help you understand the recommended dosage for your new prescription?</p>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 items-start justify-end">
+<div class="space-y-2 max-w-[80%]">
+<div class="bg-primary text-on-primary p-6 rounded-2xl rounded-tr-none shadow-md">
+<p class="leading-relaxed">Can you explain my Vitamin D levels? They seemed highlighted in the report.</p>
+</div>
+<p class="text-right text-[10px] text-outline-variant font-medium">10:42 AM • Read</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0 overflow-hidden">
+<img alt="User" data-alt="Portrait of a male user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW1HU8efYHwml5xjWeDlYZgB50Oco5a1PI_a1h_NlqCU8_WksMaCgVlkxNU3nzULoV1c6MS5YWdvpPFPToaRcH_EVrTAdbPyR07oRddImHFcy--yRee77PRq0ox-RBUU4o-_FNcCBpOz0JhWtdxAk4nVfDI_XNqwOggJvCc1cnXmNjz5f3FG30uVg9NxJZCYEjWAgQLbntFlkeZ232DqxmBLufUr6LouCW2X6fMvpIsk3WVbrLr7ggRTncxYzL31C6A2hzj2yEbSpj"/>
+</div>
+</div>
+<!-- AI Message: Data Response -->
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="space-y-6 max-w-[85%]">
+<div class="bg-surface-container-lowest p-6 rounded-2xl rounded-tl-none shadow-sm space-y-4">
+<p class="text-on-surface leading-relaxed">Of course. Your Vitamin D (25-Hydroxy) level was measured at <strong class="text-primary font-semibold">18 ng/mL</strong>. </p>
+<div class="bg-surface-container-low p-4 rounded-xl border-l-4 border-primary">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">Clinical Context</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full text-[10px] font-bold italic">Educational Info</span>
+</div>
+<p class="text-sm text-on-surface-variant">Optimal levels are typically between 30 and 100 ng/mL. A result of 18 ng/mL is classified as a <span class="text-error font-semibold">deficiency</span>. This is very common and Dr. Miller has already added a supplement to your plan.</p>
+</div>
+<p class="text-sm text-on-surface-variant italic">Note: This information is based on your lab results from LabCorp, dated Oct 23, 2023.</p>
+</div>
+<!-- Embedded Action Card -->
+<div class="bg-surface-container-high p-5 rounded-2xl flex items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="pill">medication</span>
+</div>
+<div>
+<p class="font-headline font-bold text-primary">Vitamin D3 2000IU</p>
+<p class="text-xs text-on-surface-variant">Daily oral supplement prescribed</p>
+</div>
+</div>
+<button class="bg-white text-primary text-xs font-bold py-2 px-4 rounded-full border border-outline-variant/20 hover:bg-primary hover:text-white transition-all">
+                                    View Instructions
+                                </button>
+</div>
+</div>
+</div>
+<!-- Quick Action Chips -->
+<div class="flex flex-wrap gap-3 ml-14">
+<button class="bg-surface-container-lowest border border-outline-variant/10 px-5 py-2.5 rounded-full text-xs font-semibold text-primary shadow-sm hover:bg-primary-container/10 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="event_repeat">event_repeat</span>
+                            Reschedule Appointment
+                        </button>
+<button class="bg-surface-container-lowest border border-outline-variant/10 px-5 py-2.5 rounded-full text-xs font-semibold text-primary shadow-sm hover:bg-primary-container/10 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="analytics">analytics</span>
+                            Analyze latest test
+                        </button>
+<button class="bg-surface-container-lowest border border-outline-variant/10 px-5 py-2.5 rounded-full text-xs font-semibold text-primary shadow-sm hover:bg-primary-container/10 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="contact_support">contact_support</span>
+                            Message Dr. Miller
+                        </button>
+</div>
+</div>
+</div>
+<!-- Input Bar -->
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-background via-background/95 to-transparent">
+<div class="max-w-4xl mx-auto">
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+<div class="relative flex items-center bg-surface-container-lowest rounded-2xl shadow-xl shadow-primary/5 p-2 pr-4 ring-1 ring-outline-variant/10">
+<button class="p-3 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline-variant py-4 px-2 font-body" placeholder="Ask about test results, dosages, or appointments..." type="text"/>
+<div class="flex items-center gap-2">
+<button class="p-3 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+<button class="bg-primary text-white p-4 rounded-xl shadow-lg shadow-primary/30 active:scale-95 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+<p class="text-[10px] text-center text-outline-variant mt-3 font-medium tracking-wide">AI-generated health insights. Please consult with your provider for clinical decisions.</p>
+</div>
+</div>
