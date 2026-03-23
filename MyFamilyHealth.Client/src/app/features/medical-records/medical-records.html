@@ -8,99 +8,33 @@
 <app-filter-form (filterChanged)="onFilterChanged($event)"></app-filter-form>
 <!-- Records Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-<!-- Record Card 1 -->
-<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow group">
-<div class="flex items-start justify-between mb-4">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" data-icon="bloodtype">bloodtype</span>
-</div>
-<div>
-<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">{{ 'medicalRecords.cmp' | transloco }}</h3>
-<p class="text-sm text-on-surface-variant font-medium">{{ 'medicalRecords.cmp_date' | transloco }}</p>
-</div>
-</div>
-<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{{ 'medicalRecords.normal' | transloco }}</div>
-</div>
-<div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>{{ 'medicalRecords.dr_helena' | transloco }}</div>
-<div class="flex items-center gap-3">
-<button pButton class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span>{{ 'medicalRecords.view_report' | transloco }}</button>
-<button pButton class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
-<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>{{ 'medicalRecords.ai_interpretation' | transloco }}</button>
-</div>
-</article>
-<!-- Record Card 2 (Imaging) -->
-<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow group">
-<div class="flex items-start justify-between mb-4">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
-<span class="material-symbols-outlined" data-icon="radiology">radiology</span>
-</div>
-<div>
-<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">{{ 'medicalRecords.lumbar_mri' | transloco }}</h3>
-<p class="text-sm text-on-surface-variant font-medium">{{ 'medicalRecords.mri_date' | transloco }}</p>
-</div>
-</div>
-<div class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{{ 'medicalRecords.pending_review' | transloco }}</div>
-</div>
-<div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>{{ 'medicalRecords.dr_marcus' | transloco }}</div>
-<div class="flex items-center gap-3">
-<button pButton class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="image">image</span>{{ 'medicalRecords.open_dicom' | transloco }}</button>
-<button pButton class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
-<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>{{ 'medicalRecords.ai_interpretation' | transloco }}</button>
-</div>
-</article>
-<!-- Record Card 3 -->
-<article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow group">
-<div class="flex items-start justify-between mb-4">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" data-icon="ecg">ecg</span>
-</div>
-<div>
-<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">{{ 'medicalRecords.ecg' | transloco }}</h3>
-<p class="text-sm text-on-surface-variant font-medium">{{ 'medicalRecords.ecg_date' | transloco }}</p>
-</div>
-</div>
-<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{{ 'medicalRecords.normal' | transloco }}</div>
-</div>
-<div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>{{ 'medicalRecords.dr_sarah' | transloco }}</div>
-<div class="flex items-center gap-3">
-<button pButton class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>{{ 'medicalRecords.pdf_report' | transloco }}</button>
-<button pButton class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
-<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>{{ 'medicalRecords.ai_interpretation' | transloco }}</button>
-</div>
-</article>
-<!-- Record Card 4 (Actionable/Urgent) -->
+@for (record of records(); track record.id) {
 <article class="bg-surface-container-lowest rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow group relative overflow-hidden">
+@if (record.isUrgent) {
 <div class="absolute top-0 start-0 w-1 h-full bg-error"></div>
+}
 <div class="flex items-start justify-between mb-4">
 <div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-lg bg-error/10 flex items-center justify-center text-error">
-<span class="material-symbols-outlined" data-icon="science">science</span>
+<div class="w-12 h-12 rounded-lg flex items-center justify-center" [ngClass]="record.iconBgClass + ' ' + record.iconTextClass">
+<span class="material-symbols-outlined" [attr.data-icon]="record.icon">{{ record.icon }}</span>
 </div>
 <div>
-<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">{{ 'medicalRecords.vit_d' | transloco }}</h3>
-<p class="text-sm text-on-surface-variant font-medium">{{ 'medicalRecords.vit_d_date' | transloco }}</p>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">{{ record.titleKey | transloco }}</h3>
+<p class="text-sm text-on-surface-variant font-medium">{{ record.dateKey | transloco }}</p>
 </div>
 </div>
-<div class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{{ 'medicalRecords.low_range' | transloco }}</div>
+<div class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider" [ngClass]="record.statusBgClass + ' ' + record.statusTextClass">{{ record.statusKey | transloco }}</div>
 </div>
 <div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>{{ 'medicalRecords.dr_helena' | transloco }}</div>
+<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>{{ record.providerKey | transloco }}</div>
 <div class="flex items-center gap-3">
 <button pButton class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span>{{ 'medicalRecords.view_details' | transloco }}</button>
+<span class="material-symbols-outlined text-[18px]" [attr.data-icon]="record.primaryActionIcon">{{ record.primaryActionIcon }}</span>{{ record.primaryActionKey | transloco }}</button>
 <button pButton class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
 <span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>{{ 'medicalRecords.ai_interpretation' | transloco }}</button>
 </div>
 </article>
+}
 </div>
 <!-- Empty State / Load More (Editorial Minimalism) -->
 <div class="mt-16 text-center">

@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule } from 'primeng/select';
+import { DatePickerModule } from 'primeng/datepicker';
 import { buildFeatureFilterForm } from './filter-form.form';
 
 @Component({
   selector: 'app-filter-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslocoModule, InputTextModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslocoModule, InputTextModule, SelectModule, DatePickerModule],
   templateUrl: './filter-form.component.html'
 })
 export class FilterFormComponent {
