@@ -1,16 +1,84 @@
-.main-container {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+.dashboard-header {
+  margin-bottom: 2rem;
+  
+  h2 {
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+  }
 }
 
-.features-list {
-  display: flex;
-  flex-wrap: wrap;
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.5rem;
-  margin-top: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.feature-card {
-  width: 300px;
+.stat-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: var(--p-surface-0);
+  border-radius: var(--p-border-radius);
+  border: 1px solid var(--p-surface-border);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .stat-title {
+    display: block;
+    color: var(--p-text-muted-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .stat-value {
+    color: var(--p-text-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .stat-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--p-border-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    i {
+      font-size: 1.5rem;
+    }
+  }
 }
+
+.dashboard-details {
+  background-color: var(--p-surface-0);
+  padding: 1.5rem;
+  border-radius: var(--p-border-radius);
+  border: 1px solid var(--p-surface-border);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+
+  h3 {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .text-color-secondary {
+    color: var(--p-text-muted-color);
+  }
+}
+
+.flex { display: flex; }
+.justify-content-between { justify-content: space-between; }
+.align-items-center { align-items: center; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }

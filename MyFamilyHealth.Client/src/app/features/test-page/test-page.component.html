@@ -1,20 +1,31 @@
-<main class="main-container">
-  <h1>{{ title }} Test Page</h1>
-  
-  <p-button label="Check" />
+<div class="dashboard-header mb-4">
+  <h2>{{ title }}</h2>
+  <span class="text-color-secondary">Overview of the latest statistics and performance</span>
+</div>
 
-  
-  <p-button label="Toggle Features" icon="pi pi-check" (onClick)="toggleLoad()"></p-button>
-
-  @if (isLoaded) {
-    <div class="features-list">
-      @for (feature of features; track feature.id) {
-        <p-card [header]="feature.name" class="feature-card">
-          <p>This is a demonstration of {{ feature.name }}.</p>
-        </p-card>
-      }
+<div class="dashboard-grid">
+  <!-- Dynamic Control Flow for KPI Cards -->
+  @for (kpi of kpiData; track kpi.title) {
+    <div class="stat-card">
+      <div class="stat-content">
+        <span class="stat-title">{{ kpi.title }}</span>
+        <div class="stat-value">{{ kpi.value }}</div>
+      </div>
+      <div class="stat-icon" [style.color]="kpi.iconColor" [style.backgroundColor]="kpi.iconBg">
+        <i [class]="kpi.icon"></i>
+      </div>
     </div>
-  } @else {
-    <p>Features are hidden. Click the button to reveal them.</p>
   }
-</main>
+</div>
+
+<div class="dashboard-details">
+  <div class="flex justify-content-between align-items-center mb-3">
+    <h3>Recent Activity</h3>
+    <p-button icon="pi pi-refresh" [rounded]="true" [text]="true"></p-button>
+  </div>
+  <p class="text-color-secondary">This section can contain DataTables, Charts, or additional composite widgets reflecting the data flow in the MyFamilyHealth application.</p>
+  
+  <div style="height: 300px; border: 2px dashed var(--p-surface-border); border-radius: var(--p-border-radius); display: flex; align-items: center; justify-content: center; color: var(--p-text-muted-color); margin-top: 1rem;">
+    Visualizations Placeholder
+  </div>
+</div>

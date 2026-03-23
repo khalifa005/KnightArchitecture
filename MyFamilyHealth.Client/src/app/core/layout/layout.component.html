@@ -1,0 +1,55 @@
+<div class="layout-wrapper" [class.layout-sidebar-active]="sidebarActive">
+  <!-- Topbar -->
+  <div class="layout-topbar">
+    <div class="layout-topbar-left">
+      <div class="layout-topbar-logo">
+        <i class="pi pi-prime text-primary" style="font-size: 2rem"></i>
+        <span>MyFamilyHealth</span>
+      </div>
+      <p-button icon="pi pi-bars" [text]="true" [rounded]="true" (onClick)="toggleSidebar()" class="menu-button"></p-button>
+    </div>
+    
+    <div class="layout-topbar-right">
+      <span class="p-input-icon-left search-container">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="Search..." />
+      </span>
+      <p-button icon="pi pi-bell" [text]="true" [rounded]="true"></p-button>
+      <p-button icon="pi pi-cog" [text]="true" [rounded]="true"></p-button>
+      <p-avatar image="https://primefaces.org/cdn/primeng/images/avatar/amyelsner.png" shape="circle"></p-avatar>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="layout-sidebar">
+    <ul class="layout-menu">
+      <li class="menu-section">HOME</li>
+      <li>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <i class="pi pi-home"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/profile">
+          <i class="pi pi-user"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+      <li class="menu-section">APPLICATION</li>
+      <li>
+        <a routerLink="/settings">
+          <i class="pi pi-cog"></i>
+          <span>Settings</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="layout-main-container">
+    <div class="layout-main">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
