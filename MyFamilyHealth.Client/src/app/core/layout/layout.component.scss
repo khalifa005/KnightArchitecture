@@ -1,5 +1,6 @@
 $topbarHeight: 4.5rem;
 $sidebarWidth: 18rem;
+$sidebarCollapsedWidth: 5rem;
 
 .layout-wrapper {
   display: flex;
@@ -60,8 +61,9 @@ $sidebarWidth: 18rem;
   background-color: var(--p-surface-0);
   border-right: 1px solid var(--p-surface-border);
   padding: 1.5rem;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
+  overflow-x: hidden;
   z-index: 998;
   box-shadow: 2px 0 4px -1px rgba(0,0,0,0.05);
 
@@ -76,6 +78,8 @@ $sidebarWidth: 18rem;
       color: var(--p-text-muted-color);
       margin: 1.5rem 0 0.5rem 0;
       letter-spacing: 0.05em;
+      white-space: nowrap;
+      transition: opacity 0.2s;
     }
 
     li {
@@ -89,8 +93,9 @@ $sidebarWidth: 18rem;
         border-radius: var(--p-border-radius);
         color: var(--p-text-color);
         text-decoration: none;
-        transition: background-color 0.2s, color 0.2s;
+        transition: background-color 0.2s, color 0.2s, justify-content 0.2s;
         font-weight: 500;
+        white-space: nowrap;
 
         &:hover {
           background-color: var(--p-surface-hover);
@@ -109,6 +114,11 @@ $sidebarWidth: 18rem;
         i {
           font-size: 1.1rem;
           color: var(--p-text-muted-color);
+          min-width: 1.1rem;
+        }
+
+        .menu-text {
+          transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
       }
     }
@@ -128,12 +138,63 @@ $sidebarWidth: 18rem;
   flex-grow: 1;
 }
 
-// Sidebar toggle state logic
-.layout-wrapper:not(.layout-sidebar-active) {
+// Collapsed state logic
+.layout-wrapper.layout-sidebar-collapsed {
   .layout-sidebar {
-    transform: translateX(-100%);
+    width: $sidebarCollapsedWidth;
+    padding: 1.5rem 0.5rem; // Adjust padding for centered icons
+
+    .menu-section {
+      opacity: 0;
+      height: 0;
+      margin: 0;
+      visibility: hidden;
+    }
+
+    a {
+      justify-content: center; // Center the icons
+      padding: 0.75rem 0;
+
+      .menu-text {
+        opacity: 0;
+        width: 0;
+        display: none;
+      }
+      
+      i {
+        margin: 0;
+      }
+    }
   }
+
   .layout-main-container {
-    margin-left: 0;
+    margin-left: $sidebarCollapsedWidth;
+  }
+}
+
+// Mobile responsive touch
+@media (max-width: 992px) {
+  .layout-wrapper {
+    .layout-sidebar {
+      transform: translateX(-100%);
+      width: $sidebarWidth;
+      padding: 1.5rem; // Restore padding
+      
+      .menu-text { display: block; opacity: 1; }
+      .menu-section { opacity: 1; visibility: visible; height: auto; margin: 1.5rem 0 0.5rem 0; }
+      a { justify-content: flex-start; padding: 0.75rem 1rem; }
+    }
+    
+    .layout-main-container {
+      margin-left: 0;
+    }
+    
+    // When toggle is active on mobile, slide in full bar
+    &.layout-sidebar-collapsed {
+      // Revert logic on mobile: button toggles standard canvas
+      .layout-sidebar {
+        transform: translateX(0);
+      }
+    }
   }
 }

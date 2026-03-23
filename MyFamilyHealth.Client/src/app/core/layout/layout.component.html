@@ -1,4 +1,4 @@
-<div class="layout-wrapper" [class.layout-sidebar-active]="sidebarActive">
+<div class="layout-wrapper" [class.layout-sidebar-collapsed]="!sidebarExpanded">
   <!-- Topbar -->
   <div class="layout-topbar">
     <div class="layout-topbar-left">
@@ -25,22 +25,22 @@
     <ul class="layout-menu">
       <li class="menu-section">HOME</li>
       <li>
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" title="Dashboard">
           <i class="pi pi-home"></i>
-          <span>Dashboard</span>
+          <span class="menu-text">Dashboard</span>
         </a>
       </li>
       <li>
-        <a routerLink="/profile">
+        <a routerLink="/profile" title="Profile">
           <i class="pi pi-user"></i>
-          <span>Profile</span>
+          <span class="menu-text">Profile</span>
         </a>
       </li>
       <li class="menu-section">APPLICATION</li>
       <li>
-        <a routerLink="/settings">
+        <a routerLink="/settings" title="Settings">
           <i class="pi pi-cog"></i>
-          <span>Settings</span>
+          <span class="menu-text">Settings</span>
         </a>
       </li>
     </ul>

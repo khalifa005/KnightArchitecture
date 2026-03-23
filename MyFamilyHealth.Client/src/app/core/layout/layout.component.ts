@@ -13,9 +13,9 @@ import { InputTextModule } from 'primeng/inputtext';
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
-  sidebarActive = true;
+  sidebarExpanded = true;
   
   toggleSidebar() {
-    this.sidebarActive = !this.sidebarActive;
+    this.sidebarExpanded = !this.sidebarExpanded;
   }
 }
