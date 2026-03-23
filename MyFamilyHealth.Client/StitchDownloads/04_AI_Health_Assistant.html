@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Assistant | Clinical Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#006494",
+              "background": "#f8f9fe",
+              "outline": "#707880",
+              "primary-container": "#006494",
+              "inverse-primary": "#8ecdff",
+              "error": "#ba1a1a",
+              "on-error": "#ffffff",
+              "on-background": "#191c1f",
+              "on-tertiary-fixed-variant": "#004884",
+              "on-primary": "#ffffff",
+              "secondary-fixed-dim": "#95d4b3",
+              "primary": "#004b71",
+              "on-primary-container": "#b6ddff",
+              "primary-fixed": "#cbe6ff",
+              "surface-variant": "#e0e2e7",
+              "on-secondary-fixed-variant": "#0e5138",
+              "tertiary": "#004784",
+              "inverse-on-surface": "#eff1f5",
+              "surface-container-highest": "#e0e2e7",
+              "tertiary-fixed": "#d4e3ff",
+              "on-primary-fixed": "#001e30",
+              "secondary-fixed": "#b1f0ce",
+              "surface-bright": "#f8f9fe",
+              "on-secondary-container": "#316e52",
+              "on-primary-fixed-variant": "#004b71",
+              "on-tertiary": "#ffffff",
+              "secondary": "#2c694e",
+              "outline-variant": "#c0c7d0",
+              "surface-container-low": "#f2f4f8",
+              "secondary-container": "#aeeecb",
+              "surface-container": "#eceef2",
+              "tertiary-container": "#005fac",
+              "on-tertiary-fixed": "#001c39",
+              "surface-container-high": "#e6e8ed",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "surface-dim": "#d8dade",
+              "on-surface-variant": "#40484f",
+              "on-tertiary-container": "#c3daff",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#191c1f",
+              "on-secondary-fixed": "#002114",
+              "surface": "#f8f9fe",
+              "tertiary-fixed-dim": "#a4c9ff",
+              "primary-fixed-dim": "#8ecdff",
+              "inverse-surface": "#2d3134"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased overflow-hidden">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-none font-['Inter'] text-sm antialiased">
+<div class="flex justify-between items-center px-8 py-3 w-full">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-sky-900 dark:text-sky-100 font-['Manrope']">Clinical Sanctuary</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-500">
+<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors active:scale-95 duration-200 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors active:scale-95 duration-200 rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="User profile avatar" data-alt="Portrait of a male user in his 30s" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPHigpJWlCDWntAZrkJ-9WkJd8SLWQB5RK05JZ_C8SgVw6Vin1yWlezYkeIYnz-JGaQjQfGNdpKr56NGFDs1RB8mYmoZrPTjA6gdV6lkaEt96DcM5y9KUs0TiwxlRwDGslblfmNA-c-ZHUwJ0J6TyNmkUQrrGS6KzZKLpQE09uDy9jB4xKikOGKADwRF8TEJmn4KQ6erOHYWbQ7hEMTGUtSnQP0CocqV35U9qVmwt4ZZwzIa9xDxGxtBTGOKqm_lKj3F5dRsfuYLof"/>
+</div>
+</div>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 h-[1px] w-full"></div>
+</header>
+<div class="flex h-screen pt-[57px]">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-screen w-64 border-r-0 bg-slate-50 dark:bg-slate-950 flex flex-col p-4 gap-2 font-['Manrope'] font-medium text-sm pt-20">
+<div class="mb-8 px-4">
+<h2 class="font-['Manrope'] font-extrabold text-sky-900 dark:text-white text-lg">Patient Portal</h2>
+<p class="text-xs text-slate-500">Clinical Care</p>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span>Medical Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="medication">medication</span>
+<span>Medications</span>
+</a>
+<!-- AI Assistant is ACTIVE -->
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-900 text-sky-700 dark:text-sky-400 shadow-sm rounded-xl transition-all font-semibold" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span>AI Assistant</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="lock_person">lock_person</span>
+<span>Access Control</span>
+</a>
+</nav>
+<button class="mx-2 mt-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full py-3 px-4 flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>AI Help</span>
+</button>
+<div class="mt-auto flex flex-col gap-1 pb-4">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-sky-600 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help_outline">help_outline</span>
+<span>Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:text-sky-600 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col relative bg-background">
+<!-- Header Area -->
+<div class="px-10 pt-8 pb-4">
+<h1 class="font-headline text-3xl font-extrabold text-primary tracking-tight">AI Sanctuary Assistant</h1>
+<p class="text-on-surface-variant mt-1 text-sm">Your secure, clinical AI companion for health inquiries.</p>
+</div>
+<!-- Chat Container -->
+<div class="flex-1 overflow-y-auto px-10 pb-32 pt-4 no-scrollbar">
+<div class="max-w-4xl mx-auto space-y-8">
+<!-- Timestamp -->
+<div class="flex justify-center">
+<span class="text-[10px] uppercase tracking-widest font-bold text-outline-variant">Today, October 24</span>
+</div>
+<!-- AI Message: Introduction -->
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="space-y-4 max-w-[80%]">
+<div class="bg-surface-container-lowest p-6 rounded-2xl rounded-tl-none shadow-sm">
+<p class="text-on-surface leading-relaxed">Hello. I am your Clinical Assistant. I have reviewed your recent blood work from yesterday's appointment with Dr. Miller. Would you like me to summarize the results or help you understand the recommended dosage for your new prescription?</p>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 items-start justify-end">
+<div class="space-y-2 max-w-[80%]">
+<div class="bg-primary text-on-primary p-6 rounded-2xl rounded-tr-none shadow-md">
+<p class="leading-relaxed">Can you explain my Vitamin D levels? They seemed highlighted in the report.</p>
+</div>
+<p class="text-right text-[10px] text-outline-variant font-medium">10:42 AM • Read</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0 overflow-hidden">
+<img alt="User" data-alt="Portrait of a male user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW1HU8efYHwml5xjWeDlYZgB50Oco5a1PI_a1h_NlqCU8_WksMaCgVlkxNU3nzULoV1c6MS5YWdvpPFPToaRcH_EVrTAdbPyR07oRddImHFcy--yRee77PRq0ox-RBUU4o-_FNcCBpOz0JhWtdxAk4nVfDI_XNqwOggJvCc1cnXmNjz5f3FG30uVg9NxJZCYEjWAgQLbntFlkeZ232DqxmBLufUr6LouCW2X6fMvpIsk3WVbrLr7ggRTncxYzL31C6A2hzj2yEbSpj"/>
+</div>
+</div>
+<!-- AI Message: Data Response -->
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="space-y-6 max-w-[85%]">
+<div class="bg-surface-container-lowest p-6 rounded-2xl rounded-tl-none shadow-sm space-y-4">
+<p class="text-on-surface leading-relaxed">Of course. Your Vitamin D (25-Hydroxy) level was measured at <strong class="text-primary font-semibold">18 ng/mL</strong>. </p>
+<div class="bg-surface-container-low p-4 rounded-xl border-l-4 border-primary">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold text-primary uppercase tracking-tighter">Clinical Context</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full text-[10px] font-bold italic">Educational Info</span>
+</div>
+<p class="text-sm text-on-surface-variant">Optimal levels are typically between 30 and 100 ng/mL. A result of 18 ng/mL is classified as a <span class="text-error font-semibold">deficiency</span>. This is very common and Dr. Miller has already added a supplement to your plan.</p>
+</div>
+<p class="text-sm text-on-surface-variant italic">Note: This information is based on your lab results from LabCorp, dated Oct 23, 2023.</p>
+</div>
+<!-- Embedded Action Card -->
+<div class="bg-surface-container-high p-5 rounded-2xl flex items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="pill">medication</span>
+</div>
+<div>
+<p class="font-headline font-bold text-primary">Vitamin D3 2000IU</p>
+<p class="text-xs text-on-surface-variant">Daily oral supplement prescribed</p>
+</div>
+</div>
+<button class="bg-white text-primary text-xs font-bold py-2 px-4 rounded-full border border-outline-variant/20 hover:bg-primary hover:text-white transition-all">
+                                    View Instructions
+                                </button>
+</div>
+</div>
+</div>
+<!-- Quick Action Chips -->
+<div class="flex flex-wrap gap-3 ml-14">
+<button class="bg-surface-container-lowest border border-outline-variant/10 px-5 py-2.5 rounded-full text-xs font-semibold text-primary shadow-sm hover:bg-primary-container/10 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="event_repeat">event_repeat</span>
+                            Reschedule Appointment
+                        </button>
+<button class="bg-surface-container-lowest border border-outline-variant/10 px-5 py-2.5 rounded-full text-xs font-semibold text-primary shadow-sm hover:bg-primary-container/10 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="analytics">analytics</span>
+                            Analyze latest test
+                        </button>
+<button class="bg-surface-container-lowest border border-outline-variant/10 px-5 py-2.5 rounded-full text-xs font-semibold text-primary shadow-sm hover:bg-primary-container/10 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="contact_support">contact_support</span>
+                            Message Dr. Miller
+                        </button>
+</div>
+</div>
+</div>
+<!-- Input Bar -->
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-background via-background/95 to-transparent">
+<div class="max-w-4xl mx-auto">
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+<div class="relative flex items-center bg-surface-container-lowest rounded-2xl shadow-xl shadow-primary/5 p-2 pr-4 ring-1 ring-outline-variant/10">
+<button class="p-3 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline-variant py-4 px-2 font-body" placeholder="Ask about test results, dosages, or appointments..." type="text"/>
+<div class="flex items-center gap-2">
+<button class="p-3 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+<button class="bg-primary text-white p-4 rounded-xl shadow-lg shadow-primary/30 active:scale-95 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+<p class="text-[10px] text-center text-outline-variant mt-3 font-medium tracking-wide">AI-generated health insights. Please consult with your provider for clinical decisions.</p>
+</div>
+</div>
+</main>
+</div>
+<!-- Right Side Detail Panel (Asymmetric Editorial Layout) -->
+<aside class="fixed right-0 top-[57px] h-[calc(100vh-57px)] w-80 bg-surface-container-low hidden xl:flex flex-col p-8 gap-8 overflow-y-auto border-l border-outline-variant/5">
+<section>
+<h3 class="font-headline font-extrabold text-primary text-sm uppercase tracking-widest mb-6">Patient Overview</h3>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden">
+<img alt="Patient" data-alt="Portrait of the patient" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAN3Gg_ekvyEhneUdjysqH0Khx_fzEc4vhT_Ze40QcwJm6YqrGHpkAj5UKAvfE8_2DwchTrAFr7RMCSZMrga6_5L41u4XHCOZCQfqGDSyKzJESDIczBFuohe6bzZNLQkWFO879BHjpm33lgbGmCl-XPlmVLhxET-aNU7kUcz_TVoN-rqt0Mzx-MzGtyWVJCYDmqlWudVqSgyS3XIHxfbbKmDyj9lnrfGTM1TW8oB1UH2_i8pZj8nYGlSI8MlGiMufO0KsDQcg_idtQ"/>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">James Wilson</p>
+<p class="text-xs text-on-surface-variant">ID: #44892-C</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+<p class="text-[10px] font-bold text-outline-variant uppercase">Age</p>
+<p class="font-headline font-extrabold text-primary text-lg">34</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm">
+<p class="text-[10px] font-bold text-outline-variant uppercase">Blood</p>
+<p class="font-headline font-extrabold text-primary text-lg">O+</p>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h3 class="font-headline font-extrabold text-primary text-sm uppercase tracking-widest mb-6">Active Protocol</h3>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 h-full w-1 bg-primary transform transition-transform translate-x-full group-hover:translate-x-0"></div>
+<p class="font-bold text-sm text-on-surface mb-1">Morning Routine</p>
+<p class="text-xs text-on-surface-variant">8:00 AM • Vitamin D3</p>
+<div class="mt-3 flex gap-2">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-md text-[10px] font-bold">In Progress</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 h-full w-1 bg-primary transform transition-transform translate-x-full group-hover:translate-x-0"></div>
+<p class="font-bold text-sm text-on-surface mb-1">Weekly Check-in</p>
+<p class="text-xs text-on-surface-variant">Sunday • Symptom Log</p>
+<div class="mt-3 flex gap-2">
+<span class="bg-surface-container text-on-surface-variant px-2 py-0.5 rounded-md text-[10px] font-bold">Upcoming</span>
+</div>
+</div>
+</div>
+</section>
+<section class="mt-auto">
+<div class="bg-primary-container/10 p-6 rounded-2xl border border-primary/10">
+<span class="material-symbols-outlined text-primary mb-3" data-icon="verified_user">verified_user</span>
+<p class="font-headline font-bold text-primary text-sm mb-2">HIPAA Compliant</p>
+<p class="text-[11px] text-on-surface-variant leading-relaxed">Your data is encrypted end-to-end and stored in accordance with clinical privacy standards.</p>
+</div>
+</section>
+</aside>
+</body></html>

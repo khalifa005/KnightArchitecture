@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Access Control | Clinical Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#006494",
+              "background": "#f8f9fe",
+              "outline": "#707880",
+              "primary-container": "#006494",
+              "inverse-primary": "#8ecdff",
+              "error": "#ba1a1a",
+              "on-error": "#ffffff",
+              "on-background": "#191c1f",
+              "on-tertiary-fixed-variant": "#004884",
+              "on-primary": "#ffffff",
+              "secondary-fixed-dim": "#95d4b3",
+              "primary": "#004b71",
+              "on-primary-container": "#b6ddff",
+              "primary-fixed": "#cbe6ff",
+              "surface-variant": "#e0e2e7",
+              "on-secondary-fixed-variant": "#0e5138",
+              "tertiary": "#004784",
+              "inverse-on-surface": "#eff1f5",
+              "surface-container-highest": "#e0e2e7",
+              "tertiary-fixed": "#d4e3ff",
+              "on-primary-fixed": "#001e30",
+              "secondary-fixed": "#b1f0ce",
+              "surface-bright": "#f8f9fe",
+              "on-secondary-container": "#316e52",
+              "on-primary-fixed-variant": "#004b71",
+              "on-tertiary": "#ffffff",
+              "secondary": "#2c694e",
+              "outline-variant": "#c0c7d0",
+              "surface-container-low": "#f2f4f8",
+              "secondary-container": "#aeeecb",
+              "surface-container": "#eceef2",
+              "tertiary-container": "#005fac",
+              "on-tertiary-fixed": "#001c39",
+              "surface-container-high": "#e6e8ed",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "surface-dim": "#d8dade",
+              "on-surface-variant": "#40484f",
+              "on-tertiary-container": "#c3daff",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#191c1f",
+              "on-secondary-fixed": "#002114",
+              "surface": "#f8f9fe",
+              "tertiary-fixed-dim": "#a4c9ff",
+              "primary-fixed-dim": "#8ecdff",
+              "inverse-surface": "#2d3134"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-slate-50 dark:bg-slate-950 flex flex-col p-4 gap-2 z-40">
+<div class="mb-8 px-2">
+<h1 class="font-['Manrope'] font-extrabold text-sky-900 dark:text-white text-xl">Patient Portal</h1>
+<p class="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Clinical Care</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all rounded-xl font-['Manrope'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all rounded-xl font-['Manrope'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span>Medical Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all rounded-xl font-['Manrope'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="medication">medication</span>
+<span>Medications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/20 transition-all rounded-xl font-['Manrope'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span>AI Assistant</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-900 text-sky-700 dark:text-sky-400 shadow-sm rounded-xl font-['Manrope'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="lock_person">lock_person</span>
+<span>Access Control</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant/10 space-y-1">
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-primary text-on-primary rounded-full font-bold transition-transform active:scale-95 mb-4 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+<span>AI Help</span>
+</button>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-sky-600 transition-all rounded-xl font-['Manrope'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span>Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-sky-600 transition-all rounded-xl font-['Manrope'] font-medium text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-8 py-3 w-full h-16">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold tracking-tight text-sky-900 dark:text-sky-100 font-['Manrope']">Access Management</h2>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-500 hover:bg-slate-50 p-2 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-500 hover:bg-slate-50 p-2 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-surface-container border border-outline-variant/20">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Close up of a professional profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgQ4d49PlrS3to55Kku2uRpSZFmEjT--ZaSp3pkHQ6uWMgsHQCRkOn1B74UIllLGxdppMH7D32RfqZ_isCNmhrf9Fmfgy0AgQRUPCV_5cKtHG84WkKB52y0AUUnMeneXuRnFcxFNcGsNK17qQgJ0DiCgDj4WgtDTWijrmvku3keetH0trTrGa0iE5n1HvkcGv2LmP7IFJj_sb2rf1Rk6pElXzvPubMKhwPFrXUdLUt2IoPaHE62uw0GJ77884aiM2yw_18s-k9Hbny"/>
+</div>
+</div>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 h-[1px] w-full"></div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="p-8 lg:p-12 max-w-7xl mx-auto space-y-12">
+<!-- Hero Header Section -->
+<section class="mb-12">
+<h3 class="text-display-lg font-headline font-extrabold text-primary mb-4 text-4xl lg:text-5xl tracking-tight">Security &amp; Governance</h3>
+<p class="text-on-surface-variant max-w-2xl text-lg font-body leading-relaxed">Manage who has access to your clinical records. Granular controls ensure your medical data is shared only with people you trust.</p>
+</section>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Family Sharing Section (Left Column) -->
+<div class="lg:col-span-7 space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="family_history">family_history</span>
+<h2 class="text-2xl font-headline font-bold text-on-surface">Family Sharing</h2>
+</div>
+<button class="text-primary font-semibold flex items-center gap-2 px-4 py-2 hover:bg-surface-container rounded-full transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
+<span>Add Member</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-xl p-1 space-y-1">
+<!-- Family Member 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl flex items-center justify-between transition-all hover:bg-white">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">EM</div>
+<div>
+<h4 class="font-bold text-on-surface">Elena Mitchell</h4>
+<p class="text-sm text-on-surface-variant">Spouse • Emergency Contact</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right hidden sm:block">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Full Access</span>
+<p class="text-[10px] text-on-surface-variant mt-1">Verified Oct 2023</p>
+</div>
+<button class="p-2 text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Family Member 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl flex items-center justify-between transition-all hover:bg-white">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold">JM</div>
+<div>
+<h4 class="font-bold text-on-surface">James Mitchell</h4>
+<p class="text-sm text-on-surface-variant">Son • Dependent</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right hidden sm:block">
+<span class="bg-surface-container-high text-on-surface-variant text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">View Only</span>
+<p class="text-[10px] text-on-surface-variant mt-1">Managed Account</p>
+</div>
+<button class="p-2 text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Family Member 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl flex items-center justify-between transition-all hover:bg-white">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed-dim flex items-center justify-center text-secondary font-bold">SR</div>
+<div>
+<h4 class="font-bold text-on-surface">Sarah Reed</h4>
+<p class="text-sm text-on-surface-variant">Primary Caregiver</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right hidden sm:block">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Authorized</span>
+<p class="text-[10px] text-on-surface-variant mt-1">Expires Dec 2024</p>
+</div>
+<button class="p-2 text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Doctor Access Section (Right Column) -->
+<div class="lg:col-span-5 space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="clinical_notes">clinical_notes</span>
+<h2 class="text-2xl font-headline font-bold text-on-surface">Provider Requests</h2>
+</div>
+<div class="space-y-4">
+<!-- Pending Request 1 -->
+<div class="bg-white border-b-4 border-primary rounded-xl p-6 shadow-sm">
+<div class="flex items-start justify-between mb-4">
+<div class="flex gap-4">
+<div class="p-3 bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="medical_services">medical_services</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Dr. Aris Thorne</h4>
+<p class="text-xs text-on-surface-variant">Cardiology Specialist</p>
+<p class="text-[10px] bg-primary-container/10 text-primary font-bold px-2 py-0.5 rounded mt-1 inline-block">Saint Jude Medical Center</p>
+</div>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed italic">"Requesting access to history and current medication list for upcoming consultation."</p>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-2.5 rounded-full bg-surface-container-high text-on-surface font-bold text-sm transition-all active:scale-95">Deny</button>
+<button class="py-2.5 rounded-full bg-primary text-on-primary font-bold text-sm transition-all active:scale-95 shadow-md shadow-primary/20">Approve</button>
+</div>
+</div>
+<!-- Approved Provider -->
+<div class="bg-surface-container-low rounded-xl p-6">
+<h5 class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-4">Active Authorization</h5>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-white border border-outline-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="health_and_safety">health_and_safety</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-on-surface">Dr. Linda Vance</h4>
+<p class="text-[11px] text-on-surface-variant">Internal Medicine</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="text-[11px] font-bold text-secondary">ACTIVE</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/10 flex justify-between items-center">
+<span class="text-[10px] text-on-surface-variant">Full record access granted 02/12/2024</span>
+<button class="text-error font-bold text-[11px] hover:underline">Revoke</button>
+</div>
+</div>
+<!-- Security Tip Card -->
+<div class="bg-tertiary-container/10 rounded-xl p-6 border border-tertiary-container/20">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="verified_user">verified_user</span>
+<div>
+<h4 class="font-bold text-tertiary text-sm">Privacy Reminder</h4>
+<p class="text-xs text-on-tertiary-fixed-variant leading-relaxed mt-1">Providers only see the records you explicitly authorize. You can revoke access at any time with immediate effect.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Audit Log / Bottom Section -->
+<section class="mt-12 pt-12 border-t border-outline-variant/20">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-2xl font-headline font-bold text-on-surface">Recent Activity</h2>
+<p class="text-sm text-on-surface-variant">A log of all changes made to your access settings</p>
+</div>
+<button class="text-primary font-bold text-sm flex items-center gap-1">
+                        View Full History
+                        <span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-5 rounded-xl">
+<div class="flex items-start gap-3">
+<div class="p-2 bg-secondary/10 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Access Approved</p>
+<p class="text-[11px] text-on-surface-variant mt-1">Dr. Linda Vance was granted view access to 'Medication History'.</p>
+<p class="text-[9px] text-outline mt-2 uppercase font-medium">2 hours ago</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-xl">
+<div class="flex items-start gap-3">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="person_add">person_add</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Member Added</p>
+<p class="text-[11px] text-on-surface-variant mt-1">Elena Mitchell was added as an Emergency Contact.</p>
+<p class="text-[9px] text-outline mt-2 uppercase font-medium">Yesterday at 4:30 PM</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-xl">
+<div class="flex items-start gap-3">
+<div class="p-2 bg-error/10 rounded-lg">
+<span class="material-symbols-outlined text-error text-sm" data-icon="security_update_warning">security_update_warning</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Access Revoked</p>
+<p class="text-[11px] text-on-surface-variant mt-1">Temporary access for City General Lab has expired.</p>
+<p class="text-[9px] text-outline mt-2 uppercase font-medium">3 days ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Contextual FAB - Only for Home/Dashboard/Management screens -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center transition-transform active:scale-90 z-50">
+<span class="material-symbols-outlined text-2xl" data-icon="security">security</span>
+</button>
+</body></html>

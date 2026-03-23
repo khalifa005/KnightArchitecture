@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clinical Sanctuary - Medications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-tint": "#006494",
+              "background": "#f8f9fe",
+              "outline": "#707880",
+              "primary-container": "#006494",
+              "inverse-primary": "#8ecdff",
+              "error": "#ba1a1a",
+              "on-error": "#ffffff",
+              "on-background": "#191c1f",
+              "on-tertiary-fixed-variant": "#004884",
+              "on-primary": "#ffffff",
+              "secondary-fixed-dim": "#95d4b3",
+              "primary": "#004b71",
+              "on-primary-container": "#b6ddff",
+              "primary-fixed": "#cbe6ff",
+              "surface-variant": "#e0e2e7",
+              "on-secondary-fixed-variant": "#0e5138",
+              "tertiary": "#004784",
+              "inverse-on-surface": "#eff1f5",
+              "surface-container-highest": "#e0e2e7",
+              "tertiary-fixed": "#d4e3ff",
+              "on-primary-fixed": "#001e30",
+              "secondary-fixed": "#b1f0ce",
+              "surface-bright": "#f8f9fe",
+              "on-secondary-container": "#316e52",
+              "on-primary-fixed-variant": "#004b71",
+              "on-tertiary": "#ffffff",
+              "secondary": "#2c694e",
+              "outline-variant": "#c0c7d0",
+              "surface-container-low": "#f2f4f8",
+              "secondary-container": "#aeeecb",
+              "surface-container": "#eceef2",
+              "tertiary-container": "#005fac",
+              "on-tertiary-fixed": "#001c39",
+              "surface-container-high": "#e6e8ed",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "surface-dim": "#d8dade",
+              "on-surface-variant": "#40484f",
+              "on-tertiary-container": "#c3daff",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#191c1f",
+              "on-secondary-fixed": "#002114",
+              "surface": "#f8f9fe",
+              "tertiary-fixed-dim": "#a4c9ff",
+              "primary-fixed-dim": "#8ecdff",
+              "inverse-surface": "#2d3134"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f9fe;
+      }
+      .font-headline { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="text-on-surface antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-none font-['Inter'] text-sm antialiased">
+<div class="flex justify-between items-center px-8 py-3 w-full">
+<div class="text-xl font-bold tracking-tight text-sky-900 dark:text-sky-100 font-['Manrope']">
+                Clinical Sanctuary
+            </div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4 text-slate-500">
+<button class="material-symbols-outlined hover:bg-slate-50 p-2 rounded-full transition-colors active:scale-95 duration-200" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined hover:bg-slate-50 p-2 rounded-full transition-colors active:scale-95 duration-200" data-icon="settings">settings</button>
+</div>
+<img alt="User profile avatar" class="w-8 h-8 rounded-full border border-surface-container-high" data-alt="Close up of a friendly male doctor smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAciuo1MivIrKk3y7qlMbPl8AR_EjWXKbhxwWw3RuQ0O9o53zvZAgYc5zhGabwBqe4PY0n6WsCa1x0HO3-03nZ_W6Ixk1d-3wB1S6XEpHXdwN6EqK0iTN-eqFHqmMA_DWAE6FNPxnnld1-VKSOVT-5bjGESEIs2PkPehOkH10rGQAQjymXWqg0opD2941V1BBv1wDj0pkCimr8aomGjStVFVDHgUsEV2nuzzOxVhrR5CEOHBLxBZ7VycmzUqYKt8o_pSMcUG0KKSZVj"/>
+</div>
+</div>
+<div class="bg-slate-100 dark:bg-slate-800 h-[1px] w-full"></div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-slate-50 dark:bg-slate-950 font-['Manrope'] font-medium text-sm hidden md:flex flex-col p-4 gap-2 pt-20">
+<div class="px-4 mb-6">
+<h2 class="font-['Manrope'] font-extrabold text-sky-900 dark:text-white text-lg">Patient Portal</h2>
+<p class="text-xs text-slate-500 uppercase tracking-widest">Clinical Care</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-sky-50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-sky-50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span>Medical Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-900 text-sky-700 dark:text-sky-400 shadow-sm rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="medication" style="font-variation-settings: 'FILL' 1;">medication</span>
+<span class="font-semibold">Medications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-sky-50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span>AI Assistant</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-sky-50 transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="lock_person">lock_person</span>
+<span>Access Control</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1">
+<button class="flex items-center gap-3 px-4 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-full justify-center mb-4 shadow-lg hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+<span>AI Help</span>
+</button>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:bg-sky-50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span>Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:bg-sky-50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="md:ml-64 pt-24 pb-12 px-8 lg:px-16">
+<header class="mb-12">
+<h1 class="font-headline text-4xl font-extrabold text-primary mb-2 tracking-tight">Medication Management</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl">Track your prescribed regimen, set intelligent alerts, and keep your care network informed in real-time.</p>
+</header>
+<!-- Bento Layout -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Daily Timeline / Calendar View -->
+<section class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-surface-container-low rounded-xl p-6">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline text-xl font-bold text-on-surface">Daily Schedule</h3>
+<span class="text-sm font-medium text-primary">Today, Oct 24</span>
+</div>
+<div class="relative space-y-8 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant/20">
+<!-- Timeline Item 1 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary-fixed-dim border-4 border-surface-container-low z-10"></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">08:00 AM</span>
+<span class="text-on-surface font-semibold">Lisinopril • 10mg</span>
+<span class="text-xs text-secondary font-medium flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span> 
+                                    Taken
+                                </span>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary z-10 ring-4 ring-primary-fixed"></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">12:30 PM</span>
+<span class="text-on-surface font-semibold">Metformin • 500mg</span>
+<span class="text-xs text-on-surface-variant mt-1 italic">Due in 15 mins</span>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-outline-variant z-10 border-4 border-surface-container-low"></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">08:00 PM</span>
+<span class="text-on-surface font-semibold">Atorvastatin • 20mg</span>
+<span class="text-xs text-on-surface-variant mt-1">Scheduled</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Parental Notification Status -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border-b-4 border-secondary-fixed shadow-sm">
+<div class="flex items-start gap-4">
+<div class="bg-secondary-container p-3 rounded-full text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="family_history">family_history</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface">Caregiver Status</h4>
+<p class="text-sm text-on-surface-variant mb-4">Real-time sync with Primary Contact</p>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full w-fit">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-xs font-bold uppercase tracking-tight">Parent Notified</span>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-2">Last sync: 2 mins ago</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Medications List -->
+<section class="col-span-12 lg:col-span-8 space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline text-2xl font-bold text-primary">Current Prescriptions</h2>
+<button class="text-primary text-sm font-semibold flex items-center gap-1 hover:bg-primary/5 px-3 py-1.5 rounded-full transition-colors">
+<span class="material-symbols-outlined text-base">add</span> Add New
+                    </button>
+</div>
+<!-- Med Card 1: Warning/Interaction State -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<div class="p-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="w-14 h-14 rounded-2xl bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-3xl" data-icon="pill">pill</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline text-xl font-bold">Metformin</h3>
+<span class="px-2 py-0.5 bg-error-container text-error text-[10px] font-bold uppercase rounded tracking-wider">Potential Interaction</span>
+</div>
+<p class="text-on-surface-variant text-sm">Oral tablet • 500mg • Twice daily</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-gradient-to-r from-primary to-primary-container text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-md active:scale-95 transition-all">
+                                    Mark as Taken
+                                </button>
+<button class="p-2.5 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Alert Box for Interaction -->
+<div class="mt-6 p-4 bg-error-container/30 rounded-xl border-l-4 border-error flex items-start gap-3">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<div>
+<p class="text-sm font-bold text-on-error-container">Interaction Alert with Lisinopril</p>
+<p class="text-xs text-on-error-container/80 mt-0.5">May increase the risk of lactic acidosis. Consult your healthcare provider if you experience muscle pain or weakness.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Med Card 2: Normal State -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<div class="p-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="medication">medication</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline text-xl font-bold">Lisinopril</h3>
+<span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold uppercase rounded tracking-wider">No Conflicts</span>
+</div>
+<p class="text-on-surface-variant text-sm">Oral tablet • 10mg • Once daily (Morning)</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="px-4 py-2 bg-surface-container text-secondary text-sm font-bold rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Taken at 08:14 AM
+                                </div>
+<button class="p-2.5 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Med Card 3: Refill Reminder -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<div class="p-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-3xl" data-icon="vaccines">vaccines</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline text-xl font-bold">Atorvastatin</h3>
+<span class="px-2 py-0.5 bg-tertiary-container/10 text-tertiary text-[10px] font-bold uppercase rounded tracking-wider">3 Days Left</span>
+</div>
+<p class="text-on-surface-variant text-sm">Capsule • 20mg • Once daily (Night)</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-surface-container-low text-primary border-2 border-primary/10 px-6 py-2 rounded-full font-bold text-sm hover:bg-primary/5 active:scale-95 transition-all">
+                                    Request Refill
+                                </button>
+<button class="p-2.5 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Reminders & Analytics (Secondary Bento Row) -->
+<section class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-primary text-white p-8 rounded-xl relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-9xl" data-icon="alarm_on">alarm_on</span>
+</div>
+<h4 class="font-headline text-lg font-bold mb-2">Smart Reminders</h4>
+<p class="text-primary-fixed text-sm mb-6">Predictive alerts based on your activity and heart rate trends.</p>
+<div class="flex items-center gap-2">
+<div class="w-10 h-5 bg-on-primary-container rounded-full relative">
+<div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
+</div>
+<span class="text-xs font-bold uppercase tracking-widest">Active</span>
+</div>
+</div>
+<div class="md:col-span-2 bg-surface-container-high rounded-xl p-8 flex flex-col md:flex-row items-center gap-8">
+<div class="flex-1">
+<h4 class="font-headline text-xl font-bold text-primary mb-2">Adherence Overview</h4>
+<p class="text-on-surface-variant text-sm mb-4">You have maintained a 98% adherence rate over the last 30 days. Your care team has been notified of your progress.</p>
+<div class="flex gap-4">
+<div class="px-4 py-2 bg-white rounded-lg shadow-sm">
+<span class="block text-2xl font-black text-primary">28</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">Day Streak</span>
+</div>
+<div class="px-4 py-2 bg-white rounded-lg shadow-sm">
+<span class="block text-2xl font-black text-secondary">0</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">Missed Doses</span>
+</div>
+</div>
+</div>
+<div class="w-32 h-32 relative flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="64" cy="64" fill="transparent" r="56" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary" cx="64" cy="64" fill="transparent" r="56" stroke="currentColor" stroke-dasharray="351.8" stroke-dashoffset="10" stroke-width="12"></circle>
+</svg>
+<span class="absolute font-headline font-extrabold text-2xl">98%</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button (FAB) - Suppressed as per context, but provided placeholder for consistency if needed in other screens -->
+<!-- Suppression logic applied: Focused on medication detail and action tracking -->
+</body></html>
