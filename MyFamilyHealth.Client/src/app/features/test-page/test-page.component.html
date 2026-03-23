@@ -1,0 +1,20 @@
+<main class="main-container">
+  <h1>{{ title }} Test Page</h1>
+  
+  <p-button label="Check" />
+
+  
+  <p-button label="Toggle Features" icon="pi pi-check" (onClick)="toggleLoad()"></p-button>
+
+  @if (isLoaded) {
+    <div class="features-list">
+      @for (feature of features; track feature.id) {
+        <p-card [header]="feature.name" class="feature-card">
+          <p>This is a demonstration of {{ feature.name }}.</p>
+        </p-card>
+      }
+    </div>
+  } @else {
+    <p>Features are hidden. Click the button to reveal them.</p>
+  }
+</main>
