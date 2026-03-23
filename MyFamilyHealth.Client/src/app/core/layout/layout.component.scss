@@ -1,0 +1,30 @@
+:host ::ng-deep {
+  .p-menu {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+
+    .p-menu-list {
+      padding: 0 !important;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .p-menuitem {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100%;
+    }
+
+    .p-menuitem-content {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      width: 100%;
+    }
+  }
+}

@@ -1,52 +1,54 @@
 <!-- Side Navigation Bar -->
-<aside class="fixed start-0 top-0 h-screen w-64 bg-slate-50 border-e-0 flex flex-col p-4 gap-2 z-40 hidden md:flex">
-  <div class="px-4 py-6 mb-4">
-    <h2 class="font-['Manrope'] font-extrabold text-sky-900 text-xl tracking-tight">{{ 'layout.portal_title' | transloco }}</h2>
-    <p class="text-xs font-medium text-slate-500 uppercase tracking-widest mt-1">{{ 'layout.portal_subtitle' | transloco }}</p>
+<aside [ngClass]="isExpanded() ? 'w-64' : 'w-24'" class="fixed start-0 top-0 h-screen bg-slate-50 border-e-0 flex flex-col p-4 gap-2 z-40 hidden md:flex transition-all duration-300">
+  <div class="px-3 py-6 mb-4 flex flex-col justify-center overflow-hidden whitespace-nowrap h-[100px]">
+    @if (isExpanded()) {
+        <h2 class="font-['Manrope'] font-extrabold text-sky-900 text-xl tracking-tight transition-opacity">{{ 'layout.portal_title' | transloco }}</h2>
+        <p class="text-xs font-medium text-slate-500 uppercase tracking-widest mt-1">{{ 'layout.portal_subtitle' | transloco }}</p>
+    } @else {
+        <span class="material-symbols-outlined text-sky-900 text-3xl mx-auto">health_and_safety</span>
+    }
   </div>
-  <nav class="flex-1 space-y-1">
-    <a routerLink="/" routerLinkActive="bg-white text-sky-700 shadow-sm" [routerLinkActiveOptions]="{exact:true}" class="flex items-center gap-3 px-4 py-3 text-slate-600 rounded-xl font-['Manrope'] font-medium text-sm transition-all hover:text-sky-600 hover:bg-sky-50">
-      <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-      <span>{{ 'nav.dashboard' | transloco }}</span>
-    </a>
-    <a routerLink="/medical-records" routerLinkActive="bg-white text-sky-700 shadow-sm" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-sky-600 hover:bg-sky-50 rounded-xl font-['Manrope'] font-medium text-sm transition-all">
-      <span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
-      <span>{{ 'nav.medical_records' | transloco }}</span>
-    </a>
-    <a routerLink="/medications" routerLinkActive="bg-white text-sky-700 shadow-sm" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-sky-600 hover:bg-sky-50 rounded-xl font-['Manrope'] font-medium text-sm transition-all">
-      <span class="material-symbols-outlined" data-icon="medication">medication</span>
-      <span>{{ 'nav.medications' | transloco }}</span>
-    </a>
-    <a routerLink="/ai-assistant" routerLinkActive="bg-white text-sky-700 shadow-sm" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-sky-600 hover:bg-sky-50 rounded-xl font-['Manrope'] font-medium text-sm transition-all">
-      <span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
-      <span>{{ 'nav.ai_assistant' | transloco }}</span>
-    </a>
-    <a routerLink="/access-control" routerLinkActive="bg-white text-sky-700 shadow-sm" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-sky-600 hover:bg-sky-50 rounded-xl font-['Manrope'] font-medium text-sm transition-all">
-      <span class="material-symbols-outlined" data-icon="lock_person">lock_person</span>
-      <span>{{ 'nav.access_control' | transloco }}</span>
-    </a>
-  </nav>
   
-  <div class="mt-auto pt-6 border-t border-slate-100 flex flex-col gap-1">
-    <button pButton class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-4 rounded-full font-bold shadow-lg active:scale-95 transition-transform mb-4 flex items-center justify-center gap-2">
-      <span class="material-symbols-outlined" data-icon="bolt">bolt</span>
-      {{ 'layout.ai_help' | transloco }}
+  <p-menu [model]="menuItems" styleClass="w-full border-none bg-transparent p-0 flex-1 space-y-2" [style]="{'width': '100%'}">
+    <ng-template pTemplate="item" let-item>
+       <a [routerLink]="item.routerLink" routerLinkActive="bg-white text-sky-700 shadow-sm" [routerLinkActiveOptions]="{exact: item.routerLink === '/'}" class="flex items-center gap-3 py-3 text-slate-600 rounded-xl font-['Manrope'] font-medium text-sm transition-all hover:text-sky-600 hover:bg-sky-50 overflow-hidden whitespace-nowrap w-full" [ngClass]="isExpanded() ? 'justify-start px-4' : 'justify-center px-0'">
+         <span class="material-symbols-outlined text-[24px] shrink-0" [attr.data-icon]="item.icon">{{ item.icon }}</span>
+         @if (isExpanded()) {
+            <span class="transition-opacity">{{ item.label | transloco }}</span>
+         }
+       </a>
+    </ng-template>
+  </p-menu>
+  
+  <div class="mt-auto pt-6 border-t border-slate-100 flex flex-col gap-2 overflow-hidden whitespace-nowrap">
+    <button pButton [ngClass]="{'px-0 justify-center': !isExpanded(), 'px-4': isExpanded()}" class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-3 rounded-full font-bold shadow-lg active:scale-95 transition-all mb-4 flex items-center gap-2 outline-none border-none">
+      <span class="material-symbols-outlined shrink-0" data-icon="bolt">bolt</span>
+      @if (isExpanded()) {
+        <span>{{ 'layout.ai_help' | transloco }}</span>
+      }
     </button>
-    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-sky-600 transition-colors text-sm font-medium" href="#">
-      <span class="material-symbols-outlined text-xl" data-icon="help_outline">help_outline</span>
-      <span>{{ 'layout.help_center' | transloco }}</span>
+    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-sky-600 transition-colors text-sm font-medium" [ngClass]="{'justify-center px-0': !isExpanded()}" href="#">
+      <span class="material-symbols-outlined text-xl shrink-0" data-icon="help_outline">help_outline</span>
+      @if (isExpanded()) {
+        <span>{{ 'layout.help_center' | transloco }}</span>
+      }
     </a>
-    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-sky-600 transition-colors text-sm font-medium" href="#">
-      <span class="material-symbols-outlined text-xl" data-icon="logout">logout</span>
-      <span>{{ 'layout.sign_out' | transloco }}</span>
+    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-sky-600 transition-colors text-sm font-medium" [ngClass]="{'justify-center px-0': !isExpanded()}" href="#">
+      <span class="material-symbols-outlined text-xl shrink-0" data-icon="logout">logout</span>
+      @if (isExpanded()) {
+        <span>{{ 'layout.sign_out' | transloco }}</span>
+      }
     </a>
   </div>
 </aside>
 
 <!-- Top App Bar -->
-<header class="fixed top-0 end-0 start-0 md:start-64 bg-white/80 backdrop-blur-xl z-50 shadow-sm">
+<header [ngClass]="isExpanded() ? 'md:start-64' : 'md:start-24'" class="fixed top-0 end-0 start-0 bg-white/80 backdrop-blur-xl z-50 shadow-sm transition-all duration-300">
   <div class="flex justify-between items-center px-8 py-4 w-full">
     <div class="flex items-center gap-4">
+      <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors hidden md:block" (click)="toggleSidebar()">
+         <span class="material-symbols-outlined shrink-0 text-xl font-bold p-1">menu_open</span>
+      </button>
       <h1 class="text-xl font-bold tracking-tight text-sky-900 font-['Manrope']">{{ 'layout.header_title' | transloco }}</h1>
     </div>
     <div class="flex items-center gap-6">
@@ -80,7 +82,7 @@
 </header>
 
 <!-- Main Content Canvas -->
-<main class="pt-24 md:ps-64 min-h-screen px-8 pb-12">
+<main [ngClass]="isExpanded() ? 'md:ps-64' : 'md:ps-24'" class="pt-24 min-h-screen px-8 pb-12 transition-all duration-300">
   <div class="max-w-7xl mx-auto">
     <router-outlet></router-outlet>
   </div>
