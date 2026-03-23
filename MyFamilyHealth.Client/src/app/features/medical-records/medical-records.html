@@ -1,30 +1,24 @@
 <div class="max-w-6xl mx-auto">
 <!-- Page Header -->
 <header class="mb-12">
-<h1 class="text-4xl font-extrabold tracking-tight text-primary mb-2">Medical Records</h1>
-<p class="text-on-surface-variant text-lg max-w-2xl">Secure access to your clinical history, laboratory results, and diagnostic imaging in one editorial sanctuary.</p>
+<h1 class="text-4xl font-extrabold tracking-tight text-primary mb-2">{{ 'medicalRecords.title' | transloco }}</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl">{{ 'medicalRecords.subtitle' | transloco }}</p>
 </header>
 <!-- Filters Area (Tonal Shift, No Borders) -->
 <section class="bg-surface-container-low rounded-xl p-6 mb-8 flex flex-wrap items-center gap-4">
 <div class="flex-1 min-w-[240px]">
 <div class="relative">
 <span class="material-symbols-outlined absolute start-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
-<input pInputText class="w-full ps-12 pe-4 py-3 bg-surface-container-lowest rounded-full border-none focus:ring-2 focus:ring-primary/20 text-sm font-body" placeholder="Search records, doctors, or tests..." type="text"/>
+<input pInputText class="w-full ps-12 pe-4 py-3 bg-surface-container-lowest rounded-full border-none focus:ring-2 focus:ring-primary/20 text-sm font-body" [placeholder]="'medicalRecords.search_placeholder' | transloco" type="text"/>
 </div>
 </div>
 <div class="flex items-center gap-3">
 <div class="flex items-center bg-surface-container-lowest rounded-full px-4 py-2 text-sm text-on-surface-variant hover:bg-white cursor-pointer transition-colors">
-<span class="material-symbols-outlined me-2 text-[20px]" data-icon="calendar_month">calendar_month</span>
-                        Date Range
-                    </div>
+<span class="material-symbols-outlined me-2 text-[20px]" data-icon="calendar_month">calendar_month</span>{{ 'medicalRecords.date_range' | transloco }}</div>
 <div class="flex items-center bg-surface-container-lowest rounded-full px-4 py-2 text-sm text-on-surface-variant hover:bg-white cursor-pointer transition-colors">
-<span class="material-symbols-outlined me-2 text-[20px]" data-icon="filter_list">filter_list</span>
-                        Type: All
-                    </div>
+<span class="material-symbols-outlined me-2 text-[20px]" data-icon="filter_list">filter_list</span>{{ 'medicalRecords.type_all' | transloco }}</div>
 <div class="flex items-center bg-surface-container-lowest rounded-full px-4 py-2 text-sm text-on-surface-variant hover:bg-white cursor-pointer transition-colors">
-<span class="material-symbols-outlined me-2 text-[20px]" data-icon="person">person</span>
-                        Provider
-                    </div>
+<span class="material-symbols-outlined me-2 text-[20px]" data-icon="person">person</span>{{ 'medicalRecords.provider' | transloco }}</div>
 </div>
 </section>
 <!-- Records Grid -->
@@ -37,27 +31,19 @@
 <span class="material-symbols-outlined" data-icon="bloodtype">bloodtype</span>
 </div>
 <div>
-<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Comprehensive Metabolic Panel</h3>
-<p class="text-sm text-on-surface-variant font-medium">October 24, 2023 • LabCorp Diagnostics</p>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">{{ 'medicalRecords.cmp' | transloco }}</h3>
+<p class="text-sm text-on-surface-variant font-medium">{{ 'medicalRecords.cmp_date' | transloco }}</p>
 </div>
 </div>
-<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                            Normal
-                        </div>
+<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{{ 'medicalRecords.normal' | transloco }}</div>
 </div>
 <div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>
-                        Dr. Helena Vance • General Practitioner
-                    </div>
+<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>{{ 'medicalRecords.dr_helena' | transloco }}</div>
 <div class="flex items-center gap-3">
 <button pButton class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span>
-                            View Report
-                        </button>
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span>{{ 'medicalRecords.view_report' | transloco }}</button>
 <button pButton class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
-<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-                            AI Interpretation
-                        </button>
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>{{ 'medicalRecords.ai_interpretation' | transloco }}</button>
 </div>
 </article>
 <!-- Record Card 2 (Imaging) -->
@@ -68,27 +54,19 @@
 <span class="material-symbols-outlined" data-icon="radiology">radiology</span>
 </div>
 <div>
-<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Lumbar Spine MRI</h3>
-<p class="text-sm text-on-surface-variant font-medium">September 12, 2023 • City Imaging Center</p>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">{{ 'medicalRecords.lumbar_mri' | transloco }}</h3>
+<p class="text-sm text-on-surface-variant font-medium">{{ 'medicalRecords.mri_date' | transloco }}</p>
 </div>
 </div>
-<div class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                            Pending Review
-                        </div>
+<div class="bg-surface-container text-on-surface-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{{ 'medicalRecords.pending_review' | transloco }}</div>
 </div>
 <div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>
-                        Dr. Marcus Thorne • Orthopedic Surgeon
-                    </div>
+<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>{{ 'medicalRecords.dr_marcus' | transloco }}</div>
 <div class="flex items-center gap-3">
 <button pButton class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="image">image</span>
-                            Open DICOM Viewer
-                        </button>
+<span class="material-symbols-outlined text-[18px]" data-icon="image">image</span>{{ 'medicalRecords.open_dicom' | transloco }}</button>
 <button pButton class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
-<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-                            AI Interpretation
-                        </button>
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>{{ 'medicalRecords.ai_interpretation' | transloco }}</button>
 </div>
 </article>
 <!-- Record Card 3 -->
@@ -99,27 +77,19 @@
 <span class="material-symbols-outlined" data-icon="ecg">ecg</span>
 </div>
 <div>
-<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Resting Electrocardiogram</h3>
-<p class="text-sm text-on-surface-variant font-medium">August 05, 2023 • Cardiology Associates</p>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">{{ 'medicalRecords.ecg' | transloco }}</h3>
+<p class="text-sm text-on-surface-variant font-medium">{{ 'medicalRecords.ecg_date' | transloco }}</p>
 </div>
 </div>
-<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                            Normal
-                        </div>
+<div class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{{ 'medicalRecords.normal' | transloco }}</div>
 </div>
 <div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>
-                        Dr. Sarah Chen • Cardiologist
-                    </div>
+<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>{{ 'medicalRecords.dr_sarah' | transloco }}</div>
 <div class="flex items-center gap-3">
 <button pButton class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
-                            PDF Report
-                        </button>
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>{{ 'medicalRecords.pdf_report' | transloco }}</button>
 <button pButton class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
-<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-                            AI Interpretation
-                        </button>
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>{{ 'medicalRecords.ai_interpretation' | transloco }}</button>
 </div>
 </article>
 <!-- Record Card 4 (Actionable/Urgent) -->
@@ -131,36 +101,26 @@
 <span class="material-symbols-outlined" data-icon="science">science</span>
 </div>
 <div>
-<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">Vitamin D, 25-Hydroxy</h3>
-<p class="text-sm text-on-surface-variant font-medium">July 18, 2023 • LabCorp Diagnostics</p>
+<h3 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors">{{ 'medicalRecords.vit_d' | transloco }}</h3>
+<p class="text-sm text-on-surface-variant font-medium">{{ 'medicalRecords.vit_d_date' | transloco }}</p>
 </div>
 </div>
-<div class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                            Low Range
-                        </div>
+<div class="bg-error-container text-on-error-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{{ 'medicalRecords.low_range' | transloco }}</div>
 </div>
 <div class="flex items-center gap-2 mb-6 text-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>
-                        Dr. Helena Vance • General Practitioner
-                    </div>
+<span class="material-symbols-outlined text-[18px]" data-icon="medical_information">medical_information</span>{{ 'medicalRecords.dr_helena' | transloco }}</div>
 <div class="flex items-center gap-3">
 <button pButton class="flex-1 bg-surface-container-low hover:bg-surface-container-high text-primary font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span>
-                            View Details
-                        </button>
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span>{{ 'medicalRecords.view_details' | transloco }}</button>
 <button pButton class="flex-1 bg-gradient-to-r from-tertiary to-tertiary-container text-white font-semibold py-2.5 rounded-full text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
-<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-                            AI Interpretation
-                        </button>
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>{{ 'medicalRecords.ai_interpretation' | transloco }}</button>
 </div>
 </article>
 </div>
 <!-- Empty State / Load More (Editorial Minimalism) -->
 <div class="mt-16 text-center">
-<p class="text-on-surface-variant font-medium mb-6">Showing 4 of 28 medical records</p>
-<button pButton class="px-8 py-3 rounded-full border border-outline-variant text-primary font-bold hover:bg-surface-container transition-colors active:scale-95">
-                    Load Archive History
-                </button>
+<p class="text-on-surface-variant font-medium mb-6">{{ 'medicalRecords.showing_records' | transloco }}</p>
+<button pButton class="px-8 py-3 rounded-full border border-outline-variant text-primary font-bold hover:bg-surface-container transition-colors active:scale-95">{{ 'medicalRecords.load_archive' | transloco }}</button>
 </div>
 <!-- AI Insight Preview (Floating Glassmorphism Card) -->
 <div class="mt-20 p-8 rounded-3xl bg-white/40 backdrop-blur-2xl border border-white/50 relative overflow-hidden group">
@@ -170,12 +130,10 @@
 <span class="material-symbols-outlined text-white text-4xl" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
 </div>
 <div class="flex-1 text-center md:text-start">
-<h4 class="text-2xl font-bold text-on-surface mb-2">Understand your health like never before</h4>
-<p class="text-on-surface-variant">Our Clinical AI breaks down complex medical jargon into easy-to-understand summaries. Tap 'AI Interpretation' on any record to begin.</p>
+<h4 class="text-2xl font-bold text-on-surface mb-2">{{ 'medicalRecords.ai_upsell_title' | transloco }}</h4>
+<p class="text-on-surface-variant">{{ 'medicalRecords.ai_upsell_desc' | transloco }}</p>
 </div>
-<button pButton class="bg-primary text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-primary/20 hover:shadow-xl transition-all">
-                        Upgrade Insight Tier
-                    </button>
+<button pButton class="bg-primary text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-primary/20 hover:shadow-xl transition-all">{{ 'medicalRecords.upgrade_tier' | transloco }}</button>
 </div>
 </div>
 </div>

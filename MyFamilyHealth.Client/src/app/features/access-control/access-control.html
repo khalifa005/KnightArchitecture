@@ -1,8 +1,8 @@
 <div class="p-8 lg:p-12 max-w-7xl mx-auto space-y-12">
 <!-- Hero Header Section -->
 <section class="mb-12">
-<h3 class="text-display-lg font-headline font-extrabold text-primary mb-4 text-4xl lg:text-5xl tracking-tight">Security &amp; Governance</h3>
-<p class="text-on-surface-variant max-w-2xl text-lg font-body leading-relaxed">Manage who has access to your clinical records. Granular controls ensure your medical data is shared only with people you trust.</p>
+<h3 class="text-display-lg font-headline font-extrabold text-primary mb-4 text-4xl lg:text-5xl tracking-tight">{{ 'accessControl.title' | transloco }}</h3>
+<p class="text-on-surface-variant max-w-2xl text-lg font-body leading-relaxed">{{ 'accessControl.subtitle' | transloco }}</p>
 </section>
 <!-- Grid Layout -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -11,11 +11,11 @@
 <div class="flex items-center justify-between">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="family_history">family_history</span>
-<h2 class="text-2xl font-headline font-bold text-on-surface">Family Sharing</h2>
+<h2 class="text-2xl font-headline font-bold text-on-surface">{{ 'accessControl.family_sharing' | transloco }}</h2>
 </div>
 <button pButton class="text-primary font-semibold flex items-center gap-2 px-4 py-2 hover:bg-surface-container rounded-full transition-all">
 <span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
-<span>Add Member</span>
+<span>{{ 'accessControl.add_member' | transloco }}</span>
 </button>
 </div>
 <div class="bg-surface-container-low rounded-xl p-1 space-y-1">
@@ -24,14 +24,14 @@
 <div class="flex items-center gap-4">
 <div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">EM</div>
 <div>
-<h4 class="font-bold text-on-surface">Elena Mitchell</h4>
-<p class="text-sm text-on-surface-variant">Spouse • Emergency Contact</p>
+<h4 class="font-bold text-on-surface">{{ 'accessControl.elena' | transloco }}</h4>
+<p class="text-sm text-on-surface-variant">{{ 'accessControl.elena_role' | transloco }}</p>
 </div>
 </div>
 <div class="flex items-center gap-6">
 <div class="text-end hidden sm:block">
-<span class="bg-secondary-fixed text-on-secondary-fixed-variant text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Full Access</span>
-<p class="text-[10px] text-on-surface-variant mt-1">Verified Oct 2023</p>
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">{{ 'accessControl.full_access' | transloco }}</span>
+<p class="text-[10px] text-on-surface-variant mt-1">{{ 'accessControl.verified_oct' | transloco }}</p>
 </div>
 <button pButton class="p-2 text-outline-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
@@ -43,14 +43,14 @@
 <div class="flex items-center gap-4">
 <div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold">JM</div>
 <div>
-<h4 class="font-bold text-on-surface">James Mitchell</h4>
-<p class="text-sm text-on-surface-variant">Son • Dependent</p>
+<h4 class="font-bold text-on-surface">{{ 'accessControl.james' | transloco }}</h4>
+<p class="text-sm text-on-surface-variant">{{ 'accessControl.james_role' | transloco }}</p>
 </div>
 </div>
 <div class="flex items-center gap-6">
 <div class="text-end hidden sm:block">
-<span class="bg-surface-container-high text-on-surface-variant text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">View Only</span>
-<p class="text-[10px] text-on-surface-variant mt-1">Managed Account</p>
+<span class="bg-surface-container-high text-on-surface-variant text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">{{ 'accessControl.view_only' | transloco }}</span>
+<p class="text-[10px] text-on-surface-variant mt-1">{{ 'accessControl.managed_account' | transloco }}</p>
 </div>
 <button pButton class="p-2 text-outline-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
@@ -62,14 +62,14 @@
 <div class="flex items-center gap-4">
 <div class="w-12 h-12 rounded-full bg-secondary-fixed-dim flex items-center justify-center text-secondary font-bold">SR</div>
 <div>
-<h4 class="font-bold text-on-surface">Sarah Reed</h4>
-<p class="text-sm text-on-surface-variant">Primary Caregiver</p>
+<h4 class="font-bold text-on-surface">{{ 'accessControl.sarah' | transloco }}</h4>
+<p class="text-sm text-on-surface-variant">{{ 'accessControl.sarah_role' | transloco }}</p>
 </div>
 </div>
 <div class="flex items-center gap-6">
 <div class="text-end hidden sm:block">
-<span class="bg-secondary-fixed text-on-secondary-fixed-variant text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Authorized</span>
-<p class="text-[10px] text-on-surface-variant mt-1">Expires Dec 2024</p>
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">{{ 'accessControl.authorized' | transloco }}</span>
+<p class="text-[10px] text-on-surface-variant mt-1">{{ 'accessControl.expires_dec' | transloco }}</p>
 </div>
 <button pButton class="p-2 text-outline-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
@@ -82,7 +82,7 @@
 <div class="lg:col-span-5 space-y-6">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="clinical_notes">clinical_notes</span>
-<h2 class="text-2xl font-headline font-bold text-on-surface">Provider Requests</h2>
+<h2 class="text-2xl font-headline font-bold text-on-surface">{{ 'accessControl.provider_requests' | transloco }}</h2>
 </div>
 <div class="space-y-4">
 <!-- Pending Request 1 -->
@@ -93,39 +93,39 @@
 <span class="material-symbols-outlined text-primary" data-icon="medical_services">medical_services</span>
 </div>
 <div>
-<h4 class="font-bold text-on-surface">Dr. Aris Thorne</h4>
-<p class="text-xs text-on-surface-variant">Cardiology Specialist</p>
-<p class="text-[10px] bg-primary-container/10 text-primary font-bold px-2 py-0.5 rounded mt-1 inline-block">Saint Jude Medical Center</p>
+<h4 class="font-bold text-on-surface">{{ 'accessControl.dr_aris' | transloco }}</h4>
+<p class="text-xs text-on-surface-variant">{{ 'accessControl.dr_aris_spec' | transloco }}</p>
+<p class="text-[10px] bg-primary-container/10 text-primary font-bold px-2 py-0.5 rounded mt-1 inline-block">{{ 'accessControl.st_jude' | transloco }}</p>
 </div>
 </div>
 </div>
-<p class="text-sm text-on-surface-variant mb-6 leading-relaxed italic">"Requesting access to history and current medication list for upcoming consultation."</p>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed italic">{{ 'accessControl.aris_req' | transloco }}</p>
 <div class="grid grid-cols-2 gap-3">
-<button pButton class="py-2.5 rounded-full bg-surface-container-high text-on-surface font-bold text-sm transition-all active:scale-95">Deny</button>
-<button pButton class="py-2.5 rounded-full bg-primary text-on-primary font-bold text-sm transition-all active:scale-95 shadow-md shadow-primary/20">Approve</button>
+<button pButton class="py-2.5 rounded-full bg-surface-container-high text-on-surface font-bold text-sm transition-all active:scale-95">{{ 'accessControl.deny' | transloco }}</button>
+<button pButton class="py-2.5 rounded-full bg-primary text-on-primary font-bold text-sm transition-all active:scale-95 shadow-md shadow-primary/20">{{ 'accessControl.approve' | transloco }}</button>
 </div>
 </div>
 <!-- Approved Provider -->
 <div class="bg-surface-container-low rounded-xl p-6">
-<h5 class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-4">Active Authorization</h5>
+<h5 class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-4">{{ 'accessControl.active_auth' | transloco }}</h5>
 <div class="flex items-center justify-between">
 <div class="flex items-center gap-3">
 <div class="w-10 h-10 rounded-full bg-white border border-outline-variant/20 flex items-center justify-center">
 <span class="material-symbols-outlined text-secondary" data-icon="health_and_safety">health_and_safety</span>
 </div>
 <div>
-<h4 class="font-bold text-sm text-on-surface">Dr. Linda Vance</h4>
-<p class="text-[11px] text-on-surface-variant">Internal Medicine</p>
+<h4 class="font-bold text-sm text-on-surface">{{ 'accessControl.dr_linda' | transloco }}</h4>
+<p class="text-[11px] text-on-surface-variant">{{ 'accessControl.dr_linda_spec' | transloco }}</p>
 </div>
 </div>
 <div class="flex items-center gap-2">
 <div class="w-2 h-2 rounded-full bg-secondary"></div>
-<span class="text-[11px] font-bold text-secondary">ACTIVE</span>
+<span class="text-[11px] font-bold text-secondary">{{ 'accessControl.active' | transloco }}</span>
 </div>
 </div>
 <div class="mt-4 pt-4 border-t border-outline-variant/10 flex justify-between items-center">
-<span class="text-[10px] text-on-surface-variant">Full record access granted 02/12/2024</span>
-<button pButton class="text-error font-bold text-[11px] hover:underline">Revoke</button>
+<span class="text-[10px] text-on-surface-variant">{{ 'accessControl.linda_date' | transloco }}</span>
+<button pButton class="text-error font-bold text-[11px] hover:underline">{{ 'accessControl.revoke' | transloco }}</button>
 </div>
 </div>
 <!-- Security Tip Card -->
@@ -133,8 +133,8 @@
 <div class="flex gap-4">
 <span class="material-symbols-outlined text-tertiary" data-icon="verified_user">verified_user</span>
 <div>
-<h4 class="font-bold text-tertiary text-sm">Privacy Reminder</h4>
-<p class="text-xs text-on-tertiary-fixed-variant leading-relaxed mt-1">Providers only see the records you explicitly authorize. You can revoke access at any time with immediate effect.</p>
+<h4 class="font-bold text-tertiary text-sm">{{ 'accessControl.privacy_reminder' | transloco }}</h4>
+<p class="text-xs text-on-tertiary-fixed-variant leading-relaxed mt-1">{{ 'accessControl.privacy_desc' | transloco }}</p>
 </div>
 </div>
 </div>
@@ -145,12 +145,10 @@
 <section class="mt-12 pt-12 border-t border-outline-variant/20">
 <div class="flex items-center justify-between mb-8">
 <div>
-<h2 class="text-2xl font-headline font-bold text-on-surface">Recent Activity</h2>
-<p class="text-sm text-on-surface-variant">A log of all changes made to your access settings</p>
+<h2 class="text-2xl font-headline font-bold text-on-surface">{{ 'accessControl.recent_activity' | transloco }}</h2>
+<p class="text-sm text-on-surface-variant">{{ 'accessControl.log_desc' | transloco }}</p>
 </div>
-<button pButton class="text-primary font-bold text-sm flex items-center gap-1">
-                        View Full History
-                        <span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
+<button pButton class="text-primary font-bold text-sm flex items-center gap-1">{{ 'accessControl.view_history' | transloco }}<span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
 </button>
 </div>
 <div class="space-y-4">
@@ -161,9 +159,9 @@
 <span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle">check_circle</span>
 </div>
 <div>
-<p class="text-xs font-bold text-on-surface">Access Approved</p>
-<p class="text-[11px] text-on-surface-variant mt-1">Dr. Linda Vance was granted view access to 'Medication History'.</p>
-<p class="text-[9px] text-outline mt-2 uppercase font-medium">2 hours ago</p>
+<p class="text-xs font-bold text-on-surface">{{ 'accessControl.access_approved' | transloco }}</p>
+<p class="text-[11px] text-on-surface-variant mt-1">{{ 'accessControl.log_linda' | transloco }}</p>
+<p class="text-[9px] text-outline mt-2 uppercase font-medium">{{ 'accessControl.ago_2h' | transloco }}</p>
 </div>
 </div>
 </div>
@@ -173,9 +171,9 @@
 <span class="material-symbols-outlined text-primary text-sm" data-icon="person_add">person_add</span>
 </div>
 <div>
-<p class="text-xs font-bold text-on-surface">Member Added</p>
-<p class="text-[11px] text-on-surface-variant mt-1">Elena Mitchell was added as an Emergency Contact.</p>
-<p class="text-[9px] text-outline mt-2 uppercase font-medium">Yesterday at 4:30 PM</p>
+<p class="text-xs font-bold text-on-surface">{{ 'accessControl.member_added' | transloco }}</p>
+<p class="text-[11px] text-on-surface-variant mt-1">{{ 'accessControl.log_elena' | transloco }}</p>
+<p class="text-[9px] text-outline mt-2 uppercase font-medium">{{ 'accessControl.yest_430' | transloco }}</p>
 </div>
 </div>
 </div>
@@ -185,9 +183,9 @@
 <span class="material-symbols-outlined text-error text-sm" data-icon="security_update_warning">security_update_warning</span>
 </div>
 <div>
-<p class="text-xs font-bold text-on-surface">Access Revoked</p>
-<p class="text-[11px] text-on-surface-variant mt-1">Temporary access for City General Lab has expired.</p>
-<p class="text-[9px] text-outline mt-2 uppercase font-medium">3 days ago</p>
+<p class="text-xs font-bold text-on-surface">{{ 'accessControl.access_revoked' | transloco }}</p>
+<p class="text-[11px] text-on-surface-variant mt-1">{{ 'accessControl.log_lab' | transloco }}</p>
+<p class="text-[9px] text-outline mt-2 uppercase font-medium">{{ 'accessControl.ago_3d' | transloco }}</p>
 </div>
 </div>
 </div>

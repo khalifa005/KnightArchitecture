@@ -1,7 +1,7 @@
 <!-- Hero Header Section -->
 <div class="mb-12 mt-6">
-<h2 class="text-4xl font-extrabold text-on-surface tracking-tight mb-2">Welcome back, Alex.</h2>
-<p class="text-on-surface-variant text-lg">Your health sanctuary is looking stable today. You have <span class="text-primary font-semibold">2 pending actions</span>.</p>
+<h2 class="text-4xl font-extrabold text-on-surface tracking-tight mb-2">{{ 'dashboard.welcome' | transloco }}</h2>
+<p class="text-on-surface-variant text-lg">{{ 'dashboard.status_prefix' | transloco }}<span class="text-primary font-semibold">{{ 'dashboard.status_highlight' | transloco }}</span>.</p>
 </div>
 <!-- Bento Grid Layout -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -11,18 +11,14 @@
 <div class="relative z-10 flex flex-col md:flex-row gap-8 items-start">
 <div class="flex-1">
 <div class="inline-flex items-center gap-2 bg-secondary-container px-3 py-1 rounded-full text-on-secondary-container text-xs font-bold mb-4 uppercase tracking-wider">
-<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>
-                                AI Personalized Insight
-                            </div>
-<h3 class="text-2xl font-bold text-on-surface mb-4">Focus on your sleep hygiene tonight.</h3>
-<p class="text-on-surface-variant leading-relaxed mb-6">Based on your glucose levels and heart rate variability from your wearables, we suggest moving your dinner 1 hour earlier. This could improve your recovery score by approximately 14%.</p>
-<button pButton class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-container transition-colors active:scale-95">
-                                View Full Analysis
-                            </button>
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>{{ 'dashboard.insight_tag' | transloco }}</div>
+<h3 class="text-2xl font-bold text-on-surface mb-4">{{ 'dashboard.insight_title' | transloco }}</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">{{ 'dashboard.insight_desc' | transloco }}</p>
+<button pButton class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-container transition-colors active:scale-95">{{ 'dashboard.view_analysis' | transloco }}</button>
 </div>
 <div class="w-full md:w-48 bg-surface-container-low rounded-xl p-4 flex flex-col items-center justify-center border border-outline-variant/15">
 <span class="text-secondary font-bold text-4xl mb-1">82</span>
-<span class="text-on-surface-variant text-xs font-medium uppercase">Health Score</span>
+<span class="text-on-surface-variant text-xs font-medium uppercase">{{ 'dashboard.health_score' | transloco }}</span>
 <div class="w-full bg-outline-variant/30 h-1.5 rounded-full mt-4 overflow-hidden">
 <div class="bg-secondary h-full w-[82%]"></div>
 </div>
@@ -34,22 +30,20 @@
 <div class="bg-gradient-to-br from-tertiary to-tertiary-container text-white p-6 rounded-xl shadow-lg flex flex-col justify-between h-full">
 <div>
 <span class="material-symbols-outlined text-4xl mb-4" data-icon="medication_liquid">medication_liquid</span>
-<h3 class="text-xl font-bold mb-2">Need a Refill?</h3>
-<p class="text-on-tertiary-container text-sm leading-relaxed">Your Lisinopril prescription is running low. We can contact Dr. Aris for you.</p>
+<h3 class="text-xl font-bold mb-2">{{ 'dashboard.need_refill' | transloco }}</h3>
+<p class="text-on-tertiary-container text-sm leading-relaxed">{{ 'dashboard.refill_desc' | transloco }}</p>
 </div>
-<button pButton class="bg-white text-tertiary w-full py-3 rounded-full font-bold mt-6 hover:bg-tertiary-fixed transition-colors">
-                            Refill Now
-                        </button>
+<button pButton class="bg-white text-tertiary w-full py-3 rounded-full font-bold mt-6 hover:bg-tertiary-fixed transition-colors">{{ 'dashboard.refill_now' | transloco }}</button>
 </div>
 </div>
 <!-- Recent Activity & Results -->
 <div class="lg:col-span-7 bg-surface-container-low rounded-xl p-8">
 <div class="flex justify-between items-end mb-8">
 <div>
-<h3 class="text-xl font-bold text-on-surface">Latest Test Results</h3>
-<p class="text-on-surface-variant text-sm">Updated 14 hours ago</p>
+<h3 class="text-xl font-bold text-on-surface">{{ 'dashboard.latest_results' | transloco }}</h3>
+<p class="text-on-surface-variant text-sm">{{ 'dashboard.updated_time' | transloco }}</p>
 </div>
-<a class="text-primary text-sm font-semibold hover:underline" href="#">View All Records</a>
+<a class="text-primary text-sm font-semibold hover:underline" href="#">{{ 'dashboard.view_all' | transloco }}</a>
 </div>
 <div class="space-y-4">
 <!-- Result Row 1 -->
@@ -59,14 +53,14 @@
 <span class="material-symbols-outlined" data-icon="bloodtype">bloodtype</span>
 </div>
 <div>
-<p class="font-bold text-on-surface">Complete Blood Count</p>
-<p class="text-xs text-on-surface-variant">Clinical Labs West</p>
+<p class="font-bold text-on-surface">{{ 'dashboard.cbc' | transloco }}</p>
+<p class="text-xs text-on-surface-variant">{{ 'dashboard.cbc_lab' | transloco }}</p>
 </div>
 </div>
 <div class="flex items-center gap-6">
 <div class="text-end">
-<p class="font-bold text-on-surface">Normal</p>
-<p class="text-xs text-secondary font-medium">Within Range</p>
+<p class="font-bold text-on-surface">{{ 'dashboard.normal' | transloco }}</p>
+<p class="text-xs text-secondary font-medium">{{ 'dashboard.within_range' | transloco }}</p>
 </div>
 <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
 </div>
@@ -78,14 +72,14 @@
 <span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span>
 </div>
 <div>
-<p class="font-bold text-on-surface">ECG Summary</p>
-<p class="text-xs text-on-surface-variant">Cardiology Dept.</p>
+<p class="font-bold text-on-surface">{{ 'dashboard.ecg' | transloco }}</p>
+<p class="text-xs text-on-surface-variant">{{ 'dashboard.ecg_dept' | transloco }}</p>
 </div>
 </div>
 <div class="flex items-center gap-6">
 <div class="text-end">
-<p class="font-bold text-on-surface">Pending</p>
-<p class="text-xs text-on-surface-variant font-medium">Est. 2 days</p>
+<p class="font-bold text-on-surface">{{ 'dashboard.pending' | transloco }}</p>
+<p class="text-xs text-on-surface-variant font-medium">{{ 'dashboard.est_2_days' | transloco }}</p>
 </div>
 <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="hourglass_empty">hourglass_empty</span>
 </div>
@@ -97,14 +91,14 @@
 <span class="material-symbols-outlined" data-icon="biotech">biotech</span>
 </div>
 <div>
-<p class="font-bold text-on-surface">Metabolic Panel</p>
-<p class="text-xs text-on-surface-variant">General Hospital</p>
+<p class="font-bold text-on-surface">{{ 'dashboard.metabolic' | transloco }}</p>
+<p class="text-xs text-on-surface-variant">{{ 'dashboard.gen_hospital' | transloco }}</p>
 </div>
 </div>
 <div class="flex items-center gap-6">
 <div class="text-end">
-<p class="font-bold text-error">Attention</p>
-<p class="text-xs text-error font-medium">High Glucose</p>
+<p class="font-bold text-error">{{ 'dashboard.attention' | transloco }}</p>
+<p class="text-xs text-error font-medium">{{ 'dashboard.high_glucose' | transloco }}</p>
 </div>
 <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
 </div>
@@ -114,7 +108,7 @@
 <!-- Medication Reminders -->
 <div class="lg:col-span-5 bg-surface-container-low rounded-xl p-8">
 <div class="flex justify-between items-center mb-8">
-<h3 class="text-xl font-bold text-on-surface">Medication Track</h3>
+<h3 class="text-xl font-bold text-on-surface">{{ 'dashboard.med_track' | transloco }}</h3>
 <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm">
 <span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
 </div>
@@ -125,11 +119,11 @@
 <div class="absolute -start-[41px] top-1 w-4 h-4 rounded-full bg-secondary ring-4 ring-white"></div>
 <div class="bg-white p-4 rounded-xl shadow-sm border border-transparent hover:border-secondary transition-all">
 <div class="flex justify-between items-start mb-2">
-<span class="text-xs font-bold text-secondary uppercase">Completed</span>
+<span class="text-xs font-bold text-secondary uppercase">{{ 'dashboard.completed' | transloco }}</span>
 <span class="text-xs text-on-surface-variant font-medium">8:00 AM</span>
 </div>
-<p class="font-bold text-on-surface">Metformin</p>
-<p class="text-xs text-on-surface-variant">500mg • After Breakfast</p>
+<p class="font-bold text-on-surface">{{ 'dashboard.metformin' | transloco }}</p>
+<p class="text-xs text-on-surface-variant">{{ 'dashboard.metformin_desc' | transloco }}</p>
 </div>
 </div>
 <!-- Medication Item 2 -->
@@ -137,14 +131,12 @@
 <div class="absolute -start-[41px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white"></div>
 <div class="bg-white p-4 rounded-xl shadow-sm border border-transparent hover:border-primary transition-all">
 <div class="flex justify-between items-start mb-2">
-<span class="text-xs font-bold text-primary uppercase">Upcoming</span>
+<span class="text-xs font-bold text-primary uppercase">{{ 'dashboard.upcoming' | transloco }}</span>
 <span class="text-xs text-on-surface-variant font-medium">2:00 PM</span>
 </div>
-<p class="font-bold text-on-surface">Vitamin D3</p>
-<p class="text-xs text-on-surface-variant">2000 IU • With Meal</p>
-<button pButton class="mt-4 w-full py-2 bg-surface-container text-primary rounded-full text-xs font-bold hover:bg-primary hover:text-white transition-all">
-                                    Log Dose
-                                </button>
+<p class="font-bold text-on-surface">{{ 'dashboard.vit_d3' | transloco }}</p>
+<p class="text-xs text-on-surface-variant">{{ 'dashboard.vit_d3_desc' | transloco }}</p>
+<button pButton class="mt-4 w-full py-2 bg-surface-container text-primary rounded-full text-xs font-bold hover:bg-primary hover:text-white transition-all">{{ 'dashboard.log_dose' | transloco }}</button>
 </div>
 </div>
 <!-- Medication Item 3 -->
@@ -154,8 +146,8 @@
 <div class="flex justify-between items-start mb-1">
 <span class="text-xs text-on-surface-variant font-medium">8:00 PM</span>
 </div>
-<p class="font-bold text-on-surface">Atorvastatin</p>
-<p class="text-xs text-on-surface-variant">20mg • Before Bed</p>
+<p class="font-bold text-on-surface">{{ 'dashboard.atorvastatin' | transloco }}</p>
+<p class="text-xs text-on-surface-variant">{{ 'dashboard.atorvastatin_desc' | transloco }}</p>
 </div>
 </div>
 </div>
@@ -167,11 +159,11 @@
 <span class="material-symbols-outlined text-3xl" data-icon="monitor_weight">monitor_weight</span>
 </div>
 <div>
-<p class="text-on-surface-variant text-sm font-medium">Last Weight</p>
-<h4 class="text-2xl font-extrabold text-on-surface">178.4 <span class="text-sm font-normal text-on-surface-variant">lbs</span></h4>
+<p class="text-on-surface-variant text-sm font-medium">{{ 'dashboard.last_weight' | transloco }}</p>
+<h4 class="text-2xl font-extrabold text-on-surface">178.4 <span class="text-sm font-normal text-on-surface-variant">{{ 'dashboard.lbs' | transloco }}</span></h4>
 <div class="flex items-center gap-1 mt-1">
 <span class="material-symbols-outlined text-secondary text-sm" data-icon="trending_down">trending_down</span>
-<span class="text-xs text-secondary font-bold">-2.1 lbs this month</span>
+<span class="text-xs text-secondary font-bold">-2.1 {{ 'dashboard.lbs' | transloco }} this month</span>
 </div>
 </div>
 </div>
@@ -180,9 +172,9 @@
 <span class="material-symbols-outlined text-3xl" data-icon="thermostat">thermostat</span>
 </div>
 <div>
-<p class="text-on-surface-variant text-sm font-medium">Body Temp</p>
-<h4 class="text-2xl font-extrabold text-on-surface">98.6 <span class="text-sm font-normal text-on-surface-variant">°F</span></h4>
-<div class="inline-block mt-1 px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold uppercase tracking-tighter">Normal</div>
+<p class="text-on-surface-variant text-sm font-medium">{{ 'dashboard.body_temp' | transloco }}</p>
+<h4 class="text-2xl font-extrabold text-on-surface">98.6 <span class="text-sm font-normal text-on-surface-variant">{{ 'dashboard.f' | transloco }}</span></h4>
+<div class="inline-block mt-1 px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold uppercase tracking-tighter">{{ 'dashboard.normal' | transloco }}</div>
 </div>
 </div>
 <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex items-center gap-6">
@@ -190,9 +182,9 @@
 <span class="material-symbols-outlined text-3xl" data-icon="water_drop">water_drop</span>
 </div>
 <div>
-<p class="text-on-surface-variant text-sm font-medium">Hydration</p>
-<h4 class="text-2xl font-extrabold text-on-surface">72 <span class="text-sm font-normal text-on-surface-variant">oz</span></h4>
-<p class="text-xs text-on-surface-variant mt-1">Daily goal: 84 oz</p>
+<p class="text-on-surface-variant text-sm font-medium">{{ 'dashboard.hydration' | transloco }}</p>
+<h4 class="text-2xl font-extrabold text-on-surface">72 <span class="text-sm font-normal text-on-surface-variant">{{ 'dashboard.oz' | transloco }}</span></h4>
+<p class="text-xs text-on-surface-variant mt-1">Daily goal: 84 {{ 'dashboard.oz' | transloco }}</p>
 </div>
 </div>
 </div>

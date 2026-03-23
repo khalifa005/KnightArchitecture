@@ -1,6 +1,6 @@
 <header class="mb-12">
-<h1 class="font-headline text-4xl font-extrabold text-primary mb-2 tracking-tight">Medication Management</h1>
-<p class="text-on-surface-variant text-lg max-w-2xl">Track your prescribed regimen, set intelligent alerts, and keep your care network informed in real-time.</p>
+<h1 class="font-headline text-4xl font-extrabold text-primary mb-2 tracking-tight">{{ 'medicationManager.title' | transloco }}</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl">{{ 'medicationManager.subtitle' | transloco }}</p>
 </header>
 <!-- Bento Layout -->
 <div class="grid grid-cols-12 gap-8">
@@ -8,38 +8,36 @@
 <section class="col-span-12 lg:col-span-4 space-y-6">
 <div class="bg-surface-container-low rounded-xl p-6">
 <div class="flex items-center justify-between mb-8">
-<h3 class="font-headline text-xl font-bold text-on-surface">Daily Schedule</h3>
-<span class="text-sm font-medium text-primary">Today, Oct 24</span>
+<h3 class="font-headline text-xl font-bold text-on-surface">{{ 'medicationManager.daily_schedule' | transloco }}</h3>
+<span class="text-sm font-medium text-primary">{{ 'medicationManager.today_date' | transloco }}</span>
 </div>
 <div class="relative space-y-8 before:content-[''] before:absolute before:start-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant/20">
 <!-- Timeline Item 1 -->
 <div class="relative ps-10">
 <div class="absolute start-0 top-1 w-6 h-6 rounded-full bg-primary-fixed-dim border-4 border-surface-container-low z-10"></div>
 <div class="flex flex-col">
-<span class="text-xs font-bold text-primary uppercase tracking-wider">08:00 AM</span>
-<span class="text-on-surface font-semibold">Lisinopril • 10mg</span>
+<span class="text-xs font-bold text-primary uppercase tracking-wider">{{ 'medicationManager.time_8am' | transloco }}</span>
+<span class="text-on-surface font-semibold">{{ 'medicationManager.lisinopril_10mg' | transloco }}</span>
 <span class="text-xs text-secondary font-medium flex items-center gap-1 mt-1">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span> 
-                                    Taken
-                                </span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>{{ 'medicationManager.taken' | transloco }}</span>
 </div>
 </div>
 <!-- Timeline Item 2 -->
 <div class="relative ps-10">
 <div class="absolute start-0 top-1 w-6 h-6 rounded-full bg-primary z-10 ring-4 ring-primary-fixed"></div>
 <div class="flex flex-col">
-<span class="text-xs font-bold text-primary uppercase tracking-wider">12:30 PM</span>
-<span class="text-on-surface font-semibold">Metformin • 500mg</span>
-<span class="text-xs text-on-surface-variant mt-1 italic">Due in 15 mins</span>
+<span class="text-xs font-bold text-primary uppercase tracking-wider">{{ 'medicationManager.time_12pm' | transloco }}</span>
+<span class="text-on-surface font-semibold">{{ 'medicationManager.metformin_500mg' | transloco }}</span>
+<span class="text-xs text-on-surface-variant mt-1 italic">{{ 'medicationManager.due_15m' | transloco }}</span>
 </div>
 </div>
 <!-- Timeline Item 3 -->
 <div class="relative ps-10">
 <div class="absolute start-0 top-1 w-6 h-6 rounded-full bg-outline-variant z-10 border-4 border-surface-container-low"></div>
 <div class="flex flex-col">
-<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">08:00 PM</span>
-<span class="text-on-surface font-semibold">Atorvastatin • 20mg</span>
-<span class="text-xs text-on-surface-variant mt-1">Scheduled</span>
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{{ 'medicationManager.time_8pm' | transloco }}</span>
+<span class="text-on-surface font-semibold">{{ 'medicationManager.atorvastatin_20mg' | transloco }}</span>
+<span class="text-xs text-on-surface-variant mt-1">{{ 'medicationManager.scheduled' | transloco }}</span>
 </div>
 </div>
 </div>
@@ -51,13 +49,13 @@
 <span class="material-symbols-outlined" data-icon="family_history">family_history</span>
 </div>
 <div>
-<h4 class="font-headline font-bold text-on-surface">Caregiver Status</h4>
-<p class="text-sm text-on-surface-variant mb-4">Real-time sync with Primary Contact</p>
+<h4 class="font-headline font-bold text-on-surface">{{ 'medicationManager.caregiver' | transloco }}</h4>
+<p class="text-sm text-on-surface-variant mb-4">{{ 'medicationManager.realtime_sync' | transloco }}</p>
 <div class="flex items-center gap-2 px-3 py-1.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full w-fit">
 <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
-<span class="text-xs font-bold uppercase tracking-tight">Parent Notified</span>
+<span class="text-xs font-bold uppercase tracking-tight">{{ 'medicationManager.parent_notified' | transloco }}</span>
 </div>
-<p class="text-[10px] text-on-surface-variant mt-2">Last sync: 2 mins ago</p>
+<p class="text-[10px] text-on-surface-variant mt-2">{{ 'medicationManager.last_sync' | transloco }}</p>
 </div>
 </div>
 </div>
@@ -65,10 +63,9 @@
 <!-- Active Medications List -->
 <section class="col-span-12 lg:col-span-8 space-y-6">
 <div class="flex items-center justify-between">
-<h2 class="font-headline text-2xl font-bold text-primary">Current Prescriptions</h2>
+<h2 class="font-headline text-2xl font-bold text-primary">{{ 'medicationManager.current_rx' | transloco }}</h2>
 <button pButton class="text-primary text-sm font-semibold flex items-center gap-1 hover:bg-primary/5 px-3 py-1.5 rounded-full transition-colors">
-<span class="material-symbols-outlined text-base">add</span> Add New
-                    </button>
+<span class="material-symbols-outlined text-base">add</span>{{ 'medicationManager.add_new' | transloco }}</button>
 </div>
 <!-- Med Card 1: Warning/Interaction State -->
 <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
@@ -80,16 +77,14 @@
 </div>
 <div>
 <div class="flex items-center gap-2">
-<h3 class="font-headline text-xl font-bold">Metformin</h3>
-<span class="px-2 py-0.5 bg-error-container text-error text-[10px] font-bold uppercase rounded tracking-wider">Potential Interaction</span>
+<h3 class="font-headline text-xl font-bold">{{ 'medicationManager.metformin' | transloco }}</h3>
+<span class="px-2 py-0.5 bg-error-container text-error text-[10px] font-bold uppercase rounded tracking-wider">{{ 'medicationManager.interaction' | transloco }}</span>
 </div>
-<p class="text-on-surface-variant text-sm">Oral tablet • 500mg • Twice daily</p>
+<p class="text-on-surface-variant text-sm">{{ 'medicationManager.metformin_desc' | transloco }}</p>
 </div>
 </div>
 <div class="flex items-center gap-3">
-<button pButton class="bg-gradient-to-r from-primary to-primary-container text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-md active:scale-95 transition-all">
-                                    Mark as Taken
-                                </button>
+<button pButton class="bg-gradient-to-r from-primary to-primary-container text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-md active:scale-95 transition-all">{{ 'medicationManager.mark_taken' | transloco }}</button>
 <button pButton class="p-2.5 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
 <span class="material-symbols-outlined">more_vert</span>
 </button>
@@ -99,8 +94,8 @@
 <div class="mt-6 p-4 bg-error-container/30 rounded-xl border-s-4 border-error flex items-start gap-3">
 <span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
 <div>
-<p class="text-sm font-bold text-on-error-container">Interaction Alert with Lisinopril</p>
-<p class="text-xs text-on-error-container/80 mt-0.5">May increase the risk of lactic acidosis. Consult your healthcare provider if you experience muscle pain or weakness.</p>
+<p class="text-sm font-bold text-on-error-container">{{ 'medicationManager.alert_title' | transloco }}</p>
+<p class="text-xs text-on-error-container/80 mt-0.5">{{ 'medicationManager.alert_desc' | transloco }}</p>
 </div>
 </div>
 </div>
@@ -115,17 +110,15 @@
 </div>
 <div>
 <div class="flex items-center gap-2">
-<h3 class="font-headline text-xl font-bold">Lisinopril</h3>
-<span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold uppercase rounded tracking-wider">No Conflicts</span>
+<h3 class="font-headline text-xl font-bold">{{ 'medicationManager.lisinopril' | transloco }}</h3>
+<span class="px-2 py-0.5 bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold uppercase rounded tracking-wider">{{ 'medicationManager.no_conflicts' | transloco }}</span>
 </div>
-<p class="text-on-surface-variant text-sm">Oral tablet • 10mg • Once daily (Morning)</p>
+<p class="text-on-surface-variant text-sm">{{ 'medicationManager.lisinopril_desc' | transloco }}</p>
 </div>
 </div>
 <div class="flex items-center gap-3">
 <div class="px-4 py-2 bg-surface-container text-secondary text-sm font-bold rounded-full flex items-center gap-2">
-<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                                    Taken at 08:14 AM
-                                </div>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>{{ 'medicationManager.taken_814' | transloco }}</div>
 <button pButton class="p-2.5 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
 <span class="material-symbols-outlined">more_vert</span>
 </button>
@@ -143,16 +136,14 @@
 </div>
 <div>
 <div class="flex items-center gap-2">
-<h3 class="font-headline text-xl font-bold">Atorvastatin</h3>
-<span class="px-2 py-0.5 bg-tertiary-container/10 text-tertiary text-[10px] font-bold uppercase rounded tracking-wider">3 Days Left</span>
+<h3 class="font-headline text-xl font-bold">{{ 'medicationManager.atorvastatin' | transloco }}</h3>
+<span class="px-2 py-0.5 bg-tertiary-container/10 text-tertiary text-[10px] font-bold uppercase rounded tracking-wider">{{ 'medicationManager.days_left_3' | transloco }}</span>
 </div>
-<p class="text-on-surface-variant text-sm">Capsule • 20mg • Once daily (Night)</p>
+<p class="text-on-surface-variant text-sm">{{ 'medicationManager.atorvastatin_desc' | transloco }}</p>
 </div>
 </div>
 <div class="flex items-center gap-3">
-<button pButton class="bg-surface-container-low text-primary border-2 border-primary/10 px-6 py-2 rounded-full font-bold text-sm hover:bg-primary/5 active:scale-95 transition-all">
-                                    Request Refill
-                                </button>
+<button pButton class="bg-surface-container-low text-primary border-2 border-primary/10 px-6 py-2 rounded-full font-bold text-sm hover:bg-primary/5 active:scale-95 transition-all">{{ 'medicationManager.request_refill' | transloco }}</button>
 <button pButton class="p-2.5 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
 <span class="material-symbols-outlined">more_vert</span>
 </button>
@@ -168,27 +159,27 @@
 <div class="absolute -end-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
 <span class="material-symbols-outlined text-9xl" data-icon="alarm_on">alarm_on</span>
 </div>
-<h4 class="font-headline text-lg font-bold mb-2">Smart Reminders</h4>
-<p class="text-primary-fixed text-sm mb-6">Predictive alerts based on your activity and heart rate trends.</p>
+<h4 class="font-headline text-lg font-bold mb-2">{{ 'medicationManager.smart_reminders' | transloco }}</h4>
+<p class="text-primary-fixed text-sm mb-6">{{ 'medicationManager.reminders_desc' | transloco }}</p>
 <div class="flex items-center gap-2">
 <div class="w-10 h-5 bg-on-primary-container rounded-full relative">
 <div class="absolute end-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
 </div>
-<span class="text-xs font-bold uppercase tracking-widest">Active</span>
+<span class="text-xs font-bold uppercase tracking-widest">{{ 'medicationManager.active' | transloco }}</span>
 </div>
 </div>
 <div class="md:col-span-2 bg-surface-container-high rounded-xl p-8 flex flex-col md:flex-row items-center gap-8">
 <div class="flex-1">
-<h4 class="font-headline text-xl font-bold text-primary mb-2">Adherence Overview</h4>
-<p class="text-on-surface-variant text-sm mb-4">You have maintained a 98% adherence rate over the last 30 days. Your care team has been notified of your progress.</p>
+<h4 class="font-headline text-xl font-bold text-primary mb-2">{{ 'medicationManager.adherence' | transloco }}</h4>
+<p class="text-on-surface-variant text-sm mb-4">{{ 'medicationManager.adherence_desc' | transloco }}</p>
 <div class="flex gap-4">
 <div class="px-4 py-2 bg-white rounded-lg shadow-sm">
 <span class="block text-2xl font-black text-primary">28</span>
-<span class="text-[10px] uppercase font-bold text-on-surface-variant">Day Streak</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">{{ 'medicationManager.day_streak' | transloco }}</span>
 </div>
 <div class="px-4 py-2 bg-white rounded-lg shadow-sm">
 <span class="block text-2xl font-black text-secondary">0</span>
-<span class="text-[10px] uppercase font-bold text-on-surface-variant">Missed Doses</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">{{ 'medicationManager.missed_doses' | transloco }}</span>
 </div>
 </div>
 </div>

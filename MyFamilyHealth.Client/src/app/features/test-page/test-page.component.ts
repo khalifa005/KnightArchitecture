@@ -1,3 +1,4 @@
+import { TranslocoModule } from '@jsverse/transloco';
 import { InputTextModule } from 'primeng/inputtext';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-test-page',
   standalone: true,
-  imports: [CommonModule, ButtonModule, InputTextModule],
+  imports: [TranslocoModule, CommonModule, ButtonModule, InputTextModule],
   templateUrl: './test-page.component.html',
   styleUrl: './test-page.component.scss'
 })

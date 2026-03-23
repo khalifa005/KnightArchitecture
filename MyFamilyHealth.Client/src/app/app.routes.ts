@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { provideTranslocoScope } from '@jsverse/transloco';
 
 export const routes: Routes = [
   {
@@ -7,23 +8,28 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/test-page/test-page.component').then(c => c.TestPageComponent)
+        loadComponent: () => import('./features/test-page/test-page.component').then(c => c.TestPageComponent),
+        providers: [provideTranslocoScope('dashboard')]
       },
       {
         path: 'medical-records',
-        loadComponent: () => import('./features/medical-records/medical-records').then(c => c.MedicalRecords)
+        loadComponent: () => import('./features/medical-records/medical-records').then(c => c.MedicalRecords),
+        providers: [provideTranslocoScope('medical-records')]
       },
       {
         path: 'medications',
-        loadComponent: () => import('./features/medication-manager/medication-manager').then(c => c.MedicationManager)
+        loadComponent: () => import('./features/medication-manager/medication-manager').then(c => c.MedicationManager),
+        providers: [provideTranslocoScope('medication-manager')]
       },
       {
         path: 'ai-assistant',
-        loadComponent: () => import('./features/ai-assistant/ai-assistant').then(c => c.AiAssistant)
+        loadComponent: () => import('./features/ai-assistant/ai-assistant').then(c => c.AiAssistant),
+        providers: [provideTranslocoScope('ai-assistant')]
       },
       {
         path: 'access-control',
-        loadComponent: () => import('./features/access-control/access-control').then(c => c.AccessControl)
+        loadComponent: () => import('./features/access-control/access-control').then(c => c.AccessControl),
+        providers: [provideTranslocoScope('access-control')]
       }
     ]
   }
