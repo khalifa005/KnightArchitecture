@@ -4,23 +4,8 @@
 <h1 class="text-4xl font-extrabold tracking-tight text-primary mb-2">{{ 'medicalRecords.title' | transloco }}</h1>
 <p class="text-on-surface-variant text-lg max-w-2xl">{{ 'medicalRecords.subtitle' | transloco }}</p>
 </header>
-<!-- Filters Area (Tonal Shift, No Borders) -->
-<section class="bg-surface-container-low rounded-xl p-6 mb-8 flex flex-wrap items-center gap-4">
-<div class="flex-1 min-w-[240px]">
-<div class="relative">
-<span class="material-symbols-outlined absolute start-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
-<input pInputText class="w-full ps-12 pe-4 py-3 bg-surface-container-lowest rounded-full border-none focus:ring-2 focus:ring-primary/20 text-sm font-body" [placeholder]="'medicalRecords.search_placeholder' | transloco" type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-3">
-<div class="flex items-center bg-surface-container-lowest rounded-full px-4 py-2 text-sm text-on-surface-variant hover:bg-white cursor-pointer transition-colors">
-<span class="material-symbols-outlined me-2 text-[20px]" data-icon="calendar_month">calendar_month</span>{{ 'medicalRecords.date_range' | transloco }}</div>
-<div class="flex items-center bg-surface-container-lowest rounded-full px-4 py-2 text-sm text-on-surface-variant hover:bg-white cursor-pointer transition-colors">
-<span class="material-symbols-outlined me-2 text-[20px]" data-icon="filter_list">filter_list</span>{{ 'medicalRecords.type_all' | transloco }}</div>
-<div class="flex items-center bg-surface-container-lowest rounded-full px-4 py-2 text-sm text-on-surface-variant hover:bg-white cursor-pointer transition-colors">
-<span class="material-symbols-outlined me-2 text-[20px]" data-icon="person">person</span>{{ 'medicalRecords.provider' | transloco }}</div>
-</div>
-</section>
+<!-- Filters Component (Reactive Form) -->
+<app-filter-form (filterChanged)="onFilterChanged($event)"></app-filter-form>
 <!-- Records Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 <!-- Record Card 1 -->
