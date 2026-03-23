@@ -11,10 +11,10 @@
 <h3 class="font-headline text-xl font-bold text-on-surface">Daily Schedule</h3>
 <span class="text-sm font-medium text-primary">Today, Oct 24</span>
 </div>
-<div class="relative space-y-8 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant/20">
+<div class="relative space-y-8 before:content-[''] before:absolute before:start-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-outline-variant/20">
 <!-- Timeline Item 1 -->
-<div class="relative pl-10">
-<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary-fixed-dim border-4 border-surface-container-low z-10"></div>
+<div class="relative ps-10">
+<div class="absolute start-0 top-1 w-6 h-6 rounded-full bg-primary-fixed-dim border-4 border-surface-container-low z-10"></div>
 <div class="flex flex-col">
 <span class="text-xs font-bold text-primary uppercase tracking-wider">08:00 AM</span>
 <span class="text-on-surface font-semibold">Lisinopril • 10mg</span>
@@ -25,8 +25,8 @@
 </div>
 </div>
 <!-- Timeline Item 2 -->
-<div class="relative pl-10">
-<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary z-10 ring-4 ring-primary-fixed"></div>
+<div class="relative ps-10">
+<div class="absolute start-0 top-1 w-6 h-6 rounded-full bg-primary z-10 ring-4 ring-primary-fixed"></div>
 <div class="flex flex-col">
 <span class="text-xs font-bold text-primary uppercase tracking-wider">12:30 PM</span>
 <span class="text-on-surface font-semibold">Metformin • 500mg</span>
@@ -34,8 +34,8 @@
 </div>
 </div>
 <!-- Timeline Item 3 -->
-<div class="relative pl-10">
-<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-outline-variant z-10 border-4 border-surface-container-low"></div>
+<div class="relative ps-10">
+<div class="absolute start-0 top-1 w-6 h-6 rounded-full bg-outline-variant z-10 border-4 border-surface-container-low"></div>
 <div class="flex flex-col">
 <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">08:00 PM</span>
 <span class="text-on-surface font-semibold">Atorvastatin • 20mg</span>
@@ -96,7 +96,7 @@
 </div>
 </div>
 <!-- Alert Box for Interaction -->
-<div class="mt-6 p-4 bg-error-container/30 rounded-xl border-l-4 border-error flex items-start gap-3">
+<div class="mt-6 p-4 bg-error-container/30 rounded-xl border-s-4 border-error flex items-start gap-3">
 <span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
 <div>
 <p class="text-sm font-bold text-on-error-container">Interaction Alert with Lisinopril</p>
@@ -165,14 +165,14 @@
 <!-- Reminders & Analytics (Secondary Bento Row) -->
 <section class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
 <div class="bg-primary text-white p-8 rounded-xl relative overflow-hidden group">
-<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
+<div class="absolute -end-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform">
 <span class="material-symbols-outlined text-9xl" data-icon="alarm_on">alarm_on</span>
 </div>
 <h4 class="font-headline text-lg font-bold mb-2">Smart Reminders</h4>
 <p class="text-primary-fixed text-sm mb-6">Predictive alerts based on your activity and heart rate trends.</p>
 <div class="flex items-center gap-2">
 <div class="w-10 h-5 bg-on-primary-container rounded-full relative">
-<div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
+<div class="absolute end-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
 </div>
 <span class="text-xs font-bold uppercase tracking-widest">Active</span>
 </div>

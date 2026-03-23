@@ -1,72 +1,76 @@
 <!-- Side Navigation Bar -->
-<aside class="fixed left-0 top-0 h-screen w-64 bg-slate-50 border-r-0 flex flex-col p-4 gap-2 z-40 hidden md:flex">
+<aside class="fixed start-0 top-0 h-screen w-64 bg-slate-50 border-e-0 flex flex-col p-4 gap-2 z-40 hidden md:flex">
   <div class="px-4 py-6 mb-4">
-    <h2 class="font-['Manrope'] font-extrabold text-sky-900 text-xl tracking-tight">Patient Portal</h2>
-    <p class="text-xs font-medium text-slate-500 uppercase tracking-widest mt-1">Clinical Care</p>
+    <h2 class="font-['Manrope'] font-extrabold text-sky-900 text-xl tracking-tight">{{ 'layout.portal_title' | transloco }}</h2>
+    <p class="text-xs font-medium text-slate-500 uppercase tracking-widest mt-1">{{ 'layout.portal_subtitle' | transloco }}</p>
   </div>
   <nav class="flex-1 space-y-1">
     <a routerLink="/" routerLinkActive="bg-white text-sky-700 shadow-sm" [routerLinkActiveOptions]="{exact:true}" class="flex items-center gap-3 px-4 py-3 text-slate-600 rounded-xl font-['Manrope'] font-medium text-sm transition-all hover:text-sky-600 hover:bg-sky-50">
       <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-      <span>Dashboard</span>
+      <span>{{ 'nav.dashboard' | transloco }}</span>
     </a>
     <a routerLink="/medical-records" routerLinkActive="bg-white text-sky-700 shadow-sm" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-sky-600 hover:bg-sky-50 rounded-xl font-['Manrope'] font-medium text-sm transition-all">
       <span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
-      <span>Medical Records</span>
+      <span>{{ 'nav.medical_records' | transloco }}</span>
     </a>
     <a routerLink="/medications" routerLinkActive="bg-white text-sky-700 shadow-sm" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-sky-600 hover:bg-sky-50 rounded-xl font-['Manrope'] font-medium text-sm transition-all">
       <span class="material-symbols-outlined" data-icon="medication">medication</span>
-      <span>Medications</span>
+      <span>{{ 'nav.medications' | transloco }}</span>
     </a>
     <a routerLink="/ai-assistant" routerLinkActive="bg-white text-sky-700 shadow-sm" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-sky-600 hover:bg-sky-50 rounded-xl font-['Manrope'] font-medium text-sm transition-all">
       <span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
-      <span>AI Assistant</span>
+      <span>{{ 'nav.ai_assistant' | transloco }}</span>
     </a>
     <a routerLink="/access-control" routerLinkActive="bg-white text-sky-700 shadow-sm" class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-sky-600 hover:bg-sky-50 rounded-xl font-['Manrope'] font-medium text-sm transition-all">
       <span class="material-symbols-outlined" data-icon="lock_person">lock_person</span>
-      <span>Access Control</span>
+      <span>{{ 'nav.access_control' | transloco }}</span>
     </a>
   </nav>
   
   <div class="mt-auto pt-6 border-t border-slate-100 flex flex-col gap-1">
     <button pButton class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-4 rounded-full font-bold shadow-lg active:scale-95 transition-transform mb-4 flex items-center justify-center gap-2">
       <span class="material-symbols-outlined" data-icon="bolt">bolt</span>
-      AI Help
+      {{ 'layout.ai_help' | transloco }}
     </button>
     <a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-sky-600 transition-colors text-sm font-medium" href="#">
       <span class="material-symbols-outlined text-xl" data-icon="help_outline">help_outline</span>
-      <span>Help Center</span>
+      <span>{{ 'layout.help_center' | transloco }}</span>
     </a>
     <a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-sky-600 transition-colors text-sm font-medium" href="#">
       <span class="material-symbols-outlined text-xl" data-icon="logout">logout</span>
-      <span>Sign Out</span>
+      <span>{{ 'layout.sign_out' | transloco }}</span>
     </a>
   </div>
 </aside>
 
 <!-- Top App Bar -->
-<header class="fixed top-0 right-0 left-0 md:left-64 bg-white/80 backdrop-blur-xl z-50 shadow-sm">
+<header class="fixed top-0 end-0 start-0 md:start-64 bg-white/80 backdrop-blur-xl z-50 shadow-sm">
   <div class="flex justify-between items-center px-8 py-4 w-full">
     <div class="flex items-center gap-4">
-      <h1 class="text-xl font-bold tracking-tight text-sky-900 font-['Manrope']">Clinical Sanctuary</h1>
+      <h1 class="text-xl font-bold tracking-tight text-sky-900 font-['Manrope']">{{ 'layout.header_title' | transloco }}</h1>
     </div>
     <div class="flex items-center gap-6">
       <div class="hidden sm:flex items-center bg-surface-container-low px-4 py-2 rounded-full border-0">
-        <span class="material-symbols-outlined text-on-surface-variant text-lg mr-2" data-icon="search">search</span>
-        <input pInputText class="bg-transparent border-none text-sm focus:ring-0 p-0 text-on-surface placeholder-on-surface-variant/60" placeholder="Search records..." type="text"/>
+        <span class="material-symbols-outlined text-on-surface-variant text-lg me-2" data-icon="search">search</span>
+        <input pInputText class="bg-transparent border-none text-sm focus:ring-0 p-0 text-on-surface placeholder-on-surface-variant/60" [placeholder]="'layout.search_placeholder' | transloco" type="text"/>
       </div>
       <div class="flex items-center gap-2">
+        <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors relative" (click)="toggleLanguage()">
+          <span class="material-symbols-outlined font-bold">{{ store.lang() === 'ar-SA' ? 'language' : 'translate' }}</span>
+          <span class="text-xs font-bold uppercase ms-1">{{ store.lang() === 'ar-SA' ? 'EN' : 'عربي' }}</span>
+        </button>
         <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors relative">
           <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-          <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+          <span class="absolute top-2 end-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
         </button>
         <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors">
           <span class="material-symbols-outlined" data-icon="settings">settings</span>
         </button>
         <div class="h-8 w-[1px] bg-slate-100 mx-2"></div>
         <div class="flex items-center gap-3">
-          <div class="text-right hidden lg:block">
+          <div class="text-end hidden lg:block">
             <p class="text-sm font-semibold text-on-surface">Alex Thompson</p>
-            <p class="text-xs text-on-surface-variant">Patient ID: #8821</p>
+            <p class="text-xs text-on-surface-variant">{{ 'layout.patient_id' | transloco }} #8821</p>
           </div>
           <img alt="User profile avatar" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary-container/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBam7y8S-I79ajCTOAqhAjN-sS-8E7PqpnCTgbCrIKBMw1SEIyWdobyVAKN86kfMu1ydi8LeP4siSHavd0MijtbyxuBPW5wl_6_S6oAsspqv6SM6C9MUR-KW-9idpmRk6ZasSEheNdFwGmZZVs4Yp1VyEt9hG0-qx1pkFS-kWhBphotjUK8ZOi5U_ZZuuRtfZggBx52q3Zvk3dc_1d5ViF6oCi8bBtMd0MOl3SmLM8WzUSc5Yw5ysynwqpxgujvsktgCH4J11nftyvk"/>
         </div>
@@ -76,31 +80,31 @@
 </header>
 
 <!-- Main Content Canvas -->
-<main class="pt-24 md:pl-64 min-h-screen px-8 pb-12">
+<main class="pt-24 md:ps-64 min-h-screen px-8 pb-12">
   <div class="max-w-7xl mx-auto">
     <router-outlet></router-outlet>
   </div>
 </main>
 
 <!-- Bottom Nav for Mobile -->
-<div class="md:hidden fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-md border-t-0 z-50 px-6 py-4 flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<div class="md:hidden fixed bottom-0 start-0 w-full bg-white/90 backdrop-blur-md border-t-0 z-50 px-6 py-4 flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
   <a class="text-sky-700 flex flex-col items-center" routerLink="/">
     <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-    <span class="text-[10px] font-bold mt-1">Home</span>
+    <span class="text-[10px] font-bold mt-1">{{ 'nav.dashboard' | transloco }}</span>
   </a>
   <a class="text-slate-400 flex flex-col items-center" routerLink="/medical-records">
     <span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
-    <span class="text-[10px] font-medium mt-1">Records</span>
+    <span class="text-[10px] font-medium mt-1">{{ 'nav.medical_records' | transloco }}</span>
   </a>
   <a class="bg-primary -mt-10 w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-white ring-8 ring-background" routerLink="/ai-assistant">
     <span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
   </a>
   <a class="text-slate-400 flex flex-col items-center" routerLink="/medications">
     <span class="material-symbols-outlined" data-icon="medication">medication</span>
-    <span class="text-[10px] font-medium mt-1">Meds</span>
+    <span class="text-[10px] font-medium mt-1">{{ 'nav.medications' | transloco }}</span>
   </a>
-  <a class="text-slate-400 flex flex-col items-center" routerLink="/profile">
-    <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
-    <span class="text-[10px] font-medium mt-1">Profile</span>
+  <a class="text-slate-400 flex flex-col items-center" routerLink="/access-control">
+    <span class="material-symbols-outlined" data-icon="lock_person">lock_person</span>
+    <span class="text-[10px] font-medium mt-1">{{ 'nav.access_control' | transloco }}</span>
   </a>
 </div>

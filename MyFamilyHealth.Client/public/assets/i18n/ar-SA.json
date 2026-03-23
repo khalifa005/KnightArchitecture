@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "dashboard": "لوحة القيادة",
+    "medical_records": "السجلات الطبية",
+    "medications": "الأدوية",
+    "ai_assistant": "المساعد الذكي",
+    "access_control": "التحكم بالوصول"
+  },
+  "layout": {
+    "portal_title": "بوابة المريض",
+    "portal_subtitle": "الرعاية السريرية",
+    "header_title": "الملاذ السريري",
+    "search_placeholder": "ابحث في السجلات...",
+    "ai_help": "المساعدة الذكية",
+    "help_center": "مركز المساعدة",
+    "sign_out": "تسجيل الخروج",
+    "patient_id": "رقم المريض:"
+  }
+}

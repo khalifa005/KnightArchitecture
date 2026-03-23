@@ -18,6 +18,8 @@
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
+    "@jsverse/transloco": "^8.2.1",
+    "@ngrx/signals": "^21.0.1",
     "@primeng/themes": "^21.0.4",
     "@primeuix/styled": "^0.7.4",
     "@primeuix/themes": "^2.0.3",

@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "medical_records": "Medical Records",
+    "medications": "Medications",
+    "ai_assistant": "AI Assistant",
+    "access_control": "Access Control"
+  },
+  "layout": {
+    "portal_title": "Patient Portal",
+    "portal_subtitle": "Clinical Care",
+    "header_title": "Clinical Sanctuary",
+    "search_placeholder": "Search records...",
+    "ai_help": "AI Help",
+    "help_center": "Help Center",
+    "sign_out": "Sign Out",
+    "patient_id": "Patient ID:"
+  }
+}

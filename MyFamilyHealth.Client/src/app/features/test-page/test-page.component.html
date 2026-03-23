@@ -7,7 +7,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 <!-- Primary AI Insight - Large Card -->
 <div class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 shadow-sm relative overflow-hidden group">
-<div class="absolute top-0 right-0 w-64 h-64 bg-secondary-fixed/20 rounded-full -mr-20 -mt-20 blur-3xl transition-all group-hover:bg-secondary-fixed/30"></div>
+<div class="absolute top-0 end-0 w-64 h-64 bg-secondary-fixed/20 rounded-full -me-20 -mt-20 blur-3xl transition-all group-hover:bg-secondary-fixed/30"></div>
 <div class="relative z-10 flex flex-col md:flex-row gap-8 items-start">
 <div class="flex-1">
 <div class="inline-flex items-center gap-2 bg-secondary-container px-3 py-1 rounded-full text-on-secondary-container text-xs font-bold mb-4 uppercase tracking-wider">
@@ -64,7 +64,7 @@
 </div>
 </div>
 <div class="flex items-center gap-6">
-<div class="text-right">
+<div class="text-end">
 <p class="font-bold text-on-surface">Normal</p>
 <p class="text-xs text-secondary font-medium">Within Range</p>
 </div>
@@ -83,7 +83,7 @@
 </div>
 </div>
 <div class="flex items-center gap-6">
-<div class="text-right">
+<div class="text-end">
 <p class="font-bold text-on-surface">Pending</p>
 <p class="text-xs text-on-surface-variant font-medium">Est. 2 days</p>
 </div>
@@ -91,7 +91,7 @@
 </div>
 </div>
 <!-- Result Row 3 -->
-<div class="bg-surface-container-lowest p-5 rounded-xl flex items-center justify-between group cursor-pointer hover:shadow-md transition-all border-l-4 border-error/20">
+<div class="bg-surface-container-lowest p-5 rounded-xl flex items-center justify-between group cursor-pointer hover:shadow-md transition-all border-s-4 border-error/20">
 <div class="flex items-center gap-4">
 <div class="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center text-primary">
 <span class="material-symbols-outlined" data-icon="biotech">biotech</span>
@@ -102,7 +102,7 @@
 </div>
 </div>
 <div class="flex items-center gap-6">
-<div class="text-right">
+<div class="text-end">
 <p class="font-bold text-error">Attention</p>
 <p class="text-xs text-error font-medium">High Glucose</p>
 </div>
@@ -119,10 +119,10 @@
 <span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
 </div>
 </div>
-<div class="relative pl-8 border-l border-outline-variant/30 space-y-8">
+<div class="relative ps-8 border-s border-outline-variant/30 space-y-8">
 <!-- Medication Item 1 -->
 <div class="relative">
-<div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-secondary ring-4 ring-white"></div>
+<div class="absolute -start-[41px] top-1 w-4 h-4 rounded-full bg-secondary ring-4 ring-white"></div>
 <div class="bg-white p-4 rounded-xl shadow-sm border border-transparent hover:border-secondary transition-all">
 <div class="flex justify-between items-start mb-2">
 <span class="text-xs font-bold text-secondary uppercase">Completed</span>
@@ -134,7 +134,7 @@
 </div>
 <!-- Medication Item 2 -->
 <div class="relative">
-<div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white"></div>
+<div class="absolute -start-[41px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white"></div>
 <div class="bg-white p-4 rounded-xl shadow-sm border border-transparent hover:border-primary transition-all">
 <div class="flex justify-between items-start mb-2">
 <span class="text-xs font-bold text-primary uppercase">Upcoming</span>
@@ -149,7 +149,7 @@
 </div>
 <!-- Medication Item 3 -->
 <div class="relative opacity-60">
-<div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-outline-variant ring-4 ring-white"></div>
+<div class="absolute -start-[41px] top-1 w-4 h-4 rounded-full bg-outline-variant ring-4 ring-white"></div>
 <div>
 <div class="flex justify-between items-start mb-1">
 <span class="text-xs text-on-surface-variant font-medium">8:00 PM</span>
