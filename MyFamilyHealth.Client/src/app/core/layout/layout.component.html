@@ -28,7 +28,7 @@
   </nav>
   
   <div class="mt-auto pt-6 border-t border-slate-100 flex flex-col gap-1">
-    <button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-4 rounded-full font-bold shadow-lg active:scale-95 transition-transform mb-4 flex items-center justify-center gap-2">
+    <button pButton class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-4 rounded-full font-bold shadow-lg active:scale-95 transition-transform mb-4 flex items-center justify-center gap-2">
       <span class="material-symbols-outlined" data-icon="bolt">bolt</span>
       AI Help
     </button>
@@ -52,14 +52,14 @@
     <div class="flex items-center gap-6">
       <div class="hidden sm:flex items-center bg-surface-container-low px-4 py-2 rounded-full border-0">
         <span class="material-symbols-outlined text-on-surface-variant text-lg mr-2" data-icon="search">search</span>
-        <input class="bg-transparent border-none text-sm focus:ring-0 p-0 text-on-surface placeholder-on-surface-variant/60" placeholder="Search records..." type="text"/>
+        <input pInputText class="bg-transparent border-none text-sm focus:ring-0 p-0 text-on-surface placeholder-on-surface-variant/60" placeholder="Search records..." type="text"/>
       </div>
       <div class="flex items-center gap-2">
-        <button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors relative">
+        <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors relative">
           <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
           <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
         </button>
-        <button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors">
+        <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors">
           <span class="material-symbols-outlined" data-icon="settings">settings</span>
         </button>
         <div class="h-8 w-[1px] bg-slate-100 mx-2"></div>
