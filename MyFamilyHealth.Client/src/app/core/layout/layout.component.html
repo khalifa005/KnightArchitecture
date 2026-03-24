@@ -33,7 +33,7 @@
         <span>{{ 'layout.help_center' | transloco }}</span>
       }
     </a>
-    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-sky-600 transition-colors text-sm font-medium" [ngClass]="{'justify-center px-0': !isExpanded()}" href="#">
+    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-sky-600 transition-colors text-sm font-medium cursor-pointer" [ngClass]="{'justify-center px-0': !isExpanded()}" routerLink="/login">
       <span class="material-symbols-outlined text-xl shrink-0" data-icon="logout">logout</span>
       @if (isExpanded()) {
         <span>{{ 'layout.sign_out' | transloco }}</span>

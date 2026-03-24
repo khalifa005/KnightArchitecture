@@ -1,0 +1,19 @@
+// Login custom PrimeNG styling overrides
+:host {
+    display: block;
+}
+
+// Override PrimeNG Password inner input taking up 100% width automatically
+::ng-deep p-password {
+    background: transparent;
+    border: none;
+    display: block;
+    width: 100%;
+    
+    .p-password-input {
+        width: 100%;
+        background-color: var(--md-sys-color-surface-container);
+        border: none;
+        outline: none;
+    }
+}

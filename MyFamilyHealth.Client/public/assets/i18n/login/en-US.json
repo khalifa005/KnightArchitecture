@@ -1,0 +1,19 @@
+{
+  "welcome_back": "Welcome to Clinical Sanctuary",
+  "sign_in_desc": "Your unified, secure medical records and family health portal.",
+  "email_address": "Email Address",
+  "email_placeholder": "Enter your work or personal email",
+  "password": "Password",
+  "password_placeholder": "Enter your secure password",
+  "forgot_password": "Forgot your password?",
+  "remember_me": "Stay securely signed in",
+  "sign_in_btn": "Sign In to Portal",
+  "sso_divider": "or continue with enterprise SSO",
+  "sso_google": "Google",
+  "sso_microsoft": "Microsoft Identity",
+  "create_account": "Don't have a patient account?",
+  "register_now": "Register here",
+  "footer_copyright": "© 2026 Clinical Sanctuary Systems. HIPAA Compliant.",
+  "privacy_policy": "Privacy Policy",
+  "terms": "Terms of Service"
+}

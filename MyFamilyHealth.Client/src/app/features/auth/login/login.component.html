@@ -1,0 +1,100 @@
+<div class="min-h-screen bg-surface-container flex flex-col md:flex-row overflow-hidden relative">
+  <!-- Left Decorative Pane -->
+  <div class="hidden md:flex md:w-5/12 lg:w-1/2 p-12 bg-primary relative flex-col justify-between overflow-hidden">
+    <div class="absolute inset-0 bg-primary-fixed opacity-10">
+       <svg class="h-full w-full absolute transform -translate-x-1/2 -translate-y-1/2 opacity-30" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </div>
+    <div class="absolute -top-32 -start-32 w-96 h-96 bg-white/10 rounded-full blur-3xl mix-blend-overlay"></div>
+    <div class="absolute -bottom-32 -end-32 w-96 h-96 bg-primary-container/40 rounded-full blur-3xl mix-blend-overlay"></div>
+    
+    <div class="relative z-10">
+      <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 ring-1 ring-white/30">
+        <span class="material-symbols-outlined text-white text-3xl" data-icon="monitor_heart">monitor_heart</span>
+      </div>
+      <h1 class="font-headline text-5xl font-black text-white tracking-tight leading-tight">{{ 'login.welcome_back' | transloco }}</h1>
+      <p class="text-primary-container mt-4 font-medium text-xl max-w-sm leading-relaxed">{{ 'login.sign_in_desc' | transloco }}</p>
+    </div>
+
+    <div class="relative z-10 flex items-center gap-4 text-white/80 text-sm">
+      <span class="material-symbols-outlined shrink-0" data-icon="verified_user">verified_user</span>
+      <p>Secure Enterprise SSL Encrypted Portal</p>
+    </div>
+  </div>
+
+  <!-- Right Authentication Pane -->
+  <div class="flex-1 flex flex-col items-center justify-center p-8 lg:p-16 relative bg-surface">
+    <div class="w-full max-w-md">
+      <!-- Mobile only identity -->
+      <div class="md:hidden text-center mb-10">
+        <div class="w-16 h-16 bg-primary rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-lg shadow-primary/30">
+          <span class="material-symbols-outlined text-on-primary text-3xl" data-icon="monitor_heart">monitor_heart</span>
+        </div>
+        <h1 class="font-headline text-3xl font-black text-primary tracking-tight">{{ 'login.welcome_back' | transloco }}</h1>
+      </div>
+
+      <div class="flex flex-col gap-6">
+        <!-- Credentials -->
+        <div class="flex flex-col gap-2">
+          <label for="username" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'login.email_address' | transloco }}</label>
+          <div class="relative">
+            <span class="absolute start-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant z-10" data-icon="mail">mail</span>
+            <input pInputText id="username" [(ngModel)]="username" type="email" class="w-full bg-surface-container border border-outline-variant/20 ps-12 pe-4 py-4 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-outline-variant font-body transition-all" [placeholder]="'login.email_placeholder' | transloco" />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2 relative">
+          <div class="flex items-center justify-between">
+            <label for="password" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'login.password' | transloco }}</label>
+            <a href="#" class="text-xs font-bold text-primary hover:text-primary-fixed transition-colors">{{ 'login.forgot_password' | transloco }}</a>
+          </div>
+          <p-password [(ngModel)]="password" [toggleMask]="true" styleClass="w-full" inputStyleClass="w-full bg-surface-container border border-outline-variant/20 px-4 py-4 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-outline-variant font-body transition-all" [feedback]="false" [placeholder]="'login.password_placeholder' | transloco"></p-password>
+        </div>
+
+        <div class="flex items-center gap-3 mt-1">
+          <p-checkbox [(ngModel)]="rememberMe" [binary]="true" inputId="remember"></p-checkbox>
+          <label for="remember" class="text-sm font-medium text-on-surface-variant cursor-pointer select-none">{{ 'login.remember_me' | transloco }}</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button pButton class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-md shadow-primary/20 mt-2 hover:bg-primary-fixed hover:text-on-primary-fixed active:scale-[0.98] transition-all tracking-wide flex justify-center items-center gap-2" (click)="onLogin()">
+          {{ 'login.sign_in_btn' | transloco }}
+          <span class="material-symbols-outlined font-bold text-lg" data-icon="arrow_forward">arrow_forward</span>
+        </button>
+
+        <!-- SSO Divider -->
+        <div class="flex items-center gap-4 my-2 opacity-60">
+          <div class="flex-1 h-[1px] bg-outline-variant"></div>
+          <span class="text-xs font-semibold text-outline-variant uppercase tracking-widest">{{ 'login.sso_divider' | transloco }}</span>
+          <div class="flex-1 h-[1px] bg-outline-variant"></div>
+        </div>
+
+        <!-- SSO Providers -->
+        <div class="grid grid-cols-2 gap-4">
+          <button pButton class="w-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface font-semibold py-3 rounded-xl hover:bg-surface-container transition-colors shadow-sm flex items-center justify-center gap-2">
+            <i class="pi pi-google"></i>
+            {{ 'login.sso_google' | transloco }}
+          </button>
+          <button pButton class="w-full bg-surface-container-lowest border border-outline-variant/30 text-on-surface font-semibold py-3 rounded-xl hover:bg-surface-container transition-colors shadow-sm flex items-center justify-center gap-2">
+            <i class="pi pi-microsoft"></i>
+            {{ 'login.sso_microsoft' | transloco }}
+          </button>
+        </div>
+
+        <!-- Registration Link -->
+        <p class="text-center text-sm text-on-surface-variant mt-4">
+          {{ 'login.create_account' | transloco }} <a href="#" class="font-bold text-primary hover:underline ms-1">{{ 'login.register_now' | transloco }}</a>
+        </p>
+
+      </div>
+    </div>
+    
+    <!-- Footer Branding -->
+    <div class="absolute bottom-6 md:start-16 md:end-16 start-0 end-0 px-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-outline-variant font-medium gap-2 text-center">
+      <p>{{ 'login.footer_copyright' | transloco }}</p>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-primary transition-colors">{{ 'login.privacy_policy' | transloco }}</a>
+        <a href="#" class="hover:text-primary transition-colors">{{ 'login.terms' | transloco }}</a>
+      </div>
+    </div>
+  </div>
+</div>
