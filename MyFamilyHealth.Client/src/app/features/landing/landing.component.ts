@@ -15,7 +15,7 @@ import { AppStore } from '../../core/state/app.store';
 
 /** Volume levels — intro narration is louder than the ambient heartbeat effect */
 const NARRATION_VOLUME = 0.9; // 90% — prominent narration
-const HEARTBEAT_PEAK_GAIN = 0.025; // audible but subtle heartbeat beep
+const HEARTBEAT_PEAK_GAIN = 0.04; // audible heartbeat thump
 
 const AUDIO_FILES: Record<string, string> = {
   'en-US': 'assets/audio/victoria english intro for landing page .mp3',
@@ -152,33 +152,42 @@ export class LandingComponent implements OnInit {
       const t = this.audioCtx.currentTime;
 
       // Realistic "Lub-Dub" Heartbeat
-      const playThump = (time: number, freq: number, gainVal: number) => {
+      const playThump = (time: number, freq: number, gainVal: number, duration: number) => {
         const osc = this.audioCtx!.createOscillator();
         const gain = this.audioCtx!.createGain();
+        const filter = this.audioCtx!.createBiquadFilter();
         
+        // Low-pass filter to give it that "muffled/inside-chest" feel
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(150, time);
+        filter.Q.setValueAtTime(1, time);
+
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, time);
+        // Frequency sweep for "thump" impact
+        osc.frequency.setValueAtTime(freq * 1.5, time);
+        osc.frequency.exponentialRampToValueAtTime(freq, time + 0.05);
         
         gain.gain.setValueAtTime(0, time);
-        gain.gain.linearRampToValueAtTime(gainVal, time + 0.02);
-        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
+        gain.gain.linearRampToValueAtTime(gainVal, time + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + duration);
         
-        osc.connect(gain);
+        osc.connect(filter);
+        filter.connect(gain);
         gain.connect(this.audioCtx!.destination);
         
         osc.start(time);
-        osc.stop(time + 0.2);
+        osc.stop(time + duration + 0.1);
       };
 
-      // First Thump (Lub) - Lower freq
-      playThump(t, 120, HEARTBEAT_PEAK_GAIN * 1.5);
-      // Second Thump (Dub) - Slightly higher/tighter
-      playThump(t + 0.15, 160, HEARTBEAT_PEAK_GAIN * 1.2);
+      // Lub (S1) - Lower, longer
+      playThump(t, 45, HEARTBEAT_PEAK_GAIN * 3.5, 0.25);
+      // Dub (S2) - Higher, sharper
+      playThump(t + 0.25, 55, HEARTBEAT_PEAK_GAIN * 2.5, 0.15);
     };
 
     this.stopHeartbeat();
     playBeep();
-    this.beepInterval = setInterval(playBeep, 1200);
+    this.beepInterval = setInterval(playBeep, 1400); // Slightly slower, more relaxed rate
   }
 
   private stopHeartbeat(): void {
