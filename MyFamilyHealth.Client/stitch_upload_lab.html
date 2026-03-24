@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether Health - New Lab Entry</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#f8f9fe",
+              "on-error": "#ffffff",
+              "primary": "#004b71",
+              "secondary-fixed": "#b1f0ce",
+              "surface": "#f8f9fe",
+              "on-primary-fixed-variant": "#004b71",
+              "inverse-primary": "#8ecdff",
+              "tertiary-fixed": "#d4e3ff",
+              "on-surface-variant": "#40484f",
+              "on-primary": "#ffffff",
+              "surface-container-low": "#f2f4f8",
+              "primary-container": "#006494",
+              "inverse-on-surface": "#eff1f5",
+              "error": "#ba1a1a",
+              "primary-fixed-dim": "#8ecdff",
+              "primary-fixed": "#cbe6ff",
+              "secondary-container": "#aeeecb",
+              "surface-container-high": "#e6e8ed",
+              "outline-variant": "#c0c7d0",
+              "on-primary-fixed": "#001e30",
+              "on-primary-container": "#b6ddff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "on-secondary": "#ffffff",
+              "on-background": "#191c1f",
+              "on-surface": "#191c1f",
+              "surface-tint": "#006494",
+              "secondary-fixed-dim": "#95d4b3",
+              "outline": "#707880",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary-fixed": "#001c39",
+              "secondary": "#2c694e",
+              "surface-variant": "#e0e2e7",
+              "inverse-surface": "#2d3134",
+              "on-tertiary-container": "#c3daff",
+              "surface-dim": "#d8dade",
+              "on-tertiary-fixed-variant": "#004884",
+              "surface-container-highest": "#e0e2e7",
+              "on-secondary-fixed-variant": "#0e5138",
+              "tertiary-container": "#005fac",
+              "on-secondary-fixed": "#002114",
+              "on-secondary-container": "#316e52",
+              "surface-container": "#eceef2",
+              "background": "#f8f9fe",
+              "tertiary": "#004784",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed-dim": "#a4c9ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(24px);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-4 bg-slate-50 dark:bg-slate-900 h-screen w-64 border-r-0 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-2xl font-bold text-[#006494] dark:text-sky-400 font-headline">Aether Health</h1>
+<p class="font-['Manrope'] tracking-tight text-xs font-semibold text-slate-500">Clinical Sanctuary</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800 text-[#006494] dark:text-sky-400 rounded-xl font-bold shadow-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">cloud_upload</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Upload Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#006494] hover:bg-[#eceef2] dark:hover:bg-slate-800 transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Patient Search</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#006494] hover:bg-[#eceef2] dark:hover:bg-slate-800 transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Recent Uploads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#006494] hover:bg-[#eceef2] dark:hover:bg-slate-800 transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Account Settings</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-bold shadow-lg flex items-center justify-center gap-2 active:scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined">add</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">New Lab Entry</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center w-full px-8 h-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl sticky top-0 z-40 shadow-[0_40px_60px_-15px_rgba(25,28,31,0.04)]">
+<div class="flex items-center gap-8">
+<span class="font-['Manrope'] font-extrabold text-[#004b71] dark:text-sky-200 text-xl tracking-tight">Central Lab Portal</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-500 hover:text-slate-800 font-medium font-['Inter'] text-sm antialiased" href="#">Dashboard</a>
+<a class="text-slate-500 hover:text-slate-800 font-medium font-['Inter'] text-sm antialiased" href="#">Analytics</a>
+<a class="text-slate-500 hover:text-slate-800 font-medium font-['Inter'] text-sm antialiased" href="#">Emergency</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:opacity-80 transition-opacity"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 text-slate-500 hover:opacity-80 transition-opacity"><span class="material-symbols-outlined">help_outline</span></button>
+</div>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="professional portrait of a male doctor in clinical setting with soft natural lighting and medical equipment background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY_BbQq35qPndPPnRWs8B6KNAqylhmylmfwtz8TlReec0Pb3TCxFaDuzRu-clLLmD2rv4rWJKwce7uz3yG2EAh27G3_Ng8rnEaCdrbuwXXP9IMRNukaSy50dtFj-dVqmS6qYbZtPcdbsu7_jAgi7Esdlxi7ELEjb4KoHDhYZNjnOOKDbsGT1AWzed_4LRhOiwINnT9oeUZK4DbrYQNPmtdwNv0Hs0yl6VHy3B3__Z6p9K1E9Hkbla8STMEUj6T7A0qZlEK2Iarqify"/>
+<button class="text-[#006494] font-bold font-['Inter'] text-sm hover:opacity-80 active:opacity-70 transition-opacity">Sign Out</button>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<div class="p-12 max-w-6xl mx-auto">
+<!-- Page Header -->
+<div class="mb-12">
+<div class="flex items-center gap-3 mb-4">
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-xs font-bold uppercase tracking-widest">Protocol 4.2</span>
+<span class="flex items-center gap-1 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                        HIPAA Compliant Environment
+                    </span>
+</div>
+<h2 class="text-5xl font-headline font-extrabold text-on-surface tracking-tight leading-tight">New Lab Result <br/><span class="text-primary">Clinical Documentation</span></h2>
+</div>
+<!-- Multi-step Form Layout (Asymmetric Bento Style) -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Left Column: Patient & Facility Info -->
+<div class="col-span-12 lg:col-span-4 space-y-8">
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_40px_60px_-15px_rgba(25,28,31,0.04)]">
+<h3 class="font-headline text-lg font-bold text-primary mb-6">Patient Identification</h3>
+<div class="space-y-6">
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">National Health ID</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-on-surface transition-all duration-300 px-0 py-3 text-lg font-medium" placeholder="XXX-XXXX-XXXX" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Laboratory Source</label>
+<select class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-on-surface transition-all duration-300 px-0 py-3 font-medium">
+<option>Aether Central Diagnostics</option>
+<option>Metropolitan Medical Labs</option>
+<option>Priority Pathology Group</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">Collection Date</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-on-surface transition-all duration-300 px-0 py-3 font-medium" type="date"/>
+</div>
+</div>
+</section>
+<!-- Trust Section -->
+<section class="bg-primary text-white rounded-xl p-8 overflow-hidden relative">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-4xl mb-4" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+<h4 class="font-headline text-xl font-bold mb-2">Secure Transfer</h4>
+<p class="text-primary-container text-sm leading-relaxed mb-6">All data is encrypted end-to-end with 256-bit AES. Automatic audit logs are generated for every clinical entry.</p>
+<div class="flex gap-2">
+<div class="bg-white/10 px-3 py-1 rounded-lg text-[10px] font-bold border border-white/20">SOC2 TYPE II</div>
+<div class="bg-white/10 px-3 py-1 rounded-lg text-[10px] font-bold border border-white/20">GDPR READY</div>
+</div>
+</div>
+<div class="absolute -right-8 -bottom-8 opacity-10">
+<span class="material-symbols-outlined text-[160px]">lock</span>
+</div>
+</section>
+</div>
+<!-- Right Column: Data Entry & Upload -->
+<div class="col-span-12 lg:col-span-8 space-y-8">
+<!-- File Dropzone -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_40px_60px_-15px_rgba(25,28,31,0.04)] border-2 border-dashed border-outline-variant hover:border-primary transition-colors duration-300 group cursor-pointer">
+<div class="flex flex-col items-center justify-center py-8 text-center">
+<div class="w-16 h-16 bg-surface-container-low rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-3xl text-primary">picture_as_pdf</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-2">Upload Original Report</h3>
+<p class="text-on-surface-variant text-sm max-w-sm">Drag and drop the official PDF diagnostic report here to enable OCR cross-validation.</p>
+<span class="mt-4 text-xs text-outline font-bold uppercase tracking-widest">Max file size 25MB</span>
+</div>
+</section>
+<!-- Dynamic Parameters Table -->
+<section class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_40px_60px_-15px_rgba(25,28,31,0.04)]">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="font-headline text-lg font-bold text-primary mb-1">Test Parameters</h3>
+<p class="text-on-surface-variant text-xs">Enter structured numeric or qualitative results below.</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 text-primary font-bold text-sm hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                                Add Row
+                            </button>
+</div>
+<div class="overflow-x-auto no-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low rounded-lg">
+<th class="px-4 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest first:rounded-l-lg last:rounded-r-lg">Parameter Name</th>
+<th class="px-4 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Result</th>
+<th class="px-4 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Reference Range</th>
+<th class="px-4 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Unit</th>
+<th class="px-4 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-transparent">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-low/50 transition-colors">
+<td class="px-4 py-4">
+<input class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm font-semibold w-full" type="text" value="Glucose, Fasting"/>
+</td>
+<td class="px-4 py-4">
+<input class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm font-semibold w-20" type="text" value="98"/>
+</td>
+<td class="px-4 py-4">
+<input class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm text-on-surface-variant w-24" type="text" value="70 - 99"/>
+</td>
+<td class="px-4 py-4">
+<span class="text-xs text-outline font-medium">mg/dL</span>
+</td>
+<td class="px-4 py-4 text-right">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-[10px] font-bold">
+                                                NORMAL
+                                            </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-low/50 transition-colors">
+<td class="px-4 py-4">
+<input class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm font-semibold w-full" type="text" value="Hemoglobin A1c"/>
+</td>
+<td class="px-4 py-4">
+<input class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm font-semibold w-20" type="text" value="6.1"/>
+</td>
+<td class="px-4 py-4">
+<input class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm text-on-surface-variant w-24" type="text" value="&lt; 5.7"/>
+</td>
+<td class="px-4 py-4">
+<span class="text-xs text-outline font-medium">%</span>
+</td>
+<td class="px-4 py-4 text-right">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-error-container text-on-error-container rounded-full text-[10px] font-bold">
+                                                HIGH
+                                            </span>
+</td>
+</tr>
+<!-- Empty Row for entry -->
+<tr class="group">
+<td class="px-4 py-4">
+<input class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm w-full placeholder:text-outline/50" placeholder="Enter parameter..." type="text"/>
+</td>
+<td class="px-4 py-4"><input class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm w-20" type="text"/></td>
+<td class="px-4 py-4"><input class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm w-24" type="text"/></td>
+<td class="px-4 py-4"><input class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm w-16" type="text"/></td>
+<td class="px-4 py-4 text-right">
+<button class="p-1 text-outline-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Action Bar -->
+<div class="flex items-center justify-between pt-8 border-t border-outline-variant/10">
+<button class="px-8 py-4 text-on-surface-variant font-bold hover:bg-surface-container-high rounded-full transition-colors">Discard Draft</button>
+<div class="flex gap-4">
+<button class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-full hover:bg-surface-container-highest transition-colors">Save For Peer Review</button>
+<button class="px-10 py-4 bg-gradient-to-br from-primary to-primary-container text-white font-bold rounded-full shadow-xl hover:shadow-primary/20 active:scale-95 transition-all">Submit Lab Result</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Validation Footer Message -->
+<div class="mt-16 bg-tertiary-fixed/30 rounded-2xl p-6 flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary text-2xl mt-1">info</span>
+<div>
+<h5 class="font-headline font-bold text-tertiary">Clinical Validation Note</h5>
+<p class="text-on-tertiary-fixed-variant text-sm mt-1">This form uses intelligent boundary checking. If a result is marked as 'High' or 'Low', it will automatically trigger a notification to the attending physician once submitted. Ensure all reference ranges match the source lab's specific equipment calibration.</p>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,152 @@
+<div class="p-8 md:p-12 max-w-6xl mx-auto space-y-10">
+  <!-- Header -->
+  <div>
+    <div class="flex items-center gap-3 mb-4">
+      <span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-xs font-bold uppercase tracking-widest">Protocol 4.2</span>
+      <span class="flex items-center gap-1 text-on-surface-variant text-xs">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+        HIPAA Compliant
+      </span>
+    </div>
+    <h1 class="text-5xl font-headline font-extrabold text-on-surface tracking-tight leading-tight">
+      {{ 'upload-lab-result.title' | transloco }}<br/>
+      <span class="text-primary">{{ 'upload-lab-result.title_accent' | transloco }}</span>
+    </h1>
+  </div>
+
+  <div class="grid grid-cols-12 gap-8" [formGroup]="form">
+    <!-- Left: Patient + Security -->
+    <div class="col-span-12 lg:col-span-4 space-y-8">
+      <section class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm">
+        <h2 class="font-headline text-lg font-bold text-primary mb-6">{{ 'upload-lab-result.patient_id_title' | transloco }}</h2>
+        <div class="space-y-6">
+          <div>
+            <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">{{ 'upload-lab-result.national_id' | transloco }}</label>
+            <input type="text" formControlName="nationalId"
+                   class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all duration-300 px-0 py-3 text-lg font-medium"
+                   placeholder="XXX-XXXX-XXXX" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">{{ 'upload-lab-result.lab_source' | transloco }}</label>
+            <select formControlName="labSource" class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all duration-300 px-0 py-3 font-medium">
+              @for (src of labSources; track src) { <option>{{ src }}</option> }
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-2">{{ 'upload-lab-result.collection_date' | transloco }}</label>
+            <input type="date" formControlName="collectionDate"
+                   class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all duration-300 px-0 py-3 font-medium" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust Card -->
+      <section class="bg-primary text-white rounded-2xl p-8 overflow-hidden relative">
+        <div class="relative z-10">
+          <span class="material-symbols-outlined text-4xl mb-4 block" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+          <h3 class="font-headline text-xl font-bold mb-2">{{ 'upload-lab-result.secure_title' | transloco }}</h3>
+          <p class="text-primary-container text-sm leading-relaxed mb-6">{{ 'upload-lab-result.secure_body' | transloco }}</p>
+          <div class="flex gap-2">
+            <div class="bg-white/10 px-3 py-1 rounded-xl text-[10px] font-bold border border-white/20">SOC2 TYPE II</div>
+            <div class="bg-white/10 px-3 py-1 rounded-xl text-[10px] font-bold border border-white/20">GDPR READY</div>
+          </div>
+        </div>
+        <div class="absolute -end-8 -bottom-8 opacity-10">
+          <span class="material-symbols-outlined text-[160px]">lock</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right: File + Parameters -->
+    <div class="col-span-12 lg:col-span-8 space-y-8">
+      <!-- PDF Dropzone -->
+      <section class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border-2 border-dashed transition-colors duration-300 cursor-pointer group"
+               [class.border-primary]="isDragging()" [class.hover:border-primary]="!isDragging()" [class.border-outline-variant]="!isDragging()"
+               (dragover)="onDragOver($event)" (dragleave)="onDragLeave()" (drop)="onDrop($event)">
+        <div class="flex flex-col items-center justify-center py-8 text-center">
+          <div class="w-16 h-16 bg-surface-container-low rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-3xl text-primary">picture_as_pdf</span>
+          </div>
+          <h2 class="font-headline text-xl font-bold text-on-surface mb-2">{{ 'upload-lab-result.upload_title' | transloco }}</h2>
+          <p class="text-on-surface-variant text-sm max-w-sm">{{ 'upload-lab-result.upload_hint' | transloco }}</p>
+          <span class="mt-4 text-xs text-outline font-bold uppercase tracking-widest">Max 25MB</span>
+        </div>
+      </section>
+
+      <!-- Parameters Table -->
+      <section class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm">
+        <div class="flex justify-between items-end mb-8">
+          <div>
+            <h2 class="font-headline text-lg font-bold text-primary mb-1">{{ 'upload-lab-result.params_title' | transloco }}</h2>
+            <p class="text-on-surface-variant text-xs">{{ 'upload-lab-result.params_subtitle' | transloco }}</p>
+          </div>
+          <button type="button" (click)="addRow()"
+                  class="flex items-center gap-2 px-4 py-2 text-primary font-bold text-sm hover:bg-surface-container-low rounded-xl transition-colors">
+            <span class="material-symbols-outlined text-lg">add_circle</span>
+            {{ 'upload-lab-result.add_row' | transloco }}
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-surface-container-low rounded-xl">
+                @for (col of ['upload-lab-result.col_param','upload-lab-result.col_result','upload-lab-result.col_range','upload-lab-result.col_unit','upload-lab-result.col_status']; track col) {
+                  <th class="px-4 py-3 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest" [class.text-right]="col === 'upload-lab-result.col_status'">{{ col | transloco }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-transparent">
+              @for (row of parameters(); track row.name; let i = $index) {
+                <tr class="group hover:bg-surface-container-low/50 transition-colors">
+                  <td class="px-4 py-4">
+                    <input type="text" [value]="row.name" class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm font-semibold w-full" />
+                  </td>
+                  <td class="px-4 py-4">
+                    <input type="text" [value]="row.result" class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm font-semibold w-20" />
+                  </td>
+                  <td class="px-4 py-4">
+                    <input type="text" [value]="row.range" class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm text-on-surface-variant w-24" />
+                  </td>
+                  <td class="px-4 py-4">
+                    <input type="text" [value]="row.unit" class="bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 p-0 text-sm text-outline w-16" />
+                  </td>
+                  <td class="px-4 py-4 text-right">
+                    @if (row.name) {
+                      <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold"
+                            [class.bg-secondary-fixed]="!row.high" [class.text-on-secondary-fixed-variant]="!row.high"
+                            [class.bg-error-container]="row.high" [class.text-on-error-container]="row.high">
+                        {{ row.high ? ('upload-lab-result.status_high' | transloco) : ('upload-lab-result.status_normal' | transloco) }}
+                      </span>
+                    } @else {
+                      <button (click)="removeRow(i)" class="p-1 text-outline-variant hover:text-error transition-colors">
+                        <span class="material-symbols-outlined text-lg">delete</span>
+                      </button>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Action Bar -->
+      <div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+        <button class="px-8 py-4 text-on-surface-variant font-bold hover:bg-surface-container-high rounded-full transition-colors">{{ 'upload-lab-result.discard' | transloco }}</button>
+        <div class="flex gap-4">
+          <button class="px-8 py-4 bg-surface-container-high text-primary font-bold rounded-full hover:bg-surface-container-highest transition-colors">{{ 'upload-lab-result.peer_review' | transloco }}</button>
+          <button class="px-10 py-4 bg-gradient-to-br from-primary to-primary-container text-white font-bold rounded-full shadow-xl active:scale-95 transition-all">{{ 'upload-lab-result.submit' | transloco }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Validation Note -->
+  <div class="bg-tertiary-fixed/30 rounded-2xl p-6 flex items-start gap-4">
+    <span class="material-symbols-outlined text-tertiary text-2xl mt-1">info</span>
+    <div>
+      <h4 class="font-headline font-bold text-tertiary">{{ 'upload-lab-result.validation_title' | transloco }}</h4>
+      <p class="text-on-tertiary-fixed-variant text-sm mt-1">{{ 'upload-lab-result.validation_body' | transloco }}</p>
+    </div>
+  </div>
+</div>

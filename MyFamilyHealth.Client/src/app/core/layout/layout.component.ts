@@ -28,7 +28,11 @@ export class LayoutComponent {
     { label: 'nav.ai_assistant', icon: 'smart_toy', routerLink: '/ai-assistant' },
     { label: 'nav.access_control', icon: 'lock_person', routerLink: '/access-control' },
     { label: 'nav.doctor_dashboard', icon: 'dashboard', routerLink: '/doctor-dashboard' },
-    { label: 'nav.medical_records_review', icon: 'description', routerLink: '/medical-records-review' }
+    { label: 'nav.medical_records_review', icon: 'description', routerLink: '/medical-records-review' },
+    { label: 'nav.upload_imaging', icon: 'radiology', routerLink: '/upload-imaging' },
+    { label: 'nav.upload_center', icon: 'cloud_upload', routerLink: '/upload-center' },
+    { label: 'nav.add_prescription', icon: 'prescriptions', routerLink: '/add-prescription' },
+    { label: 'nav.upload_lab_result', icon: 'biotech', routerLink: '/upload-lab-result' }
   ];
 
   toggleLanguage() {

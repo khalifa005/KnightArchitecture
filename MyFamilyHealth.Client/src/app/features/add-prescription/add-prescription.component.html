@@ -1,0 +1,157 @@
+<div class="p-8 md:p-12 space-y-12 max-w-7xl mx-auto">
+  <!-- Header -->
+  <section class="space-y-4">
+    <div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold uppercase tracking-widest">
+      <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">prescriptions</span>
+      {{ 'add-prescription.workflow_label' | transloco }}
+    </div>
+    <h1 class="text-5xl font-headline font-extrabold text-primary tracking-tight leading-tight">{{ 'add-prescription.title' | transloco }}</h1>
+    <p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed">{{ 'add-prescription.subtitle' | transloco }}</p>
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <!-- Form -->
+    <div class="lg:col-span-8 space-y-8">
+      <div class="bg-surface-container-lowest rounded-2xl p-8 shadow-sm">
+        <form class="space-y-10" [formGroup]="form" (ngSubmit)="submit()">
+          <!-- Patient + Medication -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-primary tracking-wider uppercase">{{ 'add-prescription.patient_id' | transloco }}</label>
+              <div class="relative">
+                <input type="text" formControlName="patientId"
+                       class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 transition-all px-0 py-3 font-medium placeholder:text-slate-300"
+                       placeholder="e.g. 294-001-928" />
+                <span class="absolute end-0 top-3 material-symbols-outlined text-slate-300">id_card</span>
+              </div>
+            </div>
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-primary tracking-wider uppercase">{{ 'add-prescription.medication_name' | transloco }}</label>
+              <div class="relative">
+                <input type="text" formControlName="medicationName"
+                       class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 transition-all px-0 py-3 font-medium placeholder:text-slate-300"
+                       [placeholder]="'add-prescription.medication_placeholder' | transloco" />
+                <span class="absolute end-0 top-3 material-symbols-outlined text-slate-300">medication</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Dosage Recommendations -->
+          <div class="p-6 bg-surface-container-low rounded-2xl border-s-4 border-primary space-y-6">
+            <div class="flex items-center gap-2 text-primary">
+              <span class="material-symbols-outlined">auto_awesome</span>
+              <h3 class="font-bold text-sm tracking-tight">{{ 'add-prescription.ai_title' | transloco }}</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="space-y-2">
+                <label class="block text-xs font-semibold text-on-surface-variant">{{ 'add-prescription.dosage' | transloco }}</label>
+                <select formControlName="dosage" class="w-full bg-white border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 text-sm py-2">
+                  @for (d of dosageOptions; track d) { <option>{{ d }}</option> }
+                </select>
+              </div>
+              <div class="space-y-2">
+                <label class="block text-xs font-semibold text-on-surface-variant">{{ 'add-prescription.frequency' | transloco }}</label>
+                <select formControlName="frequency" class="w-full bg-white border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 text-sm py-2">
+                  @for (f of frequencyOptions; track f) { <option>{{ f }}</option> }
+                </select>
+              </div>
+              <div class="space-y-2">
+                <label class="block text-xs font-semibold text-on-surface-variant">{{ 'add-prescription.duration' | transloco }}</label>
+                <input type="number" formControlName="duration" class="w-full bg-white border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 text-sm py-2" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Special Instructions -->
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-primary tracking-wider uppercase">{{ 'add-prescription.instructions' | transloco }}</label>
+            <textarea formControlName="specialInstructions" rows="3" class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 transition-all px-0 py-3 font-medium placeholder:text-slate-300 resize-none"
+                      [placeholder]="'add-prescription.instructions_placeholder' | transloco"></textarea>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center justify-end gap-4 pt-4">
+            <button type="button" class="px-6 py-3 text-primary font-bold hover:bg-surface-container-high rounded-full transition-colors">
+              {{ 'add-prescription.save_draft' | transloco }}
+            </button>
+            <button type="submit" class="px-8 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-bold shadow-lg hover:opacity-90 active:scale-95 transition-all">
+              {{ 'add-prescription.submit' | transloco }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Interaction Panel + Ambient -->
+    <div class="lg:col-span-4 space-y-8">
+      <div class="bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-lg font-headline font-bold text-primary">{{ 'add-prescription.interaction_title' | transloco }}</h2>
+          <span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">security</span>
+        </div>
+        <div class="space-y-4">
+          @for (item of interactions; track item.titleKey) {
+            <div class="flex gap-4 p-4 rounded-2xl"
+                 [class.bg-error-container]="item.type === 'error'" [class.text-on-error-container]="item.type === 'error'"
+                 [class.bg-secondary-container]="item.type === 'success'" [class.text-on-secondary-container]="item.type === 'success'">
+              <span class="material-symbols-outlined shrink-0">{{ item.icon }}</span>
+              <div>
+                <p class="text-sm font-bold">{{ item.titleKey | transloco }}</p>
+                <p class="text-xs opacity-80 leading-snug mt-1">{{ item.bodyKey | transloco }}</p>
+              </div>
+            </div>
+          }
+          <div class="pt-6 border-t border-outline-variant/20">
+            <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-4">{{ 'add-prescription.profile_links' | transloco }}</p>
+            @for (link of ['add-prescription.link_history','add-prescription.link_labs']; track link) {
+              <div class="flex items-center justify-between group cursor-pointer py-2">
+                <span class="text-sm text-on-surface hover:text-primary transition-colors">{{ link | transloco }}</span>
+                <span class="material-symbols-outlined text-sm text-outline group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+      <!-- Ambient image -->
+      <div class="relative h-48 rounded-2xl overflow-hidden shadow-xl group">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkzVnm0nBdBzL4fX9DTNYINiYrnj0KMYRfbbWY664SaPSRRMlChTIUR7O3ScGkn-FEZ7e1Jk_aI9NxIzgHgCFb5nCvAjei2qkbl8bH1FYLS0kQ_vWUJZcb-xHZ9aUz05qFQywi4CYGafhM7mLRAV4VQWpDVYpNGt3atQ-G1nkRBcyQ-x_UZd05ae1oOAo1mnikm9gT2KyugyQW4UcNxLxrf0ofmbzhXvHrSfU49rLqKCcuGMtk5SAYRqAmETWrsS8IjypbgU3HsMKD"
+             alt="Lab environment" class="w-full h-full object-cover grayscale-[0.2] group-hover:scale-105 transition-transform duration-700" />
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex flex-col justify-end p-6">
+          <h4 class="text-white font-bold font-headline">Aether Sanctuary</h4>
+          <p class="text-white/80 text-xs">Ensuring precision at every point of care.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pending Reviews -->
+  <section class="space-y-6 pb-12">
+    <div class="flex items-end justify-between">
+      <div>
+        <h2 class="text-2xl font-headline font-bold text-primary">{{ 'add-prescription.pending_title' | transloco }}</h2>
+        <p class="text-on-surface-variant text-sm mt-1">{{ 'add-prescription.pending_subtitle' | transloco }}</p>
+      </div>
+      <button class="text-primary font-bold text-sm hover:underline">{{ 'add-prescription.view_all' | transloco }}</button>
+    </div>
+    <div class="space-y-4">
+      @for (r of pendingReviews; track r.name) {
+        <div class="flex items-center justify-between p-6 bg-surface-container-lowest hover:bg-surface-container transition-colors rounded-2xl">
+          <div class="flex items-center gap-6">
+            <div class="h-12 w-12 rounded-full flex items-center justify-center" [class]="r.iconBg">
+              <span class="material-symbols-outlined">{{ r.icon }}</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-on-surface">{{ r.name }}</h4>
+              <p class="text-xs text-on-surface-variant">{{ r.meta }}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="px-3 py-1 rounded-full text-[10px] font-bold uppercase" [class]="r.statusStyle">{{ r.statusKey | transloco }}</div>
+            <span class="text-on-surface-variant text-sm">{{ r.time }}</span>
+            <span class="material-symbols-outlined text-outline cursor-pointer">more_vert</span>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+</div>

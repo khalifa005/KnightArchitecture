@@ -66,6 +66,26 @@ export const routes: Routes = [
         path: 'medical-records-review',
         loadComponent: () => import('./features/medical-records-review/medical-records-review.component').then(c => c.MedicalRecordsReviewComponent),
         providers: [provideTranslocoScope('medical-records-review')]
+      },
+      {
+        path: 'upload-imaging',
+        loadComponent: () => import('./features/upload-imaging/upload-imaging.component').then(c => c.UploadImagingComponent),
+        providers: [provideTranslocoScope('upload-imaging')]
+      },
+      {
+        path: 'upload-center',
+        loadComponent: () => import('./features/upload-center/upload-center.component').then(c => c.UploadCenterComponent),
+        providers: [provideTranslocoScope('upload-center')]
+      },
+      {
+        path: 'add-prescription',
+        loadComponent: () => import('./features/add-prescription/add-prescription.component').then(c => c.AddPrescriptionComponent),
+        providers: [provideTranslocoScope('add-prescription')]
+      },
+      {
+        path: 'upload-lab-result',
+        loadComponent: () => import('./features/upload-lab-result/upload-lab-result.component').then(c => c.UploadLabResultComponent),
+        providers: [provideTranslocoScope('upload-lab-result')]
       }
     ]
   }

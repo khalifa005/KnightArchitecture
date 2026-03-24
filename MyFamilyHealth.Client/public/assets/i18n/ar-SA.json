@@ -8,7 +8,11 @@
     "ai_assistant": "المساعد الذكي",
     "access_control": "التحكم بالوصول",
     "doctor_dashboard": "لوحة الطبيب",
-    "medical_records_review": "مراجعة السجلات"
+    "medical_records_review": "مراجعة السجلات",
+    "upload_imaging": "رفع الأشعة",
+    "upload_center": "مركز الرفع",
+    "add_prescription": "إضافة وصفة",
+    "upload_lab_result": "رفع نتيجة مختبر"
   },
   "layout": {
     "portal_title": "بوابة المريض",

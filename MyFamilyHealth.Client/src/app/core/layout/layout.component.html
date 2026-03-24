@@ -1,9 +1,9 @@
 <!-- Side Navigation Bar -->
 <aside [class]="isExpanded() ? 'w-64' : 'w-24'" class="fixed start-0 top-0 h-screen bg-slate-50 border-e-0 flex flex-col p-4 gap-2 z-40 hidden md:flex transition-all duration-300">
-  <div class="px-3 py-6 mb-4 flex flex-col justify-center overflow-hidden whitespace-nowrap h-[100px]">
+  <div class="px-3 pt-2 pb-3 mb-1 flex flex-col justify-start overflow-hidden whitespace-nowrap">
     @if (isExpanded()) {
-        <h2 class="font-['Manrope'] font-extrabold text-sky-900 text-xl tracking-tight transition-opacity">{{ 'layout.portal_title' | transloco }}</h2>
-        <p class="text-xs font-medium text-slate-500 uppercase tracking-widest mt-1">{{ 'layout.portal_subtitle' | transloco }}</p>
+        <h2 class="font-['Manrope'] font-extrabold text-sky-900 text-lg tracking-tight leading-tight">{{ 'layout.portal_title' | transloco }}</h2>
+        <p class="text-[11px] font-medium text-slate-400 uppercase tracking-widest mt-0.5">{{ 'layout.portal_subtitle' | transloco }}</p>
     } @else {
         <span class="material-symbols-outlined text-sky-900 text-3xl mx-auto">health_and_safety</span>
     }

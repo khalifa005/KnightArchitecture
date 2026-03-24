@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether Health - Medical Center Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#f8f9fe",
+                        "on-error": "#ffffff",
+                        "primary": "#004b71",
+                        "secondary-fixed": "#b1f0ce",
+                        "surface": "#f8f9fe",
+                        "on-primary-fixed-variant": "#004b71",
+                        "inverse-primary": "#8ecdff",
+                        "tertiary-fixed": "#d4e3ff",
+                        "on-surface-variant": "#40484f",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f2f4f8",
+                        "primary-container": "#006494",
+                        "inverse-on-surface": "#eff1f5",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#8ecdff",
+                        "primary-fixed": "#cbe6ff",
+                        "secondary-container": "#aeeecb",
+                        "surface-container-high": "#e6e8ed",
+                        "outline-variant": "#c0c7d0",
+                        "on-primary-fixed": "#001e30",
+                        "on-primary-container": "#b6ddff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1f",
+                        "on-surface": "#191c1f",
+                        "surface-tint": "#006494",
+                        "secondary-fixed-dim": "#95d4b3",
+                        "outline": "#707880",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#001c39",
+                        "secondary": "#2c694e",
+                        "surface-variant": "#e0e2e7",
+                        "inverse-surface": "#2d3134",
+                        "on-tertiary-container": "#c3daff",
+                        "surface-dim": "#d8dade",
+                        "on-tertiary-fixed-variant": "#004884",
+                        "surface-container-highest": "#e0e2e7",
+                        "on-secondary-fixed-variant": "#0e5138",
+                        "tertiary-container": "#005fac",
+                        "on-secondary-fixed": "#002114",
+                        "on-secondary-container": "#316e52",
+                        "surface-container": "#eceef2",
+                        "background": "#f8f9fe",
+                        "tertiary": "#004784",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#a4c9ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fe;
+        }
+        .editorial-shadow {
+            shadow: 0 40px 60px -15px rgba(25, 28, 31, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col p-4 h-screen w-64 border-r-0 bg-slate-50 dark:bg-slate-900 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-2xl font-bold text-[#006494] dark:text-sky-400 font-headline tracking-tight">Aether Health</h1>
+<p class="font-['Manrope'] tracking-tight text-sm font-semibold text-slate-500">Clinical Sanctuary</p>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Active: Upload Center (Based on Intent) -->
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800 text-[#006494] dark:text-sky-400 rounded-xl font-bold shadow-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="cloud_upload">cloud_upload</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Upload Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#006494] transition-colors duration-200 hover:bg-[#eceef2] dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Patient Search</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#006494] transition-colors duration-200 hover:bg-[#eceef2] dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Recent Uploads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#006494] transition-colors duration-200 hover:bg-[#eceef2] dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Account Settings</span>
+</a>
+</nav>
+<button class="mt-auto bg-primary-container text-white py-4 px-6 rounded-full font-headline font-bold text-sm tracking-wide shadow-lg hover:opacity-90 transition-all scale-95 duration-150 ease-in-out">
+            New Lab Entry
+        </button>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar (Execution from JSON) -->
+<header class="flex justify-between items-center w-full px-8 h-20 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl sticky top-0 z-40 shadow-[0_40px_60px_-15px_rgba(25,28,31,0.04)]">
+<div class="flex items-center gap-8">
+<span class="font-['Manrope'] font-extrabold text-[#004b71] dark:text-sky-200 text-xl tracking-tight">Central Lab Portal</span>
+<div class="hidden md:flex gap-6 font-['Inter'] text-sm antialiased">
+<a class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition-opacity" href="#">Dashboard</a>
+<a class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition-opacity" href="#">Analytics</a>
+<a class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 transition-opacity" href="#">Emergency</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2 mr-4">
+<button class="p-2 text-slate-500 hover:opacity-80 transition-opacity active:opacity-70">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:opacity-80 transition-opacity active:opacity-70">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="flex items-center gap-3 px-3 py-1.5 bg-surface-container rounded-full">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-primary-fixed">
+<img alt="Staff Member Portrait" data-alt="Professional portrait of a healthcare worker in clean medical attire with a friendly but focused expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYw_acc_yg7OqOdnQSJcIvCRA6TvO03sgCs9q4UEtuv8suNpnWDxCNHCrz6AcnpBlLIuXIlDA4TT4oWFZeHWSVc2TX_ie4dFE0BvFZQ62IyTDbUQdfmJrAoHbfyfeXh-Cg4WiaRGuKflSadPvUr_g8UZwlGW52ff5eYuTB2AEK3NUiTtEtnFlktea3L12rLaIvzDnLj00DyEgsUxLJdf0xzPImIOArQcIUb1NWiIAmwseLOhha5ru6MzCFTpZBImaKKAfPYZAYit0d"/>
+</div>
+<span class="text-[#006494] font-headline font-bold text-xs">Sign Out</span>
+</div>
+</div>
+</header>
+<!-- Editorial Content Area -->
+<div class="p-12 max-w-7xl mx-auto space-y-12">
+<!-- Hero Header Section -->
+<section class="space-y-2">
+<h2 class="font-headline font-extrabold text-5xl text-on-surface tracking-tight leading-tight">
+                    Upload <span class="text-primary-container">Center</span>
+</h2>
+<p class="font-body text-on-surface-variant text-lg max-w-2xl">
+                    Securely ingest clinical data into the patient longitudinal record. Ensure data integrity through high-fidelity visual verification.
+                </p>
+</section>
+<!-- Quick Upload Zone (Bento Layout) -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Main Form Area -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest p-10 rounded-xl shadow-[0_40px_60px_-15px_rgba(25,28,31,0.04)]">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline font-bold text-xl text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="add_circle" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+                            Patient Record Ingest
+                        </h3>
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant opacity-60">Session ID: ATH-9921-X</span>
+</div>
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="block font-label font-semibold text-xs text-on-surface-variant ml-1">NATIONAL ID (PRIMARY KEY)</label>
+<input class="w-full bg-surface-container-low border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 px-4 py-4 rounded-t-lg transition-all placeholder:opacity-30" placeholder="XXX - XXX - XXXX" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block font-label font-semibold text-xs text-on-surface-variant ml-1">PHONE NUMBER</label>
+<input class="w-full bg-surface-container-low border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 px-4 py-4 rounded-t-lg transition-all placeholder:opacity-30" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+</div>
+<div class="space-y-4">
+<label class="block font-label font-semibold text-xs text-on-surface-variant ml-1">UPLOAD CATEGORY</label>
+<div class="flex flex-wrap gap-4">
+<button class="flex items-center gap-3 px-6 py-4 rounded-xl border-2 border-primary-container bg-primary/5 text-primary font-bold transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+                                    Lab Test
+                                </button>
+<button class="flex items-center gap-3 px-6 py-4 rounded-xl border-2 border-transparent bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="radiology">radiology</span>
+                                    X-Ray/Imaging
+                                </button>
+<button class="flex items-center gap-3 px-6 py-4 rounded-xl border-2 border-transparent bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-all" type="button">
+<span class="material-symbols-outlined" data-icon="prescriptions">prescriptions</span>
+                                    Medication Prescription
+                                </button>
+</div>
+</div>
+<!-- Dropzone Area -->
+<div class="mt-8 border-2 border-dashed border-outline-variant/50 rounded-xl p-12 flex flex-col items-center justify-center bg-surface/50 group hover:bg-primary/5 hover:border-primary/50 transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="upload_file">upload_file</span>
+</div>
+<p class="font-headline font-bold text-lg text-on-surface">Drag &amp; Drop Patient Files</p>
+<p class="font-body text-sm text-on-surface-variant">DICOM, HL7, PDF, or JPG up to 50MB</p>
+</div>
+<div class="pt-4 flex justify-end">
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-10 py-4 rounded-full font-headline font-extrabold shadow-xl hover:shadow-primary/20 hover:scale-[1.02] transition-all">
+                                Confirm &amp; Initialize Upload
+                            </button>
+</div>
+</form>
+</div>
+<!-- Guidance / Context Sidebar -->
+<div class="col-span-12 lg:col-span-4 space-y-8">
+<!-- Protocol Card -->
+<div class="bg-surface-container p-8 rounded-xl border-l-4 border-primary">
+<h4 class="font-headline font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-xl" data-icon="verified_user">verified_user</span>
+                            Security Protocol
+                        </h4>
+<ul class="space-y-4 text-sm font-body text-on-surface-variant">
+<li class="flex gap-3">
+<span class="text-primary font-bold">•</span>
+                                Data is encrypted end-to-end using AES-256 standards.
+                            </li>
+<li class="flex gap-3">
+<span class="text-primary font-bold">•</span>
+                                Automatic PII masking is applied to all visual previews.
+                            </li>
+<li class="flex gap-3">
+<span class="text-primary font-bold">•</span>
+                                Uploads are logged for HIPAA compliance auditing.
+                            </li>
+</ul>
+</div>
+<!-- Informational Display -->
+<div class="relative rounded-xl overflow-hidden aspect-square">
+<img alt="Clinical Environment" class="w-full h-full object-cover" data-alt="Microscopic view of cellular structures with a soft blue and teal medical color palette, ethereal and scientific" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGVuxPzbuUqHoJF_0qd8DGUnIkqG9qEboBlk7FVQdlHzkDADvewS8bq-nypezCpSitYiBIe2Ox-E1Ud13RH0DJ_b3Pd_YNDP2JJB5J8i_vwAeu0jIot8PfbA_Dzz7hdLYFT2o9J62kgjYa48qPgRELLwHj-WTCes309XpnMql-Xi7euV0xtzmD56DWU_vt0bD9pfNYLSD8cVrg3DTlLrSMr8jI3tekzP6dJb8XFKvZEuHvZnyInG-sOu-2E4-GReXrGNKrHVkDcMS8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-8">
+<p class="text-white/80 font-label text-xs font-bold tracking-widest mb-2 uppercase">Aether AI Insights</p>
+<p class="text-white font-headline font-bold text-xl leading-snug">Our AI now automatically categorizes imaging results with 99.4% accuracy.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Uploads Table -->
+<section class="space-y-6">
+<div class="flex items-end justify-between">
+<div class="space-y-1">
+<h3 class="font-headline font-bold text-2xl text-on-surface">Recent Uploads</h3>
+<p class="font-body text-on-surface-variant text-sm">Monitoring real-time ingestion status and AI processing.</p>
+</div>
+<button class="text-primary font-bold text-sm hover:underline">View All Records</button>
+</div>
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_40px_60px_-15px_rgba(25,28,31,0.04)]">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-outline-variant/10">
+<tr>
+<th class="px-8 py-5 font-headline font-bold text-xs uppercase tracking-widest text-on-surface-variant">Patient Name</th>
+<th class="px-8 py-5 font-headline font-bold text-xs uppercase tracking-widest text-on-surface-variant">Category</th>
+<th class="px-8 py-5 font-headline font-bold text-xs uppercase tracking-widest text-on-surface-variant">Timestamp</th>
+<th class="px-8 py-5 font-headline font-bold text-xs uppercase tracking-widest text-on-surface-variant">Status</th>
+<th class="px-8 py-5 font-headline font-bold text-xs uppercase tracking-widest text-on-surface-variant text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-8 py-6 font-body text-sm font-semibold">Alex M*****s</td>
+<td class="px-8 py-6">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-xs font-bold">Lab Test</span>
+</td>
+<td class="px-8 py-6 font-body text-sm text-on-surface-variant">Oct 24, 14:22</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2 text-secondary font-bold text-xs">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+                                        AI-Analyzed
+                                    </div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="text-primary-container p-2 hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 (Tonal shift instead of border) -->
+<tr class="bg-surface-container-low/30 hover:bg-surface-container-low/50 transition-colors">
+<td class="px-8 py-6 font-body text-sm font-semibold">Sarah K*****n</td>
+<td class="px-8 py-6">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold">X-Ray</span>
+</td>
+<td class="px-8 py-6 font-body text-sm text-on-surface-variant">Oct 24, 13:45</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2 text-primary font-bold text-xs">
+<span class="material-symbols-outlined text-base" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Verified
+                                    </div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="text-primary-container p-2 hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-8 py-6 font-body text-sm font-semibold">David R*****z</td>
+<td class="px-8 py-6">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-xs font-bold">Prescription</span>
+</td>
+<td class="px-8 py-6 font-body text-sm text-on-surface-variant">Oct 24, 13:10</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2 text-on-surface-variant font-bold text-xs">
+<span class="material-symbols-outlined text-base animate-spin" data-icon="progress_activity">progress_activity</span>
+                                        Processing
+                                    </div>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="text-primary-container p-2 hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- FAB Suppression Rule Applied: No FAB on Dashboard/Details screens unless explicitly required -->
+</body></html>

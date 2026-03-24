@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether Health - Imaging &amp; X-Ray Upload</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#f8f9fe",
+                        "on-error": "#ffffff",
+                        "primary": "#004b71",
+                        "secondary-fixed": "#b1f0ce",
+                        "surface": "#f8f9fe",
+                        "on-primary-fixed-variant": "#004b71",
+                        "inverse-primary": "#8ecdff",
+                        "tertiary-fixed": "#d4e3ff",
+                        "on-surface-variant": "#40484f",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f2f4f8",
+                        "primary-container": "#006494",
+                        "inverse-on-surface": "#eff1f5",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#8ecdff",
+                        "primary-fixed": "#cbe6ff",
+                        "secondary-container": "#aeeecb",
+                        "surface-container-high": "#e6e8ed",
+                        "outline-variant": "#c0c7d0",
+                        "on-primary-fixed": "#001e30",
+                        "on-primary-container": "#b6ddff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1f",
+                        "on-surface": "#191c1f",
+                        "surface-tint": "#006494",
+                        "secondary-fixed-dim": "#95d4b3",
+                        "outline": "#707880",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#001c39",
+                        "secondary": "#2c694e",
+                        "surface-variant": "#e0e2e7",
+                        "inverse-surface": "#2d3134",
+                        "on-tertiary-container": "#c3daff",
+                        "surface-dim": "#d8dade",
+                        "on-tertiary-fixed-variant": "#004884",
+                        "surface-container-highest": "#e0e2e7",
+                        "on-secondary-fixed-variant": "#0e5138",
+                        "tertiary-container": "#005fac",
+                        "on-secondary-fixed": "#002114",
+                        "on-secondary-container": "#316e52",
+                        "surface-container": "#eceef2",
+                        "background": "#f8f9fe",
+                        "tertiary": "#004784",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#a4c9ff"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-hidden h-screen">
+<aside class="fixed left-0 top-0 h-full flex flex-col p-4 bg-slate-50 dark:bg-slate-900 h-screen w-64 border-r-0 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-2xl font-bold text-[#006494] dark:text-sky-400 font-headline tracking-tight">Aether Health</h1>
+<p class="font-['Manrope'] tracking-tight text-xs font-semibold text-slate-400">Clinical Sanctuary</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800 text-[#006494] dark:text-sky-400 rounded-xl font-bold shadow-sm transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">cloud_upload</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Upload Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#006494] hover:bg-[#eceef2] dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Patient Search</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#006494] hover:bg-[#eceef2] dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Recent Uploads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-[#006494] hover:bg-[#eceef2] dark:hover:bg-slate-800 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">Account Settings</span>
+</a>
+</nav>
+<button class="mt-auto bg-primary-container text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined">add</span>
+<span class="font-['Manrope'] tracking-tight text-sm font-semibold">New Lab Entry</span>
+</button>
+</aside>
+<main class="ml-64 h-full flex flex-col relative">
+<header class="flex justify-between items-center w-full px-8 h-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_40px_60px_-15px_rgba(25,28,31,0.04)] sticky top-0 z-40">
+<div class="flex items-center gap-8">
+<h2 class="font-['Manrope'] font-extrabold text-[#004b71] dark:text-sky-200 text-xl tracking-tight">Central Lab Portal</h2>
+<div class="hidden md:flex gap-6">
+<a class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 font-['Inter'] text-sm antialiased transition-opacity" href="#">Dashboard</a>
+<a class="text-[#006494] border-b-2 border-[#006494] pb-1 font-bold font-['Inter'] text-sm antialiased" href="#">Analytics</a>
+<a class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 font-['Inter'] text-sm antialiased transition-opacity" href="#">Emergency</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative w-64 mr-4">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-sm">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search patient ID..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">help_outline</button>
+<div class="h-8 w-8 rounded-full overflow-hidden ml-2 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a healthcare staff member in clinical setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLNU6kXD6lMEv338zJhJL9dTBmsdzLBxuVVHLuTgYarMb_IaOGUSDQoY8iDPtdMUnLdhfA2q6DA-2MK2jxaTfHNvL-_saX0H34wI3G4jXiAkTiu3p31OS3F9UvnnZm2_woiSul7miLWazJeXW-Al4jg61kHxnJRbkp0NE7urstuv3ewe5xYKdMJj8sJIPmy9Qy_D108mU5FSCGsVyj9Tgiggv3l3QI4CJHV5LmfAR3sXG7NPdQHdO4Rvagj0M4cFbqIg-_owwF8D1n"/>
+</div>
+<button class="text-[#006494] font-bold text-sm ml-2 active:opacity-70">Sign Out</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-10 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="mb-10">
+<h1 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight mb-2">Imaging &amp; X-Ray Upload</h1>
+<p class="text-on-surface-variant text-lg">DICOM compatible high-resolution diagnostics portal</p>
+</div>
+<div class="grid grid-cols-12 gap-8 items-start">
+<div class="col-span-12 lg:col-span-7 space-y-8">
+<section class="bg-surface-container-lowest rounded-xl p-8 transition-shadow duration-300">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline text-xl font-bold text-primary">Media Upload</h3>
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">DICOM 3.0 Ready</span>
+</div>
+<div class="border-2 border-dashed border-outline-variant bg-surface-container-low rounded-xl p-12 flex flex-col items-center justify-center group cursor-pointer hover:border-primary transition-all duration-300">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+</div>
+<p class="font-bold text-on-surface mb-1">Drag and drop high-res images here</p>
+<p class="text-on-surface-variant text-sm text-center max-w-xs">Supports .dcm, .jpg, .png (Max 1GB per study)</p>
+<button class="mt-6 px-6 py-2 bg-white border border-outline-variant rounded-full text-sm font-bold text-primary hover:bg-primary hover:text-white transition-colors">Browse Local Files</button>
+</div>
+<div class="mt-8 space-y-4">
+<div class="flex items-center gap-4 p-4 bg-surface-container rounded-lg">
+<div class="w-12 h-12 bg-white rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">image</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="text-sm font-bold">Chest_Xray_PA_002.dcm</span>
+<span class="text-xs text-on-surface-variant">42.8 MB</span>
+</div>
+<div class="h-1.5 bg-outline-variant/30 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4"></div>
+</div>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-error">close</button>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest rounded-xl p-8">
+<h3 class="font-headline text-xl font-bold text-primary mb-6">Clinical Annotation</h3>
+<div class="relative aspect-video bg-black rounded-xl overflow-hidden group">
+<img class="w-full h-full object-contain opacity-80" data-alt="high contrast medical x-ray image showing human chest and ribcage in clinical detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr67r7-m94U_OOJ_FspopED3JZ_LlHVKNTui_cfnVHjPf0L5LmGiYH4a97gvDKG0pSmNfZGD6M45YRFN6bLGxksrMva_ldgEm83NtsCMNmj-BRVLtW_EB0n8BuMtlCg75HZ_yL-Dr7VnKDjZtrVyuL-4awyg1mxc5pucrlBQU9N8ifPubtgkHNB5ZNaEaWkvJ612GMgHQ5aeAeEopFJRRUwSeg7xnQLlOaWkS4G07_VIigjZU0G5uOiB_0IUFz1RvZhThFlIl44J6b"/>
+<div class="absolute top-4 left-4 flex gap-2">
+<button class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">zoom_out</span>
+</button>
+<div class="h-10 w-px bg-white/20 mx-1"></div>
+<button class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center text-primary bg-white/90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">draw</span>
+</button>
+<button class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">square</span>
+</button>
+<button class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">straighten</span>
+</button>
+</div>
+<div class="absolute bottom-4 right-4 glass-panel px-3 py-1.5 rounded-lg text-[10px] font-mono text-on-surface flex flex-col items-end">
+<span>WW: 400 WL: 40</span>
+<span>SLICE: 1/1</span>
+<span>RES: 2048 x 2048</span>
+</div>
+</div>
+<p class="mt-4 text-xs text-on-surface-variant italic flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                                Preview rendering at 75% resolution for web optimization. Full resolution maintained in upload.
+                            </p>
+</section>
+</div>
+<div class="col-span-12 lg:col-span-5 space-y-8">
+<section class="bg-surface-container rounded-xl p-8">
+<h3 class="font-headline text-xl font-bold text-primary mb-6">Metadata &amp; Context</h3>
+<div class="space-y-6">
+<div>
+<label class="block text-xs font-bold text-on-surface-variant mb-2 uppercase tracking-wide">Patient Association</label>
+<div class="flex items-center gap-3 p-3 bg-surface-container-lowest rounded-lg">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">JD</div>
+<div>
+<p class="text-sm font-bold">John Doe</p>
+<p class="text-[10px] text-on-surface-variant">DOB: 05/12/1984 | ID: #88291-A</p>
+</div>
+<button class="ml-auto material-symbols-outlined text-outline">swap_horiz</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-bold text-on-surface-variant mb-2 uppercase tracking-wide">Body Part</label>
+<select class="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-primary border-t-0 border-x-0 text-sm py-2">
+<option>Chest / Thorax</option>
+<option>Abdomen</option>
+<option>Cranial</option>
+<option>Upper Limb</option>
+<option>Lower Limb</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant mb-2 uppercase tracking-wide">View Type</label>
+<select class="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-primary border-t-0 border-x-0 text-sm py-2">
+<option>Posterior-Anterior (PA)</option>
+<option>Anterior-Posterior (AP)</option>
+<option>Lateral</option>
+<option>Oblique</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant mb-2 uppercase tracking-wide">Radiologist Name</label>
+<input class="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-primary border-t-0 border-x-0 text-sm py-2" placeholder="Search practitioner..." type="text"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant mb-2 uppercase tracking-wide">Radiology Notes</label>
+<textarea class="w-full bg-surface-container-low border-b-2 border-outline-variant focus:border-primary border-t-0 border-x-0 text-sm py-2 resize-none" placeholder="Document initial observations or critical findings..." rows="6"></textarea>
+</div>
+<div class="pt-4 space-y-3">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-4 rounded-full font-bold shadow-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">send</span>
+                                        Finalize &amp; Submit Study
+                                    </button>
+<button class="w-full bg-surface-container-high text-on-secondary-container py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-outline-variant/30 transition-colors">
+                                        Save as Draft
+                                    </button>
+</div>
+</div>
+</section>
+<section class="bg-tertiary/5 rounded-xl p-6 border-l-4 border-tertiary">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-tertiary">verified_user</span>
+<div>
+<h4 class="font-bold text-sm text-tertiary">Compliance Check</h4>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Ensure all PHI is removed from DICOM tags if this study is intended for external research or cross-facility referral.</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
