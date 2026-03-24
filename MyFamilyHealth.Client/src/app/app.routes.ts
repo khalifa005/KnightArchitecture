@@ -27,6 +27,11 @@ export const routes: Routes = [
         providers: [provideTranslocoScope('dashboard')]
       },
       {
+        path: 'family-profiles',
+        loadComponent: () => import('./features/family-profiles/family-profiles.component').then(c => c.FamilyProfilesComponent),
+        providers: [provideTranslocoScope('family-profiles')]
+      },
+      {
         path: 'medical-records',
         loadComponent: () => import('./features/medical-records/medical-records').then(c => c.MedicalRecords),
         providers: [provideTranslocoScope('medical-records')]

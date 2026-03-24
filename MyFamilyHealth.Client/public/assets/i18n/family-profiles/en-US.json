@@ -1,0 +1,30 @@
+{
+  "title": "Family Sanctuary",
+  "subtitle": "Manage the holistic health journey of your loved ones. View clinical records, track developmental milestones, and coordinate care from a single, secure space.",
+  "roles": {
+    "primary_account": "Primary Account Holder",
+    "parent": "Parent",
+    "son": "Son",
+    "daughter": "Daughter",
+    "father": "Father"
+  },
+  "actions": {
+    "add_member": "Add Family Member",
+    "edit_profile": "Edit Profile",
+    "access_logs": "Access Logs",
+    "view_timeline": "View Unified Timeline",
+    "add_dependent": "Add another dependent",
+    "link_records": "Link health records for children or elderly family members."
+  },
+  "stats": {
+    "active_circles": "Active Care Circles",
+    "managing_dependents": "You are managing health data for 3 dependents.",
+    "monthly_records": "Monthly Records Updated"
+  },
+  "linked_profiles": "Linked Profiles",
+  "access": {
+    "full_access": "Full Access",
+    "view_only": "View Only"
+  },
+  "blood_type": "Blood Type:"
+}

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Family Profiles | Aether Health</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container": "#eceef2",
+              "on-primary-fixed": "#001e30",
+              "surface-container-high": "#e6e8ed",
+              "on-primary-fixed-variant": "#004b71",
+              "surface-container-low": "#f2f4f8",
+              "on-error-container": "#93000a",
+              "tertiary-container": "#005fac",
+              "on-surface-variant": "#40484f",
+              "on-secondary-container": "#316e52",
+              "primary-fixed": "#cbe6ff",
+              "primary-fixed-dim": "#8ecdff",
+              "surface-container-lowest": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface-container-highest": "#e0e2e7",
+              "error": "#ba1a1a",
+              "outline-variant": "#c0c7d0",
+              "secondary-fixed": "#b1f0ce",
+              "on-tertiary-container": "#c3daff",
+              "on-surface": "#191c1f",
+              "secondary": "#2c694e",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#aeeecb",
+              "inverse-primary": "#8ecdff",
+              "surface-bright": "#f8f9fe",
+              "on-tertiary-fixed": "#001c39",
+              "surface": "#f8f9fe",
+              "on-primary-container": "#b6ddff",
+              "surface-tint": "#006494",
+              "on-background": "#191c1f",
+              "primary": "#004b71",
+              "outline": "#707880",
+              "tertiary": "#004784",
+              "inverse-surface": "#2d3134",
+              "background": "#f8f9fe",
+              "primary-container": "#006494",
+              "tertiary-fixed": "#d4e3ff",
+              "surface-variant": "#e0e2e7",
+              "surface-dim": "#d8dade",
+              "on-primary": "#ffffff",
+              "on-tertiary-fixed-variant": "#004884",
+              "on-secondary-fixed": "#002114",
+              "tertiary-fixed-dim": "#a4c9ff",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#95d4b3",
+              "inverse-on-surface": "#eff1f5",
+              "on-secondary-fixed-variant": "#0e5138",
+              "on-tertiary": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .tonal-shift { transition: background-color 0.3s ease; }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- Desktop Side Navigation -->
+<nav class="h-screen w-64 hidden md:flex flex-col border-r-0 fixed left-0 top-0 p-6 bg-slate-50 z-40">
+<div class="text-2xl font-black text-sky-900 mb-8">Aether Health</div>
+<div class="flex flex-col space-y-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-sky-700 hover:bg-sky-50 transition-all duration-300 ease-in-out font-manrope text-sm font-medium rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-sky-900 font-bold border-r-4 border-sky-600 bg-sky-50 transition-all duration-300 ease-in-out font-manrope text-sm rounded-xl" href="#">
+<span class="material-symbols-outlined">family_restroom</span>
+<span>Family Profiles</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-sky-700 hover:bg-sky-50 transition-all duration-300 ease-in-out font-manrope text-sm font-medium rounded-xl" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>Health Records</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-sky-700 hover:bg-sky-50 transition-all duration-300 ease-in-out font-manrope text-sm font-medium rounded-xl" href="#">
+<span class="material-symbols-outlined">event</span>
+<span>Appointments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-sky-700 hover:bg-sky-50 transition-all duration-300 ease-in-out font-manrope text-sm font-medium rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<button class="mt-auto bg-gradient-to-br from-primary to-primary-container text-on-primary py-4 px-6 rounded-full font-headline font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">add</span>
+            Add Family Member
+        </button>
+</nav>
+<!-- Mobile Top Bar -->
+<header class="md:hidden fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm flex justify-between items-center px-6 py-3">
+<div class="text-xl font-extrabold tracking-tight text-sky-900">Aether Health</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-sky-900">notifications</span>
+<span class="material-symbols-outlined text-sky-900">account_circle</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-20 md:pt-12 px-6 md:px-20 pb-32">
+<!-- Hero Header -->
+<header class="mb-12">
+<h1 class="font-headline text-5xl font-extrabold text-primary tracking-tight mb-4">Family Sanctuary</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
+                Manage the holistic health journey of your loved ones. View clinical records, track developmental milestones, and coordinate care from a single, secure space.
+            </p>
+</header>
+<!-- Bento Grid for Profiles -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Primary Profile (User) -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 shadow-sm flex flex-col md:flex-row gap-8 items-center border-l-4 border-primary">
+<div class="relative">
+<img alt="Sarah Johnson" class="w-32 h-32 rounded-full object-cover grayscale-[20%]" data-alt="portrait of a professional woman with a kind expression, soft natural lighting, high-end photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWkodz9uviUuEY8l7yWfv6wmDy7uX3yCZbYXbEM_4jwIkrdmpcus5DMGI5P65SIy12er37ExV18ZiASbDXGcMnMCVpaTreQ11JTvhya7xjNAbs5PmevjT5L9XB0eBxKJ_Ly3MJOpk1-JbLdeKgfLTnzMs-J7T5d9tFPHtgswPZ86ZUFWfdih2zNXVYM6ieS7U6k-u9-XCxbwNI-pBIy-zlfHZ6mNfVs5W6qjbC5z_qGEYPhQWHkov9Qg9B4XrQ8BnRbjqDGKhrbjGq"/>
+<div class="absolute bottom-1 right-1 bg-secondary-fixed text-on-secondary-fixed-variant p-1.5 rounded-full border-4 border-surface-container-lowest">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+</div>
+<div class="flex-grow text-center md:text-left">
+<div class="flex flex-col md:flex-row md:items-center gap-3 mb-2">
+<h2 class="font-headline text-3xl font-bold text-on-surface">Sarah Johnson</h2>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full uppercase tracking-widest">Primary Account Holder</span>
+</div>
+<p class="text-on-surface-variant font-medium mb-6">Parent • 38 years old</p>
+<div class="flex flex-wrap justify-center md:justify-start gap-4">
+<button class="bg-surface-container-low hover:bg-surface-container-high text-primary px-5 py-2.5 rounded-xl font-headline font-bold text-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">edit</span>
+                            Edit Profile
+                        </button>
+<button class="bg-surface-container-low hover:bg-surface-container-high text-primary px-5 py-2.5 rounded-xl font-headline font-bold text-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">share_reviews</span>
+                            Access Logs
+                        </button>
+</div>
+</div>
+</div>
+<!-- Stats/Action Card -->
+<div class="lg:col-span-4 bg-primary text-white rounded-xl p-8 flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<h3 class="font-headline text-xl font-bold mb-2">Active Care Circles</h3>
+<p class="text-primary-fixed/80 text-sm mb-6">You are managing health data for 3 dependents.</p>
+</div>
+<div class="relative z-10 space-y-4">
+<div class="flex items-center justify-between p-3 bg-white/10 rounded-xl backdrop-blur-md">
+<span class="text-sm font-medium">Monthly Records Updated</span>
+<span class="text-xl font-bold">12</span>
+</div>
+<button class="w-full bg-white text-primary py-4 rounded-full font-headline font-bold text-sm hover:bg-primary-fixed transition-colors">
+                        View Unified Timeline
+                    </button>
+</div>
+<!-- Abstract Decorative Element -->
+<div class="absolute -right-8 -bottom-8 w-40 h-40 bg-primary-container rounded-full opacity-50 blur-3xl"></div>
+</div>
+<!-- Family Members List -->
+<div class="lg:col-span-12 mt-4">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline text-2xl font-bold text-on-surface">Linked Profiles</h3>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg"><span class="material-symbols-outlined">grid_view</span></button>
+<button class="p-2 text-primary bg-primary-fixed rounded-lg"><span class="material-symbols-outlined">list</span></button>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Member Row: Leo -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 group hover:bg-surface-container-low transition-colors border-l-4 border-transparent hover:border-secondary transition-all">
+<img alt="Leo Johnson" class="w-16 h-16 rounded-2xl object-cover" data-alt="close up portrait of a young boy smiling, soft focus park background, warm evening light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXbqjVetsmIBNw5ugAqi1_GFqa9X4WVjX-yNRTtaAZLL9fHnIycsiOHW4ftDjcxKlk1TLE9f4zp1KbCr8JmW5QHH4JMavR9p_Ze6QW0x6D0S_0hQZDmaF1F7pApQuosuEhJt5CPmtX9Z1RtHn8Rs0QEQi6iEjavbQjCD-izbgx97IhsHkjdlMeCpQQp33b626NXlmz7h_hU4MNffYoJ6m3cHrrx1lQVhby5chZZOpYxknkyoCv5FuhaNq4YvHkqh1RgVeDS7lxLYIr"/>
+<div class="flex-grow">
+<h4 class="font-headline font-bold text-lg text-on-surface">Leo Johnson</h4>
+<p class="text-on-surface-variant text-sm">Son • 8 years old • Blood Type: O+</p>
+</div>
+<div class="flex flex-wrap gap-4 items-center">
+<div class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant text-xs font-bold rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+                                Full Access
+                            </div>
+<div class="h-8 w-px bg-outline-variant/30 hidden md:block"></div>
+<div class="flex gap-2">
+<button class="p-2 text-primary hover:bg-primary-fixed rounded-full transition-colors" title="Health Records">
+<span class="material-symbols-outlined">folder_shared</span>
+</button>
+<button class="p-2 text-primary hover:bg-primary-fixed rounded-full transition-colors" title="Immunization">
+<span class="material-symbols-outlined">vaccines</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Member Row: Maya -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 group hover:bg-surface-container-low transition-colors border-l-4 border-transparent hover:border-secondary transition-all">
+<img alt="Maya Johnson" class="w-16 h-16 rounded-2xl object-cover" data-alt="portrait of a teenage girl with glasses looking thoughtful, clinical office setting, soft overhead lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9sM00rZdk9hL7tfl3YMmNuy_drO8hrCd9mW3sHVbo_u4ui2uOcH0p9Vn9ReoYc1J9iieKjo48qFJOmdhm1_Wy813AWXGQ0EvlwdBpGHO65J2heASmsaR8i05viYuuRk68ndOS2QtABtNHK8gVqyHPGhoHvXzsMabvBsdF3zk4d9B1PdAHr5wwSCte3ssNkvDv1ugrZDOf5ceFx57GT4-xvaenlSN3VJNrL6w9PsCtVo_vbVnvNceceHnLrQPmHwyTkF-1241WZBJa"/>
+<div class="flex-grow">
+<h4 class="font-headline font-bold text-lg text-on-surface">Maya Johnson</h4>
+<p class="text-on-surface-variant text-sm">Daughter • 14 years old • Blood Type: A-</p>
+</div>
+<div class="flex flex-wrap gap-4 items-center">
+<div class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-bold rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                                View Only
+                            </div>
+<div class="h-8 w-px bg-outline-variant/30 hidden md:block"></div>
+<div class="flex gap-2">
+<button class="p-2 text-primary hover:bg-primary-fixed rounded-full transition-colors" title="Health Records">
+<span class="material-symbols-outlined">folder_shared</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Member Row: Henry (Grandparent) -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 group hover:bg-surface-container-low transition-colors border-l-4 border-transparent hover:border-secondary transition-all">
+<img alt="Henry Smith" class="w-16 h-16 rounded-2xl object-cover" data-alt="portrait of an elderly man with white hair and a gentle smile, bright airy interior, cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYy3zPanTv5k3UsHdsMOM2ji8XVYlAXtJGU6yhFWfw0i_k_-Rb48N4ySFHoJgzZplwdCydOrOEHLtaBzPmBU039XdrupybJ298MZL-znOZhQXPnps4NVgbrEl6ijUavNu9gUQtvZGl8LmtN3Rooesg_qfXEJP4_xsNgeK8iO_8rUhoUmNE82GYYp0t9hK_dBe3nXth2AvOZHaBPea9iuPPXYt71ubpdo13uJ_fJiFxwSHAp0bS2Q7PJ1mL4D1BVVjSZHONNuFmzyoP"/>
+<div class="flex-grow">
+<h4 class="font-headline font-bold text-lg text-on-surface">Henry Smith</h4>
+<p class="text-on-surface-variant text-sm">Father • 72 years old • Blood Type: O+</p>
+</div>
+<div class="flex flex-wrap gap-4 items-center">
+<div class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant text-xs font-bold rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+                                Full Access
+                            </div>
+<div class="h-8 w-px bg-outline-variant/30 hidden md:block"></div>
+<div class="flex gap-2">
+<button class="p-2 text-primary hover:bg-primary-fixed rounded-full transition-colors" title="Health Records">
+<span class="material-symbols-outlined">folder_shared</span>
+</button>
+<button class="p-2 text-primary hover:bg-primary-fixed rounded-full transition-colors" title="Medications">
+<span class="material-symbols-outlined">medication</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State / Add Suggestion -->
+<div class="lg:col-span-12">
+<button class="w-full border-2 border-dashed border-outline-variant/50 rounded-2xl p-12 flex flex-col items-center justify-center gap-4 hover:bg-surface-container-low hover:border-primary transition-all group">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">person_add</span>
+</div>
+<div class="text-center">
+<p class="font-headline font-bold text-lg text-on-surface">Add another dependent</p>
+<p class="text-on-surface-variant text-sm">Link health records for children or elderly family members.</p>
+</div>
+</button>
+</div>
+</div>
+</main>
+<!-- Mobile Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 backdrop-blur-2xl md:hidden shadow-[0_-4px_20px_0_rgba(0,0,0,0.05)] rounded-t-[2rem]">
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-sky-100 text-sky-900 rounded-2xl px-5 py-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-widest mt-1">Family</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-widest mt-1">Records</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+<!-- FAB for Mobile -->
+<button class="md:hidden fixed bottom-24 right-6 bg-gradient-to-br from-primary to-primary-container text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-2xl">add</span>
+</button>
+</body></html>

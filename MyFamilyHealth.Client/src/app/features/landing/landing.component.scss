@@ -6,3 +6,86 @@
 .hero-gradient {
   background: linear-gradient(135deg, #004b71 0%, #006494 100%);
 }
+
+/* Advanced Digital Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatHero {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes floatCard {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(0, 100, 148, 0.4); }
+  70% { box-shadow: 0 0 0 25px rgba(0, 100, 148, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 100, 148, 0); }
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+.anim-fade-up {
+  opacity: 0;
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.anim-delay-100 { animation-delay: 100ms; }
+.anim-delay-200 { animation-delay: 200ms; }
+.anim-delay-300 { animation-delay: 300ms; }
+.anim-delay-400 { animation-delay: 400ms; }
+.anim-delay-500 { animation-delay: 500ms; }
+.anim-delay-600 { animation-delay: 600ms; }
+
+.anim-float-hero {
+  animation: floatHero 8s ease-in-out infinite;
+}
+
+.anim-float-card {
+  animation: floatCard 6s ease-in-out infinite;
+}
+
+.anim-float-card-alt {
+  animation: floatCard 7s ease-in-out infinite reverse;
+}
+
+.anim-pulse-btn {
+  animation: pulseGlow 2s infinite;
+}
+
+.anim-shine {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% auto;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes slideLeftEkg {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.heartbeat-container {
+  display: flex;
+  width: 200%;
+  animation: slideLeftEkg 8s linear infinite;
+  will-change: transform;
+}
+
+.ekg-line {
+  filter: drop-shadow(0 0 12px rgba(0, 100, 148, 0.8));
+}
