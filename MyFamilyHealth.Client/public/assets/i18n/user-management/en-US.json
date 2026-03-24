@@ -1,0 +1,37 @@
+{
+  "title": "User Management",
+  "subtitle": "Directory of all DHM platform users and providers.",
+  "stats": {
+    "total_users": "Total Users",
+    "active_now": "Active Sessions",
+    "pending": "Pending Approvals"
+  },
+  "search": "Search users...",
+  "filters": {
+    "role": "All Roles",
+    "status": "All Status"
+  },
+  "columns": {
+    "user": "User",
+    "role": "Role",
+    "status": "Status",
+    "last_active": "Last Active",
+    "actions": "Actions"
+  },
+  "roles": {
+    "admin": "Administrator",
+    "physician": "Physician",
+    "patient": "Patient",
+    "nurse": "Nurse"
+  },
+  "status": {
+    "active": "Active",
+    "pending": "Pending",
+    "suspended": "Suspended"
+  },
+  "actions": {
+    "edit": "Edit",
+    "suspend": "Suspend",
+    "activate": "Activate"
+  }
+}

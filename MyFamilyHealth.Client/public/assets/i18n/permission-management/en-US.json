@@ -1,0 +1,22 @@
+{
+  "title": "Permission Management",
+  "subtitle": "Define and manage role-based access control (RBAC)",
+  "roles_title": "Select Role",
+  "matrix": {
+    "module": "Module",
+    "view": "View",
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "modules": {
+    "medical_records": "Medical Records",
+    "medications": "Medications",
+    "upload_center": "Upload Center",
+    "billing": "Billing",
+    "user_mgmt": "User Management",
+    "reports": "Reports"
+  },
+  "save_btn": "Save Permissions",
+  "reset_btn": "Reset Changes"
+}

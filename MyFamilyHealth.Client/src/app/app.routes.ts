@@ -86,6 +86,36 @@ export const routes: Routes = [
         path: 'upload-lab-result',
         loadComponent: () => import('./features/upload-lab-result/upload-lab-result.component').then(c => c.UploadLabResultComponent),
         providers: [provideTranslocoScope('upload-lab-result')]
+      },
+      {
+        path: 'help-center',
+        loadComponent: () => import('./features/help-center/help-center.component').then(c => c.HelpCenterComponent),
+        providers: [provideTranslocoScope('help-center')]
+      },
+      {
+        path: 'contact-us',
+        loadComponent: () => import('./features/contact-us/contact-us.component').then(c => c.ContactUsComponent),
+        providers: [provideTranslocoScope('contact-us')]
+      },
+      {
+        path: 'admin/user-management',
+        loadComponent: () => import('./features/admin/user-management/user-management.component').then(c => c.UserManagementComponent),
+        providers: [provideTranslocoScope('user-management')]
+      },
+      {
+        path: 'admin/permission-management',
+        loadComponent: () => import('./features/admin/permission-management/permission-management.component').then(c => c.PermissionManagementComponent),
+        providers: [provideTranslocoScope('permission-management')]
+      },
+      {
+        path: 'admin/analytics',
+        loadComponent: () => import('./features/admin/analytics/analytics.component').then(c => c.AdminAnalyticsComponent),
+        providers: [provideTranslocoScope('admin-analytics')]
+      },
+      {
+        path: 'clinical-report',
+        loadComponent: () => import('./features/clinical-report/clinical-report.component').then(c => c.ClinicalReportComponent),
+        providers: [provideTranslocoScope('clinical-report')]
       }
     ]
   }

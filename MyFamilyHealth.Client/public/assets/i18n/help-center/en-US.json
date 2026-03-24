@@ -1,0 +1,39 @@
+{
+  "title": "Help Center",
+  "subtitle": "How can we help you today?",
+  "search_placeholder": "Search for articles, guides, or FAQs...",
+  "categories": {
+    "getting_started": {
+      "title": "Getting Started",
+      "desc": "Learn the basics of using DHM"
+    },
+    "my_records": {
+      "title": "My Records",
+      "desc": "Managing your clinical data and uploads"
+    },
+    "insurance": {
+      "title": "Insurance & Billing",
+      "desc": "Connectivity and provider settings"
+    },
+    "ai_assistant": {
+      "title": "AI Assistant",
+      "desc": "Maximizing DHM AI clinical insights"
+    },
+    "privacy": {
+      "title": "Privacy & Security",
+      "desc": "How we protect your health data"
+    }
+  },
+  "featured": {
+    "title": "Featured Articles",
+    "article1": "How to securely share records with providers",
+    "article2": "Understanding AI-generated clinical summaries",
+    "article3": "Setting up emergency contact alerts",
+    "article4": "Syncing wearable health data"
+  },
+  "still_need_help": {
+    "title": "Still need help?",
+    "desc": "Our clinical support team is available 24/7.",
+    "contact_btn": "Contact Support"
+  }
+}

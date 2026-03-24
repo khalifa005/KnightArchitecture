@@ -1,0 +1,34 @@
+{
+  "title": "Smart Clinical Report",
+  "subtitle": "Generate and export your comprehensive health summary.",
+  "config": {
+    "title": "Report Configuration",
+    "profile": "Select Profile",
+    "range": "Date Range",
+    "scope": "Data Scope",
+    "generate": "Generate Report"
+  },
+  "scopes": {
+    "medical_records": "Medical Records",
+    "medications": "Medications",
+    "vitals": "Vital Signs",
+    "ai_insights": "AI Insights"
+  },
+  "ai_section": {
+    "title": "AI Clinical Insight Summary",
+    "audio_summary": "Listen to Audio Summary",
+    "playing": "Playing AI Summary...",
+    "paused": "Paused"
+  },
+  "preview": {
+    "title": "Report Preview",
+    "patient": "Patient",
+    "generated": "Generated on",
+    "summary": "Clinical Summary"
+  },
+  "export": {
+    "pdf": "Export as PDF",
+    "print": "Print Report",
+    "email": "Email Provider"
+  }
+}

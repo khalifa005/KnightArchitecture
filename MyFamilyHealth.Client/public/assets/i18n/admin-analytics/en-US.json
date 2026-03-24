@@ -1,0 +1,25 @@
+{
+  "title": "Admin Analytics",
+  "subtitle": "Platform performance and user growth metrics.",
+  "metrics": {
+    "growth": "User Growth",
+    "ai_accuracy": "AI Diagnostic Accuracy",
+    "system_health": "System Health",
+    "active_users": "Active Users"
+  },
+  "charts": {
+    "growth_label": "Monthly New Users",
+    "accuracy_label": "AI Performance by Module",
+    "health_label": "Server Reliability"
+  },
+  "categories": {
+    "lab": "Lab Interpretation",
+    "imaging": "Imaging Analysis",
+    "general": "General Health"
+  },
+  "regions": {
+    "riyadh": "Riyadh",
+    "jeddah": "Jeddah",
+    "dammam": "Dammam"
+  }
+}

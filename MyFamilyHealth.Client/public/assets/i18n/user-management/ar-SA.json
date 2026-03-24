@@ -1,0 +1,37 @@
+{
+  "title": "إدارة المستخدمين",
+  "subtitle": "دليل جميع مستخدمي ومزودي منصة DHM.",
+  "stats": {
+    "total_users": "إجمالي المستخدمين",
+    "active_now": "الجلسات النشطة",
+    "pending": "في انتظار الموافقة"
+  },
+  "search": "البحث عن المستخدمين...",
+  "filters": {
+    "role": "جميع الأدوار",
+    "status": "جميع الحالات"
+  },
+  "columns": {
+    "user": "المستخدم",
+    "role": "الدور",
+    "status": "الحالة",
+    "last_active": "آخر نشاط",
+    "actions": "الإجراءات"
+  },
+  "roles": {
+    "admin": "مشرف",
+    "physician": "طبيب",
+    "patient": "مريض",
+    "nurse": "ممرض"
+  },
+  "status": {
+    "active": "نشط",
+    "pending": "قيد الانتظار",
+    "suspended": "تم تعليقه"
+  },
+  "actions": {
+    "edit": "تعديل",
+    "suspend": "تعليق",
+    "activate": "تنشيط"
+  }
+}

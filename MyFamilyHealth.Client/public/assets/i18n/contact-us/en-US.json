@@ -1,0 +1,29 @@
+{
+  "title": "Contact Us",
+  "subtitle": "We're here to support your clinical journey.",
+  "form": {
+    "name": "Full Name",
+    "email": "Email Address",
+    "subject": "Subject",
+    "message": "Message",
+    "submit": "Send Message",
+    "subjects": {
+      "technical": "Technical Support",
+      "medical": "Medical Inquiry",
+      "billing": "Billing & Insurance",
+      "feedback": "Feedback & Suggestions",
+      "other": "Other"
+    }
+  },
+  "info": {
+    "title": "Contact Information",
+    "address_label": "Our Office",
+    "address_value": "123 Clinical Way, DHM Plaza, Riyadh, Saudi Arabia",
+    "phone_label": "Phone",
+    "phone_value": "+966 11 234 5678",
+    "email_label": "Email",
+    "email_value": "support@dhm-health.ai",
+    "hours_label": "Business Hours",
+    "hours_value": "Sun - Thu: 9:00 AM - 6:00 PM"
+  }
+}
