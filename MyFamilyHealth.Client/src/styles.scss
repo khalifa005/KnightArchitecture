@@ -10,6 +10,7 @@
    Adding a new token? Add both :root AND .dark
    ───────────────────────────────────────────── */
 :root {
+  scroll-behavior: smooth;
   /* ── Surfaces ── */
   --md-background: #f8f9fe;
   --md-surface: #f8f9fe;

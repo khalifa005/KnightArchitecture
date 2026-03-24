@@ -7,10 +7,10 @@
         <span class="text-2xl font-bold tracking-tighter text-sky-900 dark:text-sky-100 font-headline">{{ 'landing.brand' | transloco }}</span>
       </a>
       <div class="hidden md:flex items-center gap-8">
-        <a class="text-sky-600 dark:text-sky-400 font-bold border-b-2 border-sky-600 dark:border-sky-400 font-headline tracking-tight text-sm cursor-pointer">{{ 'landing.nav_solutions' | transloco }}</a>
-        <a class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_providers' | transloco }}</a>
-        <a class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_research' | transloco }}</a>
-        <a routerLink="/about-us" class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_about' | transloco }}</a>
+        <a [routerLink]="[]" fragment="features" class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_solutions' | transloco }}</a>
+        <a [routerLink]="[]" fragment="sharing" class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_sharing' | transloco }}</a>
+        <a [routerLink]="[]" fragment="ai-insights" class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_ai' | transloco }}</a>
+        <a [routerLink]="[]" fragment="additional" class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_more' | transloco }}</a>
         
         <!-- Language Switcher -->
         <button (click)="toggleLanguage()" class="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-sky-300 transition-colors text-sm font-bold ms-4">
@@ -105,124 +105,177 @@
       </div>
     </section>
 
-    <!-- AI Insights: Intelligence That Heals -->
-    <section class="py-12 md:py-16 px-6 md:px-8 bg-surface-container-low dark:bg-slate-900/50">
+    <!-- Core Features Section -->
+    <section id="features" class="py-12 md:py-24 px-6 md:px-8 bg-surface-container-low dark:bg-slate-900/50 overflow-hidden">
       <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-12 gap-6">
-          <div class="max-w-2xl">
-            <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary dark:text-sky-100 tracking-tight mb-6">{{ 'landing.ai_title' | transloco }}</h2>
-            <p class="text-on-surface-variant dark:text-slate-400 text-lg">{{ 'landing.ai_desc' | transloco }}</p>
-          </div>
-          <div class="hidden md:block">
-            <span class="text-primary dark:text-sky-400 font-bold text-sm tracking-widest uppercase">{{ 'landing.ai_badge' | transloco }}</span>
-          </div>
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary dark:text-sky-100 tracking-tight mb-6">{{ 'landing.feat_section_title' | transloco }}</h2>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Card 1 -->
-          <div class="bg-surface-container-lowest dark:bg-slate-800 p-8 md:p-10 rounded-[2rem] shadow-sm hover:shadow-xl dark:hover:shadow-slate-900/50 transition-all duration-500 group border border-outline-variant/10 dark:border-slate-700/50 anim-float-card anim-delay-100">
-            <div class="w-16 h-16 rounded-2xl bg-primary-fixed dark:bg-sky-900/50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-              <span class="material-symbols-outlined text-primary dark:text-sky-300 text-3xl">lab_research</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Data Management -->
+          <div class="bg-surface-container-lowest dark:bg-slate-800 p-8 md:p-12 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 group border border-outline-variant/10 dark:border-slate-700/50 anim-float-card">
+            <div class="w-16 h-16 rounded-2xl bg-primary-fixed dark:bg-sky-900/50 flex items-center justify-center mb-8">
+              <span class="material-symbols-outlined text-primary dark:text-sky-300 text-3xl">database</span>
             </div>
-            <h3 class="font-headline text-2xl font-bold text-on-background dark:text-slate-100 mb-4">{{ 'landing.ai_card1_title' | transloco }}</h3>
-            <p class="text-on-surface-variant dark:text-slate-400 leading-relaxed mb-8">{{ 'landing.ai_card1_desc' | transloco }}</p>
-            <div class="pt-6 border-t border-surface-container dark:border-slate-700">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-primary dark:text-sky-400 uppercase">{{ 'landing.ai_card1_status' | transloco }}</span>
-                <span class="px-3 py-1 bg-secondary-fixed dark:bg-emerald-900/40 text-on-secondary-fixed-variant dark:text-emerald-300 text-[10px] font-black rounded-full uppercase">{{ 'landing.ai_card1_status_val' | transloco }}</span>
-              </div>
+            <h3 class="font-headline text-3xl font-bold text-on-background dark:text-slate-100 mb-4">{{ 'landing.feat_data_title' | transloco }}</h3>
+            <p class="text-on-surface-variant dark:text-slate-400 text-lg leading-relaxed mb-8">{{ 'landing.feat_data_desc' | transloco }}</p>
+            <div class="flex items-center gap-4 text-primary dark:text-sky-400 font-bold">
+              <span class="material-symbols-outlined">fingerprint</span>
+              <span>National ID integration</span>
             </div>
           </div>
           
-          <!-- Card 2 (Hero AI) — Gradient card stays the same in both modes -->
-          <div class="hero-gradient p-8 md:p-10 rounded-[2rem] shadow-2xl shadow-primary/30 transform md:-translate-y-8 relative overflow-hidden group anim-float-card-alt anim-delay-200">
-            <div class="absolute top-0 end-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
-            <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-8 border border-white/10">
-              <span class="material-symbols-outlined text-white text-3xl">medical_services</span>
+          <!-- Medication Management -->
+          <div class="bg-surface-container-lowest dark:bg-slate-800 p-8 md:p-12 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 group border border-outline-variant/10 dark:border-slate-700/50 anim-float-card anim-delay-200">
+            <div class="w-16 h-16 rounded-2xl bg-secondary-fixed dark:bg-emerald-900/50 flex items-center justify-center mb-8">
+              <span class="material-symbols-outlined text-secondary dark:text-emerald-300 text-3xl">medication</span>
             </div>
-            <h3 class="font-headline text-2xl font-bold text-white mb-4">{{ 'landing.ai_card2_title' | transloco }}</h3>
-            <p class="text-primary-fixed leading-relaxed mb-8">{{ 'landing.ai_card2_desc' | transloco }}</p>
-            <div class="pt-6 border-t border-white/20">
-              <div class="flex items-center gap-2 text-white/90">
-                <span class="material-symbols-outlined text-sm text-secondary-fixed">auto_awesome</span>
-                <span class="text-xs font-bold tracking-wide">{{ 'landing.ai_card2_acc' | transloco }}</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Card 3 -->
-          <div class="bg-surface-container-lowest dark:bg-slate-800 p-8 md:p-10 rounded-[2rem] shadow-sm hover:shadow-xl dark:hover:shadow-slate-900/50 transition-all duration-500 group border border-outline-variant/10 dark:border-slate-700/50 anim-float-card anim-delay-300">
-            <div class="w-16 h-16 rounded-2xl bg-tertiary-fixed dark:bg-blue-900/50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-              <span class="material-symbols-outlined text-tertiary dark:text-blue-300 text-3xl">neurology</span>
-            </div>
-            <h3 class="font-headline text-2xl font-bold text-on-background dark:text-slate-100 mb-4">{{ 'landing.ai_card3_title' | transloco }}</h3>
-            <p class="text-on-surface-variant dark:text-slate-400 leading-relaxed mb-8">{{ 'landing.ai_card3_desc' | transloco }}</p>
-            <div class="pt-6 border-t border-surface-container dark:border-slate-700">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-primary dark:text-sky-400 uppercase">{{ 'landing.ai_card3_int' | transloco }}</span>
-                <span class="px-3 py-1 bg-surface-container dark:bg-slate-700 text-on-surface-variant dark:text-slate-300 text-[10px] font-black rounded-full uppercase">{{ 'landing.ai_card3_int_val' | transloco }}</span>
-              </div>
+            <h3 class="font-headline text-3xl font-bold text-on-background dark:text-slate-100 mb-4">{{ 'landing.feat_meds_title' | transloco }}</h3>
+            <p class="text-on-surface-variant dark:text-slate-400 text-lg leading-relaxed mb-8">{{ 'landing.feat_meds_desc' | transloco }}</p>
+            <div class="flex items-center gap-4 text-secondary dark:text-emerald-400 font-bold">
+              <span class="material-symbols-outlined">notifications_active</span>
+              <span>Parental Smart Reminders</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Family Circles Section -->
-    <section class="py-12 md:py-16 px-6 md:px-8 overflow-hidden bg-white dark:bg-[#111318]">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+    <!-- Data Sharing & Access Control -->
+    <section id="sharing" class="py-12 md:py-24 px-6 md:px-8 overflow-hidden bg-white dark:bg-[#111318]">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div class="relative order-2 lg:order-1">
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-secondary-fixed-dim/20 dark:bg-emerald-900/20 rounded-full blur-3xl z-0"></div>
-          
-          <div class="relative z-10 flex gap-4 md:gap-8">
-            <div class="flex flex-col gap-4 md:gap-8 w-1/2 translate-y-12">
-              <img alt="Professional care" class="w-full rounded-[2rem] shadow-2xl shadow-primary/20 dark:shadow-slate-950/40 aspect-[4/5] object-cover border-4 border-white dark:border-slate-800 anim-float-card" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800"/>
-              <div class="bg-surface-container-lowest dark:bg-slate-800 p-4 md:p-6 rounded-3xl shadow-xl border border-outline-variant/10 dark:border-slate-700/50 anim-float-card anim-delay-100">
-                  <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary-fixed dark:bg-emerald-900/50 flex items-center justify-center shrink-0">
-                      <span class="material-symbols-outlined text-secondary dark:text-emerald-400">verified</span>
-                    </div>
-                    <div>
-                      <p class="font-bold text-on-surface dark:text-slate-100 text-sm md:text-base">{{ 'landing.family_verified_title' | transloco }}</p>
-                      <p class="text-[10px] md:text-xs text-on-surface-variant dark:text-slate-400">{{ 'landing.family_verified_sub' | transloco }}</p>
-                    </div>
-                  </div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary-container/10 dark:bg-sky-900/10 rounded-full blur-3xl"></div>
+          <div class="relative z-10 p-8 md:p-12 glass-panel rounded-[3rem] border border-white/40 dark:border-slate-700/30">
+            <div class="space-y-8">
+              <div class="flex items-start gap-6">
+                <div class="w-14 h-14 rounded-full bg-primary flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-white">groups</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold text-on-surface dark:text-white mb-2">{{ 'landing.sharing_family_title' | transloco }}</h4>
+                  <p class="text-on-surface-variant dark:text-slate-400">{{ 'landing.sharing_family_desc' | transloco }}</p>
+                </div>
               </div>
-            </div>
-            
-            <div class="flex flex-col gap-4 md:gap-8 w-1/2">
-              <div class="bg-primary p-6 md:p-8 rounded-[2rem] shadow-xl text-white anim-float-card-alt anim-delay-300">
-                <span class="material-symbols-outlined text-3xl md:text-4xl mb-3 md:mb-4 text-primary-fixed">security</span>
-                <h3 class="font-headline font-bold text-lg md:text-xl mb-1 md:mb-2">{{ 'landing.family_private_title' | transloco }}</h3>
-                <p class="text-primary-fixed text-xs md:text-sm">{{ 'landing.family_private_sub' | transloco }}</p>
+              <div class="flex items-start gap-6">
+                <div class="w-14 h-14 rounded-full bg-secondary flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-white">ecg_heart</span>
+                </div>
+                <div>
+                  <h4 class="text-xl font-bold text-on-surface dark:text-white mb-2">{{ 'landing.sharing_doctor_title' | transloco }}</h4>
+                  <p class="text-on-surface-variant dark:text-slate-400">{{ 'landing.sharing_doctor_desc' | transloco }}</p>
+                </div>
               </div>
-              <img alt="Family interaction" class="w-full rounded-[2rem] shadow-2xl shadow-primary/20 dark:shadow-slate-950/40 aspect-square object-cover border-4 border-white dark:border-slate-800 anim-float-card anim-delay-200" src="https://images.unsplash.com/photo-1581056344415-3abb773d7f5a?auto=format&fit=crop&q=80&w=800"/>
             </div>
           </div>
         </div>
         <div class="order-1 lg:order-2 text-center lg:text-start">
-          <span class="text-secondary dark:text-emerald-400 font-bold text-sm tracking-widest uppercase mb-4 block">{{ 'landing.family_badge' | transloco }}</span>
-          <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary dark:text-sky-100 mb-6 md:mb-8 tracking-tight">{{ 'landing.family_title' | transloco }}</h2>
-          <p class="text-on-surface-variant dark:text-slate-400 text-lg mb-8 leading-relaxed">
-            {{ 'landing.family_desc' | transloco }}
-          </p>
-          <ul class="space-y-6 mb-12 max-w-sm mx-auto lg:mx-0">
-            <li class="flex items-center gap-4 group text-start">
-              <div class="w-12 h-12 rounded-full bg-secondary-fixed dark:bg-emerald-900/50 flex items-center justify-center group-hover:rotate-12 transition-transform shrink-0">
-                <span class="material-symbols-outlined text-secondary dark:text-emerald-400">share</span>
-              </div>
-              <span class="text-on-surface dark:text-slate-200 font-semibold text-lg">{{ 'landing.family_feat1' | transloco }}</span>
-            </li>
-            <li class="flex items-center gap-4 group text-start">
-              <div class="w-12 h-12 rounded-full bg-secondary-fixed dark:bg-emerald-900/50 flex items-center justify-center group-hover:rotate-12 transition-transform shrink-0">
-                <span class="material-symbols-outlined text-secondary dark:text-emerald-400">group_add</span>
-              </div>
-              <span class="text-on-surface dark:text-slate-200 font-semibold text-lg">{{ 'landing.family_feat2' | transloco }}</span>
-            </li>
-          </ul>
-          <button pButton routerLink="/register" class="bg-secondary border-none text-on-secondary px-8 py-4 rounded-full font-bold shadow-lg shadow-secondary/20 hover:scale-105 active:scale-95 transition-all text-lg">
-            {{ 'landing.family_cta' | transloco }}
-          </button>
+          <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary dark:text-sky-100 mb-8">{{ 'landing.sharing_section_title' | transloco }}</h2>
+          <div class="flex flex-col gap-6 max-w-sm mx-auto lg:mx-0">
+             <div class="flex items-center gap-4 group cursor-pointer p-4 rounded-2xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-primary text-3xl">security</span>
+                <span class="text-lg font-bold">Patient-Managed Access</span>
+             </div>
+             <div class="flex items-center gap-4 group cursor-pointer p-4 rounded-2xl hover:bg-surface-container transition-colors">
+                <span class="material-symbols-outlined text-secondary text-3xl">history</span>
+                <span class="text-lg font-bold">Audit Trails & Logs</span>
+             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Insights Section -->
+    <section id="ai-insights" class="py-12 md:py-24 px-6 md:px-8 bg-surface-container-low dark:bg-slate-900/50 overflow-hidden">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary dark:text-sky-100 mb-8">{{ 'landing.ai_section_title' | transloco }}</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-surface-container-lowest dark:bg-slate-800 p-8 rounded-[2rem] border border-outline-variant/10 hover:border-primary transition-all group">
+            <span class="material-symbols-outlined text-primary text-4xl mb-6">psychology</span>
+            <h3 class="text-xl font-bold mb-4">{{ 'landing.ai_analysis_title' | transloco }}</h3>
+            <p class="text-on-surface-variant dark:text-slate-400">{{ 'landing.ai_analysis_desc' | transloco }}</p>
+          </div>
+          <div class="bg-surface-container-lowest dark:bg-slate-800 p-8 rounded-[2rem] border border-outline-variant/10 hover:border-primary transition-all group">
+            <span class="material-symbols-outlined text-primary text-4xl mb-6">calendar_month</span>
+            <h3 class="text-xl font-bold mb-4">{{ 'landing.ai_booking_title' | transloco }}</h3>
+            <p class="text-on-surface-variant dark:text-slate-400">{{ 'landing.ai_booking_desc' | transloco }}</p>
+          </div>
+          <div class="bg-surface-container-lowest dark:bg-slate-800 p-8 rounded-[2rem] border border-outline-variant/10 hover:border-primary transition-all group">
+            <span class="material-symbols-outlined text-primary text-4xl mb-6">send</span>
+            <h3 class="text-xl font-bold mb-4">{{ 'landing.ai_doc_comm_title' | transloco }}</h3>
+            <p class="text-on-surface-variant dark:text-slate-400">{{ 'landing.ai_doc_comm_desc' | transloco }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional/Roadmap Features -->
+    <section id="additional" class="py-12 md:py-24 px-6 md:px-8 bg-white dark:bg-[#111318] overflow-hidden">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="font-headline text-3xl font-bold text-center mb-16">{{ 'landing.more_section_title' | transloco }}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Telemedicine -->
+          <div class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
+            <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+               <span class="material-symbols-outlined text-primary">videocam</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm">{{ 'landing.more_tele_title' | transloco }}</h4>
+              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_tele_desc' | transloco }}</p>
+            </div>
+          </div>
+          <!-- Wearables -->
+          <div class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
+            <div class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0">
+               <span class="material-symbols-outlined text-secondary">watch</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm">{{ 'landing.more_wear_title' | transloco }}</h4>
+              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_wear_desc' | transloco }}</p>
+            </div>
+          </div>
+          <!-- EMI -->
+          <div class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
+            <div class="w-12 h-12 rounded-2xl bg-error/10 flex items-center justify-center shrink-0">
+               <span class="material-symbols-outlined text-error">emergency</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm">{{ 'landing.more_emi_title' | transloco }}</h4>
+              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_emi_desc' | transloco }}</p>
+            </div>
+          </div>
+          <!-- More ... -->
+          <div class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
+            <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+               <span class="material-symbols-outlined text-primary">pills</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm">{{ 'landing.more_refills_title' | transloco }}</h4>
+              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_refills_desc' | transloco }}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
+            <div class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0">
+               <span class="material-symbols-outlined text-secondary">psychiatry</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm">{{ 'landing.more_mental_title' | transloco }}</h4>
+              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_mental_desc' | transloco }}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
+            <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+               <span class="material-symbols-outlined text-primary">policy</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm">{{ 'landing.more_insurance_title' | transloco }}</h4>
+              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_insurance_desc' | transloco }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -260,11 +313,15 @@
     </section>
 
     <!-- Interactive Stats / Trust Bar -->
-    <section class="py-12 md:py-16 bg-surface-container-highest dark:bg-slate-900">
+    <section class="py-16 md:py-24 bg-surface-container-highest dark:bg-slate-950/50 overflow-hidden border-y border-outline-variant/10">
       <div class="max-w-7xl mx-auto px-6 md:px-8">
         <div class="flex flex-col items-center">
-          <p class="text-primary dark:text-sky-400 font-bold text-sm tracking-[0.2em] md:tracking-[0.3em] uppercase mb-10 text-center">{{ 'landing.trust_badge' | transloco }}</p>
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 w-full">
+          <div class="flex items-center gap-4 mb-12">
+             <div class="h-px w-12 bg-primary/30"></div>
+             <p class="text-primary dark:text-sky-400 font-bold text-sm tracking-[0.3em] uppercase text-center">{{ 'landing.trust_badge' | transloco }}</p>
+             <div class="h-px w-12 bg-primary/30"></div>
+          </div>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16 w-full">
             <div class="text-center">
               <span class="block font-headline text-4xl md:text-5xl font-extrabold text-primary dark:text-sky-300 mb-2">{{ 'landing.trust_stat1_val' | transloco }}</span>
               <span class="text-on-surface-variant dark:text-slate-400 font-medium md:text-lg">{{ 'landing.trust_stat1_lbl' | transloco }}</span>
