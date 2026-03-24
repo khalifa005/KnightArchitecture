@@ -24,6 +24,7 @@ export class LayoutComponent {
     { label: 'nav.family_profiles', icon: 'family_restroom', routerLink: '/family-profiles' },
     { label: 'nav.medical_records', icon: 'folder_shared', routerLink: '/medical-records' },
     { label: 'nav.medications', icon: 'medication', routerLink: '/medications' },
+    { label: 'nav.about_us', icon: 'info', routerLink: '/about-us' },
     { label: 'nav.ai_assistant', icon: 'smart_toy', routerLink: '/ai-assistant' },
     { label: 'nav.access_control', icon: 'lock_person', routerLink: '/access-control' }
   ];

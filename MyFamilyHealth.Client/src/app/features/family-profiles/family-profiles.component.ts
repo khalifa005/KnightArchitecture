@@ -6,7 +6,6 @@ import { MenuModule } from 'primeng/menu';
 
 @Component({
   selector: 'app-family-profiles',
-  standalone: true,
   imports: [CommonModule, TranslocoModule, ButtonModule, MenuModule],
   templateUrl: './family-profiles.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

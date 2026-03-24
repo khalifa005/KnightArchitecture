@@ -91,7 +91,7 @@
       <!-- Sound Toggle -->
       <div class="absolute bottom-6 end-6 md:bottom-12 md:end-12 z-20">
         <button (click)="toggleSound()" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-primary shadow-lg hover:scale-110 transition-transform border border-white/40">
-          <span class="material-symbols-outlined">{{ isSoundEnabled ? 'volume_up' : 'volume_off' }}</span>
+          <span class="material-symbols-outlined">{{ isSoundEnabled() ? 'volume_up' : 'volume_off' }}</span>
         </button>
       </div>
     </section>

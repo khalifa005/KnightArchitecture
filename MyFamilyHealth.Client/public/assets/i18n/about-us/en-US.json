@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "pre_title": "THE VISION",
+    "title_part1": "The Clinical",
+    "title_part2": "Sanctuary",
+    "subtitle": "Aether Health was born from a simple yet radical idea: your medical data belongs to you. We've created a restorative digital environment where complexity dissolves into clarity, and security is the foundation of care.",
+    "trusted_by": "Trusted by 5,000+ Practitioners",
+    "health_status_label": "Health Status",
+    "health_status_value": "Optimal Balance"
+  },
+  "mission": {
+    "title": "Our Mission: Patient Agency",
+    "description": "We bridge the gap between fragmented medical centers. Your lab tests, X-rays, and prescription history are securely stored in one location, instantly accessible whenever and wherever you need them.",
+    "data_sync": "Data Synchronization: 89% Complete"
+  },
+  "unified_id": {
+    "title": "Unified ID Access",
+    "description": "Medical centers use your National ID to upload results directly. No more manual entries or redundant physical copies.",
+    "verify": "Verify Identity",
+    "auto_ingest": "Auto-Ingest Records"
+  },
+  "family_care": {
+    "title": "Family Care Circles",
+    "description": "Health is a shared journey. Create secure circles to manage care for elderly parents or children. Get real-time notifications for medication dosages and appointment reminders."
+  },
+  "ai_insights": {
+    "title": "Intelligence That Heals",
+    "powered_by": "Powered by Aether-AI",
+    "description": "Our AI doesn't replace doctors—it empowers you. Get plain-language interpretations of complex lab results and personalized dosage recommendations based on your unique metabolic profile.",
+    "observation_title": "Observation: Iron Levels",
+    "observation_text": "\"Your ferritin levels are slightly below baseline. We recommend increasing leafy green intake before your follow-up.\""
+  },
+  "security": {
+    "title": "Trust is Our Highest Priority",
+    "description": "Aether Health employs bank-grade security protocols to ensure your sanctuary remains private and impenetrable.",
+    "enc_title": "256-bit Encryption",
+    "enc_desc": "Military-grade AES encryption for all data at rest and in transit.",
+    "hipaa_title": "HIPAA Compliant",
+    "hipaa_desc": "Fully compliant with international healthcare privacy standards.",
+    "bio_title": "Biometric Lock",
+    "bio_desc": "Your records are accessible only through your unique biometrics."
+  },
+  "cta": {
+    "title": "Ready to take control?",
+    "create_account": "Create Your Account",
+    "book_consultation": "Book a Consultation"
+  }
+}

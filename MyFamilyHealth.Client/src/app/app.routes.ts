@@ -33,6 +33,11 @@ export const routes: Routes = [
         providers: [provideTranslocoScope('family-profiles')]
       },
       {
+        path: 'about-us',
+        loadComponent: () => import('./features/about-us/about-us.component').then(c => c.AboutUsComponent),
+        providers: [provideTranslocoScope('about-us')]
+      },
+      {
         path: 'medical-records',
         loadComponent: () => import('./features/medical-records/medical-records').then(c => c.MedicalRecords),
         providers: [provideTranslocoScope('medical-records')]

@@ -1,0 +1,180 @@
+<div class="space-y-24 pb-24">
+  <!-- Hero Section: The Clinical Sanctuary -->
+  <section class="relative pt-12 px-8 max-w-7xl mx-auto overflow-hidden">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="text-primary font-semibold tracking-widest uppercase text-xs mb-4 block">{{ 'about-us.hero.pre_title' | transloco }}</span>
+        <h1 class="text-5xl md:text-7xl font-extrabold text-on-surface tracking-tighter leading-[1.1] mb-8 font-headline">
+          {{ 'about-us.hero.title_part1' | transloco }} <span class="text-primary">{{ 'about-us.hero.title_part2' | transloco }}</span>
+        </h1>
+        <p class="text-xl text-on-surface-variant leading-relaxed mb-8 max-w-xl">
+          {{ 'about-us.hero.subtitle' | transloco }}
+        </p>
+        <div class="flex items-center gap-4">
+          <div class="flex -space-x-3">
+            <div class="w-12 h-12 rounded-full border-4 border-background bg-surface-container overflow-hidden">
+              <img class="w-full h-full object-cover" alt="Doctor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhtR5wlQFuJRZzytw-iXcp3P42XmY--GC0LdDhAt3k4CyGES515gqo4BxAmKcVrRNzawqpM9qL_utUuXqWCaPYzK37LBNT8lYmqwIyF5IHy144dT-P-wdt0cttbMDBaLqTeQ_oqsl9W5prxlUOgQbRfrmb81X4ugUlVkcL_iE-rvQA-VJmLhxxQTq7Y2TuRerdDvZs-SfbGLeF_oZq0r9Zsjqc33jekQhwxnE2wzlxWfQnR_kL2GNGTqfoJTnMYnJXvfIr0g6i3_He"/>
+            </div>
+            <div class="w-12 h-12 rounded-full border-4 border-background bg-surface-container overflow-hidden">
+              <img class="w-full h-full object-cover" alt="Doctor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT8MrZKUYcMVzKqjw9_OTtZrEs6juywi4P_v8YJgGqo4LWWgiyKdcTRN3NOiCf0xOeVdMJojOkc2g39TzEhklAXqoz0eBqmf5wYti7a32h7iM2yjKn-m07zAEhwbocTFn5Fu_2-941eoMMi-d09BxdbXz0buENc2vdZcZFKiYq7t37Y448Fai-wRWR0Neu9ZSZpZJfo8ZikHzN1FvZiWSpHH_33Te_CVu8RvBtzS2L5r2YRI3XUFlFyMerTJciGaSpEnIkvWZDnKeY"/>
+            </div>
+          </div>
+          <span class="text-sm font-medium text-on-surface-variant">{{ 'about-us.hero.trusted_by' | transloco }}</span>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="aspect-square rounded-[3rem] overflow-hidden bg-surface-container-low shadow-2xl">
+          <img class="w-full h-full object-cover opacity-90" alt="Clinic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP1JqVwzPVif9n0rHQAeu_PKDwh3H1ZM98b6gvrJ0EPczUIcILGHv5QSmr6v49JMvOcuwV4b_lM8pd7NYFOn1cEgZz7-Twrz30Wpa48c5eklE4hx-jNY1bAlBCSAsB47321TkH4ZNbWnqprrkK2L5pk9knyTsvSfU-4TOG_Q-fzOFk1TN_h1qRjmyyLgr4DTA5UJz5GIHlYc_GOKSHB1Jg9ZHH9359Z_3GCjzmWFLMp5o6e4NusQZmGN0K2kFs4iw55hx08woAm5Lu"/>
+        </div>
+        <!-- Floating Vitality Chip -->
+        <div class="absolute -bottom-6 -start-6 bg-secondary-fixed text-on-secondary-fixed-variant px-6 py-4 rounded-xl shadow-lg flex items-center gap-3">
+          <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wider">{{ 'about-us.hero.health_status_label' | transloco }}</p>
+            <p class="text-lg font-bold">{{ 'about-us.hero.health_status_value' | transloco }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & National ID Bento Grid -->
+  <section class="px-8 max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-12 gap-6">
+      <!-- Our Mission -->
+      <div class="md:col-span-7 bg-surface-container-lowest p-12 rounded-[2rem] flex flex-col justify-between shadow-sm">
+        <div>
+          <div class="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined">shield_person</span>
+          </div>
+          <h2 class="text-3xl font-bold mb-6 font-headline">{{ 'about-us.mission.title' | transloco }}</h2>
+          <p class="text-on-surface-variant text-lg leading-relaxed mb-8">
+            {{ 'about-us.mission.description' | transloco }}
+          </p>
+        </div>
+        <div class="bg-surface-container-low rounded-2xl p-6 flex items-center gap-6">
+          <div class="flex-1">
+            <div class="h-2 w-full bg-outline-variant/30 rounded-full mb-2 overflow-hidden">
+              <div class="h-full bg-primary w-3/4"></div>
+            </div>
+            <span class="text-xs text-on-surface-variant">{{ 'about-us.mission.data_sync' | transloco }}</span>
+          </div>
+          <span class="material-symbols-outlined text-primary">sync</span>
+        </div>
+      </div>
+
+      <!-- National ID Integration -->
+      <div class="md:col-span-5 bg-primary text-on-primary p-12 rounded-[2rem] relative overflow-hidden shadow-sm">
+        <div class="relative z-10">
+          <h3 class="text-2xl font-bold mb-4 font-headline">{{ 'about-us.unified_id.title' | transloco }}</h3>
+          <p class="text-on-primary/80 mb-8">{{ 'about-us.unified_id.description' | transloco }}</p>
+          <div class="space-y-4">
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl flex items-center gap-4">
+              <span class="material-symbols-outlined">id_card</span>
+              <span class="text-sm font-medium">{{ 'about-us.unified_id.verify' | transloco }}</span>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl flex items-center gap-4">
+              <span class="material-symbols-outlined">upload_file</span>
+              <span class="text-sm font-medium">{{ 'about-us.unified_id.auto_ingest' | transloco }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="absolute -end-20 -bottom-20 w-64 h-64 bg-primary-container/20 rounded-full blur-3xl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Family Care Circles & AI Insights -->
+  <section class="px-8 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
+    <!-- Family Care -->
+    <div class="bg-surface-container p-12 rounded-[2rem]">
+      <h3 class="text-3xl font-bold mb-6 font-headline">{{ 'about-us.family_care.title' | transloco }}</h3>
+      <p class="text-on-surface-variant text-lg mb-10 leading-relaxed">{{ 'about-us.family_care.description' | transloco }}</p>
+      <div class="space-y-6">
+        <div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-secondary-container/30 text-secondary flex items-center justify-center">
+              <span class="material-symbols-outlined">family_restroom</span>
+            </div>
+            <div>
+              <p class="font-bold">Mom's Wellness</p>
+              <p class="text-xs text-on-surface-variant">Medication: 09:00 AM</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+        </div>
+        <div class="flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl opacity-60 shadow-sm">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary-container/20 text-primary flex items-center justify-center">
+              <span class="material-symbols-outlined">child_care</span>
+            </div>
+            <div>
+              <p class="font-bold">Leo's Immunization</p>
+              <p class="text-xs text-on-surface-variant">Next: Oct 24th</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-outline">calendar_today</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Driven Insights -->
+    <div class="bg-surface-container-low p-12 rounded-[2rem] border border-outline-variant/15">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="px-4 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full text-xs font-bold uppercase tracking-tighter">
+          {{ 'about-us.ai_insights.powered_by' | transloco }}
+        </div>
+      </div>
+      <h3 class="text-3xl font-bold mb-6 font-headline">{{ 'about-us.ai_insights.title' | transloco }}</h3>
+      <p class="text-on-surface-variant text-lg mb-8 leading-relaxed">{{ 'about-us.ai_insights.description' | transloco }}</p>
+      <div class="bg-surface-container-lowest p-6 rounded-2xl border-s-4 border-tertiary shadow-sm">
+        <div class="flex items-start gap-4">
+          <span class="material-symbols-outlined text-tertiary">insights</span>
+          <div>
+            <p class="font-bold mb-1">{{ 'about-us.ai_insights.observation_title' | transloco }}</p>
+            <p class="text-sm text-on-surface-variant italic">{{ 'about-us.ai_insights.observation_text' | transloco }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security & Compliance -->
+  <section class="bg-surface-container-highest py-24 rounded-[3rem] mx-8">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <span class="material-symbols-outlined text-6xl text-primary mb-6 block" style="font-variation-settings: 'wght' 200;">verified_user</span>
+      <h2 class="text-4xl font-extrabold mb-6 tracking-tight font-headline">{{ 'about-us.security.title' | transloco }}</h2>
+      <p class="text-on-surface-variant text-lg max-w-2xl mx-auto mb-16">{{ 'about-us.security.description' | transloco }}</p>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-background p-8 rounded-2xl shadow-sm">
+          <span class="material-symbols-outlined text-3xl text-primary mb-4 block">encrypted</span>
+          <h4 class="font-bold mb-2">{{ 'about-us.security.enc_title' | transloco }}</h4>
+          <p class="text-sm text-on-surface-variant">{{ 'about-us.security.enc_desc' | transloco }}</p>
+        </div>
+        <div class="bg-background p-8 rounded-2xl shadow-sm">
+          <span class="material-symbols-outlined text-3xl text-primary mb-4 block">gavel</span>
+          <h4 class="font-bold mb-2">{{ 'about-us.security.hipaa_title' | transloco }}</h4>
+          <p class="text-sm text-on-surface-variant">{{ 'about-us.security.hipaa_desc' | transloco }}</p>
+        </div>
+        <div class="bg-background p-8 rounded-2xl shadow-sm">
+          <span class="material-symbols-outlined text-3xl text-primary mb-4 block">fingerprint</span>
+          <h4 class="font-bold mb-2">{{ 'about-us.security.bio_title' | transloco }}</h4>
+          <p class="text-sm text-on-surface-variant">{{ 'about-us.security.bio_desc' | transloco }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="px-8 max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl font-bold mb-8 font-headline">{{ 'about-us.cta.title' | transloco }}</h2>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+      <button pButton class="w-full justify-center sm:w-auto px-10 py-3 bg-primary text-on-primary rounded-full font-bold text-lg hover:opacity-90 transition-opacity shadow-xl border-none">
+        {{ 'about-us.cta.create_account' | transloco }}
+      </button>
+      <button pButton class="w-full justify-center sm:w-auto px-10 py-3 bg-secondary-container text-on-secondary-container rounded-full font-bold text-lg hover:bg-secondary-container/80 transition-colors border-none">
+        {{ 'about-us.cta.book_consultation' | transloco }}
+      </button>
+    </div>
+  </section>
+</div>
