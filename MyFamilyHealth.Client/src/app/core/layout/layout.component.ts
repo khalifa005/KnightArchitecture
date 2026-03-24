@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AppStore } from '../state/app.store';
@@ -6,18 +6,73 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
+import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
+import { BadgeModule } from 'primeng/badge';
 import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslocoModule, ButtonModule, InputTextModule, MenuModule],
+  imports: [CommonModule, RouterModule, TranslocoModule, ButtonModule, InputTextModule, MenuModule, OverlayPanelModule, BadgeModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
   store = inject(AppStore);
   isExpanded = signal(true);
+
+  @ViewChild('notifPanel') notifPanel!: OverlayPanel;
+
+  notifications = [
+    {
+      icon: 'lab_research',
+      iconColor: 'text-primary',
+      iconBg: 'bg-primary-fixed',
+      title: 'Lab Results Ready',
+      desc: 'Your CBC panel results are now available.',
+      time: '2 min ago',
+      unread: true
+    },
+    {
+      icon: 'medication',
+      iconColor: 'text-secondary',
+      iconBg: 'bg-secondary-fixed',
+      title: 'Medication Reminder',
+      desc: 'Time to take your evening Metformin dose.',
+      time: '30 min ago',
+      unread: true
+    },
+    {
+      icon: 'calendar_month',
+      iconColor: 'text-tertiary',
+      iconBg: 'bg-tertiary-fixed',
+      title: 'Appointment Tomorrow',
+      desc: 'Dr. Ahmed Al-Rashid — 9:30 AM Cardiology.',
+      time: '1 hr ago',
+      unread: false
+    },
+    {
+      icon: 'verified_user',
+      iconColor: 'text-on-surface-variant',
+      iconBg: 'bg-surface-container',
+      title: 'Access Granted',
+      desc: 'Dr. Sarah Mitchell now has view access.',
+      time: '3 hr ago',
+      unread: false
+    }
+  ];
+
+  get unreadCount() {
+    return this.notifications.filter(n => n.unread).length;
+  }
+
+  toggleNotifications(event: Event) {
+    this.notifPanel.toggle(event);
+  }
+
+  markAllRead() {
+    this.notifications.forEach(n => n.unread = false);
+  }
 
   menuItems: MenuItem[] = [
     { label: 'nav.dashboard', icon: 'dashboard', routerLink: '/' },

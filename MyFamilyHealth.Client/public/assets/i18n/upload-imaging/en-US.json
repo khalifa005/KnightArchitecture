@@ -1,0 +1,22 @@
+{
+  "title": "Imaging & X-Ray Upload",
+  "subtitle": "DICOM compatible high-resolution diagnostics portal",
+  "media_upload": "Media Upload",
+  "drop_hint": "Drag and drop high-res images here",
+  "drop_formats": "Supports .dcm, .jpg, .png (Max 1GB per study)",
+  "browse": "Browse Local Files",
+  "annotation": "Clinical Annotation",
+  "preview_note": "Preview rendering at 75% resolution for web optimization. Full resolution maintained in upload.",
+  "metadata": "Metadata & Context",
+  "patient_label": "Patient Association",
+  "body_part": "Body Part",
+  "view_type": "View Type",
+  "radiologist": "Radiologist Name",
+  "radiologist_placeholder": "Search practitioner...",
+  "notes": "Radiology Notes",
+  "notes_placeholder": "Document initial observations or critical findings...",
+  "submit": "Finalize & Submit Study",
+  "save_draft": "Save as Draft",
+  "compliance_title": "Compliance Check",
+  "compliance_body": "Ensure all PHI is removed from DICOM tags if this study is intended for external research or cross-facility referral."
+}

@@ -1,24 +1,22 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { TranslocoModule } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
-import { inject } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'app-add-prescription',
   imports: [CommonModule, ReactiveFormsModule, TranslocoModule, ButtonModule, InputTextModule, SelectModule, TextareaModule],
   templateUrl: './add-prescription.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'block w-full' }
 })
 export class AddPrescriptionComponent {
   private fb = inject(FormBuilder);
 
-  form: FormGroup = this.fb.group({
+  form = this.fb.group({
     patientId: ['', Validators.required],
     medicationName: ['', Validators.required],
     dosage: ['500mg - Twice daily'],
@@ -27,19 +25,28 @@ export class AddPrescriptionComponent {
     specialInstructions: ['']
   });
 
-  dosageOptions = ['500mg - Twice daily', '250mg - Morning only', '1000mg - Loading dose'];
-  frequencyOptions = ['BID (Twice daily)', 'TID (Thrice daily)', 'PRN (As needed)'];
+  dosageOptions = [
+    { label: '500mg - Twice daily', value: '500mg - Twice daily' },
+    { label: '250mg - Morning only', value: '250mg - Morning only' },
+    { label: '1000mg - Loading dose', value: '1000mg - Loading dose' },
+  ];
+
+  frequencyOptions = [
+    { label: 'BID (Twice daily)', value: 'BID' },
+    { label: 'TID (Thrice daily)', value: 'TID' },
+    { label: 'PRN (As needed)', value: 'PRN' },
+  ];
 
   interactions = [
-    { type: 'error', icon: 'warning', titleKey: 'add-prescription.interactions.conflict_title', bodyKey: 'add-prescription.interactions.conflict_body' },
-    { type: 'success', icon: 'check_circle', titleKey: 'add-prescription.interactions.allergy_title', bodyKey: 'add-prescription.interactions.allergy_body' },
+    { type: 'error', icon: 'warning', titleKey: 'addPrescription.conflict_title', bodyKey: 'addPrescription.conflict_body' },
+    { type: 'success', icon: 'check_circle', titleKey: 'addPrescription.allergy_title', bodyKey: 'addPrescription.allergy_body' },
   ];
 
   pendingReviews = [
-    { icon: 'pill', iconBg: 'bg-secondary-fixed text-on-secondary-fixed', name: 'Amoxicillin (500mg)', meta: 'Patient ID: #4401-229 • Dr. Aris', statusKey: 'add-prescription.status.stable', statusStyle: 'bg-secondary-fixed text-on-secondary-fixed-variant', time: '2h ago' },
-    { icon: 'vaccines', iconBg: 'bg-tertiary-fixed text-on-tertiary-fixed', name: 'Insulin Glargine', meta: 'Patient ID: #9001-382 • Dr. Varma', statusKey: 'add-prescription.status.priority', statusStyle: 'bg-primary-fixed text-on-primary-fixed-variant', time: '45m ago' },
-    { icon: 'warning', iconBg: 'bg-error-container text-on-error-container', name: 'Lisinopril (10mg)', meta: 'Patient ID: #2103-991 • Dr. Aris', statusKey: 'add-prescription.status.flag', statusStyle: 'bg-error text-on-error', time: 'Now' },
+    { icon: 'pill',    iconBg: 'bg-secondary-fixed text-on-secondary-fixed',  name: 'Amoxicillin (500mg)',   meta: '#4401-229 • Dr. Aris',  statusKey: 'addPrescription.status_stable',    statusClass: 'bg-secondary-fixed text-on-secondary-fixed-variant', time: '2h ago' },
+    { icon: 'vaccines', iconBg: 'bg-tertiary-fixed text-on-tertiary-fixed',   name: 'Insulin Glargine',       meta: '#9001-382 • Dr. Varma', statusKey: 'addPrescription.status_priority',  statusClass: 'bg-primary-fixed text-on-primary-fixed-variant',    time: '45m ago' },
+    { icon: 'warning',  iconBg: 'bg-error-container text-on-error-container', name: 'Lisinopril (10mg)',      meta: '#2103-991 • Dr. Aris',  statusKey: 'addPrescription.status_flag',      statusClass: 'bg-error text-white',                               time: 'Now' },
   ];
 
-  submit() { if (this.form.valid) { /* submit logic */ } }
+  submit() { if (this.form.valid) { /* submit */ } }
 }

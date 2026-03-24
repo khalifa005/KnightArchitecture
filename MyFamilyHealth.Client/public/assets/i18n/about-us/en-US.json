@@ -3,7 +3,7 @@
     "pre_title": "THE VISION",
     "title_part1": "The Clinical",
     "title_part2": "Sanctuary",
-    "subtitle": "Aether Health was born from a simple yet radical idea: your medical data belongs to you. We've created a restorative digital environment where complexity dissolves into clarity, and security is the foundation of care.",
+    "subtitle": "Digital Health Memory was born from a simple yet radical idea: your medical data belongs to you. We've created a restorative digital environment where complexity dissolves into clarity, and security is the foundation of care.",
     "trusted_by": "Trusted by 5,000+ Practitioners",
     "health_status_label": "Health Status",
     "health_status_value": "Optimal Balance"
@@ -32,7 +32,7 @@
   },
   "security": {
     "title": "Trust is Our Highest Priority",
-    "description": "Aether Health employs bank-grade security protocols to ensure your sanctuary remains private and impenetrable.",
+    "description": "Digital Health Memory (DHM) employs bank-grade security protocols to ensure your sanctuary remains private and impenetrable.",
     "enc_title": "256-bit Encryption",
     "enc_desc": "Military-grade AES encryption for all data at rest and in transit.",
     "hipaa_title": "HIPAA Compliant",

@@ -1,156 +1,137 @@
-<div class="p-8 md:p-12 space-y-12 max-w-7xl mx-auto">
-  <!-- Hero -->
-  <section class="space-y-2">
-    <h1 class="font-headline font-extrabold text-5xl text-on-surface tracking-tight leading-tight">
-      {{ 'upload-center.title' | transloco }} <span class="text-primary-container">{{ 'upload-center.title_accent' | transloco }}</span>
+<div class="max-w-7xl mx-auto space-y-12">
+  <!-- Hero Header -->
+  <header>
+    <h1 class="text-4xl font-extrabold tracking-tight text-primary mb-2">
+      {{ 'uploadCenter.title' | transloco }} <span class="text-primary-container">{{ 'uploadCenter.title_accent' | transloco }}</span>
     </h1>
-    <p class="text-on-surface-variant text-lg max-w-2xl">{{ 'upload-center.subtitle' | transloco }}</p>
-  </section>
+    <p class="text-on-surface-variant text-lg max-w-2xl">{{ 'uploadCenter.subtitle' | transloco }}</p>
+  </header>
 
   <!-- Upload Form + Sidebar -->
   <div class="grid grid-cols-12 gap-8">
+
     <!-- Main Form -->
-    <div class="col-span-12 lg:col-span-8 bg-surface-container-lowest p-10 rounded-2xl shadow-sm">
+    <div class="col-span-12 lg:col-span-8 bg-surface-container-lowest p-8 rounded-xl shadow-sm">
       <div class="flex items-center justify-between mb-8">
-        <h2 class="font-headline font-bold text-xl text-primary flex items-center gap-2">
+        <h2 class="font-bold text-xl text-primary flex items-center gap-2">
           <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">add_circle</span>
-          {{ 'upload-center.form_title' | transloco }}
+          {{ 'uploadCenter.form_title' | transloco }}
         </h2>
         <span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant opacity-60">Session ID: ATH-9921-X</span>
       </div>
+
       <div class="space-y-8">
         <!-- ID + Phone -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="space-y-2">
-            <label class="block font-label font-semibold text-xs text-on-surface-variant">{{ 'upload-center.national_id' | transloco }}</label>
-            <input type="text" class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 px-4 py-4 rounded-t-xl transition-all placeholder:opacity-30"
-                   placeholder="XXX - XXX - XXXX" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex flex-col gap-2">
+            <label class="font-semibold text-xs text-on-surface-variant">{{ 'uploadCenter.national_id' | transloco }}</label>
+            <input pInputText class="!bg-surface-container-low !border-0 !border-b-2 !border-outline-variant/30 !focus:border-primary !px-4 !py-4 !rounded-t-lg !shadow-none" placeholder="XXX - XXX - XXXX" />
           </div>
-          <div class="space-y-2">
-            <label class="block font-label font-semibold text-xs text-on-surface-variant">{{ 'upload-center.phone' | transloco }}</label>
-            <input type="tel" class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant/30 focus:border-primary focus:ring-0 px-4 py-4 rounded-t-xl transition-all placeholder:opacity-30"
-                   placeholder="+1 (555) 000-0000" />
+          <div class="flex flex-col gap-2">
+            <label class="font-semibold text-xs text-on-surface-variant">{{ 'uploadCenter.phone' | transloco }}</label>
+            <input pInputText type="tel" class="!bg-surface-container-low !border-0 !border-b-2 !border-outline-variant/30 !focus:border-primary !px-4 !py-4 !rounded-t-lg !shadow-none" placeholder="+966 5X XXX XXXX" />
           </div>
         </div>
 
-        <!-- Category selector -->
-        <div class="space-y-4">
-          <label class="block font-label font-semibold text-xs text-on-surface-variant">{{ 'upload-center.category' | transloco }}</label>
-          <div class="flex flex-wrap gap-4">
-            <button type="button" (click)="selectCategory('lab')"
-                    class="flex items-center gap-3 px-6 py-4 rounded-2xl border-2 font-bold transition-all"
-                    [class.border-primary-container]="selectedCategory() === 'lab'"
-                    [class.bg-primary]="selectedCategory() === 'lab'"
-                    [class.bg-opacity-5]="selectedCategory() === 'lab'"
-                    [class.text-primary]="selectedCategory() === 'lab'"
-                    [class.border-transparent]="selectedCategory() !== 'lab'"
-                    [class.bg-surface-container-low]="selectedCategory() !== 'lab'"
-                    [class.text-on-surface-variant]="selectedCategory() !== 'lab'">
-              <span class="material-symbols-outlined">biotech</span>
-              {{ 'upload-center.cat_lab' | transloco }}
-            </button>
-            <button type="button" (click)="selectCategory('imaging')"
-                    class="flex items-center gap-3 px-6 py-4 rounded-2xl border-2 font-bold transition-all"
-                    [class.border-primary-container]="selectedCategory() === 'imaging'"
-                    [class.bg-primary]="selectedCategory() === 'imaging'"
-                    [class.bg-opacity-5]="selectedCategory() === 'imaging'"
-                    [class.text-primary]="selectedCategory() === 'imaging'"
-                    [class.border-transparent]="selectedCategory() !== 'imaging'"
-                    [class.bg-surface-container-low]="selectedCategory() !== 'imaging'"
-                    [class.text-on-surface-variant]="selectedCategory() !== 'imaging'">
-              <span class="material-symbols-outlined">radiology</span>
-              {{ 'upload-center.cat_imaging' | transloco }}
-            </button>
-            <button type="button" (click)="selectCategory('prescription')"
-                    class="flex items-center gap-3 px-6 py-4 rounded-2xl border-2 font-bold transition-all"
-                    [class.border-primary-container]="selectedCategory() === 'prescription'"
-                    [class.bg-primary]="selectedCategory() === 'prescription'"
-                    [class.bg-opacity-5]="selectedCategory() === 'prescription'"
-                    [class.text-primary]="selectedCategory() === 'prescription'"
-                    [class.border-transparent]="selectedCategory() !== 'prescription'"
-                    [class.bg-surface-container-low]="selectedCategory() !== 'prescription'"
-                    [class.text-on-surface-variant]="selectedCategory() !== 'prescription'">
-              <span class="material-symbols-outlined">prescriptions</span>
-              {{ 'upload-center.cat_prescription' | transloco }}
-            </button>
+        <!-- Category Selector -->
+        <div class="space-y-3">
+          <label class="font-semibold text-xs text-on-surface-variant">{{ 'uploadCenter.category' | transloco }}</label>
+          <div class="flex flex-wrap gap-3">
+            @for (cat of [{id:'lab', icon:'biotech', key:'uploadCenter.cat_lab'}, {id:'imaging', icon:'radiology', key:'uploadCenter.cat_imaging'}, {id:'prescription', icon:'prescriptions', key:'uploadCenter.cat_prescription'}]; track cat.id) {
+              <button pButton (click)="selectCategory(cat.id)"
+                      class="flex items-center gap-3 !px-5 !py-3 !rounded-xl !font-bold !border-2 transition-all"
+                      [class.!border-primary-container]="selectedCategory() === cat.id"
+                      [class.!bg-primary]="selectedCategory() === cat.id"
+                      [class.!bg-opacity-5]="selectedCategory() === cat.id"
+                      [class.!text-primary]="selectedCategory() === cat.id"
+                      [class.!border-transparent]="selectedCategory() !== cat.id"
+                      [class.!bg-surface-container-low]="selectedCategory() !== cat.id"
+                      [class.!text-on-surface-variant]="selectedCategory() !== cat.id">
+                <span class="material-symbols-outlined">{{ cat.icon }}</span>
+                {{ cat.key | transloco }}
+              </button>
+            }
           </div>
         </div>
 
         <!-- Dropzone -->
-        <div class="border-2 border-dashed rounded-2xl p-12 flex flex-col items-center justify-center cursor-pointer transition-all"
-             [class.border-primary]="isDragging()" [class.bg-primary]="isDragging()" [class.bg-opacity-5]="isDragging()"
-             [class.border-outline-variant]="!isDragging()" [class.bg-surface]="!isDragging()" [class.bg-opacity-50]="!isDragging()"
+        <div class="border-2 border-dashed rounded-xl p-10 flex flex-col items-center justify-center cursor-pointer transition-all group"
+             [class.border-primary]="isDragging()"
+             [class.border-outline-variant]="!isDragging()"
              (dragover)="onDragOver($event)" (dragleave)="onDragLeave()" (drop)="onDrop($event)">
-          <div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-4 hover:scale-110 transition-transform">
+          <div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
             <span class="material-symbols-outlined text-3xl text-primary">upload_file</span>
           </div>
-          <p class="font-headline font-bold text-lg text-on-surface">{{ 'upload-center.drop_title' | transloco }}</p>
-          <p class="text-sm text-on-surface-variant">{{ 'upload-center.drop_hint' | transloco }}</p>
+          <p class="font-bold text-lg text-on-surface">{{ 'uploadCenter.drop_title' | transloco }}</p>
+          <p class="text-sm text-on-surface-variant">{{ 'uploadCenter.drop_hint' | transloco }}</p>
         </div>
 
         <!-- Submit -->
         <div class="flex justify-end">
-          <button pButton class="!rounded-full !bg-gradient-to-br !from-primary !to-primary-container !text-white !px-10 !py-4 !font-extrabold !shadow-xl hover:!shadow-primary/20 hover:!scale-[1.02] transition-all !border-none">
-            {{ 'upload-center.submit' | transloco }}
+          <button pButton class="!rounded-full !bg-gradient-to-br !from-primary !to-primary-container !text-white !px-10 !py-4 !font-bold !shadow-xl !border-none hover:!scale-[1.02] transition-all">
+            {{ 'uploadCenter.submit' | transloco }}
           </button>
         </div>
       </div>
     </div>
 
     <!-- Guidance Sidebar -->
-    <div class="col-span-12 lg:col-span-4 space-y-8">
-      <div class="bg-surface-container p-8 rounded-2xl border-s-4 border-primary">
-        <h3 class="font-headline font-bold text-primary mb-4 flex items-center gap-2">
+    <div class="col-span-12 lg:col-span-4 space-y-6">
+      <!-- Security Protocol -->
+      <div class="bg-surface-container p-6 rounded-xl border-s-4 border-primary">
+        <h3 class="font-bold text-primary mb-4 flex items-center gap-2">
           <span class="material-symbols-outlined text-xl">verified_user</span>
-          {{ 'upload-center.security_title' | transloco }}
+          {{ 'uploadCenter.security_title' | transloco }}
         </h3>
-        <ul class="space-y-4 text-sm text-on-surface-variant">
-          @for (item of ['upload-center.sec1','upload-center.sec2','upload-center.sec3']; track item) {
-            <li class="flex gap-3">
-              <span class="text-primary font-bold">•</span>
-              {{ item | transloco }}
-            </li>
+        <ul class="space-y-3 text-sm text-on-surface-variant">
+          @for (key of ['uploadCenter.sec1','uploadCenter.sec2','uploadCenter.sec3']; track key) {
+            <li class="flex gap-2"><span class="text-primary font-bold shrink-0">•</span>{{ key | transloco }}</li>
           }
         </ul>
       </div>
-      <div class="relative rounded-2xl overflow-hidden aspect-square shadow-lg">
+      <!-- Ambient Image -->
+      <div class="relative rounded-xl overflow-hidden aspect-square shadow-lg">
         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGVuxPzbuUqHoJF_0qd8DGUnIkqG9qEboBlk7FVQdlHzkDADvewS8bq-nypezCpSitYiBIe2Ox-E1Ud13RH0DJ_b3Pd_YNDP2JJB5J8i_vwAeu0jIot8PfbA_Dzz7hdLYFT2o9J62kgjYa48qPgRELLwHj-WTCes309XpnMql-Xi7euV0xtzmD56DWU_vt0bD9pfNYLSD8cVrg3DTlLrSMr8jI3tekzP6dJb8XFKvZEuHvZnyInG-sOu-2E4-GReXrGNKrHVkDcMS8"
              alt="Microscope cells" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-8">
-          <p class="text-white/80 text-xs font-bold tracking-widest uppercase mb-2">Aether AI Insights</p>
-          <p class="text-white font-headline font-bold text-lg leading-snug">{{ 'upload-center.ai_stat' | transloco }}</p>
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-6">
+          <p class="text-white/80 text-[10px] font-bold tracking-widest uppercase mb-2">Aether AI</p>
+          <p class="text-white font-bold text-base leading-snug">{{ 'uploadCenter.ai_stat' | transloco }}</p>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Recent Uploads Table -->
-  <section class="space-y-6">
+  <section class="space-y-4">
     <div class="flex items-end justify-between">
       <div>
-        <h2 class="font-headline font-bold text-2xl text-on-surface">{{ 'upload-center.recent_title' | transloco }}</h2>
-        <p class="text-on-surface-variant text-sm">{{ 'upload-center.recent_subtitle' | transloco }}</p>
+        <h2 class="font-bold text-2xl text-on-surface">{{ 'uploadCenter.recent_title' | transloco }}</h2>
+        <p class="text-on-surface-variant text-sm">{{ 'uploadCenter.recent_subtitle' | transloco }}</p>
       </div>
-      <button class="text-primary font-bold text-sm hover:underline">{{ 'upload-center.view_all' | transloco }}</button>
+      <button pButton class="!text-primary !font-bold !text-sm !bg-transparent !border-none !shadow-none hover:!underline !p-0">
+        {{ 'uploadCenter.view_all' | transloco }}
+      </button>
     </div>
-    <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm">
+
+    <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
       <table class="w-full text-left">
-        <thead class="bg-surface-container-low border-b border-outline-variant/10">
+        <thead class="bg-surface-container-low">
           <tr>
-            @for (col of ['upload-center.col_patient','upload-center.col_category','upload-center.col_time','upload-center.col_status','upload-center.col_action']; track col) {
-              <th class="px-8 py-5 font-headline font-bold text-xs uppercase tracking-widest text-on-surface-variant" [class.text-right]="col === 'upload-center.col_action'">{{ col | transloco }}</th>
+            @for (col of ['uploadCenter.col_patient','uploadCenter.col_category','uploadCenter.col_time','uploadCenter.col_status','uploadCenter.col_action']; track col) {
+              <th class="px-6 py-4 font-bold text-xs uppercase tracking-widest text-on-surface-variant"
+                  [class.text-right]="col === 'uploadCenter.col_action'">{{ col | transloco }}</th>
             }
           </tr>
         </thead>
         <tbody>
           @for (row of recentUploads; track row.patient; let odd = $odd) {
             <tr class="hover:bg-surface-container-low/50 transition-colors" [class.bg-surface-container-low]="odd" [class.bg-opacity-30]="odd">
-              <td class="px-8 py-6 text-sm font-semibold">{{ row.patient }}</td>
-              <td class="px-8 py-6">
-                <span class="px-3 py-1 rounded-full text-xs font-bold" [class]="row.categoryStyle">{{ row.category }}</span>
+              <td class="px-6 py-5 text-sm font-semibold">{{ row.patient }}</td>
+              <td class="px-6 py-5">
+                <span class="px-3 py-1 rounded-full text-xs font-bold" [class]="row.categoryClass">{{ row.category }}</span>
               </td>
-              <td class="px-8 py-6 text-sm text-on-surface-variant">{{ row.time }}</td>
-              <td class="px-8 py-6">
+              <td class="px-6 py-5 text-sm text-on-surface-variant">{{ row.time }}</td>
+              <td class="px-6 py-5">
                 <div class="flex items-center gap-2 text-xs font-bold"
                      [class.text-secondary]="row.pulse"
                      [class.text-primary]="!row.pulse && row.statusIcon === 'check_circle'"
@@ -163,8 +144,8 @@
                   {{ row.status }}
                 </div>
               </td>
-              <td class="px-8 py-6 text-right">
-                <button class="text-primary-container p-2 hover:bg-surface-container rounded-full transition-colors">
+              <td class="px-6 py-5 text-right">
+                <button pButton class="!p-2 !bg-transparent !border-none !shadow-none !text-primary-container hover:!bg-surface-container !rounded-full transition-colors">
                   <span class="material-symbols-outlined">visibility</span>
                 </button>
               </td>

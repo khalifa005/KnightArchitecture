@@ -1,5 +1,5 @@
 {
-  "brand": "Aether Health",
+  "brand": "DHM",
   "nav_solutions": "Solutions",
   "nav_providers": "Providers",
   "nav_research": "Research",
@@ -9,7 +9,7 @@
   
   "hero_badge": "Introducing The Clinical Sanctuary",
   "hero_title": "Your Health, <br><span class=\"text-surface-tint\">Simplified & Secured.</span>",
-  "hero_desc": "Aether Health redefines medical data management through an editorial lens. Experience a sanctuary of clarity, built on elite security and human-centric intelligence.",
+  "hero_desc": "Digital Health Memory redefines medical data management. Experience a sanctuary of clarity, built on elite security and human-centric intelligence.",
   "hero_cta_start": "Start Your Journey",
   "hero_cta_watch": "Watch Narrative",
   
@@ -18,7 +18,7 @@
   
   "ai_badge": "Proprietary Core",
   "ai_title": "Intelligence That Heals",
-  "ai_desc": "Predictive diagnostics and cognitive reminders—Aether AI acts as a silent guardian for your daily wellness journey.",
+  "ai_desc": "Predictive diagnostics and cognitive reminders—DHM AI acts as a silent guardian for your daily wellness journey.",
   
   "ai_card1_title": "Lab Analysis",
   "ai_card1_desc": "Instant contextualization of blood work and metabolic panels using neural pattern recognition.",
@@ -36,7 +36,7 @@
   
   "family_badge": "Unified Care",
   "family_title": "Family Circles",
-  "family_desc": "Managing health shouldn't be a solo journey. Aether's Family Circles allow you to securely share records, coordinate appointments, and track recovery for your loved ones from a single, beautiful dashboard.",
+  "family_desc": "Managing health shouldn't be a solo journey. DHM's Family Circles allow you to securely share records, coordinate appointments, and track recovery for your loved ones from a single, beautiful dashboard.",
   "family_feat1": "Granular Permission Controls",
   "family_feat2": "One-Tap Dependent Profiles",
   "family_cta": "Explore Family Plans",
@@ -74,5 +74,5 @@
   "footer_a11y": "Accessibility",
   "footer_support": "Contact Support",
   "footer_global": "Global Compliance",
-  "footer_copy": "© 2026 Aether Health. Redefining the Clinical Sanctuary."
+  "footer_copy": "© 2026 Digital Health Memory (DHM). Redefining the Clinical Sanctuary."
 }
