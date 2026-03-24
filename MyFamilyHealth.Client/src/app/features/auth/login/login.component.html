@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-surface-container flex flex-col md:flex-row overflow-hidden relative">
   <!-- Left Decorative Pane -->
-  <div class="hidden md:flex md:w-5/12 lg:w-1/2 p-12 bg-primary relative flex-col justify-between overflow-hidden">
+  <div class="hidden md:flex md:w-5/12 lg:w-1/2 p-12 bg-primary dark:bg-slate-950 relative flex-col justify-between overflow-hidden">
     <div class="absolute inset-0 bg-primary-fixed opacity-10">
        <svg class="h-full w-full absolute transform -translate-x-1/2 -translate-y-1/2 opacity-30" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
     </div>
@@ -8,11 +8,11 @@
     <div class="absolute -bottom-32 -end-32 w-96 h-96 bg-primary-container/40 rounded-full blur-3xl mix-blend-overlay"></div>
     
     <div class="relative z-10">
-      <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 ring-1 ring-white/30">
+      <div class="w-16 h-16 bg-white/10 dark:bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 ring-1 ring-white/20">
         <span class="material-symbols-outlined text-white text-3xl" data-icon="monitor_heart">monitor_heart</span>
       </div>
       <h1 class="font-headline text-5xl font-black text-white tracking-tight leading-tight">{{ 'login.welcome_back' | transloco }}</h1>
-      <p class="text-secondary-fixed mt-4 font-medium text-xl max-w-sm leading-relaxed">{{ 'login.sign_in_desc' | transloco }}</p>
+      <p class="text-white/70 mt-4 font-medium text-xl max-w-sm leading-relaxed">{{ 'login.sign_in_desc' | transloco }}</p>
     </div>
 
     <div class="relative z-10 flex items-center gap-4 text-white/80 text-sm">
@@ -37,8 +37,8 @@
         <div class="flex flex-col gap-2">
           <label for="username" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'login.email_address' | transloco }}</label>
           <div class="relative">
-            <span class="absolute start-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant z-10" data-icon="mail">mail</span>
-            <input pInputText id="username" [(ngModel)]="username" type="email" class="w-full bg-surface-container border border-outline-variant/20 ps-12 pe-4 py-4 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-outline-variant font-body transition-all" [placeholder]="'login.email_placeholder' | transloco" />
+            <span class="absolute start-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant dark:text-outline z-10" data-icon="mail">mail</span>
+            <input pInputText id="username" [(ngModel)]="username" type="email" class="w-full bg-surface-container border border-outline-variant/20 dark:border-outline/30 ps-12 pe-4 py-4 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-on-surface-variant/50 font-body transition-all" [placeholder]="'login.email_placeholder' | transloco" />
           </div>
         </div>
 
@@ -47,7 +47,9 @@
             <label for="password" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'login.password' | transloco }}</label>
             <a href="#" class="text-xs font-bold text-primary hover:text-primary-fixed transition-colors">{{ 'login.forgot_password' | transloco }}</a>
           </div>
-          <p-password [(ngModel)]="password" [toggleMask]="true" styleClass="w-full" inputStyleClass="w-full bg-surface-container border border-outline-variant/20 px-4 py-4 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-outline-variant font-body transition-all" [feedback]="false" [placeholder]="'login.password_placeholder' | transloco"></p-password>
+          <p-password [(ngModel)]="password" [toggleMask]="true" styleClass="w-full" [feedback]="false" [placeholder]="'login.password_placeholder' | transloco"
+            inputStyleClass="w-full bg-surface-container border border-outline-variant/20 dark:border-outline/30 px-4 py-4 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-on-surface-variant/50 font-body transition-all">
+          </p-password>
         </div>
 
         <div class="flex items-center gap-3 mt-1">
@@ -56,7 +58,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button pButton class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-md shadow-primary/20 mt-2 hover:bg-primary-fixed hover:text-on-primary-fixed active:scale-[0.98] transition-all tracking-wide flex justify-center items-center gap-2" (click)="onLogin()">
+        <button pButton class="w-full bg-primary text-on-primary font-bold py-4 rounded-xl shadow-md shadow-primary/20 mt-2 hover:bg-primary-fixed hover:text-on-primary-fixed active:scale-[0.98] transition-all tracking-wide flex justify-center items-center gap-2" (click)="onLogin()">
           {{ 'login.sign_in_btn' | transloco }}
           <span class="material-symbols-outlined font-bold text-lg" data-icon="arrow_forward">arrow_forward</span>
         </button>
@@ -89,7 +91,7 @@
     </div>
     
     <!-- Footer Branding -->
-    <div class="absolute bottom-6 md:start-16 md:end-16 start-0 end-0 px-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-outline-variant font-medium gap-2 text-center">
+    <div class="absolute bottom-6 md:start-16 md:end-16 start-0 end-0 px-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-on-surface-variant/60 font-medium gap-2 text-center">
       <p>{{ 'login.footer_copyright' | transloco }}</p>
       <div class="flex items-center gap-4">
         <a href="#" class="hover:text-primary transition-colors">{{ 'login.privacy_policy' | transloco }}</a>

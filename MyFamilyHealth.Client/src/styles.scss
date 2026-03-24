@@ -4,6 +4,138 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────
+   MD3 Design Tokens — Light / Dark
+   Tailwind references these via var(--md-*)
+   Adding a new token? Add both :root AND .dark
+   ───────────────────────────────────────────── */
+:root {
+  /* ── Surfaces ── */
+  --md-background: #f8f9fe;
+  --md-surface: #f8f9fe;
+  --md-surface-dim: #d8dade;
+  --md-surface-bright: #f8f9fe;
+  --md-surface-container-lowest: #ffffff;
+  --md-surface-container-low: #f2f4f8;
+  --md-surface-container: #eceef2;
+  --md-surface-container-high: #e6e8ed;
+  --md-surface-container-highest: #e0e2e7;
+  --md-surface-variant: #e0e2e7;
+  --md-surface-tint: #006494;
+  --md-inverse-surface: #2d3134;
+  --md-inverse-on-surface: #eff1f5;
+
+  /* ── On-surface text ── */
+  --md-on-background: #191c1f;
+  --md-on-surface: #191c1f;
+  --md-on-surface-variant: #40484f;
+
+  /* ── Primary ── */
+  --md-primary: #004b71;
+  --md-on-primary: #ffffff;
+  --md-primary-container: #006494;
+  --md-on-primary-container: #b6ddff;
+  --md-primary-fixed: #cbe6ff;
+  --md-primary-fixed-dim: #8ecdff;
+  --md-on-primary-fixed: #001e30;
+  --md-on-primary-fixed-variant: #004b71;
+  --md-inverse-primary: #8ecdff;
+
+  /* ── Secondary ── */
+  --md-secondary: #2c694e;
+  --md-on-secondary: #ffffff;
+  --md-secondary-container: #aeeecb;
+  --md-on-secondary-container: #316e52;
+  --md-secondary-fixed: #b1f0ce;
+  --md-secondary-fixed-dim: #95d4b3;
+  --md-on-secondary-fixed: #002114;
+  --md-on-secondary-fixed-variant: #0e5138;
+
+  /* ── Tertiary ── */
+  --md-tertiary: #004784;
+  --md-on-tertiary: #ffffff;
+  --md-tertiary-container: #005fac;
+  --md-on-tertiary-container: #c3daff;
+  --md-tertiary-fixed: #d4e3ff;
+  --md-tertiary-fixed-dim: #a4c9ff;
+  --md-on-tertiary-fixed: #001c39;
+  --md-on-tertiary-fixed-variant: #004884;
+
+  /* ── Error ── */
+  --md-error: #ba1a1a;
+  --md-on-error: #ffffff;
+  --md-error-container: #ffdad6;
+  --md-on-error-container: #93000a;
+
+  /* ── Outline ── */
+  --md-outline: #707880;
+  --md-outline-variant: #c0c7d0;
+}
+
+/* ─── Dark Mode Overrides ─── */
+.dark {
+  /* Surfaces */
+  --md-background: #111318;
+  --md-surface: #111318;
+  --md-surface-dim: #111318;
+  --md-surface-bright: #373b3f;
+  --md-surface-container-lowest: #0c0e13;
+  --md-surface-container-low: #191c20;
+  --md-surface-container: #1d2024;
+  --md-surface-container-high: #282a2f;
+  --md-surface-container-highest: #33353a;
+  --md-surface-variant: #40484f;
+  --md-surface-tint: #8ecdff;
+  --md-inverse-surface: #e0e2e7;
+  --md-inverse-on-surface: #2d3134;
+
+  /* On-surface text */
+  --md-on-background: #e0e2e7;
+  --md-on-surface: #e0e2e7;
+  --md-on-surface-variant: #c0c7d0;
+
+  /* Primary */
+  --md-primary: #8ecdff;
+  --md-on-primary: #00344f;
+  --md-primary-container: #004b71;
+  --md-on-primary-container: #cbe6ff;
+  --md-primary-fixed: #cbe6ff;
+  --md-primary-fixed-dim: #8ecdff;
+  --md-on-primary-fixed: #001e30;
+  --md-on-primary-fixed-variant: #004b71;
+  --md-inverse-primary: #004b71;
+
+  /* Secondary */
+  --md-secondary: #95d4b3;
+  --md-on-secondary: #003823;
+  --md-secondary-container: #0e5138;
+  --md-on-secondary-container: #b1f0ce;
+  --md-secondary-fixed: #b1f0ce;
+  --md-secondary-fixed-dim: #95d4b3;
+  --md-on-secondary-fixed: #002114;
+  --md-on-secondary-fixed-variant: #0e5138;
+
+  /* Tertiary */
+  --md-tertiary: #a4c9ff;
+  --md-on-tertiary: #00315c;
+  --md-tertiary-container: #004784;
+  --md-on-tertiary-container: #d4e3ff;
+  --md-tertiary-fixed: #d4e3ff;
+  --md-tertiary-fixed-dim: #a4c9ff;
+  --md-on-tertiary-fixed: #001c39;
+  --md-on-tertiary-fixed-variant: #004884;
+
+  /* Error */
+  --md-error: #ffb4ab;
+  --md-on-error: #690005;
+  --md-error-container: #93000a;
+  --md-on-error-container: #ffdad6;
+
+  /* Outline */
+  --md-outline: #89938e;
+  --md-outline-variant: #414941;
+}
+
 @layer base {
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -14,16 +146,11 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', var(--p-font-family), sans-serif;
-  background-color: #f8f9fe;
-  color: #191c1f;
+  background-color: var(--md-background);
+  color: var(--md-on-surface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.dark body {
-  background-color: #111318;
-  color: #e0e2e7;
 }
 
 h1, h2, h3 { font-family: 'Manrope', sans-serif; }
