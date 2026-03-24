@@ -3,6 +3,10 @@
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
 }
+
+:host-context(.dark) .glass-panel {
+  background: rgba(30, 41, 59, 0.8);
+}
 .hero-gradient {
   background: linear-gradient(135deg, #004b71 0%, #006494 100%);
 }

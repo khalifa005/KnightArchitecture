@@ -1,25 +1,34 @@
-<div class="bg-background font-body text-on-surface">
+<div class="bg-background dark:bg-[#111318] font-body text-on-surface dark:text-slate-200 transition-colors duration-300">
   <!-- Top Navigation Shell -->
-  <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm shadow-sky-900/5">
+  <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm shadow-sky-900/5 dark:shadow-slate-950/30">
     <div class="flex justify-between items-center px-4 md:px-8 py-4 max-w-7xl mx-auto">
       <a routerLink="/welcome" class="flex items-center gap-2 cursor-pointer no-underline hover:opacity-80 transition-opacity">
-        <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">health_metrics</span>
+        <span class="material-symbols-outlined text-primary dark:text-sky-400 text-3xl" style="font-variation-settings: 'FILL' 1;">health_metrics</span>
         <span class="text-2xl font-bold tracking-tighter text-sky-900 dark:text-sky-100 font-headline">{{ 'landing.brand' | transloco }}</span>
       </a>
       <div class="hidden md:flex items-center gap-8">
-        <a class="text-sky-600 dark:text-sky-400 font-bold border-b-2 border-sky-600 font-headline tracking-tight text-sm cursor-pointer">{{ 'landing.nav_solutions' | transloco }}</a>
+        <a class="text-sky-600 dark:text-sky-400 font-bold border-b-2 border-sky-600 dark:border-sky-400 font-headline tracking-tight text-sm cursor-pointer">{{ 'landing.nav_solutions' | transloco }}</a>
         <a class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_providers' | transloco }}</a>
         <a class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_research' | transloco }}</a>
         <a routerLink="/about-us" class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_about' | transloco }}</a>
         
         <!-- Language Switcher -->
-        <button (click)="toggleLanguage()" class="flex items-center gap-1 text-slate-500 hover:text-primary transition-colors text-sm font-bold ms-4">
+        <button (click)="toggleLanguage()" class="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-sky-300 transition-colors text-sm font-bold ms-4">
           <span class="material-symbols-outlined text-[18px]">language</span>
           عربي/EN
         </button>
+
+        <!-- Dark Mode Toggle -->
+        <button (click)="toggleDarkMode()" class="flex items-center gap-1 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-sky-300 transition-colors" [attr.aria-label]="store.darkMode() ? ('layout.light_mode' | transloco) : ('layout.dark_mode' | transloco)">
+          <span class="material-symbols-outlined text-[20px]">{{ store.darkMode() ? 'light_mode' : 'dark_mode' }}</span>
+        </button>
       </div>
       <div class="flex items-center gap-4">
-        <button routerLink="/login" class="text-slate-600 font-bold px-4 py-2 hover:opacity-80 transition-all duration-300 scale-95 active:scale-90 hidden sm:block">{{ 'landing.nav_login' | transloco }}</button>
+        <!-- Mobile Dark Mode Toggle -->
+        <button (click)="toggleDarkMode()" class="md:hidden p-2 text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+          <span class="material-symbols-outlined">{{ store.darkMode() ? 'light_mode' : 'dark_mode' }}</span>
+        </button>
+        <button routerLink="/login" class="text-slate-600 dark:text-slate-300 font-bold px-4 py-2 hover:opacity-80 transition-all duration-300 scale-95 active:scale-90 hidden sm:block">{{ 'landing.nav_login' | transloco }}</button>
         <button pButton routerLink="/register" class="bg-primary text-on-primary border-none px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-primary/20 hover:opacity-80 transition-all duration-300 scale-95 active:scale-90">
           {{ 'landing.nav_get_started' | transloco }}
         </button>
@@ -35,12 +44,12 @@
         <div class="heartbeat-container flex">
           <!-- SVG 1 -->
           <svg class="w-full h-64 md:h-96 flex-shrink-0 ekg-line" preserveAspectRatio="none" viewBox="0 0 1000 100">
-            <path stroke="currentColor" class="text-primary" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"
+            <path stroke="currentColor" class="text-primary dark:text-sky-400" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"
               d="M0,50 L200,50 L210,40 L220,60 L235,10 L255,90 L270,50 L400,50 L410,40 L420,60 L435,10 L455,90 L470,50 L600,50 L610,40 L620,60 L635,10 L655,90 L670,50 L800,50 L810,40 L820,60 L835,10 L855,90 L870,50 L1000,50" />
           </svg>
           <!-- SVG 2 Seamless -->
           <svg class="w-full h-64 md:h-96 flex-shrink-0 ekg-line" preserveAspectRatio="none" viewBox="0 0 1000 100">
-            <path stroke="currentColor" class="text-primary" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"
+            <path stroke="currentColor" class="text-primary dark:text-sky-400" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"
               d="M0,50 L200,50 L210,40 L220,60 L235,10 L255,90 L270,50 L400,50 L410,40 L420,60 L435,10 L455,90 L470,50 L600,50 L610,40 L620,60 L635,10 L655,90 L670,50 L800,50 L810,40 L820,60 L835,10 L855,90 L870,50 L1000,50" />
           </svg>
         </div>
@@ -48,9 +57,9 @@
       
       <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center flex-col-reverse lg:flex-row relative z-10">
         <div class="z-10 text-center lg:text-start">
-          <span class="inline-block px-4 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold tracking-widest uppercase mb-6 anim-fade-up">{{ 'landing.hero_badge' | transloco }}</span>
-          <h1 class="font-headline text-5xl md:text-7xl font-extrabold text-primary leading-[1.1] tracking-tighter mb-8 anim-fade-up anim-delay-100" [innerHTML]="'landing.hero_title' | transloco"></h1>
-          <p class="text-on-surface-variant text-lg md:text-xl max-w-xl mb-12 leading-relaxed mx-auto lg:mx-0 anim-fade-up anim-delay-200">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-primary-fixed dark:bg-sky-900/50 text-on-primary-fixed-variant dark:text-sky-300 text-xs font-bold tracking-widest uppercase mb-6 anim-fade-up">{{ 'landing.hero_badge' | transloco }}</span>
+          <h1 class="font-headline text-5xl md:text-7xl font-extrabold text-primary dark:text-sky-100 leading-[1.1] tracking-tighter mb-8 anim-fade-up anim-delay-100" [innerHTML]="'landing.hero_title' | transloco"></h1>
+          <p class="text-on-surface-variant dark:text-slate-400 text-lg md:text-xl max-w-xl mb-12 leading-relaxed mx-auto lg:mx-0 anim-fade-up anim-delay-200">
             {{ 'landing.hero_desc' | transloco }}
           </p>
           <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 anim-fade-up anim-delay-300">
@@ -58,7 +67,7 @@
               <div class="absolute inset-0 anim-shine opacity-50"></div>
               <span class="relative z-10">{{ 'landing.hero_cta_start' | transloco }}</span>
             </button>
-            <button class="flex items-center justify-center gap-2 text-primary font-bold px-8 py-4 rounded-full border-2 border-primary/10 hover:bg-surface-container-low active:scale-95 transition-all duration-300">
+            <button class="flex items-center justify-center gap-2 text-primary dark:text-sky-300 font-bold px-8 py-4 rounded-full border-2 border-primary/10 dark:border-sky-400/20 hover:bg-surface-container-low dark:hover:bg-slate-800 active:scale-95 transition-all duration-300">
               <span class="material-symbols-outlined">play_circle</span>
               {{ 'landing.hero_cta_watch' | transloco }}
             </button>
@@ -66,66 +75,66 @@
         </div>
         
         <div class="relative group order-first lg:order-last anim-fade-up anim-delay-400">
-          <div class="absolute -inset-4 bg-primary-container/10 rounded-[3rem] blur-3xl group-hover:bg-primary-container/20 transition-all duration-700"></div>
-          <div class="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-sky-900/10 border-[6px] md:border-8 border-white anim-float-hero">
+          <div class="absolute -inset-4 bg-primary-container/10 dark:bg-sky-400/5 rounded-[3rem] blur-3xl group-hover:bg-primary-container/20 dark:group-hover:bg-sky-400/10 transition-all duration-700"></div>
+          <div class="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-sky-900/10 dark:shadow-sky-950/40 border-[6px] md:border-8 border-white dark:border-slate-800 anim-float-hero">
             <img alt="Modern Medical Visualization" class="w-full h-[400px] md:h-[500px] object-cover scale-105 group-hover:scale-100 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGPFAO5AzVFYevpswRMtw8xd6wJx5SoQ4hPA6YJ-XdQKhb7IC8ZTLd6KyXDMrOnrQ8sGzCb3so__staijvNEt0Uun2qXOGzA3koCREPNoh770Oh06V8mQScm2rNkfmpxEp-h9X8nRn6zCjiRcK3u_6pGswBGQHOddrhznARjdjpAqHsgnl3k_zst-WJvmRa91oxwK2zD_Q05fnBZRKWxZcy56qviNOkbrAJPEqp070KajpyNeGPjCIybDOrBnYRnKck90NHSai0-YE"/>
             <div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
           </div>
           <!-- Floating Glass Stat -->
-          <div class="absolute -bottom-6 -start-6 md:-bottom-8 md:-start-8 glass-panel p-4 md:p-6 rounded-2xl shadow-xl border border-white/40 max-w-[200px] md:max-w-[240px] anim-float-card anim-delay-500">
+          <div class="absolute -bottom-6 -start-6 md:-bottom-8 md:-start-8 glass-panel p-4 md:p-6 rounded-2xl shadow-xl border border-white/40 dark:border-slate-600/40 max-w-[200px] md:max-w-[240px] anim-float-card anim-delay-500">
             <div class="flex items-center gap-4 mb-3">
-              <div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center shrink-0">
-                <span class="material-symbols-outlined text-on-secondary-fixed-variant" data-weight="fill">vital_signs</span>
+              <div class="w-10 h-10 rounded-full bg-secondary-fixed dark:bg-emerald-900/50 flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-on-secondary-fixed-variant dark:text-emerald-300" data-weight="fill">vital_signs</span>
               </div>
               <div>
-                <p class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">{{ 'landing.stat_live' | transloco }}</p>
-                <p class="text-sm font-bold text-secondary">{{ 'landing.stat_vitals' | transloco }}</p>
+                <p class="text-[10px] uppercase tracking-wider text-on-surface-variant dark:text-slate-400 font-bold">{{ 'landing.stat_live' | transloco }}</p>
+                <p class="text-sm font-bold text-secondary dark:text-emerald-400">{{ 'landing.stat_vitals' | transloco }}</p>
               </div>
             </div>
-            <div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
-              <div class="h-full bg-secondary-fixed-dim w-[85%]"></div>
+            <div class="h-1.5 w-full bg-surface-container dark:bg-slate-700 rounded-full overflow-hidden">
+              <div class="h-full bg-secondary-fixed-dim dark:bg-emerald-500 w-[85%]"></div>
             </div>
           </div>
         </div>
       </div>
       <!-- Sound Toggle -->
       <div class="absolute bottom-6 end-6 md:bottom-12 md:end-12 z-20">
-        <button (click)="toggleSound()" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-primary shadow-lg hover:scale-110 transition-transform border border-white/40">
+        <button (click)="toggleSound()" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-primary dark:text-sky-300 shadow-lg hover:scale-110 transition-transform border border-white/40 dark:border-slate-600/40">
           <span class="material-symbols-outlined">{{ isSoundEnabled() ? 'volume_up' : 'volume_off' }}</span>
         </button>
       </div>
     </section>
 
     <!-- AI Insights: Intelligence That Heals -->
-    <section class="py-12 md:py-16 px-6 md:px-8 bg-surface-container-low">
+    <section class="py-12 md:py-16 px-6 md:px-8 bg-surface-container-low dark:bg-slate-900/50">
       <div class="max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-12 gap-6">
           <div class="max-w-2xl">
-            <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary tracking-tight mb-6">{{ 'landing.ai_title' | transloco }}</h2>
-            <p class="text-on-surface-variant text-lg">{{ 'landing.ai_desc' | transloco }}</p>
+            <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary dark:text-sky-100 tracking-tight mb-6">{{ 'landing.ai_title' | transloco }}</h2>
+            <p class="text-on-surface-variant dark:text-slate-400 text-lg">{{ 'landing.ai_desc' | transloco }}</p>
           </div>
           <div class="hidden md:block">
-            <span class="text-primary font-bold text-sm tracking-widest uppercase">{{ 'landing.ai_badge' | transloco }}</span>
+            <span class="text-primary dark:text-sky-400 font-bold text-sm tracking-widest uppercase">{{ 'landing.ai_badge' | transloco }}</span>
           </div>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Card 1 -->
-          <div class="bg-surface-container-lowest p-8 md:p-10 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 group border border-outline-variant/10 anim-float-card anim-delay-100">
-            <div class="w-16 h-16 rounded-2xl bg-primary-fixed flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-              <span class="material-symbols-outlined text-primary text-3xl">lab_research</span>
+          <div class="bg-surface-container-lowest dark:bg-slate-800 p-8 md:p-10 rounded-[2rem] shadow-sm hover:shadow-xl dark:hover:shadow-slate-900/50 transition-all duration-500 group border border-outline-variant/10 dark:border-slate-700/50 anim-float-card anim-delay-100">
+            <div class="w-16 h-16 rounded-2xl bg-primary-fixed dark:bg-sky-900/50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+              <span class="material-symbols-outlined text-primary dark:text-sky-300 text-3xl">lab_research</span>
             </div>
-            <h3 class="font-headline text-2xl font-bold text-on-background mb-4">{{ 'landing.ai_card1_title' | transloco }}</h3>
-            <p class="text-on-surface-variant leading-relaxed mb-8">{{ 'landing.ai_card1_desc' | transloco }}</p>
-            <div class="pt-6 border-t border-surface-container">
+            <h3 class="font-headline text-2xl font-bold text-on-background dark:text-slate-100 mb-4">{{ 'landing.ai_card1_title' | transloco }}</h3>
+            <p class="text-on-surface-variant dark:text-slate-400 leading-relaxed mb-8">{{ 'landing.ai_card1_desc' | transloco }}</p>
+            <div class="pt-6 border-t border-surface-container dark:border-slate-700">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-primary uppercase">{{ 'landing.ai_card1_status' | transloco }}</span>
-                <span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-black rounded-full uppercase">{{ 'landing.ai_card1_status_val' | transloco }}</span>
+                <span class="text-xs font-bold text-primary dark:text-sky-400 uppercase">{{ 'landing.ai_card1_status' | transloco }}</span>
+                <span class="px-3 py-1 bg-secondary-fixed dark:bg-emerald-900/40 text-on-secondary-fixed-variant dark:text-emerald-300 text-[10px] font-black rounded-full uppercase">{{ 'landing.ai_card1_status_val' | transloco }}</span>
               </div>
             </div>
           </div>
           
-          <!-- Card 2 (Hero AI) -->
+          <!-- Card 2 (Hero AI) — Gradient card stays the same in both modes -->
           <div class="hero-gradient p-8 md:p-10 rounded-[2rem] shadow-2xl shadow-primary/30 transform md:-translate-y-8 relative overflow-hidden group anim-float-card-alt anim-delay-200">
             <div class="absolute top-0 end-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
             <div class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-8 border border-white/10">
@@ -142,16 +151,16 @@
           </div>
           
           <!-- Card 3 -->
-          <div class="bg-surface-container-lowest p-8 md:p-10 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 group border border-outline-variant/10 anim-float-card anim-delay-300">
-            <div class="w-16 h-16 rounded-2xl bg-tertiary-fixed flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-              <span class="material-symbols-outlined text-tertiary text-3xl">neurology</span>
+          <div class="bg-surface-container-lowest dark:bg-slate-800 p-8 md:p-10 rounded-[2rem] shadow-sm hover:shadow-xl dark:hover:shadow-slate-900/50 transition-all duration-500 group border border-outline-variant/10 dark:border-slate-700/50 anim-float-card anim-delay-300">
+            <div class="w-16 h-16 rounded-2xl bg-tertiary-fixed dark:bg-blue-900/50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+              <span class="material-symbols-outlined text-tertiary dark:text-blue-300 text-3xl">neurology</span>
             </div>
-            <h3 class="font-headline text-2xl font-bold text-on-background mb-4">{{ 'landing.ai_card3_title' | transloco }}</h3>
-            <p class="text-on-surface-variant leading-relaxed mb-8">{{ 'landing.ai_card3_desc' | transloco }}</p>
-            <div class="pt-6 border-t border-surface-container">
+            <h3 class="font-headline text-2xl font-bold text-on-background dark:text-slate-100 mb-4">{{ 'landing.ai_card3_title' | transloco }}</h3>
+            <p class="text-on-surface-variant dark:text-slate-400 leading-relaxed mb-8">{{ 'landing.ai_card3_desc' | transloco }}</p>
+            <div class="pt-6 border-t border-surface-container dark:border-slate-700">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-primary uppercase">{{ 'landing.ai_card3_int' | transloco }}</span>
-                <span class="px-3 py-1 bg-surface-container text-on-surface-variant text-[10px] font-black rounded-full uppercase">{{ 'landing.ai_card3_int_val' | transloco }}</span>
+                <span class="text-xs font-bold text-primary dark:text-sky-400 uppercase">{{ 'landing.ai_card3_int' | transloco }}</span>
+                <span class="px-3 py-1 bg-surface-container dark:bg-slate-700 text-on-surface-variant dark:text-slate-300 text-[10px] font-black rounded-full uppercase">{{ 'landing.ai_card3_int_val' | transloco }}</span>
               </div>
             </div>
           </div>
@@ -160,22 +169,22 @@
     </section>
 
     <!-- Family Circles Section -->
-    <section class="py-12 md:py-16 px-6 md:px-8 overflow-hidden bg-white">
+    <section class="py-12 md:py-16 px-6 md:px-8 overflow-hidden bg-white dark:bg-[#111318]">
       <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
         <div class="relative order-2 lg:order-1">
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-secondary-fixed-dim/20 rounded-full blur-3xl z-0"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-secondary-fixed-dim/20 dark:bg-emerald-900/20 rounded-full blur-3xl z-0"></div>
           
           <div class="relative z-10 flex gap-4 md:gap-8">
             <div class="flex flex-col gap-4 md:gap-8 w-1/2 translate-y-12">
-              <img alt="Professional care" class="w-full rounded-[2rem] shadow-2xl shadow-primary/20 aspect-[4/5] object-cover border-4 border-white anim-float-card" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800"/>
-              <div class="bg-surface-container-lowest p-4 md:p-6 rounded-3xl shadow-xl border border-outline-variant/10 anim-float-card anim-delay-100">
+              <img alt="Professional care" class="w-full rounded-[2rem] shadow-2xl shadow-primary/20 dark:shadow-slate-950/40 aspect-[4/5] object-cover border-4 border-white dark:border-slate-800 anim-float-card" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800"/>
+              <div class="bg-surface-container-lowest dark:bg-slate-800 p-4 md:p-6 rounded-3xl shadow-xl border border-outline-variant/10 dark:border-slate-700/50 anim-float-card anim-delay-100">
                   <div class="flex items-center gap-4">
-                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary-fixed flex items-center justify-center shrink-0">
-                      <span class="material-symbols-outlined text-secondary">verified</span>
+                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary-fixed dark:bg-emerald-900/50 flex items-center justify-center shrink-0">
+                      <span class="material-symbols-outlined text-secondary dark:text-emerald-400">verified</span>
                     </div>
                     <div>
-                      <p class="font-bold text-on-surface text-sm md:text-base">{{ 'landing.family_verified_title' | transloco }}</p>
-                      <p class="text-[10px] md:text-xs text-on-surface-variant">{{ 'landing.family_verified_sub' | transloco }}</p>
+                      <p class="font-bold text-on-surface dark:text-slate-100 text-sm md:text-base">{{ 'landing.family_verified_title' | transloco }}</p>
+                      <p class="text-[10px] md:text-xs text-on-surface-variant dark:text-slate-400">{{ 'landing.family_verified_sub' | transloco }}</p>
                     </div>
                   </div>
               </div>
@@ -187,28 +196,28 @@
                 <h3 class="font-headline font-bold text-lg md:text-xl mb-1 md:mb-2">{{ 'landing.family_private_title' | transloco }}</h3>
                 <p class="text-primary-fixed text-xs md:text-sm">{{ 'landing.family_private_sub' | transloco }}</p>
               </div>
-              <img alt="Family interaction" class="w-full rounded-[2rem] shadow-2xl shadow-primary/20 aspect-square object-cover border-4 border-white anim-float-card anim-delay-200" src="https://images.unsplash.com/photo-1581056344415-3abb773d7f5a?auto=format&fit=crop&q=80&w=800"/>
+              <img alt="Family interaction" class="w-full rounded-[2rem] shadow-2xl shadow-primary/20 dark:shadow-slate-950/40 aspect-square object-cover border-4 border-white dark:border-slate-800 anim-float-card anim-delay-200" src="https://images.unsplash.com/photo-1581056344415-3abb773d7f5a?auto=format&fit=crop&q=80&w=800"/>
             </div>
           </div>
         </div>
         <div class="order-1 lg:order-2 text-center lg:text-start">
-          <span class="text-secondary font-bold text-sm tracking-widest uppercase mb-4 block">{{ 'landing.family_badge' | transloco }}</span>
-          <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary mb-6 md:mb-8 tracking-tight">{{ 'landing.family_title' | transloco }}</h2>
-          <p class="text-on-surface-variant text-lg mb-8 leading-relaxed">
+          <span class="text-secondary dark:text-emerald-400 font-bold text-sm tracking-widest uppercase mb-4 block">{{ 'landing.family_badge' | transloco }}</span>
+          <h2 class="font-headline text-4xl md:text-5xl font-bold text-primary dark:text-sky-100 mb-6 md:mb-8 tracking-tight">{{ 'landing.family_title' | transloco }}</h2>
+          <p class="text-on-surface-variant dark:text-slate-400 text-lg mb-8 leading-relaxed">
             {{ 'landing.family_desc' | transloco }}
           </p>
           <ul class="space-y-6 mb-12 max-w-sm mx-auto lg:mx-0">
             <li class="flex items-center gap-4 group text-start">
-              <div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center group-hover:rotate-12 transition-transform shrink-0">
-                <span class="material-symbols-outlined text-secondary">share</span>
+              <div class="w-12 h-12 rounded-full bg-secondary-fixed dark:bg-emerald-900/50 flex items-center justify-center group-hover:rotate-12 transition-transform shrink-0">
+                <span class="material-symbols-outlined text-secondary dark:text-emerald-400">share</span>
               </div>
-              <span class="text-on-surface font-semibold text-lg">{{ 'landing.family_feat1' | transloco }}</span>
+              <span class="text-on-surface dark:text-slate-200 font-semibold text-lg">{{ 'landing.family_feat1' | transloco }}</span>
             </li>
             <li class="flex items-center gap-4 group text-start">
-              <div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center group-hover:rotate-12 transition-transform shrink-0">
-                <span class="material-symbols-outlined text-secondary">group_add</span>
+              <div class="w-12 h-12 rounded-full bg-secondary-fixed dark:bg-emerald-900/50 flex items-center justify-center group-hover:rotate-12 transition-transform shrink-0">
+                <span class="material-symbols-outlined text-secondary dark:text-emerald-400">group_add</span>
               </div>
-              <span class="text-on-surface font-semibold text-lg">{{ 'landing.family_feat2' | transloco }}</span>
+              <span class="text-on-surface dark:text-slate-200 font-semibold text-lg">{{ 'landing.family_feat2' | transloco }}</span>
             </li>
           </ul>
           <button pButton routerLink="/register" class="bg-secondary border-none text-on-secondary px-8 py-4 rounded-full font-bold shadow-lg shadow-secondary/20 hover:scale-105 active:scale-95 transition-all text-lg">
@@ -218,59 +227,59 @@
       </div>
     </section>
 
-    <!-- Security Protocol Section -->
-    <section class="bg-inverse-surface py-12 md:py-16 px-6 md:px-8 text-inverse-on-surface">
+    <!-- Security Protocol Section — Already dark by design, minimal changes needed -->
+    <section class="bg-inverse-surface dark:bg-slate-950 py-12 md:py-16 px-6 md:px-8 text-inverse-on-surface dark:text-slate-200">
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-10 md:mb-12">
           <h2 class="font-headline text-4xl md:text-5xl font-bold mb-4">{{ 'landing.sec_title' | transloco }}</h2>
-          <p class="text-outline-variant text-lg">{{ 'landing.sec_desc' | transloco }}</p>
+          <p class="text-outline-variant dark:text-slate-400 text-lg">{{ 'landing.sec_desc' | transloco }}</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-1">
-          <div class="p-8 md:p-12 border border-white/5 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-r md:border-b md:border-t-0 md:border-l-0">
-            <span class="material-symbols-outlined text-5xl text-inverse-primary mb-6" data-weight="fill">verified_user</span>
+          <div class="p-8 md:p-12 border border-white/5 dark:border-slate-700/30 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-r md:border-b md:border-t-0 md:border-l-0">
+            <span class="material-symbols-outlined text-5xl text-inverse-primary dark:text-sky-400 mb-6" data-weight="fill">verified_user</span>
             <h4 class="font-headline text-xl font-bold mb-2">{{ 'landing.sec_card1_title' | transloco }}</h4>
-            <p class="text-sm text-outline-variant">{{ 'landing.sec_card1_desc' | transloco }}</p>
+            <p class="text-sm text-outline-variant dark:text-slate-400">{{ 'landing.sec_card1_desc' | transloco }}</p>
           </div>
-          <div class="p-8 md:p-12 border border-white/5 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-r md:border-b md:border-t-0 md:border-l-0">
-            <span class="material-symbols-outlined text-5xl text-inverse-primary mb-6" data-weight="fill">encrypted</span>
+          <div class="p-8 md:p-12 border border-white/5 dark:border-slate-700/30 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-r md:border-b md:border-t-0 md:border-l-0">
+            <span class="material-symbols-outlined text-5xl text-inverse-primary dark:text-sky-400 mb-6" data-weight="fill">encrypted</span>
             <h4 class="font-headline text-xl font-bold mb-2">{{ 'landing.sec_card2_title' | transloco }}</h4>
-            <p class="text-sm text-outline-variant">{{ 'landing.sec_card2_desc' | transloco }}</p>
+            <p class="text-sm text-outline-variant dark:text-slate-400">{{ 'landing.sec_card2_desc' | transloco }}</p>
           </div>
-          <div class="p-8 md:p-12 border border-white/5 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-r md:border-b md:border-t-0 md:border-l-0">
-            <span class="material-symbols-outlined text-5xl text-inverse-primary mb-6" data-weight="fill">fingerprint</span>
+          <div class="p-8 md:p-12 border border-white/5 dark:border-slate-700/30 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-r md:border-b md:border-t-0 md:border-l-0">
+            <span class="material-symbols-outlined text-5xl text-inverse-primary dark:text-sky-400 mb-6" data-weight="fill">fingerprint</span>
             <h4 class="font-headline text-xl font-bold mb-2">{{ 'landing.sec_card3_title' | transloco }}</h4>
-            <p class="text-sm text-outline-variant">{{ 'landing.sec_card3_desc' | transloco }}</p>
+            <p class="text-sm text-outline-variant dark:text-slate-400">{{ 'landing.sec_card3_desc' | transloco }}</p>
           </div>
-          <div class="p-8 md:p-12 border border-white/5 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-b md:border-r-0 md:border-t-0 md:border-l-0">
-            <span class="material-symbols-outlined text-5xl text-inverse-primary mb-6" data-weight="fill">security_update_good</span>
+          <div class="p-8 md:p-12 border border-white/5 dark:border-slate-700/30 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-b md:border-r-0 md:border-t-0 md:border-l-0">
+            <span class="material-symbols-outlined text-5xl text-inverse-primary dark:text-sky-400 mb-6" data-weight="fill">security_update_good</span>
             <h4 class="font-headline text-xl font-bold mb-2">{{ 'landing.sec_card4_title' | transloco }}</h4>
-            <p class="text-sm text-outline-variant">{{ 'landing.sec_card4_desc' | transloco }}</p>
+            <p class="text-sm text-outline-variant dark:text-slate-400">{{ 'landing.sec_card4_desc' | transloco }}</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Interactive Stats / Trust Bar -->
-    <section class="py-12 md:py-16 bg-surface-container-highest">
+    <section class="py-12 md:py-16 bg-surface-container-highest dark:bg-slate-900">
       <div class="max-w-7xl mx-auto px-6 md:px-8">
         <div class="flex flex-col items-center">
-          <p class="text-primary font-bold text-sm tracking-[0.2em] md:tracking-[0.3em] uppercase mb-10 text-center">{{ 'landing.trust_badge' | transloco }}</p>
+          <p class="text-primary dark:text-sky-400 font-bold text-sm tracking-[0.2em] md:tracking-[0.3em] uppercase mb-10 text-center">{{ 'landing.trust_badge' | transloco }}</p>
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 w-full">
             <div class="text-center">
-              <span class="block font-headline text-4xl md:text-5xl font-extrabold text-primary mb-2">{{ 'landing.trust_stat1_val' | transloco }}</span>
-              <span class="text-on-surface-variant font-medium md:text-lg">{{ 'landing.trust_stat1_lbl' | transloco }}</span>
+              <span class="block font-headline text-4xl md:text-5xl font-extrabold text-primary dark:text-sky-300 mb-2">{{ 'landing.trust_stat1_val' | transloco }}</span>
+              <span class="text-on-surface-variant dark:text-slate-400 font-medium md:text-lg">{{ 'landing.trust_stat1_lbl' | transloco }}</span>
             </div>
             <div class="text-center">
-              <span class="block font-headline text-4xl md:text-5xl font-extrabold text-primary mb-2">{{ 'landing.trust_stat2_val' | transloco }}</span>
-              <span class="text-on-surface-variant font-medium md:text-lg">{{ 'landing.trust_stat2_lbl' | transloco }}</span>
+              <span class="block font-headline text-4xl md:text-5xl font-extrabold text-primary dark:text-sky-300 mb-2">{{ 'landing.trust_stat2_val' | transloco }}</span>
+              <span class="text-on-surface-variant dark:text-slate-400 font-medium md:text-lg">{{ 'landing.trust_stat2_lbl' | transloco }}</span>
             </div>
             <div class="text-center">
-              <span class="block font-headline text-4xl md:text-5xl font-extrabold text-primary mb-2">{{ 'landing.trust_stat3_val' | transloco }}</span>
-              <span class="text-on-surface-variant font-medium md:text-lg">{{ 'landing.trust_stat3_lbl' | transloco }}</span>
+              <span class="block font-headline text-4xl md:text-5xl font-extrabold text-primary dark:text-sky-300 mb-2">{{ 'landing.trust_stat3_val' | transloco }}</span>
+              <span class="text-on-surface-variant dark:text-slate-400 font-medium md:text-lg">{{ 'landing.trust_stat3_lbl' | transloco }}</span>
             </div>
             <div class="text-center">
-              <span class="block font-headline text-4xl md:text-5xl font-extrabold text-primary mb-2">{{ 'landing.trust_stat4_val' | transloco }}</span>
-              <span class="text-on-surface-variant font-medium md:text-lg">{{ 'landing.trust_stat4_lbl' | transloco }}</span>
+              <span class="block font-headline text-4xl md:text-5xl font-extrabold text-primary dark:text-sky-300 mb-2">{{ 'landing.trust_stat4_val' | transloco }}</span>
+              <span class="text-on-surface-variant dark:text-slate-400 font-medium md:text-lg">{{ 'landing.trust_stat4_lbl' | transloco }}</span>
             </div>
           </div>
         </div>
@@ -304,28 +313,28 @@
   </main>
 
   <!-- Footer Shell -->
-  <footer class="bg-surface-container-lowest w-full border-t border-outline-variant/20">
+  <footer class="bg-surface-container-lowest dark:bg-slate-900 w-full border-t border-outline-variant/20 dark:border-slate-700/30">
     <div class="flex flex-col lg:flex-row justify-between lg:items-center px-8 md:px-12 py-16 gap-12 max-w-7xl mx-auto">
       <div class="space-y-4 max-w-sm">
         <div class="flex items-center gap-2 mb-2">
-          <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">health_metrics</span>
+          <span class="material-symbols-outlined text-primary dark:text-sky-400 text-2xl" style="font-variation-settings: 'FILL' 1;">health_metrics</span>
           <span class="text-xl font-bold tracking-tighter text-sky-950 dark:text-sky-100 font-headline">{{ 'landing.brand' | transloco }}</span>
         </div>
-        <p class="text-on-surface-variant text-sm leading-relaxed font-body">
+        <p class="text-on-surface-variant dark:text-slate-400 text-sm leading-relaxed font-body">
           {{ 'landing.footer_desc' | transloco }}
         </p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
-        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant hover:text-primary transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_privacy' | transloco }}</a>
-        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant hover:text-primary transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_terms' | transloco }}</a>
-        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant hover:text-primary transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_cookie' | transloco }}</a>
-        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant hover:text-primary transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_a11y' | transloco }}</a>
-        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant hover:text-primary transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_support' | transloco }}</a>
-        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant hover:text-primary transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_global' | transloco }}</a>
+        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant dark:text-slate-400 hover:text-primary dark:hover:text-sky-300 transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_privacy' | transloco }}</a>
+        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant dark:text-slate-400 hover:text-primary dark:hover:text-sky-300 transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_terms' | transloco }}</a>
+        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant dark:text-slate-400 hover:text-primary dark:hover:text-sky-300 transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_cookie' | transloco }}</a>
+        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant dark:text-slate-400 hover:text-primary dark:hover:text-sky-300 transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_a11y' | transloco }}</a>
+        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant dark:text-slate-400 hover:text-primary dark:hover:text-sky-300 transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_support' | transloco }}</a>
+        <a class="font-body text-xs md:text-sm font-semibold text-on-surface-variant dark:text-slate-400 hover:text-primary dark:hover:text-sky-300 transition-opacity underline-offset-4 hover:underline cursor-pointer">{{ 'landing.footer_global' | transloco }}</a>
       </div>
     </div>
-    <div class="border-t border-outline-variant/10 px-8 py-6 text-center lg:text-start lg:px-12 max-w-7xl mx-auto">
-      <p class="font-body text-xs font-semibold text-primary">{{ 'landing.footer_copy' | transloco }}</p>
+    <div class="border-t border-outline-variant/10 dark:border-slate-700/20 px-8 py-6 text-center lg:text-start lg:px-12 max-w-7xl mx-auto">
+      <p class="font-body text-xs font-semibold text-primary dark:text-sky-400">{{ 'landing.footer_copy' | transloco }}</p>
     </div>
   </footer>
 </div>

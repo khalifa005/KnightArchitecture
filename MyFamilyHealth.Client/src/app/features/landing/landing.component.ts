@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AppStore } from '../../core/state/app.store';
 
 /** Volume levels — intro narration is louder than the ambient heartbeat effect */
 const NARRATION_VOLUME = 0.9; // 90% — prominent narration
@@ -31,6 +32,7 @@ const AUDIO_FILES: Record<string, string> = {
 export class LandingComponent implements OnInit {
   private readonly translocoService = inject(TranslocoService);
   private readonly destroyRef = inject(DestroyRef);
+  readonly store = inject(AppStore);
 
   isSoundEnabled = signal(true);
 
@@ -71,6 +73,10 @@ export class LandingComponent implements OnInit {
       this.stopHeartbeat();
       this.stopNarration();
     }
+  }
+
+  toggleDarkMode(): void {
+    this.store.toggleDarkMode();
   }
 
   // ──────────────────────────────────────────────
