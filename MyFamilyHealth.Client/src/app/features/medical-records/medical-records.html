@@ -1,8 +1,13 @@
 <div class="max-w-6xl mx-auto">
 <!-- Page Header -->
-<header class="mb-12">
-<h1 class="text-4xl font-extrabold tracking-tight text-primary mb-2">{{ 'medicalRecords.title' | transloco }}</h1>
-<p class="text-on-surface-variant text-lg max-w-2xl">{{ 'medicalRecords.subtitle' | transloco }}</p>
+<header class="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div>
+        <h1 class="text-4xl font-extrabold tracking-tight text-primary mb-2">{{ 'medicalRecords.title' | transloco }}</h1>
+        <p class="text-on-surface-variant text-lg max-w-2xl">{{ 'medicalRecords.subtitle' | transloco }}</p>
+    </div>
+    <button pButton (click)="openAddModal()" class="w-fit bg-primary text-white px-6 py-3 rounded-full font-bold shadow-md hover:shadow-lg transition-all flex items-center gap-2 active:scale-95">
+        <span class="material-symbols-outlined text-[20px]">add</span> Add Record
+    </button>
 </header>
 <!-- Filters Component (Reactive Form) -->
 <app-filter-form (filterChanged)="onFilterChanged($event)"></app-filter-form>
@@ -39,7 +44,7 @@
 <!-- Empty State / Load More (Editorial Minimalism) -->
 <div class="mt-16 text-center">
 <p class="text-on-surface-variant font-medium mb-6">{{ 'medicalRecords.showing_records' | transloco }}</p>
-<button pButton class="px-8 py-3 rounded-full border border-outline-variant text-primary font-bold hover:bg-surface-container transition-colors active:scale-95">{{ 'medicalRecords.load_archive' | transloco }}</button>
+<button pButton (click)="loadMore()" class="px-8 py-3 rounded-full border border-outline-variant text-primary font-bold hover:bg-surface-container transition-colors active:scale-95">{{ 'medicalRecords.load_archive' | transloco }}</button>
 </div>
 <!-- AI Insight Preview (Floating Glassmorphism Card) -->
 <div class="mt-20 p-8 rounded-3xl bg-white/40 backdrop-blur-2xl border border-white/50 relative overflow-hidden group">
@@ -56,3 +61,25 @@
 </div>
 </div>
 </div>
+
+<!-- Add Record PrimeNG Dialog Modal -->
+<p-dialog header="Add New Medical Record" [modal]="true" [(visible)]="displayAddModal" [style]="{ width: '25rem' }">
+    <div class="flex flex-col gap-4 mt-2">
+        <span class="text-on-surface-variant text-sm mb-4">Enter the details for the new clinical record below. Note: Forms structure is dynamically mapped.</span>
+        
+        <div class="flex flex-col gap-2">
+            <label for="recordTitle" class="font-semibold text-sm">Record Title</label>
+            <input pInputText id="recordTitle" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" placeholder="e.g. Lumbar MRI" />
+        </div>
+        
+        <div class="flex flex-col gap-2">
+            <label for="provider" class="font-semibold text-sm">Provider</label>
+            <input pInputText id="provider" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" placeholder="e.g. Dr. Helena Vance" />
+        </div>
+        
+        <div class="flex justify-end gap-2 mt-4">
+            <button pButton class="px-6 py-2 bg-surface-container-low text-on-surface rounded-full text-sm font-bold hover:bg-surface-container transition-colors" (click)="displayAddModal.set(false)">Cancel</button>
+            <button pButton class="px-6 py-2 bg-primary text-white rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all" (click)="displayAddModal.set(false); loadMore()">Save Record</button>
+        </div>
+    </div>
+</p-dialog>

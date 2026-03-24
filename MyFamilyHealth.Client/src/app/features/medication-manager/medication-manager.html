@@ -64,7 +64,7 @@
 <section class="col-span-12 lg:col-span-8 space-y-6">
 <div class="flex items-center justify-between">
 <h2 class="font-headline text-2xl font-bold text-primary">{{ 'medicationManager.current_rx' | transloco }}</h2>
-<button pButton class="text-primary text-sm font-semibold flex items-center gap-1 hover:bg-primary/5 px-3 py-1.5 rounded-full transition-colors">
+<button pButton (click)="openAddModal()" class="text-primary text-sm font-semibold flex items-center gap-1 hover:bg-primary/5 px-3 py-1.5 rounded-full transition-colors">
 <span class="material-symbols-outlined text-base">add</span>{{ 'medicationManager.add_new' | transloco }}</button>
 </div>
 <!-- Med Card 1: Warning/Interaction State -->
@@ -161,11 +161,9 @@
 </div>
 <h4 class="font-headline text-lg font-bold mb-2">{{ 'medicationManager.smart_reminders' | transloco }}</h4>
 <p class="text-primary-fixed text-sm mb-6">{{ 'medicationManager.reminders_desc' | transloco }}</p>
-<div class="flex items-center gap-2">
-<div class="w-10 h-5 bg-on-primary-container rounded-full relative">
-<div class="absolute end-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
-</div>
-<span class="text-xs font-bold uppercase tracking-widest">{{ 'medicationManager.active' | transloco }}</span>
+<div class="flex items-center gap-3">
+<p-toggleswitch [(ngModel)]="remindersActive" styleClass="mt-1"></p-toggleswitch>
+<span class="text-xs font-bold uppercase tracking-widest">{{ (remindersActive() ? 'medicationManager.active' : 'Inactive') | transloco }}</span>
 </div>
 </div>
 <div class="md:col-span-2 bg-surface-container-high rounded-xl p-8 flex flex-col md:flex-row items-center gap-8">

@@ -1,10 +1,13 @@
+<div class="relative flex flex-col h-[calc(100vh-6rem)] w-full overflow-hidden">
+
 <!-- Header Area -->
-<div class="px-10 pt-8 pb-4">
+<div class="px-10 pt-8 pb-4 shrink-0">
 <h1 class="font-headline text-3xl font-extrabold text-primary tracking-tight">{{ 'aiAssistant.title' | transloco }}</h1>
 <p class="text-on-surface-variant mt-1 text-sm">{{ 'aiAssistant.subtitle' | transloco }}</p>
 </div>
+
 <!-- Chat Container -->
-<div class="flex-1 overflow-y-auto px-10 pb-32 pt-4 no-scrollbar">
+<div class="flex-1 overflow-y-auto px-10 pb-4 pt-4 no-scrollbar">
 <div class="max-w-4xl mx-auto space-y-8">
 <!-- Timestamp -->
 <div class="flex justify-center">
@@ -12,9 +15,7 @@
 </div>
 <!-- AI Message: Introduction -->
 <div class="flex gap-4 items-start">
-<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-on-secondary-container" data-icon="smart_toy">smart_toy</span>
-</div>
+<p-avatar icon="pi pi-sparkles" styleClass="w-10 h-10 bg-secondary-container text-on-secondary-container shrink-0" shape="circle"></p-avatar>
 <div class="space-y-4 max-w-[80%]">
 <div class="bg-surface-container-lowest p-6 rounded-2xl rounded-tl-none shadow-sm">
 <p class="text-on-surface leading-relaxed">{{ 'aiAssistant.ai_msg_1' | transloco }}</p>
@@ -29,15 +30,11 @@
 </div>
 <p class="text-end text-[10px] text-outline-variant font-medium">{{ 'aiAssistant.timestamp_1' | transloco }}</p>
 </div>
-<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0 overflow-hidden">
-<img alt="User" data-alt="Portrait of a male user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW1HU8efYHwml5xjWeDlYZgB50Oco5a1PI_a1h_NlqCU8_WksMaCgVlkxNU3nzULoV1c6MS5YWdvpPFPToaRcH_EVrTAdbPyR07oRddImHFcy--yRee77PRq0ox-RBUU4o-_FNcCBpOz0JhWtdxAk4nVfDI_XNqwOggJvCc1cnXmNjz5f3FG30uVg9NxJZCYEjWAgQLbntFlkeZ232DqxmBLufUr6LouCW2X6fMvpIsk3WVbrLr7ggRTncxYzL31C6A2hzj2yEbSpj"/>
-</div>
+<p-avatar icon="pi pi-user" styleClass="w-10 h-10 bg-surface-container text-on-surface shrink-0" shape="circle"></p-avatar>
 </div>
 <!-- AI Message: Data Response -->
 <div class="flex gap-4 items-start">
-<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-on-secondary-container" data-icon="smart_toy">smart_toy</span>
-</div>
+<p-avatar icon="pi pi-sparkles" styleClass="w-10 h-10 bg-secondary-container text-on-secondary-container shrink-0" shape="circle"></p-avatar>
 <div class="space-y-6 max-w-[85%]">
 <div class="bg-surface-container-lowest p-6 rounded-2xl rounded-tl-none shadow-sm space-y-4">
 <p class="text-on-surface leading-relaxed">{{ 'aiAssistant.ai_msg_2_part1' | transloco }}<strong class="text-primary font-semibold">{{ 'aiAssistant.ai_msg_2_value' | transloco }}</strong>{{ 'aiAssistant.ai_msg_2_part2' | transloco }}</p>
@@ -74,10 +71,35 @@
 <button pButton class="bg-surface-container-lowest border border-outline-variant/10 px-5 py-2.5 rounded-full text-xs font-semibold text-primary shadow-sm hover:bg-primary-container/10 transition-colors flex items-center gap-2">
 <span class="material-symbols-outlined text-sm" data-icon="contact_support">contact_support</span>{{ 'aiAssistant.message_dr' | transloco }}</button>
 </div>
+<!-- Dynamic Chat Loop -->
+@for (msg of newMessages(); track msg.id) {
+    <!-- AI Message dynamically generated -->
+    @if (msg.isAi) {
+        <div class="flex gap-4 items-start">
+            <p-avatar icon="pi pi-sparkles" styleClass="w-10 h-10 bg-secondary-container text-on-secondary-container shrink-0" shape="circle"></p-avatar>
+            <div class="space-y-4 max-w-[80%]">
+                <div class="bg-surface-container-lowest p-6 rounded-2xl rounded-tl-none shadow-sm">
+                    <p class="text-on-surface leading-relaxed">{{ msg.content }}</p>
+                </div>
+            </div>
+        </div>
+    } @else {
+        <!-- User Message dynamically generated -->
+        <div class="flex gap-4 items-start justify-end">
+            <div class="space-y-2 max-w-[80%]">
+                <div class="bg-primary text-on-primary p-6 rounded-2xl rounded-tr-none shadow-md">
+                    <p class="leading-relaxed">{{ msg.content }}</p>
+                </div>
+                <p class="text-end text-[10px] text-outline-variant font-medium">{{ msg.time }}</p>
+            </div>
+            <p-avatar icon="pi pi-user" styleClass="w-10 h-10 bg-surface-container text-on-surface shrink-0" shape="circle"></p-avatar>
+        </div>
+    }
+}
 </div>
 </div>
 <!-- Input Bar -->
-<div class="absolute bottom-0 start-0 w-full p-8 bg-gradient-to-t from-background via-background/95 to-transparent">
+<div class="w-full shrink-0 p-6 bg-gradient-to-t from-background via-background/95 to-transparent">
 <div class="max-w-4xl mx-auto">
 <div class="relative group">
 <div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
@@ -85,12 +107,12 @@
 <button pButton class="p-3 text-on-surface-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
 </button>
-<input pInputText class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline-variant py-4 px-2 font-body" [placeholder]="'aiAssistant.placeholder' | transloco" type="text"/>
+<input pInputText class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline-variant py-4 px-2 font-body" [placeholder]="'aiAssistant.placeholder' | transloco" type="text" [(ngModel)]="userInput" (keydown.enter)="sendMessage()"/>
 <div class="flex items-center gap-2">
 <button pButton class="p-3 text-on-surface-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined" data-icon="mic">mic</span>
 </button>
-<button pButton class="bg-primary text-white p-4 rounded-xl shadow-lg shadow-primary/30 active:scale-95 transition-transform flex items-center justify-center">
+<button pButton class="bg-primary text-white p-4 rounded-xl shadow-lg shadow-primary/30 active:scale-95 transition-transform flex items-center justify-center" (click)="sendMessage()">
 <span class="material-symbols-outlined" data-icon="send">send</span>
 </button>
 </div>
@@ -98,4 +120,6 @@
 </div>
 <p class="text-[10px] text-center text-outline-variant mt-3 font-medium tracking-wide">{{ 'aiAssistant.disclaimer' | transloco }}</p>
 </div>
+</div>
+
 </div>

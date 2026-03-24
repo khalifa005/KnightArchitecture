@@ -1,13 +1,25 @@
+import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 import { TranslocoModule } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { Component } from '@angular/core';
 
 @Component({
   standalone: true,
   selector: 'app-medication-manager',
-  imports: [TranslocoModule, ButtonModule, InputTextModule],
+  imports: [CommonModule, TranslocoModule, ButtonModule, ToggleSwitchModule, DialogModule, InputTextModule, FormsModule],
   templateUrl: './medication-manager.html',
   styleUrl: './medication-manager.scss',
 })
-export class MedicationManager {}
+export class MedicationManager {
+  remindersActive = signal(true);
+  displayAddModal = signal(false);
+
+  openAddModal() {
+    this.displayAddModal.set(true);
+  }
+}
