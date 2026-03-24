@@ -151,6 +151,36 @@
 </div>
 </div>
 </div>
+
+<!-- Sensitivities / Blacklisted Medications List -->
+<div class="flex items-center justify-between mt-10">
+<h2 class="font-headline text-2xl font-bold text-error">{{ 'medicationManager.allergies_and_sensitivities' | transloco }}</h2>
+</div>
+<!-- Allergy Med Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border-s-4 border-error">
+<div class="p-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="w-14 h-14 rounded-2xl bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-3xl" data-icon="block">block</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline text-xl font-bold">{{ 'medicationManager.penicillin' | transloco }}</h3>
+<span class="px-2 py-0.5 bg-error text-white text-[10px] font-bold uppercase rounded tracking-wider">{{ 'medicationManager.blacklisted' | transloco }}</span>
+</div>
+<p class="text-on-surface-variant text-sm">{{ 'medicationManager.penicillin_desc' | transloco }}</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button pButton class="p-2.5 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+
 </section>
 </div>
 <!-- Reminders & Analytics (Secondary Bento Row) -->
@@ -201,9 +231,25 @@
             <input pInputText id="medName" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" />
         </div>
         
+        <div class="grid grid-cols-2 gap-4">
+            <div class="flex flex-col gap-2">
+                <label for="dosage" class="font-semibold text-sm">{{ 'medicationManager.dosage' | transloco }}</label>
+                <input pInputText id="dosage" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" placeholder="e.g. 500mg" />
+            </div>
+            <div class="flex flex-col gap-2">
+                <label for="route" class="font-semibold text-sm">{{ 'medicationManager.route' | transloco }}</label>
+                <input pInputText id="route" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" placeholder="Oral, Injection, etc." />
+            </div>
+        </div>
+        
         <div class="flex flex-col gap-2">
-            <label for="dosage" class="font-semibold text-sm">{{ 'medicationManager.dosage' | transloco }}</label>
-            <input pInputText id="dosage" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" />
+            <label for="frequency" class="font-semibold text-sm">{{ 'medicationManager.frequency' | transloco }}</label>
+            <input pInputText id="frequency" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" placeholder="e.g. Twice a day" />
+        </div>
+        
+        <div class="flex flex-col gap-2">
+            <label for="instructions" class="font-semibold text-sm">{{ 'medicationManager.instructions' | transloco }}</label>
+            <input pInputText id="instructions" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" placeholder="e.g. Take with food" />
         </div>
         
         <div class="flex items-center gap-2 mt-2 p-3 bg-error-container/20 rounded-xl border border-error/20">

@@ -1,0 +1,78 @@
+{
+  "brand": "Aether Health",
+  "nav_solutions": "Solutions",
+  "nav_providers": "Providers",
+  "nav_research": "Research",
+  "nav_about": "About",
+  "nav_login": "Login",
+  "nav_get_started": "Get Started",
+  
+  "hero_badge": "Introducing The Clinical Sanctuary",
+  "hero_title": "Your Health, <br><span class=\"text-surface-tint\">Simplified & Secured.</span>",
+  "hero_desc": "Aether Health redefines medical data management through an editorial lens. Experience a sanctuary of clarity, built on elite security and human-centric intelligence.",
+  "hero_cta_start": "Start Your Journey",
+  "hero_cta_watch": "Watch Narrative",
+  
+  "stat_live": "Live Status",
+  "stat_vitals": "Optimal Vitals",
+  
+  "ai_badge": "Proprietary Core",
+  "ai_title": "Intelligence That Heals",
+  "ai_desc": "Predictive diagnostics and cognitive reminders—Aether AI acts as a silent guardian for your daily wellness journey.",
+  
+  "ai_card1_title": "Lab Analysis",
+  "ai_card1_desc": "Instant contextualization of blood work and metabolic panels using neural pattern recognition.",
+  "ai_card1_status": "Status",
+  "ai_card1_status_val": "Active",
+  
+  "ai_card2_title": "Precision Dosing",
+  "ai_card2_desc": "Smart reminders that adjust based on your activity levels and metabolic feedback loops.",
+  "ai_card2_acc": "99.8% Accuracy Rating",
+  
+  "ai_card3_title": "Cognitive Sync",
+  "ai_card3_desc": "Detecting early signs of mental fatigue and neurological stress through biometric analysis.",
+  "ai_card3_int": "Integration",
+  "ai_card3_int_val": "Standard",
+  
+  "family_badge": "Unified Care",
+  "family_title": "Family Circles",
+  "family_desc": "Managing health shouldn't be a solo journey. Aether's Family Circles allow you to securely share records, coordinate appointments, and track recovery for your loved ones from a single, beautiful dashboard.",
+  "family_feat1": "Granular Permission Controls",
+  "family_feat2": "One-Tap Dependent Profiles",
+  "family_cta": "Explore Family Plans",
+  
+  "sec_title": "Uncompromising Security Protocol",
+  "sec_desc": "Your medical data is your digital DNA. We protect it with banking-grade fortress technology.",
+  "sec_card1_title": "HIPAA Core",
+  "sec_card1_desc": "Fully compliant with Global Medical Standards.",
+  "sec_card2_title": "256-Bit AES",
+  "sec_card2_desc": "Military-grade encryption at rest and in transit.",
+  "sec_card3_title": "Biometric Lock",
+  "sec_card3_desc": "Multi-factor physical authentication keys.",
+  "sec_card4_title": "Zero Trust",
+  "sec_card4_desc": "Constant real-time threat neutralization.",
+  
+  "trust_badge": "The Network of Trust",
+  "trust_stat1_val": "5k+",
+  "trust_stat1_lbl": "Practitioners",
+  "trust_stat2_val": "12M",
+  "trust_stat2_lbl": "Health Logs",
+  "trust_stat3_val": "100%",
+  "trust_stat3_lbl": "Data Privacy",
+  "trust_stat4_val": "24/7",
+  "trust_stat4_lbl": "AI Support",
+  
+  "cta_title": "Enter The Clinical Sanctuary.",
+  "cta_desc": "Join the future of health management where clarity meets uncompromising care.",
+  "cta_btn1": "Get Started Free",
+  "cta_btn2": "Contact Enterprise",
+  
+  "footer_desc": "Redefining the Clinical Sanctuary through design and technology.",
+  "footer_privacy": "Privacy Policy",
+  "footer_terms": "Terms of Service",
+  "footer_cookie": "Cookie Settings",
+  "footer_a11y": "Accessibility",
+  "footer_support": "Contact Support",
+  "footer_global": "Global Compliance",
+  "footer_copy": "© 2026 Aether Health. Redefining the Clinical Sanctuary."
+}

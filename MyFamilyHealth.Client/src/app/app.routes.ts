@@ -8,6 +8,11 @@ export const routes: Routes = [
     providers: [provideTranslocoScope('register')]
   },
   {
+    path: 'welcome',
+    loadComponent: () => import('./features/landing/landing.component').then(m => m.LandingComponent),
+    providers: [provideTranslocoScope('landing')]
+  },
+  {
     path: 'login',
     loadComponent: () => import('./features/auth/login/login.component').then(c => c.LoginComponent),
     providers: [provideTranslocoScope('login')]

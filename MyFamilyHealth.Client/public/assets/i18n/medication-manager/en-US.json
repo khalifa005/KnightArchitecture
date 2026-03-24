@@ -45,5 +45,12 @@
   "mark_blacklist": "Mark as Sensitivity (Blacklisted)",
   "blacklist_desc": "Checking this will add the medication to your allergy/sensitivity profile instead of active prescriptions.",
   "cancel": "Cancel",
-  "save_med": "Save Medication"
+  "save_med": "Save Medication",
+  "route": "Route of Administration",
+  "frequency": "Frequency",
+  "instructions": "Special Instructions",
+  "allergies_and_sensitivities": "Allergies & Sensitivities",
+  "penicillin": "Penicillin",
+  "blacklisted": "Blacklisted",
+  "penicillin_desc": "Severe allergic reaction (Anaphylaxis) recorded in 2015."
 }
