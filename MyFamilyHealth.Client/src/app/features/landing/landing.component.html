@@ -2,15 +2,15 @@
   <!-- Top Navigation Shell -->
   <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm shadow-sky-900/5">
     <div class="flex justify-between items-center px-4 md:px-8 py-4 max-w-7xl mx-auto">
-      <div class="flex items-center gap-2">
+      <a routerLink="/welcome" class="flex items-center gap-2 cursor-pointer no-underline hover:opacity-80 transition-opacity">
         <span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">health_metrics</span>
         <span class="text-2xl font-bold tracking-tighter text-sky-900 dark:text-sky-100 font-headline">{{ 'landing.brand' | transloco }}</span>
-      </div>
+      </a>
       <div class="hidden md:flex items-center gap-8">
         <a class="text-sky-600 dark:text-sky-400 font-bold border-b-2 border-sky-600 font-headline tracking-tight text-sm cursor-pointer">{{ 'landing.nav_solutions' | transloco }}</a>
         <a class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_providers' | transloco }}</a>
         <a class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_research' | transloco }}</a>
-        <a class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_about' | transloco }}</a>
+        <a routerLink="/about-us" class="text-slate-600 dark:text-slate-400 hover:text-sky-900 dark:hover:text-sky-100 transition-colors font-headline tracking-tight text-sm font-medium cursor-pointer">{{ 'landing.nav_about' | transloco }}</a>
         
         <!-- Language Switcher -->
         <button (click)="toggleLanguage()" class="flex items-center gap-1 text-slate-500 hover:text-primary transition-colors text-sm font-bold ms-4">

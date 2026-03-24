@@ -169,10 +169,10 @@
   <section class="px-8 max-w-4xl mx-auto text-center">
     <h2 class="text-4xl font-bold mb-8 font-headline">{{ 'about-us.cta.title' | transloco }}</h2>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-      <button pButton class="w-full justify-center sm:w-auto px-10 py-3 bg-primary text-on-primary rounded-full font-bold text-lg hover:opacity-90 transition-opacity shadow-xl border-none">
+      <button pButton routerLink="/register" class="w-full justify-center sm:w-auto px-10 py-3 bg-primary text-on-primary rounded-full font-bold text-lg hover:opacity-90 transition-opacity shadow-xl border-none">
         {{ 'about-us.cta.create_account' | transloco }}
       </button>
-      <button pButton class="w-full justify-center sm:w-auto px-10 py-3 bg-secondary-container text-on-secondary-container rounded-full font-bold text-lg hover:bg-secondary-container/80 transition-colors border-none">
+      <button pButton routerLink="/welcome" class="w-full justify-center sm:w-auto px-10 py-3 bg-secondary-container text-on-secondary-container rounded-full font-bold text-lg hover:bg-secondary-container/80 transition-colors border-none">
         {{ 'about-us.cta.book_consultation' | transloco }}
       </button>
     </div>
