@@ -40,13 +40,27 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="flex flex-col gap-2">
                 <label class="text-xs font-semibold text-on-surface-variant">{{ 'addPrescription.dosage' | transloco }}</label>
-                <p-select formControlName="dosage" [options]="dosageOptions" optionLabel="label" optionValue="value"
-                          styleClass="w-full !bg-white !border-0 !border-b !border-outline-variant/30 !rounded-none !shadow-none text-sm" />
+                <p-select formControlName="dosage" [options]="dosageOptions" optionValue="value"
+                          styleClass="w-full !bg-white !border-0 !border-b !border-outline-variant/30 !rounded-none !shadow-none text-sm">
+                  <ng-template pTemplate="selectedItem" let-selectedOption>
+                    {{ selectedOption.labelKey | transloco }}
+                  </ng-template>
+                  <ng-template pTemplate="item" let-option>
+                    {{ option.labelKey | transloco }}
+                  </ng-template>
+                </p-select>
               </div>
               <div class="flex flex-col gap-2">
                 <label class="text-xs font-semibold text-on-surface-variant">{{ 'addPrescription.frequency' | transloco }}</label>
-                <p-select formControlName="frequency" [options]="frequencyOptions" optionLabel="label" optionValue="value"
-                          styleClass="w-full !bg-white !border-0 !border-b !border-outline-variant/30 !rounded-none !shadow-none text-sm" />
+                <p-select formControlName="frequency" [options]="frequencyOptions" optionValue="value"
+                          styleClass="w-full !bg-white !border-0 !border-b !border-outline-variant/30 !rounded-none !shadow-none text-sm">
+                  <ng-template pTemplate="selectedItem" let-selectedOption>
+                    {{ selectedOption.labelKey | transloco }}
+                  </ng-template>
+                  <ng-template pTemplate="item" let-option>
+                    {{ option.labelKey | transloco }}
+                  </ng-template>
+                </p-select>
               </div>
               <div class="flex flex-col gap-2">
                 <label class="text-xs font-semibold text-on-surface-variant">{{ 'addPrescription.duration' | transloco }}</label>
@@ -113,7 +127,7 @@
         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkzVnm0nBdBzL4fX9DTNYINiYrnj0KMYRfbbWY664SaPSRRMlChTIUR7O3ScGkn-FEZ7e1Jk_aI9NxIzgHgCFb5nCvAjei2qkbl8bH1FYLS0kQ_vWUJZcb-xHZ9aUz05qFQywi4CYGafhM7mLRAV4VQWpDVYpNGt3atQ-G1nkRBcyQ-x_UZd05ae1oOAo1mnikm9gT2KyugyQW4UcNxLxrf0ofmbzhXvHrSfU49rLqKCcuGMtk5SAYRqAmETWrsS8IjypbgU3HsMKD"
              alt="Lab" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
         <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex flex-col justify-end p-5">
-          <h4 class="text-white font-bold">Aether Sanctuary</h4>
+          <h4 class="text-white font-bold">DHM Sanctuary</h4>
           <p class="text-white/80 text-xs">Precision at every point of care.</p>
         </div>
       </div>

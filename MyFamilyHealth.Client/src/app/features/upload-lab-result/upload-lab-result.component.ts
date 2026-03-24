@@ -18,12 +18,12 @@ export class UploadLabResultComponent {
 
   form = this.fb.group({
     nationalId: ['', Validators.required],
-    labSource: ['Aether Central Diagnostics'],
+    labSource: ['dhm'],
     collectionDate: ['', Validators.required],
   });
 
   labSources = [
-    { label: 'Aether Central Diagnostics', value: 'aether' },
+    { label: 'DHM Central Diagnostics', value: 'dhm' },
     { label: 'Metropolitan Medical Labs', value: 'metro' },
     { label: 'Priority Pathology Group', value: 'priority' },
   ];

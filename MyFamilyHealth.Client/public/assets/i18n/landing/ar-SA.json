@@ -74,5 +74,9 @@
   "footer_a11y": "إمكانية الوصول",
   "footer_support": "اتصل بالدعم",
   "footer_global": "الامتثال العالمي",
-  "footer_copy": "© 2026 ذاكرة الصحة الرقمية (DHM). جميع الحقوق محفوظة."
+  "footer_copy": "© 2026 ذاكرة الصحة الرقمية (DHM). جميع الحقوق محفوظة.",
+  "family_verified_title": "وصول موثق",
+  "family_verified_sub": "مزامنة عالمية",
+  "family_private_title": "دوائر خاصة",
+  "family_private_sub": "حماية بدرجة عسكرية للأصول المعالة."
 }

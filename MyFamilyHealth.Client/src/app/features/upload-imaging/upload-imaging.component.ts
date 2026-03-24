@@ -20,11 +20,22 @@ export class UploadImagingComponent {
     { name: 'Chest_Xray_PA_002.dcm', size: '42.8 MB', progress: 75 }
   ]);
 
-  bodyParts = ['Chest / Thorax', 'Abdomen', 'Cranial', 'Upper Limb', 'Lower Limb'];
-  viewTypes = ['Posterior-Anterior (PA)', 'Anterior-Posterior (AP)', 'Lateral', 'Oblique'];
+  bodyParts = [
+    { labelKey: 'uploadImaging.part_chest', value: 'chest' },
+    { labelKey: 'uploadImaging.part_abdomen', value: 'abdomen' },
+    { labelKey: 'uploadImaging.part_cranial', value: 'cranial' },
+    { labelKey: 'uploadImaging.part_upper_limb', value: 'upper_limb' },
+    { labelKey: 'uploadImaging.part_lower_limb', value: 'lower_limb' }
+  ];
+  viewTypes = [
+    { labelKey: 'uploadImaging.view_pa', value: 'pa' },
+    { labelKey: 'uploadImaging.view_ap', value: 'ap' },
+    { labelKey: 'uploadImaging.view_lateral', value: 'lateral' },
+    { labelKey: 'uploadImaging.view_oblique', value: 'oblique' }
+  ];
 
-  selectedBodyPart = 'Chest / Thorax';
-  selectedViewType = 'Posterior-Anterior (PA)';
+  selectedBodyPart = 'chest';
+  selectedViewType = 'pa';
   radiologistName = '';
   notes = '';
 

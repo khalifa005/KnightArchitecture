@@ -6,14 +6,14 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MenuModule } from 'primeng/menu';
-import { OverlayPanel, OverlayPanelModule } from 'primeng/overlaypanel';
 import { BadgeModule } from 'primeng/badge';
+import { Popover, PopoverModule } from 'primeng/popover';
 import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslocoModule, ButtonModule, InputTextModule, MenuModule, OverlayPanelModule, BadgeModule],
+  imports: [CommonModule, RouterModule, TranslocoModule, ButtonModule, InputTextModule, MenuModule, PopoverModule, BadgeModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
@@ -21,7 +21,7 @@ export class LayoutComponent {
   store = inject(AppStore);
   isExpanded = signal(true);
 
-  @ViewChild('notifPanel') notifPanel!: OverlayPanel;
+  @ViewChild('notifPanel') notifPanel!: Popover;
 
   notifications = [
     {

@@ -15,9 +15,9 @@ export class UploadCenterComponent {
   selectedCategory = signal<'lab' | 'imaging' | 'prescription'>('lab');
 
   recentUploads = [
-    { patient: 'Alex M*****s', category: 'Lab Test', categoryClass: 'bg-tertiary-fixed text-on-tertiary-fixed-variant', time: 'Oct 24, 14:22', status: 'AI-Analyzed', statusIcon: '', pulse: true },
-    { patient: 'Sarah K*****n', category: 'X-Ray', categoryClass: 'bg-secondary-fixed text-on-secondary-fixed-variant', time: 'Oct 24, 13:45', status: 'Verified', statusIcon: 'check_circle', pulse: false },
-    { patient: 'David R*****z', category: 'Prescription', categoryClass: 'bg-primary-fixed text-on-primary-fixed-variant', time: 'Oct 24, 13:10', status: 'Processing', statusIcon: 'progress_activity', pulse: false },
+    { patient: 'Alex M*****s', categoryKey: 'uploadCenter.cat_lab', categoryClass: 'bg-tertiary-fixed text-on-tertiary-fixed-variant', time: 'Oct 24, 14:22', statusKey: 'uploadCenter.status_ai', statusIcon: '', pulse: true },
+    { patient: 'Sarah K*****n', categoryKey: 'uploadCenter.cat_imaging', categoryClass: 'bg-secondary-fixed text-on-secondary-fixed-variant', time: 'Oct 24, 13:45', statusKey: 'uploadCenter.status_verified', statusIcon: 'check_circle', pulse: false },
+    { patient: 'David R*****z', categoryKey: 'uploadCenter.cat_prescription', categoryClass: 'bg-primary-fixed text-on-primary-fixed-variant', time: 'Oct 24, 13:10', statusKey: 'uploadCenter.status_processing', statusIcon: 'progress_activity', pulse: false },
   ];
 
   selectCategory(cat: string) { this.selectedCategory.set(cat as 'lab' | 'imaging' | 'prescription'); }

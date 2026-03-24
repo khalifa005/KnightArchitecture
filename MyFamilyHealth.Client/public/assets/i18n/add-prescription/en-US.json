@@ -26,5 +26,11 @@
   "view_all": "View All Records",
   "status_stable": "Stable",
   "status_priority": "Priority",
-  "status_flag": "Interaction Flag"
+  "status_flag": "Interaction Flag",
+  "dose_500_bid": "500mg - Twice daily",
+  "dose_250_am": "250mg - Morning only",
+  "dose_1000_load": "1000mg - Loading dose",
+  "freq_bid": "BID (Twice daily)",
+  "freq_tid": "TID (Thrice daily)",
+  "freq_prn": "PRN (As needed)"
 }

@@ -145,30 +145,29 @@ export class LandingComponent implements OnInit {
 
       const t = this.audioCtx.currentTime;
 
-      const osc1 = this.audioCtx.createOscillator();
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(800, t);
+      // Realistic "Lub-Dub" Heartbeat
+      const playThump = (time: number, freq: number, gainVal: number) => {
+        const osc = this.audioCtx!.createOscillator();
+        const gain = this.audioCtx!.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, time);
+        
+        gain.gain.setValueAtTime(0, time);
+        gain.gain.linearRampToValueAtTime(gainVal, time + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
+        
+        osc.connect(gain);
+        gain.connect(this.audioCtx!.destination);
+        
+        osc.start(time);
+        osc.stop(time + 0.2);
+      };
 
-      const osc2 = this.audioCtx.createOscillator();
-      osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(1600, t);
-
-      const gainNode = this.audioCtx.createGain();
-
-      // Keep heartbeat subtle so narration remains prominent
-      gainNode.gain.setValueAtTime(0, t);
-      gainNode.gain.linearRampToValueAtTime(HEARTBEAT_PEAK_GAIN, t + 0.01);
-      gainNode.gain.setValueAtTime(HEARTBEAT_PEAK_GAIN, t + 0.05);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
-
-      osc1.connect(gainNode);
-      osc2.connect(gainNode);
-      gainNode.connect(this.audioCtx.destination);
-
-      osc1.start(t);
-      osc2.start(t);
-      osc1.stop(t + 0.16);
-      osc2.stop(t + 0.16);
+      // First Thump (Lub) - Lower freq
+      playThump(t, 120, HEARTBEAT_PEAK_GAIN * 1.5);
+      // Second Thump (Dub) - Slightly higher/tighter
+      playThump(t + 0.15, 160, HEARTBEAT_PEAK_GAIN * 1.2);
     };
 
     this.stopHeartbeat();

@@ -16,12 +16,12 @@
   "col_result": "Result",
   "col_range": "Reference Range",
   "col_unit": "Unit",
-  "col_status": "Status",
-  "status_normal": "Normal",
   "status_high": "High",
-  "discard": "Discard Draft",
-  "peer_review": "Save For Peer Review",
-  "submit": "Submit Lab Result",
   "validation_title": "Clinical Validation Note",
-  "validation_body": "This form uses intelligent boundary checking. If a result is marked as 'High' or 'Low', it will automatically trigger a notification to the attending physician once submitted."
+  "validation_body": "This form uses intelligent boundary checking. If a result is marked as 'High' or 'Low', it will automatically trigger a notification to the attending physician once submitted.",
+  "col_status": "Status",
+  "discard": "Discard",
+  "source_dhm": "DHM Central Diagnostics",
+  "source_metro": "Metropolitan Medical Labs",
+  "source_priority": "Priority Pathology Group"
 }

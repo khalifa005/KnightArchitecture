@@ -24,5 +24,8 @@
   "col_category": "Category",
   "col_time": "Timestamp",
   "col_status": "Status",
-  "col_action": "Action"
+  "col_action": "Action",
+  "status_ai": "AI-Analyzed",
+  "status_verified": "Verified",
+  "status_processing": "Processing"
 }

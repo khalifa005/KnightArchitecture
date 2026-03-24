@@ -26,15 +26,15 @@ export class AddPrescriptionComponent {
   });
 
   dosageOptions = [
-    { label: '500mg - Twice daily', value: '500mg - Twice daily' },
-    { label: '250mg - Morning only', value: '250mg - Morning only' },
-    { label: '1000mg - Loading dose', value: '1000mg - Loading dose' },
+    { labelKey: 'addPrescription.dose_500_bid', value: '500_bid' },
+    { labelKey: 'addPrescription.dose_250_am',  value: '250_am' },
+    { labelKey: 'addPrescription.dose_1000_load', value: '1000_load' },
   ];
 
   frequencyOptions = [
-    { label: 'BID (Twice daily)', value: 'BID' },
-    { label: 'TID (Thrice daily)', value: 'TID' },
-    { label: 'PRN (As needed)', value: 'PRN' },
+    { labelKey: 'addPrescription.freq_bid', value: 'BID' },
+    { labelKey: 'addPrescription.freq_tid', value: 'TID' },
+    { labelKey: 'addPrescription.freq_prn', value: 'PRN' },
   ];
 
   interactions = [

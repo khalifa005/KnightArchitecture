@@ -111,16 +111,16 @@
             <div>
               <label class="block text-xs font-bold text-on-surface-variant mb-2 uppercase tracking-wide">{{ 'uploadImaging.body_part' | transloco }}</label>
               <select [(ngModel)]="selectedBodyPart" class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-sm py-2">
-                @for (part of bodyParts; track part) {
-                  <option [value]="part">{{ part }}</option>
+                @for (part of bodyParts; track part.value) {
+                  <option [value]="part.value">{{ part.labelKey | transloco }}</option>
                 }
               </select>
             </div>
             <div>
               <label class="block text-xs font-bold text-on-surface-variant mb-2 uppercase tracking-wide">{{ 'uploadImaging.view_type' | transloco }}</label>
               <select [(ngModel)]="selectedViewType" class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-sm py-2">
-                @for (vt of viewTypes; track vt) {
-                  <option [value]="vt">{{ vt }}</option>
+                @for (vt of viewTypes; track vt.value) {
+                  <option [value]="vt.value">{{ vt.labelKey | transloco }}</option>
                 }
               </select>
             </div>

@@ -63,10 +63,48 @@
           <span class="material-symbols-outlined font-bold">{{ store.lang() === 'ar-SA' ? 'language' : 'translate' }}</span>
           <span class="text-xs font-bold uppercase ms-1">{{ store.lang() === 'ar-SA' ? 'EN' : 'عربي' }}</span>
         </button>
-        <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors relative">
-          <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-          <span class="absolute top-2 end-2 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
-        </button>
+        <!-- Notification Button + Popover -->
+        <div class="relative">
+          <button pButton (click)="toggleNotifications($event)" class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors relative">
+            <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+            @if (unreadCount > 0) {
+              <span class="absolute top-1.5 end-1.5 min-w-[18px] h-[18px] bg-red-500 text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-white">{{ unreadCount }}</span>
+            }
+          </button>
+
+          <p-popover #notifPanel styleClass="shadow-2xl border-0 rounded-2xl overflow-hidden" [style]="{'width': '360px', 'padding': '0'}">
+            <!-- Header -->
+            <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+              <div>
+                <p class="font-bold text-on-surface text-sm">Notifications</p>
+                <p class="text-xs text-on-surface-variant mt-0.5">{{ unreadCount }} unread</p>
+              </div>
+              <button (click)="markAllRead()" class="text-xs text-primary font-semibold hover:opacity-70 transition-opacity">Mark all read</button>
+            </div>
+            <!-- Notification List -->
+            <div class="max-h-80 overflow-y-auto">
+              @for (notif of notifications; track notif.title) {
+                <div [class]="'flex gap-4 px-5 py-4 border-b border-slate-50 hover:bg-slate-50/80 transition-colors cursor-pointer relative' + (notif.unread ? ' bg-primary-fixed/30' : '')">
+                  <div [class]="notif.iconBg + ' w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5'">
+                    <span [class]="'material-symbols-outlined text-lg ' + notif.iconColor">{{ notif.icon }}</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-semibold text-on-surface leading-snug">{{ notif.title }}</p>
+                    <p class="text-xs text-on-surface-variant mt-0.5 leading-relaxed">{{ notif.desc }}</p>
+                    <p class="text-[10px] text-primary font-medium mt-1.5">{{ notif.time }}</p>
+                  </div>
+                  @if (notif.unread) {
+                    <span class="w-2 h-2 bg-primary rounded-full shrink-0 mt-2"></span>
+                  }
+                </div>
+              }
+            </div>
+            <!-- Footer -->
+            <div class="px-5 py-3 text-center">
+              <a class="text-xs text-primary font-semibold hover:opacity-70 transition-opacity cursor-pointer">View all notifications →</a>
+            </div>
+          </p-popover>
+        </div>
         <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors">
           <span class="material-symbols-outlined" data-icon="settings">settings</span>
         </button>

@@ -18,5 +18,14 @@
   "submit": "Finalize & Submit Study",
   "save_draft": "Save as Draft",
   "compliance_title": "Compliance Check",
-  "compliance_body": "Ensure all PHI is removed from DICOM tags if this study is intended for external research or cross-facility referral."
+  "compliance_body": "Ensure all PHI is removed from DICOM tags if this study is intended for external research or cross-facility referral.",
+  "part_chest": "Chest / Thorax",
+  "part_abdomen": "Abdomen",
+  "part_cranial": "Cranial",
+  "part_upper_limb": "Upper Limb",
+  "part_lower_limb": "Lower Limb",
+  "view_pa": "Posterior-Anterior (PA)",
+  "view_ap": "Anterior-Posterior (AP)",
+  "view_lateral": "Lateral",
+  "view_oblique": "Oblique"
 }

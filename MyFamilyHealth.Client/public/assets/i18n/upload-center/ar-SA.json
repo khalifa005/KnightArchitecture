@@ -24,5 +24,8 @@
   "col_category": "الفئة",
   "col_time": "الوقت",
   "col_status": "الحالة",
-  "col_action": "الإجراء"
+  "col_action": "الإجراء",
+  "status_ai": "تم التحليل بالذكاء الاصطناعي",
+  "status_verified": "تم التحقق",
+  "status_processing": "قيد المعالجة"
 }
