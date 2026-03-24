@@ -1,0 +1,125 @@
+<!-- Hero Header -->
+<header class="mb-12">
+  <h1 class="font-headline text-5xl font-extrabold text-primary tracking-tight mb-4">
+    {{ 'family-profiles.title' | transloco }}
+  </h1>
+  <p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
+    {{ 'family-profiles.subtitle' | transloco }}
+  </p>
+</header>
+
+<!-- Bento Grid for Profiles -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+  <!-- Primary Profile (User) -->
+  <div class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 shadow-sm flex flex-col md:flex-row gap-8 items-center border-s-4 border-primary">
+    <div class="relative">
+      <img [alt]="primaryUser.name" class="w-32 h-32 rounded-full object-cover grayscale-[20%]" [src]="primaryUser.image"/>
+      <div class="absolute bottom-1 end-1 bg-secondary-fixed text-on-secondary-fixed-variant p-1.5 rounded-full border-4 border-surface-container-lowest">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+      </div>
+    </div>
+    
+    <div class="flex-grow text-center md:text-start">
+      <div class="flex flex-col md:flex-row md:items-center gap-3 mb-2">
+        <h2 class="font-headline text-3xl font-bold text-on-surface">{{ primaryUser.name }}</h2>
+        <span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold rounded-full uppercase tracking-widest">
+          {{ 'family-profiles.roles.primary_account' | transloco }}
+        </span>
+      </div>
+      <p class="text-on-surface-variant font-medium mb-6">
+        {{ primaryUser.roleKey | transloco }} • {{ primaryUser.age }}
+      </p>
+      <div class="flex flex-wrap justify-center md:justify-start gap-4">
+        <button pButton class="bg-surface-container-low hover:bg-surface-container-high text-primary px-5 py-3 rounded-xl font-headline font-bold text-sm transition-colors flex items-center gap-2 border-none">
+          <span class="material-symbols-outlined text-lg">edit</span>
+          {{ 'family-profiles.actions.edit_profile' | transloco }}
+        </button>
+        <button pButton class="bg-surface-container-low hover:bg-surface-container-high text-primary px-5 py-3 rounded-xl font-headline font-bold text-sm transition-colors flex items-center gap-2 border-none">
+          <span class="material-symbols-outlined text-lg">share_reviews</span>
+          {{ 'family-profiles.actions.access_logs' | transloco }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats/Action Card -->
+  <div class="lg:col-span-4 bg-primary text-white rounded-xl p-8 flex flex-col justify-between overflow-hidden relative">
+    <div class="relative z-10">
+      <h3 class="font-headline text-xl font-bold mb-2">{{ 'family-profiles.stats.active_circles' | transloco }}</h3>
+      <p class="text-primary-fixed/80 text-sm mb-6">{{ 'family-profiles.stats.managing_dependents' | transloco : { count: familyMembers.length } }}</p>
+    </div>
+    <div class="relative z-10 space-y-4">
+      <div class="flex items-center justify-between p-3 bg-white/10 rounded-xl backdrop-blur-md">
+        <span class="text-sm font-medium">{{ 'family-profiles.stats.monthly_records' | transloco }}</span>
+        <span class="text-xl font-bold">12</span>
+      </div>
+      <button pButton class="w-full bg-white text-primary py-4 rounded-full font-headline font-bold text-sm hover:bg-primary-fixed transition-colors border-none">
+        {{ 'family-profiles.actions.view_timeline' | transloco }}
+      </button>
+    </div>
+    <!-- Abstract Decorative Element -->
+    <div class="absolute -end-8 -bottom-8 w-40 h-40 bg-primary-container rounded-full opacity-50 blur-3xl"></div>
+  </div>
+
+  <!-- Family Members List -->
+  <div class="lg:col-span-12 mt-4">
+    <div class="flex items-center justify-between mb-8">
+      <h3 class="font-headline text-2xl font-bold text-on-surface">{{ 'family-profiles.linked_profiles' | transloco }}</h3>
+      <div class="flex gap-2">
+        <button pButton class="p-2 text-on-surface-variant hover:bg-surface-container rounded-lg bg-transparent border-none">
+          <span class="material-symbols-outlined text-xl">grid_view</span>
+        </button>
+        <button pButton class="p-2 text-primary bg-primary-fixed rounded-lg border-none">
+          <span class="material-symbols-outlined text-xl">list</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      @for (member of familyMembers; track member.name) {
+        <div class="bg-surface-container-lowest rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 group hover:bg-surface-container-low transition-colors border-s-4 border-transparent hover:border-secondary transition-all">
+          <img [alt]="member.name" class="w-16 h-16 rounded-2xl object-cover" [src]="member.image"/>
+          <div class="flex-grow text-center md:text-start">
+            <h4 class="font-headline font-bold text-lg text-on-surface">{{ member.name }}</h4>
+            <p class="text-on-surface-variant text-sm mt-1">
+              {{ member.relationKey | transloco }} • {{ member.age }} • {{ 'family-profiles.blood_type' | transloco }} {{ member.bloodType }}
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-4 items-center justify-center md:justify-end">
+            <div [class]="member.accessClass + ' px-3 py-1 text-xs font-bold rounded-full flex items-center gap-1'">
+              <span class="material-symbols-outlined text-sm" [style.font-variation-settings]="member.accessIcon === 'shield_with_heart' ? '&quot;FILL&quot; 1' : ''">{{ member.accessIcon }}</span>
+              {{ member.accessKey | transloco }}
+            </div>
+            
+            <div class="h-8 w-px bg-outline-variant/30 hidden md:block mx-1"></div>
+            
+            <div class="flex gap-2">
+              @for (action of member.actions; track action.title) {
+                <button pButton class="p-2 text-primary hover:bg-primary-fixed rounded-full transition-colors bg-transparent border-none" [title]="action.title | transloco">
+                  <span class="material-symbols-outlined">{{ action.icon }}</span>
+                </button>
+              }
+              <button pButton class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors bg-transparent border-none">
+                <span class="material-symbols-outlined">more_vert</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Empty State / Add Suggestion -->
+  <div class="lg:col-span-12">
+    <button class="w-full border-2 border-dashed border-outline-variant/50 rounded-2xl p-12 flex flex-col items-center justify-center gap-4 hover:bg-surface-container-low hover:border-primary transition-all group bg-transparent cursor-pointer">
+      <div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary group-hover:text-white transition-colors">
+        <span class="material-symbols-outlined text-3xl">person_add</span>
+      </div>
+      <div class="text-center">
+        <p class="font-headline font-bold text-lg text-on-surface">{{ 'family-profiles.actions.add_dependent' | transloco }}</p>
+        <p class="text-on-surface-variant text-sm mt-1">{{ 'family-profiles.actions.link_records' | transloco }}</p>
+      </div>
+    </button>
+  </div>
+</div>

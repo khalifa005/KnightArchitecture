@@ -21,6 +21,7 @@ export class LayoutComponent {
 
   menuItems: MenuItem[] = [
     { label: 'nav.dashboard', icon: 'dashboard', routerLink: '/' },
+    { label: 'nav.family_profiles', icon: 'family_restroom', routerLink: '/family-profiles' },
     { label: 'nav.medical_records', icon: 'folder_shared', routerLink: '/medical-records' },
     { label: 'nav.medications', icon: 'medication', routerLink: '/medications' },
     { label: 'nav.ai_assistant', icon: 'smart_toy', routerLink: '/ai-assistant' },

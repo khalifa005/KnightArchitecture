@@ -28,6 +28,7 @@ export const routes: Routes = [
       },
       {
         path: 'family-profiles',
+        // Force esbuild re-resolution
         loadComponent: () => import('./features/family-profiles/family-profiles.component').then(c => c.FamilyProfilesComponent),
         providers: [provideTranslocoScope('family-profiles')]
       },
