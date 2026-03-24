@@ -28,6 +28,8 @@
     "ai_help": "AI Help",
     "help_center": "Help Center",
     "sign_out": "Sign Out",
-    "patient_id": "Patient ID:"
+    "patient_id": "Patient ID:",
+    "dark_mode": "Dark Mode",
+    "light_mode": "Light Mode"
   }
 }

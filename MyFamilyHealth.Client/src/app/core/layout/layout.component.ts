@@ -106,4 +106,8 @@ export class LayoutComponent {
   toggleSidebar() {
     this.isExpanded.update(val => !val);
   }
+
+  toggleDarkMode() {
+    this.store.toggleDarkMode();
+  }
 }

@@ -1,18 +1,18 @@
 <!-- Side Navigation Bar -->
-<aside [class]="isExpanded() ? 'w-64' : 'w-24'" class="fixed start-0 top-0 h-screen bg-slate-50 border-e-0 flex flex-col p-4 gap-2 z-40 hidden md:flex transition-all duration-300">
+<aside [class]="isExpanded() ? 'w-64' : 'w-24'" class="fixed start-0 top-0 h-screen bg-slate-50 dark:bg-slate-900 border-e-0 flex flex-col p-4 gap-2 z-40 hidden md:flex transition-all duration-300">
   <a routerLink="/welcome" class="px-3 pt-2 pb-3 mb-1 flex flex-col justify-start overflow-hidden whitespace-nowrap cursor-pointer no-underline hover:opacity-80 transition-opacity">
     @if (isExpanded()) {
-        <h2 class="font-['Manrope'] font-extrabold text-sky-900 text-lg tracking-tight leading-tight">{{ 'layout.portal_title' | transloco }}</h2>
-        <p class="text-[11px] font-medium text-slate-400 uppercase tracking-widest mt-0.5">{{ 'layout.portal_subtitle' | transloco }}</p>
+        <h2 class="font-['Manrope'] font-extrabold text-sky-900 dark:text-sky-100 text-lg tracking-tight leading-tight">{{ 'layout.portal_title' | transloco }}</h2>
+        <p class="text-[11px] font-medium text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-0.5">{{ 'layout.portal_subtitle' | transloco }}</p>
     } @else {
-        <span class="material-symbols-outlined text-sky-900 text-3xl mx-auto">health_and_safety</span>
+        <span class="material-symbols-outlined text-sky-900 dark:text-sky-100 text-3xl mx-auto">health_and_safety</span>
     }
   </a>
   
   <div class="flex-1 overflow-y-auto sidebar-scroll">
     <p-menu [model]="menuItems" styleClass="w-full border-none bg-transparent p-0 flex-1 space-y-2" [style]="{'width': '100%'}">
       <ng-template pTemplate="item" let-item>
-         <a [routerLink]="item.routerLink" routerLinkActive="bg-white text-sky-700 shadow-sm" [routerLinkActiveOptions]="{exact: item.routerLink === '/'}" class="flex items-center gap-3 py-3 text-slate-600 rounded-xl font-['Manrope'] font-medium text-sm transition-all hover:text-sky-600 hover:bg-sky-50 overflow-hidden whitespace-nowrap w-full" [ngClass]="isExpanded() ? 'justify-start px-4' : 'justify-center px-0'">
+         <a [routerLink]="item.routerLink" routerLinkActive="bg-white dark:bg-slate-800 text-sky-700 dark:text-sky-300 shadow-sm" [routerLinkActiveOptions]="{exact: item.routerLink === '/'}" class="flex items-center gap-3 py-3 text-slate-600 dark:text-slate-400 rounded-xl font-['Manrope'] font-medium text-sm transition-all hover:text-sky-600 dark:hover:text-sky-300 hover:bg-sky-50 dark:hover:bg-slate-800 overflow-hidden whitespace-nowrap w-full" [ngClass]="isExpanded() ? 'justify-start px-4' : 'justify-center px-0'">
            <span class="material-symbols-outlined text-[24px] shrink-0" [attr.data-icon]="item.icon">{{ item.icon }}</span>
            @if (isExpanded()) {
               <span class="transition-opacity">{{ item.label | transloco }}</span>
@@ -22,20 +22,20 @@
     </p-menu>
   </div>
   
-  <div class="mt-auto pt-6 border-t border-slate-100 flex flex-col gap-2 overflow-hidden whitespace-nowrap">
+  <div class="mt-auto pt-6 border-t border-slate-100 dark:border-slate-700 flex flex-col gap-2 overflow-hidden whitespace-nowrap">
     <button pButton [ngClass]="{'px-0 justify-center': !isExpanded(), 'px-4': isExpanded()}" class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-3 rounded-full font-bold shadow-lg active:scale-95 transition-all mb-4 flex items-center gap-2 outline-none border-none">
       <span class="material-symbols-outlined shrink-0" data-icon="bolt">bolt</span>
       @if (isExpanded()) {
         <span>{{ 'layout.ai_help' | transloco }}</span>
       }
     </button>
-    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-sky-600 transition-colors text-sm font-medium" [ngClass]="{'justify-center px-0': !isExpanded()}" href="#">
+    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors text-sm font-medium" [ngClass]="{'justify-center px-0': !isExpanded()}" href="#">
       <span class="material-symbols-outlined text-xl shrink-0" data-icon="help_outline">help_outline</span>
       @if (isExpanded()) {
         <span>{{ 'layout.help_center' | transloco }}</span>
       }
     </a>
-    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-sky-600 transition-colors text-sm font-medium cursor-pointer" [ngClass]="{'justify-center px-0': !isExpanded()}" routerLink="/login">
+    <a class="flex items-center gap-3 px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors text-sm font-medium cursor-pointer" [ngClass]="{'justify-center px-0': !isExpanded()}" routerLink="/login">
       <span class="material-symbols-outlined text-xl shrink-0" data-icon="logout">logout</span>
       @if (isExpanded()) {
         <span>{{ 'layout.sign_out' | transloco }}</span>
@@ -45,76 +45,80 @@
 </aside>
 
 <!-- Top App Bar -->
-<header [ngClass]="isExpanded() ? 'md:start-64' : 'md:start-24'" class="fixed top-0 end-0 start-0 bg-white/80 backdrop-blur-xl z-50 shadow-sm transition-all duration-300">
+<header [ngClass]="isExpanded() ? 'md:start-64' : 'md:start-24'" class="fixed top-0 end-0 start-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 shadow-sm dark:shadow-slate-900/50 transition-all duration-300">
   <div class="flex justify-between items-center px-8 py-4 w-full">
     <div class="flex items-center gap-4">
-      <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors hidden md:block" (click)="toggleSidebar()">
+      <button pButton class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors hidden md:block" (click)="toggleSidebar()">
          <span class="material-symbols-outlined shrink-0 text-xl font-bold p-1">menu_open</span>
       </button>
-      <h1 class="text-xl font-bold tracking-tight text-sky-900 font-['Manrope']">{{ 'layout.header_title' | transloco }}</h1>
+      <h1 class="text-xl font-bold tracking-tight text-sky-900 dark:text-sky-100 font-['Manrope']">{{ 'layout.header_title' | transloco }}</h1>
     </div>
     <div class="flex items-center gap-6">
-      <div class="hidden sm:flex items-center bg-surface-container-low px-4 py-2 rounded-full border-0">
-        <span class="material-symbols-outlined text-on-surface-variant text-lg me-2" data-icon="search">search</span>
-        <input pInputText class="bg-transparent border-none text-sm focus:ring-0 p-0 text-on-surface placeholder-on-surface-variant/60" [placeholder]="'layout.search_placeholder' | transloco" type="text"/>
+      <div class="hidden sm:flex items-center bg-surface-container-low dark:bg-slate-800 px-4 py-2 rounded-full border-0">
+        <span class="material-symbols-outlined text-on-surface-variant dark:text-slate-400 text-lg me-2" data-icon="search">search</span>
+        <input pInputText class="bg-transparent border-none text-sm focus:ring-0 p-0 text-on-surface dark:text-slate-200 placeholder-on-surface-variant/60 dark:placeholder-slate-500" [placeholder]="'layout.search_placeholder' | transloco" type="text"/>
       </div>
       <div class="flex items-center gap-2">
-        <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors relative" (click)="toggleLanguage()">
+        <!-- Dark Mode Toggle -->
+        <button pButton class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors" (click)="toggleDarkMode()" [attr.aria-label]="store.darkMode() ? ('layout.light_mode' | transloco) : ('layout.dark_mode' | transloco)">
+          <span class="material-symbols-outlined font-bold">{{ store.darkMode() ? 'light_mode' : 'dark_mode' }}</span>
+        </button>
+        <button pButton class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors relative" (click)="toggleLanguage()">
           <span class="material-symbols-outlined font-bold">{{ store.lang() === 'ar-SA' ? 'language' : 'translate' }}</span>
           <span class="text-xs font-bold uppercase ms-1">{{ store.lang() === 'ar-SA' ? 'EN' : 'عربي' }}</span>
         </button>
         <!-- Notification Button + Popover -->
         <div class="relative">
-          <button pButton (click)="toggleNotifications($event)" class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors relative">
+          <button pButton (click)="toggleNotifications($event)" class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors relative">
             <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
             @if (unreadCount > 0) {
-              <span class="absolute top-1.5 end-1.5 min-w-[18px] h-[18px] bg-red-500 text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-white">{{ unreadCount }}</span>
+              <span class="absolute top-1.5 end-1.5 min-w-[18px] h-[18px] bg-red-500 text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900">{{ unreadCount }}</span>
             }
           </button>
 
           <p-popover #notifPanel styleClass="shadow-2xl border-0 rounded-2xl overflow-hidden" [style]="{'width': '360px', 'padding': '0'}">
             <!-- Header -->
-            <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+            <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100 dark:border-slate-700">
               <div>
-                <p class="font-bold text-on-surface text-sm">Notifications</p>
-                <p class="text-xs text-on-surface-variant mt-0.5">{{ unreadCount }} unread</p>
+                <p class="font-bold text-on-surface dark:text-slate-100 text-sm">Notifications</p>
+                <p class="text-xs text-on-surface-variant dark:text-slate-400 mt-0.5">{{ unreadCount }} unread</p>
               </div>
-              <button (click)="markAllRead()" class="text-xs text-primary font-semibold hover:opacity-70 transition-opacity">Mark all read</button>
+              <button (click)="markAllRead()" class="text-xs text-primary dark:text-sky-400 font-semibold hover:opacity-70 transition-opacity">Mark all read</button>
             </div>
             <!-- Notification List -->
             <div class="max-h-80 overflow-y-auto">
               @for (notif of notifications; track notif.title) {
-                <div [class]="'flex gap-4 px-5 py-4 border-b border-slate-50 hover:bg-slate-50/80 transition-colors cursor-pointer relative' + (notif.unread ? ' bg-primary-fixed/30' : '')">
+                <div [class]="'flex gap-4 px-5 py-4 border-b border-slate-50 dark:border-slate-700 hover:bg-slate-50/80 dark:hover:bg-slate-800/80 transition-colors cursor-pointer relative' + (notif.unread ? ' bg-primary-fixed/30 dark:bg-sky-900/30' : '')">
                   <div [class]="notif.iconBg + ' w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5'">
                     <span [class]="'material-symbols-outlined text-lg ' + notif.iconColor">{{ notif.icon }}</span>
                   </div>
                   <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-on-surface leading-snug">{{ notif.title }}</p>
-                    <p class="text-xs text-on-surface-variant mt-0.5 leading-relaxed">{{ notif.desc }}</p>
-                    <p class="text-[10px] text-primary font-medium mt-1.5">{{ notif.time }}</p>
+                    <p class="text-sm font-semibold text-on-surface dark:text-slate-100 leading-snug">{{ notif.title }}</p>
+                    <p class="text-xs text-on-surface-variant dark:text-slate-400 mt-0.5 leading-relaxed">{{ notif.desc }}</p>
+                    <p class="text-[10px] text-primary dark:text-sky-400 font-medium mt-1.5">{{ notif.time }}</p>
                   </div>
                   @if (notif.unread) {
-                    <span class="w-2 h-2 bg-primary rounded-full shrink-0 mt-2"></span>
+                    <span class="w-2 h-2 bg-primary dark:bg-sky-400 rounded-full shrink-0 mt-2"></span>
                   }
                 </div>
               }
             </div>
             <!-- Footer -->
             <div class="px-5 py-3 text-center">
-              <a class="text-xs text-primary font-semibold hover:opacity-70 transition-opacity cursor-pointer">View all notifications →</a>
+              <a class="text-xs text-primary dark:text-sky-400 font-semibold hover:opacity-70 transition-opacity cursor-pointer">View all notifications →</a>
             </div>
           </p-popover>
         </div>
-        <button pButton class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors">
+        <button pButton class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors">
           <span class="material-symbols-outlined" data-icon="settings">settings</span>
         </button>
-        <div class="h-8 w-[1px] bg-slate-100 mx-2"></div>
+        <div class="h-8 w-[1px] bg-slate-100 dark:bg-slate-700 mx-2"></div>
         <div class="flex items-center gap-3">
           <div class="text-end hidden lg:block">
-            <p class="text-sm font-semibold text-on-surface">Alex Thompson</p>
-            <p class="text-xs text-on-surface-variant">{{ 'layout.patient_id' | transloco }} #8821</p>
+            <p class="text-sm font-semibold text-on-surface dark:text-slate-100">Alex Thompson</p>
+            <p class="text-xs text-on-surface-variant dark:text-slate-400">{{ 'layout.patient_id' | transloco }} #8821</p>
           </div>
-          <img alt="User profile avatar" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary-container/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBam7y8S-I79ajCTOAqhAjN-sS-8E7PqpnCTgbCrIKBMw1SEIyWdobyVAKN86kfMu1ydi8LeP4siSHavd0MijtbyxuBPW5wl_6_S6oAsspqv6SM6C9MUR-KW-9idpmRk6ZasSEheNdFwGmZZVs4Yp1VyEt9hG0-qx1pkFS-kWhBphotjUK8ZOi5U_ZZuuRtfZggBx52q3Zvk3dc_1d5ViF6oCi8bBtMd0MOl3SmLM8WzUSc5Yw5ysynwqpxgujvsktgCH4J11nftyvk"/>
+          <img alt="User profile avatar" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary-container/20 dark:ring-sky-400/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBam7y8S-I79ajCTOAqhAjN-sS-8E7PqpnCTgbCrIKBMw1SEIyWdobyVAKN86kfMu1ydi8LeP4siSHavd0MijtbyxuBPW5wl_6_S6oAsspqv6SM6C9MUR-KW-9idpmRk6ZasSEheNdFwGmZZVs4Yp1VyEt9hG0-qx1pkFS-kWhBphotjUK8ZOi5U_ZZuuRtfZggBx52q3Zvk3dc_1d5ViF6oCi8bBtMd0MOl3SmLM8WzUSc5Yw5ysynwqpxgujvsktgCH4J11nftyvk"/>
         </div>
       </div>
     </div>
@@ -129,27 +133,27 @@
 </main>
 
 <!-- Bottom Nav for Mobile -->
-<div class="md:hidden fixed bottom-0 start-0 w-full bg-white/90 backdrop-blur-md border-t-0 z-50 px-6 py-4 flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
-  <a class="text-sky-700 flex flex-col items-center" routerLink="/">
+<div class="md:hidden fixed bottom-0 start-0 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t-0 z-50 px-6 py-4 flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.3)]">
+  <a class="text-sky-700 dark:text-sky-400 flex flex-col items-center" routerLink="/">
     <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
     <span class="text-[10px] font-bold mt-1">{{ 'nav.dashboard' | transloco }}</span>
   </a>
-  <a class="text-slate-400 flex flex-col items-center" routerLink="/family-profiles">
+  <a class="text-slate-400 dark:text-slate-500 flex flex-col items-center" routerLink="/family-profiles">
     <span class="material-symbols-outlined" data-icon="family_restroom">family_restroom</span>
     <span class="text-[10px] font-medium mt-1">{{ 'nav.family_profiles' | transloco }}</span>
   </a>
-  <a class="text-slate-400 flex flex-col items-center" routerLink="/medical-records">
+  <a class="text-slate-400 dark:text-slate-500 flex flex-col items-center" routerLink="/medical-records">
     <span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
     <span class="text-[10px] font-medium mt-1">{{ 'nav.medical_records' | transloco }}</span>
   </a>
-  <a class="bg-primary -mt-10 w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-white ring-8 ring-background" routerLink="/ai-assistant">
+  <a class="bg-primary -mt-10 w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-white ring-8 ring-background dark:ring-slate-900" routerLink="/ai-assistant">
     <span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
   </a>
-  <a class="text-slate-400 flex flex-col items-center" routerLink="/medications">
+  <a class="text-slate-400 dark:text-slate-500 flex flex-col items-center" routerLink="/medications">
     <span class="material-symbols-outlined" data-icon="medication">medication</span>
     <span class="text-[10px] font-medium mt-1">{{ 'nav.medications' | transloco }}</span>
   </a>
-  <a class="text-slate-400 flex flex-col items-center" routerLink="/access-control">
+  <a class="text-slate-400 dark:text-slate-500 flex flex-col items-center" routerLink="/access-control">
     <span class="material-symbols-outlined" data-icon="lock_person">lock_person</span>
     <span class="text-[10px] font-medium mt-1">{{ 'nav.access_control' | transloco }}</span>
   </a>

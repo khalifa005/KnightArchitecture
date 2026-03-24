@@ -53,3 +53,15 @@
   }
 }
 
+:host-context(.dark) .sidebar-scroll {
+  scrollbar-color: #475569 transparent;
+
+  &::-webkit-scrollbar-thumb {
+    background: #475569;
+
+    &:hover {
+      background: #64748b;
+    }
+  }
+}
+

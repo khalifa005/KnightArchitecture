@@ -18,6 +18,12 @@ body {
   color: #191c1f;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: #111318;
+  color: #e0e2e7;
 }
 
 h1, h2, h3 { font-family: 'Manrope', sans-serif; }
