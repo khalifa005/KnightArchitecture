@@ -28,3 +28,28 @@
     }
   }
 }
+
+/* Slim light-gray scrollbar for the sidebar nav area */
+.sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 99px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 99px;
+
+    &:hover {
+      background: #9ca3af;
+    }
+  }
+}
+

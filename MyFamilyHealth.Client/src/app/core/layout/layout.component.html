@@ -1,5 +1,5 @@
 <!-- Side Navigation Bar -->
-<aside [ngClass]="isExpanded() ? 'w-64' : 'w-24'" class="fixed start-0 top-0 h-screen bg-slate-50 border-e-0 flex flex-col p-4 gap-2 z-40 hidden md:flex transition-all duration-300">
+<aside [class]="isExpanded() ? 'w-64' : 'w-24'" class="fixed start-0 top-0 h-screen bg-slate-50 border-e-0 flex flex-col p-4 gap-2 z-40 hidden md:flex transition-all duration-300">
   <div class="px-3 py-6 mb-4 flex flex-col justify-center overflow-hidden whitespace-nowrap h-[100px]">
     @if (isExpanded()) {
         <h2 class="font-['Manrope'] font-extrabold text-sky-900 text-xl tracking-tight transition-opacity">{{ 'layout.portal_title' | transloco }}</h2>
@@ -9,16 +9,18 @@
     }
   </div>
   
-  <p-menu [model]="menuItems" styleClass="w-full border-none bg-transparent p-0 flex-1 space-y-2" [style]="{'width': '100%'}">
-    <ng-template pTemplate="item" let-item>
-       <a [routerLink]="item.routerLink" routerLinkActive="bg-white text-sky-700 shadow-sm" [routerLinkActiveOptions]="{exact: item.routerLink === '/'}" class="flex items-center gap-3 py-3 text-slate-600 rounded-xl font-['Manrope'] font-medium text-sm transition-all hover:text-sky-600 hover:bg-sky-50 overflow-hidden whitespace-nowrap w-full" [ngClass]="isExpanded() ? 'justify-start px-4' : 'justify-center px-0'">
-         <span class="material-symbols-outlined text-[24px] shrink-0" [attr.data-icon]="item.icon">{{ item.icon }}</span>
-         @if (isExpanded()) {
-            <span class="transition-opacity">{{ item.label | transloco }}</span>
-         }
-       </a>
-    </ng-template>
-  </p-menu>
+  <div class="flex-1 overflow-y-auto sidebar-scroll">
+    <p-menu [model]="menuItems" styleClass="w-full border-none bg-transparent p-0 flex-1 space-y-2" [style]="{'width': '100%'}">
+      <ng-template pTemplate="item" let-item>
+         <a [routerLink]="item.routerLink" routerLinkActive="bg-white text-sky-700 shadow-sm" [routerLinkActiveOptions]="{exact: item.routerLink === '/'}" class="flex items-center gap-3 py-3 text-slate-600 rounded-xl font-['Manrope'] font-medium text-sm transition-all hover:text-sky-600 hover:bg-sky-50 overflow-hidden whitespace-nowrap w-full" [ngClass]="isExpanded() ? 'justify-start px-4' : 'justify-center px-0'">
+           <span class="material-symbols-outlined text-[24px] shrink-0" [attr.data-icon]="item.icon">{{ item.icon }}</span>
+           @if (isExpanded()) {
+              <span class="transition-opacity">{{ item.label | transloco }}</span>
+           }
+         </a>
+      </ng-template>
+    </p-menu>
+  </div>
   
   <div class="mt-auto pt-6 border-t border-slate-100 flex flex-col gap-2 overflow-hidden whitespace-nowrap">
     <button pButton [ngClass]="{'px-0 justify-center': !isExpanded(), 'px-4': isExpanded()}" class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-3 rounded-full font-bold shadow-lg active:scale-95 transition-all mb-4 flex items-center gap-2 outline-none border-none">

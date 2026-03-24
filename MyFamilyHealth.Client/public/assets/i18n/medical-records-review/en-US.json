@@ -1,0 +1,60 @@
+{
+  "active_case": "Active Case",
+  "patient_meta": "Patient ID: {{id}} • {{age}} Years • {{sex}}",
+  "blood_type": "Blood Type",
+  "weight": "Weight",
+  "height": "Height",
+  "secure_sharing": "Secure Sharing",
+  "last_updated": "Last Updated: 2 Hours Ago",
+  "imaging": {
+    "title": "Recent Imaging (Chest X-Ray)",
+    "view_dicom": "View DICOM",
+    "area_of_interest": "Area of Interest",
+    "notes_title": "Radiology Notes",
+    "notes": "Minor opacity noted in the lower left lobe. Suggestive of early stage inflammation. No pleural effusion detected. Diaphragm contours appear normal."
+  },
+  "vitals": {
+    "title": "Vital Trends",
+    "heart_rate": "Heart Rate",
+    "blood_pressure": "Blood Pressure",
+    "spo2": "SpO2",
+    "optimal": "OPTIMAL",
+    "normal": "NORMAL",
+    "export_pdf": "Export PDF Logs"
+  },
+  "lab": {
+    "title": "Comprehensive Metabolic Panel",
+    "date": "Date: Oct 24, 2023",
+    "col_test": "Test Name",
+    "col_result": "Result",
+    "col_range": "Reference Range",
+    "col_status": "Status"
+  },
+  "status": {
+    "normal": "NORMAL",
+    "high": "HIGH"
+  },
+  "ai": {
+    "title": "Aether AI Insight",
+    "subtitle": "Clinical Decision Support",
+    "findings_label": "SUMMARY FINDINGS",
+    "findings": "Patient displays mild renal impairment (Elevated Creatinine: 1.4 mg/dL). Chest X-ray indicates potential pulmonary congestion.",
+    "action_label": "RECOMMENDED ACTION",
+    "action": "Adjust ACE Inhibitor dosage.",
+    "current": "Current",
+    "proposed": "Proposed",
+    "approve": "Approve & Update Dosage",
+    "peer_review": "Flag for Peer Review"
+  },
+  "comms": {
+    "title": "Patient Communications",
+    "send_analysis": "Send Analysis to Patient",
+    "send_analysis_sub": "Encrypted via Patient Portal",
+    "schedule": "Schedule Follow-up",
+    "schedule_sub": "Next available: Oct 28"
+  },
+  "tasks": {
+    "title": "Medical Tasks",
+    "pending": "2 Pending"
+  }
+}

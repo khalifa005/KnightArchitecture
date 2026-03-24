@@ -56,6 +56,16 @@ export const routes: Routes = [
         path: 'access-control',
         loadComponent: () => import('./features/access-control/access-control').then(c => c.AccessControl),
         providers: [provideTranslocoScope('access-control')]
+      },
+      {
+        path: 'doctor-dashboard',
+        loadComponent: () => import('./features/doctor-dashboard/doctor-dashboard.component').then(c => c.DoctorDashboardComponent),
+        providers: [provideTranslocoScope('doctor-dashboard')]
+      },
+      {
+        path: 'medical-records-review',
+        loadComponent: () => import('./features/medical-records-review/medical-records-review.component').then(c => c.MedicalRecordsReviewComponent),
+        providers: [provideTranslocoScope('medical-records-review')]
       }
     ]
   }

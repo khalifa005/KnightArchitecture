@@ -1,0 +1,233 @@
+<div class="flex gap-8 p-8 md:p-10">
+  <!-- Left Column: Patient Profile & Records -->
+  <div class="flex-1 space-y-8">
+    <!-- Patient Header Card -->
+    <div class="bg-surface-container-lowest rounded-2xl p-8 flex flex-col md:flex-row justify-between items-start gap-6 shadow-sm">
+      <div class="flex gap-6">
+        <img [src]="patient.image" [alt]="patient.name" class="w-24 h-24 rounded-2xl object-cover" />
+        <div>
+          <div class="flex items-center gap-3 mb-1">
+            <h1 class="text-3xl font-bold text-on-surface tracking-tight">{{ patient.name }}</h1>
+            <span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant text-xs font-bold uppercase tracking-wider">{{ 'medical-records-review.active_case' | transloco }}</span>
+          </div>
+          <p class="text-on-surface-variant font-medium mb-4">
+            {{ 'medical-records-review.patient_meta' | transloco: { id: patient.id, age: patient.age, sex: patient.sex } }}
+          </p>
+          <div class="flex gap-4 flex-wrap">
+            <div class="bg-surface-container-low px-4 py-2 rounded-xl">
+              <p class="text-[10px] uppercase font-bold text-outline tracking-widest mb-1">{{ 'medical-records-review.blood_type' | transloco }}</p>
+              <p class="font-bold text-primary">{{ patient.bloodType }}</p>
+            </div>
+            <div class="bg-surface-container-low px-4 py-2 rounded-xl">
+              <p class="text-[10px] uppercase font-bold text-outline tracking-widest mb-1">{{ 'medical-records-review.weight' | transloco }}</p>
+              <p class="font-bold text-primary">{{ patient.weight }}</p>
+            </div>
+            <div class="bg-surface-container-low px-4 py-2 rounded-xl">
+              <p class="text-[10px] uppercase font-bold text-outline tracking-widest mb-1">{{ 'medical-records-review.height' | transloco }}</p>
+              <p class="font-bold text-primary">{{ patient.height }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col items-end gap-3">
+        <div class="flex items-center gap-2 px-4 py-2 bg-surface-container-high rounded-full">
+          <span class="text-xs font-medium text-on-surface-variant">{{ 'medical-records-review.secure_sharing' | transloco }}</span>
+          <div class="w-10 h-5 bg-secondary-fixed-dim rounded-full relative cursor-pointer">
+            <div class="absolute end-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+          </div>
+        </div>
+        <p class="text-[10px] text-outline font-medium">{{ 'medical-records-review.last_updated' | transloco }}</p>
+      </div>
+    </div>
+
+    <!-- Bento Grid: Imaging + Vitals -->
+    <div class="grid grid-cols-12 gap-6">
+      <!-- Imaging Analysis -->
+      <div class="col-span-12 md:col-span-7 bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col shadow-sm">
+        <div class="p-6 border-b border-outline-variant/15 flex justify-between items-center">
+          <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+            <span class="material-symbols-outlined">radiology</span>
+            {{ 'medical-records-review.imaging.title' | transloco }}
+          </h3>
+          <button pButton class="!border-none !bg-transparent !p-0 text-xs font-semibold text-primary hover:underline">
+            {{ 'medical-records-review.imaging.view_dicom' | transloco }}
+          </button>
+        </div>
+        <div class="relative">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBum77vdGbPXeTKXfdaYphstFgfIKyQQpCk6xM6kOnolNsvBUH2o5kLkf5ojXh9Sd7Qi1rDcLlfCeIC2CjPPdstPNRFFq60Sld6KMOjKwFiJRs6OP9q485ayudR4lMLhgVrx3lu0SS0PhEpcbRvqqKmFU9SS8Ms5wZPJ3haTYxxmldRewUkvAdGhi-bO6dGsxCnG5M3K_4ZCVNI4sWH6uda7--4PLsURSnqgFhO1SU-8SFizG-nYadwXZpglWzPUxONkJPuLWUAErzb"
+               alt="Chest X-Ray" class="w-full h-64 object-cover" />
+          <div class="absolute top-1/4 left-1/3 w-16 h-16 border-2 border-error rounded-full animate-pulse flex items-center justify-center">
+            <span class="bg-error text-white text-[10px] px-1.5 py-0.5 rounded absolute -top-5">{{ 'medical-records-review.imaging.area_of_interest' | transloco }}</span>
+          </div>
+        </div>
+        <div class="p-6 bg-surface-container-low flex-1">
+          <h4 class="text-sm font-bold text-on-surface mb-2">{{ 'medical-records-review.imaging.notes_title' | transloco }}</h4>
+          <p class="text-sm text-on-surface-variant leading-relaxed">{{ 'medical-records-review.imaging.notes' | transloco }}</p>
+        </div>
+      </div>
+
+      <!-- Vital Trends -->
+      <div class="col-span-12 md:col-span-5 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+        <h3 class="text-lg font-bold text-primary flex items-center gap-2 mb-6">
+          <span class="material-symbols-outlined">monitoring</span>
+          {{ 'medical-records-review.vitals.title' | transloco }}
+        </h3>
+        <div class="space-y-6">
+          @for (vital of vitals; track vital.labelKey) {
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-xs font-bold text-outline uppercase mb-1">{{ vital.labelKey | transloco }}</p>
+                <p class="text-2xl font-bold text-on-surface">{{ vital.value }} <span class="text-sm font-normal text-on-surface-variant">{{ vital.unit }}</span></p>
+              </div>
+              @if (vital.statusKey) {
+                <span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-[10px] font-bold uppercase">{{ vital.statusKey | transloco }}</span>
+              } @else {
+                <div class="flex items-end gap-1 h-8">
+                  <div class="w-1 bg-secondary-fixed-dim h-1/2 rounded-full"></div>
+                  <div class="w-1 bg-secondary-fixed-dim h-3/4 rounded-full"></div>
+                  <div class="w-1 bg-secondary-fixed h-full rounded-full"></div>
+                  <div class="w-1 bg-secondary-fixed-dim h-2/3 rounded-full"></div>
+                  <div class="w-1 bg-secondary-fixed-dim h-1/2 rounded-full"></div>
+                </div>
+              }
+            </div>
+          }
+          <div class="pt-4 border-t border-outline-variant/15">
+            <button pButton class="!border-none !bg-transparent !p-0 w-full text-center py-2 text-xs font-bold text-primary hover:bg-surface-container-low rounded-xl transition-colors uppercase tracking-wider">
+              {{ 'medical-records-review.vitals.export_pdf' | transloco }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lab Results Table -->
+      <div class="col-span-12 bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm">
+        <div class="p-6 border-b border-outline-variant/15 flex justify-between items-center">
+          <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+            <span class="material-symbols-outlined">biotech</span>
+            {{ 'medical-records-review.lab.title' | transloco }}
+          </h3>
+          <span class="text-xs font-medium text-on-surface-variant">{{ 'medical-records-review.lab.date' | transloco }}</span>
+        </div>
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-surface-container-low text-outline text-[10px] font-bold uppercase tracking-widest">
+              <th class="text-left px-6 py-3">{{ 'medical-records-review.lab.col_test' | transloco }}</th>
+              <th class="text-left px-6 py-3">{{ 'medical-records-review.lab.col_result' | transloco }}</th>
+              <th class="text-left px-6 py-3">{{ 'medical-records-review.lab.col_range' | transloco }}</th>
+              <th class="text-left px-6 py-3">{{ 'medical-records-review.lab.col_status' | transloco }}</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-outline-variant/10">
+            @for (row of labResults; track row.test) {
+              <tr class="hover:bg-surface-container/30 transition-colors">
+                <td class="px-6 py-4 font-semibold text-sm">{{ row.test }}</td>
+                <td class="px-6 py-4 text-sm" [class.text-error]="row.high" [class.font-bold]="row.high">{{ row.result }}</td>
+                <td class="px-6 py-4 text-sm text-on-surface-variant">{{ row.range }}</td>
+                <td class="px-6 py-4">
+                  <span class="px-2 py-1 text-[10px] font-bold rounded"
+                        [class.bg-secondary-fixed]="!row.high" [class.text-on-secondary-fixed-variant]="!row.high"
+                        [class.bg-error-container]="row.high" [class.text-on-error-container]="row.high">
+                    {{ row.statusKey | transloco }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column: AI Insights & Actions -->
+  <div class="w-80 xl:w-96 space-y-6 shrink-0">
+    <!-- AI Diagnostic Card -->
+    <div class="bg-gradient-to-br from-tertiary-container to-tertiary p-[1px] rounded-2xl shadow-xl overflow-hidden">
+      <div class="bg-surface-container-lowest rounded-2xl p-6">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-tertiary-fixed-variant">psychology</span>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-on-surface">{{ 'medical-records-review.ai.title' | transloco }}</h3>
+            <p class="text-[10px] text-primary uppercase font-bold tracking-widest">{{ 'medical-records-review.ai.subtitle' | transloco }}</p>
+          </div>
+        </div>
+        <div class="space-y-4 mb-8">
+          <div class="p-4 bg-tertiary-fixed/30 rounded-xl">
+            <p class="text-xs font-bold text-on-tertiary-fixed-variant mb-2 flex items-center gap-2">
+              <span class="material-symbols-outlined text-sm">auto_awesome</span>
+              {{ 'medical-records-review.ai.findings_label' | transloco }}
+            </p>
+            <p class="text-sm text-on-tertiary-fixed leading-relaxed">{{ 'medical-records-review.ai.findings' | transloco }}</p>
+          </div>
+          <div class="p-4 bg-secondary-fixed/20 rounded-xl">
+            <p class="text-xs font-bold text-on-secondary-fixed-variant mb-2">{{ 'medical-records-review.ai.action_label' | transloco }}</p>
+            <p class="text-sm font-semibold text-on-secondary-fixed">{{ 'medical-records-review.ai.action' | transloco }}</p>
+            <div class="mt-3 flex items-center gap-3">
+              <div class="flex-1">
+                <p class="text-[10px] text-outline uppercase font-bold">{{ 'medical-records-review.ai.current' | transloco }}</p>
+                <p class="text-sm font-bold">20mg QD</p>
+              </div>
+              <span class="material-symbols-outlined text-outline">arrow_forward</span>
+              <div class="flex-1">
+                <p class="text-[10px] text-outline uppercase font-bold">{{ 'medical-records-review.ai.proposed' | transloco }}</p>
+                <p class="text-sm font-bold text-primary">10mg QD</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <button pButton class="w-full !border-none !bg-primary !text-on-primary py-4 rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+            <span class="material-symbols-outlined text-lg">check_circle</span>
+            {{ 'medical-records-review.ai.approve' | transloco }}
+          </button>
+          <button pButton class="w-full !border-none !bg-surface-container-high !text-on-surface py-4 rounded-full font-bold text-sm hover:bg-surface-container-highest transition-colors">
+            {{ 'medical-records-review.ai.peer_review' | transloco }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Communication Actions -->
+    <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+      <h3 class="text-sm font-bold text-on-surface-variant uppercase tracking-widest mb-4">{{ 'medical-records-review.comms.title' | transloco }}</h3>
+      <div class="space-y-3">
+        <button class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+          <div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined">send</span>
+          </div>
+          <div class="text-left">
+            <p class="font-bold text-sm text-on-surface">{{ 'medical-records-review.comms.send_analysis' | transloco }}</p>
+            <p class="text-xs text-on-surface-variant">{{ 'medical-records-review.comms.send_analysis_sub' | transloco }}</p>
+          </div>
+        </button>
+        <button class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+          <div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined">event_available</span>
+          </div>
+          <div class="text-left">
+            <p class="font-bold text-sm text-on-surface">{{ 'medical-records-review.comms.schedule' | transloco }}</p>
+            <p class="text-xs text-on-surface-variant">{{ 'medical-records-review.comms.schedule_sub' | transloco }}</p>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Medical Tasks -->
+    <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">{{ 'medical-records-review.tasks.title' | transloco }}</h3>
+        <span class="text-xs font-bold text-error">{{ 'medical-records-review.tasks.pending' | transloco }}</span>
+      </div>
+      <div class="space-y-4">
+        @for (task of tasks; track task) {
+          <div class="flex gap-3 items-start">
+            <div class="w-5 h-5 rounded border-2 border-primary-fixed-dim mt-0.5 shrink-0"></div>
+            <p class="text-sm text-on-surface font-medium leading-tight">{{ task }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

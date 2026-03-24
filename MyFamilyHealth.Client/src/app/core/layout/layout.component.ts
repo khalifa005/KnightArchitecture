@@ -26,7 +26,9 @@ export class LayoutComponent {
     { label: 'nav.medications', icon: 'medication', routerLink: '/medications' },
     { label: 'nav.about_us', icon: 'info', routerLink: '/about-us' },
     { label: 'nav.ai_assistant', icon: 'smart_toy', routerLink: '/ai-assistant' },
-    { label: 'nav.access_control', icon: 'lock_person', routerLink: '/access-control' }
+    { label: 'nav.access_control', icon: 'lock_person', routerLink: '/access-control' },
+    { label: 'nav.doctor_dashboard', icon: 'dashboard', routerLink: '/doctor-dashboard' },
+    { label: 'nav.medical_records_review', icon: 'description', routerLink: '/medical-records-review' }
   ];
 
   toggleLanguage() {

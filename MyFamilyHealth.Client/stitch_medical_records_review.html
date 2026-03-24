@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Medical Records Review | Aether Health</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed": "#d4e3ff",
+              "surface-container-low": "#f2f4f8",
+              "secondary-fixed-dim": "#95d4b3",
+              "on-primary-container": "#b6ddff",
+              "on-secondary-container": "#316e52",
+              "on-primary": "#ffffff",
+              "on-error-container": "#93000a",
+              "surface-container-highest": "#e0e2e7",
+              "error-container": "#ffdad6",
+              "on-tertiary-fixed-variant": "#004884",
+              "primary": "#004b71",
+              "error": "#ba1a1a",
+              "primary-container": "#006494",
+              "surface-container": "#eceef2",
+              "tertiary-fixed-dim": "#a4c9ff",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#b1f0ce",
+              "on-error": "#ffffff",
+              "inverse-surface": "#2d3134",
+              "on-tertiary-fixed": "#001c39",
+              "secondary-container": "#aeeecb",
+              "primary-fixed-dim": "#8ecdff",
+              "on-surface": "#191c1f",
+              "tertiary-container": "#005fac",
+              "outline-variant": "#c0c7d0",
+              "outline": "#707880",
+              "on-tertiary-container": "#c3daff",
+              "inverse-primary": "#8ecdff",
+              "on-tertiary": "#ffffff",
+              "inverse-on-surface": "#eff1f5",
+              "surface-variant": "#e0e2e7",
+              "on-primary-fixed": "#001e30",
+              "surface-bright": "#f8f9fe",
+              "on-background": "#191c1f",
+              "background": "#f8f9fe",
+              "surface-tint": "#006494",
+              "tertiary": "#004784",
+              "surface-container-high": "#e6e8ed",
+              "primary-fixed": "#cbe6ff",
+              "on-primary-fixed-variant": "#004b71",
+              "surface": "#f8f9fe",
+              "surface-dim": "#d8dade",
+              "on-secondary-fixed-variant": "#0e5138",
+              "on-secondary-fixed": "#002114",
+              "secondary": "#2c694e",
+              "on-surface-variant": "#40484f"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f9fe;
+        color: #191c1f;
+      }
+      h1, h2, h3, h4 {
+        font-family: 'Manrope', sans-serif;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #c0c7d0;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col p-4 z-40 bg-slate-50 dark:bg-slate-900">
+<div class="mb-8 px-4">
+<h1 class="text-xl font-bold tracking-tight text-sky-900 dark:text-sky-100">Aether Health</h1>
+<p class="font-inter text-sm font-medium text-slate-500">Clinical Portal</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="pending_actions">pending_actions</span>
+<span class="font-inter text-sm font-medium">Patient Requests</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-inter text-sm font-medium">Clinical Dashboard</span>
+</a>
+<!-- Active State: Medical Records Review -->
+<a class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-slate-800 text-sky-700 dark:text-sky-400 rounded-xl font-semibold shadow-sm scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-inter text-sm">Medical Records Review</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="videocam">videocam</span>
+<span class="font-inter text-sm font-medium">Telemedicine Schedule</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2 pt-4 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full mb-4 py-3 px-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-white font-semibold text-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Consultation
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-sky-600 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-inter text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 dark:text-slate-400 hover:text-sky-600 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-inter text-sm">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 right-0 left-64 h-16 flex items-center justify-between px-8 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low rounded-full border-none focus:ring-2 focus:ring-primary/20 text-sm font-inter transition-all" placeholder="Search patient name, ID, or clinical code..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="px-6 py-2 rounded-full border border-primary text-primary text-sm font-semibold hover:bg-primary/5 transition-colors">
+                    Go Online
+                </button>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="notifications">notifications</span>
+<div class="flex items-center gap-2 cursor-pointer group">
+<img alt="Doctor profile picture" class="w-8 h-8 rounded-full object-cover" data-alt="Close-up portrait of a professional male doctor in a white lab coat with a friendly expression and glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-dqAV_BRT05uo0R33-iq5UPKwwaAvzj7uNgBD3LW29kfyRyj22mfnVh6XgttR7z2BBeomN3dqQePB3brZ7ZeIcu44VqRxQN8QPCU07NVRNyj_ANry1mQdGjYXl3XC1ATBcFdniuHiuqa4eVaTKWaXnGd1iib8bOsM0n76dpcjsGnunKWNuaW_lKkOrHDmNK98qAEQCQxDCSuFoG1b4aV4gDOSuQRnBRfoWzh6CNA9WXA4vO5Gohqj2oCHVzEDbfMIiTq2PJpeCtte"/>
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas Content -->
+<div class="mt-16 p-10 flex gap-8">
+<!-- Left Column: Patient Profile & Detailed Records -->
+<div class="flex-1 space-y-8">
+<!-- Patient Header Card -->
+<div class="bg-surface-container-lowest rounded-xl p-8 flex justify-between items-start">
+<div class="flex gap-6">
+<img alt="Patient profile image" class="w-24 h-24 rounded-xl object-cover" data-alt="Portrait of an elderly woman with silver hair and gentle features, looking thoughtfully at the camera in soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn3Lj-of7O9g2VSjOBTCRyVFzyVlECHpr3tjKnwUK23ror3dAq33kvP-w9eo_mdDwUVZa0NHJ0EFJUmM1CkBxwYCYy8Y_lQzeUZWIqg2p_-HFemzeHZypa1-6z1WXjr8trvhfrHl7nQ6Fc14xIDuTOZ6cWRtrtB8uZPVDI1nbTxLj3A57ecH4qcyfVSfG0sT8FTeQE5GUeV6cujZqeD2vD4YZXOdFja3XCv6eJQM7qLmqKsUombEv1hq1EG32DWSh37M8njnTVxmAX"/>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h2 class="text-3xl font-bold text-on-surface tracking-tight">Eleanor Vance</h2>
+<span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant text-xs font-bold uppercase tracking-wider">Active Case</span>
+</div>
+<p class="text-on-surface-variant font-medium mb-4">Patient ID: #AE-992-01 • 68 Years • Female</p>
+<div class="flex gap-4">
+<div class="bg-surface-container-low px-4 py-2 rounded-lg">
+<p class="text-[10px] uppercase font-bold text-outline tracking-widest mb-1">Blood Type</p>
+<p class="font-bold text-primary">O Positive</p>
+</div>
+<div class="bg-surface-container-low px-4 py-2 rounded-lg">
+<p class="text-[10px] uppercase font-bold text-outline tracking-widest mb-1">Weight</p>
+<p class="font-bold text-primary">64.5 kg</p>
+</div>
+<div class="bg-surface-container-low px-4 py-2 rounded-lg">
+<p class="text-[10px] uppercase font-bold text-outline tracking-widest mb-1">Height</p>
+<p class="font-bold text-primary">162 cm</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end gap-3">
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-container-high rounded-full">
+<span class="text-xs font-medium text-on-surface-variant">Secure Sharing</span>
+<div class="w-10 h-5 bg-secondary-fixed-dim rounded-full relative cursor-pointer">
+<div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</div>
+</div>
+<p class="text-[10px] text-outline font-medium">Last Updated: 2 Hours Ago</p>
+</div>
+</div>
+<!-- Bento Grid for Clinical Data -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Imaging Analysis -->
+<div class="col-span-7 bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col">
+<div class="p-6 border-b border-outline-variant/15 flex justify-between items-center">
+<h3 class="text-lg font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="radiology">radiology</span>
+                                Recent Imaging (Chest X-Ray)
+                            </h3>
+<button class="text-xs font-semibold text-primary hover:underline">View DICOM</button>
+</div>
+<div class="relative group">
+<img alt="X-ray image of human lungs" class="w-full h-64 object-cover" data-alt="A detailed clinical chest x-ray showing the rib cage and lungs in high contrast monochrome medical imaging style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBum77vdGbPXeTKXfdaYphstFgfIKyQQpCk6xM6kOnolNsvBUH2o5kLkf5ojXh9Sd7Qi1rDcLlfCeIC2CjPPdstPNRFFq60Sld6KMOjKwFiJRs6OP9q485ayudR4lMLhgVrx3lu0SS0PhEpcbRvqqKmFU9SS8Ms5wZPJ3haTYxxmldRewUkvAdGhi-bO6dGsxCnG5M3K_4ZCVNI4sWH6uda7--4PLsURSnqgFhO1SU-8SFizG-nYadwXZpglWzPUxONkJPuLWUAErzb"/>
+<!-- AI Highlight Markers -->
+<div class="absolute top-1/4 left-1/3 w-16 h-16 border-2 border-error rounded-full animate-pulse flex items-center justify-center">
+<span class="bg-error text-white text-[10px] px-1.5 py-0.5 rounded absolute -top-4">Area of Interest</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-low flex-1">
+<h4 class="text-sm font-bold text-on-surface mb-2">Radiology Notes</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                Minor opacity noted in the lower left lobe. Suggestive of early stage inflammation. No pleural effusion detected. Diaphragm contours appear normal.
+                            </p>
+</div>
+</div>
+<!-- Vital Signs History -->
+<div class="col-span-5 bg-surface-container-lowest rounded-xl p-6">
+<h3 class="text-lg font-bold text-primary flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+                            Vital Trends
+                        </h3>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs font-bold text-outline uppercase mb-1">Heart Rate</p>
+<p class="text-2xl font-bold text-on-surface">72 <span class="text-sm font-normal text-on-surface-variant">bpm</span></p>
+</div>
+<div class="flex items-end gap-1 h-8">
+<div class="w-1 bg-secondary-fixed-dim h-1/2 rounded-full"></div>
+<div class="w-1 bg-secondary-fixed-dim h-3/4 rounded-full"></div>
+<div class="w-1 bg-secondary-fixed h-full rounded-full"></div>
+<div class="w-1 bg-secondary-fixed-dim h-2/3 rounded-full"></div>
+<div class="w-1 bg-secondary-fixed-dim h-1/2 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs font-bold text-outline uppercase mb-1">Blood Pressure</p>
+<p class="text-2xl font-bold text-on-surface">118/79 <span class="text-sm font-normal text-on-surface-variant">mmHg</span></p>
+</div>
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-[10px] font-bold">OPTIMAL</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-xs font-bold text-outline uppercase mb-1">SpO2</p>
+<p class="text-2xl font-bold text-on-surface">98 <span class="text-sm font-normal text-on-surface-variant">%</span></p>
+</div>
+<span class="px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-[10px] font-bold">NORMAL</span>
+</div>
+<div class="pt-4 mt-4 border-t border-outline-variant/15">
+<button class="w-full text-center py-2 text-xs font-bold text-primary hover:bg-surface-container-low rounded-lg transition-colors uppercase tracking-wider">Export PDF Logs</button>
+</div>
+</div>
+</div>
+<!-- Lab Results Table -->
+<div class="col-span-12 bg-surface-container-lowest rounded-xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/15 flex justify-between items-center">
+<h3 class="text-lg font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+                                Comprehensive Metabolic Panel
+                            </h3>
+<span class="text-xs font-medium text-on-surface-variant">Date: Oct 24, 2023</span>
+</div>
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="text-left px-6 py-3 text-[10px] font-bold text-outline uppercase tracking-widest">Test Name</th>
+<th class="text-left px-6 py-3 text-[10px] font-bold text-outline uppercase tracking-widest">Result</th>
+<th class="text-left px-6 py-3 text-[10px] font-bold text-outline uppercase tracking-widest">Reference Range</th>
+<th class="text-left px-6 py-3 text-[10px] font-bold text-outline uppercase tracking-widest">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container/30 transition-colors">
+<td class="px-6 py-4 font-semibold text-sm">Glucose</td>
+<td class="px-6 py-4 text-sm">92 mg/dL</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">65 - 99 mg/dL</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold rounded">NORMAL</span></td>
+</tr>
+<tr class="hover:bg-surface-container/30 transition-colors">
+<td class="px-6 py-4 font-semibold text-sm">Creatinine</td>
+<td class="px-6 py-4 text-sm text-error font-bold">1.4 mg/dL</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">0.7 - 1.3 mg/dL</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-error-container text-on-error-container text-[10px] font-bold rounded">HIGH</span></td>
+</tr>
+<tr class="hover:bg-surface-container/30 transition-colors">
+<td class="px-6 py-4 font-semibold text-sm">Potassium</td>
+<td class="px-6 py-4 text-sm">4.2 mmol/L</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">3.5 - 5.1 mmol/L</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold rounded">NORMAL</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column: AI Insights & Actions -->
+<div class="w-96 space-y-6">
+<!-- AI Diagnostic Overlay Card -->
+<div class="bg-gradient-to-br from-tertiary-container to-tertiary p-[1px] rounded-2xl shadow-xl overflow-hidden">
+<div class="bg-surface-container-lowest rounded-2xl p-6">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant" data-icon="psychology">psychology</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-on-surface">Aether AI Insight</h3>
+<p class="text-[10px] text-primary uppercase font-bold tracking-widest">Clinical Decision Support</p>
+</div>
+</div>
+<div class="space-y-4 mb-8">
+<div class="p-4 bg-tertiary-fixed/30 rounded-xl">
+<p class="text-xs font-bold text-on-tertiary-fixed-variant mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>
+                                    SUMMARY FINDINGS
+                                </p>
+<p class="text-sm text-on-tertiary-fixed text-sm leading-relaxed">
+                                    Patient displays mild renal impairment (Elevated Creatinine: 1.4 mg/dL). Chest X-ray indicates potential pulmonary congestion.
+                                </p>
+</div>
+<div class="p-4 bg-secondary-fixed/20 rounded-xl">
+<p class="text-xs font-bold text-on-secondary-fixed-variant mb-2">RECOMMENDED ACTION</p>
+<p class="text-sm font-semibold text-on-secondary-fixed">Adjust ACE Inhibitor dosage.</p>
+<div class="mt-3 flex items-center gap-3">
+<div class="flex-1">
+<p class="text-[10px] text-outline uppercase font-bold">Current</p>
+<p class="text-sm font-bold">20mg QD</p>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="arrow_forward">arrow_forward</span>
+<div class="flex-1">
+<p class="text-[10px] text-outline uppercase font-bold">Proposed</p>
+<p class="text-sm font-bold text-primary">10mg QD</p>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full py-4 rounded-full bg-primary text-white font-bold text-sm shadow-md hover:scale-[1.02] transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+                                Approve &amp; Update Dosage
+                            </button>
+<button class="w-full py-4 rounded-full bg-surface-container-high text-on-surface font-bold text-sm hover:bg-surface-container-highest transition-colors">
+                                Flag for Peer Review
+                            </button>
+</div>
+</div>
+</div>
+<!-- Communication Actions -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<h3 class="text-sm font-bold text-on-surface-variant uppercase tracking-widest mb-4">Patient Communications</h3>
+<div class="space-y-3">
+<button class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</div>
+<div class="text-left">
+<p class="font-bold text-sm text-on-surface">Send Analysis to Patient</p>
+<p class="text-xs text-on-surface-variant">Encrypted via Patient Portal</p>
+</div>
+</button>
+<button class="w-full flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+</div>
+<div class="text-left">
+<p class="font-bold text-sm text-on-surface">Schedule Follow-up</p>
+<p class="text-xs text-on-surface-variant">Next available: Oct 28</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Clinical Reminders -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Medical Tasks</h3>
+<span class="text-xs font-bold text-error">2 Pending</span>
+</div>
+<div class="space-y-4">
+<div class="flex gap-3 items-start">
+<div class="w-5 h-5 rounded border-2 border-primary-fixed-dim mt-0.5"></div>
+<p class="text-sm text-on-surface font-medium leading-tight">Order follow-up Creatinine blood work in 14 days</p>
+</div>
+<div class="flex gap-3 items-start">
+<div class="w-5 h-5 rounded border-2 border-primary-fixed-dim mt-0.5"></div>
+<p class="text-sm text-on-surface font-medium leading-tight">Consult with Nephrology regarding GFR trend</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

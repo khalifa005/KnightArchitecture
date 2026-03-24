@@ -1,0 +1,39 @@
+{
+  "date": "Tuesday, October 24",
+  "welcome": "Welcome back, Dr. Aris.",
+  "subtitle": "Your clinical sanctuary is ready. You have 4 pending patient requests and 12 appointments today.",
+  "new_consultation": "New Consultation",
+  "schedule": {
+    "title": "Today's Schedule",
+    "hours": "8:00 AM - 5:00 PM"
+  },
+  "ai": {
+    "title": "AI Practice Insights",
+    "insight": "We've identified a 12% uptick in localized respiratory cases within your patient demographic this week.",
+    "recommendation_label": "Recommendation",
+    "recommendation": "Increase stock of rapid flu diagnostics for upcoming clinics.",
+    "anomaly_label": "Anomalous Data",
+    "anomaly": "3 patients showing divergent recovery paths for standard BP meds."
+  },
+  "requests": {
+    "title": "Patient Access Requests",
+    "view_all": "View All Requests",
+    "full_history": "Requesting: Full Longitudinal History",
+    "lab_only": "Requesting: Lab Results Only"
+  },
+  "lab": {
+    "title": "Recent Lab Results",
+    "anomalous_count": "2 Anomalous",
+    "col_patient": "Patient",
+    "col_test": "Test Description",
+    "col_status": "Status",
+    "col_lab": "Laboratory",
+    "col_action": "Action",
+    "action_review": "Review",
+    "action_flag": "View AI Flag"
+  },
+  "lab_status": {
+    "normal": "Normal",
+    "anomalous": "Anomalous"
+  }
+}

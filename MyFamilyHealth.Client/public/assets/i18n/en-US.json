@@ -6,7 +6,9 @@
     "medications": "Medications",
     "about_us": "About Us",
     "ai_assistant": "AI Assistant",
-    "access_control": "Access Control"
+    "access_control": "Access Control",
+    "doctor_dashboard": "Clinical Dashboard",
+    "medical_records_review": "Records Review"
   },
   "layout": {
     "portal_title": "Patient Portal",
