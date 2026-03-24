@@ -1,0 +1,101 @@
+<div class="min-h-screen bg-surface-container flex flex-col md:flex-row overflow-hidden relative">
+  <!-- Left Decorative Pane -->
+  <div class="hidden md:flex md:w-5/12 lg:w-1/2 p-12 bg-primary relative flex-col justify-between overflow-hidden">
+    <div class="absolute inset-0 bg-primary-fixed opacity-10">
+       <svg class="h-full w-full absolute transform -translate-x-1/2 -translate-y-1/2 opacity-30" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </div>
+    <div class="absolute -top-32 -start-32 w-96 h-96 bg-white/10 rounded-full blur-3xl mix-blend-overlay"></div>
+    <div class="absolute -bottom-32 -end-32 w-96 h-96 bg-primary-container/40 rounded-full blur-3xl mix-blend-overlay"></div>
+    
+    <div class="relative z-10">
+      <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-6 ring-1 ring-white/30">
+        <span class="material-symbols-outlined text-white text-3xl" data-icon="monitor_heart">monitor_heart</span>
+      </div>
+      <h1 class="font-headline text-5xl font-black text-white tracking-tight leading-tight">{{ 'register.create_account' | transloco }}</h1>
+      <p class="text-primary-container mt-4 font-medium text-xl max-w-sm leading-relaxed">{{ 'register.register_desc' | transloco }}</p>
+    </div>
+
+    <div class="relative z-10 flex items-center gap-4 text-white/80 text-sm">
+      <span class="material-symbols-outlined shrink-0" data-icon="verified_user">verified_user</span>
+      <p>Secure Enterprise SSL Encrypted Portal</p>
+    </div>
+  </div>
+
+  <!-- Right Authentication Pane -->
+  <div class="flex-1 overflow-y-auto p-8 lg:p-16 relative bg-surface flex flex-col justify-center">
+    <div class="w-full max-w-lg mx-auto">
+      <!-- Mobile only identity -->
+      <div class="md:hidden text-center mb-10 mt-8">
+        <div class="w-16 h-16 bg-primary rounded-2xl mx-auto flex items-center justify-center mb-4 shadow-lg shadow-primary/30">
+          <span class="material-symbols-outlined text-on-primary text-3xl" data-icon="monitor_heart">monitor_heart</span>
+        </div>
+        <h1 class="font-headline text-3xl font-black text-primary tracking-tight">{{ 'register.create_account' | transloco }}</h1>
+      </div>
+
+      <div class="flex flex-col gap-5">
+        
+        <!-- Name Group -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="flex flex-col gap-2">
+            <label for="firstName" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'register.first_name' | transloco }}</label>
+            <input pInputText id="firstName" [(ngModel)]="firstName" type="text" class="w-full bg-surface-container border border-outline-variant/20 px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all" [placeholder]="'register.first_name_ph' | transloco" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="lastName" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'register.last_name' | transloco }}</label>
+            <input pInputText id="lastName" [(ngModel)]="lastName" type="text" class="w-full bg-surface-container border border-outline-variant/20 px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all" [placeholder]="'register.last_name_ph' | transloco" />
+          </div>
+        </div>
+
+        <!-- Demographics Group -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="flex flex-col gap-2 relative">
+            <label for="dob" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'register.dob' | transloco }}</label>
+            <p-datepicker [(ngModel)]="dob" [showIcon]="true" inputId="dob" styleClass="w-full" inputStyleClass="w-full bg-surface-container border border-outline-variant/20 focus:ring-2 focus:ring-primary/40 py-3 rounded-xl px-4 pe-12 transition-all outline-none" [placeholder]="'register.dob_ph' | transloco" appendTo="body"></p-datepicker>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="gender" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'register.gender' | transloco }}</label>
+            <p-select [options]="genderOptions" [(ngModel)]="selectedGender" placeholder="Select" styleClass="w-full bg-surface-container border border-outline-variant/20 py-2 px-2 rounded-xl focus:ring-2 focus:ring-primary/40 transition-all outline-none" optionLabel="label" optionValue="value" appendTo="body"></p-select>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col gap-2">
+          <label for="email" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'register.email' | transloco }}</label>
+          <div class="relative">
+            <span class="absolute start-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant z-10" data-icon="mail">mail</span>
+            <input pInputText id="email" [(ngModel)]="email" type="email" class="w-full bg-surface-container border border-outline-variant/20 ps-12 pe-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all" [placeholder]="'register.email_ph' | transloco" />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="flex flex-col gap-2 relative">
+          <label for="password" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'register.password' | transloco }}</label>
+          <p-password [(ngModel)]="password" [toggleMask]="true" styleClass="w-full" inputStyleClass="w-full bg-surface-container border border-outline-variant/20 px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none transition-all" [feedback]="true" [placeholder]="'register.password_ph' | transloco"></p-password>
+        </div>
+
+        <!-- Terms -->
+        <div class="flex items-center gap-3 mt-2">
+          <p-checkbox [(ngModel)]="acceptTerms" [binary]="true" inputId="terms"></p-checkbox>
+          <label for="terms" class="text-sm font-medium text-on-surface-variant cursor-pointer select-none">
+            {{ 'register.accept_terms' | transloco }} 
+            <a href="#" class="text-primary font-bold hover:underline mx-1">{{ 'register.terms' | transloco }}</a> 
+            {{ 'register.and' | transloco }} 
+            <a href="#" class="text-primary font-bold hover:underline mx-1">{{ 'register.privacy' | transloco }}</a>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button pButton class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-md shadow-primary/20 mt-4 hover:bg-primary-fixed hover:text-on-primary-fixed active:scale-[0.98] transition-all tracking-wide flex justify-center items-center gap-2" (click)="onRegister()" [disabled]="!acceptTerms">
+          {{ 'register.register_btn' | transloco }}
+          <span class="material-symbols-outlined font-bold text-lg" data-icon="arrow_forward">arrow_forward</span>
+        </button>
+
+        <!-- Login Link -->
+        <p class="text-center text-sm text-on-surface-variant mt-2 mb-8 md:mb-0">
+          {{ 'register.already_member' | transloco }} <a routerLink="/login" class="font-bold text-primary hover:underline ms-1">{{ 'register.login_now' | transloco }}</a>
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>

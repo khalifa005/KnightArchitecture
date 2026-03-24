@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 
 import { InputTextModule } from 'primeng/inputtext';
@@ -12,7 +12,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 @Component({
   standalone: true,
   selector: 'app-login',
-  imports: [CommonModule, FormsModule, TranslocoModule, InputTextModule, PasswordModule, ButtonModule, CheckboxModule],
+  imports: [CommonModule, FormsModule, RouterModule, TranslocoModule, InputTextModule, PasswordModule, ButtonModule, CheckboxModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

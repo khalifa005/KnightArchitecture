@@ -1,0 +1,23 @@
+{
+  "create_account": "إنشاء حساب",
+  "register_desc": "انضم إلى الرعاية السريرية لإدارة السجلات الصحية لعائلتك بأمان.",
+  "first_name": "الاسم الأول",
+  "first_name_ph": "مثل أحمد",
+  "last_name": "اسم العائلة",
+  "last_name_ph": "مثل محمد",
+  "email": "البريد الإلكتروني",
+  "email_ph": "name@example.com",
+  "dob": "تاريخ الميلاد",
+  "dob_ph": "حدد تاريخ ميلادك",
+  "gender": "الجنس",
+  "gender_ph": "حدد الجنس",
+  "password": "كلمة المرور",
+  "password_ph": "أنشئ كلمة مرور قوية",
+  "accept_terms": "أوافق على",
+  "terms": "شروط الخدمة",
+  "and": "و",
+  "privacy": "سياسة الخصوصية",
+  "register_btn": "إنشاء حساب آمن",
+  "already_member": "هل لديك حساب بالفعل؟",
+  "login_now": "تسجيل الدخول"
+}

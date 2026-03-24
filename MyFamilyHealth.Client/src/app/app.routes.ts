@@ -3,6 +3,11 @@ import { provideTranslocoScope } from '@jsverse/transloco';
 
 export const routes: Routes = [
   {
+    path: 'register',
+    loadComponent: () => import('./features/auth/register/register.component').then(c => c.RegisterComponent),
+    providers: [provideTranslocoScope('register')]
+  },
+  {
     path: 'login',
     loadComponent: () => import('./features/auth/login/login.component').then(c => c.LoginComponent),
     providers: [provideTranslocoScope('login')]
