@@ -38,5 +38,12 @@
   "adherence": "Adherence Overview",
   "adherence_desc": "You have maintained a 98% adherence rate over the last 30 days. Your care team has been notified of your progress.",
   "day_streak": "Day Streak",
-  "missed_doses": "Missed Doses"
+  "missed_doses": "Missed Doses",
+  "add_instruction": "Enter the details for the new medication below.",
+  "medName": "Medication Name",
+  "dosage": "Dosage & Frequency",
+  "mark_blacklist": "Mark as Sensitivity (Blacklisted)",
+  "blacklist_desc": "Checking this will add the medication to your allergy/sensitivity profile instead of active prescriptions.",
+  "cancel": "Cancel",
+  "save_med": "Save Medication"
 }

@@ -13,7 +13,7 @@
 <span class="material-symbols-outlined text-primary text-3xl" data-icon="family_history">family_history</span>
 <h2 class="text-2xl font-headline font-bold text-on-surface">{{ 'accessControl.family_sharing' | transloco }}</h2>
 </div>
-<button pButton class="text-primary font-semibold flex items-center gap-2 px-4 py-2 hover:bg-surface-container rounded-full transition-all">
+<button pButton (click)="displayAddModal.set(true)" class="text-primary font-semibold flex items-center gap-2 px-4 py-2 hover:bg-surface-container rounded-full transition-all">
 <span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
 <span>{{ 'accessControl.add_member' | transloco }}</span>
 </button>
@@ -193,3 +193,30 @@
 </div>
 </section>
 </div>
+
+<!-- Add Family Member PrimeNG Dialog Modal -->
+<p-dialog header="{{ 'accessControl.add_new_member' | transloco }}" [modal]="true" [(visible)]="displayAddModal" [style]="{ width: '28rem' }">
+    <div class="flex flex-col gap-4 mt-2">
+        <span class="text-on-surface-variant text-sm mb-4">{{ 'accessControl.add_member_desc' | transloco }}</span>
+        
+        <div class="flex flex-col gap-2">
+            <label for="memberName" class="font-semibold text-sm">{{ 'accessControl.member_name' | transloco }}</label>
+            <input pInputText id="memberName" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" />
+        </div>
+        
+        <div class="flex flex-col gap-2">
+            <label for="memberEmail" class="font-semibold text-sm">{{ 'accessControl.member_email' | transloco }}</label>
+            <input pInputText id="memberEmail" type="email" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" />
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <label for="memberRole" class="font-semibold text-sm">{{ 'accessControl.member_role' | transloco }}</label>
+            <input pInputText id="memberRole" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" />
+        </div>
+
+        <div class="flex justify-end gap-2 mt-4">
+            <button pButton class="px-6 py-2 bg-surface-container-low text-on-surface rounded-full text-sm font-bold hover:bg-surface-container transition-colors" (click)="displayAddModal.set(false)">{{ 'accessControl.cancel' | transloco }}</button>
+            <button pButton class="px-6 py-2 bg-primary text-white rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all" (click)="displayAddModal.set(false)">{{ 'accessControl.save_member' | transloco }}</button>
+        </div>
+    </div>
+</p-dialog>

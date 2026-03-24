@@ -1,106 +1,106 @@
-<div class="bg-surface font-body text-on-surface antialiased min-h-screen flex flex-col pt-12">
+<div class="bg-surface font-body text-on-surface antialiased h-screen flex flex-col overflow-hidden">
 
-  <main class="flex-grow flex items-center justify-center pt-8 pb-12 px-6">
-    <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+  <main class="flex-grow flex items-center justify-center p-4 lg:p-6 h-full overflow-hidden">
+    <div class="max-w-6xl w-full h-full grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
       
       <!-- Left Side: Editorial Content -->
-      <div class="lg:col-span-5 hidden lg:block">
-        <h1 class="font-headline text-5xl font-extrabold text-primary leading-tight mb-6">
+      <div class="lg:col-span-5 hidden lg:flex flex-col h-full justify-center max-h-[85vh]">
+        <h1 class="font-headline text-4xl font-extrabold text-primary leading-tight mb-4">
           {{ 'register.hero_title' | transloco }}
         </h1>
-        <p class="text-on-surface-variant text-lg mb-10 leading-relaxed max-w-md">
+        <p class="text-on-surface-variant text-base mb-6 leading-relaxed max-w-md">
           {{ 'register.hero_desc' | transloco }}
         </p>
         
-        <div class="space-y-6">
+        <div class="space-y-4">
           <div class="flex items-start gap-4">
-            <div class="bg-secondary p-3 rounded-xl">
-              <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+            <div class="bg-secondary p-2.5 rounded-xl">
+              <span class="material-symbols-outlined text-white text-[20px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
             </div>
             <div>
-              <h3 class="font-headline font-bold text-on-surface">{{ 'register.hipaa' | transloco }}</h3>
-              <p class="text-on-surface-variant text-sm">{{ 'register.hipaa_desc' | transloco }}</p>
+              <h3 class="font-headline font-bold text-on-surface text-sm">{{ 'register.hipaa' | transloco }}</h3>
+              <p class="text-on-surface-variant text-xs">{{ 'register.hipaa_desc' | transloco }}</p>
             </div>
           </div>
           <div class="flex items-start gap-4">
-            <div class="bg-primary p-3 rounded-xl">
-              <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">lock</span>
+            <div class="bg-primary p-2.5 rounded-xl">
+              <span class="material-symbols-outlined text-white text-[20px]" style="font-variation-settings: 'FILL' 1;">lock</span>
             </div>
             <div>
-              <h3 class="font-headline font-bold text-on-surface">{{ 'register.encrypt' | transloco }}</h3>
-              <p class="text-on-surface-variant text-sm">{{ 'register.encrypt_desc' | transloco }}</p>
+              <h3 class="font-headline font-bold text-on-surface text-sm">{{ 'register.encrypt' | transloco }}</h3>
+              <p class="text-on-surface-variant text-xs">{{ 'register.encrypt_desc' | transloco }}</p>
             </div>
           </div>
         </div>
         
-        <div class="mt-16 relative rounded-xl overflow-hidden aspect-video shadow-[0_40px_60px_-20px_rgba(25,28,31,0.04)]">
+        <div class="mt-8 relative rounded-xl overflow-hidden aspect-[21/9] shadow-[0_20px_40px_-15px_rgba(25,28,31,0.06)] shrink-0">
           <img class="object-cover w-full h-full grayscale-[0.2] opacity-90" alt="Clinical Environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw2_ryVRIrup_N0NWDZsubNnPSwmAx8qVSqV3c3jZ34VFTQGohB3-vdFjlph-SBORJb6KGZ07OvoL9zNvjdCFROgadtg74m8WRWc7TLTH6pHIaw3wNKymMsVEIU0b0U9u2PsXYvnmQj9PV7A-82BhI-l16aGAUQfjQYOzWR8AeKJJQvN50qd0r_u9UZ3GKEaUbaj7e64fyvWh3Zaio5QuuC-5R7VNIXBefuOZ0jkbj5E-gkXbAy75wkWEeQusJRNQZMi3QIt0FlWgP"/>
         </div>
       </div>
       
       <!-- Right Side: Registration Form -->
-      <div class="lg:col-span-7 flex justify-center lg:justify-end">
-        <div class="bg-surface-container-lowest p-8 md:p-12 rounded-xl w-full max-w-xl shadow-[0_40px_60px_-20px_rgba(25,28,31,0.04)] border border-outline-variant/10">
-          <div class="mb-10 text-center lg:text-start">
-            <h2 class="font-headline text-3xl font-bold text-on-surface mb-2">{{ 'register.create_account' | transloco }}</h2>
-            <p class="text-on-surface-variant">{{ 'register.register_desc' | transloco }}</p>
+      <div class="lg:col-span-7 flex justify-center lg:justify-end h-full items-center">
+        <div class="bg-surface-container-lowest p-6 md:p-8 rounded-xl w-full max-w-xl shadow-[0_20px_50px_-15px_rgba(25,28,31,0.06)] border border-outline-variant/10 max-h-full overflow-y-auto custom-scrollbar">
+          <div class="mb-6 text-center lg:text-start">
+            <h2 class="font-headline text-2xl font-bold text-on-surface mb-1">{{ 'register.create_account' | transloco }}</h2>
+            <p class="text-on-surface-variant text-sm">{{ 'register.register_desc' | transloco }}</p>
           </div>
           
-          <div class="space-y-6">
+          <div class="space-y-4">
             <!-- Full Name -->
-            <div class="space-y-1.5 flex flex-col">
-              <label class="text-sm font-semibold text-on-surface ms-1">{{ 'register.full_name' | transloco }}</label>
-              <input pInputText [(ngModel)]="fullName" type="text" class="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-all outline-none" [placeholder]="'register.full_name_ph' | transloco"/>
+            <div class="space-y-1 flex flex-col">
+              <label class="text-xs font-bold text-on-surface uppercase tracking-wider ms-1">{{ 'register.full_name' | transloco }}</label>
+              <input pInputText [(ngModel)]="fullName" type="text" class="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-3 py-2 rounded-t-lg transition-all outline-none text-sm" [placeholder]="'register.full_name_ph' | transloco"/>
             </div>
             
             <!-- Grid for Email & Phone -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="space-y-1.5 flex flex-col">
-                <label class="text-sm font-semibold text-on-surface ms-1">{{ 'register.email' | transloco }}</label>
-                <input pInputText [(ngModel)]="email" type="email" class="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-all outline-none" [placeholder]="'register.email_ph' | transloco"/>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="space-y-1 flex flex-col">
+                <label class="text-xs font-bold text-on-surface uppercase tracking-wider ms-1">{{ 'register.email' | transloco }}</label>
+                <input pInputText [(ngModel)]="email" type="email" class="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-3 py-2 rounded-t-lg transition-all outline-none text-sm" [placeholder]="'register.email_ph' | transloco"/>
               </div>
-              <div class="space-y-1.5 flex flex-col">
-                <label class="text-sm font-semibold text-on-surface ms-1">{{ 'register.phone' | transloco }}</label>
-                <input pInputText [(ngModel)]="phone" type="tel" class="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-all outline-none" [placeholder]="'register.phone_ph' | transloco"/>
+              <div class="space-y-1 flex flex-col">
+                <label class="text-xs font-bold text-on-surface uppercase tracking-wider ms-1">{{ 'register.phone' | transloco }}</label>
+                <input pInputText [(ngModel)]="phone" type="tel" class="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-3 py-2 rounded-t-lg transition-all outline-none text-sm" [placeholder]="'register.phone_ph' | transloco"/>
               </div>
             </div>
             
             <!-- National ID with Tooltip -->
-            <div class="space-y-1.5 relative flex flex-col">
-              <div class="flex items-center justify-between mb-1">
-                <label class="text-sm font-semibold text-on-surface ms-1">{{ 'register.national_id' | transloco }}</label>
+            <div class="space-y-1 relative flex flex-col">
+              <div class="flex items-center justify-between mb-0.5">
+                <label class="text-xs font-bold text-on-surface uppercase tracking-wider ms-1">{{ 'register.national_id' | transloco }}</label>
                 <div class="group relative">
-                  <span class="material-symbols-outlined text-outline text-lg cursor-help">info</span>
-                  <div class="absolute bottom-full end-0 mb-2 hidden group-hover:block w-64 p-3 bg-on-surface text-surface text-xs rounded-lg shadow-xl z-10 transition-all opacity-0 group-hover:opacity-100 duration-300">
+                  <span class="material-symbols-outlined text-outline text-[16px] cursor-help">info</span>
+                  <div class="absolute bottom-full end-0 mb-1 hidden group-hover:block w-48 p-2 bg-on-surface text-surface text-[10px] rounded-lg shadow-xl z-20 transition-all opacity-0 group-hover:opacity-100 duration-300 pointer-events-none">
                     {{ 'register.national_id_tooltip' | transloco }}
                   </div>
                 </div>
               </div>
-              <input pInputText [(ngModel)]="nationalId" type="text" class="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-all outline-none" [placeholder]="'register.national_id_ph' | transloco"/>
-              <p class="text-[11px] text-on-surface-variant italic mt-1 px-1">{{ 'register.national_id_help' | transloco }}</p>
+              <input pInputText [(ngModel)]="nationalId" type="text" class="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-3 py-2 rounded-t-lg transition-all outline-none text-sm" [placeholder]="'register.national_id_ph' | transloco"/>
+              <p class="text-[10px] text-on-surface-variant italic mt-0.5 px-1">{{ 'register.national_id_help' | transloco }}</p>
             </div>
             
             <!-- Passwords -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="space-y-1.5 flex flex-col">
-                <label class="text-sm font-semibold text-on-surface ms-1">{{ 'register.password' | transloco }}</label>
-                <p-password [(ngModel)]="password" [toggleMask]="true" styleClass="w-full" inputStyleClass="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-all outline-none" [feedback]="false" [placeholder]="'register.password_ph' | transloco"></p-password>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="space-y-1 flex flex-col">
+                <label class="text-xs font-bold text-on-surface uppercase tracking-wider ms-1">{{ 'register.password' | transloco }}</label>
+                <p-password [(ngModel)]="password" [toggleMask]="true" styleClass="w-full" inputStyleClass="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-3 py-2 rounded-t-lg transition-all outline-none text-sm" [feedback]="false" [placeholder]="'register.password_ph' | transloco"></p-password>
               </div>
-              <div class="space-y-1.5 flex flex-col">
-                <label class="text-sm font-semibold text-on-surface ms-1">{{ 'register.confirm_password' | transloco }}</label>
-                <p-password [(ngModel)]="confirmPassword" [toggleMask]="true" styleClass="w-full" inputStyleClass="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-all outline-none" [feedback]="false" [placeholder]="'register.password_ph' | transloco"></p-password>
+              <div class="space-y-1 flex flex-col">
+                <label class="text-xs font-bold text-on-surface uppercase tracking-wider ms-1">{{ 'register.confirm_password' | transloco }}</label>
+                <p-password [(ngModel)]="confirmPassword" [toggleMask]="true" styleClass="w-full" inputStyleClass="w-full bg-surface-container border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-3 py-2 rounded-t-lg transition-all outline-none text-sm" [feedback]="false" [placeholder]="'register.password_ph' | transloco"></p-password>
               </div>
             </div>
             
             <!-- Action Button -->
-            <div class="pt-4">
-              <button pButton class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold py-4 rounded-full shadow-lg active:scale-[0.98] transition-all duration-200 border-none flex justify-center items-center gap-2" (click)="onRegister()">
+            <div class="pt-2">
+              <button pButton class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold py-3 text-sm rounded-full shadow-md active:scale-[0.98] transition-all duration-200 border-none flex justify-center items-center gap-2" (click)="onRegister()">
                 {{ 'register.register_btn' | transloco }}
               </button>
             </div>
             
-            <div class="text-center pt-4">
-              <p class="text-on-surface-variant text-sm flex items-center justify-center gap-1">
+            <div class="text-center pt-2">
+              <p class="text-on-surface-variant text-[13px] flex items-center justify-center gap-1">
                 {{ 'register.already_member' | transloco }} 
                 <a routerLink="/login" class="text-primary font-bold hover:underline cursor-pointer">{{ 'register.login_now' | transloco }}</a>
               </p>
@@ -108,14 +108,14 @@
           </div>
           
           <!-- Trust Signals (Mobile visible) -->
-          <div class="mt-10 lg:hidden flex justify-center gap-8 border-t border-surface-container pt-8">
+          <div class="mt-6 lg:hidden flex justify-center gap-6 border-t border-surface-container pt-4">
             <div class="flex items-center gap-2 opacity-60">
-              <span class="material-symbols-outlined text-sm">shield_person</span>
-              <span class="text-[10px] font-bold uppercase tracking-wider">HIPAA</span>
+              <span class="material-symbols-outlined text-[16px]">shield_person</span>
+              <span class="text-[9px] font-bold uppercase tracking-wider">HIPAA</span>
             </div>
             <div class="flex items-center gap-2 opacity-60">
-              <span class="material-symbols-outlined text-sm">encrypted</span>
-              <span class="text-[10px] font-bold uppercase tracking-wider">AES-256</span>
+              <span class="material-symbols-outlined text-[16px]">encrypted</span>
+              <span class="text-[9px] font-bold uppercase tracking-wider">AES-256</span>
             </div>
           </div>
         </div>
@@ -124,16 +124,15 @@
   </main>
   
   <!-- Footer -->
-  <footer class="bg-surface-container-low py-12 px-12 mt-auto">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-      <!-- Muted Brand Footer omitted to avoid clashing with angular Layout components -->
-      <p class="font-inter text-sm text-slate-500 text-center md:text-start w-full md:w-auto">
+  <footer class="bg-surface-container-low py-4 px-8 mt-auto shrink-0 border-t border-surface-container">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+      <p class="font-inter text-xs text-slate-500 text-center md:text-start w-full md:w-auto">
         {{ 'register.footer_copyright' | transloco }}
       </p>
-      <div class="flex gap-8">
-        <a class="font-inter text-sm text-slate-500 hover:text-sky-900 transition-colors cursor-pointer">{{ 'register.privacy_policy' | transloco }}</a>
-        <a class="font-inter text-sm text-slate-500 hover:text-sky-900 transition-colors cursor-pointer">{{ 'register.terms' | transloco }}</a>
-        <a class="font-inter text-sm text-slate-500 hover:text-sky-900 transition-colors cursor-pointer">{{ 'register.help_center' | transloco }}</a>
+      <div class="flex gap-6">
+        <a class="font-inter text-xs text-slate-500 hover:text-sky-900 transition-colors cursor-pointer">{{ 'register.privacy_policy' | transloco }}</a>
+        <a class="font-inter text-xs text-slate-500 hover:text-sky-900 transition-colors cursor-pointer">{{ 'register.terms' | transloco }}</a>
+        <a class="font-inter text-xs text-slate-500 hover:text-sky-900 transition-colors cursor-pointer">{{ 'register.help_center' | transloco }}</a>
       </div>
     </div>
   </footer>

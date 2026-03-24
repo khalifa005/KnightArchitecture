@@ -190,3 +190,31 @@
 </div>
 </div>
 </section>
+
+<!-- Add Medication PrimeNG Dialog Modal -->
+<p-dialog header="{{ 'medicationManager.add_new' | transloco }}" [modal]="true" [(visible)]="displayAddModal" [style]="{ width: '30rem' }">
+    <div class="flex flex-col gap-4 mt-2">
+        <span class="text-on-surface-variant text-sm mb-4">{{ 'medicationManager.add_instruction' | transloco }}</span>
+        
+        <div class="flex flex-col gap-2">
+            <label for="medName" class="font-semibold text-sm">{{ 'medicationManager.medName' | transloco }}</label>
+            <input pInputText id="medName" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" />
+        </div>
+        
+        <div class="flex flex-col gap-2">
+            <label for="dosage" class="font-semibold text-sm">{{ 'medicationManager.dosage' | transloco }}</label>
+            <input pInputText id="dosage" class="bg-surface-container-lowest border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary/20 outline-none" autocomplete="off" />
+        </div>
+        
+        <div class="flex items-center gap-2 mt-2 p-3 bg-error-container/20 rounded-xl border border-error/20">
+            <p-checkbox [(ngModel)]="isBlacklisted" [binary]="true" inputId="blacklist"></p-checkbox>
+            <label for="blacklist" class="text-sm font-semibold text-on-surface cursor-pointer select-none">{{ 'medicationManager.mark_blacklist' | transloco }}</label>
+        </div>
+        <p class="text-xs text-on-surface-variant ms-8 -mt-2">{{ 'medicationManager.blacklist_desc' | transloco }}</p>
+
+        <div class="flex justify-end gap-2 mt-4">
+            <button pButton class="px-6 py-2 bg-surface-container-low text-on-surface rounded-full text-sm font-bold hover:bg-surface-container transition-colors" (click)="displayAddModal.set(false)">{{ 'medicationManager.cancel' | transloco }}</button>
+            <button pButton class="px-6 py-2 bg-primary text-white rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all" (click)="displayAddModal.set(false)">{{ 'medicationManager.save_med' | transloco }}</button>
+        </div>
+    </div>
+</p-dialog>

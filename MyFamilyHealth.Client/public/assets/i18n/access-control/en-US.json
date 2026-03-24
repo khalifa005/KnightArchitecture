@@ -41,5 +41,12 @@
   "yest_430": "Yesterday at 4:30 PM",
   "access_revoked": "Access Revoked",
   "log_lab": "Temporary access for City General Lab has expired.",
-  "ago_3d": "3 days ago"
+  "ago_3d": "3 days ago",
+  "add_new_member": "Add New Family Member",
+  "add_member_desc": "Enter the details to send an invitation to a family member.",
+  "member_name": "Member Name",
+  "member_email": "Email Address",
+  "member_role": "Role / Relationship",
+  "cancel": "Cancel",
+  "save_member": "Save Member"
 }
