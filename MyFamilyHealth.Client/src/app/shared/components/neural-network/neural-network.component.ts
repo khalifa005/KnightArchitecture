@@ -38,6 +38,7 @@ export class NeuralNetworkComponent implements AfterViewInit, OnDestroy {
   isPaused = model<boolean>(false);
   showControls = input<boolean>(true);
   showButtons = input<boolean>(true);
+  showThemeSelector = input<boolean>(true);
 
   // Canvas reference
   private canvas = viewChild<ElementRef<HTMLCanvasElement>>('neuralNetworkCanvas');
