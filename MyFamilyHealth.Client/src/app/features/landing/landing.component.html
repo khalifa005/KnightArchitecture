@@ -61,7 +61,7 @@
 
   <main class="pt-20">
     <!-- Hero Section -->
-    <section class="relative min-h-[500px] md:min-h-[500px] flex items-center px-8 py-16 overflow-hidden">
+    <section class="relative min-h-[600px] md:min-h-[750px] flex items-center px-8 py-16 overflow-hidden bg-[#050508]">
       <!-- Digital EKG Flow Background -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none flex items-center opacity-10 md:opacity-[0.15]">
         <div class="heartbeat-container flex">
@@ -83,24 +83,17 @@
       <div
         class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center flex-col-reverse lg:flex-row relative z-10">
         <div class="z-10 text-center lg:text-start">
-          <span
-            class="inline-block px-4 py-1.5 rounded-full bg-primary-fixed dark:bg-sky-900/50 text-on-primary-fixed-variant dark:text-sky-300 text-xs font-bold tracking-widest uppercase mb-6 anim-fade-up">{{
-            'landing.hero_badge' | transloco }}</span>
-          <h1
-            class="font-headline text-5xl md:text-7xl font-extrabold text-primary dark:text-sky-100 leading-[1.1] tracking-tighter mb-8 anim-fade-up anim-delay-100"
-            [innerHTML]="'landing.hero_title' | transloco"></h1>
-          <p
-            class="text-on-surface-variant dark:text-slate-400 text-lg md:text-xl max-w-xl mb-12 leading-relaxed mx-auto lg:mx-0 anim-fade-up anim-delay-200">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-xs font-bold tracking-widest uppercase mb-6 anim-fade-up">{{ 'landing.hero_badge' | transloco }}</span>
+          <h1 class="font-headline text-5xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tighter mb-8 anim-fade-up anim-delay-100" [innerHTML]="'landing.hero_title' | transloco"></h1>
+          <p class="text-slate-400 text-lg md:text-xl max-w-xl mb-12 leading-relaxed mx-auto lg:mx-0 anim-fade-up anim-delay-200">
             {{ 'landing.hero_desc' | transloco }}
           </p>
           <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 anim-fade-up anim-delay-300">
-            <button pButton routerLink="/register"
-              class="bg-primary border-none text-on-primary px-8 py-4 rounded-full text-lg font-bold shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-transform duration-300 anim-pulse-btn overflow-hidden relative group">
-              <div class="absolute inset-0 anim-shine opacity-50"></div>
+            <button pButton routerLink="/register" class="bg-primary border-none text-white px-8 py-4 rounded-full text-lg font-bold shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-transform duration-300 anim-pulse-btn overflow-hidden relative group">
+              <div class="absolute inset-0 anim-shine opacity-30"></div>
               <span class="relative z-10">{{ 'landing.hero_cta_start' | transloco }}</span>
             </button>
-            <button
-              class="flex items-center justify-center gap-2 text-primary dark:text-sky-300 font-bold px-8 py-4 rounded-full border-2 border-primary/10 dark:border-sky-400/20 hover:bg-surface-container-low dark:hover:bg-slate-800 active:scale-95 transition-all duration-300">
+            <button class="flex items-center justify-center gap-2 text-white font-bold px-8 py-4 rounded-full border-2 border-white/10 hover:bg-white/5 active:scale-95 transition-all duration-300 backdrop-blur-sm">
               <span class="material-symbols-outlined">play_circle</span>
               {{ 'landing.hero_cta_watch' | transloco }}
             </button>
@@ -108,25 +101,17 @@
         </div>
 
         <div class="relative group order-first lg:order-last anim-fade-up anim-delay-400">
-          <div
-            class="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-sky-900/10 dark:shadow-sky-950/40 border-[6px] md:border-8 border-white dark:border-slate-800 anim-float-hero">
-            <img alt="Modern Medical Visualization"
-              class="w-full h-[400px] md:h-[500px] object-cover scale-105 group-hover:scale-100 transition-transform duration-1000"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGPFAO5AzVFYevpswRMtw8xd6wJx5SoQ4hPA6YJ-XdQKhb7IC8ZTLd6KyXDMrOnrQ8sGzCb3so__staijvNEt0Uun2qXOGzA3koCREPNoh770Oh06V8mQScm2rNkfmpxEp-h9X8nRn6zCjiRcK3u_6pGswBGQHOddrhznARjdjpAqHsgnl3k_zst-WJvmRa91oxwK2zD_Q05fnBZRKWxZcy56qviNOkbrAJPEqp070KajpyNeGPjCIybDOrBnYRnKck90NHSai0-YE" />
-            <div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
-          </div>
-
-          <!-- <div class="absolute -inset-4 bg-primary-container/10 dark:bg-sky-400/5 rounded-[3rem] blur-3xl group-hover:bg-primary-container/20 dark:group-hover:bg-sky-400/10 transition-all duration-700"></div> -->
-          <!-- <div class="relative h-[400px] md:h-[500px] anim-float-hero shadow-2xl shadow-sky-900/10 dark:shadow-sky-950/40">
+          <!-- Singularity 3D Hero -->
+          <div class="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-sky-400/10 border-[6px] md:border-8 border-white/5 anim-float-hero bg-black/40 h-[400px] md:h-[550px] backdrop-blur-3xl">
             @defer (on timer(100ms)) {
               <app-singularity></app-singularity>
             } @placeholder {
-              <div class="w-full h-full bg-slate-900/10 dark:bg-slate-800/20 backdrop-blur-xl animate-pulse rounded-[2rem]"></div>
+              <div class="w-full h-full bg-slate-900/10 backdrop-blur-xl animate-pulse"></div>
             }
-          </div> -->
+          </div>
 
           <!-- Floating Glass Stat -->
-          <div
+          <!-- <div
             class="absolute -bottom-6 -start-6 md:-bottom-8 md:-start-8 glass-panel p-4 md:p-6 rounded-2xl shadow-xl border border-white/40 dark:border-slate-600/40 max-w-[200px] md:max-w-[240px] anim-float-card anim-delay-500">
             <div class="flex items-center gap-4 mb-3">
               <div
@@ -145,7 +130,7 @@
             <div class="h-1.5 w-full bg-surface-container dark:bg-slate-700 rounded-full overflow-hidden">
               <div class="h-full bg-secondary-fixed-dim dark:bg-emerald-500 w-[85%]"></div>
             </div>
-          </div>
+          </div> -->
         </div>
 
 
@@ -333,6 +318,32 @@
               <span class="text-xs font-bold tracking-widest uppercase">Sanctuary</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Story Panel (Left) -->
+      <div class="absolute top-[300px] left-8 glass-panel p-6 w-[320px] z-30 anim-fade-up anim-delay-300 border-l-4 border-l-sky-500 hidden lg:block backdrop-blur-xl bg-white/5">
+        <h4 class="text-sky-400 font-bold uppercase tracking-widest text-xs mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">history_edu</span>
+          {{ 'landing.nn_story_title' | transloco }}
+        </h4>
+        <p class="text-[13px] text-slate-300 leading-relaxed font-light italic">
+          "{{ 'landing.nn_story_text' | transloco }}"
+        </p>
+      </div>
+
+      <!-- Mission/Target Panel (Right) -->
+      <div class="absolute top-[32px] right-8 glass-panel p-6 w-[320px] z-30 anim-fade-up anim-delay-400 border-r-4 border-r-emerald-500 hidden lg:block backdrop-blur-xl bg-white/5">
+        <h4 class="text-emerald-400 font-bold uppercase tracking-widest text-xs mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">target</span>
+          {{ 'landing.nn_target_title' | transloco }}
+        </h4>
+        <p class="text-[13px] text-slate-300 leading-relaxed font-light">
+          {{ 'landing.nn_target_text' | transloco }}
+        </p>
+        <div class="mt-4 pt-4 border-t border-white/10 flex justify-between items-center text-[10px] text-emerald-400/60 font-mono tracking-tighter">
+          <span>COGNITIVE_SYNC: ACTIVE</span>
+          <span>99.9% ACCURACY</span>
         </div>
       </div>
       } @placeholder {
