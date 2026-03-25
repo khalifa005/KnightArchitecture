@@ -100,5 +100,11 @@
   "nn_morph_btn": "Morph",
   "nn_freeze_btn": "Freeze",
   "nn_play_btn": "Play",
-  "nn_reset_btn": "Reset"
+  "nn_reset_btn": "Reset",
+  "singularity_title_stable": "Stable Singularity",
+  "singularity_title_turbulence": "Accretion Turbulence",
+  "singularity_title_collapse": "Relativistic Collapse",
+  "singularity_status_nominal": "Topology: Nominal",
+  "singularity_status_fluctuating": "Topology: Fluctuating",
+  "singularity_status_critical": "Topology: Critical"
 }

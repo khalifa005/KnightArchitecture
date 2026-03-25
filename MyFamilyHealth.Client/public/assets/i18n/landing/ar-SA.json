@@ -100,5 +100,11 @@
   "nn_morph_btn": "تحويل",
   "nn_freeze_btn": "تجميد",
   "nn_play_btn": "تشغيل",
-  "nn_reset_btn": "إعادة ضبط"
+  "nn_reset_btn": "إعادة ضبط",
+  "singularity_title_stable": "تفرد مستقر",
+  "singularity_title_turbulence": "اضطراب التراكم",
+  "singularity_title_collapse": "انهيار نسبي",
+  "singularity_status_nominal": "الطوبولوجيا: طبيعية",
+  "singularity_status_fluctuating": "الطوبولوجيا: متذبذبة",
+  "singularity_status_critical": "الطوبولوجيا: حرجة"
 }

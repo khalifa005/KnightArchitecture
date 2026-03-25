@@ -1,0 +1,21 @@
+<div id="vignette"></div>
+<div id="overlay">
+  <div class="header">
+    <div class="title" id="main-title">{{ 'landing.' + currentTitleKey | transloco }}</div>
+    <div class="status-pill" id="status-text" [style.color]="statusColor" [style.borderColor]="statusColor">
+      {{ 'landing.' + currentStatusKey | transloco }}
+    </div>
+  </div>
+  <div class="hud-bottom">
+    <div>
+      <div class="metric">MASS_INDEX: <span class="val" [style.color]="statusColor">4.2M SOL</span></div>
+      <div class="metric">LENSING: <span class="val" id="lensing-val" [style.color]="statusColor">SCHWARZSCHILD</span></div>
+    </div>
+    <div style="text-align: right">
+      <div class="metric">RELATIVITY: <span class="val" id="vel-val" [style.color]="statusColor">{{ currentVel }}</span></div>
+      <div class="metric">RADIATION: <span class="val" [style.color]="statusColor">DETECTION ON</span></div>
+    </div>
+  </div>
+</div>
+
+<canvas #singularityCanvas></canvas>

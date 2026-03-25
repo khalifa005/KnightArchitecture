@@ -55,6 +55,9 @@ export class NeuralNetworkComponent implements AfterViewInit, OnDestroy {
   private neuralNetwork: any = null;
   private lastPulseIndex = 0;
   private animationId?: number;
+  private isVisible = true;
+  private observer!: IntersectionObserver;
+  private el = inject(ElementRef);
 
   // Uniforms
   private pulseUniforms = {
@@ -189,11 +192,23 @@ export class NeuralNetworkComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.initThree();
+    this.setupIntersectionObserver();
     this.animate();
     window.addEventListener('resize', this.onWindowResize.bind(this));
   }
 
+  private setupIntersectionObserver(): void {
+    this.observer = new IntersectionObserver(([entry]) => {
+      this.isVisible = entry.isIntersecting;
+    }, { threshold: 0.1 });
+
+    this.observer.observe(this.el.nativeElement);
+  }
+
   ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
     }
@@ -506,6 +521,9 @@ export class NeuralNetworkComponent implements AfterViewInit, OnDestroy {
 
   private animate(): void {
     this.animationId = requestAnimationFrame(this.animate.bind(this));
+    
+    if (!this.isVisible) return;
+    
     const t = this.clock.getElapsedTime();
     
     if (!this.isPaused()) {

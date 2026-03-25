@@ -76,11 +76,20 @@
         </div>
         
         <div class="relative group order-first lg:order-last anim-fade-up anim-delay-400">
-          <div class="absolute -inset-4 bg-primary-container/10 dark:bg-sky-400/5 rounded-[3rem] blur-3xl group-hover:bg-primary-container/20 dark:group-hover:bg-sky-400/10 transition-all duration-700"></div>
           <div class="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-sky-900/10 dark:shadow-sky-950/40 border-[6px] md:border-8 border-white dark:border-slate-800 anim-float-hero">
             <img alt="Modern Medical Visualization" class="w-full h-[400px] md:h-[500px] object-cover scale-105 group-hover:scale-100 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGPFAO5AzVFYevpswRMtw8xd6wJx5SoQ4hPA6YJ-XdQKhb7IC8ZTLd6KyXDMrOnrQ8sGzCb3so__staijvNEt0Uun2qXOGzA3koCREPNoh770Oh06V8mQScm2rNkfmpxEp-h9X8nRn6zCjiRcK3u_6pGswBGQHOddrhznARjdjpAqHsgnl3k_zst-WJvmRa91oxwK2zD_Q05fnBZRKWxZcy56qviNOkbrAJPEqp070KajpyNeGPjCIybDOrBnYRnKck90NHSai0-YE"/>
             <div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
           </div>
+
+          <!-- <div class="absolute -inset-4 bg-primary-container/10 dark:bg-sky-400/5 rounded-[3rem] blur-3xl group-hover:bg-primary-container/20 dark:group-hover:bg-sky-400/10 transition-all duration-700"></div> -->
+          <!-- <div class="relative h-[400px] md:h-[500px] anim-float-hero shadow-2xl shadow-sky-900/10 dark:shadow-sky-950/40">
+            @defer (on timer(100ms)) {
+              <app-singularity></app-singularity>
+            } @placeholder {
+              <div class="w-full h-full bg-slate-900/10 dark:bg-slate-800/20 backdrop-blur-xl animate-pulse rounded-[2rem]"></div>
+            }
+          </div> -->
+          
           <!-- Floating Glass Stat -->
           <div class="absolute -bottom-6 -start-6 md:-bottom-8 md:-start-8 glass-panel p-4 md:p-6 rounded-2xl shadow-xl border border-white/40 dark:border-slate-600/40 max-w-[200px] md:max-w-[240px] anim-float-card anim-delay-500">
             <div class="flex items-center gap-4 mb-3">
@@ -97,6 +106,11 @@
             </div>
           </div>
         </div>
+
+          
+
+
+
       </div>
       <!-- Sound Toggle -->
       <div class="absolute bottom-6 end-6 md:bottom-12 md:end-12 z-20">
@@ -219,12 +233,18 @@
 
     <!-- Quantum Neural Network Section -->
     <section id="neural-network" class="h-screen w-full relative overflow-hidden bg-black">
-      <app-neural-network 
-        [themeIndex]="0" 
-        [density]="100" 
-        [formation]="0" 
-        [showControls]="true">
-      </app-neural-network>
+      @defer (on viewport) {
+        <app-neural-network 
+          [themeIndex]="0" 
+          [density]="100" 
+          [formation]="0" 
+          [showControls]="true">
+        </app-neural-network>
+      } @placeholder {
+        <div class="w-full h-full bg-black flex items-center justify-center">
+           <div class="text-primary/20 text-xs font-mono tracking-widest uppercase animate-pulse">Initializing Neural Core...</div>
+        </div>
+      }
     </section>
 
     <!-- Additional/Roadmap Features -->
