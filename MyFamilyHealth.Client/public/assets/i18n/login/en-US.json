@@ -1,4 +1,5 @@
 {
+  "brand": "DHM",
   "welcome_back": "Welcome to Digital Health Memory",
   "sign_in_desc": "Your unified, secure medical records and family health portal.",
   "email_address": "Email Address",
@@ -8,7 +9,7 @@
   "forgot_password": "Forgot your password?",
   "remember_me": "Stay securely signed in",
   "sign_in_btn": "Sign In to Portal",
-  "sso_divider": "or continue with enterprise SSO",
+  "sso_divider": "or continue with",
   "sso_google": "Google",
   "sso_microsoft": "Microsoft Identity",
   "create_account": "Don't have a patient account?",
