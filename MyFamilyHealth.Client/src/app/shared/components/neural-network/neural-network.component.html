@@ -1,0 +1,38 @@
+<div id="instructions-container" class="glass-panel">
+  <div id="instruction-title">{{ 'landing.nn_instruction_title' | transloco }}</div>
+  <div class="instruction-text" [innerHTML]="'landing.nn_instruction_text' | transloco"></div>
+</div>
+
+@if (showControls()) {
+  <div id="theme-selector" class="glass-panel">
+    <div style="flex: 1;">
+      <div id="theme-selector-title">{{ 'landing.nn_theme_title' | transloco }}</div>
+      <div class="theme-grid">
+        <button class="theme-button" [class.active]="themeIndex() === 0" id="theme-1" (click)="$event.stopPropagation(); themeIndex.set(0)" [attr.aria-label]="'landing.nn_theme_1_label' | transloco"></button>
+        <button class="theme-button" [class.active]="themeIndex() === 1" id="theme-2" (click)="$event.stopPropagation(); themeIndex.set(1)" [attr.aria-label]="'landing.nn_theme_2_label' | transloco"></button>
+        <button class="theme-button" [class.active]="themeIndex() === 2" id="theme-3" (click)="$event.stopPropagation(); themeIndex.set(2)" [attr.aria-label]="'landing.nn_theme_3_label' | transloco"></button>
+      </div>
+    </div>
+    <div id="density-controls" style="flex: 1;">
+      <div class="density-label"><span>{{ 'landing.nn_density_label' | transloco }}</span><span id="density-value">{{ density() }}%</span></div>
+      <input type="range" min="30" max="100" [value]="density()" 
+        (input)="density.set(+$any($event.target).value); $event.stopPropagation();"
+        class="density-slider" id="density-slider"
+        [attr.aria-label]="'landing.nn_density_label' | transloco">
+    </div>
+  </div>
+
+  <div id="control-buttons">
+    <button (click)="$event.stopPropagation(); formation.set((formation() + 1) % 3)" class="control-button">
+      <span>{{ 'landing.nn_morph_btn' | transloco }}</span>
+    </button>
+    <button (click)="$event.stopPropagation(); isPaused.set(!isPaused())" class="control-button">
+      <span>{{ (isPaused() ? 'landing.nn_play_btn' : 'landing.nn_freeze_btn') | transloco }}</span>
+    </button>
+    <button (click)="$event.stopPropagation(); controls.reset()" class="control-button">
+      <span>{{ 'landing.nn_reset_btn' | transloco }}</span>
+    </button>
+  </div>
+}
+
+<canvas #neuralNetworkCanvas (click)="handleCanvasClick($event)" (touchstart)="handleCanvasClick($event)"></canvas>

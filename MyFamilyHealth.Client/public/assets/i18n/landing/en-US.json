@@ -3,6 +3,7 @@
   "nav_solutions": "Core Features",
   "nav_sharing": "Data Sharing",
   "nav_ai": "AI Insights",
+  "nav_neural_network": "Neural Network",
   "nav_more": "Additional",
   "nav_login": "Login",
   "nav_get_started": "Get Started",
@@ -87,5 +88,17 @@
   "family_verified_title": "Verified Access",
   "family_verified_sub": "Global Sync",
   "family_private_title": "Private Circles",
-  "family_private_sub": "Military-grade protection for dependent assets."
+  "family_private_sub": "Military-grade protection for dependent assets.",
+  "nn_section_title": "Quantum Neural Network",
+  "nn_instruction_title": "Quantum Neural Network",
+  "nn_instruction_text": "Click to send energy pulses. <br>Drag to explore the structure.",
+  "nn_theme_title": "Crystal Theme",
+  "nn_theme_1_label": "Purple Nebula",
+  "nn_theme_2_label": "Sunset Fire",
+  "nn_theme_3_label": "Ocean Aurora",
+  "nn_density_label": "Density",
+  "nn_morph_btn": "Morph",
+  "nn_freeze_btn": "Freeze",
+  "nn_play_btn": "Play",
+  "nn_reset_btn": "Reset"
 }

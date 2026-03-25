@@ -3,6 +3,7 @@
   "nav_solutions": "المميزات الأساسية",
   "nav_sharing": "مشاركة البيانات",
   "nav_ai": "تحليلات الذكاء الاصطناعي",
+  "nav_neural_network": "الشبكة العصبية",
   "nav_more": "مميزات إضافية",
   "nav_login": "تسجيل الدخول",
   "nav_get_started": "ابدأ الآن",
@@ -87,5 +88,17 @@
   "family_verified_title": "وصول موثق",
   "family_verified_sub": "زمن مزامنة عالمي",
   "family_private_title": "دوائر خاصة",
-  "family_private_sub": "حماية من الدرجة العسكرية للأصول التابعة."
+  "family_private_sub": "حماية من الدرجة العسكرية للأصول التابعة.",
+  "nn_section_title": "الشبكة العصبية الكمومية",
+  "nn_instruction_title": "الشبكة العصبية الكمومية",
+  "nn_instruction_text": "انقر لإرسال نبضات الطاقة. <br>اسحب لاستكشاف الهيكل.",
+  "nn_theme_title": "سمة الكريستال",
+  "nn_theme_1_label": "سديم أرجواني",
+  "nn_theme_2_label": "نار الغروب",
+  "nn_theme_3_label": "أورورا المحيط",
+  "nn_density_label": "الكثافة",
+  "nn_morph_btn": "تحويل",
+  "nn_freeze_btn": "تجميد",
+  "nn_play_btn": "تشغيل",
+  "nn_reset_btn": "إعادة ضبط"
 }

@@ -22,9 +22,20 @@ const AUDIO_FILES: Record<string, string> = {
   'ar-SA': 'assets/audio/oliver arabic intro for landing page .mp3',
 };
 
+import { EkgPulseComponent } from '../../shared/components/ekg-pulse/ekg-pulse.component';
+import { NeuralNetworkComponent } from '../../shared/components/neural-network/neural-network.component';
+
 @Component({
   selector: 'app-landing',
-  imports: [CommonModule, RouterModule, TranslocoModule, ButtonModule],
+  standalone: true,
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    ButtonModule, 
+    TranslocoModule,
+    EkgPulseComponent,
+    NeuralNetworkComponent
+  ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

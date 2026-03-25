@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ekg-container {
+  width: 100%;
+  height: 100%;
+  color: var(--md-primary, #00AEAA);
+  pointer-events: none;
+}
+
+.ekg-bg {
+  opacity: 0.1;
+}
+
+/* Base Dash Animation */
+@keyframes dash {
+  from {
+    stroke-dashoffset: 814;
+  }
+  to {
+    stroke-dashoffset: -814;
+  }
+}
+
+/* Pulsar Mode */
+#pulsar {
+  stroke-dasharray: 281;
+  animation: dash 2.5s infinite linear forwards;
+}
+
+/* Jugular Mode */
+#jugular {
+  stroke-dasharray: 497;
+  animation: dash 1.4s infinite ease forwards;
+}
+
+/* Bleed Mode */
+#bleed {
+  stroke-dasharray: 437;
+  animation: dash 1.2s infinite ease-out;
+}
+
+/* Flatline Mode */
+#flat {
+  stroke-dasharray: 814;
+  animation: dash 10s infinite linear;
+}
+
+/* Pulse Concept / Default */
+.ekg-pulse-concept {
+  opacity: 0.2;
+}
+
+.pulse-point {
+  color: var(--md-primary, #00AEAA);
+  filter: drop-shadow(0 0 8px currentColor);
+  opacity: 0.7;
+}

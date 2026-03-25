@@ -1,0 +1,27 @@
+<div class="ekg-container" [class]="type()">
+  <svg height="100%" width="100%" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    
+    @switch (type()) {
+      @case ('pulse-concept') {
+        <!-- Background static line -->
+        <path class="ekg-bg" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linejoin="round"
+              d="M0,100L150,100M150,100Q158,70 162,97T167,105 170,98 173,102t6,35 7,-60T190,137 197,117s2,-11 10,-10 1,1 8,-10T219,105c6,4 8,-6 10,-17s2,10 9,11h110" />
+        <path id="longbeat" class="ekg-pulse-concept" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linejoin="round"
+              d="M0,100L150,100M150,100Q158,70 162,97T167,105 170,98 173,102t6,35 7,-60T190,137 197,117s2,-11 10,-10 1,1 8,-10T219,105c6,4 8,-6 10,-17s2,10 9,11h110" />
+        <rect x="-4" y="-4" height="8" width="8" rx="4" ry="4" fill="currentColor" class="pulse-point">
+          <animateMotion dur="2s" repeatCount="indefinite">
+            <mpath href="#longbeat"/>
+          </animateMotion>
+        </rect>
+      }
+      @default {
+        <!-- Shadow Path -->
+        <path stroke="rgba(0,0,0,0.05)" fill="none" stroke-width="1" stroke-linejoin="round"
+              d="M0,100L250,100Q257,70 262,97T267,105 270,98 273,102t6,35 7,-60T290,137 297,117s2,-11 10,-10 1,1 8,-10T319,105c6,4 8,-6 10,-17s2,10 9,11h210" />   
+        <!-- Active Pulsing Path -->
+        <path [id]="type()" class="ekg-generic" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linejoin="round"
+              d="M0,100L250,100Q257,70 262,97T267,105 270,98 273,102t6,35 7,-60T290,137 297,117s2,-11 10,-10 1,1 8,-10T319,105c6,4 8,-6 10,-17s2,10 9,11h210" />
+      }
+    }
+  </svg>
+</div>
