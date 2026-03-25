@@ -22,17 +22,19 @@
     </div>
   </div>
 
-  <div id="control-buttons">
-    <button (click)="$event.stopPropagation(); formation.set((formation() + 1) % 3)" class="control-button">
-      <span>{{ 'landing.nn_morph_btn' | transloco }}</span>
-    </button>
-    <button (click)="$event.stopPropagation(); isPaused.set(!isPaused())" class="control-button">
-      <span>{{ (isPaused() ? 'landing.nn_play_btn' : 'landing.nn_freeze_btn') | transloco }}</span>
-    </button>
-    <button (click)="$event.stopPropagation(); controls.reset()" class="control-button">
-      <span>{{ 'landing.nn_reset_btn' | transloco }}</span>
-    </button>
-  </div>
+  @if (showButtons()) {
+    <div id="control-buttons">
+      <button (click)="$event.stopPropagation(); formation.set((formation() + 1) % 3)" class="control-button">
+        <span>{{ 'landing.nn_morph_btn' | transloco }}</span>
+      </button>
+      <button (click)="$event.stopPropagation(); isPaused.set(!isPaused())" class="control-button">
+        <span>{{ (isPaused() ? 'landing.nn_play_btn' : 'landing.nn_freeze_btn') | transloco }}</span>
+      </button>
+      <button (click)="$event.stopPropagation(); controls.reset()" class="control-button">
+        <span>{{ 'landing.nn_reset_btn' | transloco }}</span>
+      </button>
+    </div>
+  }
 }
 
 <canvas #neuralNetworkCanvas (click)="handleCanvasClick($event)" (touchstart)="handleCanvasClick($event)"></canvas>
