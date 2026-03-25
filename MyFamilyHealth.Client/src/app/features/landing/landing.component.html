@@ -304,6 +304,37 @@
       <app-neural-network [themeIndex]="0" [density]="100" [formation]="2" [showControls]="false" [showButtons]="false"
         [showThemeSelector]="false">
       </app-neural-network>
+
+      <!-- Strategic Sponsors Overlay -->
+      <div class="absolute bottom-12 left-0 w-full z-20 pointer-events-none anim-fade-up anim-delay-500">
+        <div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-6">
+          <p class="text-sky-500/50 font-bold text-[10px] tracking-[0.5em] uppercase text-center">
+            {{ 'landing.nn_sponsors_title' | transloco }}
+          </p>
+          <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-20 hover:opacity-80 transition-all duration-1000 grayscale hover:grayscale-0 pointer-events-auto">
+            <div class="flex items-center gap-2 text-white group cursor-pointer">
+              <span class="material-symbols-outlined text-3xl group-hover:text-sky-400 transition-colors">hub</span>
+              <span class="text-xs font-bold tracking-widest uppercase">GHealth</span>
+            </div>
+            <div class="flex items-center gap-2 text-white group cursor-pointer">
+              <span class="material-symbols-outlined text-3xl group-hover:text-emerald-400 transition-colors">ecg_heart</span>
+              <span class="text-xs font-bold tracking-widest uppercase">BioSync</span>
+            </div>
+            <div class="flex items-center gap-2 text-white group cursor-pointer">
+              <span class="material-symbols-outlined text-3xl group-hover:text-indigo-400 transition-colors">neurology</span>
+              <span class="text-xs font-bold tracking-widest uppercase">CogniCore</span>
+            </div>
+            <div class="flex items-center gap-2 text-white group cursor-pointer">
+              <span class="material-symbols-outlined text-3xl group-hover:text-rose-400 transition-colors">genetics</span>
+              <span class="text-xs font-bold tracking-widest uppercase">LoomDNA</span>
+            </div>
+            <div class="flex items-center gap-2 text-white group cursor-pointer">
+              <span class="material-symbols-outlined text-3xl group-hover:text-amber-400 transition-colors">shield_health</span>
+              <span class="text-xs font-bold tracking-widest uppercase">Sanctuary</span>
+            </div>
+          </div>
+        </div>
+      </div>
       } @placeholder {
       <div class="w-full h-full bg-black flex items-center justify-center">
         <div class="text-primary/20 text-xs font-mono tracking-widest uppercase animate-pulse">Initializing Neural

@@ -9,7 +9,8 @@ import {
   viewChild,
   AfterViewInit,
   ChangeDetectionStrategy,
-  effect
+  effect,
+  NgZone
 } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import * as THREE from 'three';
@@ -60,6 +61,7 @@ export class NeuralNetworkComponent implements AfterViewInit, OnDestroy {
   private isVisible = true;
   private observer!: IntersectionObserver;
   private el = inject(ElementRef);
+  private ngZone = inject(NgZone);
 
   // Uniforms
   private pulseUniforms = {
@@ -522,35 +524,43 @@ export class NeuralNetworkComponent implements AfterViewInit, OnDestroy {
   }
 
   private animate(): void {
-    this.animationId = requestAnimationFrame(this.animate.bind(this));
-    
-    if (!this.isVisible) return;
-    
-    const t = this.clock.getElapsedTime();
-    
-    if (!this.isPaused()) {
-      if (this.nodesMesh) {
-          (this.nodesMesh.material as THREE.ShaderMaterial).uniforms['uTime'].value = t;
-          this.nodesMesh.rotation.y = Math.sin(t * 0.04) * 0.05;
-      }
-      if (this.connectionsMesh) {
-          (this.connectionsMesh.material as THREE.ShaderMaterial).uniforms['uTime'].value = t;
-          this.connectionsMesh.rotation.y = Math.sin(t * 0.04) * 0.05;
-      }
-    }
+    this.ngZone.runOutsideAngular(() => {
+      const render = () => {
+        if (this.animationId) {
+          cancelAnimationFrame(this.animationId);
+        }
+        this.animationId = requestAnimationFrame(render);
+        
+        if (!this.isVisible) return;
+        
+        const t = this.clock.getElapsedTime();
+        
+        if (!this.isPaused()) {
+          if (this.nodesMesh) {
+            (this.nodesMesh.material as THREE.ShaderMaterial).uniforms['uTime'].value = t;
+            this.nodesMesh.rotation.y = Math.sin(t * 0.04) * 0.05;
+          }
+          if (this.connectionsMesh) {
+            (this.connectionsMesh.material as THREE.ShaderMaterial).uniforms['uTime'].value = t;
+            this.connectionsMesh.rotation.y = Math.sin(t * 0.04) * 0.05;
+          }
+        }
 
-    if (this.starField) {
-      this.starField.rotation.y += 0.0002;
-      (this.starField.material as THREE.ShaderMaterial).uniforms['uTime'].value = t;
-    }
+        if (this.starField) {
+          this.starField.rotation.y += 0.0002;
+          (this.starField.material as THREE.ShaderMaterial).uniforms['uTime'].value = t;
+        }
 
-    if (this.controls) {
-      this.controls.update();
-    }
-    
-    if (this.composer) {
-      this.composer.render();
-    }
+        if (this.controls) {
+          this.controls.update();
+        }
+        
+        if (this.composer) {
+          this.composer.render();
+        }
+      };
+      render();
+    });
   }
 
   private onWindowResize(): void {
