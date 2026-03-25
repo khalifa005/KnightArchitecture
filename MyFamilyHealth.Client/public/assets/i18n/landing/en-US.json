@@ -106,5 +106,10 @@
   "singularity_title_collapse": "Relativistic Collapse",
   "singularity_status_nominal": "Topology: Nominal",
   "singularity_status_fluctuating": "Topology: Fluctuating",
-  "singularity_status_critical": "Topology: Critical"
+  "singularity_status_critical": "Topology: Critical",
+  "singularity_hud_mass": "MASS_INDEX",
+  "singularity_hud_lensing": "LENSING",
+  "singularity_hud_relativity": "RELATIVITY",
+  "singularity_hud_radiation": "RADIATION",
+  "singularity_hud_detection_on": "DETECTION ON"
 }

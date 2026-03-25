@@ -8,11 +8,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
+import { SingularityComponent } from '../../../shared/components/singularity/singularity.component';
 
 @Component({
   standalone: true,
   selector: 'app-login',
-  imports: [CommonModule, FormsModule, RouterModule, TranslocoModule, InputTextModule, PasswordModule, ButtonModule, CheckboxModule],
+  imports: [CommonModule, FormsModule, RouterModule, TranslocoModule, InputTextModule, PasswordModule, ButtonModule, CheckboxModule, SingularityComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

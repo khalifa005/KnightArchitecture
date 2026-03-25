@@ -24,7 +24,6 @@ const AUDIO_FILES: Record<string, string> = {
 
 import { EkgPulseComponent } from '../../shared/components/ekg-pulse/ekg-pulse.component';
 import { NeuralNetworkComponent } from '../../shared/components/neural-network/neural-network.component';
-import { SingularityComponent } from '../../shared/components/singularity/singularity.component';
 
 @Component({
   selector: 'app-landing',
@@ -35,8 +34,7 @@ import { SingularityComponent } from '../../shared/components/singularity/singul
     ButtonModule, 
     TranslocoModule,
     EkgPulseComponent,
-    NeuralNetworkComponent,
-    SingularityComponent
+    NeuralNetworkComponent
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss',

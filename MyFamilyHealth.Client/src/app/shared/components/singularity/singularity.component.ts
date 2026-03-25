@@ -30,6 +30,8 @@ export class SingularityComponent implements OnInit, AfterViewInit, OnDestroy {
   private ngZone = inject(NgZone);
   private canvas = viewChild<ElementRef<HTMLCanvasElement>>('singularityCanvas');
 
+  translationScope = input<string>('landing');
+  
   // Three.js instances
   private scene!: THREE.Scene;
   private camera!: THREE.PerspectiveCamera;
@@ -49,9 +51,9 @@ export class SingularityComponent implements OnInit, AfterViewInit, OnDestroy {
   private observer!: IntersectionObserver;
   
   // HUD Data (Signals or plain objects for now)
-  public currentTitleKey = 'singularity_title_stable';
-  public currentStatusKey = 'singularity_status_nominal';
-  public currentVel = '0.45c';
+  public currentTitleKey = '';
+  public currentStatusKey = '';
+  public currentVel = '';
   public statusColor = '#00f3ff';
   public isNominal = true;
 

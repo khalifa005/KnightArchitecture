@@ -15,5 +15,16 @@
   "register_now": "سجل هنا",
   "footer_copyright": "© 2026 أنظمة ذاكرة الصحة الرقمية (DHM). متوافق مع معايير HIPAA.",
   "privacy_policy": "سياسة الخصوصية",
-  "terms": "شروط الخدمة"
+  "terms": "شروط الخدمة",
+  "singularity_title_stable": "تفرد مستقر",
+  "singularity_title_turbulence": "اضطراب التراكم",
+  "singularity_title_collapse": "انهيار نسبي",
+  "singularity_status_nominal": "الطوبولوجيا: طبيعية",
+  "singularity_status_fluctuating": "الطوبولوجيا: متذبذبة",
+  "singularity_status_critical": "الطوبولوجيا: حرجة",
+  "singularity_hud_mass": "مؤشر الكتلة",
+  "singularity_hud_lensing": "عدسة الجاذبية",
+  "singularity_hud_relativity": "النسبية",
+  "singularity_hud_radiation": "الإشعاع",
+  "singularity_hud_detection_on": "الرصد نشط"
 }
