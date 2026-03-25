@@ -11,9 +11,7 @@
     width: 100%;
     
     .p-password-input {
-        width: 100%;
-        background-color: var(--md-sys-color-surface-container);
-        border: none;
+        width: 100% !important;
         outline: none;
     }
 }

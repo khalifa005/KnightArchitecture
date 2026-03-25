@@ -24,13 +24,13 @@
   </div>
 
   <!-- Right Authentication Pane -->
-  <div class="flex-1 flex flex-col items-center justify-center p-8 lg:p-16 relative bg-surface">
+  <div class="flex-1 flex flex-col items-center justify-center p-8 lg:p-16 relative bg-surface-container-low">
     <div class="w-full max-w-md">
       <!-- Brand Logo & Identity -->
-      <div class="flex flex-col items-center md:items-start mb-10">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="material-symbols-outlined text-primary dark:text-sky-400 text-3xl anim-heartbeat-pulse" style="font-variation-settings: 'FILL' 1;">health_metrics</span>
-          <span class="text-2xl font-bold tracking-tighter text-sky-900 dark:text-sky-100 font-headline">{{ 'login.brand' | transloco }}</span>
+      <div class="flex flex-col items-center mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="material-symbols-outlined text-primary dark:text-sky-400 text-5xl anim-heartbeat-pulse" style="font-variation-settings: 'FILL' 1;">health_metrics</span>
+          <span class="text-4xl font-bold tracking-tighter text-sky-900 dark:text-sky-100 font-headline">{{ 'login.brand' | transloco }}</span>
         </div>
         <h1 class="md:hidden font-headline text-3xl font-black text-primary tracking-tight">{{ 'login.welcome_back' | transloco }}</h1>
       </div>
@@ -50,9 +50,12 @@
             <label for="password" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'login.password' | transloco }}</label>
             <a href="#" class="text-xs font-bold text-primary hover:text-primary-fixed transition-colors">{{ 'login.forgot_password' | transloco }}</a>
           </div>
-          <p-password [(ngModel)]="password" [toggleMask]="true" styleClass="w-full" [feedback]="false" [placeholder]="'login.password_placeholder' | transloco"
-            inputStyleClass="w-full bg-surface-container border border-outline-variant/20 dark:border-outline/30 px-4 py-4 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-on-surface-variant/50 font-body transition-all">
-          </p-password>
+          <div class="relative">
+            <span class="absolute start-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant dark:text-outline z-10" data-icon="lock">lock</span>
+            <p-password [(ngModel)]="password" [toggleMask]="true" styleClass="w-full" [feedback]="false" [placeholder]="'login.password_placeholder' | transloco"
+              inputStyleClass="w-full !bg-surface-container !border !border-outline-variant/20 dark:!border-outline/30 ps-12 pe-4 py-4 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-on-surface-variant/50 font-body transition-all">
+            </p-password>
+          </div>
         </div>
 
         <div class="flex items-center gap-3 mt-1">
