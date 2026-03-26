@@ -1,10 +1,12 @@
 <div id="vignette"></div>
 <div id="overlay">
-  <div class="header">
-    <div class="centered-data-text">
-       {{ (translationScope() ? translationScope() + '.' : '') + 'singularity_centered_text' | transloco }}
+  @if (showCenteredText()) {
+    <div class="header">
+      <div class="centered-data-text">
+         {{ (translationScope() ? translationScope() + '.' : '') + 'singularity_centered_text' | transloco }}
+      </div>
     </div>
-  </div>
+  }
   <div class="hud-bottom">
     <div>
       <!-- <div class="metric">{{ (translationScope() ? translationScope() + '.' : '') + 'singularity_hud_mass' | transloco }}: <span class="val" [style.color]="statusColor">4.2M SOL</span></div> -->

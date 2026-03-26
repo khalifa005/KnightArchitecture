@@ -31,6 +31,7 @@ export class SingularityComponent implements OnInit, AfterViewInit, OnDestroy {
   private canvas = viewChild<ElementRef<HTMLCanvasElement>>('singularityCanvas');
 
   translationScope = input<string>('landing');
+  showCenteredText = input<boolean>(true);
   
   // Three.js instances
   private scene!: THREE.Scene;
