@@ -1,9 +1,9 @@
 <div class="min-h-screen bg-surface-container flex flex-col md:flex-row overflow-hidden relative">
   <!-- Left Decorative Pane -->
-  <div class="hidden md:flex md:w-5/12 lg:w-1/2 p-12 bg-primary dark:bg-slate-950 relative flex-col justify-between overflow-hidden">
+  <div class="hidden md:flex md:w-5/12 lg:w-1/2 p-10 bg-primary dark:bg-slate-950 relative flex-col justify-between overflow-hidden">
     <div class="absolute inset-0 z-0">
       @defer (on timer(100ms)) {
-        <app-singularity translationScope="login"></app-singularity>
+        <app-singularity translationScope="login" [showCenteredText]="false"></app-singularity>
       } @placeholder {
         <div class="w-full h-full bg-slate-900/10 dark:bg-slate-800/20 backdrop-blur-xl animate-pulse"></div>
       }
@@ -24,10 +24,10 @@
   </div>
 
   <!-- Right Authentication Pane -->
-  <div class="flex-1 flex flex-col items-center justify-center p-8 lg:p-16 relative bg-surface-container-low dark:bg-[#000d1a]">
+  <div class="flex-1 flex flex-col items-center justify-center p-8 relative bg-surface-container-low dark:bg-[#000d1a]">
     <div class="w-full max-w-md">
       <!-- Brand Logo & Identity -->
-      <div class="flex flex-col items-center mb-12">
+      <div class="flex flex-col items-center mb-8">
         <div class="flex items-center gap-3 mb-4">
           <span class="material-symbols-outlined text-primary dark:text-sky-400 text-5xl anim-heartbeat-pulse" style="font-variation-settings: 'FILL' 1;">health_metrics</span>
           <span class="text-4xl font-bold tracking-tighter text-sky-900 dark:text-sky-100 font-headline">{{ 'login.brand' | transloco }}</span>
@@ -35,17 +35,17 @@
         <h1 class="md:hidden font-headline text-3xl font-black text-primary tracking-tight">{{ 'login.welcome_back' | transloco }}</h1>
       </div>
 
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-4">
         <!-- Credentials -->
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-1.5">
           <label for="username" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'login.email_address' | transloco }}</label>
           <div class="relative">
             <span class="absolute start-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant dark:text-outline z-10" data-icon="mail">mail</span>
-            <input pInputText id="username" [(ngModel)]="username" type="email" class="w-full bg-surface-container border border-outline-variant/20 dark:!bg-[#011424] dark:!border-primary/20 dark:!border ps-12 pe-4 py-4 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-on-surface-variant/50 font-body transition-all" [placeholder]="'login.email_placeholder' | transloco" />
+            <input pInputText id="username" [(ngModel)]="username" type="email" class="w-full bg-surface-container border border-outline-variant/20 dark:!bg-[#011424] dark:!border-primary/20 dark:!border ps-12 pe-4 py-2.5 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-on-surface-variant/50 font-body transition-all" [placeholder]="'login.email_placeholder' | transloco" />
           </div>
         </div>
 
-        <div class="flex flex-col gap-2 relative">
+        <div class="flex flex-col gap-1.5 relative">
           <div class="flex items-center justify-between">
             <label for="password" class="text-sm font-bold text-on-surface uppercase tracking-wider">{{ 'login.password' | transloco }}</label>
             <a href="#" class="text-xs font-bold text-primary hover:text-primary-fixed transition-colors">{{ 'login.forgot_password' | transloco }}</a>
@@ -53,7 +53,7 @@
           <div class="relative">
             <span class="absolute start-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant dark:text-outline z-10" data-icon="lock">lock</span>
             <p-password [(ngModel)]="password" [toggleMask]="true" styleClass="w-full" [feedback]="false" [placeholder]="'login.password_placeholder' | transloco"
-              inputStyleClass="w-full bg-surface-container border border-outline-variant/20 dark:!bg-[#011424] dark:!border-primary/20 dark:!border ps-12 pe-4 py-4 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-on-surface-variant/50 font-body transition-all">
+              inputStyleClass="w-full bg-surface-container border border-outline-variant/20 dark:!bg-[#011424] dark:!border-primary/20 dark:!border ps-12 pe-4 py-2.5 rounded-xl focus:ring-2 focus:ring-primary/40 focus:border-primary outline-none text-on-surface placeholder:text-on-surface-variant/50 font-body transition-all">
             </p-password>
           </div>
         </div>
@@ -64,7 +64,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button pButton class="w-full bg-primary text-on-primary font-bold py-4 rounded-xl shadow-md shadow-primary/20 mt-2 hover:bg-primary-fixed hover:text-on-primary-fixed active:scale-[0.98] transition-all tracking-wide flex justify-center items-center gap-2" (click)="onLogin()">
+        <button pButton class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl shadow-md shadow-primary/20 mt-1 hover:bg-primary-fixed hover:text-on-primary-fixed active:scale-[0.98] transition-all tracking-wide flex justify-center items-center gap-2" (click)="onLogin()">
           {{ 'login.sign_in_btn' | transloco }}
           <span class="material-symbols-outlined font-bold text-lg" data-icon="arrow_forward">arrow_forward</span>
         </button>
