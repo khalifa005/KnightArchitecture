@@ -61,7 +61,7 @@
 
   <main class="pt-20">
     <!-- Hero Section -->
-    <section class="relative min-h-[500px] md:min-h-[calc(100vh-80px)] flex items-center px-8 py-8 md:py-12 overflow-hidden bg-[#050508]">
+    <section class="relative min-h-[500px] md:min-h-[calc(100vh-80px)] flex items-center px-8 py-8 md:py-12 overflow-hidden bg-slate-50 dark:bg-[#050508] transition-colors duration-500">
       <!-- Digital EKG Flow Background -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none flex items-center opacity-10 md:opacity-[0.15]">
         <div class="heartbeat-container flex">
@@ -84,8 +84,8 @@
         class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center flex-col-reverse lg:flex-row relative z-10">
         <div class="z-10 text-center lg:text-start">
           <span class="inline-block px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-xs font-bold tracking-widest uppercase mb-6 anim-fade-up">{{ 'landing.hero_badge' | transloco }}</span>
-          <h1 class="font-headline text-4xl md:text-6xl font-extrabold text-white leading-[1.1] tracking-tighter mb-6 anim-fade-up anim-delay-100" [innerHTML]="'landing.hero_title' | transloco"></h1>
-          <p class="text-slate-400 text-lg md:text-xl max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0 anim-fade-up anim-delay-200">
+          <h1 class="font-headline text-4xl md:text-6xl font-extrabold text-sky-950 dark:text-white leading-[1.1] tracking-tighter mb-6 anim-fade-up anim-delay-100" [innerHTML]="'landing.hero_title' | transloco"></h1>
+          <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0 anim-fade-up anim-delay-200">
             {{ 'landing.hero_desc' | transloco }}
           </p>
           <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 anim-fade-up anim-delay-300">
@@ -93,7 +93,7 @@
               <div class="absolute inset-0 anim-shine opacity-30"></div>
               <span class="relative z-10">{{ 'landing.hero_cta_start' | transloco }}</span>
             </button>
-            <button class="flex items-center justify-center gap-2 text-white font-bold px-8 py-4 rounded-full border-2 border-white/10 hover:bg-white/5 active:scale-95 transition-all duration-300 backdrop-blur-sm">
+            <button class="flex items-center justify-center gap-2 text-slate-900 dark:text-white font-bold px-8 py-4 rounded-full border-2 border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/5 active:scale-95 transition-all duration-300 backdrop-blur-sm">
               <span class="material-symbols-outlined">play_circle</span>
               {{ 'landing.hero_cta_watch' | transloco }}
             </button>
@@ -102,7 +102,7 @@
 
         <div class="relative group order-first lg:order-last anim-fade-up anim-delay-400">
           <!-- Singularity 3D Hero -->
-          <div class="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-sky-400/10 border-[6px] md:border-8 border-white/5 anim-float-hero bg-black/40 h-[350px] md:h-[450px] lg:h-[500px] backdrop-blur-3xl">
+          <div class="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-sky-400/10 border-[6px] md:border-8 border-slate-200/50 dark:border-white/5 anim-float-hero bg-slate-100/40 dark:bg-black/40 backdrop-blur-3xl h-[350px] md:h-[450px] lg:h-[500px]">
             @defer (on timer(100ms)) {
               <app-singularity></app-singularity>
             } @placeholder {
@@ -267,8 +267,8 @@
             <div class="icon-box">
               <span class="material-symbols-outlined">psychology</span>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-primary transition-colors duration-300">{{ 'landing.ai_analysis_title' | transloco }}</h3>
-            <p class="text-slate-400 text-lg leading-relaxed">{{ 'landing.ai_analysis_desc' | transloco }}</p>
+            <h3 class="text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">{{ 'landing.ai_analysis_title' | transloco }}</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">{{ 'landing.ai_analysis_desc' | transloco }}</p>
           </div>
 
           <div class="quantum-card ai-card group">
@@ -277,8 +277,8 @@
             <div class="icon-box">
               <span class="material-symbols-outlined">calendar_month</span>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-primary transition-colors duration-300">{{ 'landing.ai_booking_title' | transloco }}</h3>
-            <p class="text-slate-400 text-lg leading-relaxed">{{ 'landing.ai_booking_desc' | transloco }}</p>
+            <h3 class="text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">{{ 'landing.ai_booking_title' | transloco }}</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">{{ 'landing.ai_booking_desc' | transloco }}</p>
           </div>
 
           <div class="quantum-card ai-card group">
@@ -287,8 +287,8 @@
             <div class="icon-box">
               <span class="material-symbols-outlined">send</span>
             </div>
-            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-primary transition-colors duration-300">{{ 'landing.ai_doc_comm_title' | transloco }}</h3>
-            <p class="text-slate-400 text-lg leading-relaxed">{{ 'landing.ai_doc_comm_desc' | transloco }}</p>
+            <h3 class="text-2xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-primary transition-colors duration-300">{{ 'landing.ai_doc_comm_title' | transloco }}</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">{{ 'landing.ai_doc_comm_desc' | transloco }}</p>
           </div>
         </div>
       </div>
@@ -314,31 +314,31 @@
 
 
     <!-- Sanctuary with Integrated Features (Accordion) -->
-    <section class="bg-[#0a0c10] py-24 md:py-32 px-6 md:px-8 relative overflow-hidden">
+    <section class="bg-white dark:bg-[#0a0c10] py-24 md:py-32 px-6 md:px-8 relative overflow-hidden transition-colors duration-500">
       <!-- Background Ambient Glow -->
       <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
       <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div class="max-w-4xl mx-auto relative z-10">
         <div class="text-center mb-16 md:mb-20">
-          <h2 class="font-headline text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tighter">{{ 'landing.sec_title' | transloco }}</h2>
-          <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">{{ 'landing.sec_desc' | transloco }}</p>
+          <h2 class="font-headline text-4xl md:text-6xl font-extrabold text-sky-950 dark:text-white mb-6 tracking-tighter">{{ 'landing.sec_title' | transloco }}</h2>
+          <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">{{ 'landing.sec_desc' | transloco }}</p>
         </div>
 
         <!-- Custom Expanding Items Accordion -->
         <div class="space-y-4">
           @for (item of expandedItems; track item.title; let i = $index) {
-            <div class="group border-b border-white/5 last:border-0 pb-4">
+            <div class="group border-b border-slate-200 dark:border-white/5 last:border-0 pb-4">
               <button 
                 (click)="activeAccordionIndex.set(activeAccordionIndex() === i ? null : i)"
-                class="w-full flex items-center justify-between py-6 text-left rtl:text-right group-hover:px-4 transition-all duration-300 rounded-2xl hover:bg-white/[0.02]">
+                class="w-full flex items-center justify-between py-6 text-left rtl:text-right group-hover:px-4 transition-all duration-300 rounded-2xl hover:bg-slate-50 dark:hover:bg-white/[0.02]">
                 <div class="flex items-center gap-6">
                   <div [class]="'w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 ' + 
-                    (activeAccordionIndex() === i ? 'bg-primary text-white scale-110 shadow-lg shadow-primary/20' : 'bg-white/5 text-slate-400 group-hover:bg-white/10 group-hover:text-white')">
+                    (activeAccordionIndex() === i ? 'bg-primary text-white scale-110 shadow-lg shadow-primary/20' : 'bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 group-hover:bg-slate-200 dark:group-hover:bg-white/10 group-hover:text-slate-900 dark:group-hover:text-white')">
                     <span class="material-symbols-outlined text-3xl">{{ item.icon }}</span>
                   </div>
                   <h3 [class]="'text-xl md:text-2xl font-bold transition-all duration-300 ' + 
-                    (activeAccordionIndex() === i ? 'text-white translate-x-1' : 'text-slate-300 group-hover:text-white')">
+                    (activeAccordionIndex() === i ? 'text-primary dark:text-white translate-x-1' : 'text-slate-700 dark:text-slate-300 group-hover:text-sky-950 dark:group-hover:text-white')">
                     {{ item.title | transloco }}
                   </h3>
                 </div>
@@ -352,7 +352,7 @@
                 [style.grid-template-rows]="activeAccordionIndex() === i ? '1fr' : '0fr'">
                 <div class="min-h-0">
                   <div class="ps-20 pe-6 pb-6 animate-fade-in">
-                    <p class="text-slate-400 text-lg leading-relaxed max-w-2xl">
+                    <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed max-w-2xl">
                       {{ item.desc | transloco }}
                     </p>
                     <div class="mt-6 flex items-center gap-3 text-primary font-bold text-sm tracking-widest uppercase cursor-pointer hover:gap-5 transition-all">
