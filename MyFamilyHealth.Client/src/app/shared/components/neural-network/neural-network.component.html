@@ -28,6 +28,49 @@
   </div>
 </div>
 
+<div id="target-container" class="quantum-card">
+  <div class="card-corners">
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
+  </div>
+  <div class="scan-line"></div>
+  <div class="relative z-10">
+    <div id="target-title" class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-[18px]">target</span>
+      {{ 'landing.nn_target_title' | transloco }}
+    </div>
+    <div class="instruction-text" [innerHTML]="'landing.nn_target_text' | transloco"></div>
+    <div class="mt-4 pt-4 border-t border-white/10 flex justify-between items-center text-[10px] text-emerald-400/60 font-mono tracking-tighter">
+      <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> COGNITIVE_SYNC: ACTIVE</span>
+      <span>99.9% ACCURACY</span>
+    </div>
+  </div>
+</div>
+
+<!-- Vertical Sponsor Rail -->
+<div class="sponsor-rail-container">
+  <div class="sponsor-label">{{ 'landing.nn_sponsors_title' | transloco }}</div>
+  <div class="sponsor-scroll-area">
+    <div class="sponsor-track">
+      <div class="sponsor-group">
+        <div class="sponsor-logo"><span class="material-symbols-outlined">hub</span><span>GHealth</span></div>
+        <div class="sponsor-logo"><span class="material-symbols-outlined">ecg_heart</span><span>BioSync</span></div>
+        <div class="sponsor-logo"><span class="material-symbols-outlined">neurology</span><span>CogniCore</span></div>
+        <div class="sponsor-logo"><span class="material-symbols-outlined">genetics</span><span>LoomDNA</span></div>
+        <div class="sponsor-logo"><span class="material-symbols-outlined">shield_health</span><span>Sanctuary</span></div>
+      </div>
+      <!-- Duplicate for seamless loop -->
+      <div class="sponsor-group">
+        <div class="sponsor-logo"><span class="material-symbols-outlined">hub</span><span>GHealth</span></div>
+        <div class="sponsor-logo"><span class="material-symbols-outlined">ecg_heart</span><span>BioSync</span></div>
+        <div class="sponsor-logo"><span class="material-symbols-outlined">neurology</span><span>CogniCore</span></div>
+        <div class="sponsor-logo"><span class="material-symbols-outlined">genetics</span><span>LoomDNA</span></div>
+        <div class="sponsor-logo"><span class="material-symbols-outlined">shield_health</span><span>Sanctuary</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 @if (showControls()) {
   @if (showThemeSelector()) {
     <div id="theme-selector" class="quantum-card">

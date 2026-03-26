@@ -94,18 +94,26 @@ canvas {
     top: 32px;
     left: 32px;
     width: 280px;
-    padding: 24px;
+    padding: 20px;
 }
 
 #story-container {
-    top: 250px;
+    top: 200px;
     left: 32px;
     width: 280px;
-    padding: 24px;
+    padding: 20px;
     background: rgba(10, 15, 25, 0.9);
 }
 
-#instruction-title, #story-title {
+#target-container {
+    top: 380px;
+    left: 32px;
+    width: 280px;
+    padding: 20px;
+    background: rgba(10, 15, 25, 0.9);
+}
+
+#instruction-title, #story-title, #target-title {
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
@@ -117,8 +125,8 @@ canvas {
     color: #38bdf8; // Sky-400
 }
 
-#story-title {
-    color: #38bdf8;
+#target-title {
+    color: #10b981; // Emerald-500
 }
 
 .instruction-text {
@@ -294,36 +302,112 @@ canvas {
 }
 
 @media (max-width: 640px) {
-    #instructions-container {
-        top: 16px;
-        left: 16px;
-        right: 16px;
+    #instructions-container, #story-container, #target-container {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
         width: auto;
-        padding: 16px;
-        background: rgba(10, 10, 15, 0.6);
+        margin: 10px;
     }
-    #theme-selector {
-        top: auto;
-        bottom: 100px;
-        left: 16px;
-        right: 16px;
-        width: auto;
-        padding: 16px;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-    #control-buttons {
-        bottom: 24px;
-        width: 100%;
-        justify-content: center;
-        gap: 8px;
-        padding: 0 16px;
-    }
-    .control-button {
-        padding: 10px 16px;
-        min-width: auto;
-        font-size: 11px;
-        flex: 1;
+    .sponsor-rail-container {
+        display: none;
     }
 }
+
+/* Sponsor Rail on the right: Horizontal title, Vertical moving logos */
+.sponsor-rail-container {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 100px;
+    height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 15;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(56, 189, 248, 0.1);
+    border-radius: 12px;
+    padding: 24px 8px;
+    overflow: hidden;
+}
+
+.sponsor-label {
+    text-transform: uppercase;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: rgba(56, 189, 248, 0.6);
+    font-weight: 800;
+    margin-bottom: 24px; // Spacing before the scroll area
+    text-align: center;
+    line-height: 1.4;
+    width: 100%;
+}
+
+.sponsor-scroll-area {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    /* This masks the moving logos when they reach the label area */
+}
+
+.sponsor-track {
+    display: flex;
+    flex-direction: column;
+    animation: verticalScroll 25s linear infinite;
+    gap: 80px; // Larger gap between groups
+}
+
+.sponsor-group {
+    display: flex;
+    flex-direction: column;
+    gap: 80px; // Larger gap between each individual partner
+}
+
+.sponsor-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.4;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover { 
+        opacity: 1; 
+        transform: scale(1.1);
+    }
+    
+    span:first-child { 
+        font-size: 28px; // Slightly larger for clarity
+        color: #fff; 
+    }
+    span:last-child { 
+        font-size: 9px; 
+        color: #fff; 
+        font-weight: 800; 
+        text-transform: uppercase; 
+        letter-spacing: 1px;
+    }
+}
+
+@keyframes verticalScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+.mt-4 { margin-top: 1rem; }
+.pt-4 { padding-top: 1rem; }
+.border-t { border-top-width: 1px; }
+.border-white\/10 { border-color: rgba(255,255,255,0.1); }
+.justify-between { justify-content: space-between; }
+.items-center { align-items: center; }
+.text-\[10px\] { font-size: 10px; }
+.text-emerald-400\/60 { color: rgba(52, 211, 153, 0.6); }
+.font-mono { font-family: monospace; }
+.tracking-tighter { letter-spacing: -0.05em; }
+.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
