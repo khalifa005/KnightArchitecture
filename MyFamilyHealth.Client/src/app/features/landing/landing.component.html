@@ -321,29 +321,27 @@
         </div>
       </div>
 
-      <!-- Story Panel (Left) -->
-      <div class="absolute top-[300px] left-8 glass-panel p-6 w-[320px] z-30 anim-fade-up anim-delay-300 border-l-4 border-l-sky-500 hidden lg:block backdrop-blur-xl bg-white/5">
-        <h4 class="text-sky-400 font-bold uppercase tracking-widest text-xs mb-3 flex items-center gap-2">
-          <span class="material-symbols-outlined text-[18px]">history_edu</span>
-          {{ 'landing.nn_story_title' | transloco }}
-        </h4>
-        <p class="text-[13px] text-slate-300 leading-relaxed font-light italic">
-          "{{ 'landing.nn_story_text' | transloco }}"
-        </p>
-      </div>
 
       <!-- Mission/Target Panel (Right) -->
-      <div class="absolute top-[32px] right-8 glass-panel p-6 w-[320px] z-30 anim-fade-up anim-delay-400 border-r-4 border-r-emerald-500 hidden lg:block backdrop-blur-xl bg-white/5">
-        <h4 class="text-emerald-400 font-bold uppercase tracking-widest text-xs mb-3 flex items-center gap-2">
-          <span class="material-symbols-outlined text-[18px]">target</span>
-          {{ 'landing.nn_target_title' | transloco }}
-        </h4>
-        <p class="text-[13px] text-slate-300 leading-relaxed font-light">
-          {{ 'landing.nn_target_text' | transloco }}
-        </p>
-        <div class="mt-4 pt-4 border-t border-white/10 flex justify-between items-center text-[10px] text-emerald-400/60 font-mono tracking-tighter">
-          <span>COGNITIVE_SYNC: ACTIVE</span>
-          <span>99.9% ACCURACY</span>
+      <div class="absolute top-[32px] right-8 quantum-card p-6 w-[320px] z-30 anim-fade-up anim-delay-400 hidden lg:block border-r-4 border-r-emerald-500">
+        <div class="card-corners">
+          <div class="corner-bl"></div>
+          <div class="corner-br"></div>
+        </div>
+        <div class="scan-line"></div>
+
+        <div class="relative z-10">
+          <h4 class="text-emerald-400 font-bold uppercase tracking-widest text-xs mb-3 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">target</span>
+            {{ 'landing.nn_target_title' | transloco }}
+          </h4>
+          <p class="text-[13px] text-slate-300 leading-relaxed font-light">
+            {{ 'landing.nn_target_text' | transloco }}
+          </p>
+          <div class="mt-4 pt-4 border-t border-white/10 flex justify-between items-center text-[10px] text-emerald-400/60 font-mono tracking-tighter">
+            <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> COGNITIVE_SYNC: ACTIVE</span>
+            <span>99.9% ACCURACY</span>
+          </div>
         </div>
       </div>
       } @placeholder {

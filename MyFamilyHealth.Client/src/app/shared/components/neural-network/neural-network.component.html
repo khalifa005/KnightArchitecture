@@ -1,25 +1,57 @@
-<div id="instructions-container" class="glass-panel">
-  <div id="instruction-title">{{ 'landing.nn_instruction_title' | transloco }}</div>
-  <div class="instruction-text" [innerHTML]="'landing.nn_instruction_text' | transloco"></div>
+<div id="instructions-container" class="quantum-card">
+  <div class="card-corners">
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
+  </div>
+  <div class="scan-line"></div>
+  <div class="relative z-10">
+    <div id="instruction-title" class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-[18px]">hub</span>
+      {{ 'landing.nn_instruction_title' | transloco }}
+    </div>
+    <div class="instruction-text" [innerHTML]="'landing.nn_instruction_text' | transloco"></div>
+  </div>
+</div>
+
+<div id="story-container" class="quantum-card">
+  <div class="card-corners">
+    <div class="corner-bl"></div>
+    <div class="corner-br"></div>
+  </div>
+  <div class="scan-line"></div>
+  <div class="relative z-10">
+    <div id="story-title" class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-[18px]">history_edu</span>
+      {{ 'landing.nn_story_title' | transloco }}
+    </div>
+    <div class="instruction-text italic" [innerHTML]="'landing.nn_story_text' | transloco"></div>
+  </div>
 </div>
 
 @if (showControls()) {
   @if (showThemeSelector()) {
-    <div id="theme-selector" class="glass-panel">
-      <div style="flex: 1;">
-        <div id="theme-selector-title">{{ 'landing.nn_theme_title' | transloco }}</div>
-        <div class="theme-grid">
-          <button class="theme-button" [class.active]="themeIndex() === 0" id="theme-1" (click)="$event.stopPropagation(); themeIndex.set(0)" [attr.aria-label]="'landing.nn_theme_1_label' | transloco"></button>
-          <button class="theme-button" [class.active]="themeIndex() === 1" id="theme-2" (click)="$event.stopPropagation(); themeIndex.set(1)" [attr.aria-label]="'landing.nn_theme_2_label' | transloco"></button>
-          <button class="theme-button" [class.active]="themeIndex() === 2" id="theme-3" (click)="$event.stopPropagation(); themeIndex.set(2)" [attr.aria-label]="'landing.nn_theme_3_label' | transloco"></button>
-        </div>
+    <div id="theme-selector" class="quantum-card">
+      <div class="card-corners">
+        <div class="corner-bl"></div>
+        <div class="corner-br"></div>
       </div>
-      <div id="density-controls" style="flex: 1;">
-        <div class="density-label"><span>{{ 'landing.nn_density_label' | transloco }}</span><span id="density-value">{{ density() }}%</span></div>
-        <input type="range" min="30" max="100" [value]="density()" 
-          (input)="density.set(+$any($event.target).value); $event.stopPropagation();"
-          class="density-slider" id="density-slider"
-          [attr.aria-label]="'landing.nn_density_label' | transloco">
+      <div class="scan-line"></div>
+      <div class="relative z-10 flex flex-col gap-4">
+        <div style="flex: 1;">
+          <div id="theme-selector-title">{{ 'landing.nn_theme_title' | transloco }}</div>
+          <div class="theme-grid">
+            <button class="theme-button" [class.active]="themeIndex() === 0" id="theme-1" (click)="$event.stopPropagation(); themeIndex.set(0)" [attr.aria-label]="'landing.nn_theme_1_label' | transloco"></button>
+            <button class="theme-button" [class.active]="themeIndex() === 1" id="theme-2" (click)="$event.stopPropagation(); themeIndex.set(1)" [attr.aria-label]="'landing.nn_theme_2_label' | transloco"></button>
+            <button class="theme-button" [class.active]="themeIndex() === 2" id="theme-3" (click)="$event.stopPropagation(); themeIndex.set(2)" [attr.aria-label]="'landing.nn_theme_3_label' | transloco"></button>
+          </div>
+        </div>
+        <div id="density-controls" style="flex: 1;">
+          <div class="density-label"><span>{{ 'landing.nn_density_label' | transloco }}</span><span id="density-value">{{ density() }}%</span></div>
+          <input type="range" min="30" max="100" [value]="density()" 
+            (input)="density.set(+$any($event.target).value); $event.stopPropagation();"
+            class="density-slider" id="density-slider"
+            [attr.aria-label]="'landing.nn_density_label' | transloco">
+        </div>
       </div>
     </div>
   }
