@@ -150,6 +150,57 @@
     animation: scanAnimation 4s linear infinite;
     pointer-events: none;
   }
+
+  &.ai-card {
+    border-radius: 2.5rem;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(56, 189, 248, 0.1);
+    
+    .icon-box {
+      width: 70px;
+      height: 70px;
+      border-radius: 1.5rem;
+      background: rgba(56, 189, 248, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+
+      .material-symbols-outlined {
+        color: #38bdf8;
+        font-size: 2.25rem;
+        transition: all 0.5s;
+        z-index: 1;
+      }
+    }
+
+    &:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-5px);
+
+      .icon-box {
+        transform: rotate(10deg) scale(1.1);
+        background: rgba(56, 189, 248, 0.2);
+        &::after { opacity: 1; }
+        .material-symbols-outlined { transform: scale(1.1); }
+      }
+    }
+  }
 }
 
 @keyframes scanAnimation {
