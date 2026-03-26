@@ -48,6 +48,16 @@ export class LandingComponent implements OnInit {
   readonly store = inject(AppStore);
 
   isSoundEnabled = signal(true);
+  activeAccordionIndex = signal<number | null>(0);
+
+  expandedItems = [
+    { title: 'landing.more_tele_title', desc: 'landing.more_tele_desc', icon: 'videocam', color: 'primary' },
+    { title: 'landing.more_wear_title', desc: 'landing.more_wear_desc', icon: 'watch', color: 'secondary' },
+    { title: 'landing.more_emi_title', desc: 'landing.more_emi_desc', icon: 'emergency', color: 'error' },
+    { title: 'landing.more_refills_title', desc: 'landing.more_refills_desc', icon: 'pills', color: 'primary' },
+    { title: 'landing.more_mental_title', desc: 'landing.more_mental_desc', icon: 'psychiatry', color: 'secondary' },
+    { title: 'landing.more_insurance_title', desc: 'landing.more_insurance_desc', icon: 'policy', color: 'primary' }
+  ];
 
   private audioCtx: AudioContext | null = null;
   private beepInterval: ReturnType<typeof setInterval> | null = null;

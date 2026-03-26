@@ -300,117 +300,59 @@
       }
     </section>
 
-    <!-- Additional/Roadmap Features -->
-    <section id="additional" class="py-12 md:py-16 px-6 md:px-8 bg-white dark:bg-[#111318] overflow-hidden">
-      <div class="max-w-7xl mx-auto">
-        <h2 class="font-headline text-3xl font-bold text-center mb-16">{{ 'landing.more_section_title' | transloco }}
-        </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Telemedicine -->
-          <div
-            class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
-            <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined text-primary">videocam</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-sm">{{ 'landing.more_tele_title' | transloco }}</h4>
-              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_tele_desc' | transloco }}</p>
-            </div>
-          </div>
-          <!-- Wearables -->
-          <div
-            class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
-            <div class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined text-secondary">watch</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-sm">{{ 'landing.more_wear_title' | transloco }}</h4>
-              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_wear_desc' | transloco }}</p>
-            </div>
-          </div>
-          <!-- EMI -->
-          <div
-            class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
-            <div class="w-12 h-12 rounded-2xl bg-error/10 flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined text-error">emergency</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-sm">{{ 'landing.more_emi_title' | transloco }}</h4>
-              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_emi_desc' | transloco }}</p>
-            </div>
-          </div>
-          <!-- More ... -->
-          <div
-            class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
-            <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined text-primary">pills</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-sm">{{ 'landing.more_refills_title' | transloco }}</h4>
-              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_refills_desc' | transloco }}</p>
-            </div>
-          </div>
-          <div
-            class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
-            <div class="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined text-secondary">psychiatry</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-sm">{{ 'landing.more_mental_title' | transloco }}</h4>
-              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_mental_desc' | transloco }}</p>
-            </div>
-          </div>
-          <div
-            class="flex items-center gap-6 p-6 rounded-3xl bg-surface-container-low dark:bg-slate-900 border border-outline-variant/10">
-            <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined text-primary">policy</span>
-            </div>
-            <div>
-              <h4 class="font-bold text-sm">{{ 'landing.more_insurance_title' | transloco }}</h4>
-              <p class="text-[11px] text-on-surface-variant">{{ 'landing.more_insurance_desc' | transloco }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Security Protocol Section — Already dark by design, minimal changes needed -->
-    <section
-      class="bg-inverse-surface dark:bg-slate-950 py-12 md:py-16 px-6 md:px-8 text-inverse-on-surface dark:text-slate-200">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center max-w-3xl mx-auto mb-10 md:mb-12">
-          <h2 class="font-headline text-4xl md:text-5xl font-bold mb-4">{{ 'landing.sec_title' | transloco }}</h2>
-          <p class="text-outline-variant dark:text-slate-400 text-lg">{{ 'landing.sec_desc' | transloco }}</p>
+
+    <!-- Sanctuary with Integrated Features (Accordion) -->
+    <section class="bg-[#0a0c10] py-24 md:py-32 px-6 md:px-8 relative overflow-hidden">
+      <!-- Background Ambient Glow -->
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+      <div class="max-w-4xl mx-auto relative z-10">
+        <div class="text-center mb-16 md:mb-20">
+          <h2 class="font-headline text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tighter">{{ 'landing.sec_title' | transloco }}</h2>
+          <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">{{ 'landing.sec_desc' | transloco }}</p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-1">
-          <div
-            class="p-8 md:p-12 border border-white/5 dark:border-slate-700/30 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-r md:border-b md:border-t-0 md:border-l-0">
-            <span class="material-symbols-outlined text-5xl text-inverse-primary dark:text-sky-400 mb-6"
-              data-weight="fill">verified_user</span>
-            <h4 class="font-headline text-xl font-bold mb-2">{{ 'landing.sec_card1_title' | transloco }}</h4>
-            <p class="text-sm text-outline-variant dark:text-slate-400">{{ 'landing.sec_card1_desc' | transloco }}</p>
-          </div>
-          <div
-            class="p-8 md:p-12 border border-white/5 dark:border-slate-700/30 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-r md:border-b md:border-t-0 md:border-l-0">
-            <span class="material-symbols-outlined text-5xl text-inverse-primary dark:text-sky-400 mb-6"
-              data-weight="fill">encrypted</span>
-            <h4 class="font-headline text-xl font-bold mb-2">{{ 'landing.sec_card2_title' | transloco }}</h4>
-            <p class="text-sm text-outline-variant dark:text-slate-400">{{ 'landing.sec_card2_desc' | transloco }}</p>
-          </div>
-          <div
-            class="p-8 md:p-12 border border-white/5 dark:border-slate-700/30 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-r md:border-b md:border-t-0 md:border-l-0">
-            <span class="material-symbols-outlined text-5xl text-inverse-primary dark:text-sky-400 mb-6"
-              data-weight="fill">fingerprint</span>
-            <h4 class="font-headline text-xl font-bold mb-2">{{ 'landing.sec_card3_title' | transloco }}</h4>
-            <p class="text-sm text-outline-variant dark:text-slate-400">{{ 'landing.sec_card3_desc' | transloco }}</p>
-          </div>
-          <div
-            class="p-8 md:p-12 border border-white/5 dark:border-slate-700/30 flex flex-col items-center text-center rounded-2xl md:rounded-none md:border-b md:border-r-0 md:border-t-0 md:border-l-0">
-            <span class="material-symbols-outlined text-5xl text-inverse-primary dark:text-sky-400 mb-6"
-              data-weight="fill">security_update_good</span>
-            <h4 class="font-headline text-xl font-bold mb-2">{{ 'landing.sec_card4_title' | transloco }}</h4>
-            <p class="text-sm text-outline-variant dark:text-slate-400">{{ 'landing.sec_card4_desc' | transloco }}</p>
-          </div>
+
+        <!-- Custom Expanding Items Accordion -->
+        <div class="space-y-4">
+          @for (item of expandedItems; track item.title; let i = $index) {
+            <div class="group border-b border-white/5 last:border-0 pb-4">
+              <button 
+                (click)="activeAccordionIndex.set(activeAccordionIndex() === i ? null : i)"
+                class="w-full flex items-center justify-between py-6 text-left rtl:text-right group-hover:px-4 transition-all duration-300 rounded-2xl hover:bg-white/[0.02]">
+                <div class="flex items-center gap-6">
+                  <div [class]="'w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500 ' + 
+                    (activeAccordionIndex() === i ? 'bg-primary text-white scale-110 shadow-lg shadow-primary/20' : 'bg-white/5 text-slate-400 group-hover:bg-white/10 group-hover:text-white')">
+                    <span class="material-symbols-outlined text-3xl">{{ item.icon }}</span>
+                  </div>
+                  <h3 [class]="'text-xl md:text-2xl font-bold transition-all duration-300 ' + 
+                    (activeAccordionIndex() === i ? 'text-white translate-x-1' : 'text-slate-300 group-hover:text-white')">
+                    {{ item.title | transloco }}
+                  </h3>
+                </div>
+                <span class="material-symbols-outlined text-slate-500 transition-transform duration-500"
+                  [style.transform]="activeAccordionIndex() === i ? 'rotate(180deg)' : 'rotate(0deg)'">
+                  expand_more
+                </span>
+              </button>
+              
+              <div class="grid transition-all duration-500 ease-in-out overflow-hidden"
+                [style.grid-template-rows]="activeAccordionIndex() === i ? '1fr' : '0fr'">
+                <div class="min-h-0">
+                  <div class="ps-20 pe-6 pb-6 animate-fade-in">
+                    <p class="text-slate-400 text-lg leading-relaxed max-w-2xl">
+                      {{ item.desc | transloco }}
+                    </p>
+                    <div class="mt-6 flex items-center gap-3 text-primary font-bold text-sm tracking-widest uppercase cursor-pointer hover:gap-5 transition-all">
+                      <span>{{ 'landing.hero_cta_watch' | transloco }}</span>
+                      <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
         </div>
       </div>
     </section>

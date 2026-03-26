@@ -37,7 +37,7 @@
   "ai_doc_comm_title": "Direct Doctor Comms",
   "ai_doc_comm_desc": "AI can send results directly to your doctor with a summary, potentially saving you an in-person visit.",
   
-  "more_section_title": "Expanding the Sanctuary",
+  "more_section_title": "Sanctuary with integrated features",
   "more_tele_title": "Telemedicine",
   "more_tele_desc": "Seamless video conferencing for virtual consultations from home.",
   "more_wear_title": "Wearable Integration",
@@ -51,15 +51,8 @@
   "more_insurance_title": "Insurance Assistance",
   "more_insurance_desc": "AI-powered help understanding and processing complex insurance claims.",
 
-  "sec_title": "Uncompromising Security Protocol",
+  "sec_title": "Sanctuary with integrated features",
   "sec_desc": "Your medical data is your digital DNA. We protect it with banking-grade fortress technology.",
-  "sec_card1_title": "HIPAA Core",
-  "sec_card1_desc": "Fully compliant with Global Medical Standards.",
-  "sec_card2_title": "256-Bit AES",
-  "sec_card2_desc": "Military-grade encryption at rest and in transit.",
-  "sec_card3_title": "Biometric Lock",
-  "sec_card3_desc": "Multi-factor physical authentication keys.",
-  "sec_card4_title": "Zero Trust",
   "sec_card4_desc": "Constant real-time threat neutralization.",
   
   "trust_badge": "The Network of Trust",
