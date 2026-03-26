@@ -61,7 +61,7 @@
 
   <main class="pt-20">
     <!-- Hero Section -->
-    <section class="relative min-h-[600px] md:min-h-[750px] flex items-center px-8 py-16 overflow-hidden bg-[#050508]">
+    <section class="relative min-h-[500px] md:min-h-[calc(100vh-80px)] flex items-center px-8 py-8 md:py-12 overflow-hidden bg-[#050508]">
       <!-- Digital EKG Flow Background -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none flex items-center opacity-10 md:opacity-[0.15]">
         <div class="heartbeat-container flex">
@@ -84,8 +84,8 @@
         class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center flex-col-reverse lg:flex-row relative z-10">
         <div class="z-10 text-center lg:text-start">
           <span class="inline-block px-4 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-300 text-xs font-bold tracking-widest uppercase mb-6 anim-fade-up">{{ 'landing.hero_badge' | transloco }}</span>
-          <h1 class="font-headline text-5xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tighter mb-8 anim-fade-up anim-delay-100" [innerHTML]="'landing.hero_title' | transloco"></h1>
-          <p class="text-slate-400 text-lg md:text-xl max-w-xl mb-12 leading-relaxed mx-auto lg:mx-0 anim-fade-up anim-delay-200">
+          <h1 class="font-headline text-4xl md:text-6xl font-extrabold text-white leading-[1.1] tracking-tighter mb-6 anim-fade-up anim-delay-100" [innerHTML]="'landing.hero_title' | transloco"></h1>
+          <p class="text-slate-400 text-lg md:text-xl max-w-xl mb-8 leading-relaxed mx-auto lg:mx-0 anim-fade-up anim-delay-200">
             {{ 'landing.hero_desc' | transloco }}
           </p>
           <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 anim-fade-up anim-delay-300">
@@ -102,7 +102,7 @@
 
         <div class="relative group order-first lg:order-last anim-fade-up anim-delay-400">
           <!-- Singularity 3D Hero -->
-          <div class="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-sky-400/10 border-[6px] md:border-8 border-white/5 anim-float-hero bg-black/40 h-[400px] md:h-[550px] backdrop-blur-3xl">
+          <div class="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-sky-400/10 border-[6px] md:border-8 border-white/5 anim-float-hero bg-black/40 h-[350px] md:h-[450px] lg:h-[500px] backdrop-blur-3xl">
             @defer (on timer(100ms)) {
               <app-singularity></app-singularity>
             } @placeholder {

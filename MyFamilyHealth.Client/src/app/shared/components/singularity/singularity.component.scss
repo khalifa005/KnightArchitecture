@@ -39,6 +39,23 @@ canvas {
   opacity: 0.9;
 }
 
+.centered-data-text {
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  margin-top: 20px;
+  text-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+  animation: pulse-text 4s infinite ease-in-out;
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
 .status-pill {
   display: inline-block;
   padding: 6px 20px;
